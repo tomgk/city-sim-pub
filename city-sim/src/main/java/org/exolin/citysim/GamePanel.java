@@ -60,6 +60,16 @@ public class GamePanel extends JComponent
             g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
         }
         
+        for(int i = 0; i < size; ++i)
+        {
+            Point pw0 = new Point();
+            Point pwh = new Point();
+
+            transform(dim, (double)dim / size * i, 0, pw0);
+            transform(dim, (double)dim / size * i, dim, pwh);
+            g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
+        }
+        
         Point p00 = new Point();
         Point pw0 = new Point();
         Point pwh = new Point();

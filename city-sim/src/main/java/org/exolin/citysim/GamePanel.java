@@ -74,11 +74,10 @@ public class GamePanel extends JComponent
             g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
         }
         
-        /*
         URL resource = GamePanel.class.getClassLoader().getResource("office.png");
         if(resource != null)
             throw new IllegalArgumentException("not found");
-        
+        /*
         BufferedImage i = null;
         try{
             i = ImageIO.read(resource);

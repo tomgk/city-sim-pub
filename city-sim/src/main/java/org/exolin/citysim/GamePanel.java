@@ -75,9 +75,9 @@ public class GamePanel extends JComponent
         }
         
         URL resource = GamePanel.class.getClassLoader().getResource("office.png");
-        if(resource != null)
+        if(resource == null)
             throw new IllegalArgumentException("not found");
-        /*
+        
         BufferedImage i = null;
         try{
             i = ImageIO.read(resource);
@@ -85,15 +85,17 @@ public class GamePanel extends JComponent
             throw new RuntimeException(e);
         }
         
-        /*
-        g.drawImage(i, 0, 0, new ImageObserver()
+        Point p = new Point();
+        transform(dim, 0, 0, p);
+        
+        g.drawImage(i, p.x, p.y, new ImageObserver()
         {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)
             {
                 return true;
             }
-        });*/
+        });
     }
     
     private void draw2(Graphics2D g, int dim)

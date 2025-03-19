@@ -54,15 +54,19 @@ public class GamePanel extends JComponent
         Point p00 = new Point();
         Point pw0 = new Point();
         Point pwh = new Point();
+        Point p0h = new Point();
         
         transform(dim, 0, 0, p00);
-        transform(dim, 0, dim, pw0);
+        transform(dim, dim, 0, pw0);
         transform(dim, dim, dim, pwh);
+        transform(dim, 0, dim, p0h);
         
-        System.out.println(p00+" "+pw0);
+        System.out.println(p00+" "+pw0+" "+pwh+" "+p0h);
         
         g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
         g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
+        g.drawLine(pwh.x, pwh.y, p0h.x, p0h.y);
+        g.drawLine(p0h.x, p0h.y, p00.x, p00.y);
     }
     
     private void draw2(Graphics2D g, int dim)

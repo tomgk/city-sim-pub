@@ -11,7 +11,7 @@ import javax.swing.JComponent;
  */
 public class GamePanel extends JComponent
 {
-    private final int size = 100;
+    private final int size = 10;
     private static final int FACTOR = 2;
     
     @Override
@@ -24,14 +24,16 @@ public class GamePanel extends JComponent
     
     private void draw(Graphics2D g, int dim)
     {
-        /*
-        double s = (double)dim / size;
+        double s = (double)dim / size / FACTOR;
         
         for(int i = 0; i<size;++i)
         {
-            g.drawLine(0, height/2, width/2, 0);
+            int xoffset = (int)(i * s);
+            int yoffset = (int)(i * s / FACTOR);
+            
+            g.drawLine(0 + xoffset, dim/FACTOR/2 + yoffset,
+                       dim/2 + xoffset, 0 + yoffset);
         }
-        */
         
         g.drawLine(0, dim/FACTOR/2, dim/2, 0);
         g.drawLine(dim/2, 0, dim, dim/FACTOR/2);

@@ -2,7 +2,13 @@ package org.exolin.citysim;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 /**
@@ -67,6 +73,28 @@ public class GamePanel extends JComponent
             transform(dim, (double)dim / size * i, dim, pwh);
             g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
         }
+        
+        /*
+        URL resource = GamePanel.class.getClassLoader().getResource("office.png");
+        if(resource != null)
+            throw new IllegalArgumentException("not found");
+        
+        BufferedImage i = null;
+        try{
+            i = ImageIO.read(resource);
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        
+        /*
+        g.drawImage(i, 0, 0, new ImageObserver()
+        {
+            @Override
+            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)
+            {
+                return true;
+            }
+        });*/
     }
     
     private void draw2(Graphics2D g, int dim)

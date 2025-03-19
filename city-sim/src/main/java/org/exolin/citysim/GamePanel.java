@@ -2,7 +2,9 @@ package org.exolin.citysim;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import javax.swing.JComponent;
 
 /**
@@ -20,6 +22,44 @@ public class GamePanel extends JComponent
         g.drawRect(0, 0, getWidth()-1, getHeight()-1);
         
         draw((Graphics2D)g, Math.min(getWidth(), getHeight()*FACTOR));
+    }
+    
+    /**
+     *    
+     * 
+     * 
+     * @param dim
+     * @param x
+     * @param y
+     * @param drawPoint 
+     */
+    public static void transform(int dim, int x, int y, Point drawPoint)
+    {
+        double w = dim;
+        double h = dim/FACTOR;
+        
+        //x part
+        double xx = - x * w / 2;
+        double xy = h/2 * x;
+        //y part
+        double yx = y * w/2;
+        double yy = h/2 * y;
+        
+        drawPoint.x = (int)(w/2 + xx + xy);
+        drawPoint.y = (int)(w/2 + yx + yy);
+    }
+    
+    private void draw2(Graphics2D g, int dim)
+    {
+        Point p00 = new Point();
+        Point pw0 = new Point();
+        
+        transform(dim, 0, 0, p00);
+        transform(dim, 0, size, pw0);
+        
+        System.out.println(p00+" "+pw0);
+        
+        g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
     }
     
     private void draw(Graphics2D g, int dim)

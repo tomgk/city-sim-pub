@@ -51,7 +51,7 @@ public class GamePanel extends JComponent
     
     private void draw(Graphics2D g, int dim)
     {
-        for(int i = 0; i < size; ++i)
+        for(int i = 0; i < size+1; ++i)
         {
             Point p00 = new Point();
             Point pw0 = new Point();
@@ -60,7 +60,7 @@ public class GamePanel extends JComponent
             g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
         }
         
-        for(int i = 0; i < size; ++i)
+        for(int i = 0; i < size+1; ++i)
         {
             Point pw0 = new Point();
             Point pwh = new Point();
@@ -70,6 +70,8 @@ public class GamePanel extends JComponent
             g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
         }
         
+        if(false)
+        {
         Point p00 = new Point();
         Point pw0 = new Point();
         Point pwh = new Point();
@@ -86,6 +88,7 @@ public class GamePanel extends JComponent
         g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
         g.drawLine(pwh.x, pwh.y, p0h.x, p0h.y);
         g.drawLine(p0h.x, p0h.y, p00.x, p00.y);
+        }
     }
     
     private void draw2(Graphics2D g, int dim)

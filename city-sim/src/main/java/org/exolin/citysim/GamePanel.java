@@ -22,9 +22,6 @@ public class GamePanel extends JComponent
     
     private void draw(Graphics2D g, int dim)
     {
-        int width = dim;
-        int height = dim/2;
-        
         /*
         double w = (double)width / size;
         double h = (double)height / size;
@@ -35,9 +32,9 @@ public class GamePanel extends JComponent
         }
         */
         
-        g.drawLine(0, height/2, width/2, 0);
-        g.drawLine(width/2, 0, width, height/2);
-        g.drawLine(width, height/2, width/2, height);
-        g.drawLine(width/2, height, 0, height/2);
+        g.drawLine(0, dim/2/2, dim/2, 0);
+        g.drawLine(dim/2, 0, dim, dim/2/2);
+        g.drawLine(dim, dim/2/2, dim/2, dim/2);
+        g.drawLine(dim/2, dim/2, 0, dim/2/2);
     }
 }

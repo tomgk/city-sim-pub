@@ -51,6 +51,15 @@ public class GamePanel extends JComponent
     
     private void draw(Graphics2D g, int dim)
     {
+        for(int i = 0; i < size; ++i)
+        {
+            Point p00 = new Point();
+            Point pw0 = new Point();
+            transform(dim, 0, (double)dim / size * i, p00);
+            transform(dim, dim, (double)dim / size * i, pw0);
+            g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+        }
+        
         Point p00 = new Point();
         Point pw0 = new Point();
         Point pwh = new Point();

@@ -33,7 +33,7 @@ public class GamePanel extends JComponent
      * @param y
      * @param drawPoint 
      */
-    public static void transform(int dim, int x, int y, Point drawPoint)
+    public static void transform(double dim, double x, double y, Point drawPoint)
     {
         double w = dim;
         double h = dim/FACTOR;
@@ -42,27 +42,27 @@ public class GamePanel extends JComponent
         double xx = - x/dim * w / 2;
         double xy = h/2 * x/dim;
         //y part
-        double yx = y/dim * w/2;
-        double yy = h/2 * y/dim;
+        double yx = y/dim * (w/2);
+        double yy = (h/2) * (y/dim);
         
         drawPoint.x = (int)(w/2 + xx + yx);
         drawPoint.y = (int)(0 + xy + yy);
     }
     
-    private void draw2(Graphics2D g, int dim)
+    private void draw(Graphics2D g, int dim)
     {
         Point p00 = new Point();
         Point pw0 = new Point();
         
         transform(dim, 0, 0, p00);
-        transform(dim, 0, size, pw0);
+        transform(dim, 0, dim, pw0);
         
         System.out.println(p00+" "+pw0);
         
         g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
     }
     
-    private void draw(Graphics2D g, int dim)
+    private void draw2(Graphics2D g, int dim)
     {
         double s = (double)dim / size / FACTOR;
         

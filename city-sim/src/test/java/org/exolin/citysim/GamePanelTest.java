@@ -20,15 +20,13 @@ public class GamePanelTest
         Assertions.assertEquals(new Point(50, 0), p);
     }
     
-    /*
     @Test
     public void testTranform_11()
     {
         Point p = new Point(-1, -1);
         GamePanel.transform(100, 1, 1, p);
-        Assertions.assertEquals(new Point(50, 10), p);
+        Assertions.assertEquals(new Point(3, 25), p);
     }
-    */
     
     @Test
     public void testTranform_w0()

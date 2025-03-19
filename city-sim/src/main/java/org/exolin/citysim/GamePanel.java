@@ -39,14 +39,14 @@ public class GamePanel extends JComponent
         double h = dim/FACTOR;
         
         //x part
-        double xx = - x * w / 2;
-        double xy = h/2 * x;
+        double xx = - x/dim * w / 2;
+        double xy = h/2 * x/dim;
         //y part
-        double yx = y * w/2;
-        double yy = h/2 * y;
+        double yx = y/dim * w/2;
+        double yy = h/2 * y/dim;
         
-        drawPoint.x = (int)(w/2 + xx + xy);
-        drawPoint.y = (int)(w/2 + yx + yy);
+        drawPoint.x = (int)(w/2 + xx + yx);
+        drawPoint.y = (int)(0 + xy + yy);
     }
     
     private void draw2(Graphics2D g, int dim)

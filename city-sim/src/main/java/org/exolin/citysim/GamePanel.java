@@ -87,8 +87,11 @@ public class GamePanel extends JComponent
         
         Point p = new Point();
         transform(dim, 0, 0, p);
+        Point p1 = new Point();
+        transform(dim, 1, 1, p1);
+        System.out.println(p+" to "+p1);
         
-        g.drawImage(i, p.x, p.y, new ImageObserver()
+        g.drawImage(i, p.x, p.y, p1.x, p1.y, new ImageObserver()
         {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)

@@ -44,13 +44,18 @@ public class GamePanel extends JComponent
         }catch(IOException e){
             throw new RuntimeException(e);
         }
-        
+    }
+
+    public GamePanel()
+    {
+        setBackground(Color.black);
     }
     
     @Override
     public void paint(Graphics g)
     {
-        g.drawRect(0, 0, getWidth()-1, getHeight()-1);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        //g.drawRect(0, 0, getWidth()-1, getHeight()-1);
         
         draw((Graphics2D)g, Math.min(getWidth(), getHeight()*FACTOR));
     }

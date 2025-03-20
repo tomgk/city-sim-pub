@@ -88,7 +88,7 @@ public class GamePanel extends JComponent
         System.out.println(grid_x+","+grid_y+" => "+screen_x+","+screen_y);
     }
     
-    private final boolean colorGrid = true;
+    private final boolean colorGrid = false;
     
     private void draw(Graphics2D g, int dim)
     {
@@ -166,40 +166,6 @@ public class GamePanel extends JComponent
     {
         buildings.add(new Building(image, x, y));
         buildings.sort(Comparator.comparing(Building::getLevel));
-    }
-    
-    static class Building
-    {
-        private final Image image;
-        private final int x;
-        private final int y;
-
-        public Building(Image image, int x, int y)
-        {
-            this.image = image;
-            this.x = x;
-            this.y = y;
-        }
-
-        public Image getImage()
-        {
-            return image;
-        }
-
-        public int getX()
-        {
-            return x;
-        }
-
-        public int getY()
-        {
-            return y;
-        }
-        
-        public int getLevel()
-        {
-            return x + y;
-        }
     }
     
     void drax(Graphics2D g, int dim, int x, int y, Image img)

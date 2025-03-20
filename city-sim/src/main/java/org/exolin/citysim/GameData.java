@@ -21,6 +21,12 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         zoomValueLabel.setText(zoom+"");
     }
 
+    @Override
+    public void offsetChanged(int xoffset, int yoffset)
+    {
+        offsetValueLabel.setText(xoffset+"/"+yoffset);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,11 +39,17 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
 
         jLabel1 = new javax.swing.JLabel();
         zoomValueLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        offsetValueLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Zoom:");
 
-        zoomValueLabel.setText("0");
+        zoomValueLabel.setText("undefined");
         zoomValueLabel.setName(""); // NOI18N
+
+        jLabel2.setText("Offset:");
+
+        offsetValueLabel.setText("undefined");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,7 +60,11 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(zoomValueLabel)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(offsetValueLabel)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -56,7 +72,9 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(zoomValueLabel))
+                    .addComponent(zoomValueLabel)
+                    .addComponent(jLabel2)
+                    .addComponent(offsetValueLabel))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -64,6 +82,8 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel offsetValueLabel;
     private javax.swing.JLabel zoomValueLabel;
     // End of variables declaration//GEN-END:variables
 }

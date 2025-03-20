@@ -6,8 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -18,7 +19,6 @@ import java.util.Comparator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,6 +66,39 @@ public class GamePanel extends JComponent
             listener.zoomChanged(zoom);
             GamePanel.this.repaint();
         });
+        setFocusable(true);
+        addKeyListener(new KeyAdapter()
+        {
+            @Override
+            public void keyPressed(KeyEvent e)
+            {
+                boolean update = true;
+                switch(e.getKeyCode())
+                {
+                    case KeyEvent.VK_LEFT:
+                        xoffset -= getZoomFactor();
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        xoffset += getZoomFactor();
+                        break;
+                    case KeyEvent.VK_UP:
+                        yoffset -= getZoomFactor();
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        yoffset += getZoomFactor();
+                        break;
+                    default:
+                        update = false;
+                }
+                if(update)
+                {
+                    listener.offsetChanged(xoffset, yoffset);
+                    repaint();
+                }
+            }
+        });
+        listener.zoomChanged(zoom);
+        listener.offsetChanged(xoffset, yoffset);
     }
     
     private double getZoomFactor()
@@ -84,7 +117,8 @@ public class GamePanel extends JComponent
         double z = getZoomFactor();
         AffineTransform scalingTransform = AffineTransform.getScaleInstance(z, z);
 
-        g2.transform(scalingTransform );
+        g2.transform(scalingTransform);
+        g2.translate(xoffset, yoffset);
         
         draw(g2, Math.min(getWidth(), getHeight()*FACTOR));
     }

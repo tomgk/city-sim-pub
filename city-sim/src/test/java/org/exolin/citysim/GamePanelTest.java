@@ -17,6 +17,11 @@ public class GamePanelTest
         public void zoomChanged(int zoom)
         {
         }
+
+        @Override
+        public void offsetChanged(int xoffset, int yoffset)
+        {
+        }
     });
     
     @Test

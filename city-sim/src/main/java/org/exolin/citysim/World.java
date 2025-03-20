@@ -19,6 +19,7 @@ public class World
     private static final BufferedImage car_cinema = loadImage("car-cinema");
     private static final BufferedImage cinema = loadImage("cinema");
     private static final BufferedImage parkbuilding = loadImage("parkbuilding");
+    private static final BufferedImage street1 = loadImage("street_1");
     
     private final List<Building> buildings = new ArrayList<>();
     
@@ -30,6 +31,8 @@ public class World
         addBuilding(office2, 6, 8);
         addBuilding(parkbuilding, 6, 9);
         addBuilding(office3, 5, 9);
+        for(int i=0;i<3;++i)
+            addBuilding(street1, 2+i, 2);
         
         addBuilding(office, 0, 0);
     }

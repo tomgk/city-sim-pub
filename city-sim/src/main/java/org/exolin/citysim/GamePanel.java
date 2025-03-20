@@ -73,19 +73,20 @@ public class GamePanel extends JComponent
             public void keyPressed(KeyEvent e)
             {
                 boolean update = true;
+                double f = 50;
                 switch(e.getKeyCode())
                 {
                     case KeyEvent.VK_LEFT:
-                        xoffset -= getZoomFactor();
+                        xoffset += getZoomFactor() * f;
                         break;
                     case KeyEvent.VK_RIGHT:
-                        xoffset += getZoomFactor();
+                        xoffset -= getZoomFactor() * f;
                         break;
                     case KeyEvent.VK_UP:
-                        yoffset -= getZoomFactor();
+                        yoffset += getZoomFactor() * f;
                         break;
                     case KeyEvent.VK_DOWN:
-                        yoffset += getZoomFactor();
+                        yoffset -= getZoomFactor() * f;
                         break;
                     default:
                         update = false;

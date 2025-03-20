@@ -17,7 +17,7 @@ public class Main
         f.setLayout(new BorderLayout());
         GameData gd = new GameData();
         f.add(gd, BorderLayout.NORTH);
-        f.add(new GamePanel(gd), BorderLayout.CENTER);
+        f.add(new GamePanel(f, gd), BorderLayout.CENTER);
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         f.setVisible(true);

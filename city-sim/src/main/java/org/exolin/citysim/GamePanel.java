@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -55,14 +56,14 @@ public class GamePanel extends JComponent
         }
     }
 
-    public GamePanel(GamePanelListener listener)
+    public GamePanel(JFrame frame, GamePanelListener listener)
     {
         this.listener = listener;
         setBackground(Color.black);
         
         listener.created(this);
         
-        addMouseWheelListener((MouseWheelEvent e) ->
+        frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
             zoom -= e.getWheelRotation();
             listener.zoomChanged(zoom);
@@ -79,8 +80,8 @@ public class GamePanel extends JComponent
             
             GamePanel.this.repaint();
         });
-        setFocusable(true);
-        addKeyListener(new KeyAdapter()
+        //setFocusable(true);
+        frame.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyPressed(KeyEvent e)

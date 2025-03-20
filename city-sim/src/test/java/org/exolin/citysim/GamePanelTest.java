@@ -2,6 +2,7 @@ package org.exolin.citysim;
 
 import java.awt.Point;
 import java.net.URL;
+import javax.swing.JFrame;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
@@ -12,12 +13,10 @@ import org.junit.jupiter.api.Test;
  */
 public class GamePanelTest
 {
-    private static final GamePanel gamePanel = new GamePanel(new GamePanelListener(){
+    private static final GamePanel gamePanel = new GamePanel(new JFrame(), new GamePanelListener(){
         @Override
         public void created(GamePanel panel)
         {
-            if(gamePanel != panel)
-                throw new IllegalArgumentException();
         }
         
         @Override

@@ -150,12 +150,6 @@ public class GamePanel extends JComponent
         
         for(Building b: buildings)
             drax(g, dim, b.getX(), b.getY(), b.getImage());
-        
-        /*
-        drax(g, dim, 2, 1, i);
-        drax(g, dim, 3, 4, i);
-        drax(g, dim, 6, 6, car_cinema);
-        */
     }
     
     private final List<Building> buildings = new ArrayList<>();

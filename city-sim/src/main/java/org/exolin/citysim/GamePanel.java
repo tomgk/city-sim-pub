@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
@@ -15,6 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,6 +26,7 @@ import javax.swing.JComponent;
  */
 public class GamePanel extends JComponent
 {
+    private final GamePanelListener listener;
     private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
@@ -32,6 +37,10 @@ public class GamePanel extends JComponent
     private static final BufferedImage car_cinema = loadImage("car-cinema");
     private static final BufferedImage cinema = loadImage("cinema");
     private static final BufferedImage parkbuilding = loadImage("parkbuilding");
+    
+    private int zoom = 0;
+    private int xoffset = 0;
+    private int yoffset = 0;
 
     static BufferedImage loadImage(String name)
     {
@@ -46,9 +55,22 @@ public class GamePanel extends JComponent
         }
     }
 
-    public GamePanel()
+    public GamePanel(GamePanelListener listener)
     {
+        this.listener = listener;
         setBackground(Color.black);
+        
+        addMouseWheelListener((MouseWheelEvent e) ->
+        {
+            zoom -= e.getWheelRotation();
+            listener.zoomChanged(zoom);
+            GamePanel.this.repaint();
+        });
+    }
+    
+    private double getZoomFactor()
+    {
+        return Math.pow(1.5, zoom);
     }
     
     @Override
@@ -57,7 +79,14 @@ public class GamePanel extends JComponent
         g.fillRect(0, 0, getWidth(), getHeight());
         //g.drawRect(0, 0, getWidth()-1, getHeight()-1);
         
-        draw((Graphics2D)g, Math.min(getWidth(), getHeight()*FACTOR));
+        Graphics2D g2 = (Graphics2D) g;
+        
+        double z = getZoomFactor();
+        AffineTransform scalingTransform = AffineTransform.getScaleInstance(z, z);
+
+        g2.transform(scalingTransform );
+        
+        draw(g2, Math.min(getWidth(), getHeight()*FACTOR));
     }
     
     /**
@@ -69,10 +98,14 @@ public class GamePanel extends JComponent
      * @param grid_y
      * @param drawPoint 
      */
-    public static void transform(double dim, double grid_x, double grid_y, Point drawPoint)
+    public void transform(double dim, double grid_x, double grid_y, Point drawPoint)
     {
+        //dim *= Math.pow(1.5, zoom);
+        
         double SCREEN_WIDTH = dim;
         double SCREEN_HEIGHT = dim/FACTOR;
+        
+        //System.out.println(dim);
         
         if(false)
         {

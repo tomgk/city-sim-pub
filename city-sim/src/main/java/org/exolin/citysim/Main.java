@@ -12,6 +12,7 @@ public class Main
     {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setTitle("City Sim");
         f.add(new GamePanel());
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);

@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -17,7 +18,7 @@ import javax.swing.JComponent;
  */
 public class GamePanel extends JComponent
 {
-    private final int size = 10;
+    private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
     @Override
@@ -33,46 +34,98 @@ public class GamePanel extends JComponent
      * 
      * 
      * @param dim
-     * @param x
-     * @param y
+     * @param grid_x
+     * @param grid_y
      * @param drawPoint 
      */
-    public static void transform(double dim, double x, double y, Point drawPoint)
+    public static void transform(double dim, double grid_x, double grid_y, Point drawPoint)
     {
-        double w = dim;
-        double h = dim/FACTOR;
+        double SCREEN_WIDTH = dim;
+        double SCREEN_HEIGHT = dim/FACTOR;
+        
+        if(false)
+        {
+            drawPoint.x = (int)(SCREEN_WIDTH / 2 + grid_y * (SCREEN_WIDTH / 2 / GRID_SIZE) - grid_x * (SCREEN_WIDTH / 2 / GRID_SIZE));
+            drawPoint.y = (int)(0 + grid_y * (SCREEN_HEIGHT / 2 / GRID_SIZE) + grid_x * (SCREEN_HEIGHT / 2 / GRID_SIZE));
+        }
+        
+        grid_x *= dim / GRID_SIZE;
+        grid_y *= dim / GRID_SIZE;
         
         //x part
-        double xx = - x/dim * w / 2;
-        double xy = h/2 * x/dim;
+        double xx = - grid_x/dim * SCREEN_WIDTH / 2;
+        double xy = SCREEN_HEIGHT/2 * grid_x/dim;
         //y part
-        double yx = y/dim * (w/2);
-        double yy = (h/2) * (y/dim);
+        double yx = grid_y/dim * (SCREEN_WIDTH/2);
+        double yy = (SCREEN_HEIGHT/2) * (grid_y/dim);
         
-        drawPoint.x = (int)(w/2 + xx + yx);
-        drawPoint.y = (int)(0 + xy + yy);
+        double screen_x = SCREEN_WIDTH/2 + xx + yx;
+        double screen_y = 0 + xy + yy;
+        
+        drawPoint.x = (int)(screen_x);
+        drawPoint.y = (int)(screen_y);
+        
+        System.out.println(grid_x+","+grid_y+" => "+screen_x+","+screen_y);
     }
+    
+    private final boolean colorGrid = true;
     
     private void draw(Graphics2D g, int dim)
     {
-        for(int i = 0; i < size+1; ++i)
+        if(colorGrid)
         {
-            Point p00 = new Point();
-            Point pw0 = new Point();
-            transform(dim, 0, (double)dim / size * i, p00);
-            transform(dim, dim, (double)dim / size * i, pw0);
-            g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+            Color[] color = {Color.red, Color.green, Color.blue};
+            int c = 0;
+
+            for(int y=0;y<=GRID_SIZE;++y)
+            {
+                for(int x=0;x<=GRID_SIZE;++x)
+                {
+                    Point p00 = new Point();
+                    Point pw0 = new Point();
+                    if(x != GRID_SIZE)
+                    {
+                        transform(dim, (double)x, (double)y, p00);
+                        transform(dim, (double)(x+1), (double)(y), pw0);
+                        g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+                    }
+                    
+                    if(y != GRID_SIZE)
+                    {
+                        transform(dim, (double)x, (double)y, p00);
+                        transform(dim, (double)(x), (double)(y+1), pw0);
+                        g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+                    }
+
+                    g.setColor(color[c]);
+                    ++c;
+                    if(c >= color.length)
+                        c = 0;
+                }
+            }
+        }
+        else
+        {
+            for(int i = 0; i < GRID_SIZE+1; ++i)
+            {
+                Point p00 = new Point();
+                Point pw0 = new Point();
+                transform(dim, 0, (double)i, p00);
+                transform(dim, dim, (double)i, pw0);
+                g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+            }
+
+            for(int i = 0; i < GRID_SIZE+1; ++i)
+            {
+                Point pw0 = new Point();
+                Point pwh = new Point();
+
+                transform(dim, (double)i, 0, pw0);
+                transform(dim, (double)i, dim, pwh);
+                g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
+            }
         }
         
-        for(int i = 0; i < size+1; ++i)
-        {
-            Point pw0 = new Point();
-            Point pwh = new Point();
-
-            transform(dim, (double)dim / size * i, 0, pw0);
-            transform(dim, (double)dim / size * i, dim, pwh);
-            g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
-        }
         
         URL resource = GamePanel.class.getClassLoader().getResource("office.png");
         if(resource == null)
@@ -85,13 +138,21 @@ public class GamePanel extends JComponent
             throw new RuntimeException(e);
         }
         
+        System.out.println("-------------------------------------------------");
+        
         Point p = new Point();
-        transform(dim, 0, 0, p);
+        transform(dim, 0.5, -0.5, p);
         Point p1 = new Point();
-        transform(dim, 1, 1, p1);
+        transform(dim, 0.5, 1.5, p1);
         System.out.println(p+" to "+p1);
         
-        g.drawImage(i, p.x, p.y, p1.x, p1.y, new ImageObserver()
+        g.setColor(Color.black);
+        g.drawRect(p.x-1, p.y-1, 3, 3);
+        
+        g.setColor(Color.red);
+        g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
+        
+        g.drawImage(i, p.x, p.y, p1.x-p.x, p1.y-p.y, new ImageObserver()
         {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)
@@ -103,9 +164,9 @@ public class GamePanel extends JComponent
     
     private void draw2(Graphics2D g, int dim)
     {
-        double s = (double)dim / size / FACTOR;
+        double s = (double)dim / GRID_SIZE / FACTOR;
         
-        for(int i = 0; i<size;++i)
+        for(int i = 0; i<GRID_SIZE;++i)
         {
             int xoffset = (int)(i * s);
             int yoffset = (int)(i * s / FACTOR);

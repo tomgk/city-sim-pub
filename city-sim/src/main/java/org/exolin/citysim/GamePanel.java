@@ -21,16 +21,17 @@ public class GamePanel extends JComponent
     private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
-    BufferedImage i = null;
+    BufferedImage i = loadImage("office");
+    BufferedImage car_cinema = loadImage("car-cinema");
 
-    public GamePanel()
+    static BufferedImage loadImage(String name)
     {
-        URL resource = GamePanel.class.getClassLoader().getResource("office.png");
+        URL resource = GamePanel.class.getClassLoader().getResource(name+".png");
         if(resource == null)
             throw new IllegalArgumentException("not found");
         
         try{
-            i = ImageIO.read(resource);
+            return ImageIO.read(resource);
         }catch(IOException e){
             throw new RuntimeException(e);
         }
@@ -146,6 +147,7 @@ public class GamePanel extends JComponent
         
         drax(g, dim, 2, 1, i);
         drax(g, dim, 3, 4, i);
+        drax(g, dim, 6, 6, car_cinema);
     }
     
     void drax(Graphics2D g, int dim, int x, int y, Image img)

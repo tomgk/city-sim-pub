@@ -12,11 +12,18 @@ import org.junit.jupiter.api.Test;
  */
 public class GamePanelTest
 {
+    private static final GamePanel gamePanel = new GamePanel(new GamePanelListener(){
+        @Override
+        public void zoomChanged(int zoom)
+        {
+        }
+    });
+    
     @Test
     public void testTranform_00()
     {
         Point p = new Point(-1, -1);
-        GamePanel.transform(100, 0, 0, p);
+        gamePanel.transform(100, 0, 0, p);
         Assertions.assertEquals(new Point(50, 0), p);
     }
     
@@ -24,7 +31,7 @@ public class GamePanelTest
     public void testTranform_11()
     {
         Point p = new Point(-1, -1);
-        GamePanel.transform(100, 1, 1, p);
+        gamePanel.transform(100, 1, 1, p);
         Assertions.assertEquals(new Point(3, 25), p);
     }
     
@@ -32,7 +39,7 @@ public class GamePanelTest
     public void testTranform_w0()
     {
         Point p = new Point(-1, -1);
-        GamePanel.transform(100, 100, 0, p);
+        gamePanel.transform(100, 100, 0, p);
         Assertions.assertEquals(new Point(0, 25), p);
     }
     
@@ -40,7 +47,7 @@ public class GamePanelTest
     public void testTranform_0h()
     {
         Point p = new Point(-1, -1);
-        GamePanel.transform(100, 0, 100, p);
+        gamePanel.transform(100, 0, 100, p);
         Assertions.assertEquals(new Point(100, 25), p);
     }
     
@@ -48,7 +55,7 @@ public class GamePanelTest
     public void testTranform_wh()
     {
         Point p = new Point(-1, -1);
-        GamePanel.transform(100, 100, 100, p);
+        gamePanel.transform(100, 100, 100, p);
         Assertions.assertEquals(new Point(50, 50), p);
     }
     

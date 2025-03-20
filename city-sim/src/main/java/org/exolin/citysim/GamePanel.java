@@ -144,11 +144,11 @@ public class GamePanel extends JComponent
         
         System.out.println("-------------------------------------------------");
         
-        drax(g, dim, 2, 1);
-        drax(g, dim, 3, 4);
+        drax(g, dim, 2, 1, i);
+        drax(g, dim, 3, 4, i);
     }
     
-    void drax(Graphics2D g, int dim, int x, int y)
+    void drax(Graphics2D g, int dim, int x, int y, Image img)
     {
         Point p = new Point();
         transform(dim, 0.5 + x, -0.5 + y, p);
@@ -158,7 +158,15 @@ public class GamePanel extends JComponent
         double tileHeight = dim/FACTOR/GRID_SIZE;
         
         System.out.println(p+" to "+p1);
-        p.y -= (tileHeight / 50) * 10;
+        //p.y -= (tileHeight / 50) * 10;
+        
+        //assumption: image is exactly one tile wide
+        int imageTileHeight = img.getWidth(null) / FACTOR;
+        
+        //image can be higher than a tile
+        //substract the part above to place it on the tile
+        p.y -= (tileHeight / imageTileHeight) * (img.getHeight(null) - imageTileHeight);
+        
         System.out.println(p+" to "+p1);
         
         g.setColor(Color.black);
@@ -170,7 +178,7 @@ public class GamePanel extends JComponent
             g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
         }
         
-        g.drawImage(i, p.x, p.y, p1.x-p.x, p1.y-p.y, new ImageObserver()
+        g.drawImage(img, p.x, p.y, p1.x-p.x, p1.y-p.y, new ImageObserver()
         {
             @Override
             public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)

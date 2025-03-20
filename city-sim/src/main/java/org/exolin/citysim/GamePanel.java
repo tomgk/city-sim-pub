@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
@@ -145,9 +148,64 @@ public class GamePanel extends JComponent
         
         System.out.println("-------------------------------------------------");
         
+        for(Building b: buildings)
+            drax(g, dim, b.getX(), b.getY(), b.getImage());
+        
+        /*
         drax(g, dim, 2, 1, i);
         drax(g, dim, 3, 4, i);
         drax(g, dim, 6, 6, car_cinema);
+        */
+    }
+    
+    private final List<Building> buildings = new ArrayList<>();
+    
+    {
+        addBuilding(i, 2, 1);
+        addBuilding(i, 3, 4);
+        addBuilding(car_cinema, 6, 6);
+        
+        addBuilding(i, 0, 0);
+    }
+    
+    void addBuilding(Image image, int x, int y)
+    {
+        buildings.add(new Building(image, x, y));
+        buildings.sort(Comparator.comparing(Building::getLevel));
+    }
+    
+    static class Building
+    {
+        private final Image image;
+        private final int x;
+        private final int y;
+
+        public Building(Image image, int x, int y)
+        {
+            this.image = image;
+            this.x = x;
+            this.y = y;
+        }
+
+        public Image getImage()
+        {
+            return image;
+        }
+
+        public int getX()
+        {
+            return x;
+        }
+
+        public int getY()
+        {
+            return y;
+        }
+        
+        public int getLevel()
+        {
+            return x + y;
+        }
     }
     
     void drax(Graphics2D g, int dim, int x, int y, Image img)

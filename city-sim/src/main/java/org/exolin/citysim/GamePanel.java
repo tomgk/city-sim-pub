@@ -21,6 +21,22 @@ public class GamePanel extends JComponent
     private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
+    BufferedImage i = null;
+
+    public GamePanel()
+    {
+        URL resource = GamePanel.class.getClassLoader().getResource("office.png");
+        if(resource == null)
+            throw new IllegalArgumentException("not found");
+        
+        try{
+            i = ImageIO.read(resource);
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        
+    }
+    
     @Override
     public void paint(Graphics g)
     {
@@ -126,31 +142,33 @@ public class GamePanel extends JComponent
             }
         }
         
-        
-        URL resource = GamePanel.class.getClassLoader().getResource("office.png");
-        if(resource == null)
-            throw new IllegalArgumentException("not found");
-        
-        BufferedImage i = null;
-        try{
-            i = ImageIO.read(resource);
-        }catch(IOException e){
-            throw new RuntimeException(e);
-        }
-        
         System.out.println("-------------------------------------------------");
         
+        drax(g, dim, 2, 1);
+        drax(g, dim, 3, 4);
+    }
+    
+    void drax(Graphics2D g, int dim, int x, int y)
+    {
         Point p = new Point();
-        transform(dim, 0.5, -0.5, p);
+        transform(dim, 0.5 + x, -0.5 + y, p);
         Point p1 = new Point();
-        transform(dim, 0.5, 1.5, p1);
+        transform(dim, 0.5 + x, 1.5 + y, p1);
+        
+        double tileHeight = dim/FACTOR/GRID_SIZE;
+        
+        System.out.println(p+" to "+p1);
+        p.y -= (tileHeight / 50) * 10;
         System.out.println(p+" to "+p1);
         
         g.setColor(Color.black);
         g.drawRect(p.x-1, p.y-1, 3, 3);
         
-        g.setColor(Color.red);
-        g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
+        if(false)
+        {
+            g.setColor(Color.red);
+            g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
+        }
         
         g.drawImage(i, p.x, p.y, p1.x-p.x, p1.y-p.y, new ImageObserver()
         {

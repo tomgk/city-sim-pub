@@ -21,6 +21,13 @@ public class World
     private static final BufferedImage parkbuilding = loadImage("parkbuilding");
     private static final BufferedImage street1 = loadImage("street_1");
     
+    private final static int GRID_SIZE = 10;
+    
+    public int GRID_SIZE()
+    {
+        return GRID_SIZE;
+    }
+    
     private final List<Building> buildings = new ArrayList<>();
     
     {

@@ -23,7 +23,6 @@ import static org.exolin.citysim.Utils.loadImage;
 public class GamePanel extends JComponent
 {
     private final GamePanelListener listener;
-    private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
     private static final BufferedImage land = loadImage("land");
@@ -53,8 +52,8 @@ public class GamePanel extends JComponent
             if(false)
             {
                 double zoomFactor = getZoomFactor();
-                xoffset += 1/zoomFactor * GRID_SIZE;
-                yoffset += 1/zoomFactor * GRID_SIZE;
+                xoffset += 1/zoomFactor * world.GRID_SIZE();
+                yoffset += 1/zoomFactor *  world.GRID_SIZE();
                 listener.offsetChanged(xoffset, yoffset);
                 System.out.println(xoffset+"/"+yoffset);
             }
@@ -155,12 +154,12 @@ public class GamePanel extends JComponent
         
         if(false)
         {
-            drawPoint.x = (int)(SCREEN_WIDTH / 2 + grid_y * (SCREEN_WIDTH / 2 / GRID_SIZE) - grid_x * (SCREEN_WIDTH / 2 / GRID_SIZE));
-            drawPoint.y = (int)(0 + grid_y * (SCREEN_HEIGHT / 2 / GRID_SIZE) + grid_x * (SCREEN_HEIGHT / 2 / GRID_SIZE));
+            drawPoint.x = (int)(SCREEN_WIDTH / 2 + grid_y * (SCREEN_WIDTH / 2 /  world.GRID_SIZE()) - grid_x * (SCREEN_WIDTH / 2 /  world.GRID_SIZE()));
+            drawPoint.y = (int)(0 + grid_y * (SCREEN_HEIGHT / 2 /  world.GRID_SIZE()) + grid_x * (SCREEN_HEIGHT / 2 /  world.GRID_SIZE()));
         }
         
-        grid_x *= dim / GRID_SIZE;
-        grid_y *= dim / GRID_SIZE;
+        grid_x *= dim /  world.GRID_SIZE();
+        grid_y *= dim /  world.GRID_SIZE();
         
         //x part
         double xx = - grid_x/dim * SCREEN_WIDTH / 2;
@@ -187,20 +186,20 @@ public class GamePanel extends JComponent
             Color[] color = {Color.red, Color.green, Color.blue};
             int c = 0;
 
-            for(int y=0;y<=GRID_SIZE;++y)
+            for(int y=0;y<= world.GRID_SIZE();++y)
             {
-                for(int x=0;x<=GRID_SIZE;++x)
+                for(int x=0;x<= world.GRID_SIZE();++x)
                 {
                     Point p00 = new Point();
                     Point pw0 = new Point();
-                    if(x != GRID_SIZE)
+                    if(x !=  world.GRID_SIZE())
                     {
                         transform(dim, (double)x, (double)y, p00);
                         transform(dim, (double)(x+1), (double)(y), pw0);
                         g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
                     }
                     
-                    if(y != GRID_SIZE)
+                    if(y !=  world.GRID_SIZE())
                     {
                         transform(dim, (double)x, (double)y, p00);
                         transform(dim, (double)(x), (double)(y+1), pw0);
@@ -219,22 +218,22 @@ public class GamePanel extends JComponent
             g.setColor(Color.orange.darker().darker());
             g.setStroke(new BasicStroke(10));
             
-            for(int i = 0; i < GRID_SIZE+1; ++i)
+            for(int i = 0; i <  world.GRID_SIZE()+1; ++i)
             {
                 Point p00 = new Point();
                 Point pw0 = new Point();
                 transform(dim, 0, (double)i, p00);
-                transform(dim, GRID_SIZE, (double)i, pw0);
+                transform(dim,  world.GRID_SIZE(), (double)i, pw0);
                 g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
             }
 
-            for(int i = 0; i < GRID_SIZE+1; ++i)
+            for(int i = 0; i <  world.GRID_SIZE()+1; ++i)
             {
                 Point pw0 = new Point();
                 Point pwh = new Point();
 
                 transform(dim, (double)i, 0, pw0);
-                transform(dim, (double)i, GRID_SIZE, pwh);
+                transform(dim, (double)i,  world.GRID_SIZE(), pwh);
                 g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
             }
         }
@@ -243,9 +242,9 @@ public class GamePanel extends JComponent
         
         //System.out.println("-------------------------------------------------");
         
-        for(int y=0;y<GRID_SIZE;++y)
+        for(int y=0;y< world.GRID_SIZE();++y)
         {
-            for(int x=0;x<GRID_SIZE;++x)
+            for(int x=0;x< world.GRID_SIZE();++x)
             {
                 drax(g, dim, x, y, land);
             }
@@ -264,7 +263,7 @@ public class GamePanel extends JComponent
         Point p1 = new Point();
         transform(dim, 0.5 + x, 1.5 + y, p1);
         
-        double tileHeight = dim/FACTOR/GRID_SIZE;
+        double tileHeight = dim/FACTOR/ world.GRID_SIZE();
         
         //System.out.println(p+" to "+p1);
         //p.y -= (tileHeight / 50) * 10;
@@ -299,9 +298,9 @@ public class GamePanel extends JComponent
     
     private void draw2(Graphics2D g, int dim)
     {
-        double s = (double)dim / GRID_SIZE / FACTOR;
+        double s = (double)dim /  world.GRID_SIZE() / FACTOR;
         
-        for(int i = 0; i<GRID_SIZE;++i)
+        for(int i = 0; i< world.GRID_SIZE();++i)
         {
             int xoffset = (int)(i * s);
             int yoffset = (int)(i * s / FACTOR);

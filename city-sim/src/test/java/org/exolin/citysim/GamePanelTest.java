@@ -18,16 +18,17 @@ public class GamePanelTest
         public void created(GamePanel panel)
         {
         }
-        
+
         @Override
-        public void zoomChanged(int zoom)
+        public void zoomChanged(int zoom, double zoomFactor)
         {
         }
-
+        
         @Override
         public void offsetChanged(int xoffset, int yoffset)
         {
         }
+        
     });
     
     @Test

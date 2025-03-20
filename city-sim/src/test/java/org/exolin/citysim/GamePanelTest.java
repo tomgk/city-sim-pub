@@ -14,6 +14,13 @@ public class GamePanelTest
 {
     private static final GamePanel gamePanel = new GamePanel(new GamePanelListener(){
         @Override
+        public void created(GamePanel panel)
+        {
+            if(gamePanel != panel)
+                throw new IllegalArgumentException();
+        }
+        
+        @Override
         public void zoomChanged(int zoom)
         {
         }

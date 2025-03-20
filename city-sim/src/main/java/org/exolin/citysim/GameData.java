@@ -6,13 +6,20 @@ package org.exolin.citysim;
  */
 public class GameData extends javax.swing.JPanel implements GamePanelListener
 {
-
+    private GamePanel panel;
+    
     /**
      * Creates new form GameData
      */
     public GameData()
     {
         initComponents();
+    }
+
+    @Override
+    public void created(GamePanel panel)
+    {
+        this.panel = panel;
     }
 
     @Override
@@ -41,6 +48,7 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         zoomValueLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         offsetValueLabel = new javax.swing.JLabel();
+        resetPositionLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Zoom:");
 
@@ -50,6 +58,15 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         jLabel2.setText("Offset:");
 
         offsetValueLabel.setText("undefined");
+
+        resetPositionLabel.setText("Reset position");
+        resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                resetPositionLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -64,7 +81,9 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(offsetValueLabel)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(resetPositionLabel)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,16 +93,23 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                     .addComponent(jLabel1)
                     .addComponent(zoomValueLabel)
                     .addComponent(jLabel2)
-                    .addComponent(offsetValueLabel))
+                    .addComponent(offsetValueLabel)
+                    .addComponent(resetPositionLabel))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void resetPositionLabelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_resetPositionLabelMouseClicked
+    {//GEN-HEADEREND:event_resetPositionLabelMouseClicked
+        panel.resetPosition();
+    }//GEN-LAST:event_resetPositionLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel offsetValueLabel;
+    private javax.swing.JLabel resetPositionLabel;
     private javax.swing.JLabel zoomValueLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,10 +60,23 @@ public class GamePanel extends JComponent
         this.listener = listener;
         setBackground(Color.black);
         
+        listener.created(this);
+        
         addMouseWheelListener((MouseWheelEvent e) ->
         {
             zoom -= e.getWheelRotation();
             listener.zoomChanged(zoom);
+            
+            //doesnt work
+            if(false)
+            {
+                double zoomFactor = getZoomFactor();
+                xoffset += 1/zoomFactor * GRID_SIZE;
+                yoffset += 1/zoomFactor * GRID_SIZE;
+                listener.offsetChanged(xoffset, yoffset);
+                System.out.println(xoffset+"/"+yoffset);
+            }
+            
             GamePanel.this.repaint();
         });
         setFocusable(true);
@@ -102,7 +115,23 @@ public class GamePanel extends JComponent
         listener.offsetChanged(xoffset, yoffset);
     }
     
+    public void resetPosition()
+    {
+        zoom = 0;
+        xoffset = 0;
+        yoffset = 0;
+        repaint();
+        requestFocus();
+        listener.zoomChanged(zoom);
+        listener.offsetChanged(xoffset, yoffset);
+    }
+    
     private double getZoomFactor()
+    {
+        return getZoomFactor(zoom);
+    }
+    
+    private double getZoomFactor(int zoom)
     {
         return Math.pow(1.5, zoom);
     }
@@ -164,7 +193,7 @@ public class GamePanel extends JComponent
         drawPoint.x = (int)(screen_x);
         drawPoint.y = (int)(screen_y);
         
-        System.out.println(grid_x+","+grid_y+" => "+screen_x+","+screen_y);
+        //System.out.println(grid_x+","+grid_y+" => "+screen_x+","+screen_y);
     }
     
     private final boolean colorGrid = false;
@@ -230,7 +259,7 @@ public class GamePanel extends JComponent
         
         g.setStroke(new BasicStroke(1));
         
-        System.out.println("-------------------------------------------------");
+        //System.out.println("-------------------------------------------------");
         
         for(int y=0;y<GRID_SIZE;++y)
         {
@@ -273,7 +302,7 @@ public class GamePanel extends JComponent
         
         double tileHeight = dim/FACTOR/GRID_SIZE;
         
-        System.out.println(p+" to "+p1);
+        //System.out.println(p+" to "+p1);
         //p.y -= (tileHeight / 50) * 10;
         
         //assumption: image is exactly one tile wide
@@ -283,7 +312,7 @@ public class GamePanel extends JComponent
         //substract the part above to place it on the tile
         p.y -= (tileHeight / imageTileHeight) * (img.getHeight(null) - imageTileHeight);
         
-        System.out.println(p+" to "+p1);
+        //System.out.println(p+" to "+p1);
         
         g.setColor(Color.black);
         //g.drawRect(p.x-1, p.y-1, 3, 3);

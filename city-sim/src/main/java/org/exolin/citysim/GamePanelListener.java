@@ -6,6 +6,7 @@ package org.exolin.citysim;
  */
 public interface GamePanelListener
 {
+    public void created(GamePanel panel);
 
     public void zoomChanged(int zoom);
 

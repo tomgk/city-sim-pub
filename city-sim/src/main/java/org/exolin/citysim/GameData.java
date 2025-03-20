@@ -23,9 +23,17 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
     }
 
     @Override
-    public void zoomChanged(int zoom)
+    public void zoomChanged(int zoom, double zoomFactor)
     {
-        zoomValueLabel.setText(zoom+"");
+        String f;
+        if(zoom == 0)
+            f = "full view";
+        else if(zoomFactor < 1)
+            f = "zoom out "+(1/zoomFactor);
+        else
+            f = "zoom in "+zoomFactor;
+        
+        zoomValueLabel.setText(zoom+" | "+f);
     }
 
     @Override

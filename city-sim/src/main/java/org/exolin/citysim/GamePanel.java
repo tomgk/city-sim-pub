@@ -31,6 +31,11 @@ public class GamePanel extends JComponent
     private int zoom = 0;
     private int xoffset = 0;
     private int yoffset = 0;
+    
+    private void zoomChanged()
+    {
+        listener.zoomChanged(zoom, getZoomFactor(zoom));
+    }
 
     public GamePanel(JFrame frame, GamePanelListener listener)
     {
@@ -42,7 +47,7 @@ public class GamePanel extends JComponent
         frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
             zoom -= e.getWheelRotation();
-            listener.zoomChanged(zoom);
+            zoomChanged();
             
             //doesnt work
             if(false)
@@ -88,7 +93,7 @@ public class GamePanel extends JComponent
                 }
             }
         });
-        listener.zoomChanged(zoom);
+        zoomChanged();
         listener.offsetChanged(xoffset, yoffset);
     }
     
@@ -99,7 +104,7 @@ public class GamePanel extends JComponent
         yoffset = 0;
         repaint();
         requestFocus();
-        listener.zoomChanged(zoom);
+        zoomChanged();
         listener.offsetChanged(xoffset, yoffset);
     }
     

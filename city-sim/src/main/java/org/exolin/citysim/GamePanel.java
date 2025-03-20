@@ -24,8 +24,12 @@ public class GamePanel extends JComponent
     private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
-    BufferedImage i = loadImage("office");
-    BufferedImage car_cinema = loadImage("car-cinema");
+    private static final BufferedImage office = loadImage("office");
+    private static final BufferedImage office2 = loadImage("office_2");
+    private static final BufferedImage office3 = loadImage("office_3");
+    private static final BufferedImage car_cinema = loadImage("car-cinema");
+    private static final BufferedImage cinema = loadImage("cinema");
+    private static final BufferedImage parkbuilding = loadImage("parkbuilding");
 
     static BufferedImage loadImage(String name)
     {
@@ -155,11 +159,15 @@ public class GamePanel extends JComponent
     private final List<Building> buildings = new ArrayList<>();
     
     {
-        addBuilding(i, 2, 1);
-        addBuilding(i, 3, 4);
+        addBuilding(office, 2, 1);
+        addBuilding(office, 3, 4);
         addBuilding(car_cinema, 6, 6);
+        addBuilding(cinema, 6, 7);
+        addBuilding(office2, 6, 8);
+        addBuilding(parkbuilding, 6, 9);
+        addBuilding(office3, 5, 9);
         
-        addBuilding(i, 0, 0);
+        addBuilding(office, 0, 0);
     }
     
     void addBuilding(Image image, int x, int y)

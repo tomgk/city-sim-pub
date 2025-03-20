@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,6 +25,7 @@ public class GamePanel extends JComponent
     private final static int GRID_SIZE = 10;
     private static final int FACTOR = 2;
     
+    private static final BufferedImage land = loadImage("land");
     private static final BufferedImage office = loadImage("office");
     private static final BufferedImage office2 = loadImage("office_2");
     private static final BufferedImage office3 = loadImage("office_3");
@@ -130,6 +132,9 @@ public class GamePanel extends JComponent
         }
         else
         {
+            g.setColor(Color.orange.darker().darker());
+            g.setStroke(new BasicStroke(10));
+            
             for(int i = 0; i < GRID_SIZE+1; ++i)
             {
                 Point p00 = new Point();
@@ -150,7 +155,17 @@ public class GamePanel extends JComponent
             }
         }
         
+        g.setStroke(new BasicStroke(1));
+        
         System.out.println("-------------------------------------------------");
+        
+        for(int y=0;y<GRID_SIZE;++y)
+        {
+            for(int x=0;x<GRID_SIZE;++x)
+            {
+                drax(g, dim, x, y, land);
+            }
+        }
         
         for(Building b: buildings)
             drax(g, dim, b.getX(), b.getY(), b.getImage());
@@ -198,7 +213,7 @@ public class GamePanel extends JComponent
         System.out.println(p+" to "+p1);
         
         g.setColor(Color.black);
-        g.drawRect(p.x-1, p.y-1, 3, 3);
+        //g.drawRect(p.x-1, p.y-1, 3, 3);
         
         if(false)
         {

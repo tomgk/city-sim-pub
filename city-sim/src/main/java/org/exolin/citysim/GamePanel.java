@@ -131,7 +131,7 @@ public class GamePanel extends JComponent
                 Point p00 = new Point();
                 Point pw0 = new Point();
                 transform(dim, 0, (double)i, p00);
-                transform(dim, dim, (double)i, pw0);
+                transform(dim, GRID_SIZE, (double)i, pw0);
                 g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
             }
 
@@ -141,7 +141,7 @@ public class GamePanel extends JComponent
                 Point pwh = new Point();
 
                 transform(dim, (double)i, 0, pw0);
-                transform(dim, (double)i, dim, pwh);
+                transform(dim, (double)i, GRID_SIZE, pwh);
                 g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
             }
         }

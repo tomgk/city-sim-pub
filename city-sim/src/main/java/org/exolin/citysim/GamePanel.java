@@ -36,8 +36,9 @@ public class GamePanel extends JComponent
         listener.zoomChanged(zoom, getZoomFactor(zoom));
     }
 
-    public GamePanel(JFrame frame, GamePanelListener listener)
+    public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
+        this.world = world;
         this.listener = listener;
         setBackground(Color.black);
         
@@ -181,6 +182,12 @@ public class GamePanel extends JComponent
     
     private void draw(Graphics2D g, int dim)
     {
+        drawGrid(g, dim);
+        drawBuildings(g, dim);
+    }
+    
+    private void drawGrid(Graphics2D g, int dim)
+    {
         if(colorGrid)
         {
             Color[] color = {Color.red, Color.green, Color.blue};
@@ -237,7 +244,10 @@ public class GamePanel extends JComponent
                 g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
             }
         }
-        
+    }
+    
+    private void drawBuildings(Graphics2D g, int dim)
+    {
         g.setStroke(new BasicStroke(1));
         
         //System.out.println("-------------------------------------------------");
@@ -246,17 +256,17 @@ public class GamePanel extends JComponent
         {
             for(int x=0;x< world.GRID_SIZE();++x)
             {
-                drax(g, dim, x, y, land);
+                drawItem(g, dim, x, y, land);
             }
         }
         
         for(Building b: world.getBuildings())
-            drax(g, dim, b.getX(), b.getY(), b.getImage());
+            drawItem(g, dim, b.getX(), b.getY(), b.getImage());
     }
     
-    private final World world = new World();
+    private final World world;
     
-    void drax(Graphics2D g, int dim, int x, int y, Image img)
+    private void drawItem(Graphics2D g, int dim, int x, int y, Image img)
     {
         Point p = new Point();
         transform(dim, 0.5 + x, -0.5 + y, p);
@@ -280,6 +290,7 @@ public class GamePanel extends JComponent
         g.setColor(Color.black);
         //g.drawRect(p.x-1, p.y-1, 3, 3);
         
+        //draws a rectangle around
         if(false)
         {
             g.setColor(Color.red);

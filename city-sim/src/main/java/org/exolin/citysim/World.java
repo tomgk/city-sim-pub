@@ -1,7 +1,5 @@
 package org.exolin.citysim;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,11 +9,11 @@ import static org.exolin.citysim.Utils.loadImage;
  *
  * @author Thomas
  */
-public class World
+public final class World
 {
     private static final BuildingType office = createBuildingType("office", 1);
     private static final BuildingType office2 = createBuildingType("office_2", 1);
-    private static final BuildingType office3 = createBuildingType("office_3", 1);
+    private static final BuildingType office3 = createBuildingType("office_3", 3);
     private static final BuildingType car_cinema = createBuildingType("car-cinema", 1);
     private static final BuildingType cinema = createBuildingType("cinema", 1);
     private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 1);
@@ -35,18 +33,39 @@ public class World
     
     private final List<Building> buildings = new ArrayList<>();
     
+    private World()
     {
-        addBuilding(office, 2, 1);
-        addBuilding(office, 3, 4);
-        addBuilding(car_cinema, 6, 6);
-        addBuilding(cinema, 6, 7);
-        addBuilding(office2, 6, 8);
-        addBuilding(parkbuilding, 6, 9);
-        addBuilding(office3, 5, 9);
-        for(int i=0;i<3;++i)
-            addBuilding(street1, 2+i, 2);
         
-        addBuilding(office, 0, 0);
+    }
+
+    public static World World1()
+    {
+        World w = new World();
+        w.addBuilding(office, 2, 1);
+        w.addBuilding(office, 3, 4);
+        w.addBuilding(car_cinema, 6, 6);
+        w.addBuilding(cinema, 6, 7);
+        w.addBuilding(office2, 6, 8);
+        w.addBuilding(parkbuilding, 6, 9);
+        w.addBuilding(office3, 5, 9);
+        for(int i=0;i<3;++i)
+            w.addBuilding(street1, 2+i, 2);
+        
+        w.addBuilding(office, 0, 0);
+        
+        return w;
+    }
+
+    public static World World2()
+    {
+        World w = new World();
+        
+        w.addBuilding(office, 6, 6);
+        
+        w.addBuilding(office3, 2, 2);
+        
+        
+        return w;
     }
     
     void addBuilding(BuildingType type, int x, int y)

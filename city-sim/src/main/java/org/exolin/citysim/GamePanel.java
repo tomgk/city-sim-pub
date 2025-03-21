@@ -349,6 +349,7 @@ public class GamePanel extends JComponent
             //doesnt work
             if(false)
             {
+                //issue: ignores current position, just adds
                 double zoomFactor = getZoomFactor();
                 xoffset += 1/zoomFactor * world.getGridSize();
                 yoffset += 1/zoomFactor *  world.getGridSize();

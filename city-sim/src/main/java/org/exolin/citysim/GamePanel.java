@@ -48,7 +48,14 @@ public class GamePanel extends JComponent
         List<Action> actions = new ArrayList<>();
         actions.add(new NoAction());
         actions.add(new StreetBuilder());
-        actions.add(new PlaceBuilding(World.office));
+        //actions.add(new PlaceBuilding(World.office));
+        
+        for(BuildingType type : BuildingType.types())
+        {
+            if(type.isBuilding())
+                actions.add(new PlaceBuilding(type));
+        }
+        
         return actions;
     }
 

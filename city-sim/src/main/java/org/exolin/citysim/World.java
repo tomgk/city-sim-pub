@@ -17,12 +17,17 @@ public final class World
     static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
     static final BuildingType cinema = createBuildingType("cinema", 3);
     static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
-    static final BuildingType street1 = createBuildingType("street_1", 1);
-    static final BuildingType street2 = createBuildingType("street_2", 1);
+    static final BuildingType street1 = createStreetType("street_1", 1);
+    static final BuildingType street2 = createStreetType("street_2", 1);
+    
+    private static BuildingType createStreetType(String name, int size)
+    {
+        return new BuildingType(name, loadImage(name), size, false);
+    }
     
     private static BuildingType createBuildingType(String name, int size)
     {
-        return new BuildingType(name, loadImage(name), size);
+        return new BuildingType(name, loadImage(name), size, true);
     }
     
     private final int gridSize = 30;

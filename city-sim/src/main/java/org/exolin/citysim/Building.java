@@ -41,6 +41,7 @@ public class Building
 
     public int getLevel()
     {
-        return x + y;
+        //each +1 of x and y pushes further down
+        return x + y + type.getSize() * 2;
     }
 }

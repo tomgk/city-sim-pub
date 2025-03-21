@@ -17,14 +17,13 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
     public GameData()
     {
         initComponents();
-        
-        toolCombobox.setModel(new DefaultComboBoxModel(Tool.values()));
     }
 
     @Override
     public void created(GamePanel panel)
     {
         this.panel = panel;
+        toolCombobox.setModel(new DefaultComboBoxModel(panel.getActions().toArray()));
     }
 
     @Override
@@ -150,7 +149,7 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
 
     private void toolComboboxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolComboboxActionPerformed
     {//GEN-HEADEREND:event_toolComboboxActionPerformed
-        panel.setTool((Tool)toolCombobox.getSelectedItem());
+        panel.setAction((Action)toolCombobox.getSelectedItem());
     }//GEN-LAST:event_toolComboboxActionPerformed
 
 

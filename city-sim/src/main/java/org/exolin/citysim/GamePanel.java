@@ -15,8 +15,11 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import org.exolin.citysim.Action.NoAction;
 import static org.exolin.citysim.Utils.brighter;
 import static org.exolin.citysim.Utils.loadImage;
 
@@ -40,21 +43,18 @@ public class GamePanel extends JComponent
     
     private Action action;
     
-    public void setTool(Tool tool)
+    public List<Action> getActions()
     {
-        switch(tool)
-        {
-            case STREET:
-                action = new StreetBuilder();
-                break;
-                
-            case OFFICE1:
-                action = new PlaceBuilding(World.office);
-                break;
-                
-            default:
-                action = null;
-        }
+        List<Action> actions = new ArrayList<>();
+        actions.add(new NoAction());
+        actions.add(new StreetBuilder());
+        actions.add(new PlaceBuilding(World.office));
+        return actions;
+    }
+
+    public void setAction(Action action)
+    {
+        this.action = action;
     }
     
     private void zoomChanged()
@@ -73,6 +73,12 @@ public class GamePanel extends JComponent
             this.start = new Point(gridPoint);
             System.out.println("StreetBuilder @ "+start);
             marking = new Rectangle(start.x, start.y, 1, 1);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "build street";
         }
 
         @Override
@@ -188,11 +194,17 @@ public class GamePanel extends JComponent
     class PlaceBuilding implements Action
     {
         private final BuildingType type;
-        private Rectangle marking = new Rectangle();
+        private final Rectangle marking = new Rectangle();
 
         public PlaceBuilding(BuildingType type)
         {
             this.type = type;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "build "+type.getName();
         }
         
         @Override

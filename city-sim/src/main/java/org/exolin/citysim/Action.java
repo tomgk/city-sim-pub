@@ -16,4 +16,49 @@ public interface Action
     Rectangle getSelection();
     Image getMarker();
     boolean scaleMarker();
+    
+    class NoAction implements Action
+    {
+        @Override
+        public void mouseDown(Point gridPoint)
+        {
+            
+        }
+        
+        @Override
+        public void moveMouse(Point gridPoint)
+        {
+            
+        }
+        
+        @Override
+        public void releaseMouse(Point gridPoint)
+        {
+            
+        }
+        
+        @Override
+        public Rectangle getSelection()
+        {
+            return null;
+        }
+        
+        @Override
+        public Image getMarker()
+        {
+            return null;
+        }
+        
+        @Override
+        public boolean scaleMarker()
+        {
+            return false;
+        }
+
+        @Override
+        public String toString()
+        {
+            return "none";
+        }
+    }
 }

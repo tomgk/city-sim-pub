@@ -9,13 +9,20 @@ import java.awt.image.BufferedImage;
  */
 public class BuildingType
 {
+    private final String name;
     private final BufferedImage image;
     private final int size;
 
-    public BuildingType(BufferedImage image, int size)
+    public BuildingType(String name, BufferedImage image, int size)
     {
+        this.name = name;
         this.image = image;
         this.size = size;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     public Image getImage()

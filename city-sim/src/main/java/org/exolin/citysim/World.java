@@ -22,7 +22,7 @@ public final class World
     
     private static BuildingType createBuildingType(String name, int size)
     {
-        return new BuildingType(loadImage(name), size);
+        return new BuildingType(name, loadImage(name), size);
     }
     
     private final int gridSize = 30;

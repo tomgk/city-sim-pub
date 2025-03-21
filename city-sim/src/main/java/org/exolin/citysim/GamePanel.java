@@ -256,22 +256,31 @@ public class GamePanel extends JComponent
         {
             for(int x=0;x< world.GRID_SIZE();++x)
             {
-                drawItem(g, dim, x, y, land);
+                drawItem(g, dim, x, y, land, 1);
             }
         }
         
         for(Building b: world.getBuildings())
-            drawItem(g, dim, b.getX(), b.getY(), b.getImage());
+            drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
     }
     
     private final World world;
     
-    private void drawItem(Graphics2D g, int dim, int x, int y, Image img)
+    private void drawItem(Graphics2D g, int dim, int x, int y, Image img, int size)
     {
         Point p = new Point();
+        
+        /*
         transform(dim, 0.5 + x, -0.5 + y, p);
         Point p1 = new Point();
         transform(dim, 0.5 + x, 1.5 + y, p1);
+        */
+        
+        int addSize = size-1;
+        
+        transform(dim, size * 0.5 + x, size * -0.5 + y, p);
+        Point p1 = new Point();
+        transform(dim, size * 0.5 + x, size * 1.5 + y, p1);
         
         double tileHeight = dim/FACTOR/ world.GRID_SIZE();
         
@@ -283,7 +292,7 @@ public class GamePanel extends JComponent
         
         //image can be higher than a tile
         //substract the part above to place it on the tile
-        p.y -= (tileHeight / imageTileHeight) * (img.getHeight(null) - imageTileHeight);
+        p.y -= (tileHeight / imageTileHeight) * (img.getHeight(null) - imageTileHeight) * size;
         
         //System.out.println(p+" to "+p1);
         
@@ -291,8 +300,11 @@ public class GamePanel extends JComponent
         //g.drawRect(p.x-1, p.y-1, 3, 3);
         
         //draws a rectangle around
-        if(false)
+        if(img != land)
         {
+            g.drawRect(p.x-1, p.y-1, 3, 3);
+            g.drawRect(p1.x-1, p1.y-1, 3, 3);
+            
             g.setColor(Color.red);
             g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
         }

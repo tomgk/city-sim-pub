@@ -16,8 +16,9 @@ public interface Action
     Rectangle getSelection();
     Image getMarker();
     boolean scaleMarker();
+    String getName();
     
-    class NoAction implements Action
+    final class NoAction implements Action
     {
         @Override
         public void mouseDown(Point gridPoint)
@@ -56,9 +57,15 @@ public interface Action
         }
 
         @Override
-        public String toString()
+        public String getName()
         {
             return "none";
+        }
+
+        @Override
+        public String toString()
+        {
+            return getName();
         }
     }
 }

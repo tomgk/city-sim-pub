@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -19,7 +20,27 @@ public class Main
         f.setLayout(new BorderLayout());
         GameData gd = new GameData();
         f.add(gd, BorderLayout.NORTH);
-        f.add(new GamePanel(World.World2(), f, gd), BorderLayout.CENTER);
+        GamePanel gp = new GamePanel(World.World2(), f, gd);
+        f.add(gp, BorderLayout.CENTER);
+        
+        SelectorPanel sp = new SelectorPanel(gp);
+        
+        for(Action a: gp.getActions())
+        {
+            if(a instanceof Action.NoAction)
+                continue;
+            
+            sp.add(a);
+        }
+        
+        JScrollPane scroll = new JScrollPane(sp);
+        JFrame selector = new JFrame("Selector");
+        selector.setLayout(new BorderLayout());
+        selector.add(scroll, BorderLayout.CENTER);
+        selector.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        selector.setSize(300, 500);
+        selector.setVisible(true);
+        
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         

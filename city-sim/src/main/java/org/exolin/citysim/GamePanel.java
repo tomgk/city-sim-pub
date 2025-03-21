@@ -69,7 +69,7 @@ public class GamePanel extends JComponent
         listener.zoomChanged(zoom, getZoomFactor(zoom));
     }
     
-    private class StreetBuilder implements Action
+    private class StreetBuilder implements BuildingAction
     {
         private Point start;
         private Rectangle marking;
@@ -83,9 +83,15 @@ public class GamePanel extends JComponent
         }
 
         @Override
-        public String toString()
+        public String getName()
         {
             return "build street";
+        }
+
+        @Override
+        public String toString()
+        {
+            return getName();
         }
 
         @Override
@@ -177,6 +183,12 @@ public class GamePanel extends JComponent
         }
 
         @Override
+        public BuildingType getBuilding()
+        {
+            return World.street1;
+        }
+
+        @Override
         public Image getMarker()
         {
             if(marking == null)
@@ -198,7 +210,7 @@ public class GamePanel extends JComponent
         }
     }
     
-    class PlaceBuilding implements Action
+    class PlaceBuilding implements BuildingAction
     {
         private final BuildingType type;
         private final Rectangle marking = new Rectangle();
@@ -209,9 +221,21 @@ public class GamePanel extends JComponent
         }
 
         @Override
-        public String toString()
+        public BuildingType getBuilding()
+        {
+            return type;
+        }
+
+        @Override
+        public String getName()
         {
             return "build "+type.getName();
+        }
+
+        @Override
+        public String toString()
+        {
+            return getName();
         }
         
         @Override

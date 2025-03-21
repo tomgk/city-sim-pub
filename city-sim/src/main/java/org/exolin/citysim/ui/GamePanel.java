@@ -1,4 +1,4 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -19,9 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import org.exolin.citysim.Action.NoAction;
-import static org.exolin.citysim.Utils.brighter;
-import static org.exolin.citysim.Utils.loadImage;
+import org.exolin.citysim.Building;
+import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.World;
+import org.exolin.citysim.ui.Action.NoAction;
+import static org.exolin.citysim.ui.Utils.brighter;
+import static org.exolin.citysim.ui.Utils.loadImage;
 
 /**
  *

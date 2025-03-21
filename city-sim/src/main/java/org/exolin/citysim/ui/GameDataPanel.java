@@ -1,5 +1,6 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui;
 
+import org.exolin.citysim.ui.GamePanelListener;
 import java.awt.Point;
 import javax.swing.DefaultComboBoxModel;
 

@@ -3,7 +3,7 @@ package org.exolin.citysim;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import static org.exolin.citysim.Utils.loadImage;
+import static org.exolin.citysim.ui.Utils.loadImage;
 
 /**
  *
@@ -31,8 +31,8 @@ public final class World
     
     static final BuildingType plant_solar = createBuildingType("plant_solar", 4);
     
-    static final BuildingType street1 = createStreetType("street_1", 1);
-    static final BuildingType street2 = createStreetType("street_2", 1);
+    public static final BuildingType street1 = createStreetType("street_1", 1);
+    public static final BuildingType street2 = createStreetType("street_2", 1);
     
     private static BuildingType createStreetType(String name, int size)
     {
@@ -98,7 +98,7 @@ public final class World
         return w;
     }
     
-    boolean containsBuilding(int x, int y)
+    public boolean containsBuilding(int x, int y)
     {
         for(Building b: buildings)
             if(b.isOccupying(x, y))
@@ -107,7 +107,7 @@ public final class World
         return false;
     }
     
-    void addBuilding(BuildingType type, int x, int y)
+    public void addBuilding(BuildingType type, int x, int y)
     {
         buildings.add(new Building(type, x, y));
         buildings.sort(Comparator.comparing(Building::getLevel));

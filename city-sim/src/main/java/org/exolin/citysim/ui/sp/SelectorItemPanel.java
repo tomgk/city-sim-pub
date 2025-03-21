@@ -1,4 +1,4 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui.sp;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.BuildingAction;
 
 /**
  *

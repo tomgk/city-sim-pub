@@ -1,8 +1,9 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.net.URL;
 import javax.swing.JFrame;
+import org.exolin.citysim.World;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;

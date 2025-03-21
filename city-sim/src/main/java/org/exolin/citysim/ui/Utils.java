@@ -1,4 +1,4 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

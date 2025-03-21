@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import org.exolin.citysim.ui.Utils;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

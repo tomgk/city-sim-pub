@@ -1,4 +1,4 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui;
 
 import java.awt.Image;
 import java.awt.Point;

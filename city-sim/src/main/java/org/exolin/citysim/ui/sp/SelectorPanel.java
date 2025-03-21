@@ -1,7 +1,9 @@
-package org.exolin.citysim;
+package org.exolin.citysim.ui.sp;
 
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.GamePanel;
 
 /**
  *

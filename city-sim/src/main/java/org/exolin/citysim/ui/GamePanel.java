@@ -56,6 +56,7 @@ public class GamePanel extends JComponent
         
         actions.add(new ZonePlacement(world, World.zone_residential));
         actions.add(new ZonePlacement(world, World.zone_business));
+        actions.add(new ZonePlacement(world, World.zone_industrial));
         
         //actions.add(new PlaceBuilding(World.office));
         

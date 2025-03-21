@@ -36,6 +36,7 @@ public final class World
     
     public static final BuildingType zone_residential = createZone("zone_residential");
     public static final BuildingType zone_business = createZone("zone_business");
+    public static final BuildingType zone_industrial = createZone("zone_industrial");
     
     private static BuildingType createStreetType(String name, int size)
     {

@@ -23,7 +23,6 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
     public void created(GamePanel panel)
     {
         this.panel = panel;
-        toolCombobox.setModel(new DefaultComboBoxModel(panel.getActions().toArray()));
     }
 
     @Override
@@ -69,7 +68,6 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         resetPositionLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tilePosLabel = new javax.swing.JLabel();
-        toolCombobox = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Zoom:");
 
@@ -93,15 +91,6 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
 
         tilePosLabel.setText("undefined");
 
-        toolCombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        toolCombobox.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                toolComboboxActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,14 +110,12 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tilePosLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addComponent(toolCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(zoomValueLabel)
@@ -136,9 +123,8 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                     .addComponent(offsetValueLabel)
                     .addComponent(resetPositionLabel)
                     .addComponent(jLabel3)
-                    .addComponent(tilePosLabel)
-                    .addComponent(toolCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(tilePosLabel))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -147,12 +133,6 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         panel.resetPosition();
     }//GEN-LAST:event_resetPositionLabelMouseClicked
 
-    private void toolComboboxActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toolComboboxActionPerformed
-    {//GEN-HEADEREND:event_toolComboboxActionPerformed
-        panel.setAction((Action)toolCombobox.getSelectedItem());
-    }//GEN-LAST:event_toolComboboxActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -160,7 +140,6 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
     private javax.swing.JLabel offsetValueLabel;
     private javax.swing.JLabel resetPositionLabel;
     private javax.swing.JLabel tilePosLabel;
-    private javax.swing.JComboBox<String> toolCombobox;
     private javax.swing.JLabel zoomValueLabel;
     // End of variables declaration//GEN-END:variables
 }

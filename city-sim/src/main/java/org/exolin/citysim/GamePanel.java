@@ -146,18 +146,8 @@ public class GamePanel extends JComponent
      */
     public void transform(double dim, double grid_x, double grid_y, Point drawPoint)
     {
-        //dim *= Math.pow(1.5, zoom);
-        
         double SCREEN_WIDTH = dim;
         double SCREEN_HEIGHT = dim/FACTOR;
-        
-        //System.out.println(dim);
-        
-        if(false)
-        {
-            drawPoint.x = (int)(SCREEN_WIDTH / 2 + grid_y * (SCREEN_WIDTH / 2 /  world.getGridSize()) - grid_x * (SCREEN_WIDTH / 2 /  world.getGridSize()));
-            drawPoint.y = (int)(0 + grid_y * (SCREEN_HEIGHT / 2 /  world.getGridSize()) + grid_x * (SCREEN_HEIGHT / 2 /  world.getGridSize()));
-        }
         
         grid_x *= dim /  world.getGridSize();
         grid_y *= dim /  world.getGridSize();
@@ -174,8 +164,6 @@ public class GamePanel extends JComponent
         
         drawPoint.x = (int)(screen_x);
         drawPoint.y = (int)(screen_y);
-        
-        //System.out.println(grid_x+","+grid_y+" => "+screen_x+","+screen_y);
     }
     
     private final boolean colorGrid = false;

@@ -31,6 +31,7 @@ public class BuildingType
         return instances;
     }
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public BuildingType(String name, BufferedImage image, int size, Category category)
     {
         this.name = name;

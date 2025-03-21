@@ -44,4 +44,21 @@ public class Building
         //each +1 of x and y pushes further down
         return x + y + type.getSize() * 2;
     }
+    
+    public boolean isOccupying(int x, int y)
+    {
+        if(this.x < x)
+            return false;
+        
+        if(this.x+type.getSize() >= x)
+            return false;
+        
+        if(this.y < y)
+            return false;
+        
+        if(this.y + type.getSize() >= x)
+            return false;
+        
+        return true;
+    }
 }

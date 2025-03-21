@@ -40,6 +40,19 @@ public class GamePanel extends JComponent
     
     private Action action;
     
+    public void setTool(Tool tool)
+    {
+        switch(tool)
+        {
+            case STREET:
+                action = new StreetBuilder();
+                break;
+                
+            default:
+                action = null;
+        }
+    }
+    
     private void zoomChanged()
     {
         listener.zoomChanged(zoom, getZoomFactor(zoom));
@@ -67,6 +80,9 @@ public class GamePanel extends JComponent
         @Override
         public void moveMouse(Point gridPoint)
         {
+            if(start == null)
+                return;
+            
             int diffX = gridPoint.x - start.x;
             int diffY = gridPoint.y - start.y;
             
@@ -100,13 +116,47 @@ public class GamePanel extends JComponent
                 marking.y += diffY;
             }
             
-            System.out.println("StreetBuilder move to "+gridPoint+" => "+marking);
+            //System.out.println("StreetBuilder move to "+gridPoint+" => "+marking);
         }
 
         @Override
         public void releaseMouse(Point gridPoint)
         {
             //TODO
+            System.out.println("release "+marking);
+            
+            int diffX;
+            int diffY;
+            int len;
+            BuildingType type;
+            if(marking.width == 1)
+            {
+                diffX = 0;
+                diffY = 1;
+                len = marking.height;
+                type = World.street2;
+            }
+            else
+            {
+                diffX = 1;
+                diffY = 0;
+                len = marking.width;
+                type = World.street1;
+            }
+            
+            for(int i=0;i<len;++i)
+            {
+                int x = marking.x + diffX * i;
+                int y = marking.y + diffY * i;
+                
+                if(world.containsBuilding(x, y))
+                    continue;
+                
+                world.addBuilding(type, x, y);
+            }
+            
+            start = null;
+            marking = null;
         }
     }
     
@@ -130,12 +180,10 @@ public class GamePanel extends JComponent
             @Override
             public void mousePressed(MouseEvent e)
             {
-                if(action != null)
-                    return;
-                
                 updatePos(e);
-                action = new StreetBuilder();
-                action.mouseDown(currentGridPos);
+                if(action != null)
+                    action.mouseDown(currentGridPos);
+                repaint();
             }
 
             @Override
@@ -146,7 +194,6 @@ public class GamePanel extends JComponent
                 
                 updatePos(e);
                 action.releaseMouse(currentGridPos);
-                action = null;
                 repaint();
             }
             
@@ -393,10 +440,10 @@ public class GamePanel extends JComponent
         
         //System.out.println("-------------------------------------------------");
         
-        Rectangle r;
+        Rectangle r = null;
         if(action != null)
             r = action.getSelection();
-        else
+        if(r == null)
             r = new Rectangle(-1, -1); //out of bounds to never match
         
         for(int y=0;y< world.getGridSize();++y)

@@ -11,14 +11,14 @@ import static org.exolin.citysim.Utils.loadImage;
  */
 public final class World
 {
-    private static final BuildingType office = createBuildingType("office", 4);
-    private static final BuildingType office2 = createBuildingType("office_2", 3);
-    private static final BuildingType office3 = createBuildingType("office_3", 3);
-    private static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
-    private static final BuildingType cinema = createBuildingType("cinema", 3);
-    private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
-    private static final BuildingType street1 = createBuildingType("street_1", 1);
-    private static final BuildingType street2 = createBuildingType("street_2", 1);
+    static final BuildingType office = createBuildingType("office", 4);
+    static final BuildingType office2 = createBuildingType("office_2", 3);
+    static final BuildingType office3 = createBuildingType("office_3", 3);
+    static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
+    static final BuildingType cinema = createBuildingType("cinema", 3);
+    static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
+    static final BuildingType street1 = createBuildingType("street_1", 1);
+    static final BuildingType street2 = createBuildingType("street_2", 1);
     
     private static BuildingType createBuildingType(String name, int size)
     {
@@ -77,6 +77,15 @@ public final class World
             w.addBuilding(street2, 20, 6+i);
         
         return w;
+    }
+    
+    boolean containsBuilding(int x, int y)
+    {
+        for(Building b: buildings)
+            if(b.isOccupying(x, y))
+                return true;
+        
+        return false;
     }
     
     void addBuilding(BuildingType type, int x, int y)

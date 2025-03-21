@@ -7,14 +7,14 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Thomas
  */
-public class GameData extends javax.swing.JPanel implements GamePanelListener
+public class GameDataPanel extends javax.swing.JPanel implements GamePanelListener
 {
     private GamePanel panel;
     
     /**
      * Creates new form GameData
      */
-    public GameData()
+    public GameDataPanel()
     {
         initComponents();
     }

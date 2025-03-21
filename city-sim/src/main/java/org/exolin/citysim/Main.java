@@ -18,7 +18,7 @@ public class Main
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setTitle("City Sim");
         f.setLayout(new BorderLayout());
-        GameData gd = new GameData();
+        GameDataPanel gd = new GameDataPanel();
         f.add(gd, BorderLayout.NORTH);
         GamePanel gp = new GamePanel(World.World2(), f, gd);
         f.add(gp, BorderLayout.CENTER);

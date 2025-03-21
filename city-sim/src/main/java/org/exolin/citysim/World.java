@@ -11,20 +11,21 @@ import static org.exolin.citysim.Utils.loadImage;
  */
 public final class World
 {
-    private static final BuildingType office = createBuildingType("office", 1);
-    private static final BuildingType office2 = createBuildingType("office_2", 1);
+    private static final BuildingType office = createBuildingType("office", 3);
+    private static final BuildingType office2 = createBuildingType("office_2", 3);
     private static final BuildingType office3 = createBuildingType("office_3", 3);
-    private static final BuildingType car_cinema = createBuildingType("car-cinema", 1);
+    private static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
     private static final BuildingType cinema = createBuildingType("cinema", 1);
     private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 1);
     private static final BuildingType street1 = createBuildingType("street_1", 1);
+    private static final BuildingType street2 = createBuildingType("street_2", 1);
     
     private static BuildingType createBuildingType(String name, int size)
     {
         return new BuildingType(loadImage(name), size);
     }
     
-    private final int gridSize = 10;
+    private final int gridSize = 30;
     
     public int getGridSize()
     {
@@ -62,8 +63,15 @@ public final class World
         
         w.addBuilding(office, 6, 6);
         
-        w.addBuilding(office3, 2, 2);
+        w.addBuilding(office3, 6, 2);
         
+        w.addBuilding(car_cinema, 16, 6);
+        
+        for(int i=0;i<25;++i)
+            w.addBuilding(street1, 2+i, 5);
+        
+        for(int i=0;i<4;++i)
+            w.addBuilding(street2, 20, 6+i);
         
         return w;
     }

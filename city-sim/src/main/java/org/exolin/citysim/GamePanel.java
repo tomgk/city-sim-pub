@@ -270,14 +270,6 @@ public class GamePanel extends JComponent
     {
         Point p = new Point();
         
-        /*
-        transform(dim, 0.5 + x, -0.5 + y, p);
-        Point p1 = new Point();
-        transform(dim, 0.5 + x, 1.5 + y, p1);
-        */
-        
-        int addSize = size-1;
-        
         transform(dim, size * 0.5 + x, size * -0.5 + y, p);
         Point p1 = new Point();
         transform(dim, size * 0.5 + x, size * 1.5 + y, p1);
@@ -300,7 +292,7 @@ public class GamePanel extends JComponent
         //g.drawRect(p.x-1, p.y-1, 3, 3);
         
         //draws a rectangle around
-        if(img != land)
+        if(false)//img != land)
         {
             g.drawRect(p.x-1, p.y-1, 3, 3);
             g.drawRect(p1.x-1, p1.y-1, 3, 3);

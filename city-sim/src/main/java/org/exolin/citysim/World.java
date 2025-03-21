@@ -16,7 +16,7 @@ public final class World
     private static final BuildingType office3 = createBuildingType("office_3", 3);
     private static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
     private static final BuildingType cinema = createBuildingType("cinema", 1);
-    private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 1);
+    private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
     private static final BuildingType street1 = createBuildingType("street_1", 1);
     private static final BuildingType street2 = createBuildingType("street_2", 1);
     
@@ -42,13 +42,13 @@ public final class World
     public static World World1()
     {
         World w = new World();
-        w.addBuilding(office, 2, 1);
-        w.addBuilding(office, 3, 4);
-        w.addBuilding(car_cinema, 6, 6);
-        w.addBuilding(cinema, 6, 7);
-        w.addBuilding(office2, 6, 8);
-        w.addBuilding(parkbuilding, 6, 9);
-        w.addBuilding(office3, 5, 9);
+        w.addBuilding(office, 6, 3);
+        w.addBuilding(office, 9, 12);
+        w.addBuilding(car_cinema, 18, 18);
+        w.addBuilding(cinema, 18, 21);
+        w.addBuilding(office2, 18, 24);
+        w.addBuilding(parkbuilding, 18, 27);
+        w.addBuilding(office3, 15, 27);
         for(int i=0;i<3;++i)
             w.addBuilding(street1, 2+i, 2);
         

@@ -11,11 +11,11 @@ import static org.exolin.citysim.Utils.loadImage;
  */
 public final class World
 {
-    private static final BuildingType office = createBuildingType("office", 3);
+    private static final BuildingType office = createBuildingType("office", 4);
     private static final BuildingType office2 = createBuildingType("office_2", 3);
     private static final BuildingType office3 = createBuildingType("office_3", 3);
     private static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
-    private static final BuildingType cinema = createBuildingType("cinema", 1);
+    private static final BuildingType cinema = createBuildingType("cinema", 3);
     private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
     private static final BuildingType street1 = createBuildingType("street_1", 1);
     private static final BuildingType street2 = createBuildingType("street_2", 1);
@@ -62,10 +62,13 @@ public final class World
         World w = new World();
         
         w.addBuilding(office, 6, 6);
+        w.addBuilding(parkbuilding, 3, 6);
         
         w.addBuilding(office3, 6, 2);
         
         w.addBuilding(car_cinema, 16, 6);
+        w.addBuilding(cinema, 16, 2);
+        w.addBuilding(office2, 19, 2);
         
         for(int i=0;i<25;++i)
             w.addBuilding(street1, 2+i, 5);

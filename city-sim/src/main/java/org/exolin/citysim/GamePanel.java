@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -37,11 +38,77 @@ public class GamePanel extends JComponent
     
     private final Point currentGridPos = new Point();
     
+    private Action action;
+    
     private void zoomChanged()
     {
         listener.zoomChanged(zoom, getZoomFactor(zoom));
     }
+    
+    private class StreetBuilder implements Action
+    {
+        private final Point start;
+        private final Rectangle marking;
 
+        public StreetBuilder(Point start)
+        {
+            System.out.println("StreetBuilder @ "+start);
+            this.start = new Point(start);
+            marking = new Rectangle(start.x, start.y, 1, 1);
+        }
+
+        @Override
+        public Rectangle getSelection()
+        {
+            return marking;
+        }
+
+        @Override
+        public void moveMouse(Point gridPoint)
+        {
+            int diffX = gridPoint.x - start.x;
+            int diffY = gridPoint.y - start.y;
+            
+            if(Math.abs(diffX) > Math.abs(diffY))
+            {
+                diffX = diffX + Integer.signum(diffX);
+                diffY = 1;
+            }
+            else
+            {
+                diffX = 1;
+                diffY = diffY + Integer.signum(diffY);
+            }
+            
+            marking.x = start.x;
+            marking.y = start.y;
+            
+            if(diffX > 0)
+                marking.width = diffX;
+            else
+            {
+                marking.width = -diffX;
+                marking.x += diffX;
+            }
+            
+            if(diffY > 0)
+                marking.height = diffY;
+            else
+            {
+                marking.height = -diffY;
+                marking.y += diffY;
+            }
+            
+            System.out.println("StreetBuilder move to "+gridPoint+" => "+marking);
+        }
+
+        @Override
+        public void releaseMouse(Point gridPoint)
+        {
+            //TODO
+        }
+    }
+    
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
         this.world = world;
@@ -50,18 +117,59 @@ public class GamePanel extends JComponent
         
         listener.created(this);
         
-        frame.addMouseMotionListener(new MouseAdapter()
+        MouseAdapter a  = new MouseAdapter()
         {
-            @Override
-            public void mouseMoved(MouseEvent e)
+            private void updatePos(MouseEvent e)
             {
                 double x = e.getX();
                 double y = e.getY();
                 transformBack(getDim(), x, y, currentGridPos);
+            }
+            
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                if(action != null)
+                    return;
+                
+                updatePos(e);
+                action = new StreetBuilder(currentGridPos);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+                if(action == null)
+                    return;
+                
+                updatePos(e);
+                action.releaseMouse(currentGridPos);
+                action = null;
                 repaint();
+            }
+            
+            @Override
+            public void mouseMoved(MouseEvent e)
+            {
+                updatePos(e);
+                
+                if(action != null)
+                    action.moveMouse(currentGridPos);
+                
+                repaint();
+                
                 listener.onSelectionChanged(currentGridPos);
             }
-        });
+
+            @Override
+            public void mouseDragged(MouseEvent e)
+            {
+                mouseMoved(e);
+            }
+        };
+        
+        frame.addMouseListener(a);
+        frame.addMouseMotionListener(a);
         
         frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
@@ -283,11 +391,20 @@ public class GamePanel extends JComponent
         
         //System.out.println("-------------------------------------------------");
         
+        Rectangle r;
+        if(action != null)
+            r = action.getSelection();
+        else
+            r = new Rectangle(-1, -1); //out of bounds to never match
+        
         for(int y=0;y< world.getGridSize();++y)
         {
             for(int x=0;x< world.getGridSize();++x)
             {
                 boolean current = currentGridPos.x == x && currentGridPos.y == y;
+                
+                if(r.contains(x, y))
+                    current = true;
                 
                 drawItem(g, dim, x, y, current ? land_highlighted : land, 1);
             }

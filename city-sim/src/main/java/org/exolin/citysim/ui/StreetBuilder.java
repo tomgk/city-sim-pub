@@ -25,7 +25,6 @@ public class StreetBuilder implements BuildingAction
     public void mouseDown(Point gridPoint)
     {
         this.start = new Point(gridPoint);
-        System.out.println("StreetBuilder @ "+start);
         marking = new Rectangle(start.x, start.y, 1, 1);
     }
 
@@ -85,16 +84,11 @@ public class StreetBuilder implements BuildingAction
             marking.height = -diffY;
             marking.y += diffY;
         }
-
-        //System.out.println("StreetBuilder move to "+gridPoint+" => "+marking);
     }
 
     @Override
     public void releaseMouse(Point gridPoint)
     {
-        //TODO
-        System.out.println("release "+marking);
-
         int diffX;
         int diffY;
         int len;

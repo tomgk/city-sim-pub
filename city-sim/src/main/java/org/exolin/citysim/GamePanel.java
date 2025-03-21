@@ -158,6 +158,21 @@ public class GamePanel extends JComponent
             start = null;
             marking = null;
         }
+
+        @Override
+        public Image getMarker()
+        {
+            if(marking == null)
+                return null;
+            
+            BuildingType type;
+            if(marking.width == 1)
+                type = World.street2;
+            else
+                type = World.street1;
+            
+            return type.getBrightImage();
+        }
     }
     
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
@@ -441,21 +456,28 @@ public class GamePanel extends JComponent
         //System.out.println("-------------------------------------------------");
         
         Rectangle r = null;
+        Image markerImage = null;
         if(action != null)
+        {
+            markerImage = action.getMarker();
             r = action.getSelection();
+        }
         if(r == null)
             r = new Rectangle(-1, -1); //out of bounds to never match
+        if(markerImage == null)
+            markerImage = land_highlighted;
         
         for(int y=0;y< world.getGridSize();++y)
         {
             for(int x=0;x< world.getGridSize();++x)
             {
                 boolean current = currentGridPos.x == x && currentGridPos.y == y;
+                Image img = current ? land_highlighted : land;
                 
                 if(r.contains(x, y))
-                    current = true;
+                    img = markerImage;
                 
-                drawItem(g, dim, x, y, current ? land_highlighted : land, 1);
+                drawItem(g, dim, x, y, img, 1);
             }
         }
         

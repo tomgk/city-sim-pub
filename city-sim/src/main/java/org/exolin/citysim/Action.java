@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -13,4 +14,5 @@ public interface Action
     void moveMouse(Point gridPoint);
     void releaseMouse(Point gridPoint);
     Rectangle getSelection();
+    Image getMarker();
 }

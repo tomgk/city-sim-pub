@@ -1,6 +1,7 @@
 package org.exolin.citysim;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -8,10 +9,10 @@ import java.awt.Image;
  */
 public class BuildingType
 {
-    private final Image image;
+    private final BufferedImage image;
     private final int size;
 
-    public BuildingType(Image image, int size)
+    public BuildingType(BufferedImage image, int size)
     {
         this.image = image;
         this.size = size;
@@ -25,5 +26,10 @@ public class BuildingType
     public int getSize()
     {
         return size;
+    }
+
+    public BufferedImage getBrightImage()
+    {
+        return Utils.brighter(image);
     }
 }

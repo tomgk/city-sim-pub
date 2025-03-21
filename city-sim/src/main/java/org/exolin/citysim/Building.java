@@ -1,6 +1,7 @@
 package org.exolin.citysim;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 
 /**
  *
@@ -43,6 +44,11 @@ public class Building
     {
         //each +1 of x and y pushes further down
         return x + y + type.getSize() * 2;
+    }
+    
+    public static int getLevel(Rectangle r)
+    {
+        return r.x+r.y+r.width+r.height;
     }
     
     public boolean isOccupying(int x, int y)

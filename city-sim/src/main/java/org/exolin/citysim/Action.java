@@ -15,4 +15,5 @@ public interface Action
     void releaseMouse(Point gridPoint);
     Rectangle getSelection();
     Image getMarker();
+    boolean scaleMarker();
 }

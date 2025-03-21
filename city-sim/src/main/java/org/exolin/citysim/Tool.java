@@ -7,5 +7,6 @@ package org.exolin.citysim;
 public enum Tool
 {
     NONE,
-    STREET
+    STREET,
+    OFFICE1
 }

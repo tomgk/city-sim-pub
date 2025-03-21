@@ -48,6 +48,10 @@ public class GamePanel extends JComponent
                 action = new StreetBuilder();
                 break;
                 
+            case OFFICE1:
+                action = new PlaceBuilding(World.office);
+                break;
+                
             default:
                 action = null;
         }
@@ -172,6 +176,63 @@ public class GamePanel extends JComponent
                 type = World.street1;
             
             return type.getBrightImage();
+        }
+
+        @Override
+        public boolean scaleMarker()
+        {
+            return false;
+        }
+    }
+    
+    class PlaceBuilding implements Action
+    {
+        private final BuildingType type;
+        private Rectangle marking = new Rectangle();
+
+        public PlaceBuilding(BuildingType type)
+        {
+            this.type = type;
+        }
+        
+        @Override
+        public void mouseDown(Point gridPoint)
+        {
+            world.addBuilding(type, marking.x, marking.y);
+        }
+
+        @Override
+        public Rectangle getSelection()
+        {
+            return marking;
+        }
+
+        @Override
+        public void moveMouse(Point gridPoint)
+        {
+            marking.x = gridPoint.x;
+            marking.y = gridPoint.y;
+            marking.width = type.getSize();
+            marking.height = type.getSize();
+        }
+        
+        
+        @Override
+        public void releaseMouse(Point gridPoint)
+        {
+            
+        }
+
+        @Override
+        public Image getMarker()
+        {
+            return type.getBrightImage();
+        }
+
+        @Override
+        public boolean scaleMarker()
+        {
+            return true;
         }
     }
     
@@ -457,9 +518,12 @@ public class GamePanel extends JComponent
         
         Rectangle r = null;
         Image markerImage = null;
+        boolean scaleMarker = false;
         if(action != null)
         {
             markerImage = action.getMarker();
+            if(markerImage != null)
+                scaleMarker = action.scaleMarker();
             r = action.getSelection();
         }
         if(r == null)
@@ -477,12 +541,43 @@ public class GamePanel extends JComponent
                 if(r.contains(x, y))
                     img = markerImage;
                 
+                //will be drawn later
+                if(scaleMarker && r.contains(x, y))
+                    continue;
+                
+                if(false)
+                {
+                if(scaleMarker && r.contains(x, y))
+                {
+                    if(x != r.getMaxX()-1 || y != r.getMaxY()-1)
+                        continue;
+                    else
+                        drawItem(g, dim, r.x, r.y, markerImage, r.width);
+                    
+                    continue;
+                }
+                }
+                
                 drawItem(g, dim, x, y, img, 1);
             }
         }
         
         for(Building b: world.getBuildings())
+        {
+            if(scaleMarker)
+            {
+                if(b.getLevel() == Building.getLevel(r))
+                {
+                    drawItem(g, dim, r.x, r.y, markerImage, r.width);
+                    scaleMarker = false;
+                }
+            }
+            
             drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
+        }
+        
+        if(scaleMarker)
+            drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
     private final World world;

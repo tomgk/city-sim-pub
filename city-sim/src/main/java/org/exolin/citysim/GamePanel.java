@@ -47,13 +47,14 @@ public class GamePanel extends JComponent
     
     private class StreetBuilder implements Action
     {
-        private final Point start;
-        private final Rectangle marking;
+        private Point start;
+        private Rectangle marking;
 
-        public StreetBuilder(Point start)
+        @Override
+        public void mouseDown(Point gridPoint)
         {
+            this.start = new Point(gridPoint);
             System.out.println("StreetBuilder @ "+start);
-            this.start = new Point(start);
             marking = new Rectangle(start.x, start.y, 1, 1);
         }
 
@@ -133,7 +134,8 @@ public class GamePanel extends JComponent
                     return;
                 
                 updatePos(e);
-                action = new StreetBuilder(currentGridPos);
+                action = new StreetBuilder();
+                action.mouseDown(currentGridPos);
             }
 
             @Override

@@ -13,13 +13,18 @@ import static org.exolin.citysim.Utils.loadImage;
  */
 public class World
 {
-    private static final BufferedImage office = loadImage("office");
-    private static final BufferedImage office2 = loadImage("office_2");
-    private static final BufferedImage office3 = loadImage("office_3");
-    private static final BufferedImage car_cinema = loadImage("car-cinema");
-    private static final BufferedImage cinema = loadImage("cinema");
-    private static final BufferedImage parkbuilding = loadImage("parkbuilding");
-    private static final BufferedImage street1 = loadImage("street_1");
+    private static final BuildingType office = createBuildingType("office", 1);
+    private static final BuildingType office2 = createBuildingType("office_2", 1);
+    private static final BuildingType office3 = createBuildingType("office_3", 1);
+    private static final BuildingType car_cinema = createBuildingType("car-cinema", 1);
+    private static final BuildingType cinema = createBuildingType("cinema", 1);
+    private static final BuildingType parkbuilding = createBuildingType("parkbuilding", 1);
+    private static final BuildingType street1 = createBuildingType("street_1", 1);
+    
+    private static BuildingType createBuildingType(String name, int size)
+    {
+        return new BuildingType(loadImage(name), size);
+    }
     
     private final static int GRID_SIZE = 10;
     
@@ -44,9 +49,9 @@ public class World
         addBuilding(office, 0, 0);
     }
     
-    void addBuilding(Image image, int x, int y)
+    void addBuilding(BuildingType type, int x, int y)
     {
-        buildings.add(new Building(image, x, y));
+        buildings.add(new Building(type, x, y));
         buildings.sort(Comparator.comparing(Building::getLevel));
     }
 

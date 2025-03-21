@@ -8,20 +8,25 @@ import java.awt.Image;
  */
 public class Building
 {
-    private final Image image;
+    private final BuildingType type;
     private final int x;
     private final int y;
 
-    public Building(Image image, int x, int y)
+    public Building(BuildingType type, int x, int y)
     {
-        this.image = image;
+        this.type = type;
         this.x = x;
         this.y = y;
     }
 
     public Image getImage()
     {
-        return image;
+        return type.getImage();
+    }
+    
+    public int getSize()
+    {
+        return type.getSize();
     }
 
     public int getX()

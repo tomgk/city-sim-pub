@@ -15,7 +15,14 @@ public class BuildingType
     private final String name;
     private final BufferedImage image;
     private final int size;
-    private final boolean isBuilding;
+    private final Category category;
+    
+    public enum Category
+    {
+        BUILDING,
+        STREET,
+        ZONE
+    }
     
     private static final List<BuildingType> instances = new ArrayList<>();
     
@@ -24,18 +31,18 @@ public class BuildingType
         return instances;
     }
 
-    public BuildingType(String name, BufferedImage image, int size, boolean isBuilding)
+    public BuildingType(String name, BufferedImage image, int size, Category category)
     {
         this.name = name;
         this.image = image;
         this.size = size;
-        this.isBuilding = isBuilding;
+        this.category = category;
         instances.add(this);
     }
 
     public boolean isBuilding()
     {
-        return isBuilding;
+        return category == Category.BUILDING;
     }
     
     public String getName()

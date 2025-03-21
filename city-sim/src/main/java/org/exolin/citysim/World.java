@@ -34,14 +34,22 @@ public final class World
     public static final BuildingType street1 = createStreetType("street_1", 1);
     public static final BuildingType street2 = createStreetType("street_2", 1);
     
+    public static final BuildingType zone_residential = createZone("zone_residential");
+    public static final BuildingType zone_business = createZone("zone_business");
+    
     private static BuildingType createStreetType(String name, int size)
     {
-        return new BuildingType(name, loadImage(name), size, false);
+        return new BuildingType(name, loadImage(name), size, BuildingType.Category.STREET);
     }
     
     private static BuildingType createBuildingType(String name, int size)
     {
-        return new BuildingType(name, loadImage(name), size, true);
+        return new BuildingType(name, loadImage(name), size, BuildingType.Category.BUILDING);
+    }
+    
+    private static BuildingType createZone(String name)
+    {
+        return new BuildingType(name, loadImage(name), 1, BuildingType.Category.ZONE);
     }
     
     private final int gridSize = 30;

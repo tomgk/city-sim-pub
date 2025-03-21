@@ -17,6 +17,13 @@ public final class World
     static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
     static final BuildingType cinema = createBuildingType("cinema", 3);
     static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
+    
+    static final BuildingType small_house_1 = createBuildingType("small_house_1", 1);
+    static final BuildingType house_1 = createBuildingType("house_1", 3);
+    static final BuildingType house_2 = createBuildingType("house_2", 3);
+    static final BuildingType house_3 = createBuildingType("house_3", 4);
+    static final BuildingType house_4 = createBuildingType("house_4", 4);
+    
     static final BuildingType street1 = createStreetType("street_1", 1);
     static final BuildingType street2 = createStreetType("street_2", 1);
     

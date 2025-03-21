@@ -1,5 +1,7 @@
 package org.exolin.citysim;
 
+import java.awt.Point;
+
 /**
  *
  * @author Thomas
@@ -42,6 +44,12 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         offsetValueLabel.setText(xoffset+"/"+yoffset);
     }
 
+    @Override
+    public void onSelectionChanged(Point p)
+    {
+        tilePosLabel.setText(p+"");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +65,8 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
         jLabel2 = new javax.swing.JLabel();
         offsetValueLabel = new javax.swing.JLabel();
         resetPositionLabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tilePosLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Zoom:");
 
@@ -76,6 +86,10 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
             }
         });
 
+        jLabel3.setText("Current tile:");
+
+        tilePosLabel.setText("undefined");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,7 +105,11 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                 .addComponent(offsetValueLabel)
                 .addGap(40, 40, 40)
                 .addComponent(resetPositionLabel)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tilePosLabel)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,8 +120,10 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
                     .addComponent(zoomValueLabel)
                     .addComponent(jLabel2)
                     .addComponent(offsetValueLabel)
-                    .addComponent(resetPositionLabel))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(resetPositionLabel)
+                    .addComponent(jLabel3)
+                    .addComponent(tilePosLabel))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -116,8 +136,10 @@ public class GameData extends javax.swing.JPanel implements GamePanelListener
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel offsetValueLabel;
     private javax.swing.JLabel resetPositionLabel;
+    private javax.swing.JLabel tilePosLabel;
     private javax.swing.JLabel zoomValueLabel;
     // End of variables declaration//GEN-END:variables
 }

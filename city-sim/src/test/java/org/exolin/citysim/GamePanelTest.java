@@ -28,7 +28,11 @@ public class GamePanelTest
         public void offsetChanged(int xoffset, int yoffset)
         {
         }
-        
+
+        @Override
+        public void onSelectionChanged(Point p)
+        {
+        }
     });
     
     @Test

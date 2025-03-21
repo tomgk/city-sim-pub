@@ -8,12 +8,15 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import static org.exolin.citysim.Utils.brighter;
 import static org.exolin.citysim.Utils.loadImage;
 
 /**
@@ -26,10 +29,13 @@ public class GamePanel extends JComponent
     private static final int FACTOR = 2;
     
     private static final BufferedImage land = loadImage("land");
+    private static final BufferedImage land_highlighted = brighter(loadImage("land"));
     
     private int zoom = 0;
     private int xoffset = 0;
     private int yoffset = 0;
+    
+    private final Point currentGridPos = new Point();
     
     private void zoomChanged()
     {
@@ -43,6 +49,19 @@ public class GamePanel extends JComponent
         setBackground(Color.black);
         
         listener.created(this);
+        
+        frame.addMouseMotionListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseMoved(MouseEvent e)
+            {
+                double x = e.getX();
+                double y = e.getY();
+                transformBack(getDim(), x, y, currentGridPos);
+                repaint();
+                listener.onSelectionChanged(currentGridPos);
+            }
+        });
         
         frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
@@ -118,6 +137,11 @@ public class GamePanel extends JComponent
         return Math.pow(1.5, zoom);
     }
     
+    private int getDim()
+    {
+        return Math.min(getWidth(), getHeight()*FACTOR);
+    }
+    
     @Override
     public void paint(Graphics g)
     {
@@ -132,7 +156,7 @@ public class GamePanel extends JComponent
         g2.transform(scalingTransform);
         g2.translate(xoffset, yoffset);
         
-        draw(g2, Math.min(getWidth(), getHeight()*FACTOR));
+        draw(g2, getDim());
     }
     
     /**
@@ -164,6 +188,25 @@ public class GamePanel extends JComponent
         
         drawPoint.x = (int)(screen_x);
         drawPoint.y = (int)(screen_y);
+    }
+    
+    public void transformBack(double dim, double screen_x, double screen_y, Point gridPoint)
+    {
+        double SCREEN_WIDTH = dim;
+        double SCREEN_HEIGHT = dim/FACTOR;
+        
+        //pretend that top of (0, 0) is in the top left corner of the screen
+        screen_x -= SCREEN_WIDTH / 2;
+        screen_y -= 0;
+        
+        screen_x /= dim /  world.getGridSize();
+        screen_y /= dim /  world.getGridSize();
+        
+        double gridX = -screen_x + screen_y * FACTOR;
+        double gridY = screen_x + screen_y * FACTOR;
+        
+        gridPoint.x = (int)gridX - 2;
+        gridPoint.y = (int)gridY - 2;
     }
     
     private final boolean colorGrid = false;
@@ -244,7 +287,9 @@ public class GamePanel extends JComponent
         {
             for(int x=0;x< world.getGridSize();++x)
             {
-                drawItem(g, dim, x, y, land, 1);
+                boolean current = currentGridPos.x == x && currentGridPos.y == y;
+                
+                drawItem(g, dim, x, y, current ? land_highlighted : land, 1);
             }
         }
         

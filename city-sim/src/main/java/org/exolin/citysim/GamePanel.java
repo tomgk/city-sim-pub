@@ -43,6 +43,8 @@ public class GamePanel extends JComponent
     
     private Action action;
     
+    private boolean debugInfo = true;
+    
     public List<Action> getActions()
     {
         List<Action> actions = new ArrayList<>();
@@ -424,15 +426,37 @@ public class GamePanel extends JComponent
         g.fillRect(0, 0, getWidth(), getHeight());
         //g.drawRect(0, 0, getWidth()-1, getHeight()-1);
         
-        Graphics2D g2 = (Graphics2D) g;
-        
-        double z = getZoomFactor();
-        AffineTransform scalingTransform = AffineTransform.getScaleInstance(z, z);
+        {
+            Graphics2D g2 = (Graphics2D) g.create();
 
-        g2.transform(scalingTransform);
-        g2.translate(xoffset, yoffset);
+            double z = getZoomFactor();
+            AffineTransform scalingTransform = AffineTransform.getScaleInstance(z, z);
+
+            g2.transform(scalingTransform);
+            g2.translate(xoffset, yoffset);
+
+            draw(g2, getDim());
+        }
         
-        draw(g2, getDim());
+        g.setColor(Color.white);
+        if(debugInfo)
+        {
+            String f;
+            double zoomFactor = getZoomFactor();
+            if(zoom == 0)
+                f = "full view";
+            else if(zoomFactor < 1)
+                f = "zoom out "+(1/zoomFactor);
+            else
+                f = "zoom in "+zoomFactor;
+
+            int start = 12;
+            int lineHeight = 15;
+            
+            g.drawString("Zoom: "+zoom+" | "+f, 0, start);
+            g.drawString("Offset: "+xoffset+"/"+yoffset, 0, start + lineHeight * 1);
+            g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
+        }
     }
     
     /**

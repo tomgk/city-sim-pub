@@ -24,11 +24,11 @@ public final class World
         return new BuildingType(loadImage(name), size);
     }
     
-    private final static int GRID_SIZE = 10;
+    private final int gridSize = 10;
     
-    public int GRID_SIZE()
+    public int getGridSize()
     {
-        return GRID_SIZE;
+        return gridSize;
     }
     
     private final List<Building> buildings = new ArrayList<>();

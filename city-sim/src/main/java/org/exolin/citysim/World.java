@@ -11,46 +11,46 @@ import static org.exolin.citysim.ui.Utils.loadImage;
  */
 public final class World
 {
-    static final BuildingType office = createBuildingType("office", 4);
-    static final BuildingType office2 = createBuildingType("office_2", 3);
-    static final BuildingType office3 = createBuildingType("office_3", 3);
-    static final BuildingType car_cinema = createBuildingType("car-cinema", 4);
-    static final BuildingType cinema = createBuildingType("cinema", 3);
-    static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3);
+    public static final ZoneType zone_residential = createZone("zone_residential");
+    public static final ZoneType zone_business = createZone("zone_business");
+    public static final ZoneType zone_industrial = createZone("zone_industrial");
     
-    static final BuildingType small_house_1 = createBuildingType("small_house_1", 1);
-    static final BuildingType house_1 = createBuildingType("house_1", 3);
-    static final BuildingType house_2 = createBuildingType("house_2", 3);
-    static final BuildingType house_3 = createBuildingType("house_3", 4);
-    static final BuildingType house_4 = createBuildingType("house_4", 4);
+    static final BuildingType office = createBuildingType("office", 4, zone_business);
+    static final BuildingType office2 = createBuildingType("office_2", 3, zone_business);
+    static final BuildingType office3 = createBuildingType("office_3", 3, zone_business);
+    static final BuildingType car_cinema = createBuildingType("car-cinema", 4, zone_business);
+    static final BuildingType cinema = createBuildingType("cinema", 3, zone_business);
+    static final BuildingType parkbuilding = createBuildingType("parkbuilding", 3, zone_business);
     
-    static final BuildingType industrial_small_1 = createBuildingType("industrial_small_1", 1);
-    static final BuildingType industrial_small_2 = createBuildingType("industrial_small_2", 1);
-    static final BuildingType industrial_small_3 = createBuildingType("industrial_small_3", 1);
-    static final BuildingType industrial_small_4 = createBuildingType("industrial_small_4", 1);
+    static final BuildingType small_house_1 = createBuildingType("small_house_1", 1, zone_residential);
+    static final BuildingType house_1 = createBuildingType("house_1", 3, zone_residential);
+    static final BuildingType house_2 = createBuildingType("house_2", 3, zone_residential);
+    static final BuildingType house_3 = createBuildingType("house_3", 4, zone_residential);
+    static final BuildingType house_4 = createBuildingType("house_4", 4, zone_residential);
     
-    static final BuildingType plant_solar = createBuildingType("plant_solar", 4);
+    static final BuildingType industrial_small_1 = createBuildingType("industrial_small_1", 1, zone_residential);
+    static final BuildingType industrial_small_2 = createBuildingType("industrial_small_2", 1, zone_residential);
+    static final BuildingType industrial_small_3 = createBuildingType("industrial_small_3", 1, zone_residential);
+    static final BuildingType industrial_small_4 = createBuildingType("industrial_small_4", 1, zone_residential);
+    
+    static final BuildingType plant_solar = createBuildingType("plant_solar", 4, null);
     
     public static final BuildingType street1 = createStreetType("street_1", 1);
     public static final BuildingType street2 = createStreetType("street_2", 1);
     
-    public static final BuildingType zone_residential = createZone("zone_residential");
-    public static final BuildingType zone_business = createZone("zone_business");
-    public static final BuildingType zone_industrial = createZone("zone_industrial");
-    
     private static BuildingType createStreetType(String name, int size)
     {
-        return new BuildingType(name, loadImage(name), size, BuildingType.Category.STREET);
+        return new StreetType(name, loadImage(name), size);
     }
     
-    private static BuildingType createBuildingType(String name, int size)
+    private static BuildingType createBuildingType(String name, int size, ZoneType zoneType)
     {
-        return new BuildingType(name, loadImage(name), size, BuildingType.Category.BUILDING);
+        return new ActualBuildingType(name, loadImage(name), size, zoneType);
     }
     
-    private static BuildingType createZone(String name)
+    private static ZoneType createZone(String name)
     {
-        return new BuildingType(name, loadImage(name), 1, BuildingType.Category.ZONE);
+        return new ZoneType(name, loadImage(name), 1);
     }
     
     private final int gridSize = 30;

@@ -39,6 +39,8 @@ public class GameDataPanel extends javax.swing.JPanel
         keyTopLabel = new javax.swing.JLabel();
         keyBottomLabel = new javax.swing.JLabel();
         keyRightLabel = new javax.swing.JLabel();
+        zoomInLabel = new javax.swing.JLabel();
+        zoomOutLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -85,6 +87,24 @@ public class GameDataPanel extends javax.swing.JPanel
             }
         });
 
+        zoomInLabel.setText("+");
+        zoomInLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                zoomInLabelMousePressed(evt);
+            }
+        });
+
+        zoomOutLabel.setText("-");
+        zoomOutLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                zoomOutLabelMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +120,11 @@ public class GameDataPanel extends javax.swing.JPanel
                     .addComponent(keyBottomLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(keyRightLabel)
-                .addContainerGap(567, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(zoomInLabel)
+                    .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(523, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,12 +135,19 @@ public class GameDataPanel extends javax.swing.JPanel
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addComponent(keyBottomLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(resetPositionLabel)
-                                .addComponent(keyLeftLabel))
-                            .addComponent(keyRightLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(resetPositionLabel)
+                                        .addComponent(keyLeftLabel))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(keyRightLabel)
+                                        .addComponent(zoomInLabel))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(zoomOutLabel)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -147,11 +178,23 @@ public class GameDataPanel extends javax.swing.JPanel
         panel.keyPressed(KeyEvent.VK_RIGHT);
     }//GEN-LAST:event_keyRightLabelMousePressed
 
+    private void zoomInLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_zoomInLabelMousePressed
+    {//GEN-HEADEREND:event_zoomInLabelMousePressed
+        panel.onZoom(1);
+    }//GEN-LAST:event_zoomInLabelMousePressed
+
+    private void zoomOutLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_zoomOutLabelMousePressed
+    {//GEN-HEADEREND:event_zoomOutLabelMousePressed
+        panel.onZoom(-1);
+    }//GEN-LAST:event_zoomOutLabelMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel keyBottomLabel;
     private javax.swing.JLabel keyLeftLabel;
     private javax.swing.JLabel keyRightLabel;
     private javax.swing.JLabel keyTopLabel;
     private javax.swing.JLabel resetPositionLabel;
+    private javax.swing.JLabel zoomInLabel;
+    private javax.swing.JLabel zoomOutLabel;
     // End of variables declaration//GEN-END:variables
 }

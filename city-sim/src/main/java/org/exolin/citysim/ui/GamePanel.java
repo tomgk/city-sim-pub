@@ -148,19 +148,7 @@ public class GamePanel extends JComponent
         
         frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
-            zoom -= e.getWheelRotation();
-            
-            //doesnt work
-            if(false)
-            {
-                //issue: ignores current position, just adds
-                double zoomFactor = getZoomFactor();
-                xoffset += 1/zoomFactor * world.getGridSize();
-                yoffset += 1/zoomFactor *  world.getGridSize();
-                System.out.println(xoffset+"/"+yoffset);
-            }
-            
-            GamePanel.this.repaint();
+            onZoom(-e.getWheelRotation());
         });
         //setFocusable(true);
         frame.addKeyListener(new KeyAdapter()
@@ -171,6 +159,23 @@ public class GamePanel extends JComponent
                 GamePanel.this.keyPressed(e.getKeyCode());
             }
         });
+    }
+    
+    void onZoom(int amount)
+    {
+        zoom += amount;
+
+        //doesnt work
+        if(false)
+        {
+            //issue: ignores current position, just adds
+            double zoomFactor = getZoomFactor();
+            xoffset += 1/zoomFactor * world.getGridSize();
+            yoffset += 1/zoomFactor *  world.getGridSize();
+            System.out.println(xoffset+"/"+yoffset);
+        }
+
+        GamePanel.this.repaint();
     }
     
     void keyPressed(int keyCode)

@@ -1,18 +1,17 @@
 package org.exolin.citysim;
 
-import org.exolin.citysim.ui.GameControlPanel;
-import org.exolin.citysim.ui.Action;
-import org.exolin.citysim.ui.sp.SelectorPanel;
 import java.awt.BorderLayout;
-import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.sp.SelectorPanel;
 
 /**
  *

@@ -177,34 +177,39 @@ public class GamePanel extends JComponent
             @Override
             public void keyPressed(KeyEvent e)
             {
-                boolean update = true;
-                double f = 50;
-                switch(e.getKeyCode())
-                {
-                    case KeyEvent.VK_LEFT:
-                        xoffset += getZoomFactor() * f;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        xoffset -= getZoomFactor() * f;
-                        break;
-                    case KeyEvent.VK_UP:
-                        yoffset += getZoomFactor() * f;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        yoffset -= getZoomFactor() * f;
-                        break;
-                    default:
-                        update = false;
-                }
-                if(update)
-                {
-                    listener.offsetChanged(xoffset, yoffset);
-                    repaint();
-                }
+                GamePanel.this.keyPressed(e.getKeyCode());
             }
         });
         zoomChanged();
         listener.offsetChanged(xoffset, yoffset);
+    }
+    
+    void keyPressed(int keyCode)
+    {
+        boolean update = true;
+        double f = 50;
+        switch(keyCode)
+        {
+            case KeyEvent.VK_LEFT:
+                xoffset += getZoomFactor() * f;
+                break;
+            case KeyEvent.VK_RIGHT:
+                xoffset -= getZoomFactor() * f;
+                break;
+            case KeyEvent.VK_UP:
+                yoffset += getZoomFactor() * f;
+                break;
+            case KeyEvent.VK_DOWN:
+                yoffset -= getZoomFactor() * f;
+                break;
+            default:
+                update = false;
+        }
+        if(update)
+        {
+            listener.offsetChanged(xoffset, yoffset);
+            repaint();
+        }
     }
     
     public void resetPosition()

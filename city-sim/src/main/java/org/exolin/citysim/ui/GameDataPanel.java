@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import org.exolin.citysim.ui.GamePanelListener;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -69,6 +70,10 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
         resetPositionLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tilePosLabel = new javax.swing.JLabel();
+        keyLeftLabel = new javax.swing.JLabel();
+        keyTopLabel = new javax.swing.JLabel();
+        keyBottomLabel = new javax.swing.JLabel();
+        keyRightLabel = new javax.swing.JLabel();
 
         jLabel1.setText("Zoom:");
 
@@ -92,6 +97,42 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
 
         tilePosLabel.setText("undefined");
 
+        keyLeftLabel.setText("<");
+        keyLeftLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                keyLeftLabelMousePressed(evt);
+            }
+        });
+
+        keyTopLabel.setText("^");
+        keyTopLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                keyTopLabelMousePressed(evt);
+            }
+        });
+
+        keyBottomLabel.setText("v");
+        keyBottomLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                keyBottomLabelMousePressed(evt);
+            }
+        });
+
+        keyRightLabel.setText(">");
+        keyRightLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                keyRightLabelMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,21 +152,39 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tilePosLabel)
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(keyLeftLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(keyTopLabel)
+                    .addComponent(keyBottomLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(keyRightLabel)
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(zoomValueLabel)
-                    .addComponent(jLabel2)
-                    .addComponent(offsetValueLabel)
-                    .addComponent(resetPositionLabel)
-                    .addComponent(jLabel3)
-                    .addComponent(tilePosLabel))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(keyTopLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(keyBottomLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(zoomValueLabel)
+                                .addComponent(jLabel2)
+                                .addComponent(offsetValueLabel)
+                                .addComponent(resetPositionLabel)
+                                .addComponent(jLabel3)
+                                .addComponent(tilePosLabel)
+                                .addComponent(keyLeftLabel))
+                            .addComponent(keyRightLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,10 +193,34 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
         panel.resetPosition();
     }//GEN-LAST:event_resetPositionLabelMouseClicked
 
+    private void keyLeftLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_keyLeftLabelMousePressed
+    {//GEN-HEADEREND:event_keyLeftLabelMousePressed
+        panel.keyPressed(KeyEvent.VK_LEFT);
+    }//GEN-LAST:event_keyLeftLabelMousePressed
+
+    private void keyTopLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_keyTopLabelMousePressed
+    {//GEN-HEADEREND:event_keyTopLabelMousePressed
+        panel.keyPressed(KeyEvent.VK_UP);
+    }//GEN-LAST:event_keyTopLabelMousePressed
+
+    private void keyBottomLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_keyBottomLabelMousePressed
+    {//GEN-HEADEREND:event_keyBottomLabelMousePressed
+        panel.keyPressed(KeyEvent.VK_DOWN);
+    }//GEN-LAST:event_keyBottomLabelMousePressed
+
+    private void keyRightLabelMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_keyRightLabelMousePressed
+    {//GEN-HEADEREND:event_keyRightLabelMousePressed
+        panel.keyPressed(KeyEvent.VK_RIGHT);
+    }//GEN-LAST:event_keyRightLabelMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel keyBottomLabel;
+    private javax.swing.JLabel keyLeftLabel;
+    private javax.swing.JLabel keyRightLabel;
+    private javax.swing.JLabel keyTopLabel;
     private javax.swing.JLabel offsetValueLabel;
     private javax.swing.JLabel resetPositionLabel;
     private javax.swing.JLabel tilePosLabel;

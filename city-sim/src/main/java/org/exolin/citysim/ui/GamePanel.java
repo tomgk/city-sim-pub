@@ -32,7 +32,7 @@ import static org.exolin.citysim.ui.Utils.loadImage;
  *
  * @author Thomas
  */
-public class GamePanel extends JComponent
+public final class GamePanel extends JComponent
 {
     private static final int FACTOR = 2;
     

@@ -16,9 +16,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.World;
@@ -48,22 +51,33 @@ public class GamePanel extends JComponent
     
     private boolean debugInfo = true;
     
-    public List<Action> getActions()
+    public Map<String, List<Action>> getActions()
     {
-        List<Action> actions = new ArrayList<>();
-        actions.add(new NoAction());
-        actions.add(new StreetBuilder(world));
+        Map<String, List<Action>> actions = new LinkedHashMap<>();
         
-        actions.add(new ZonePlacement(world, World.zone_residential));
-        actions.add(new ZonePlacement(world, World.zone_business));
-        actions.add(new ZonePlacement(world, World.zone_industrial));
+        List<Action> sactions = new ArrayList<>();
+        sactions.add(new NoAction());
+        sactions.add(new StreetBuilder(world));
+        actions.put("Special", sactions);
+        
+        {
+            List<Action> zoneActions = new ArrayList<>();
+            zoneActions.add(new ZonePlacement(world, World.zone_residential));
+            zoneActions.add(new ZonePlacement(world, World.zone_business));
+            zoneActions.add(new ZonePlacement(world, World.zone_industrial));
+            actions.put("Zones", zoneActions);
+        }
         
         //actions.add(new PlaceBuilding(World.office));
         
-        for(BuildingType type : BuildingType.types())
+        for(ActualBuildingType type : BuildingType.actualBuildingTypes())
         {
-            if(type.isBuilding())
-                actions.add(new PlaceBuilding(world, type));
+            String categoryName = type.getZoneType() != null ? type.getZoneType().getName() : "Special buildings";
+            
+            if(!actions.containsKey(categoryName))
+                actions.put(categoryName, new ArrayList<>());
+            
+            actions.get(categoryName).add(new PlaceBuilding(world, type));
         }
         
         return actions;

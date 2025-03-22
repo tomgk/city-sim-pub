@@ -56,7 +56,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
     
     private SelectorPanel getSelectorPanel()
     {
-        return (SelectorPanel)getParent();
+        return (SelectorPanel)getParent().getParent();
     }
     
     void setSelected(boolean selected)

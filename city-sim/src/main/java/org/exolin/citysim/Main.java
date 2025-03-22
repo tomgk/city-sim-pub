@@ -6,6 +6,8 @@ import org.exolin.citysim.ui.sp.SelectorPanel;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import org.exolin.citysim.ui.GamePanel;
@@ -29,12 +31,10 @@ public class Main
         
         SelectorPanel sp = new SelectorPanel(gp);
         
-        for(Action a: gp.getActions())
+        for(Map.Entry<String, List<Action>> e: gp.getActions().entrySet())
         {
-            if(a instanceof Action.NoAction)
-                continue;
-            
-            sp.add(a);
+            for(Action a: e.getValue())
+                sp.add(e.getKey(), a);
         }
         
         JScrollPane scroll = new JScrollPane(sp);

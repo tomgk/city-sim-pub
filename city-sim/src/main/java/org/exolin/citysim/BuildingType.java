@@ -23,6 +23,11 @@ public class BuildingType
         return instances;
     }
 
+    public static List<ActualBuildingType> actualBuildingTypes()
+    {
+        return instances.stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
+    }
+
     @SuppressWarnings("LeakingThisInConstructor")
     public BuildingType(String name, BufferedImage image, int size)
     {

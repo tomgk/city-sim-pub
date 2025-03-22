@@ -1,6 +1,16 @@
 package org.exolin.citysim.ui.sp;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.GamePanel;
@@ -12,17 +22,50 @@ import org.exolin.citysim.ui.GamePanel;
 public class SelectorPanel extends JPanel
 {
     private final GamePanel panel;
+    
+    private final DefaultComboBoxModel<String> categoriesModel;
+    private final JComboBox<String> categoriesCombobox;
+    private final JPanel items;
+    private final Map<String, List<Action>> actions = new LinkedHashMap<>();
     private SelectorItemPanel selected = null;
     
     public SelectorPanel(GamePanel panel)
     {
         this.panel = panel;
-        setLayout(new GridLayout(0, 1));
+        setLayout(new BorderLayout());
+        
+        this.categoriesModel = new DefaultComboBoxModel<>();
+        this.categoriesCombobox = new JComboBox<>(categoriesModel);
+        categoriesCombobox.addActionListener((ActionEvent e) ->
+        {
+            List<Action> a = actions.get((String)categoriesCombobox.getSelectedItem());
+            setList(a != null ? a : List.of());
+        });
+        
+        this.items = new JPanel(new GridLayout(0, 1));
+        
+        add(categoriesCombobox, BorderLayout.NORTH);
+        add(items, BorderLayout.CENTER);
     }
     
-    public void add(Action action)
+    private void setList(List<Action> list)
     {
-        add(new SelectorItemPanel(action));
+        items.removeAll();
+        for(Action action : list)
+            items.add(new SelectorItemPanel(action));
+        items.invalidate();
+        items.repaint();
+    }
+    
+    public void add(String name, Action action)
+    {
+        if(!actions.containsKey(name))
+        {
+            actions.put(name, new ArrayList<>());
+            categoriesModel.addElement(name);
+        }
+        
+        actions.computeIfAbsent(name, n -> new ArrayList<>()).add(action);
     }
 
     void select(SelectorItemPanel item)

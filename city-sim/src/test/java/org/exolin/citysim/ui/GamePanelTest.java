@@ -19,21 +19,6 @@ public class GamePanelTest
         public void created(GamePanel panel)
         {
         }
-
-        @Override
-        public void zoomChanged(int zoom, double zoomFactor)
-        {
-        }
-        
-        @Override
-        public void offsetChanged(int xoffset, int yoffset)
-        {
-        }
-
-        @Override
-        public void onSelectionChanged(Point p)
-        {
-        }
     });
     
     @Test

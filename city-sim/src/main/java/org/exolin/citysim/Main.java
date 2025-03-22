@@ -4,6 +4,7 @@ import org.exolin.citysim.ui.GameDataPanel;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.sp.SelectorPanel;
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import org.exolin.citysim.ui.GamePanel;
+import org.exolin.citysim.ui.GamePanelListener;
 
 /**
  *
@@ -26,7 +28,14 @@ public class Main
         f.setLayout(new BorderLayout());
         GameDataPanel gd = new GameDataPanel();
         f.add(gd, BorderLayout.NORTH);
-        GamePanel gp = new GamePanel(World.World2(), f, gd);
+        GamePanel gp = new GamePanel(World.World2(), f, new GamePanelListener()
+        {
+            @Override
+            public void created(GamePanel panel)
+            {
+                gd.setPanel(panel);
+            }
+        });
         f.add(gp, BorderLayout.CENTER);
         
         SelectorPanel sp = new SelectorPanel(gp);

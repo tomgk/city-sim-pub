@@ -88,11 +88,6 @@ public class GamePanel extends JComponent
         this.action = action;
     }
 
-    private void zoomChanged()
-    {
-        listener.zoomChanged(zoom, getZoomFactor(zoom));
-    }
-    
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
         this.world = world;
@@ -139,8 +134,6 @@ public class GamePanel extends JComponent
                     action.moveMouse(currentGridPos);
                 
                 repaint();
-                
-                listener.onSelectionChanged(currentGridPos);
             }
 
             @Override
@@ -156,7 +149,6 @@ public class GamePanel extends JComponent
         frame.addMouseWheelListener((MouseWheelEvent e) ->
         {
             zoom -= e.getWheelRotation();
-            zoomChanged();
             
             //doesnt work
             if(false)
@@ -165,7 +157,6 @@ public class GamePanel extends JComponent
                 double zoomFactor = getZoomFactor();
                 xoffset += 1/zoomFactor * world.getGridSize();
                 yoffset += 1/zoomFactor *  world.getGridSize();
-                listener.offsetChanged(xoffset, yoffset);
                 System.out.println(xoffset+"/"+yoffset);
             }
             
@@ -180,8 +171,6 @@ public class GamePanel extends JComponent
                 GamePanel.this.keyPressed(e.getKeyCode());
             }
         });
-        zoomChanged();
-        listener.offsetChanged(xoffset, yoffset);
     }
     
     void keyPressed(int keyCode)
@@ -207,7 +196,6 @@ public class GamePanel extends JComponent
         }
         if(update)
         {
-            listener.offsetChanged(xoffset, yoffset);
             repaint();
         }
     }
@@ -219,8 +207,6 @@ public class GamePanel extends JComponent
         yoffset = 0;
         repaint();
         requestFocus();
-        zoomChanged();
-        listener.offsetChanged(xoffset, yoffset);
     }
     
     private double getZoomFactor()

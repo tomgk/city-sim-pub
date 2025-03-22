@@ -1,15 +1,13 @@
 package org.exolin.citysim.ui;
 
-import org.exolin.citysim.ui.GamePanelListener;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Thomas
  */
-public class GameDataPanel extends javax.swing.JPanel implements GamePanelListener
+public class GameDataPanel extends javax.swing.JPanel
 {
     private GamePanel panel;
     
@@ -21,28 +19,9 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
         initComponents();
     }
 
-    @Override
-    public void created(GamePanel panel)
+    public void setPanel(GamePanel panel)
     {
         this.panel = panel;
-    }
-
-    @Override
-    public void zoomChanged(int zoom, double zoomFactor)
-    {
-        //not displayed
-    }
-
-    @Override
-    public void offsetChanged(int xoffset, int yoffset)
-    {
-        //not displayed
-    }
-
-    @Override
-    public void onSelectionChanged(Point p)
-    {
-        //not displayed
     }
 
     /**

@@ -34,7 +34,6 @@ import static org.exolin.citysim.ui.Utils.loadImage;
  */
 public class GamePanel extends JComponent
 {
-    private final GamePanelListener listener;
     private static final int FACTOR = 2;
     
     private static final BufferedImage land = loadImage("land");
@@ -90,7 +89,6 @@ public class GamePanel extends JComponent
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
         this.world = world;
-        this.listener = listener;
         setBackground(Color.black);
         
         listener.created(this);

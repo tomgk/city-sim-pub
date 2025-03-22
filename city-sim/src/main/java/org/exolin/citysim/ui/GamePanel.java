@@ -487,14 +487,7 @@ public class GamePanel extends JComponent
             g.drawRect(p.x, p.y, p1.x-p.x, p1.y-p.y);
         }
         
-        g.drawImage(img, p.x, p.y, p1.x-p.x, p1.y-p.y, new ImageObserver()
-        {
-            @Override
-            public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height)
-            {
-                return true;
-            }
-        });
+        g.drawImage(img, p.x, p.y, p1.x-p.x, p1.y-p.y, null);
     }
     
     private void draw2(Graphics2D g, int dim)

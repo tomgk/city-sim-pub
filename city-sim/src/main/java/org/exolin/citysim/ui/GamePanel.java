@@ -468,9 +468,6 @@ public class GamePanel extends JComponent
         
         double tileHeight = dim/FACTOR/ world.getGridSize();
         
-        //System.out.println(p+" to "+p1);
-        //p.y -= (tileHeight / 50) * 10;
-        
         //assumption: image is exactly one tile wide
         int imageTileHeight = img.getWidth(null) / FACTOR;
         
@@ -478,10 +475,7 @@ public class GamePanel extends JComponent
         //substract the part above to place it on the tile
         p.y -= (tileHeight / imageTileHeight) * (img.getHeight(null) - imageTileHeight) * size;
         
-        //System.out.println(p+" to "+p1);
-        
         g.setColor(Color.black);
-        //g.drawRect(p.x-1, p.y-1, 3, 3);
         
         //draws a rectangle around
         if(false)//img != land)

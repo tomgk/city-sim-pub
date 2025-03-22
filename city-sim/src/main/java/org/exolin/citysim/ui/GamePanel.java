@@ -389,8 +389,6 @@ public class GamePanel extends JComponent
     {
         g.setStroke(new BasicStroke(1));
         
-        //System.out.println("-------------------------------------------------");
-        
         Rectangle r = null;
         Image markerImage = null;
         boolean scaleMarker = false;

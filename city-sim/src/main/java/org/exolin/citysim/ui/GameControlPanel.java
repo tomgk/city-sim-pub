@@ -7,14 +7,14 @@ import java.awt.event.KeyEvent;
  *
  * @author Thomas
  */
-public class GameDataPanel extends javax.swing.JPanel
+public class GameControlPanel extends javax.swing.JPanel
 {
     private GamePanel panel;
     
     /**
      * Creates new form GameData
      */
-    public GameDataPanel()
+    public GameControlPanel()
     {
         initComponents();
     }

@@ -1,6 +1,6 @@
 package org.exolin.citysim;
 
-import org.exolin.citysim.ui.GameDataPanel;
+import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.sp.SelectorPanel;
 import java.awt.BorderLayout;
@@ -26,7 +26,7 @@ public class Main
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setTitle("City Sim");
         f.setLayout(new BorderLayout());
-        GameDataPanel gd = new GameDataPanel();
+        GameControlPanel gd = new GameControlPanel();
         f.add(gd, BorderLayout.NORTH);
         GamePanel gp = new GamePanel(World.World2(), f, new GamePanelListener()
         {

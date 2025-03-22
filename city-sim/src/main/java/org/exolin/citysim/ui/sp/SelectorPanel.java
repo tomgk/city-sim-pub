@@ -25,7 +25,7 @@ public class SelectorPanel extends JPanel
     
     private final DefaultComboBoxModel<String> categoriesModel;
     private final JComboBox<String> categoriesCombobox;
-    private final JPanel items;
+    private final JPanel itemsPanel;
     private final Map<String, List<Action>> actions = new LinkedHashMap<>();
     private SelectorItemPanel selected = null;
     
@@ -42,19 +42,19 @@ public class SelectorPanel extends JPanel
             setList(a != null ? a : List.of());
         });
         
-        this.items = new JPanel(new GridLayout(0, 1));
+        this.itemsPanel = new JPanel(new GridLayout(0, 1));
         
         add(categoriesCombobox, BorderLayout.NORTH);
-        add(items, BorderLayout.CENTER);
+        add(itemsPanel, BorderLayout.CENTER);
     }
     
     private void setList(List<Action> list)
     {
-        items.removeAll();
+        itemsPanel.removeAll();
         for(Action action : list)
-            items.add(new SelectorItemPanel(action));
-        items.invalidate();
-        items.repaint();
+            itemsPanel.add(new SelectorItemPanel(action));
+        itemsPanel.revalidate();
+        itemsPanel.repaint();
     }
     
     public void add(String name, Action action)

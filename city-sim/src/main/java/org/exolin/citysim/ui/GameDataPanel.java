@@ -30,27 +30,19 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
     @Override
     public void zoomChanged(int zoom, double zoomFactor)
     {
-        String f;
-        if(zoom == 0)
-            f = "full view";
-        else if(zoomFactor < 1)
-            f = "zoom out "+(1/zoomFactor);
-        else
-            f = "zoom in "+zoomFactor;
-        
-        zoomValueLabel.setText(zoom+" | "+f);
+        //not displayed
     }
 
     @Override
     public void offsetChanged(int xoffset, int yoffset)
     {
-        offsetValueLabel.setText(xoffset+"/"+yoffset);
+        //not displayed
     }
 
     @Override
     public void onSelectionChanged(Point p)
     {
-        tilePosLabel.setText(p+"");
+        //not displayed
     }
 
     /**
@@ -63,26 +55,11 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
     private void initComponents()
     {
 
-        jLabel1 = new javax.swing.JLabel();
-        zoomValueLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        offsetValueLabel = new javax.swing.JLabel();
         resetPositionLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        tilePosLabel = new javax.swing.JLabel();
         keyLeftLabel = new javax.swing.JLabel();
         keyTopLabel = new javax.swing.JLabel();
         keyBottomLabel = new javax.swing.JLabel();
         keyRightLabel = new javax.swing.JLabel();
-
-        jLabel1.setText("Zoom:");
-
-        zoomValueLabel.setText("undefined");
-        zoomValueLabel.setName(""); // NOI18N
-
-        jLabel2.setText("Offset:");
-
-        offsetValueLabel.setText("undefined");
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -92,10 +69,6 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
                 resetPositionLabelMouseClicked(evt);
             }
         });
-
-        jLabel3.setText("Current tile:");
-
-        tilePosLabel.setText("undefined");
 
         keyLeftLabel.setText("<");
         keyLeftLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -139,20 +112,8 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(zoomValueLabel)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(offsetValueLabel)
-                .addGap(40, 40, 40)
                 .addComponent(resetPositionLabel)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tilePosLabel)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addComponent(keyLeftLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +121,7 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
                     .addComponent(keyBottomLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(keyRightLabel)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(567, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,13 +135,7 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(zoomValueLabel)
-                                .addComponent(jLabel2)
-                                .addComponent(offsetValueLabel)
                                 .addComponent(resetPositionLabel)
-                                .addComponent(jLabel3)
-                                .addComponent(tilePosLabel)
                                 .addComponent(keyLeftLabel))
                             .addComponent(keyRightLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -214,16 +169,10 @@ public class GameDataPanel extends javax.swing.JPanel implements GamePanelListen
     }//GEN-LAST:event_keyRightLabelMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel keyBottomLabel;
     private javax.swing.JLabel keyLeftLabel;
     private javax.swing.JLabel keyRightLabel;
     private javax.swing.JLabel keyTopLabel;
-    private javax.swing.JLabel offsetValueLabel;
     private javax.swing.JLabel resetPositionLabel;
-    private javax.swing.JLabel tilePosLabel;
-    private javax.swing.JLabel zoomValueLabel;
     // End of variables declaration//GEN-END:variables
 }

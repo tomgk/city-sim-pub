@@ -20,6 +20,11 @@ public class Building
         this.y = y;
     }
 
+    public BuildingType getType()
+    {
+        return type;
+    }
+
     public Image getImage()
     {
         return type.getImage();
@@ -59,16 +64,16 @@ public class Building
     
     public boolean isOccupying(int x, int y)
     {
-        if(this.x < x)
+        if(x < this.x)
             return false;
         
-        if(this.x+type.getSize() >= x)
+        if(x >= this.x+type.getSize())
             return false;
         
-        if(this.y < y)
+        if(y < this.y)
             return false;
         
-        if(this.y + type.getSize() >= x)
+        if(y >= this.y + type.getSize())
             return false;
         
         return true;

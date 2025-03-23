@@ -262,6 +262,8 @@ public final class GamePanel extends JComponent
             g.drawString("Zoom: "+zoom+" | "+f, 0, start);
             g.drawString("Offset: "+xoffset+"/"+yoffset, 0, start + lineHeight * 1);
             g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
+            Building b = world.getBuildingAt(currentGridPos.x, currentGridPos.y);
+            g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
         }
     }
     

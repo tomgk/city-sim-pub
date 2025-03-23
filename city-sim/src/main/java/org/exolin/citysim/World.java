@@ -67,6 +67,11 @@ public final class World
         
     }
 
+    public static World Empty()
+    {
+        return new World();
+    }
+
     public static World World1()
     {
         World w = new World();
@@ -107,19 +112,26 @@ public final class World
         return w;
     }
     
-    public boolean containsBuilding(int x, int y)
+    public Building getBuildingAt(int x, int y)
     {
         for(Building b: buildings)
             if(b.isOccupying(x, y))
-                return true;
+                return b;
         
-        return false;
+        return null;
     }
     
-    public void addBuilding(BuildingType type, int x, int y)
+    public boolean containsBuilding(int x, int y)
     {
-        buildings.add(new Building(type, x, y));
+        return getBuildingAt(x, y) != null;
+    }
+    
+    public Building addBuilding(BuildingType type, int x, int y)
+    {
+        Building b = new Building(type, x, y);
+        buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));
+        return b;
     }
 
     public List<Building> getBuildings()

@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
  */
 public class ZoneType extends BuildingType<Zone>
 {
-    public ZoneType(String name, BufferedImage image, int size)
+    public ZoneType(int id, String name, BufferedImage image, int size)
     {
-        super(name, image, size);
+        super(id, name, image, size);
     }
 
     @Override

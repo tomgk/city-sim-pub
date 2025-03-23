@@ -2,6 +2,8 @@ package org.exolin.citysim;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  *
@@ -78,4 +80,16 @@ public abstract class Building
         
         return true;
     }
+    
+    public void serialize(Writer out) throws IOException
+    {
+        out.write(Integer.toString(type.getId()));
+        out.write(";");
+        out.write(Integer.toString(x));
+        out.write(";");
+        out.write(Integer.toString(y));
+        serializeImpl(out);
+    }
+    
+    protected abstract void serializeImpl(Writer out) throws IOException;
 }

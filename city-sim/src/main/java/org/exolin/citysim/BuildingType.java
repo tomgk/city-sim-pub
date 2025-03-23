@@ -3,7 +3,9 @@ package org.exolin.citysim;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import org.exolin.citysim.ui.Utils;
 
 /**
@@ -12,6 +14,8 @@ import org.exolin.citysim.ui.Utils;
  */
 public abstract class BuildingType<B>
 {
+    private final int id;
+    private final Set<Integer> usedIds = new LinkedHashSet<>();
     private final String name;
     private final BufferedImage image;
     private final int size;
@@ -31,14 +35,23 @@ public abstract class BuildingType<B>
     }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, BufferedImage image, int size)
+    public BuildingType(int id, String name, BufferedImage image, int size)
     {
+        if(!usedIds.add(id))
+            throw new IllegalArgumentException("duplicate ID");
+        
+        this.id = id;
         this.name = name;
         this.image = image;
         this.size = size;
         instances.add(this);
     }
 
+    public int getId()
+    {
+        return id;
+    }
+    
     public boolean isBuilding()
     {
         return this instanceof ActualBuildingType;

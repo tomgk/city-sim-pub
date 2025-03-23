@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
  */
 public class StreetType extends BuildingType
 {
-    public StreetType(String name, BufferedImage image, int size)
+    public StreetType(int id, String name, BufferedImage image, int size)
     {
-        super(name, image, size);
+        super(id, name, image, size);
     }
     
     @Override

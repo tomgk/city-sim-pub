@@ -1,5 +1,7 @@
 package org.exolin.citysim;
 
+import java.io.Writer;
+
 /**
  *
  * @author Thomas
@@ -15,5 +17,10 @@ public class ActualBuilding extends Building
     public ActualBuildingType getType()
     {
         return (ActualBuildingType)super.getType();
+    }
+
+    @Override
+    protected void serializeImpl(Writer out)
+    {
     }
 }

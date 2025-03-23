@@ -10,24 +10,15 @@ import org.exolin.citysim.World;
  *
  * @author Thomas
  */
-public class ZonePlacement implements BuildingAction
+public class ZonePlacement extends AreaAction implements BuildingAction
 {
     private final World world;
     private final BuildingType building;
-    private Point start;
-    private Rectangle marking;
 
     public ZonePlacement(World world, BuildingType building)
     {
         this.world = world;
         this.building = building;
-    }
-
-    @Override
-    public void mouseDown(Point gridPoint)
-    {
-        this.start = new Point(gridPoint);
-        marking = new Rectangle(start.x, start.y, 1, 1);
     }
 
     @Override
@@ -43,42 +34,7 @@ public class ZonePlacement implements BuildingAction
     }
 
     @Override
-    public Rectangle getSelection()
-    {
-        return marking;
-    }
-
-    @Override
-    public void moveMouse(Point gridPoint)
-    {
-        if(start == null)
-            return;
-
-        int diffX = gridPoint.x - start.x;
-        int diffY = gridPoint.y - start.y;
-
-        marking.x = start.x;
-        marking.y = start.y;
-
-        if(diffX > 0)
-            marking.width = diffX;
-        else
-        {
-            marking.width = -diffX;
-            marking.x += diffX;
-        }
-
-        if(diffY > 0)
-            marking.height = diffY;
-        else
-        {
-            marking.height = -diffY;
-            marking.y += diffY;
-        }
-    }
-
-    @Override
-    public void releaseMouse(Point gridPoint)
+    protected void performAction(Rectangle marking)
     {
         for(int y=0;y<marking.height;++y)
         {
@@ -90,9 +46,6 @@ public class ZonePlacement implements BuildingAction
                 world.addBuilding(building, marking.x + x, marking.y + y);
             }
         }
-
-        start = null;
-        marking = null;
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.exolin.citysim;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import static org.exolin.citysim.ui.Utils.loadImage;
 
@@ -119,6 +120,17 @@ public final class World
                 return b;
         
         return null;
+    }
+
+    public void removeBuildingAt(int x, int y)
+    {
+        System.out.println("Remove "+x+"/"+y);
+        for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
+        {
+            Building b = it.next();
+            if(b.isOccupying(x, y))
+                it.remove();
+        }
     }
     
     public boolean containsBuilding(int x, int y)

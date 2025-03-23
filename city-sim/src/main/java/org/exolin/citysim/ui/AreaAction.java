@@ -60,7 +60,7 @@ public abstract class AreaAction implements Action
             marking.y += diffY;
         }
         
-        removeOutSideWorldSelection();
+        //removeOutSideWorldSelection();
     }
 
     private void removeOutSideWorldSelection()

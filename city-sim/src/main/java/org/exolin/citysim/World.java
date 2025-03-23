@@ -28,10 +28,10 @@ public final class World
     static final BuildingType house_3 = createBuildingType("house_3", 4, zone_residential);
     static final BuildingType house_4 = createBuildingType("house_4", 4, zone_residential);
     
-    static final BuildingType industrial_small_1 = createBuildingType("industrial_small_1", 1, zone_residential);
-    static final BuildingType industrial_small_2 = createBuildingType("industrial_small_2", 1, zone_residential);
-    static final BuildingType industrial_small_3 = createBuildingType("industrial_small_3", 1, zone_residential);
-    static final BuildingType industrial_small_4 = createBuildingType("industrial_small_4", 1, zone_residential);
+    static final BuildingType industrial_small_1 = createBuildingType("industrial_small_1", 1, zone_industrial);
+    static final BuildingType industrial_small_2 = createBuildingType("industrial_small_2", 1, zone_industrial);
+    static final BuildingType industrial_small_3 = createBuildingType("industrial_small_3", 1, zone_industrial);
+    static final BuildingType industrial_small_4 = createBuildingType("industrial_small_4", 1, zone_industrial);
     
     static final BuildingType plant_solar = createBuildingType("plant_solar", 4, null);
     

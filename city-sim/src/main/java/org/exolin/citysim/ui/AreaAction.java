@@ -57,7 +57,10 @@ public abstract class AreaAction implements Action
     @Override
     public final void releaseMouse(Point gridPoint)
     {
-        performAction(marking);
+        //can be null because left and right mouse buttons aren't handled yet
+        if(marking != null)
+            performAction(marking);
+        
         start = null;
         marking = null;
     }

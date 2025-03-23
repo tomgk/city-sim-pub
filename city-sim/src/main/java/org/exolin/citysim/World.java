@@ -121,6 +121,11 @@ public final class World
         
         return null;
     }
+    
+    public boolean containsBuilding(int x, int y)
+    {
+        return getBuildingAt(x, y) != null;
+    }
 
     public void removeBuildingAt(int x, int y)
     {
@@ -131,11 +136,6 @@ public final class World
             if(b.isOccupying(x, y))
                 it.remove();
         }
-    }
-    
-    public boolean containsBuilding(int x, int y)
-    {
-        return getBuildingAt(x, y) != null;
     }
     
     public Building addBuilding(BuildingType type, int x, int y)

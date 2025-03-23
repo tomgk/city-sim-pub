@@ -12,4 +12,10 @@ public class StreetType extends BuildingType
     {
         super(name, image, size);
     }
+    
+    @Override
+    public Object createBuilding(int x, int y)
+    {
+        return new Street(this, x, y);
+    }
 }

@@ -7,7 +7,7 @@ import java.awt.Rectangle;
  *
  * @author Thomas
  */
-public class Building
+public abstract class Building
 {
     private final BuildingType type;
     private final int x;

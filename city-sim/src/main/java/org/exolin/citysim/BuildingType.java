@@ -10,7 +10,7 @@ import org.exolin.citysim.ui.Utils;
  *
  * @author Thomas
  */
-public class BuildingType
+public abstract class BuildingType<B>
 {
     private final String name;
     private final BufferedImage image;
@@ -22,6 +22,8 @@ public class BuildingType
     {
         return instances;
     }
+    
+    public abstract B createBuilding(int x, int y);
 
     public static List<ActualBuildingType> actualBuildingTypes()
     {

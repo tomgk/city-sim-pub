@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Thomas
  */
-public class ActualBuildingType extends BuildingType
+public class ActualBuildingType extends BuildingType<ActualBuilding>
 {
     private final ZoneType zoneType;
     
@@ -20,5 +20,11 @@ public class ActualBuildingType extends BuildingType
     public ZoneType getZoneType()
     {
         return zoneType;
+    }
+
+    @Override
+    public ActualBuilding createBuilding(int x, int y)
+    {
+        return new ActualBuilding(this, x, y);
     }
 }

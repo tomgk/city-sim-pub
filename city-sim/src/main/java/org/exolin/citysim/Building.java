@@ -43,12 +43,18 @@ public class Building
     public int getLevel()
     {
         //each +1 of x and y pushes further down
-        return x + y + type.getSize() * 2;
+        //divide size*2 by 2 to put level to center
+        //which fixes the issue of smaller buildings getting hidden
+        //by bigger ones on the upper half
+        return x + y + type.getSize() * 2 / 2;
     }
     
     public static int getLevel(Rectangle r)
     {
-        return r.x+r.y+r.width+r.height;
+        //divide r.width+r.height by 2 to put level to center
+        //which fixes the issue of smaller buildings getting hidden
+        //by bigger ones on the upper half
+        return r.x+r.y+(r.width+r.height)/2;
     }
     
     public boolean isOccupying(int x, int y)

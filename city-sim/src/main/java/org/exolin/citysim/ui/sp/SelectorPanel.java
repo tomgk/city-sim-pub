@@ -38,6 +38,8 @@ public class SelectorPanel extends JPanel
         {
             List<Action> a = actions.get((String)categoriesCombobox.getSelectedItem());
             setList(a != null ? a : List.of());
+            //reset, so that current action isn't out another category
+            panel.setAction(null);
         });
         
         this.itemsPanel = new JPanel(new GridLayout(0, 1));

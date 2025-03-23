@@ -1,5 +1,6 @@
 package org.exolin.citysim.ui;
 
+import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -17,6 +18,11 @@ public interface Action
     Image getMarker();
     boolean scaleMarker();
     String getName();
+
+    default Cursor getCursor()
+    {
+        return null;
+    }
     
     final class NoAction implements Action
     {

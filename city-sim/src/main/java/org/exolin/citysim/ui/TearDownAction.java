@@ -1,7 +1,10 @@
 package org.exolin.citysim.ui;
 
+import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import org.exolin.citysim.World;
 
 /**
@@ -45,5 +48,13 @@ public class TearDownAction extends AreaAction implements Action
     public String getName()
     {
         return "tear down";
+    }
+    
+    private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(Utils.loadImage("tools/bulldozer"), new Point(0, 27), "bulldozer");
+
+    @Override
+    public Cursor getCursor()
+    {
+        return CURSOR;
     }
 }

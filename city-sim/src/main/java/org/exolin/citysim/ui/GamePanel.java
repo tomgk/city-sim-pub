@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -85,6 +86,15 @@ public final class GamePanel extends JComponent
     public void setAction(Action action)
     {
         this.action = action;
+        Cursor cursor = null;
+        
+        if(action != null)
+            cursor = action.getCursor();
+        
+        if(cursor == null)
+            cursor = Cursor.getDefaultCursor();
+        
+        setCursor(cursor);
     }
 
     public GamePanel(World world, JFrame frame, GamePanelListener listener)

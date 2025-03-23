@@ -38,7 +38,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
         {
             for(int x=0;x<marking.width;++x)
             {
-                if(world.containsBuilding(x, y))
+                if(world.containsBuilding(marking.x + x, marking.y + y))
                     continue;
 
                 world.addBuilding(building, marking.x + x, marking.y + y);

@@ -1,6 +1,7 @@
 package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
+import java.io.Reader;
 
 /**
  *
@@ -26,5 +27,11 @@ public class ActualBuildingType extends BuildingType<ActualBuilding>
     public ActualBuilding createBuilding(int x, int y)
     {
         return new ActualBuilding(this, x, y);
+    }
+
+    @Override
+    protected ActualBuilding readImpl(Reader reader)
+    {
+        throw new UnsupportedOperationException();
     }
 }

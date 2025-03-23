@@ -1,6 +1,7 @@
 package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
+import java.io.Reader;
 
 /**
  *
@@ -17,5 +18,11 @@ public class ZoneType extends BuildingType<Zone>
     public Zone createBuilding(int x, int y)
     {
         return new Zone(this, x, y);
+    }
+
+    @Override
+    protected Zone readImpl(Reader reader)
+    {
+        throw new UnsupportedOperationException();
     }
 }

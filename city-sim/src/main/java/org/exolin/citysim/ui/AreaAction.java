@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import org.exolin.citysim.World;
 
 /**
  *
@@ -9,9 +10,15 @@ import java.awt.Rectangle;
  */
 public abstract class AreaAction implements Action
 {
+    protected final World world;
     private Point start;
     private Rectangle marking;
 
+    public AreaAction(World world)
+    {
+        this.world = world;
+    }
+    
     @Override
     public void mouseDown(Point gridPoint)
     {
@@ -52,6 +59,30 @@ public abstract class AreaAction implements Action
             marking.height = -diffY;
             marking.y += diffY;
         }
+        
+        removeOutSideWorldSelection();
+    }
+
+    private void removeOutSideWorldSelection()
+    {
+        if(marking.x < 0)
+        {
+            marking.width -= Math.abs(marking.x);
+            marking.x = 0;
+        }
+        if(marking.y < 0)
+        {
+            marking.height -= Math.abs(marking.y);
+            marking.y = 0;
+        }
+        
+        int overflowx = (marking.x + marking.width) - world.getGridSize();
+        int overflowy = (marking.y + marking.height) - world.getGridSize();
+        
+        if(overflowx > 0)
+            marking.width -= overflowx;
+        if(overflowy > 0)
+            marking.height -= overflowy;
     }
 
     @Override

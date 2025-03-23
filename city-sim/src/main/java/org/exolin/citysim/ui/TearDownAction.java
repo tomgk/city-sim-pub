@@ -13,11 +13,9 @@ import org.exolin.citysim.World;
  */
 public class TearDownAction extends AreaAction implements Action
 {
-    private final World world;
-
     public TearDownAction(World world)
     {
-        this.world = world;
+        super(world);
     }
 
     @Override

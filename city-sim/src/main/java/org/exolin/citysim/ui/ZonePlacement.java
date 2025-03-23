@@ -1,7 +1,6 @@
 package org.exolin.citysim.ui;
 
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.World;
@@ -12,12 +11,11 @@ import org.exolin.citysim.World;
  */
 public class ZonePlacement extends AreaAction implements BuildingAction
 {
-    private final World world;
     private final BuildingType building;
 
     public ZonePlacement(World world, BuildingType building)
     {
-        this.world = world;
+        super(world);
         this.building = building;
     }
 

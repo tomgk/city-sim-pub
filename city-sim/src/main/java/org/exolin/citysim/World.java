@@ -140,6 +140,9 @@ public final class World
     
     public Building addBuilding(BuildingType type, int x, int y)
     {
+        if(x < 0 || y < 0 || x+type.getSize()>=gridSize || y+type.getSize()>=gridSize)
+            throw new IllegalArgumentException("out of grid");
+        
         Building b = new Building(type, x, y);
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));

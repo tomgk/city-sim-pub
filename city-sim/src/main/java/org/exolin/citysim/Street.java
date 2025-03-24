@@ -47,6 +47,8 @@ public class Street extends Building
         if(x_before && x_after && y_before && y_after)
             setVariant(StreetType.Variant.X_INTERSECTION);
         
+        //----- curves
+        
         else if(x_before && !x_after && !y_before && y_after)
             setVariant(StreetType.Variant.CURVE_1);
         
@@ -58,6 +60,22 @@ public class Street extends Building
         
         else if(x_before && !x_after && y_before && !y_after)
             setVariant(StreetType.Variant.CURVE_4);
+        
+        //----- t intersection
+        
+        else if(x_before && !x_after && y_before && y_after)
+            setVariant(StreetType.Variant.T_INTERSECTION_1);
+        
+        else if(!x_before && x_after && y_before && y_after)
+            setVariant(StreetType.Variant.T_INTERSECTION_3);
+        
+        else if(x_before && x_after && !y_before && y_after)
+            setVariant(StreetType.Variant.T_INTERSECTION_2);
+        
+        else if(x_before && x_after && y_before && !y_after)
+            setVariant(StreetType.Variant.T_INTERSECTION_4);
+        
+        //----- straight
         
         else if(x_before || x_after)
             setVariant(StreetType.Variant.CONNECT_X);

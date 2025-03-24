@@ -18,7 +18,11 @@ public class StreetType extends BuildingType<Street>
         CURVE_1,
         CURVE_2,
         CURVE_3,
-        CURVE_4
+        CURVE_4,
+        T_INTERSECTION_1,
+        T_INTERSECTION_2,
+        T_INTERSECTION_3,
+        T_INTERSECTION_4,
     }
     
     public StreetType(int id, String name, List<BufferedImage> images, int size)

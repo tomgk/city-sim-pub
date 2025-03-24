@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 import javax.swing.ImageIcon;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.ui.Action;
@@ -19,7 +20,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
     
     public SelectorItemPanel(Action action)
     {
-        this.action = action;
+        this.action = Objects.requireNonNull(action);
         
         initComponents();
         

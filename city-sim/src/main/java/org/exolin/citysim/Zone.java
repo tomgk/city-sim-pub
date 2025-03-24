@@ -8,9 +8,9 @@ import java.io.Writer;
  */
 public class Zone extends Building
 {
-    public Zone(ZoneType type, int x, int y)
+    public Zone(ZoneType type, int x, int y, int variant)
     {
-        super(type, x, y);
+        super(type, x, y, variant);
     }
 
     @Override

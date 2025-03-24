@@ -24,9 +24,9 @@ public class ActualBuildingType extends BuildingType<ActualBuilding>
     }
 
     @Override
-    public ActualBuilding createBuilding(int x, int y)
+    public ActualBuilding createBuilding(int x, int y, int variant)
     {
-        return new ActualBuilding(this, x, y);
+        return new ActualBuilding(this, x, y, variant);
     }
 
     @Override

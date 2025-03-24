@@ -2,6 +2,7 @@ package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
 import java.io.Reader;
+import java.util.List;
 
 /**
  *
@@ -9,15 +10,18 @@ import java.io.Reader;
  */
 public class StreetType extends BuildingType<Street>
 {
-    public StreetType(int id, String name, BufferedImage image, int size)
+    public static final int LEFT = 0;
+    public static final int RIGHT = 1;
+    
+    public StreetType(int id, String name, List<BufferedImage> images, int size)
     {
-        super(id, name, image, size);
+        super(id, name, images, size);
     }
     
     @Override
-    public Street createBuilding(int x, int y)
+    public Street createBuilding(int x, int y, int variant)
     {
-        return new Street(this, x, y);
+        return new Street(this, x, y, variant);
     }
 
     @Override

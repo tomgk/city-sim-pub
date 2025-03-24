@@ -1,9 +1,11 @@
 package org.exolin.citysim;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import org.exolin.citysim.ui.Utils;
 import static org.exolin.citysim.ui.Utils.loadImage;
 
 /**
@@ -36,12 +38,15 @@ public final class World
     
     static final BuildingType plant_solar = createBuildingType(17, "plant_solar", 4, null);
     
-    public static final BuildingType street1 = createStreetType(18, "street_1", 1);
-    public static final BuildingType street2 = createStreetType(19, "street_2", 1);
+    public static final BuildingType street = createStreetType(18, "street", List.of("street_1", "street_2"), 1);
     
-    private static BuildingType createStreetType(int id, String name, int size)
+    private static BuildingType createStreetType(int id, String name, List<String> variants, int size)
     {
-        return new StreetType(id, name, loadImage(name), size);
+        List<BufferedImage> images = variants.stream()
+                .map(Utils::loadImage)
+                .toList();
+        
+        return new StreetType(id, name, images, size);
     }
     
     private static BuildingType createBuildingType(int id, String name, int size, ZoneType zoneType)
@@ -84,7 +89,7 @@ public final class World
         w.addBuilding(parkbuilding, 18, 27);
         w.addBuilding(office3, 15, 27);
         for(int i=0;i<3;++i)
-            w.addBuilding(street1, 2+i, 2);
+            w.addBuilding(street, 2+i, 2, StreetType.LEFT);
         
         w.addBuilding(office, 0, 0);
         
@@ -105,10 +110,10 @@ public final class World
         w.addBuilding(office2, 19, 2);
         
         for(int i=0;i<25;++i)
-            w.addBuilding(street1, 2+i, 5);
+            w.addBuilding(street, 2+i, 5, StreetType.LEFT);
         
         for(int i=0;i<4;++i)
-            w.addBuilding(street2, 20, 6+i);
+            w.addBuilding(street, 20, 6+i, StreetType.RIGHT);
         
         return w;
     }
@@ -140,10 +145,15 @@ public final class World
     
     public <B extends Building> B addBuilding(BuildingType<B> type, int x, int y)
     {
+        return addBuilding(type, x, y, BuildingType.DEFAULT_VARIANT);
+    }
+    
+    public <B extends Building> B addBuilding(BuildingType<B> type, int x, int y, int variant)
+    {
         if(x < 0 || y < 0 || x+type.getSize()>=gridSize || y+type.getSize()>=gridSize)
             throw new IllegalArgumentException("out of grid");
         
-        B b = type.createBuilding(x, y);
+        B b = type.createBuilding(x, y, variant);
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));
         return b;

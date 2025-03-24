@@ -15,9 +15,9 @@ public class ZoneType extends BuildingType<Zone>
     }
 
     @Override
-    public Zone createBuilding(int x, int y)
+    public Zone createBuilding(int x, int y, int variant)
     {
-        return new Zone(this, x, y);
+        return new Zone(this, x, y, variant);
     }
 
     @Override

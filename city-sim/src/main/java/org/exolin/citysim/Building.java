@@ -14,12 +14,16 @@ public abstract class Building
     private final BuildingType type;
     private final int x;
     private final int y;
+    private final int variant;
 
-    public Building(BuildingType type, int x, int y)
+    public Building(BuildingType type, int x, int y, int variant)
     {
+        type.checkVariant(variant);
+        
         this.type = type;
         this.x = x;
         this.y = y;
+        this.variant = variant;
     }
 
     public BuildingType getType()
@@ -29,7 +33,7 @@ public abstract class Building
 
     public Image getImage()
     {
-        return type.getImage();
+        return type.getImage(variant);
     }
     
     public int getSize()

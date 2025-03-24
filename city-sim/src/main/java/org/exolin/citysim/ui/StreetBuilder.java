@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
 
 /**
@@ -92,20 +93,20 @@ public class StreetBuilder implements BuildingAction
         int diffX;
         int diffY;
         int len;
-        BuildingType type;
+        int variant;
         if(marking.width == 1)
         {
             diffX = 0;
             diffY = 1;
             len = marking.height;
-            type = World.street2;
+            variant = StreetType.RIGHT;
         }
         else
         {
             diffX = 1;
             diffY = 0;
             len = marking.width;
-            type = World.street1;
+            variant = StreetType.LEFT;
         }
 
         for(int i=0;i<len;++i)
@@ -116,7 +117,7 @@ public class StreetBuilder implements BuildingAction
             if(world.containsBuilding(x, y))
                 continue;
 
-            world.addBuilding(type, x, y);
+            world.addBuilding(World.street, x, y, variant);
         }
 
         start = null;
@@ -126,7 +127,7 @@ public class StreetBuilder implements BuildingAction
     @Override
     public BuildingType getBuilding()
     {
-        return World.street1;
+        return World.street;
     }
 
     @Override
@@ -135,13 +136,13 @@ public class StreetBuilder implements BuildingAction
         if(marking == null)
             return null;
 
-        BuildingType type;
+        int variant;
         if(marking.width == 1)
-            type = World.street2;
+            variant = StreetType.RIGHT;
         else
-            type = World.street1;
+            variant = StreetType.LEFT;
 
-        return type.getBrightImage();
+        return World.street.getBrightImage(variant);
     }
 
     @Override

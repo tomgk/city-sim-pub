@@ -8,9 +8,9 @@ import java.io.Writer;
  */
 public class Street extends Building
 {
-    public Street(StreetType type, int x, int y)
+    public Street(StreetType type, int x, int y, int variant)
     {
-        super(type, x, y);
+        super(type, x, y, variant);
     }
 
     @Override

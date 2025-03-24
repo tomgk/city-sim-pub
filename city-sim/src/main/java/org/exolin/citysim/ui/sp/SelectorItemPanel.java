@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.BuildingAction;
 
@@ -24,7 +25,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
         
         if(action instanceof BuildingAction ba)
         {
-            imageLabel.setIcon(new ImageIcon(ba.getBuilding().getImage()));
+            imageLabel.setIcon(new ImageIcon(ba.getBuilding().getImage(BuildingType.DEFAULT_VARIANT)));
             imageLabel.setText("");
             nameLabel.setText(ba.getBuilding().getName());
         }

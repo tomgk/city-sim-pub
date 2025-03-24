@@ -15,10 +15,12 @@ import org.exolin.citysim.ui.Utils;
  */
 public abstract class BuildingType<B>
 {
+    public static final int DEFAULT_VARIANT = 0;
+    
     private final int id;
     private final Set<Integer> usedIds = new LinkedHashSet<>();
     private final String name;
-    private final BufferedImage image;
+    private final List<BufferedImage> images;
     private final int size;
     
     private static final List<BuildingType> instances = new ArrayList<>();
@@ -28,7 +30,7 @@ public abstract class BuildingType<B>
         return instances;
     }
     
-    public abstract B createBuilding(int x, int y);
+    public abstract B createBuilding(int x, int y, int variant);
     public B read(Reader reader)
     {
         if(true)
@@ -43,16 +45,21 @@ public abstract class BuildingType<B>
     {
         return instances.stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
     }
+    
+    public BuildingType(int id, String name, BufferedImage image, int size)
+    {
+        this(id, name, List.of(image), size);
+    }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(int id, String name, BufferedImage image, int size)
+    public BuildingType(int id, String name, List<BufferedImage> images, int size)
     {
         if(!usedIds.add(id))
             throw new IllegalArgumentException("duplicate ID");
         
         this.id = id;
         this.name = name;
-        this.image = image;
+        this.images = images;
         this.size = size;
         instances.add(this);
     }
@@ -71,10 +78,16 @@ public abstract class BuildingType<B>
     {
         return name;
     }
-
-    public Image getImage()
+    
+    void checkVariant(int variant)
     {
-        return image;
+        if(variant < 0 || variant >= images.size())
+            throw new IllegalArgumentException("invalid variant "+variant);
+    }
+
+    public Image getImage(int version)
+    {
+        return images.get(version);
     }
 
     public int getSize()
@@ -84,6 +97,11 @@ public abstract class BuildingType<B>
 
     public BufferedImage getBrightImage()
     {
-        return Utils.brighter(image);
+        return getBrightImage(DEFAULT_VARIANT);
+    }
+
+    public BufferedImage getBrightImage(int variant)
+    {
+        return Utils.brighter(images.get(variant));
     }
 }

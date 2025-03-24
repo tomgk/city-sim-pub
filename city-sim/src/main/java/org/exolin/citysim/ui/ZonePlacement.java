@@ -55,7 +55,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public Image getMarker()
     {
-        return building.getImage();
+        return building.getImage(BuildingType.DEFAULT_VARIANT);
     }
 
     @Override

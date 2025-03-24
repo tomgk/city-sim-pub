@@ -56,6 +56,9 @@ public class Street extends Building
         else if(!x_before && x_after && !y_before && y_after)
             setVariant(StreetType.Variant.CURVE_2);
         
+        else if(x_before && !x_after && y_before && !y_after)
+            setVariant(StreetType.Variant.CURVE_4);
+        
         else if(x_before || x_after)
             setVariant(StreetType.Variant.CONNECT_X);
         

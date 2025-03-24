@@ -242,4 +242,27 @@ public final class World
     {
         return lastChange;
     }
+    
+    private <B> void replaceBuilding(ZoneType type, int x, int y)
+    {
+        Building b = getBuildingAt(x, y);
+        if(b != null)
+            buildings.remove(b);
+        
+        addBuilding(type, x, y);
+    }
+
+    public void update(World w)
+    {
+        for(Building b: buildings)
+        {
+            if(b.getType() instanceof ZoneType z)
+            {
+                if(z.getSize() == 1)
+                {
+                    replaceBuilding(z, b.getX(), b.getY());
+                }
+            }
+        }
+    }
 }

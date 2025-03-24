@@ -176,6 +176,7 @@ public final class GamePanel extends JComponent
         
         repaint = new Timer(10, (ActionEvent e) ->
         {
+            world.update(world);
             long u = world.getLastChange();
             if(u >= lastPaint)
             {

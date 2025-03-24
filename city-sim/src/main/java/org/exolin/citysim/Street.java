@@ -38,10 +38,19 @@ public class Street extends Building
     {
         System.out.println("Update street @ "+getX()+"/"+getY());
         
-        if(containsStreet(world, getX()-1, getY()) || containsStreet(world, getX()+1, getY()))
-            setVariant(StreetType.CONNECT_X);
+        boolean x_before = containsStreet(world, getX()-1, getY());
+        boolean x_after = containsStreet(world, getX()+1, getY());
         
-        else if(containsStreet(world, getX(), getY()-1) || containsStreet(world, getX(), getY()+1))
-            setVariant(StreetType.CONNECT_Y);
+        boolean y_before = containsStreet(world, getX(), getY()-1);
+        boolean y_after = containsStreet(world, getX(), getY()+1);
+        
+        if(x_before && x_after && y_before && y_after)
+            setVariant(StreetType.Variant.X_INTERSECTION);
+        
+        else if(x_before || x_after)
+            setVariant(StreetType.Variant.CONNECT_X);
+        
+        else if(y_before || y_after)
+            setVariant(StreetType.Variant.CONNECT_Y);
     }
 }

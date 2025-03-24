@@ -38,7 +38,7 @@ public final class World
     
     static final BuildingType plant_solar = createBuildingType(17, "plant_solar", 4, null);
     
-    public static final BuildingType street = createStreetType(18, "street", List.of("street_1", "street_2"), 1);
+    public static final BuildingType street = createStreetType(18, "street", List.of("street_1", "street_2", "street_x_intersection"), 1);
     
     private static BuildingType createStreetType(int id, String name, List<String> variants, int size)
     {
@@ -89,7 +89,7 @@ public final class World
         w.addBuilding(parkbuilding, 18, 27);
         w.addBuilding(office3, 15, 27);
         for(int i=0;i<3;++i)
-            w.addBuilding(street, 2+i, 2, StreetType.CONNECT_X);
+            w.addBuilding(street, 2+i, 2, StreetType.Variant.CONNECT_X);
         
         w.addBuilding(office, 0, 0);
         
@@ -110,10 +110,10 @@ public final class World
         w.addBuilding(office2, 19, 2);
         
         for(int i=0;i<25;++i)
-            w.addBuilding(street, 2+i, 5, StreetType.CONNECT_X);
+            w.addBuilding(street, 2+i, 5, StreetType.Variant.CONNECT_X);
         
         for(int i=0;i<4;++i)
-            w.addBuilding(street, 20, 6+i, StreetType.CONNECT_Y);
+            w.addBuilding(street, 20, 6+i, StreetType.Variant.CONNECT_Y);
         
         return w;
     }
@@ -146,6 +146,11 @@ public final class World
     public <B extends Building> B addBuilding(BuildingType<B> type, int x, int y)
     {
         return addBuilding(type, x, y, BuildingType.DEFAULT_VARIANT);
+    }
+    
+    public <B extends Building> B addBuilding(BuildingType<B> type, int x, int y, Enum<?> variant)
+    {
+        return addBuilding(type, x, y, variant.ordinal());
     }
     
     public <B extends Building> B addBuilding(BuildingType<B> type, int x, int y, int variant)

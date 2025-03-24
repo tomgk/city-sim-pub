@@ -100,6 +100,11 @@ public abstract class BuildingType<B>
         return getBrightImage(DEFAULT_VARIANT);
     }
 
+    public BufferedImage getBrightImage(Enum<?> variant)
+    {
+        return getBrightImage(variant.ordinal());
+    }
+
     public BufferedImage getBrightImage(int variant)
     {
         return Utils.brighter(images.get(variant));

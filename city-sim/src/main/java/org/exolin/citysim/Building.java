@@ -15,6 +15,11 @@ public abstract class Building
     private final int x;
     private final int y;
     private int variant;
+    
+    public Building(BuildingType type, int x, int y, Enum<?> variant)
+    {
+        this(type, x, y, variant.ordinal());
+    }
 
     public Building(BuildingType type, int x, int y, int variant)
     {
@@ -96,6 +101,11 @@ public abstract class Building
     }
     
     protected abstract void serializeImpl(Writer out) throws IOException;
+    
+    protected void setVariant(Enum<?> variant)
+    {
+        setVariant(variant.ordinal());
+    }
     
     protected void setVariant(int variant)
     {

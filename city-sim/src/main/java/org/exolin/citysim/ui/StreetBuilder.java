@@ -93,20 +93,20 @@ public class StreetBuilder implements BuildingAction
         int diffX;
         int diffY;
         int len;
-        int variant;
+        StreetType.Variant variant;
         if(marking.width == 1)
         {
             diffX = 0;
             diffY = 1;
             len = marking.height;
-            variant = StreetType.CONNECT_Y;
+            variant = StreetType.Variant.CONNECT_Y;
         }
         else
         {
             diffX = 1;
             diffY = 0;
             len = marking.width;
-            variant = StreetType.CONNECT_X;
+            variant = StreetType.Variant.CONNECT_X;
         }
 
         for(int i=0;i<len;++i)
@@ -136,11 +136,11 @@ public class StreetBuilder implements BuildingAction
         if(marking == null)
             return null;
 
-        int variant;
+        StreetType.Variant variant;
         if(marking.width == 1)
-            variant = StreetType.CONNECT_Y;
+            variant = StreetType.Variant.CONNECT_Y;
         else
-            variant = StreetType.CONNECT_X;
+            variant = StreetType.Variant.CONNECT_X;
 
         return World.street.getBrightImage(variant);
     }

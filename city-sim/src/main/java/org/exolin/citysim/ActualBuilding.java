@@ -11,6 +11,7 @@ public class ActualBuilding extends Building
     public ActualBuilding(ActualBuildingType type, int x, int y, int version)
     {
         super(type, x, y, version);
+        type.addBuilding(this);
     }
 
     @Override

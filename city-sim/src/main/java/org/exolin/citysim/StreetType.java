@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class StreetType extends BuildingType<Street>
 {
-    public static final int LEFT = 0;
-    public static final int RIGHT = 1;
+    public static final int CONNECT_X = 0;
+    public static final int CONNECT_Y = 1;
     
     public StreetType(int id, String name, List<BufferedImage> images, int size)
     {

@@ -14,7 +14,7 @@ public abstract class Building
     private final BuildingType type;
     private final int x;
     private final int y;
-    private final int variant;
+    private int variant;
 
     public Building(BuildingType type, int x, int y, int variant)
     {
@@ -96,4 +96,15 @@ public abstract class Building
     }
     
     protected abstract void serializeImpl(Writer out) throws IOException;
+    
+    protected void setVariant(int variant)
+    {
+        type.checkVariant(variant);
+        this.variant = variant;
+    }
+
+    void update(World world)
+    {
+        
+    }
 }

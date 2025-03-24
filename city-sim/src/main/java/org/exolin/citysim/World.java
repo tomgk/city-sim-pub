@@ -89,7 +89,7 @@ public final class World
         w.addBuilding(parkbuilding, 18, 27);
         w.addBuilding(office3, 15, 27);
         for(int i=0;i<3;++i)
-            w.addBuilding(street, 2+i, 2, StreetType.LEFT);
+            w.addBuilding(street, 2+i, 2, StreetType.CONNECT_X);
         
         w.addBuilding(office, 0, 0);
         
@@ -110,10 +110,10 @@ public final class World
         w.addBuilding(office2, 19, 2);
         
         for(int i=0;i<25;++i)
-            w.addBuilding(street, 2+i, 5, StreetType.LEFT);
+            w.addBuilding(street, 2+i, 5, StreetType.CONNECT_X);
         
         for(int i=0;i<4;++i)
-            w.addBuilding(street, 20, 6+i, StreetType.RIGHT);
+            w.addBuilding(street, 20, 6+i, StreetType.CONNECT_Y);
         
         return w;
     }
@@ -156,7 +156,64 @@ public final class World
         B b = type.createBuilding(x, y, variant);
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));
+        updateBuilding(b);
         return b;
+    }
+    
+    private Building getBuildingAtForUpdate(int x, int y)
+    {
+        System.out.println(x+"/"+y);
+        return getBuildingAt(x, y);
+    }
+    
+    private void updateBuilding(Building b)
+    {
+        b.update(this);
+        
+        System.out.println("-------");
+        for(int x=b.getX()-1;x<b.getX()+b.getSize()+1;++x)
+        {
+            {
+                //  xxxxx
+                //   ***
+                //   ***
+                //   ***
+                Building buildingAt = getBuildingAtForUpdate(x, b.getY()-1);
+                if(buildingAt != null)
+                    buildingAt.update(this);
+            }
+            {
+                //   ***
+                //   ***
+                //   ***
+                //  xxxxx
+                Building buildingAt = getBuildingAtForUpdate(x, b.getY()+b.getSize());
+                if(buildingAt != null)
+                    buildingAt.update(this);
+            }
+        }
+        
+        for(int y=b.getY();y<b.getY()+b.getSize();++y)
+        {
+            //only cover sides, corner was already covered in x loop
+            
+            //  x***
+            //  x***
+            //  x***
+            {
+                Building buildingAt = getBuildingAtForUpdate(b.getX()-1, y);
+                if(buildingAt != null)
+                    buildingAt.update(this);
+            }
+            //   ***x
+            //   ***x
+            //   ***x
+            {
+                Building buildingAt = getBuildingAtForUpdate(b.getX()+b.getSize(), y);
+                if(buildingAt != null)
+                    buildingAt.update(this);
+            }
+        }
     }
 
     public List<Building> getBuildings()

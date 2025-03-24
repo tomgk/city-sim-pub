@@ -99,14 +99,14 @@ public class StreetBuilder implements BuildingAction
             diffX = 0;
             diffY = 1;
             len = marking.height;
-            variant = StreetType.RIGHT;
+            variant = StreetType.CONNECT_Y;
         }
         else
         {
             diffX = 1;
             diffY = 0;
             len = marking.width;
-            variant = StreetType.LEFT;
+            variant = StreetType.CONNECT_X;
         }
 
         for(int i=0;i<len;++i)
@@ -138,9 +138,9 @@ public class StreetBuilder implements BuildingAction
 
         int variant;
         if(marking.width == 1)
-            variant = StreetType.RIGHT;
+            variant = StreetType.CONNECT_Y;
         else
-            variant = StreetType.LEFT;
+            variant = StreetType.CONNECT_X;
 
         return World.street.getBrightImage(variant);
     }

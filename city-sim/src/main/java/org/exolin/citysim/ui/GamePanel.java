@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
@@ -49,6 +52,9 @@ public final class GamePanel extends JComponent
     private Action action;
     
     private boolean debugInfo = true;
+    
+    private long lastPaint;
+    private Timer repaint;
     
     public Map<String, List<Action>> getActions()
     {
@@ -167,6 +173,17 @@ public final class GamePanel extends JComponent
                 GamePanel.this.keyPressed(e.getKeyCode());
             }
         });
+        
+        repaint = new Timer(10, (ActionEvent e) ->
+        {
+            long u = world.getLastChange();
+            if(u >= lastPaint)
+            {
+                System.out.println("Timeout repaint");
+                repaint();
+            }
+        });
+        repaint.start();
     }
     
     void onZoom(int amount)
@@ -240,6 +257,8 @@ public final class GamePanel extends JComponent
     @Override
     public void paint(Graphics g)
     {
+        lastPaint = System.currentTimeMillis();
+        
         g.fillRect(0, 0, getWidth(), getHeight());
         //g.drawRect(0, 0, getWidth()-1, getHeight()-1);
         

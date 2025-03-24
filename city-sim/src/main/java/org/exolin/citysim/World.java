@@ -237,4 +237,9 @@ public final class World
     {
         lastChange = System.currentTimeMillis();
     }
+
+    public long getLastChange()
+    {
+        return lastChange;
+    }
 }

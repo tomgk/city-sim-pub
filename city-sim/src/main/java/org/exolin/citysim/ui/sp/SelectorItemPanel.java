@@ -25,15 +25,20 @@ public class SelectorItemPanel extends javax.swing.JPanel
         
         if(action instanceof BuildingAction ba)
         {
-            imageLabel.setIcon(new ImageIcon(ba.getBuilding().getImage(BuildingType.DEFAULT_VARIANT)));
+            BuildingType building = ba.getBuilding();
+            
+            imageLabel.setIcon(new ImageIcon(building.getImage(BuildingType.DEFAULT_VARIANT)));
             imageLabel.setText("");
-            nameLabel.setText(ba.getBuilding().getName());
+            nameLabel.setText(building.getName());
+            sizeLabel.setText(building.getSize()+"x"+building.getSize());
         }
         else
         {
             imageLabel.setIcon(null);//new ImageIcon(action.));
             imageLabel.setText("");
             nameLabel.setText(action.getName());
+            sizeCaptionLabel.setVisible(false);
+            sizeLabel.setVisible(false);
         }
         
         setPreferredSize(new Dimension(300, 100));
@@ -81,6 +86,8 @@ public class SelectorItemPanel extends javax.swing.JPanel
         imageLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
+        sizeCaptionLabel = new javax.swing.JLabel();
+        sizeLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -94,21 +101,34 @@ public class SelectorItemPanel extends javax.swing.JPanel
 
         nameLabel.setText("jLabel2");
 
+        sizeCaptionLabel.setText("Size:");
+
+        sizeLabel.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(nameLabel)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(sizeCaptionLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(sizeLabel))
+                    .addComponent(nameLabel))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(nameLabel)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sizeCaptionLabel)
+                    .addComponent(sizeLabel))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -120,5 +140,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel sizeCaptionLabel;
+    private javax.swing.JLabel sizeLabel;
     // End of variables declaration//GEN-END:variables
 }

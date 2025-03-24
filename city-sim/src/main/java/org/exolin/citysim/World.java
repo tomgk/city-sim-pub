@@ -38,7 +38,10 @@ public final class World
     
     static final BuildingType plant_solar = createBuildingType(17, "plant_solar", 4, null);
     
-    public static final BuildingType street = createStreetType(18, "street", List.of("street_1", "street_2", "street_x_intersection"), 1);
+    public static final BuildingType street = createStreetType(18, "street", List.of(
+            "street_1", "street_2",
+            "street_x_intersection",
+            "street_curve_1", "street_curve_2", "street_curve_3"), 1);
     
     private static BuildingType createStreetType(int id, String name, List<String> variants, int size)
     {

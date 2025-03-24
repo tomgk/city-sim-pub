@@ -14,12 +14,18 @@ public class StreetType extends BuildingType<Street>
     {
         CONNECT_X,
         CONNECT_Y,
-        X_INTERSECTION
+        X_INTERSECTION,
+        CURVE_1,
+        CURVE_2,
+        CURVE_3
     }
     
     public StreetType(int id, String name, List<BufferedImage> images, int size)
     {
         super(id, name, images, size);
+        
+        if(images.size() != Variant.values().length)
+            throw new IllegalArgumentException("incorrect image count");
     }
     
     @Override

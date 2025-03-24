@@ -18,25 +18,25 @@ public final class World
     public static final ZoneType zone_business = createZone(2, "zone_business");
     public static final ZoneType zone_industrial = createZone(3, "zone_industrial");
     
-    static final BuildingType office = createBuildingType(4, "office", 4, zone_business);
-    static final BuildingType office2 = createBuildingType(5, "office_2", 3, zone_business);
-    static final BuildingType office3 = createBuildingType(6, "office_3", 3, zone_business);
-    static final BuildingType car_cinema = createBuildingType(7, "car-cinema", 4, zone_business);
-    static final BuildingType cinema = createBuildingType(8, "cinema", 3, zone_business);
-    static final BuildingType parkbuilding = createBuildingType(9, "parkbuilding", 3, zone_business);
+    public static final BuildingType office = createBuildingType(4, "office", 4, zone_business);
+    public static final BuildingType office2 = createBuildingType(5, "office_2", 3, zone_business);
+    public static final BuildingType office3 = createBuildingType(6, "office_3", 3, zone_business);
+    public static final BuildingType car_cinema = createBuildingType(7, "car-cinema", 4, zone_business);
+    public static final BuildingType cinema = createBuildingType(8, "cinema", 3, zone_business);
+    public static final BuildingType parkbuilding = createBuildingType(9, "parkbuilding", 3, zone_business);
     
-    static final BuildingType small_house_1 = createBuildingType(10, "small_house_1", 1, zone_residential);
-    static final BuildingType house_1 = createBuildingType(11, "house_1", 3, zone_residential);
-    static final BuildingType house_2 = createBuildingType(12, "house_2", 3, zone_residential);
-    static final BuildingType house_3 = createBuildingType(13, "house_3", 4, zone_residential);
-    static final BuildingType house_4 = createBuildingType(14, "house_4", 4, zone_residential);
+    public static final BuildingType small_house_1 = createBuildingType(10, "small_house_1", 1, zone_residential);
+    public static final BuildingType house_1 = createBuildingType(11, "house_1", 3, zone_residential);
+    public static final BuildingType house_2 = createBuildingType(12, "house_2", 3, zone_residential);
+    public static final BuildingType house_3 = createBuildingType(13, "house_3", 4, zone_residential);
+    public static final BuildingType house_4 = createBuildingType(14, "house_4", 4, zone_residential);
     
-    static final BuildingType industrial_small_1 = createBuildingType(14, "industrial_small_1", 1, zone_industrial);
-    static final BuildingType industrial_small_2 = createBuildingType(15, "industrial_small_2", 1, zone_industrial);
-    static final BuildingType industrial_small_3 = createBuildingType(16, "industrial_small_3", 1, zone_industrial);
-    static final BuildingType industrial_small_4 = createBuildingType(17, "industrial_small_4", 1, zone_industrial);
+    public static final BuildingType industrial_small_1 = createBuildingType(14, "industrial_small_1", 1, zone_industrial);
+    public static final BuildingType industrial_small_2 = createBuildingType(15, "industrial_small_2", 1, zone_industrial);
+    public static final BuildingType industrial_small_3 = createBuildingType(16, "industrial_small_3", 1, zone_industrial);
+    public static final BuildingType industrial_small_4 = createBuildingType(17, "industrial_small_4", 1, zone_industrial);
     
-    static final BuildingType plant_solar = createBuildingType(17, "plant_solar", 4, null);
+    public static final BuildingType plant_solar = createBuildingType(17, "plant_solar", 4, null);
     
     public static final BuildingType street = createStreetType(18, "street", List.of(
             "street_1", "street_2",

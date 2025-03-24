@@ -45,42 +45,42 @@ public class Street extends Building
         boolean y_after = containsStreet(world, getX(), getY()+1);
         
         if(x_before && x_after && y_before && y_after)
-            setVariant(StreetType.Variant.X_INTERSECTION);
+            setVariant(world, StreetType.Variant.X_INTERSECTION);
         
         //----- curves
         
         else if(x_before && !x_after && !y_before && y_after)
-            setVariant(StreetType.Variant.CURVE_1);
+            setVariant(world, StreetType.Variant.CURVE_1);
         
         else if(!x_before && x_after && y_before && !y_after)
-            setVariant(StreetType.Variant.CURVE_3);
+            setVariant(world, StreetType.Variant.CURVE_3);
         
         else if(!x_before && x_after && !y_before && y_after)
-            setVariant(StreetType.Variant.CURVE_2);
+            setVariant(world, StreetType.Variant.CURVE_2);
         
         else if(x_before && !x_after && y_before && !y_after)
-            setVariant(StreetType.Variant.CURVE_4);
+            setVariant(world, StreetType.Variant.CURVE_4);
         
         //----- t intersection
         
         else if(x_before && !x_after && y_before && y_after)
-            setVariant(StreetType.Variant.T_INTERSECTION_1);
+            setVariant(world, StreetType.Variant.T_INTERSECTION_1);
         
         else if(!x_before && x_after && y_before && y_after)
-            setVariant(StreetType.Variant.T_INTERSECTION_3);
+            setVariant(world, StreetType.Variant.T_INTERSECTION_3);
         
         else if(x_before && x_after && !y_before && y_after)
-            setVariant(StreetType.Variant.T_INTERSECTION_2);
+            setVariant(world, StreetType.Variant.T_INTERSECTION_2);
         
         else if(x_before && x_after && y_before && !y_after)
-            setVariant(StreetType.Variant.T_INTERSECTION_4);
+            setVariant(world, StreetType.Variant.T_INTERSECTION_4);
         
         //----- straight
         
         else if(x_before || x_after)
-            setVariant(StreetType.Variant.CONNECT_X);
+            setVariant(world, StreetType.Variant.CONNECT_X);
         
         else if(y_before || y_after)
-            setVariant(StreetType.Variant.CONNECT_Y);
+            setVariant(world, StreetType.Variant.CONNECT_Y);
     }
 }

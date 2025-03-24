@@ -44,6 +44,8 @@ public final class World
             "street_curve_1", "street_curve_2", "street_curve_3", "street_curve_4",
             "street_t_1", "street_t_2", "street_t_3", "street_t_4"), 1);
     
+    private long lastChange = System.currentTimeMillis();
+    
     private static BuildingType createStreetType(int id, String name, List<String> variants, int size)
     {
         List<BufferedImage> images = variants.stream()
@@ -166,6 +168,7 @@ public final class World
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));
         updateBuilding(b);
+        onChange();
         return b;
     }
     
@@ -228,5 +231,10 @@ public final class World
     public List<Building> getBuildings()
     {
         return buildings;
+    }
+
+    void onChange()
+    {
+        lastChange = System.currentTimeMillis();
     }
 }

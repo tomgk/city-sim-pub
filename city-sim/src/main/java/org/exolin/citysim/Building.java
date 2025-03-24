@@ -102,15 +102,16 @@ public abstract class Building
     
     protected abstract void serializeImpl(Writer out) throws IOException;
     
-    protected void setVariant(Enum<?> variant)
+    protected void setVariant(World w, Enum<?> variant)
     {
-        setVariant(variant.ordinal());
+        setVariant(w, variant.ordinal());
     }
     
-    protected void setVariant(int variant)
+    protected void setVariant(World w, int variant)
     {
         type.checkVariant(variant);
         this.variant = variant;
+        w.onChange();
     }
 
     void update(World world)

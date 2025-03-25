@@ -56,6 +56,11 @@ public abstract class Building
         return y;
     }
 
+    public int getVariant()
+    {
+        return variant;
+    }
+    
     public int getLevel()
     {
         //each +1 of x and y pushes further down

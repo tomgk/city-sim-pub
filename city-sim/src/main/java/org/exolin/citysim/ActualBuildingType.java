@@ -7,8 +7,13 @@ import java.io.Reader;
  *
  * @author Thomas
  */
-public class ActualBuildingType extends BuildingType<ActualBuilding>
+public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuildingType.Variant>
 {
+    public enum Variant
+    {
+        DEFAULT
+    }
+    
     private final ZoneType zoneType;
     //private final List<ActualBuilding> buildings = new ArrayList<>();
     

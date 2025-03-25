@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Thomas
  */
-public class StreetType extends BuildingType<Street>
+public class StreetType extends BuildingType<Street, StreetType.Variant>
 {
     public enum Variant
     {

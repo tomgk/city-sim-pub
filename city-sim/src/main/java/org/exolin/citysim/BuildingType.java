@@ -13,7 +13,7 @@ import org.exolin.citysim.ui.Utils;
  *
  * @author Thomas
  */
-public abstract class BuildingType<B>
+public abstract class BuildingType<B, E extends Enum<E>>
 {
     public static final int DEFAULT_VARIANT = 0;
     

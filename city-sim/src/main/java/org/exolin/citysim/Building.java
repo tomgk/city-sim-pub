@@ -9,7 +9,7 @@ import java.io.Writer;
  *
  * @author Thomas
  */
-public abstract class Building<B, T extends BuildingType<B>, E extends Enum<E>>
+public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E>>
 {
     private final T type;
     private final int x;

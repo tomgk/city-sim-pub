@@ -7,8 +7,13 @@ import java.io.Reader;
  *
  * @author Thomas
  */
-public class ZoneType extends BuildingType<Zone>
+public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
 {
+    public enum Variant
+    {
+        DEFAULT
+    }
+    
     public ZoneType(int id, String name, BufferedImage image, int size)
     {
         super(id, name, image, size);

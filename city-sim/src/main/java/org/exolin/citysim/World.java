@@ -154,15 +154,10 @@ public final class World
     
     public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y)
     {
-        return addBuilding(type, x, y, BuildingType.DEFAULT_VARIANT);
+        return addBuilding(type, x, y, type.getVariantClass().getEnumConstants()[0]);
     }
     
-    public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y, Enum<?> variant)
-    {
-        return addBuilding(type, x, y, variant.ordinal());
-    }
-    
-    public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y, int variant)
+    public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)
     {
         if(x < 0 || y < 0 || x+type.getSize()>=gridSize || y+type.getSize()>=gridSize)
             throw new IllegalArgumentException("out of grid");

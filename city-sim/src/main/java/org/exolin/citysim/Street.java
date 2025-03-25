@@ -6,15 +6,15 @@ import java.io.Writer;
  *
  * @author Thomas
  */
-public class Street extends Building
+public class Street extends Building<Street, StreetType, StreetType.Variant>
 {
-    public Street(StreetType type, int x, int y, int variant)
+    public Street(StreetType type, int x, int y, StreetType.Variant variant)
     {
         super(type, x, y, variant);
     }
 
     @Override
-    public BuildingType getType()
+    public StreetType getType()
     {
         return (StreetType)super.getType();
     }

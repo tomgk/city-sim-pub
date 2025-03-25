@@ -21,7 +21,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         this(type, x, y, variant.ordinal());
     }
 
-    public Building(T type, int x, int y, int variant)
+    private Building(T type, int x, int y, int variant)
     {
         type.checkVariant(variant);
         

@@ -32,9 +32,15 @@ public class StreetType extends BuildingType<Street, StreetType.Variant>
         if(images.size() != Variant.values().length)
             throw new IllegalArgumentException("incorrect image count");
     }
+
+    @Override
+    public Class<Variant> getVariantClass()
+    {
+        return Variant.class;
+    }
     
     @Override
-    public Street createBuilding(int x, int y, int variant)
+    public Street createBuilding(int x, int y, StreetType.Variant variant)
     {
         return new Street(this, x, y, variant);
     }

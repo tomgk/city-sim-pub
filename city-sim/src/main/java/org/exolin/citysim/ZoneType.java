@@ -20,7 +20,14 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     }
 
     @Override
-    public Zone createBuilding(int x, int y, int variant)
+    public Class<Variant> getVariantClass()
+    {
+        return Variant.class;
+    }
+
+
+    @Override
+    public Zone createBuilding(int x, int y, Variant variant)
     {
         return new Zone(this, x, y, variant);
     }

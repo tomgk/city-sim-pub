@@ -8,7 +8,7 @@ import java.io.Writer;
  */
 public class ActualBuilding extends Building
 {
-    public ActualBuilding(ActualBuildingType type, int x, int y, int version)
+    public ActualBuilding(ActualBuildingType type, int x, int y, ActualBuildingType.Variant version)
     {
         super(type, x, y, version);
         //type.addBuilding(this);

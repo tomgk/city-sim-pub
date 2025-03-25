@@ -35,7 +35,13 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     }
 
     @Override
-    public ActualBuilding createBuilding(int x, int y, int variant)
+    public Class<Variant> getVariantClass()
+    {
+        return Variant.class;
+    }
+
+    @Override
+    public ActualBuilding createBuilding(int x, int y, Variant variant)
     {
         return new ActualBuilding(this, x, y, variant);
     }

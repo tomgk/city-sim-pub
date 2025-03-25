@@ -25,12 +25,14 @@ public abstract class BuildingType<B, E extends Enum<E>>
     
     private static final List<BuildingType> instances = new ArrayList<>();
     
+    public abstract Class<E> getVariantClass();
+    
     public static List<BuildingType> types()
     {
         return instances;
     }
     
-    public abstract B createBuilding(int x, int y, int variant);
+    public abstract B createBuilding(int x, int y, E variant);
     public B read(Reader reader)
     {
         if(true)

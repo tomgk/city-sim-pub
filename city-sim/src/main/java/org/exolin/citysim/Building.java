@@ -9,19 +9,19 @@ import java.io.Writer;
  *
  * @author Thomas
  */
-public abstract class Building
+public abstract class Building<B, T extends BuildingType<B>, E extends Enum<E>>
 {
-    private final BuildingType type;
+    private final T type;
     private final int x;
     private final int y;
     private int variant;
     
-    public Building(BuildingType type, int x, int y, Enum<?> variant)
+    public Building(T type, int x, int y, Enum<?> variant)
     {
         this(type, x, y, variant.ordinal());
     }
 
-    public Building(BuildingType type, int x, int y, int variant)
+    public Building(T type, int x, int y, int variant)
     {
         type.checkVariant(variant);
         
@@ -31,7 +31,7 @@ public abstract class Building
         this.variant = variant;
     }
 
-    public BuildingType getType()
+    public T getType()
     {
         return type;
     }

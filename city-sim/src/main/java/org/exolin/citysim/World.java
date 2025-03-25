@@ -145,7 +145,10 @@ public final class World
         {
             Building b = it.next();
             if(b.isOccupying(x, y))
+            {
                 it.remove();
+                updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+            }
         }
     }
     
@@ -181,16 +184,20 @@ public final class World
     private void updateBuilding(Building b)
     {
         b.update(this);
-        
+        updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+    }
+    
+    private void updateBuildingsAround(int bx, int by, int bsize)
+    {
         System.out.println("-------");
-        for(int x=b.getX()-1;x<b.getX()+b.getSize()+1;++x)
+        for(int x=bx-1;x<bx+bsize+1;++x)
         {
             {
                 //  xxxxx
                 //   ***
                 //   ***
                 //   ***
-                Building buildingAt = getBuildingAtForUpdate(x, b.getY()-1);
+                Building buildingAt = getBuildingAtForUpdate(x, by-1);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
@@ -199,13 +206,13 @@ public final class World
                 //   ***
                 //   ***
                 //  xxxxx
-                Building buildingAt = getBuildingAtForUpdate(x, b.getY()+b.getSize());
+                Building buildingAt = getBuildingAtForUpdate(x, by+bsize);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
         }
         
-        for(int y=b.getY();y<b.getY()+b.getSize();++y)
+        for(int y=by;y<by+bsize;++y)
         {
             //only cover sides, corner was already covered in x loop
             
@@ -213,7 +220,7 @@ public final class World
             //  x***
             //  x***
             {
-                Building buildingAt = getBuildingAtForUpdate(b.getX()-1, y);
+                Building buildingAt = getBuildingAtForUpdate(bx-1, y);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
@@ -221,7 +228,7 @@ public final class World
             //   ***x
             //   ***x
             {
-                Building buildingAt = getBuildingAtForUpdate(b.getX()+b.getSize(), y);
+                Building buildingAt = getBuildingAtForUpdate(bx+bsize, y);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }

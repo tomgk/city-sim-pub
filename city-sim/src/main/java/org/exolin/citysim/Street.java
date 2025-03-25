@@ -31,7 +31,7 @@ public class Street extends Building<Street, StreetType, StreetType.Variant>
     @Override
     void update(World world)
     {
-        System.out.println("Update street @ "+getX()+"/"+getY());
+        //System.out.println("Update street @ "+getX()+"/"+getY());
         
         boolean x_before = containsStreet(world, getX()-1, getY());
         boolean x_after = containsStreet(world, getX()+1, getY());

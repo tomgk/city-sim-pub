@@ -198,7 +198,7 @@ public final class GamePanel extends JComponent
             double zoomFactor = getZoomFactor();
             xoffset += 1/zoomFactor * world.getGridSize();
             yoffset += 1/zoomFactor *  world.getGridSize();
-            System.out.println(xoffset+"/"+yoffset);
+            //System.out.println(xoffset+"/"+yoffset);
         }
 
         GamePanel.this.repaint();

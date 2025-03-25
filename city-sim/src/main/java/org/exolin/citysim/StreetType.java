@@ -25,9 +25,9 @@ public class StreetType extends BuildingType<Street, StreetType.Variant>
         T_INTERSECTION_4,
     }
     
-    public StreetType(int id, String name, List<BufferedImage> images, int size)
+    public StreetType(String name, List<BufferedImage> images, int size)
     {
-        super(id, name, images, size);
+        super(name, images, size);
         
         if(images.size() != Variant.values().length)
             throw new IllegalArgumentException("incorrect image count");

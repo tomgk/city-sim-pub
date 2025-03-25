@@ -18,15 +18,4 @@ public class Zone extends Building
     {
         return (ZoneType)super.getType();
     }
-
-    @Override
-    protected void serializeImpl(Writer out)
-    {
-    }
-/*
-    @Override
-    void update(World world)
-    {
-        x
-    }*/
 }

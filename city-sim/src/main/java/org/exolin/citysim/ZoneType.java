@@ -14,9 +14,9 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
         DEFAULT
     }
     
-    public ZoneType(int id, String name, BufferedImage image, int size)
+    public ZoneType(String name, BufferedImage image, int size)
     {
-        super(id, name, image, size);
+        super(name, image, size);
     }
 
     @Override

@@ -18,11 +18,6 @@ public class Street extends Building<Street, StreetType, StreetType.Variant>
     {
         return (StreetType)super.getType();
     }
-
-    @Override
-    protected void serializeImpl(Writer out)
-    {
-    }
     
     private boolean containsStreet(World world, int x, int y)
     {

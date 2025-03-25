@@ -95,18 +95,6 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return true;
     }
     
-    public void serialize(Writer out) throws IOException
-    {
-        out.write(Integer.toString(type.getId()));
-        out.write(";");
-        out.write(Integer.toString(x));
-        out.write(";");
-        out.write(Integer.toString(y));
-        serializeImpl(out);
-    }
-    
-    protected abstract void serializeImpl(Writer out) throws IOException;
-    
     protected void setVariant(World w, Enum<?> variant)
     {
         setVariant(w, variant.ordinal());

@@ -17,8 +17,7 @@ public abstract class BuildingType<B, E extends Enum<E>>
 {
     public static final int DEFAULT_VARIANT = 0;
     
-    private final int id;
-    private final Set<Integer> usedIds = new LinkedHashSet<>();
+    private final Set<String> usedNames = new LinkedHashSet<>();
     private final String name;
     private final List<BufferedImage> images;
     private final int size;
@@ -48,27 +47,21 @@ public abstract class BuildingType<B, E extends Enum<E>>
         return instances.stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
     }
     
-    public BuildingType(int id, String name, BufferedImage image, int size)
+    public BuildingType(String name, BufferedImage image, int size)
     {
-        this(id, name, List.of(image), size);
+        this(name, List.of(image), size);
     }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(int id, String name, List<BufferedImage> images, int size)
+    public BuildingType(String name, List<BufferedImage> images, int size)
     {
-        if(!usedIds.add(id))
+        if(!usedNames.add(name))
             throw new IllegalArgumentException("duplicate ID");
         
-        this.id = id;
         this.name = name;
         this.images = images;
         this.size = size;
         instances.add(this);
-    }
-
-    public int getId()
-    {
-        return id;
     }
     
     public boolean isBuilding()

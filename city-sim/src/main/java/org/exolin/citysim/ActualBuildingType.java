@@ -2,8 +2,6 @@ package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -12,7 +10,7 @@ import java.util.List;
 public class ActualBuildingType extends BuildingType<ActualBuilding>
 {
     private final ZoneType zoneType;
-    private final List<ActualBuilding> buildings = new ArrayList<>();
+    //private final List<ActualBuilding> buildings = new ArrayList<>();
     
     public ActualBuildingType(int id, String name, BufferedImage image, int size, ZoneType zoneType)
     {
@@ -20,12 +18,12 @@ public class ActualBuildingType extends BuildingType<ActualBuilding>
         //zoneType is null if it can be placed directly by player
         this.zoneType = zoneType;
     }
-    
+    /*
     void addBuilding(ActualBuilding b)
     {
         buildings.add(b);
     }
-
+    */
     public ZoneType getZoneType()
     {
         return zoneType;

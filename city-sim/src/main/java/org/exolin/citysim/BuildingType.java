@@ -74,9 +74,9 @@ public abstract class BuildingType<B, E extends Enum<E>>
         return name;
     }
     
-    void checkVariant(int variant)
+    void checkVariant(Enum variant)
     {
-        if(variant < 0 || variant >= images.size())
+        if(variant.ordinal() < 0 || variant.ordinal() >= images.size())
             throw new IllegalArgumentException("invalid variant "+variant);
     }
 

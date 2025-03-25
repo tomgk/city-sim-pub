@@ -14,14 +14,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     private final T type;
     private final int x;
     private final int y;
-    private int variant;
+    private E variant;
     
-    public Building(T type, int x, int y, Enum<?> variant)
-    {
-        this(type, x, y, variant.ordinal());
-    }
-
-    private Building(T type, int x, int y, int variant)
+    public Building(T type, int x, int y, E variant)
     {
         type.checkVariant(variant);
         
@@ -38,7 +33,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
 
     public Image getImage()
     {
-        return type.getImage(variant);
+        return type.getImage(variant.ordinal());
     }
     
     public int getSize()
@@ -58,7 +53,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
 
     public int getVariant()
     {
-        return variant;
+        return variant.ordinal();
     }
     
     public int getLevel()
@@ -95,12 +90,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return true;
     }
     
-    protected void setVariant(World w, Enum<?> variant)
-    {
-        setVariant(w, variant.ordinal());
-    }
-    
-    protected void setVariant(World w, int variant)
+    protected void setVariant(World w, E variant)
     {
         type.checkVariant(variant);
         this.variant = variant;

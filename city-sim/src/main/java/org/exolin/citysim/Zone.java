@@ -1,7 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.Writer;
-
 /**
  *
  * @author Thomas

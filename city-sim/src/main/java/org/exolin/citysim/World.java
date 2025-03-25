@@ -38,7 +38,7 @@ public final class World
     
     public static final ActualBuildingType plant_solar = createBuildingType("plant_solar", 4, null);
     
-    public static final BuildingType street = createStreetType("street", List.of(
+    public static final StreetType street = createStreetType("street", List.of(
             "street_1", "street_2",
             "street_x_intersection",
             "street_curve_1", "street_curve_2", "street_curve_3", "street_curve_4",
@@ -46,7 +46,7 @@ public final class World
     
     private long lastChange = System.currentTimeMillis();
     
-    private static BuildingType createStreetType(String name, List<String> variants, int size)
+    private static StreetType createStreetType(String name, List<String> variants, int size)
     {
         List<BufferedImage> images = variants.stream()
                 .map(Utils::loadImage)

@@ -248,15 +248,23 @@ public final class World
     private <B> void replaceBuilding(ZoneType type, int x, int y)
     {
         Building b = getBuildingAt(x, y);
-        if(b != null)
-            buildings.remove(b);
+        if(b == null)
+            return;
         
-        addBuilding(type, x, y);
+        ActualBuildingType bt = type.getRandomBuilding();
+        if(bt != null && Math.random() < 0.01)
+        {
+            buildings.remove(b);
+            addBuilding(bt, x, y);
+        }
     }
 
     public void update(World w)
     {
-        for(Building b: buildings)
+        //TODO: maybe no copy
+        List<Building> originalBuildings = new ArrayList<>(this.buildings);
+        
+        for(Building b: originalBuildings)
         {
             if(b.getType() instanceof ZoneType z)
             {

@@ -27,6 +27,18 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     {
         this.buildings.add(building);
     }
+    
+    ActualBuildingType getRandomBuilding()
+    {
+        List<ActualBuildingType> smallBuildings = buildings.stream()
+                .filter(b -> b.getSize() == 1)
+                .toList();
+        
+        if(smallBuildings.isEmpty())
+            return null;
+        
+        return smallBuildings.get((int)(Math.random()*smallBuildings.size()));
+    }
 
     @Override
     public Class<Variant> getVariantClass()

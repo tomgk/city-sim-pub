@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
@@ -111,11 +114,23 @@ public final class GamePanel extends JComponent
         transformBack(getDim(), x, y, currentGridPos);
     }
     
+    private void execute(Runnable b)
+    {
+        try{
+        b.run();
+        }catch(Exception e){
+            e.printStackTrace(System.out);
+            StringWriter out = new StringWriter();
+            e.printStackTrace(new PrintWriter(out));
+            JOptionPane.showMessageDialog(this, out.toString(), "Unexpected Exception", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     private synchronized void mousePressed(MouseEvent e)
     {
         updatePos(e);
         if(action != null)
-            action.mouseDown(currentGridPos);
+            execute(() -> action.mouseDown(currentGridPos));
         repaint();
     }
     
@@ -125,7 +140,7 @@ public final class GamePanel extends JComponent
             return;
 
         updatePos(e);
-        action.releaseMouse(currentGridPos);
+        execute(() -> action.releaseMouse(currentGridPos));
         repaint();
     }
     
@@ -134,7 +149,7 @@ public final class GamePanel extends JComponent
         updatePos(e);
 
         if(action != null)
-            action.moveMouse(currentGridPos);
+            execute(() -> action.moveMouse(currentGridPos));
         
         //repaint has to always be done because the selection moves
         repaint();

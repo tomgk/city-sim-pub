@@ -135,7 +135,8 @@ public final class GamePanel extends JComponent
 
         if(action != null)
             action.moveMouse(currentGridPos);
-
+        
+        //repaint has to always be done because the selection moves
         repaint();
     }
 

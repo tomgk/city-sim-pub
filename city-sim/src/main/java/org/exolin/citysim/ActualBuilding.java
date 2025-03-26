@@ -16,4 +16,10 @@ public class ActualBuilding extends Building
     {
         return (ActualBuildingType)super.getType();
     }
+
+    @Override
+    public ZoneType getZoneType()
+    {
+        return getType().getZoneType();
+    }
 }

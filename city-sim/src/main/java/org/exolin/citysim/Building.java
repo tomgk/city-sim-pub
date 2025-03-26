@@ -101,4 +101,12 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     {
         
     }
+    
+    /**
+     * @return zone type or {@code null} if not belonging to a zone type
+     */
+    public ZoneType getZoneType()
+    {
+        return null;
+    }
 }

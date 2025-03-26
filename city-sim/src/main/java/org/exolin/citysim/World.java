@@ -147,7 +147,16 @@ public final class World
             if(b.isOccupying(x, y))
             {
                 it.remove();
+                
+                ZoneType zoneType = b.getZoneType();
+                if(zoneType != null)
+                {
+                    //TODO: replace for full size
+                    buildings.add(zoneType.createBuilding(x, y, ZoneType.Variant.DEFAULT));
+                }
+                
                 updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+                return;
             }
         }
     }

@@ -12,6 +12,8 @@ import org.exolin.citysim.ui.Utils;
 /**
  *
  * @author Thomas
+ * @param <B> building class
+ * @param <E> building variant
  */
 public abstract class BuildingType<B, E extends Enum<E>>
 {

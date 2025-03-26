@@ -2,12 +2,13 @@ package org.exolin.citysim;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.io.IOException;
-import java.io.Writer;
 
 /**
  *
  * @author Thomas
+ * @param <B> building class
+ * @param <T> building type
+ * @param <E> building variant
  */
 public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E>>
 {

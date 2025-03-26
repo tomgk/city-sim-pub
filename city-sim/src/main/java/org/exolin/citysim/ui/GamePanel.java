@@ -17,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -197,7 +198,7 @@ public final class GamePanel extends JComponent
                 long u = world.getLastChange();
                 if(u >= lastPaint)
                 {
-                    System.out.println("Timeout repaint");
+                    System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
                     repaint();
                 }
             }

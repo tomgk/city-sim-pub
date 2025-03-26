@@ -61,8 +61,16 @@ public class Main
             @Override
             public void keyPressed(KeyEvent e)
             {
-                if(e.getKeyCode() == KeyEvent.VK_F12)
-                    gd.setVisible(!gd.isVisible());
+                switch(e.getKeyCode())
+                {
+                    case KeyEvent.VK_F11:
+                        gp.toggleColorGrid();
+                        break;
+                        
+                    case KeyEvent.VK_F12:
+                        gd.setVisible(!gd.isVisible());
+                        break;
+                }
             }
         });
         

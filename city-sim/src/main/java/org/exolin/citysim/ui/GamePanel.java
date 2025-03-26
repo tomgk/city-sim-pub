@@ -383,12 +383,18 @@ public final class GamePanel extends JComponent
         gridPoint.y = (int)gridY - 2;
     }
     
-    private final boolean colorGrid = false;
+    private boolean colorGrid = false;
     
     private void draw(Graphics2D g, int dim)
     {
         drawGrid(g, dim);
         drawBuildings(g, dim);
+    }
+    
+    public void toggleColorGrid()
+    {
+        colorGrid = !colorGrid;
+        repaint();
     }
     
     private void drawGrid(Graphics2D g, int dim)

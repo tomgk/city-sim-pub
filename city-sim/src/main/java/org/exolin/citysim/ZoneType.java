@@ -2,6 +2,8 @@ package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,9 +16,16 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
         DEFAULT
     }
     
+    private final List<ActualBuildingType> buildings = new ArrayList<>();
+    
     public ZoneType(String name, BufferedImage image, int size)
     {
         super(name, image, size);
+    }
+    
+    void addBuilding(ActualBuildingType building)
+    {
+        this.buildings.add(building);
     }
 
     @Override

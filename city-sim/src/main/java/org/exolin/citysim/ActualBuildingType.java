@@ -15,20 +15,16 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     }
     
     private final ZoneType zoneType;
-    //private final List<ActualBuilding> buildings = new ArrayList<>();
     
     public ActualBuildingType(String name, BufferedImage image, int size, ZoneType zoneType)
     {
         super(name, image, size);
         //zoneType is null if it can be placed directly by player
         this.zoneType = zoneType;
+        if(zoneType != null)
+            zoneType.addBuilding(this);
     }
-    /*
-    void addBuilding(ActualBuilding b)
-    {
-        buildings.add(b);
-    }
-    */
+    
     public ZoneType getZoneType()
     {
         return zoneType;

@@ -394,60 +394,66 @@ public final class GamePanel extends JComponent
     private void drawGrid(Graphics2D g, int dim)
     {
         if(colorGrid)
-        {
-            Color[] color = {Color.red, Color.green, Color.blue};
-            int c = 0;
-
-            for(int y=0;y<= world.getGridSize();++y)
-            {
-                for(int x=0;x<= world.getGridSize();++x)
-                {
-                    Point p00 = new Point();
-                    Point pw0 = new Point();
-                    if(x !=  world.getGridSize())
-                    {
-                        transform(dim, (double)x, (double)y, p00);
-                        transform(dim, (double)(x+1), (double)(y), pw0);
-                        g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
-                    }
-                    
-                    if(y !=  world.getGridSize())
-                    {
-                        transform(dim, (double)x, (double)y, p00);
-                        transform(dim, (double)(x), (double)(y+1), pw0);
-                        g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
-                    }
-
-                    g.setColor(color[c]);
-                    ++c;
-                    if(c >= color.length)
-                        c = 0;
-                }
-            }
-        }
+            drawColorGrid(g, dim);
         else
+            drawNormalGrid(g, dim);
+    }
+    
+    private void drawColorGrid(Graphics2D g, int dim)
+    {
+        Color[] color = {Color.red, Color.green, Color.blue};
+        int c = 0;
+
+        for(int y=0;y<= world.getGridSize();++y)
         {
-            g.setColor(Color.orange.darker().darker());
-            g.setStroke(new BasicStroke(10));
-            
-            for(int i = 0; i <  world.getGridSize()+1; ++i)
+            for(int x=0;x<= world.getGridSize();++x)
             {
                 Point p00 = new Point();
                 Point pw0 = new Point();
-                transform(dim, 0, (double)i, p00);
-                transform(dim,  world.getGridSize(), (double)i, pw0);
-                g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
-            }
+                if(x !=  world.getGridSize())
+                {
+                    transform(dim, (double)x, (double)y, p00);
+                    transform(dim, (double)(x+1), (double)(y), pw0);
+                    g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+                }
 
-            for(int i = 0; i <  world.getGridSize()+1; ++i)
-            {
-                Point pw0 = new Point();
-                Point pwh = new Point();
+                if(y !=  world.getGridSize())
+                {
+                    transform(dim, (double)x, (double)y, p00);
+                    transform(dim, (double)(x), (double)(y+1), pw0);
+                    g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+                }
 
-                transform(dim, (double)i, 0, pw0);
-                transform(dim, (double)i,  world.getGridSize(), pwh);
-                g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
+                g.setColor(color[c]);
+                ++c;
+                if(c >= color.length)
+                    c = 0;
             }
+        }
+    }
+    
+    private void drawNormalGrid(Graphics2D g, int dim)
+    {
+        g.setColor(Color.orange.darker().darker());
+        g.setStroke(new BasicStroke(10));
+
+        for(int i = 0; i <  world.getGridSize()+1; ++i)
+        {
+            Point p00 = new Point();
+            Point pw0 = new Point();
+            transform(dim, 0, (double)i, p00);
+            transform(dim,  world.getGridSize(), (double)i, pw0);
+            g.drawLine(p00.x, p00.y, pw0.x, pw0.y);
+        }
+
+        for(int i = 0; i <  world.getGridSize()+1; ++i)
+        {
+            Point pw0 = new Point();
+            Point pwh = new Point();
+
+            transform(dim, (double)i, 0, pw0);
+            transform(dim, (double)i,  world.getGridSize(), pwh);
+            g.drawLine(pw0.x, pw0.y, pwh.x, pwh.y);
         }
     }
     

@@ -102,6 +102,41 @@ public final class GamePanel extends JComponent
         
         setCursor(cursor);
     }
+    
+    private void updatePos(MouseEvent e)
+    {
+        double x = e.getX();
+        double y = e.getY();
+        transformBack(getDim(), x, y, currentGridPos);
+    }
+    
+    private synchronized void mousePressed(MouseEvent e)
+    {
+        updatePos(e);
+        if(action != null)
+            action.mouseDown(currentGridPos);
+        repaint();
+    }
+    
+    private synchronized void mouseReleased(MouseEvent e)
+    {
+        if(action == null)
+            return;
+
+        updatePos(e);
+        action.releaseMouse(currentGridPos);
+        repaint();
+    }
+    
+    private synchronized void mouseMoved(MouseEvent e)
+    {
+        updatePos(e);
+
+        if(action != null)
+            action.moveMouse(currentGridPos);
+
+        repaint();
+    }
 
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
@@ -112,42 +147,22 @@ public final class GamePanel extends JComponent
         
         MouseAdapter a  = new MouseAdapter()
         {
-            private void updatePos(MouseEvent e)
-            {
-                double x = e.getX();
-                double y = e.getY();
-                transformBack(getDim(), x, y, currentGridPos);
-            }
-            
             @Override
             public void mousePressed(MouseEvent e)
             {
-                updatePos(e);
-                if(action != null)
-                    action.mouseDown(currentGridPos);
-                repaint();
+                GamePanel.this.mousePressed(e);
             }
 
             @Override
             public void mouseReleased(MouseEvent e)
             {
-                if(action == null)
-                    return;
-                
-                updatePos(e);
-                action.releaseMouse(currentGridPos);
-                repaint();
+                GamePanel.this.mouseReleased(e);
             }
             
             @Override
             public void mouseMoved(MouseEvent e)
             {
-                updatePos(e);
-                
-                if(action != null)
-                    action.moveMouse(currentGridPos);
-                
-                repaint();
+                GamePanel.this.mouseMoved(e);
             }
 
             @Override

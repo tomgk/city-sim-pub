@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -210,13 +209,15 @@ public final class GamePanel extends JComponent
         {
             synchronized (GamePanel.this)
             {
-                world.update(world);
-                long u = world.getLastChange();
-                if(u >= lastPaint)
-                {
-                    System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
-                    repaint();
-                }
+                execute(() -> {
+                    world.update(world);
+                    long u = world.getLastChange();
+                    if(u >= lastPaint)
+                    {
+                        System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
+                        repaint();
+                    }
+                });
             }
         });
     }

@@ -66,6 +66,7 @@ public class Main
             }
         });
         
+        gp.start();
         f.setVisible(true);
     }
 }

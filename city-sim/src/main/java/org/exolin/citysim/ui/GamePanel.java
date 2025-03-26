@@ -54,7 +54,7 @@ public final class GamePanel extends JComponent
     private boolean debugInfo = true;
     
     private long lastPaint;
-    private Timer repaint;
+    private final Timer repaint;
     
     public Map<String, List<Action>> getActions()
     {
@@ -176,15 +176,33 @@ public final class GamePanel extends JComponent
         
         repaint = new Timer(10, (ActionEvent e) ->
         {
-            world.update(world);
-            long u = world.getLastChange();
-            if(u >= lastPaint)
+            synchronized (GamePanel.this)
             {
-                System.out.println("Timeout repaint");
-                repaint();
+                world.update(world);
+                long u = world.getLastChange();
+                if(u >= lastPaint)
+                {
+                    System.out.println("Timeout repaint");
+                    repaint();
+                }
             }
         });
+    }
+    
+    public void start()
+    {
         repaint.start();
+    }
+    
+    private synchronized void update()
+    {
+        world.update(world);
+        long u = world.getLastChange();
+        if(u >= lastPaint)
+        {
+            System.out.println("Timeout repaint");
+            repaint();
+        }
     }
     
     void onZoom(int amount)

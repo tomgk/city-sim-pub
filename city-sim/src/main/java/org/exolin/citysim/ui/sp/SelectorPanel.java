@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.GamePanel;
 
@@ -45,7 +46,7 @@ public class SelectorPanel extends JPanel
         this.itemsPanel = new JPanel(new GridLayout(0, 1));
         
         add(categoriesCombobox, BorderLayout.NORTH);
-        add(itemsPanel, BorderLayout.CENTER);
+        add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
     }
     
     private void setList(List<Action> list)

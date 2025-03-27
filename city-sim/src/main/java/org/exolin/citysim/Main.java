@@ -45,10 +45,9 @@ public class Main
                 sp.add(e.getKey(), a);
         }
         
-        JScrollPane scroll = new JScrollPane(sp);
         JFrame selector = new JFrame("Selector");
         selector.setLayout(new BorderLayout());
-        selector.add(scroll, BorderLayout.CENTER);
+        selector.add(sp, BorderLayout.CENTER);
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         selector.setSize(300, 500);
         selector.setVisible(true);

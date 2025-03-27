@@ -49,7 +49,7 @@ public class Main
         JFrame selector = new JFrame("Selector");
         selector.setLayout(new BorderLayout());
         selector.add(scroll, BorderLayout.CENTER);
-        selector.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         selector.setSize(300, 500);
         selector.setVisible(true);
         
@@ -63,6 +63,10 @@ public class Main
             {
                 switch(e.getKeyCode())
                 {
+                    case KeyEvent.VK_F10:
+                        selector.setVisible(!selector.isVisible());
+                        break;
+                        
                     case KeyEvent.VK_F11:
                         gp.toggleColorGrid();
                         break;

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 public class GamePanelTest
 {
-    private static final GamePanel gamePanel = new GamePanel(World.World1(), new JFrame(), new GamePanelListener(){
+    private static final GamePanel gamePanel = new GamePanel(World.World2(), new JFrame(), new GamePanelListener(){
         @Override
         public void created(GamePanel panel)
         {
@@ -39,7 +39,7 @@ public class GamePanelTest
     {
         Point p = new Point(-1, -1);
         gamePanel.transform(100, 1, 1, p);
-        Assertions.assertEquals(new Point(3, 25), p);
+        Assertions.assertEquals(new Point(50, 1), p);
     }
     
     @Test
@@ -47,7 +47,7 @@ public class GamePanelTest
     {
         Point p = new Point(-1, -1);
         gamePanel.transform(100, 100, 0, p);
-        Assertions.assertEquals(new Point(0, 25), p);
+        Assertions.assertEquals(new Point(-116, 83), p);
     }
     
     @Test
@@ -55,7 +55,7 @@ public class GamePanelTest
     {
         Point p = new Point(-1, -1);
         gamePanel.transform(100, 0, 100, p);
-        Assertions.assertEquals(new Point(100, 25), p);
+        Assertions.assertEquals(new Point(216, 83), p);
     }
     
     @Test
@@ -63,7 +63,7 @@ public class GamePanelTest
     {
         Point p = new Point(-1, -1);
         gamePanel.transform(100, 100, 100, p);
-        Assertions.assertEquals(new Point(50, 50), p);
+        Assertions.assertEquals(new Point(50, 166), p);
     }
     
     @Test

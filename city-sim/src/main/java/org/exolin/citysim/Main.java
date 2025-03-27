@@ -71,7 +71,7 @@ public class Main
                 switch(e.getKeyCode())
                 {
                     case KeyEvent.VK_ESCAPE:
-                        gp.setAction(null);
+                        gp.setAction(Action.NONE);
                         break;
                     
                     case KeyEvent.VK_F10:

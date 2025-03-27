@@ -1,7 +1,6 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -10,7 +9,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -115,16 +113,16 @@ public class SelectorPanel extends JPanel
         if(category == null)
             throw new IllegalArgumentException(newAction.getName()+" vs "+actionCategories);
         
-        List<Action> actions = this.actions.get(category);
-        if(actions == null)
+        List<Action> cactions = this.actions.get(category);
+        if(cactions == null)
             throw new IllegalArgumentException(newAction.getName());
         
-        int index = actions.indexOf(newAction);
+        int index = cactions.indexOf(newAction);
         if(index == -1)
             throw new IllegalArgumentException();
         
         categoriesCombobox.setSelectedItem(category);
-        setList(actions);
+        setList(cactions);
         SelectorItemPanel component = (SelectorItemPanel)itemsPanel.getComponent(index);
         component.setSelected(true);
     }

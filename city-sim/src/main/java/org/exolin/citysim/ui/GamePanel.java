@@ -98,14 +98,12 @@ public final class GamePanel extends JComponent
         if(this.action == action)
             return;
         
-        this.action = action;
-        Cursor cursor = null;
-        
-        if(action != null)
-            cursor = action.getCursor();
+        Cursor cursor = action.getCursor();
         
         if(cursor == null)
             cursor = Cursor.getDefaultCursor();
+        
+        this.action = action;
         
         setCursor(cursor);
         listener.onActionChanged(action);

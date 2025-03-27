@@ -150,15 +150,19 @@ public final class World
                 
                 ZoneType zoneType = b.getZoneType();
                 if(zoneType != null)
-                {
-                    //TODO: replace for full size
-                    buildings.add(zoneType.createBuilding(x, y, ZoneType.Variant.DEFAULT));
-                }
+                    placeZone(zoneType, x, y, b.getSize());
                 
                 updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 return;
             }
         }
+    }
+
+    private void placeZone(ZoneType zoneType, int x, int y, int size)
+    {
+        for(int yi=0;yi<size;++yi)
+            for(int xi=0;xi<size;++xi)
+                addBuilding(zoneType, x+xi, y+yi, ZoneType.Variant.DEFAULT);
     }
     
     public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y)

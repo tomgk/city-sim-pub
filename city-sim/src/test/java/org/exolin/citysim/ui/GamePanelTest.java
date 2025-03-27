@@ -19,6 +19,11 @@ public class GamePanelTest
         public void created(GamePanel panel)
         {
         }
+
+        @Override
+        public void onActionChanged(Action newAction)
+        {
+        }
     });
     
     @Test

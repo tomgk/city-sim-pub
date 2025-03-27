@@ -18,7 +18,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,7 +30,6 @@ import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.World;
-import org.exolin.citysim.ui.Action.NoAction;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
 
@@ -64,7 +62,7 @@ public final class GamePanel extends JComponent
         Map<String, List<Action>> actions = new LinkedHashMap<>();
         
         List<Action> sactions = new ArrayList<>();
-        sactions.add(new NoAction());
+        sactions.add(Action.NONE);
         sactions.add(new TearDownAction(world));
         sactions.add(new StreetBuilder(world));
         actions.put("Special", sactions);
@@ -94,6 +92,12 @@ public final class GamePanel extends JComponent
 
     public void setAction(Action action)
     {
+        if(action == null)
+            throw new NullPointerException();
+        
+        if(this.action == action)
+            return;
+        
         this.action = action;
         Cursor cursor = null;
         
@@ -104,6 +108,7 @@ public final class GamePanel extends JComponent
             cursor = Cursor.getDefaultCursor();
         
         setCursor(cursor);
+        listener.onActionChanged(action);
     }
     
     private void updatePos(MouseEvent e)
@@ -153,10 +158,13 @@ public final class GamePanel extends JComponent
         //repaint has to always be done because the selection moves
         repaint();
     }
+    
+    private final GamePanelListener listener;
 
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
         this.world = world;
+        this.listener = listener;
         setBackground(Color.black);
         
         listener.created(this);
@@ -214,7 +222,7 @@ public final class GamePanel extends JComponent
                     long u = world.getLastChange();
                     if(u >= lastPaint)
                     {
-                        System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
+                        //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
                         repaint();
                     }
                 });
@@ -233,7 +241,7 @@ public final class GamePanel extends JComponent
         long u = world.getLastChange();
         if(u >= lastPaint)
         {
-            System.out.println("Timeout repaint");
+            //System.out.println("Timeout repaint");
             repaint();
         }
     }

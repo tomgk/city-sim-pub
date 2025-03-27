@@ -24,54 +24,62 @@ public interface Action
         return null;
     }
     
-    final class NoAction implements Action
+    public static final NoAction NONE = NoAction.INSTANCE;
+}
+
+final class NoAction implements Action
+{
+    public static final NoAction INSTANCE = new NoAction();
+
+    private NoAction()
     {
-        @Override
-        public void mouseDown(Point gridPoint)
-        {
-            
-        }
-        
-        @Override
-        public void moveMouse(Point gridPoint)
-        {
-            
-        }
-        
-        @Override
-        public void releaseMouse(Point gridPoint)
-        {
-            
-        }
-        
-        @Override
-        public Rectangle getSelection()
-        {
-            return null;
-        }
-        
-        @Override
-        public Image getMarker()
-        {
-            return null;
-        }
-        
-        @Override
-        public boolean scaleMarker()
-        {
-            return false;
-        }
+    }
 
-        @Override
-        public String getName()
-        {
-            return "none";
-        }
+    @Override
+    public void mouseDown(Point gridPoint)
+    {
 
-        @Override
-        public String toString()
-        {
-            return getName();
-        }
+    }
+
+    @Override
+    public void moveMouse(Point gridPoint)
+    {
+
+    }
+
+    @Override
+    public void releaseMouse(Point gridPoint)
+    {
+
+    }
+
+    @Override
+    public Rectangle getSelection()
+    {
+        return null;
+    }
+
+    @Override
+    public Image getMarker()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean scaleMarker()
+    {
+        return false;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "none";
+    }
+
+    @Override
+    public String toString()
+    {
+        return getName();
     }
 }

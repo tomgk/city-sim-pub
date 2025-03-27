@@ -1,12 +1,16 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -20,17 +24,18 @@ import org.exolin.citysim.ui.GamePanel;
  */
 public class SelectorPanel extends JPanel
 {
-    private final GamePanel panel;
+    private GamePanel panel;
     
     private final DefaultComboBoxModel<String> categoriesModel;
     private final JComboBox<String> categoriesCombobox;
     private final JPanel itemsPanel;
     private final Map<String, List<Action>> actions = new LinkedHashMap<>();
+    private final Map<Action, String> actionCategories = new IdentityHashMap<>();
     private SelectorItemPanel selected = null;
+    private Action setAction;
     
-    public SelectorPanel(GamePanel panel)
+    public SelectorPanel()
     {
-        this.panel = panel;
         setLayout(new BorderLayout());
         
         this.categoriesModel = new DefaultComboBoxModel<>();
@@ -40,13 +45,19 @@ public class SelectorPanel extends JPanel
             List<Action> a = actions.get((String)categoriesCombobox.getSelectedItem());
             setList(a != null ? a : List.of());
             //reset, so that current action isn't out another category
-            panel.setAction(null);
+            SelectorPanel.this.panel.setAction(Action.NONE);
+            setAction = null;
         });
         
         this.itemsPanel = new JPanel(new GridLayout(0, 1));
         
         add(categoriesCombobox, BorderLayout.NORTH);
         add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
+    }
+
+    public void setPanel(GamePanel panel)
+    {
+        this.panel = panel;
     }
     
     private void setList(List<Action> list)
@@ -66,6 +77,7 @@ public class SelectorPanel extends JPanel
             categoriesModel.addElement(name);
         }
         
+        actionCategories.put(action, name);
         actions.computeIfAbsent(name, n -> new ArrayList<>()).add(action);
     }
 
@@ -77,10 +89,43 @@ public class SelectorPanel extends JPanel
         selected = item;
         if(selected != null)
         {
+            setAction = selected.getAction();
             panel.setAction(selected.getAction());
             selected.setSelected(true);
         }
         else
+        {
+            setAction = null;
             panel.setAction(null);
+        }
+    }
+
+    public void setAction(Action newAction)
+    {
+        if(true)
+            return;
+        
+        Objects.requireNonNull(newAction);
+        
+        //when change came from here then no change is needed
+        if(setAction == newAction)
+            return;
+        
+        String category = actionCategories.get(newAction);
+        if(category == null)
+            throw new IllegalArgumentException(newAction.getName()+" vs "+actionCategories);
+        
+        List<Action> actions = this.actions.get(category);
+        if(actions == null)
+            throw new IllegalArgumentException(newAction.getName());
+        
+        int index = actions.indexOf(newAction);
+        if(index == -1)
+            throw new IllegalArgumentException();
+        
+        categoriesCombobox.setSelectedItem(category);
+        setList(actions);
+        SelectorItemPanel component = (SelectorItemPanel)itemsPanel.getComponent(index);
+        component.setSelected(true);
     }
 }

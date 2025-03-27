@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
@@ -27,17 +26,26 @@ public class Main
         f.setLayout(new BorderLayout());
         GameControlPanel gd = new GameControlPanel();
         f.add(gd, BorderLayout.NORTH);
+        
+        SelectorPanel sp = new SelectorPanel();
+        
         GamePanel gp = new GamePanel(World.World2(), f, new GamePanelListener()
         {
             @Override
             public void created(GamePanel panel)
             {
                 gd.setPanel(panel);
+                sp.setPanel(panel);
+            }
+
+            @Override
+            public void onActionChanged(Action newAction)
+            {
+                sp.setAction(newAction);
             }
         });
         f.add(gp, BorderLayout.CENTER);
         
-        SelectorPanel sp = new SelectorPanel(gp);
         
         for(Map.Entry<String, List<Action>> e: gp.getActions().entrySet())
         {
@@ -62,6 +70,10 @@ public class Main
             {
                 switch(e.getKeyCode())
                 {
+                    case KeyEvent.VK_ESCAPE:
+                        gp.setAction(null);
+                        break;
+                    
                     case KeyEvent.VK_F10:
                         selector.setVisible(!selector.isVisible());
                         break;

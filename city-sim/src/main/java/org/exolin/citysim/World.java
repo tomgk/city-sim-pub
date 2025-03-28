@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import org.exolin.citysim.bt.BuildingTypes;
 import static org.exolin.citysim.bt.BusinessBuildings.*;
 import static org.exolin.citysim.bt.Streets.*;
 
@@ -13,6 +14,10 @@ import static org.exolin.citysim.bt.Streets.*;
  */
 public final class World
 {
+    static
+    {
+        BuildingTypes.init();
+    }
     
     private long lastChange = System.currentTimeMillis();
     

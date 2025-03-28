@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
@@ -20,6 +21,8 @@ public class Main
 {
     public static void main(String[] args)
     {
+        BuildingTypes.init();
+        
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setTitle("City Sim");

@@ -8,11 +8,22 @@ public class BuildingTypes
 {
     public static void init()
     {
-        Buildings.init();
-        BusinessBuildings.init();
-        IndustrialBuildings.init();
-        ResidentialBuildings.init();
-        Streets.init();
-        Zones.init();
+        Class<?> classes[] = {
+            Buildings.class,
+            BusinessBuildings.class,
+            IndustrialBuildings.class,
+            ResidentialBuildings.class,
+            Streets.class,
+            Zones.class
+        };
+        
+        for(Class<?> clazz: classes)
+        {
+            try{
+                Class.forName(clazz.getName());
+            }catch(ClassNotFoundException e){
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

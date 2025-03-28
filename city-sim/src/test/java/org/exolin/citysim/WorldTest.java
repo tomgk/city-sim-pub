@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import org.exolin.citysim.bt.BusinessBuildings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -16,10 +17,10 @@ public class WorldTest
     {
         World w = World.Empty();
         
-        assertEquals(3, World.cinema.getSize());
+        assertEquals(3, BusinessBuildings.cinema.getSize());
         
         //[10, 7] .. [12, 9]
-        Building b = w.addBuilding(World.cinema, 10, 7);
+        Building b = w.addBuilding(BusinessBuildings.cinema, 10, 7);
         
         //-----------------
         

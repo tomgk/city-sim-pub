@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
+import static org.exolin.citysim.bt.Streets.street;
 
 /**
  *
@@ -117,7 +118,7 @@ public class StreetBuilder implements BuildingAction
             if(world.containsBuilding(x, y))
                 continue;
 
-            world.addBuilding(World.street, x, y, variant);
+            world.addBuilding(street, x, y, variant);
         }
 
         start = null;
@@ -127,7 +128,7 @@ public class StreetBuilder implements BuildingAction
     @Override
     public BuildingType getBuilding()
     {
-        return World.street;
+        return street;
     }
 
     @Override
@@ -142,7 +143,7 @@ public class StreetBuilder implements BuildingAction
         else
             variant = StreetType.Variant.CONNECT_X;
 
-        return World.street.getBrightImage(variant);
+        return street.getBrightImage(variant);
     }
 
     @Override

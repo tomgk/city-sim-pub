@@ -1,12 +1,11 @@
 package org.exolin.citysim;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import org.exolin.citysim.ui.Utils;
-import static org.exolin.citysim.ui.Utils.loadImage;
+import static org.exolin.citysim.bt.BusinessBuildings.*;
+import static org.exolin.citysim.bt.Streets.*;
 
 /**
  *
@@ -14,65 +13,8 @@ import static org.exolin.citysim.ui.Utils.loadImage;
  */
 public final class World
 {
-    public static final ZoneType zone_residential = createZone("zone_residential");
-    public static final ZoneType zone_business = createZone("zone_business");
-    public static final ZoneType zone_industrial = createZone("zone_industrial");
-    
-    public static final ActualBuildingType office = createBuildingType("office", 4, zone_business);
-    public static final ActualBuildingType office2 = createBuildingType("office_2", 3, zone_business);
-    public static final ActualBuildingType office3 = createBuildingType("office_3", 3, zone_business);
-    public static final ActualBuildingType car_cinema = createBuildingType("car-cinema", 4, zone_business);
-    public static final ActualBuildingType cinema = createBuildingType("cinema", 3, zone_business);
-    public static final ActualBuildingType parkbuilding = createBuildingType("parkbuilding", 3, zone_business);
-    
-    public static final ActualBuildingType business_small_1 = createBuildingType("business_small_1", 1, zone_business);
-    public static final ActualBuildingType business_small_2 = createBuildingType("business_small_2", 1, zone_business);
-    public static final ActualBuildingType business_small_3 = createBuildingType("business_small_3", 1, zone_business);
-    public static final ActualBuildingType business_small_4 = createBuildingType("business_small_4", 1, zone_business);
-    public static final ActualBuildingType business_small_5 = createBuildingType("business_small_5", 1, zone_business);
-    public static final ActualBuildingType business_small_6 = createBuildingType("business_small_6", 1, zone_business);
-    public static final ActualBuildingType business_small_7 = createBuildingType("business_small_7", 1, zone_business);
-    public static final ActualBuildingType business_small_8 = createBuildingType("business_small_8", 1, zone_business);
-    
-    public static final ActualBuildingType small_house_1 = createBuildingType("small_house_1", 1, zone_residential);
-    public static final ActualBuildingType house_1 = createBuildingType("house_1", 3, zone_residential);
-    public static final ActualBuildingType house_2 = createBuildingType("house_2", 3, zone_residential);
-    public static final ActualBuildingType house_3 = createBuildingType("house_3", 4, zone_residential);
-    public static final ActualBuildingType house_4 = createBuildingType("house_4", 4, zone_residential);
-    
-    public static final ActualBuildingType industrial_small_1 = createBuildingType("industrial_small_1", 1, zone_industrial);
-    public static final ActualBuildingType industrial_small_2 = createBuildingType("industrial_small_2", 1, zone_industrial);
-    public static final ActualBuildingType industrial_small_3 = createBuildingType("industrial_small_3", 1, zone_industrial);
-    public static final ActualBuildingType industrial_small_4 = createBuildingType("industrial_small_4", 1, zone_industrial);
-    
-    public static final ActualBuildingType plant_solar = createBuildingType("plant_solar", 4, null);
-    
-    public static final StreetType street = createStreetType("street", List.of(
-            "street_1", "street_2",
-            "street_x_intersection",
-            "street_curve_1", "street_curve_2", "street_curve_3", "street_curve_4",
-            "street_t_1", "street_t_2", "street_t_3", "street_t_4"), 1);
     
     private long lastChange = System.currentTimeMillis();
-    
-    private static StreetType createStreetType(String name, List<String> variants, int size)
-    {
-        List<BufferedImage> images = variants.stream()
-                .map(Utils::loadImage)
-                .toList();
-        
-        return new StreetType(name, images, size);
-    }
-    
-    private static ActualBuildingType createBuildingType(String name, int size, ZoneType zoneType)
-    {
-        return new ActualBuildingType(name, loadImage(name), size, zoneType);
-    }
-    
-    private static ZoneType createZone(String name)
-    {
-        return new ZoneType(name, loadImage(name), 1);
-    }
     
     private final int gridSize = 30;
     

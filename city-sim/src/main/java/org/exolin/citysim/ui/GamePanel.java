@@ -30,6 +30,7 @@ import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.World;
+import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
 
@@ -69,9 +70,9 @@ public final class GamePanel extends JComponent
         
         {
             List<Action> zoneActions = new ArrayList<>();
-            zoneActions.add(new ZonePlacement(world, World.zone_residential));
-            zoneActions.add(new ZonePlacement(world, World.zone_business));
-            zoneActions.add(new ZonePlacement(world, World.zone_industrial));
+            zoneActions.add(new ZonePlacement(world, Zones.zone_residential));
+            zoneActions.add(new ZonePlacement(world, Zones.zone_business));
+            zoneActions.add(new ZonePlacement(world, Zones.zone_industrial));
             actions.put("Zones", zoneActions);
         }
         

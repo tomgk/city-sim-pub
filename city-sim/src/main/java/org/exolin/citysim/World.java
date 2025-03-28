@@ -6,7 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import org.exolin.citysim.bt.BuildingTypes;
 import static org.exolin.citysim.bt.BusinessBuildings.*;
+import org.exolin.citysim.bt.Streets;
 import static org.exolin.citysim.bt.Streets.*;
+import org.exolin.citysim.bt.Zones;
 
 /**
  *
@@ -237,11 +239,29 @@ public final class World
         {
             if(b.getType() instanceof ZoneType z)
             {
-                if(z.getSize() == 1)
-                {
+                if(z.getSize() != 1)
+                    continue;
+                
+                if(hasAnyInRadius(Streets.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
                     replaceBuilding(z, b.getX(), b.getY());
-                }
             }
         }
+    }
+
+    private boolean hasAnyInRadius(StreetType street, int cx, int cy, int distance)
+    {
+        for(int y=cy-distance;y<=cy+distance;++y)
+        {
+            for(int x=cx-distance;x<=cx+distance;++x)
+            {
+                Building b = getBuildingAt(x, y);
+                if(b == null)
+                    continue;
+                if(b.getType() == street)
+                    return true;
+            }
+        }
+        
+        return false;
     }
 }

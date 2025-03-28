@@ -110,4 +110,11 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     {
         return null;
     }
+
+    public int getSupply()
+    {
+        //assume high rises
+        int base = getSize() * 2;
+        return base * base;
+    }
 }

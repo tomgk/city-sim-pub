@@ -2,8 +2,10 @@ package org.exolin.citysim;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import org.exolin.citysim.bt.BuildingTypes;
 import static org.exolin.citysim.bt.BusinessBuildings.*;
 import org.exolin.citysim.bt.Streets;
@@ -137,6 +139,7 @@ public final class World
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));
         updateBuilding(b);
+        updateBuildCount(b, true);
         onChange();
         return b;
     }
@@ -226,8 +229,24 @@ public final class World
         if(bt != null && Math.random() < 0.01)
         {
             buildings.remove(b);
+            updateBuildCount(b, false);
             addBuilding(bt, x, y);
         }
+    }
+    
+    private final Map<ZoneType, Integer> buildCount = new HashMap<>();
+    {
+        for(ZoneType t: Zones.BASIC_ZONES)
+            buildCount.put(t, 0);
+    }
+    
+    private void updateBuildCount(Building building, boolean up)
+    {
+        ZoneType type = building.getZoneType();
+        if(type == null)
+            return;
+        
+        buildCount.computeIfPresent(type, (k, v) -> v+(up?+building.getSupply():-building.getSupply()));
     }
 
     public void update()

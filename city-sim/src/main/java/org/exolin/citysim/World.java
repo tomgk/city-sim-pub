@@ -25,6 +25,15 @@ public final class World
     public static final ActualBuildingType cinema = createBuildingType("cinema", 3, zone_business);
     public static final ActualBuildingType parkbuilding = createBuildingType("parkbuilding", 3, zone_business);
     
+    public static final ActualBuildingType business_small_1 = createBuildingType("business_small_1", 1, zone_business);
+    public static final ActualBuildingType business_small_2 = createBuildingType("business_small_2", 1, zone_business);
+    public static final ActualBuildingType business_small_3 = createBuildingType("business_small_3", 1, zone_business);
+    public static final ActualBuildingType business_small_4 = createBuildingType("business_small_4", 1, zone_business);
+    public static final ActualBuildingType business_small_5 = createBuildingType("business_small_5", 1, zone_business);
+    public static final ActualBuildingType business_small_6 = createBuildingType("business_small_6", 1, zone_business);
+    public static final ActualBuildingType business_small_7 = createBuildingType("business_small_7", 1, zone_business);
+    public static final ActualBuildingType business_small_8 = createBuildingType("business_small_8", 1, zone_business);
+    
     public static final ActualBuildingType small_house_1 = createBuildingType("small_house_1", 1, zone_residential);
     public static final ActualBuildingType house_1 = createBuildingType("house_1", 3, zone_residential);
     public static final ActualBuildingType house_2 = createBuildingType("house_2", 3, zone_residential);

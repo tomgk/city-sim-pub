@@ -272,7 +272,7 @@ public final class World
         }
     }
 
-    public void update(World w)
+    public void update()
     {
         //TODO: maybe no copy
         List<Building> originalBuildings = new ArrayList<>(this.buildings);

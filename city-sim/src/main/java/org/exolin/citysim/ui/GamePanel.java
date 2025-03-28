@@ -119,7 +119,7 @@ public final class GamePanel extends JComponent
     private void execute(Runnable b)
     {
         try{
-        b.run();
+            b.run();
         }catch(Exception e){
             e.printStackTrace(System.out);
             StringWriter out = new StringWriter();
@@ -216,7 +216,7 @@ public final class GamePanel extends JComponent
             synchronized (GamePanel.this)
             {
                 execute(() -> {
-                    world.update(world);
+                    world.update();
                     long u = world.getLastChange();
                     if(u >= lastPaint)
                     {
@@ -235,7 +235,7 @@ public final class GamePanel extends JComponent
     
     private synchronized void update()
     {
-        world.update(world);
+        world.update();
         long u = world.getLastChange();
         if(u >= lastPaint)
         {

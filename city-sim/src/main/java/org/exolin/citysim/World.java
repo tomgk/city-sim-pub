@@ -150,7 +150,7 @@ public final class World
                 
                 ZoneType zoneType = b.getZoneType();
                 if(zoneType != null)
-                    placeZone(zoneType, x, y, b.getSize());
+                    placeZone(zoneType, b.getX(), b.getY(), b.getSize());
                 
                 updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 return;

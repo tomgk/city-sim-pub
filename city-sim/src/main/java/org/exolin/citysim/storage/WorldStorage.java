@@ -3,9 +3,8 @@ package org.exolin.citysim.storage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.OutputStream;
-import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.Building;
-import org.exolin.citysim.Street;
+import org.exolin.citysim.World;
 
 /**
  *
@@ -17,13 +16,11 @@ public class WorldStorage
     
     public static void serialize(Building b, OutputStream out) throws IOException
     {
-        Class<?> clazz = b.getClass();
-        
-        if(clazz == ActualBuilding.class)
-            objectMapper.writeValue(out, new ActualBuildingData((ActualBuilding)b));
-        else if(clazz == Street.class)
-            objectMapper.writeValue(out, new StreetData((Street)b));
-        else
-            throw new UnsupportedOperationException(clazz.getName());
+        objectMapper.writeValue(out, BuildingData.create(b));
+    }
+    
+    public static void serialize(World w, OutputStream out) throws IOException
+    {
+        objectMapper.writeValue(out, new WorldData(w));
     }
 }

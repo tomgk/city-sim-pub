@@ -132,7 +132,7 @@ public final class World
     
     public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)
     {
-        if(x < 0 || y < 0 || x+type.getSize()>=gridSize || y+type.getSize()>=gridSize)
+        if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
             throw new IllegalArgumentException("out of grid");
         
         B b = type.createBuilding(x, y, variant);

@@ -1,17 +1,20 @@
 package org.exolin.citysim.storage;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.Street;
+import static org.exolin.citysim.ZoneType.Variant.DEFAULT;
 
 /**
  *
  * @author Thomas
  */
-public class BuildingData
+@JsonIgnoreProperties({ "variantClass"})
+public abstract class BuildingData
 {
     @JsonProperty
     public String type;
@@ -32,6 +35,8 @@ public class BuildingData
         this.x = b.getX();
         this.y = b.getY();
         this.variant = b.getVariant().name().toLowerCase();
+        //only remove it from the file if it is named default
+        //if it just happens to be the first, don't do it
         if(this.variant.equals("default"))
             this.variant = null;
     }
@@ -45,4 +50,6 @@ public class BuildingData
         else
             throw new UnsupportedOperationException(b.getClass().getName());
     }
+    
+    public abstract Class<? extends Enum<?>> getVariantClass();
 }

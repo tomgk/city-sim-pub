@@ -1,6 +1,7 @@
 package org.exolin.citysim.storage;
 
 import org.exolin.citysim.ActualBuilding;
+import org.exolin.citysim.ActualBuildingType;
 
 /**
  *
@@ -12,4 +13,12 @@ public class ActualBuildingData extends BuildingData
     {
         super(b);
     }
+
+    @Override
+    public Class<? extends Enum<?>> getVariantClass()
+    {
+        return ActualBuildingType.Variant.class;
+    }
+    
+    
 }

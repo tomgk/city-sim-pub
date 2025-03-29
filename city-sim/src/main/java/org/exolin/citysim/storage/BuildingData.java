@@ -1,5 +1,7 @@
 package org.exolin.citysim.storage;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.Building;
@@ -21,14 +23,17 @@ public class BuildingData
     public int y;
     
     @JsonProperty
-    public int variant;
+    @JsonInclude(Include.NON_NULL)
+    public String variant;
     
     public BuildingData(Building b)
     {
         this.type = b.getType().getName();
         this.x = b.getX();
         this.y = b.getY();
-        this.variant = b.getVariant();
+        this.variant = b.getVariant().name().toLowerCase();
+        if(this.variant.equals("default"))
+            this.variant = null;
     }
     
     public static BuildingData create(Building b)

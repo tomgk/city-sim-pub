@@ -52,9 +52,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return y;
     }
 
-    public int getVariant()
+    public E getVariant()
     {
-        return variant.ordinal();
+        return variant;
     }
     
     public int getLevel()

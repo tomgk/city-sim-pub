@@ -33,11 +33,11 @@ public class WorldStorageTest
     }
     
     @Test
-    public void testSerializeActualBuilding() throws IOException
+    public void testSerializeActualBuilding_Default() throws IOException
     {
         ActualBuilding building = new ActualBuilding(BusinessBuildings.cinema, 16, 99, ActualBuildingType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
-        String expected = "{\"type\":\"cinema\",\"x\":16,\"y\":99,\"variant\":0}";
+        String expected = "{\"type\":\"cinema\",\"x\":16,\"y\":99}";
         Assertions.assertEquals(expected, output);
     }
     
@@ -46,7 +46,7 @@ public class WorldStorageTest
     {
         Street street = new Street(Streets.street, 16, 99, StreetType.Variant.T_INTERSECTION_4);
         String output = serialize(WorldStorage::serialize, street);
-        String expected = "{\"type\":\"street\",\"x\":16,\"y\":99,\"variant\":10}";
+        String expected = "{\"type\":\"street\",\"x\":16,\"y\":99,\"variant\":\"t_intersection_4\"}";
         Assertions.assertEquals(expected, output);
     }
     
@@ -57,7 +57,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, StreetType.Variant.T_INTERSECTION_4);
         String output = serialize(WorldStorage::serialize, w);
-        String expected = "{\"gridSize\":30,\"buildings\":[{\"type\":\"street\",\"x\":15,\"y\":5,\"variant\":10},{\"type\":\"cinema\",\"x\":16,\"y\":5,\"variant\":0}]}";
+        String expected = "{\"gridSize\":30,\"buildings\":[{\"type\":\"street\",\"x\":15,\"y\":5,\"variant\":\"t_intersection_4\"},{\"type\":\"cinema\",\"x\":16,\"y\":5}]}";
         Assertions.assertEquals(expected, output);
     }
 }

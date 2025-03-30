@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ public final class World
     
     private final List<Building> buildings = new ArrayList<>();
     
-    public World(int gridSize)
+    public World(@JsonProperty("gridSize") int gridSize)
     {
         this.gridSize = gridSize;
     }

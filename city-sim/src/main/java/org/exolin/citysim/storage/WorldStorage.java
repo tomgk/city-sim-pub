@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.World;
 
@@ -35,5 +38,24 @@ public class WorldStorage
     {
         WorldData worldData = objectMapper.readValue(in, WorldData.class);
         return worldData.createWorld();
+    }
+
+    public static void save(World world, Path file) throws IOException
+    {
+        Path temp = file.resolveSibling(file.getFileName()+".tmp");
+        
+        try(OutputStream out = Files.newOutputStream(temp))
+        {
+            WorldStorage.serialize(world, out);
+        }catch(IOException e){
+            try{
+                Files.delete(temp);
+            }catch(IOException e2){
+                e.addSuppressed(e2);
+            }
+            throw e;
+        }
+        
+        Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING);
     }
 }

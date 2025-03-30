@@ -259,7 +259,7 @@ public class GameControlPanel extends javax.swing.JPanel
         
         try(OutputStream out = Files.newOutputStream(file))
         {
-            WorldStorage.serialize(panel.getWorld(), out);
+            WorldStorage.save(panel.getWorld(), file);
         }catch(IOException e){
             ErrorDisplay.show(this, e);
         }

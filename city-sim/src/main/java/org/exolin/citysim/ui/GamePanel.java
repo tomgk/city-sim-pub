@@ -60,23 +60,6 @@ public final class GamePanel extends JComponent
     
     private final WorldHolder worldHolder;
     
-    static final class WorldHolder implements GetWorld
-    {
-        private World world;
-        private Path worldFile;
-
-        public WorldHolder(World world)
-        {
-            this.world = world;
-        }
-
-        @Override
-        public World get()
-        {
-            return world;
-        }
-    }
-    
     public Map<String, List<Action>> getActions()
     {
         GetWorld getWorld = worldHolder;
@@ -587,26 +570,22 @@ public final class GamePanel extends JComponent
     
     public World getWorld()
     {
-        return worldHolder.world;
+        return worldHolder.get();
     }
 
     public Path getWorldFile()
     {
-        return worldHolder.worldFile;
+        return worldHolder.getFile();
     }
 
     public void setWorldFile(Path worldFile)
     {
-        worldHolder.worldFile = worldFile;
+        worldHolder.setFile(worldFile);
     }
 
     public void setWorld(World world, Path worldFile)
     {
-        Objects.requireNonNull(world);
-        //worldFile can be null
-        
-        worldHolder.world = world;
-        worldHolder.worldFile = worldFile;
+        worldHolder.set(world, worldFile);
         setAction(Action.NONE);
         repaint();
     }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
@@ -15,6 +16,7 @@ import org.exolin.citysim.World;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -99,5 +101,33 @@ public class WorldStorageTest
         String output = serialize(WorldStorage::serialize, w);
         String expected = "{\"gridSize\":30,\"buildings\":[{\"type\":\"street\",\"x\":15,\"y\":5,\"variant\":\"t_intersection_4\"},{\"type\":\"cinema\",\"x\":16,\"y\":5}]}";
         assertEquals(expected, output);
+    }
+    
+    @Test
+    public void testDeserializeWorld() throws IOException
+    {
+        InputStream in = createInputStream("{\"gridSize\":30,\"buildings\":[{\"type\":\"street\",\"x\":15,\"y\":5,\"variant\":\"t_intersection_4\"},{\"type\":\"cinema\",\"x\":16,\"y\":5}]}");
+        
+        World w = WorldStorage.deserialize(in);
+        
+        assertEquals(30, w.getGridSize());
+        
+        List<Building> buildings = w.getBuildings();
+        assertEquals(2, buildings.size());
+        
+        {
+            Building b = buildings.get(0);
+            assertEquals(Streets.street, b.getType());
+            assertEquals(15, b.getX());
+            assertEquals(5, b.getY());
+            assertEquals(StreetType.Variant.T_INTERSECTION_4, b.getVariant());
+        }
+        {
+            Building b = buildings.get(1);
+            assertEquals(BusinessBuildings.cinema, b.getType());
+            assertEquals(16, b.getX());
+            assertEquals(5, b.getY());
+            assertEquals(ActualBuildingType.Variant.DEFAULT, b.getVariant());
+        }
     }
 }

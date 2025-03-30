@@ -1,5 +1,6 @@
 package org.exolin.citysim.storage;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import org.exolin.citysim.World;
@@ -15,6 +16,13 @@ public class WorldData
     
     @JsonProperty
     private final List<BuildingData> buildings;
+
+    @JsonCreator
+    public WorldData(@JsonProperty("gridSize") int gridSize, @JsonProperty("buildings") List<BuildingData> buildings)
+    {
+        this.gridSize = gridSize;
+        this.buildings = buildings;
+    }
 
     public WorldData(World world)
     {

@@ -31,7 +31,7 @@ public class WorldStorage
         objectMapper.writeValue(out, new WorldData(w));
     }
     
-    public World deserialize(InputStream in) throws IOException
+    public static World deserialize(InputStream in) throws IOException
     {
         WorldData worldData = objectMapper.readValue(in, WorldData.class);
         return worldData.createWorld();

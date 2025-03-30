@@ -21,6 +21,7 @@ import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
  *
@@ -57,7 +58,7 @@ public class WorldStorageTest
         Zone zone = new Zone(Zones.zone_residential, 16, 99, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, zone);
         String expected = "{\"type\":\"zone_residential\",\"x\":16,\"y\":99}";
-        assertEquals(expected, output);
+        JSONAssert.assertEquals(expected, output, false);
     }
     
     @Test

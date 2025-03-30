@@ -244,10 +244,10 @@ public final class World
         }
     }
     
-    private final Map<ZoneType, Integer> buildCount = new HashMap<>();
+    private final Map<ZoneType, Integer> buildSupply = new HashMap<>();
     {
         for(ZoneType t: Zones.BASIC_ZONES)
-            buildCount.put(t, 0);
+            buildSupply.put(t, 0);
     }
     
     private void updateBuildCount(Building building, boolean up)
@@ -256,7 +256,9 @@ public final class World
         if(type == null)
             return;
         
-        buildCount.computeIfPresent(type, (k, v) -> v+(up?+building.getSupply():-building.getSupply()));
+        int factor = up ? +1 : -1;
+        
+        buildSupply.computeIfPresent(type, (k, v) -> v+factor*building.getSupply());
     }
 
     public void update()

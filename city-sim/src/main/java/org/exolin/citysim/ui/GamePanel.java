@@ -28,6 +28,7 @@ import javax.swing.Timer;
 import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.ui.Utils.brighter;
@@ -59,19 +60,21 @@ public final class GamePanel extends JComponent
     
     public Map<String, List<Action>> getActions()
     {
+        GetWorld getWorld = () -> world;
+        
         Map<String, List<Action>> actions = new LinkedHashMap<>();
         
         List<Action> sactions = new ArrayList<>();
         sactions.add(Action.NONE);
-        sactions.add(new TearDownAction(world));
-        sactions.add(new StreetBuilder(world));
+        sactions.add(new TearDownAction(getWorld));
+        sactions.add(new StreetBuilder(getWorld));
         actions.put("Special", sactions);
         
         {
             List<Action> zoneActions = new ArrayList<>();
-            zoneActions.add(new ZonePlacement(world, Zones.zone_residential));
-            zoneActions.add(new ZonePlacement(world, Zones.zone_business));
-            zoneActions.add(new ZonePlacement(world, Zones.zone_industrial));
+            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_residential));
+            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_business));
+            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_industrial));
             actions.put("Zones", zoneActions);
         }
         
@@ -84,7 +87,7 @@ public final class GamePanel extends JComponent
             if(!actions.containsKey(categoryName))
                 actions.put(categoryName, new ArrayList<>());
             
-            actions.get(categoryName).add(new PlaceBuilding(world, type));
+            actions.get(categoryName).add(new PlaceBuilding(getWorld, type));
         }
         
         return actions;
@@ -575,6 +578,7 @@ public final class GamePanel extends JComponent
         
         this.world = world;
         this.worldFile = worldFile;
+        setAction(Action.NONE);
         repaint();
     }
     

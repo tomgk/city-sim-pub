@@ -3,6 +3,7 @@ package org.exolin.citysim.ui;
 import java.awt.Image;
 import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
 
 /**
@@ -13,7 +14,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
 {
     private final BuildingType building;
 
-    public ZonePlacement(World world, BuildingType building)
+    public ZonePlacement(GetWorld world, BuildingType building)
     {
         super(world);
         this.building = building;
@@ -34,6 +35,8 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
+        World world = getWorld.get();
+        
         for(int y=0;y<marking.height;++y)
         {
             for(int x=0;x<marking.width;++x)

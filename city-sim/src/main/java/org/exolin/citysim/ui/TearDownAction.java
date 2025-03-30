@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
 
 /**
@@ -13,7 +14,7 @@ import org.exolin.citysim.World;
  */
 public class TearDownAction extends AreaAction implements Action
 {
-    public TearDownAction(World world)
+    public TearDownAction(GetWorld world)
     {
         super(world);
     }
@@ -21,6 +22,8 @@ public class TearDownAction extends AreaAction implements Action
     @Override
     protected void performAction(Rectangle marking)
     {
+        World world = this.getWorld.get();
+        
         for(int y=0;y<marking.height;++y)
         {
             for(int x=0;x<marking.width;++x)

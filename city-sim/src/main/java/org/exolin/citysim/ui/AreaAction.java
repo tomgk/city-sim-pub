@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
 
 /**
@@ -10,13 +11,13 @@ import org.exolin.citysim.World;
  */
 public abstract class AreaAction implements Action
 {
-    protected final World world;
+    protected final GetWorld getWorld;
     private Point start;
     private Rectangle marking;
 
-    public AreaAction(World world)
+    public AreaAction(GetWorld world)
     {
-        this.world = world;
+        this.getWorld = world;
     }
     
     @Override
@@ -65,6 +66,8 @@ public abstract class AreaAction implements Action
 
     private void removeOutSideWorldSelection()
     {
+        World world = getWorld.get();
+        
         if(marking.x < 0)
         {
             marking.width -= Math.abs(marking.x);

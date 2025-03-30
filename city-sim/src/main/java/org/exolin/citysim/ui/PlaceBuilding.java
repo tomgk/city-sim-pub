@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
-import org.exolin.citysim.World;
+import org.exolin.citysim.GetWorld;
 
 /**
  *
@@ -12,11 +12,11 @@ import org.exolin.citysim.World;
  */
 public class PlaceBuilding implements BuildingAction
 {
-    private final World world;
+    private final GetWorld world;
     private final BuildingType type;
     private final Rectangle marking = new Rectangle();
 
-    public PlaceBuilding(World world, BuildingType type)
+    public PlaceBuilding(GetWorld world, BuildingType type)
     {
         this.world = world;
         this.type = type;
@@ -43,7 +43,7 @@ public class PlaceBuilding implements BuildingAction
     @Override
     public void mouseDown(Point gridPoint)
     {
-        world.addBuilding(type, marking.x, marking.y);
+        world.get().addBuilding(type, marking.x, marking.y);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
 import static org.exolin.citysim.bt.Streets.street;
@@ -14,13 +15,13 @@ import static org.exolin.citysim.bt.Streets.street;
  */
 public class StreetBuilder implements BuildingAction
 {
-    private final World world;
+    private final GetWorld getWorld;
     private Point start;
     private Rectangle marking;
 
-    public StreetBuilder(World world)
+    public StreetBuilder(GetWorld getWorld)
     {
-        this.world = world;
+        this.getWorld = getWorld;
     }
 
     @Override
@@ -91,6 +92,8 @@ public class StreetBuilder implements BuildingAction
     @Override
     public void releaseMouse(Point gridPoint)
     {
+        World world = this.getWorld.get();
+        
         int diffX;
         int diffY;
         int len;

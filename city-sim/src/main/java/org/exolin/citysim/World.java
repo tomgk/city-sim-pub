@@ -25,7 +25,7 @@ public final class World
     
     private long lastChange = System.currentTimeMillis();
     
-    private final int gridSize = 30;
+    private final int gridSize;
     
     public int getGridSize()
     {
@@ -36,7 +36,17 @@ public final class World
     
     private World()
     {
-        
+        this(30);
+    }
+    
+    private World(int gridSize)
+    {
+        this.gridSize = gridSize;
+    }
+    
+    public static World create(int gridSize)
+    {
+        return new World(gridSize);
     }
 
     public static World Empty()

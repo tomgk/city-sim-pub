@@ -35,4 +35,14 @@ public class WorldData
     {
         return gridSize;
     }
+
+    public World createWorld()
+    {
+        World w = World.create(gridSize);
+        
+        for(BuildingData bd : buildings)
+            bd.createBuilding(w);
+        
+        return w;
+    }
 }

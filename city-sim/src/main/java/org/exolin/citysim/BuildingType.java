@@ -6,6 +6,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import org.exolin.citysim.ui.Utils;
 
@@ -31,6 +32,15 @@ public abstract class BuildingType<B, E extends Enum<E>>
     public static List<BuildingType> types()
     {
         return instances;
+    }
+    
+    public static BuildingType<?, ?> getByName(String name)
+    {
+        Objects.requireNonNull(name);
+        return instances.stream()
+                .filter(b -> b.name.equals(name))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("no building type "+name));
     }
     
     public abstract B createBuilding(int x, int y, E variant);

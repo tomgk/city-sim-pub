@@ -136,11 +136,13 @@ public class WorldStorageTest
         World w = World.Empty();
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, StreetType.Variant.T_INTERSECTION_4);
+        w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
                             "gridSize":30,
                             "buildings":[
+                                {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
                                 {"type":"cinema","x":16,"y":5}
                             ]
@@ -156,6 +158,7 @@ public class WorldStorageTest
                           {
                             "gridSize":30,
                             "buildings":[
+                                {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
                                 {"type":"cinema","x":16,"y":5}
                             ]
@@ -168,17 +171,25 @@ public class WorldStorageTest
         assertEquals(30, w.getGridSize());
         
         List<Building> buildings = w.getBuildings();
-        assertEquals(2, buildings.size());
+        assertEquals(3, buildings.size());
         
         {
             Building b = buildings.get(0);
+            assertEquals(Zones.zone_business, b.getType());
+            assertEquals(15, b.getX());
+            assertEquals(4, b.getY());
+            assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());
+        }
+        
+        {
+            Building b = buildings.get(1);
             assertEquals(Streets.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
             assertEquals(StreetType.Variant.T_INTERSECTION_4, b.getVariant());
         }
         {
-            Building b = buildings.get(1);
+            Building b = buildings.get(2);
             assertEquals(BusinessBuildings.cinema, b.getType());
             assertEquals(16, b.getX());
             assertEquals(5, b.getY());

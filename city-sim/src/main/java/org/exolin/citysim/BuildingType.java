@@ -116,4 +116,10 @@ public abstract class BuildingType<B, E extends Enum<E>>
     {
         return Utils.brighter(images.get(variant));
     }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName()+"["+name+"]";
+    }
 }

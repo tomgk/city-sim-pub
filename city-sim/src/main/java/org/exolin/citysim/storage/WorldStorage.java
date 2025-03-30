@@ -28,7 +28,7 @@ public class WorldStorage
     
     public static void serialize(World w, OutputStream out) throws IOException
     {
-        objectMapper.writeValue(out, new WorldData(w));
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(out, new WorldData(w));
     }
     
     public static World deserialize(InputStream in) throws IOException

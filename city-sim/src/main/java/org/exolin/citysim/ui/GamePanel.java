@@ -58,9 +58,28 @@ public final class GamePanel extends JComponent
     private long lastPaint;
     private final Timer repaintTimer;
     
+    private final WorldHolder worldHolder;
+    
+    static final class WorldHolder implements GetWorld
+    {
+        private World world;
+        private Path worldFile;
+
+        public WorldHolder(World world)
+        {
+            this.world = world;
+        }
+
+        @Override
+        public World get()
+        {
+            return world;
+        }
+    }
+    
     public Map<String, List<Action>> getActions()
     {
-        GetWorld getWorld = () -> world;
+        GetWorld getWorld = worldHolder;
         
         Map<String, List<Action>> actions = new LinkedHashMap<>();
         
@@ -161,7 +180,7 @@ public final class GamePanel extends JComponent
 
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
-        this.world = world;
+        this.worldHolder = new WorldHolder(world);
         this.listener = listener;
         setBackground(Color.black);
         
@@ -235,6 +254,7 @@ public final class GamePanel extends JComponent
     
     private synchronized void update()
     {
+        World world = worldHolder.get();
         world.update();
         long u = world.getLastChange();
         if(u >= lastPaint)
@@ -251,6 +271,8 @@ public final class GamePanel extends JComponent
         //doesnt work
         if(false)
         {
+            World world = worldHolder.get();
+            
             //issue: ignores current position, just adds
             double zoomFactor = getZoomFactor();
             xoffset += 1/zoomFactor * world.getGridSize();
@@ -350,7 +372,7 @@ public final class GamePanel extends JComponent
             g.drawString("Zoom: "+zoom+" | "+f, 0, start);
             g.drawString("Offset: "+xoffset+"/"+yoffset, 0, start + lineHeight * 1);
             g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
-            Building b = world.getBuildingAt(currentGridPos.x, currentGridPos.y);
+            Building b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
             g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
         }
     }
@@ -366,6 +388,8 @@ public final class GamePanel extends JComponent
      */
     public void transform(double dim, double grid_x, double grid_y, Point drawPoint)
     {
+        World world = worldHolder.get();
+        
         double SCREEN_WIDTH = dim;
         double SCREEN_HEIGHT = dim/FACTOR;
         
@@ -388,6 +412,8 @@ public final class GamePanel extends JComponent
     
     public void transformBack(double dim, double screen_x, double screen_y, Point gridPoint)
     {
+        World world = worldHolder.get();
+        
         double SCREEN_WIDTH = dim;
         double SCREEN_HEIGHT = dim/FACTOR;
         
@@ -429,6 +455,8 @@ public final class GamePanel extends JComponent
     
     private void drawColorGrid(Graphics2D g, int dim)
     {
+        World world = worldHolder.get();
+        
         Color[] color = {Color.red, Color.green, Color.blue};
         int c = 0;
 
@@ -462,6 +490,8 @@ public final class GamePanel extends JComponent
     
     private void drawNormalGrid(Graphics2D g, int dim)
     {
+        World world = worldHolder.get();
+        
         g.setColor(Color.orange.darker().darker());
         g.setStroke(new BasicStroke(10));
 
@@ -487,6 +517,8 @@ public final class GamePanel extends JComponent
     
     private void drawBuildings(Graphics2D g, int dim)
     {
+        World world = worldHolder.get();
+        
         g.setStroke(new BasicStroke(1));
         
         Rectangle r = null;
@@ -553,22 +585,19 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
-    private World world;
-    private Path worldFile;
-
     public World getWorld()
     {
-        return world;
+        return worldHolder.world;
     }
 
     public Path getWorldFile()
     {
-        return worldFile;
+        return worldHolder.worldFile;
     }
 
     public void setWorldFile(Path worldFile)
     {
-        this.worldFile = worldFile;
+        worldHolder.worldFile = worldFile;
     }
 
     public void setWorld(World world, Path worldFile)
@@ -576,14 +605,16 @@ public final class GamePanel extends JComponent
         Objects.requireNonNull(world);
         //worldFile can be null
         
-        this.world = world;
-        this.worldFile = worldFile;
+        worldHolder.world = world;
+        worldHolder.worldFile = worldFile;
         setAction(Action.NONE);
         repaint();
     }
     
     private void drawItem(Graphics2D g, int dim, int x, int y, Image img, int size)
     {
+        World world = worldHolder.get();
+        
         Point p = new Point();
         
         transform(dim, size * 0.5 + x, size * -0.5 + y, p);
@@ -616,6 +647,8 @@ public final class GamePanel extends JComponent
     
     private void draw2(Graphics2D g, int dim)
     {
+        World world = worldHolder.get();
+        
         double s = (double)dim /  world.getGridSize() / FACTOR;
         
         for(int i = 0; i< world.getGridSize();++i)

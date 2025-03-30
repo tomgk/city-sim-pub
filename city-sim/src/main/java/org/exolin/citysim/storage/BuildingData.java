@@ -13,6 +13,7 @@ import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.World;
+import org.exolin.citysim.Zone;
 
 /**
  *
@@ -68,6 +69,8 @@ public abstract class BuildingData
             return new StreetData((Street)b);
         else if(b.getClass() == ActualBuilding.class)
             return new ActualBuildingData((ActualBuilding)b);
+        else if(b.getClass() == Zone.class)
+            return new ZoneData((Zone)b);
         else
             throw new UnsupportedOperationException(b.getClass().getName());
     }
@@ -78,6 +81,8 @@ public abstract class BuildingData
             return StreetData.class;
         else if(buildingClass == ActualBuilding.class)
             return ActualBuildingData.class;
+        else if(buildingClass == Zone.class)
+            return ZoneData.class;
         else
             throw new UnsupportedOperationException(buildingClass.getName());
     }

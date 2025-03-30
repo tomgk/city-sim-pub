@@ -13,8 +13,11 @@ import org.exolin.citysim.Building;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
+import org.exolin.citysim.Zone;
+import org.exolin.citysim.ZoneType;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,34 @@ public class WorldStorageTest
         return new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
     }
     
+    private Building getBuilding(World w)
+    {
+        assertEquals(1, w.getBuildings().size());
+        return w.getBuildings().get(0);
+    }
+    
+    @Test
+    public void testSerializeZone() throws IOException
+    {
+        Zone zone = new Zone(Zones.zone_residential, 16, 99, ZoneType.Variant.DEFAULT);
+        String output = serialize(WorldStorage::serialize, zone);
+        String expected = "{\"type\":\"zone_residential\",\"x\":16,\"y\":99}";
+        assertEquals(expected, output);
+    }
+    
+    @Test
+    public void testDeserializeZone() throws IOException
+    {
+        World w = World.create(30);
+        InputStream in = createInputStream("{\"type\":\"zone_residential\",\"x\":16,\"y\":5}");
+        WorldStorage.deserialize(in, w);
+        Building b = getBuilding(w);
+        assertEquals(Zones.zone_residential, b.getType());
+        assertEquals(16, b.getX());
+        assertEquals(5, b.getY());
+        assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());
+    }
+    
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
@@ -49,12 +80,6 @@ public class WorldStorageTest
         String output = serialize(WorldStorage::serialize, building);
         String expected = "{\"type\":\"cinema\",\"x\":16,\"y\":99}";
         assertEquals(expected, output);
-    }
-    
-    private Building getBuilding(World w)
-    {
-        assertEquals(1, w.getBuildings().size());
-        return w.getBuildings().get(0);
     }
     
     @Test

@@ -218,8 +218,10 @@ public final class GamePanel extends JComponent
             synchronized (GamePanel.this)
             {
                 execute(() -> {
-                    world.update();
-                    long u = world.getLastChange();
+                    World world_ = worldHolder.get();
+                    
+                    world_.update();
+                    long u = world_.getLastChange();
                     if(u >= lastPaint)
                     {
                         //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");

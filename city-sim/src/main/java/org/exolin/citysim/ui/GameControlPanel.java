@@ -1,6 +1,17 @@
 package org.exolin.citysim.ui;
 
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import org.exolin.citysim.World;
+import org.exolin.citysim.storage.WorldStorage;
 
 /**
  *
@@ -9,6 +20,27 @@ import java.awt.event.KeyEvent;
 public class GameControlPanel extends javax.swing.JPanel
 {
     private GamePanel panel;
+    private final JFileChooser fileChooser = new JFileChooser(new File("./saves"));
+    {
+        fileChooser.setFileFilter(new FileFilter()
+        {
+            @Override
+            public String getDescription()
+            {
+                return "Save files (*.cs)";
+            }
+
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".cs");
+                }
+            }
+         });
+    }
     
     /**
      * Creates new form GameData
@@ -40,6 +72,8 @@ public class GameControlPanel extends javax.swing.JPanel
         keyRightLabel = new javax.swing.JLabel();
         zoomInLabel = new javax.swing.JLabel();
         zoomOutLabel = new javax.swing.JLabel();
+        saveLabel = new javax.swing.JLabel();
+        loadLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -104,6 +138,24 @@ public class GameControlPanel extends javax.swing.JPanel
             }
         });
 
+        saveLabel.setText("Save");
+        saveLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                saveLabelMouseClicked(evt);
+            }
+        });
+
+        loadLabel.setText("Load");
+        loadLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                loadLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +175,11 @@ public class GameControlPanel extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zoomInLabel)
                     .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(523, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loadLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,8 +201,12 @@ public class GameControlPanel extends javax.swing.JPanel
                                         .addComponent(keyRightLabel)
                                         .addComponent(zoomInLabel))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(zoomOutLabel)))
+                                .addContainerGap()
+                                .addComponent(saveLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(zoomOutLabel)
+                                    .addComponent(loadLabel))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -187,12 +247,48 @@ public class GameControlPanel extends javax.swing.JPanel
         panel.onZoom(-1);
     }//GEN-LAST:event_zoomOutLabelMousePressed
 
+    private void saveLabelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_saveLabelMouseClicked
+    {//GEN-HEADEREND:event_saveLabelMouseClicked
+        Path file = panel.getWorldFile();
+        if(file == null)
+        {
+            if(fileChooser.showSaveDialog(panel) != JFileChooser.APPROVE_OPTION)
+                return;
+            
+            file = fileChooser.getSelectedFile().toPath();
+        }
+        
+        try(OutputStream out = Files.newOutputStream(file))
+        {
+            WorldStorage.serialize(panel.getWorld(), out);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_saveLabelMouseClicked
+
+    private void loadLabelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_loadLabelMouseClicked
+    {//GEN-HEADEREND:event_loadLabelMouseClicked
+        if(fileChooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION)
+        {
+            Path p = fileChooser.getSelectedFile().toPath();
+            try(InputStream in = Files.newInputStream(p))
+            {
+                World w = WorldStorage.deserialize(in);
+                panel.setWorld(w, p);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_loadLabelMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel keyBottomLabel;
     private javax.swing.JLabel keyLeftLabel;
     private javax.swing.JLabel keyRightLabel;
     private javax.swing.JLabel keyTopLabel;
+    private javax.swing.JLabel loadLabel;
     private javax.swing.JLabel resetPositionLabel;
+    private javax.swing.JLabel saveLabel;
     private javax.swing.JLabel zoomInLabel;
     private javax.swing.JLabel zoomOutLabel;
     // End of variables declaration//GEN-END:variables

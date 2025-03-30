@@ -18,10 +18,12 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -56,7 +58,7 @@ public final class GamePanel extends JComponent
     private boolean debugInfo = true;
     
     private long lastPaint;
-    private final Timer repaint;
+    private final Timer repaintTimer;
     
     public Map<String, List<Action>> getActions()
     {
@@ -212,7 +214,7 @@ public final class GamePanel extends JComponent
             }
         });
         
-        repaint = new Timer(10, (ActionEvent e) ->
+        repaintTimer = new Timer(10, (ActionEvent e) ->
         {
             synchronized (GamePanel.this)
             {
@@ -231,7 +233,7 @@ public final class GamePanel extends JComponent
     
     public void start()
     {
-        repaint.start();
+        repaintTimer.start();
     }
     
     private synchronized void update()
@@ -554,7 +556,33 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
-    private final World world;
+    private World world;
+    private Path worldFile;
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public Path getWorldFile()
+    {
+        return worldFile;
+    }
+
+    public void setWorldFile(Path worldFile)
+    {
+        this.worldFile = worldFile;
+    }
+
+    public void setWorld(World world, Path worldFile)
+    {
+        Objects.requireNonNull(world);
+        //worldFile can be null
+        
+        this.world = world;
+        this.worldFile = worldFile;
+        repaint();
+    }
     
     private void drawItem(Graphics2D g, int dim, int x, int y, Image img, int size)
     {

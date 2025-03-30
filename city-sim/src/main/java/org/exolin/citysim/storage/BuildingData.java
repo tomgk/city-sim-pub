@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
-import java.util.Objects;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;

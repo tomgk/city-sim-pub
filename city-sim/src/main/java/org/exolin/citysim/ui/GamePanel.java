@@ -16,8 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,7 +24,6 @@ import java.util.Map;
 import java.util.Objects;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
@@ -124,10 +121,7 @@ public final class GamePanel extends JComponent
         try{
             b.run();
         }catch(Exception e){
-            e.printStackTrace(System.out);
-            StringWriter out = new StringWriter();
-            e.printStackTrace(new PrintWriter(out));
-            JOptionPane.showMessageDialog(this, out.toString(), "Unexpected Exception", JOptionPane.ERROR_MESSAGE);
+            ErrorDisplay.show(this, e);
         }
     }
     

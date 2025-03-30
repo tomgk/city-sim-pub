@@ -19,7 +19,6 @@ import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 

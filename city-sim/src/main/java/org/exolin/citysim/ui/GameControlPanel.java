@@ -2,7 +2,6 @@ package org.exolin.citysim.ui;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -262,7 +261,7 @@ public class GameControlPanel extends javax.swing.JPanel
         {
             WorldStorage.serialize(panel.getWorld(), out);
         }catch(IOException e){
-            e.printStackTrace();
+            ErrorDisplay.show(this, e);
         }
     }//GEN-LAST:event_saveLabelMouseClicked
 
@@ -276,7 +275,7 @@ public class GameControlPanel extends javax.swing.JPanel
                 World w = WorldStorage.deserialize(in);
                 panel.setWorld(w, p);
             }catch(IOException e){
-                e.printStackTrace();
+                ErrorDisplay.show(this, e);
             }
         }
     }//GEN-LAST:event_loadLabelMouseClicked

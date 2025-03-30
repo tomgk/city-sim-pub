@@ -646,4 +646,10 @@ public final class GamePanel extends JComponent
         g.drawLine(dim, dim/FACTOR/2, dim/2, dim/FACTOR);
         g.drawLine(dim/2, dim/FACTOR, 0, dim/FACTOR/2);
     }
+
+    public void toggleDebug()
+    {
+        debugInfo = !debugInfo;
+        repaint();
+    }
 }

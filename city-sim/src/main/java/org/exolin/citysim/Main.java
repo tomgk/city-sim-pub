@@ -76,6 +76,10 @@ public class Main
                     case KeyEvent.VK_ESCAPE:
                         gp.setAction(Action.NONE);
                         break;
+                        
+                    case KeyEvent.VK_F9:
+                        gp.toggleDebug();
+                        break;
                     
                     case KeyEvent.VK_F10:
                         selector.setVisible(!selector.isVisible());

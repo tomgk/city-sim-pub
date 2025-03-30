@@ -15,7 +15,7 @@ public class WorldTest
     @Test
     public void testGetBuilding()
     {
-        World w = World.Empty();
+        World w = new World(30);
         
         assertEquals(3, BusinessBuildings.cinema.getSize());
         

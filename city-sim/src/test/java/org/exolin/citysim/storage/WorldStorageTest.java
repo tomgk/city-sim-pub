@@ -13,6 +13,7 @@ import org.exolin.citysim.Building;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
+import org.exolin.citysim.Worlds;
 import org.exolin.citysim.Zone;
 import org.exolin.citysim.ZoneType;
 import org.exolin.citysim.bt.BusinessBuildings;
@@ -65,7 +66,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeZone() throws IOException
     {
-        World w = World.create(30);
+        World w = new World(30);
         InputStream in = createInputStream("""
                                            {"type":"zone_residential","x":16,"y":5}
                                            """);
@@ -91,7 +92,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeActualBuilding_Default() throws IOException
     {
-        World w = World.create(30);
+        World w = new World(30);
         InputStream in = createInputStream("""
                                            {"type":"cinema","x":16,"y":5}
                                            """);
@@ -117,7 +118,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeStreet() throws IOException
     {
-        World w = World.create(30);
+        World w = new World(30);
         InputStream in = createInputStream("""
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);
@@ -132,7 +133,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeWorld() throws IOException
     {
-        World w = World.Empty();
+        World w = new World(30);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, StreetType.Variant.T_INTERSECTION_4);
         w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);

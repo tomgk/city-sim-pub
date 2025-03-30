@@ -32,7 +32,7 @@ public class Main
         
         SelectorPanel sp = new SelectorPanel();
         
-        GamePanel gp = new GamePanel(World.World2(), f, new GamePanelListener()
+        GamePanel gp = new GamePanel(Worlds.World2(), f, new GamePanelListener()
         {
             @Override
             public void created(GamePanel panel)

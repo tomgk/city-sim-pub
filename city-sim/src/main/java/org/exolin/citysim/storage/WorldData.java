@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import org.exolin.citysim.World;
+import org.exolin.citysim.Worlds;
 
 /**
  *
@@ -46,7 +47,7 @@ public class WorldData
 
     public World createWorld()
     {
-        World w = World.create(gridSize);
+        World w = new World(gridSize);
         
         for(BuildingData bd : buildings)
             bd.createBuilding(w);

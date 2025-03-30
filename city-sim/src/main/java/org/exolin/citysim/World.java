@@ -52,7 +52,7 @@ public final class World
         return getBuildingAt(x, y) != null;
     }
 
-    public void removeBuildingAt(int x, int y)
+    public void removeBuildingAt(int x, int y, boolean removeZoning)
     {
         //System.out.println("Remove "+x+"/"+y);
         for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
@@ -60,13 +60,29 @@ public final class World
             Building b = it.next();
             if(b.isOccupying(x, y))
             {
-                it.remove();
+                //removeZoning mode keeps streets
+                if(b instanceof Street && removeZoning)
+                    continue;
                 
                 ZoneType zoneType = b.getZoneType();
-                if(zoneType != null)
-                    placeZone(zoneType, b.getX(), b.getY(), b.getSize());
                 
-                updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+                //if remove zone and it is a zone, continue
+                if(removeZoning && b instanceof Zone)
+                    ;
+                //keep building if not belonging to a zone
+                //but it is about removing zoning
+                else if(zoneType == null && removeZoning)
+                    continue;
+                
+                it.remove();
+                
+                if(!removeZoning)
+                {
+                    if(zoneType != null)
+                        placeZone(zoneType, b.getX(), b.getY(), b.getSize());
+
+                    updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+                }
                 return;
             }
         }

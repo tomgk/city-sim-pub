@@ -68,7 +68,8 @@ public final class GamePanel extends JComponent
         
         List<Action> sactions = new ArrayList<>();
         sactions.add(Action.NONE);
-        sactions.add(new TearDownAction(getWorld));
+        sactions.add(new TearDownAction(getWorld, false));
+        sactions.add(new TearDownAction(getWorld, true));
         sactions.add(new StreetBuilder(getWorld));
         actions.put("Special", sactions);
         

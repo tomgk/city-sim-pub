@@ -14,9 +14,12 @@ import org.exolin.citysim.World;
  */
 public class TearDownAction extends AreaAction implements Action
 {
-    public TearDownAction(GetWorld world)
+    private final boolean removeZoning;
+    
+    public TearDownAction(GetWorld world, boolean removeZoning)
     {
         super(world);
+        this.removeZoning = removeZoning;
     }
 
     @Override
@@ -28,7 +31,7 @@ public class TearDownAction extends AreaAction implements Action
         {
             for(int x=0;x<marking.width;++x)
             {
-                world.removeBuildingAt(marking.x + x, marking.y + y);
+                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning);
             }
         }
     }
@@ -48,7 +51,7 @@ public class TearDownAction extends AreaAction implements Action
     @Override
     public String getName()
     {
-        return "tear down";
+        return removeZoning ? "remove zoning" : "tear down";
     }
     
     private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(Utils.loadImage("tools/bulldozer"), new Point(0, 27), "bulldozer");

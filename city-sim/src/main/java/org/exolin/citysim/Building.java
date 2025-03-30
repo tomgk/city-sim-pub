@@ -111,6 +111,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return null;
     }
 
+    /**
+     * @return how much supply this building gives to the demand
+     */
     public int getSupply()
     {
         //assume high rises

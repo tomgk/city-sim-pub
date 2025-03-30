@@ -57,7 +57,9 @@ public class WorldStorageTest
     {
         Zone zone = new Zone(Zones.zone_residential, 16, 99, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, zone);
-        String expected = "{\"type\":\"zone_residential\",\"x\":16,\"y\":99}";
+        String expected = """
+                          {"type":"zone_residential","x":16,"y":99}
+                          """;
         JSONAssert.assertEquals(expected, output, false);
     }
     
@@ -65,7 +67,9 @@ public class WorldStorageTest
     public void testDeserializeZone() throws IOException
     {
         World w = World.create(30);
-        InputStream in = createInputStream("{\"type\":\"zone_residential\",\"x\":16,\"y\":5}");
+        InputStream in = createInputStream("""
+                                           {"type":"zone_residential","x":16,"y":5}
+                                           """);
         WorldStorage.deserialize(in, w);
         Building b = getBuilding(w);
         assertEquals(Zones.zone_residential, b.getType());
@@ -79,7 +83,9 @@ public class WorldStorageTest
     {
         ActualBuilding building = new ActualBuilding(BusinessBuildings.cinema, 16, 99, ActualBuildingType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
-        String expected = "{\"type\":\"cinema\",\"x\":16,\"y\":99}";
+        String expected = """
+                          {"type":"cinema","x":16,"y":99}
+                          """;
         JSONAssert.assertEquals(expected, output, false);
     }
     
@@ -87,7 +93,9 @@ public class WorldStorageTest
     public void testDeserializeActualBuilding_Default() throws IOException
     {
         World w = World.create(30);
-        InputStream in = createInputStream("{\"type\":\"cinema\",\"x\":16,\"y\":5}");
+        InputStream in = createInputStream("""
+                                           {"type":"cinema","x":16,"y":5}
+                                           """);
         WorldStorage.deserialize(in, w);
         Building b = getBuilding(w);
         assertEquals(BusinessBuildings.cinema, b.getType());
@@ -101,7 +109,9 @@ public class WorldStorageTest
     {
         Street street = new Street(Streets.street, 16, 99, StreetType.Variant.T_INTERSECTION_4);
         String output = serialize(WorldStorage::serialize, street);
-        String expected = "{\"type\":\"street\",\"x\":16,\"y\":99,\"variant\":\"t_intersection_4\"}";
+        String expected = """
+                          {"type":"street","x":16,"y":99,"variant":"t_intersection_4"}
+                          """;
         JSONAssert.assertEquals(expected, output, false);
     }
     
@@ -109,7 +119,9 @@ public class WorldStorageTest
     public void testDeserializeStreet() throws IOException
     {
         World w = World.create(30);
-        InputStream in = createInputStream("{\"type\":\"street\",\"x\":16,\"y\":5,\"variant\":\"t_intersection_4\"}");
+        InputStream in = createInputStream("""
+                                           {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
+                                           """);
         WorldStorage.deserialize(in, w);
         Building b = getBuilding(w);
         assertEquals(Streets.street, b.getType());

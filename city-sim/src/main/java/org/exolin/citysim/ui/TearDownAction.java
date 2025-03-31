@@ -31,7 +31,7 @@ public class TearDownAction extends AreaAction implements Action
         {
             for(int x=0;x<marking.width;++x)
             {
-                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning);
+                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning, !removeZoning);
             }
         }
     }

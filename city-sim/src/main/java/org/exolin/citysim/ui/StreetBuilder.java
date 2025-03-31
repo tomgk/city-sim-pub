@@ -118,8 +118,7 @@ public class StreetBuilder implements BuildingAction
             int x = marking.x + diffX * i;
             int y = marking.y + diffY * i;
 
-            if(world.containsBuilding(x, y))
-                continue;
+            world.removeBuildingAt(x, y, true, true);
 
             world.addBuilding(street, x, y, variant);
         }

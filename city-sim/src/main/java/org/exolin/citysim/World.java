@@ -52,7 +52,7 @@ public final class World
         return getBuildingAt(x, y) != null;
     }
 
-    public void removeBuildingAt(int x, int y, boolean removeZoning)
+    public void removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {
         //System.out.println("Remove "+x+"/"+y);
         for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
@@ -76,7 +76,7 @@ public final class World
                 
                 it.remove();
                 
-                if(!removeZoning)
+                if(replaceWithZoning)
                 {
                     if(zoneType != null)
                         placeZone(zoneType, b.getX(), b.getY(), b.getSize());

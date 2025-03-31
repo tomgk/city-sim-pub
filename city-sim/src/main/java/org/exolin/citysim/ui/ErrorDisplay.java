@@ -3,6 +3,7 @@ package org.exolin.citysim.ui;
 import java.awt.Component;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,8 +12,12 @@ import javax.swing.JOptionPane;
  */
 public class ErrorDisplay
 {
+    @SuppressWarnings("ThrowableResultIgnored")
     static void show(Component parent, Exception e)
     {
+        Objects.requireNonNull(parent);
+        Objects.requireNonNull(e);
+        
         if(e instanceof OutOfGridException)
             return;
         

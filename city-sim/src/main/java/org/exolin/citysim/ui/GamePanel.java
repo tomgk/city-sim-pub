@@ -216,20 +216,7 @@ public final class GamePanel extends JComponent
         
         repaintTimer = new Timer(10, (ActionEvent e) ->
         {
-            synchronized (GamePanel.this)
-            {
-                execute(() -> {
-                    World world_ = worldHolder.get();
-                    
-                    world_.update();
-                    long u = world_.getLastChange();
-                    if(u >= lastPaint)
-                    {
-                        //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
-                        repaint();
-                    }
-                });
-            }
+            update();
         });
     }
     
@@ -240,14 +227,17 @@ public final class GamePanel extends JComponent
     
     private synchronized void update()
     {
-        World world = worldHolder.get();
-        world.update();
-        long u = world.getLastChange();
-        if(u >= lastPaint)
-        {
-            //System.out.println("Timeout repaint");
-            repaint();
-        }
+        execute(() -> {
+            World world_ = worldHolder.get();
+
+            world_.update();
+            long u = world_.getLastChange();
+            if(u >= lastPaint)
+            {
+                //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
+                repaint();
+            }
+        });
     }
     
     void onZoom(int amount)

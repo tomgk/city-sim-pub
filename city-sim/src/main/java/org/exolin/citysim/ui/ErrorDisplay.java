@@ -13,6 +13,9 @@ public class ErrorDisplay
 {
     static void show(Component parent, Exception e)
     {
+        if(e instanceof OutOfGridException)
+            return;
+        
         e.printStackTrace(System.out);
         StringWriter out = new StringWriter();
         e.printStackTrace(new PrintWriter(out));

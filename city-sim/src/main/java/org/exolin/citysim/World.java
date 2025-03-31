@@ -10,6 +10,7 @@ import java.util.Map;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.ui.OutOfGridException;
 
 /**
  *
@@ -103,7 +104,7 @@ public final class World
     public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)
     {
         if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
-            throw new IllegalArgumentException("out of grid");
+            throw new OutOfGridException("out of grid");
         
         B b = type.createBuilding(x, y, variant);
         buildings.add(b);

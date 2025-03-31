@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.awt.image.BufferedImage;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +17,9 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     
     private final List<ActualBuildingType> buildings = new ArrayList<>();
     
-    public ZoneType(String name, BufferedImage image, int size)
+    public ZoneType(String name, Animation animation, int size)
     {
-        super(name, image, size);
+        super(name, animation, size);
     }
     
     void addBuilding(ActualBuildingType building)

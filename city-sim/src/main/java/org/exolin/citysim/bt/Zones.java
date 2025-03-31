@@ -1,8 +1,8 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
+import org.exolin.citysim.Animation;
 import org.exolin.citysim.ZoneType;
-import static org.exolin.citysim.ui.Utils.loadImage;
 
 /**
  *
@@ -20,7 +20,7 @@ public class Zones
     
     private static ZoneType createZone(String name)
     {
-        return new ZoneType(name, loadImage(name), 1);
+        return new ZoneType(name, Animation.create(name), 1);
     }
 
     static void init()

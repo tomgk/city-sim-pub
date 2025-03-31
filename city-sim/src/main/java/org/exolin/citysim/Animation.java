@@ -21,7 +21,13 @@ public class Animation
         this.images = List.copyOf(images);
     }
     
-    public static Animation of(BufferedImage img)
+    public static Animation create(String name)
+    {
+        //todo: add other animation parts
+        return new Animation(List.of(Utils.loadImage(name)));
+    }
+    
+    public static Animation ofUnanimated(BufferedImage img)
     {
         return new Animation(List.of(img));
     }
@@ -48,7 +54,7 @@ public class Animation
                 .toList();
         
         return images.stream()
-                .map(Animation::of)
+                .map(Animation::ofUnanimated)
                 .toList();
     }
 }

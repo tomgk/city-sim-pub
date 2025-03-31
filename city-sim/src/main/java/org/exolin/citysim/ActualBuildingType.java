@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.awt.image.BufferedImage;
 import java.io.Reader;
 
 /**
@@ -16,9 +15,9 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     
     private final ZoneType zoneType;
     
-    public ActualBuildingType(String name, BufferedImage image, int size, ZoneType zoneType)
+    public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType)
     {
-        super(name, image, size);
+        super(name, animation, size);
         //zoneType is null if it can be placed directly by player
         this.zoneType = zoneType;
         if(zoneType != null)

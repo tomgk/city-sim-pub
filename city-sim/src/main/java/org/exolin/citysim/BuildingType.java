@@ -58,9 +58,9 @@ public abstract class BuildingType<B, E extends Enum<E>>
         return instances.stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
     }
     
-    public BuildingType(String name, BufferedImage image, int size)
+    public BuildingType(String name, Animation animation, int size)
     {
-        this(name, List.of(Animation.of(image)), size);
+        this(name, List.of(animation), size);
     }
 
     @SuppressWarnings("LeakingThisInConstructor")

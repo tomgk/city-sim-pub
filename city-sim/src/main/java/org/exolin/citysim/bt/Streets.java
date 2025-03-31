@@ -2,6 +2,7 @@ package org.exolin.citysim.bt;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+import org.exolin.citysim.Animation;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.ui.Utils;
 
@@ -23,7 +24,7 @@ public class Streets
                 .map(Utils::loadImage)
                 .toList();
         
-        return new StreetType(name, images, size);
+        return new StreetType(name, Animation.noAnimation(images), size);
     }
 
     static void init()

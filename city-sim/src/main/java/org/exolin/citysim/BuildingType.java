@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public abstract class BuildingType<B, E extends Enum<E>>
     
     private final Set<String> usedNames = new LinkedHashSet<>();
     private final String name;
-    private final List<BufferedImage> images;
+    private final List<Animation> images;
     private final int size;
     
     private static final List<BuildingType> instances = new ArrayList<>();
@@ -61,11 +60,11 @@ public abstract class BuildingType<B, E extends Enum<E>>
     
     public BuildingType(String name, BufferedImage image, int size)
     {
-        this(name, List.of(image), size);
+        this(name, List.of(Animation.of(image)), size);
     }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, List<BufferedImage> images, int size)
+    public BuildingType(String name, List<Animation> images, int size)
     {
         if(!usedNames.add(name))
             throw new IllegalArgumentException("duplicate ID");
@@ -92,7 +91,7 @@ public abstract class BuildingType<B, E extends Enum<E>>
             throw new IllegalArgumentException("invalid variant "+variant);
     }
 
-    public Image getImage(int version)
+    public Animation getImage(int version)
     {
         return images.get(version);
     }
@@ -114,7 +113,7 @@ public abstract class BuildingType<B, E extends Enum<E>>
 
     public BufferedImage getBrightImage(int variant)
     {
-        return Utils.brighter(images.get(variant));
+        return Utils.brighter(images.get(variant).getDefault());
     }
 
     @Override

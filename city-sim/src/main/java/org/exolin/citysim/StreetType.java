@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.awt.image.BufferedImage;
 import java.io.Reader;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class StreetType extends BuildingType<Street, StreetType.Variant>
         T_INTERSECTION_4,
     }
     
-    public StreetType(String name, List<BufferedImage> images, int size)
+    public StreetType(String name, List<Animation> images, int size)
     {
         super(name, images, size);
         

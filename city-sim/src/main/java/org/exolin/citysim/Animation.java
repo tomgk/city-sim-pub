@@ -3,6 +3,7 @@ package org.exolin.citysim;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import org.exolin.citysim.ui.Utils;
 
 /**
  *
@@ -40,8 +41,12 @@ public class Animation
         return images.get(0);
     }
 
-    public static List<Animation> noAnimation(List<BufferedImage> images)
+    public static List<Animation> noAnimation(List<String> variants)
     {
+        List<BufferedImage> images = variants.stream()
+                .map(Utils::loadImage)
+                .toList();
+        
         return images.stream()
                 .map(Animation::of)
                 .toList();

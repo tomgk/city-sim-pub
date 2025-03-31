@@ -20,11 +20,7 @@ public class Streets
     
     private static StreetType createStreetType(String name, List<String> variants, int size)
     {
-        List<BufferedImage> images = variants.stream()
-                .map(Utils::loadImage)
-                .toList();
-        
-        return new StreetType(name, Animation.noAnimation(images), size);
+        return new StreetType(name, Animation.noAnimation(variants), size);
     }
 
     static void init()

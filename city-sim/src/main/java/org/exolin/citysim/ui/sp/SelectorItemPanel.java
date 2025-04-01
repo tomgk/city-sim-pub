@@ -28,7 +28,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
         {
             BuildingType building = ba.getBuilding();
             
-            imageLabel.setIcon(new ImageIcon(building.getImage(BuildingType.DEFAULT_VARIANT).getDefault()));
+            imageLabel.setIcon(new ImageIcon(building.getDefaultImage()));
             imageLabel.setText("");
             nameLabel.setText(building.getName());
             sizeLabel.setText(building.getSize()+"x"+building.getSize());

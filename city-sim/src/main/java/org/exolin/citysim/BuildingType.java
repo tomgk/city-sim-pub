@@ -85,15 +85,15 @@ public abstract class BuildingType<B, E extends Enum<E>>
         return name;
     }
     
-    void checkVariant(Enum variant)
+    void checkVariant(E variant)
     {
         if(variant.ordinal() < 0 || variant.ordinal() >= images.size())
             throw new IllegalArgumentException("invalid variant "+variant);
     }
 
-    public Animation getImage(int version)
+    public Animation getImage(E version)
     {
-        return images.get(version);
+        return images.get(version.ordinal());
     }
 
     public int getSize()
@@ -103,7 +103,7 @@ public abstract class BuildingType<B, E extends Enum<E>>
     
     public BufferedImage getDefaultImage()
     {
-        return getImage(DEFAULT_VARIANT).getDefault();
+        return getImage(getVariantClass().getEnumConstants()[0]).getDefault();
     }
 
     public BufferedImage getBrightImage()

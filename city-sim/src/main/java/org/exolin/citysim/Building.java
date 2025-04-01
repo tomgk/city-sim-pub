@@ -34,7 +34,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
 
     public Image getImage()
     {
-        return type.getImage(variant.ordinal()).getDefault();
+        return type.getImage(variant).getDefault();
     }
     
     public int getSize()

@@ -30,6 +30,7 @@ import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
+import org.exolin.citysim.ZoneType;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
@@ -564,7 +565,12 @@ public final class GamePanel extends JComponent
     
     private void drawBuilding(Graphics2D g, int dim, Building b)
     {
-        drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
+        if(view == WorldView.ZONES && b.getZoneType() != null)
+        {
+            drawItemN(g, dim, b.getX(), b.getY(), b.getZoneType().getDefaultImage(), b.getSize());
+        }
+        else
+            drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
     }
     
     public World getWorld()
@@ -587,6 +593,17 @@ public final class GamePanel extends JComponent
         worldHolder.set(world, worldFile);
         setAction(Action.NONE);
         repaint();
+    }
+    
+    private void drawItemN(Graphics2D g, int dim, int x, int y, Image img, int size)
+    {
+        for(int yi=0;yi<size;++yi)
+        {
+            for(int xi=0;xi<size;++xi)
+            {
+                drawItem(g, dim, x+xi, y+yi, img, 1);
+            }
+        }
     }
     
     private void drawItem(Graphics2D g, int dim, int x, int y, Image img, int size)

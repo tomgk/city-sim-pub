@@ -100,6 +100,11 @@ public abstract class BuildingType<B, E extends Enum<E>>
     {
         return size;
     }
+    
+    public BufferedImage getDefaultImage()
+    {
+        return getImage(DEFAULT_VARIANT).getDefault();
+    }
 
     public BufferedImage getBrightImage()
     {

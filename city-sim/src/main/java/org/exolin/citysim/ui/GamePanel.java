@@ -62,6 +62,8 @@ public final class GamePanel extends JComponent
     
     private final GamePanelListener listener;
     private boolean colorGrid = false;
+    
+    private WorldView view = WorldView.OVERGROUND;
 
     public Map<String, List<Action>> getActions()
     {
@@ -553,11 +555,16 @@ public final class GamePanel extends JComponent
                 }
             }
             
-            drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
+            drawBuilding(g, dim, b);
         }
         
         if(scaleMarker)
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
+    }
+    
+    private void drawBuilding(Graphics2D g, int dim, Building b)
+    {
+        drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
     }
     
     public World getWorld()
@@ -640,6 +647,17 @@ public final class GamePanel extends JComponent
     public void toggleDebug()
     {
         debugInfo = !debugInfo;
+        repaint();
+    }
+
+    public WorldView getView()
+    {
+        return view;
+    }
+
+    public void setView(WorldView view)
+    {
+        this.view = view;
         repaint();
     }
 }

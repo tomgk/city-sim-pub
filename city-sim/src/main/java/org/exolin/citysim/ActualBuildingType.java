@@ -1,6 +1,7 @@
 package org.exolin.citysim;
 
 import java.io.Reader;
+import java.util.Objects;
 
 /**
  *
@@ -18,10 +19,8 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType)
     {
         super(name, animation, size);
-        //zoneType is null if it can be placed directly by player
-        this.zoneType = zoneType;
-        if(zoneType != null)
-            zoneType.addBuilding(this);
+        this.zoneType = Objects.requireNonNull(zoneType);
+        zoneType.addBuilding(this);
     }
     
     public ZoneType getZoneType()

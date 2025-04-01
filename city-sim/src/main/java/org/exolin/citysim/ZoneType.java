@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
 {
+    private final boolean userPlaceableZone;
+    
     public enum Variant
     {
         DEFAULT
@@ -17,9 +19,15 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     
     private final List<ActualBuildingType> buildings = new ArrayList<>();
     
-    public ZoneType(String name, Animation animation, int size)
+    public ZoneType(String name, Animation animation, int size, boolean userPlaceableZone)
     {
         super(name, animation, size);
+        this.userPlaceableZone = userPlaceableZone;
+    }
+
+    public boolean isUserPlaceableZone()
+    {
+        return userPlaceableZone;
     }
     
     void addBuilding(ActualBuildingType building)

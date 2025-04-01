@@ -1,7 +1,6 @@
 package org.exolin.citysim;
 
 import java.awt.image.BufferedImage;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,15 +42,6 @@ public abstract class BuildingType<B, E extends Enum<E>>
     }
     
     public abstract B createBuilding(int x, int y, E variant);
-    public B read(Reader reader)
-    {
-        if(true)
-            throw new UnsupportedOperationException("TODO");
-        
-        return readImpl(reader);
-    }
-    
-    protected abstract B readImpl(Reader reader);
 
     public static List<ActualBuildingType> actualBuildingTypes()
     {

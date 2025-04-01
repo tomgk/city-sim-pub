@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.Reader;
 import java.util.List;
 
 /**
@@ -42,11 +41,5 @@ public class StreetType extends BuildingType<Street, StreetType.Variant>
     public Street createBuilding(int x, int y, StreetType.Variant variant)
     {
         return new Street(this, x, y, variant);
-    }
-
-    @Override
-    protected Street readImpl(Reader reader)
-    {
-        throw new UnsupportedOperationException();
     }
 }

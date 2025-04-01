@@ -13,7 +13,6 @@ import org.exolin.citysim.Building;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.StreetType;
 import org.exolin.citysim.World;
-import org.exolin.citysim.Worlds;
 import org.exolin.citysim.Zone;
 import org.exolin.citysim.ZoneType;
 import org.exolin.citysim.bt.BusinessBuildings;

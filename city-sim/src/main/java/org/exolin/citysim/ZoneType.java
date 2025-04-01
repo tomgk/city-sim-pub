@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +57,5 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     public Zone createBuilding(int x, int y, Variant variant)
     {
         return new Zone(this, x, y, variant);
-    }
-
-    @Override
-    protected Zone readImpl(Reader reader)
-    {
-        throw new UnsupportedOperationException();
     }
 }

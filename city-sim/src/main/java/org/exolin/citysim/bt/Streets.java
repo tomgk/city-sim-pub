@@ -1,10 +1,8 @@
 package org.exolin.citysim.bt;
 
-import java.awt.image.BufferedImage;
 import java.util.List;
 import org.exolin.citysim.Animation;
 import org.exolin.citysim.StreetType;
-import org.exolin.citysim.ui.Utils;
 
 /**
  *

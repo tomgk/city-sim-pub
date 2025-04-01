@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.Reader;
 import java.util.Objects;
 
 /**
@@ -38,11 +37,5 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     public ActualBuilding createBuilding(int x, int y, Variant variant)
     {
         return new ActualBuilding(this, x, y, variant);
-    }
-
-    @Override
-    protected ActualBuilding readImpl(Reader reader)
-    {
-        throw new UnsupportedOperationException();
     }
 }

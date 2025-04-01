@@ -24,15 +24,20 @@ public final class World
     }
     
     private long lastChange = System.currentTimeMillis();
-    
     private final int gridSize;
+    private final List<Building> buildings = new ArrayList<>();
+    
+    private final Map<ZoneType, Integer> buildSupply = new HashMap<>();
+    {
+        for(ZoneType t: Zones.BASIC_ZONES)
+            buildSupply.put(t, 0);
+    }
     
     public int getGridSize()
     {
         return gridSize;
     }
     
-    private final List<Building> buildings = new ArrayList<>();
     
     public World(@JsonProperty("gridSize") int gridSize)
     {
@@ -203,12 +208,6 @@ public final class World
             updateBuildCount(b, false);
             addBuilding(bt, x, y);
         }
-    }
-    
-    private final Map<ZoneType, Integer> buildSupply = new HashMap<>();
-    {
-        for(ZoneType t: Zones.BASIC_ZONES)
-            buildSupply.put(t, 0);
     }
     
     private void updateBuildCount(Building building, boolean up)

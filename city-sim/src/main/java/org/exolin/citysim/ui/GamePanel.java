@@ -60,6 +60,9 @@ public final class GamePanel extends JComponent
     
     private final WorldHolder worldHolder;
     
+    private final GamePanelListener listener;
+    private boolean colorGrid = false;
+
     public Map<String, List<Action>> getActions()
     {
         GetWorld getWorld = worldHolder;
@@ -160,8 +163,6 @@ public final class GamePanel extends JComponent
         repaint();
     }
     
-    private final GamePanelListener listener;
-
     public GamePanel(World world, JFrame frame, GamePanelListener listener)
     {
         this.worldHolder = new WorldHolder(world);
@@ -406,8 +407,6 @@ public final class GamePanel extends JComponent
         gridPoint.x = (int)gridX - 2;
         gridPoint.y = (int)gridY - 2;
     }
-    
-    private boolean colorGrid = false;
     
     private void draw(Graphics2D g, int dim)
     {

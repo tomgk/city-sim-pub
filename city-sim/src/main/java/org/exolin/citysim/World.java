@@ -37,8 +37,7 @@ public final class World
     {
         return gridSize;
     }
-    
-    
+
     public World(@JsonProperty("gridSize") int gridSize)
     {
         this.gridSize = gridSize;

@@ -110,6 +110,15 @@ public final class World
         if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
             throw new OutOfGridException("out of grid");
         
+        int size = type.getSize();
+        for(int yi=0;yi<size;++yi)
+        {
+            for(int xi=0;xi<size;++xi)
+            {
+                removeBuildingAt(x, y, true, true);
+            }
+        }
+        
         B b = type.createBuilding(x, y, variant);
         buildings.add(b);
         buildings.sort(Comparator.comparing(Building::getLevel));

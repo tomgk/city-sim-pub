@@ -16,7 +16,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
 {
     private final BuildingType building;
 
-    public ZonePlacement(GetWorld world, BuildingType building)
+    public ZonePlacement(GetWorld world, ZoneType building)
     {
         super(world);
         this.building = building;

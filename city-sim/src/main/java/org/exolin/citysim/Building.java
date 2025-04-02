@@ -120,4 +120,10 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         int base = getSize() * 2;
         return base * base;
     }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName()+"[x="+x+",y="+y+",type="+type.getName()+"]";
+    }
 }

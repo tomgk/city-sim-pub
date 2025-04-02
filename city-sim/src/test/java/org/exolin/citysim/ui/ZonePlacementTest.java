@@ -4,11 +4,9 @@ import java.awt.Point;
 import java.util.List;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.World;
-import org.exolin.citysim.Zone;
 import org.exolin.citysim.ZoneType;
 import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

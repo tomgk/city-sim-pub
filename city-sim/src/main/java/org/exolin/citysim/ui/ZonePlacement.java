@@ -2,9 +2,11 @@ package org.exolin.citysim.ui;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.World;
+import org.exolin.citysim.ZoneType;
 
 /**
  *
@@ -41,8 +43,16 @@ public class ZonePlacement extends AreaAction implements BuildingAction
         {
             for(int x=0;x<marking.width;++x)
             {
-                if(world.containsBuilding(marking.x + x, marking.y + y))
-                    continue;
+                Building buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
+                if(buildingAt != null)
+                {
+                    ZoneType zoneType = buildingAt.getZoneType();
+                    //keep non zone buildings
+                    if(zoneType == null)
+                        continue;
+                    
+                    world.removeBuildingAt(x, y, true, true);
+                }
 
                 world.addBuilding(building, marking.x + x, marking.y + y);
             }

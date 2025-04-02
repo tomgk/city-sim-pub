@@ -25,16 +25,21 @@ public class ZonePlacementTest
         assertEquals(t, b.getType());
     }
     
+    private void makeMove(Point start, Point end, World world)
+    {
+        ZonePlacement z = new ZonePlacement(() -> world, Zones.zone_business);
+        
+        z.mouseDown(start);
+        z.moveMouse(end);
+        z.releaseMouse(end);
+    }
+    
     @Test
     public void testZonePlacementOnEmpty()
     {
         World world = new World(100);
         
-        ZonePlacement z = new ZonePlacement(() -> world, Zones.zone_business);
-        
-        z.mouseDown(new Point(1, 6));
-        z.moveMouse(new Point(3, 9));
-        z.releaseMouse(new Point(3, 9));
+        makeMove(new Point(1, 6), new Point(3, 9), world);
         
         List<Building> buildings = world.getBuildings();
         assertEquals(6, world.getBuildings().size(), buildings.toString());

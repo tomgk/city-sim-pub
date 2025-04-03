@@ -74,6 +74,7 @@ public class Main
                 switch(e.getKeyCode())
                 {
                     case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
+                    case KeyEvent.VK_F7 -> gp.setRotation(gp.getRotation().getNext());
                     case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
                     case KeyEvent.VK_F9 -> gp.toggleDebug();
                     case KeyEvent.VK_F10 -> selector.setVisible(!selector.isVisible());

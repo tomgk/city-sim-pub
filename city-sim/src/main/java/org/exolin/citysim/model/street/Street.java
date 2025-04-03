@@ -1,10 +1,13 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.street;
 
-import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_Y;
-import static org.exolin.citysim.model.StreetType.Curve.*;
-import static org.exolin.citysim.model.StreetType.TIntersection.*;
-import static org.exolin.citysim.model.StreetType.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Rotation;
+import org.exolin.citysim.model.World;
+import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.street.StreetType.Curve.*;
+import static org.exolin.citysim.model.street.StreetType.TIntersection.*;
+import static org.exolin.citysim.model.street.StreetType.XIntersection.X_INTERSECTION;
 
 /**
  *
@@ -59,7 +62,7 @@ public class Street extends Building<Street, StreetType, StreetType.StreetVarian
     }
     
     @Override
-    void update(World world)
+    protected void update(World world)
     {
         //System.out.println("Update street @ "+getX()+"/"+getY());
         

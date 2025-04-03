@@ -10,6 +10,8 @@ import java.util.Map;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.model.street.Street;
+import org.exolin.citysim.model.street.StreetType;
 import org.exolin.citysim.ui.OutOfGridException;
 
 /**

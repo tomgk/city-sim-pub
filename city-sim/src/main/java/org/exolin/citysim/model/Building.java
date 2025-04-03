@@ -116,7 +116,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Buildi
         w.onChange();
     }
 
-    void update(World world)
+    protected void update(World world)
     {
         
     }

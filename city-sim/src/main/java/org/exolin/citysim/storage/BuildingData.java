@@ -11,9 +11,9 @@ import org.exolin.citysim.model.ActualBuilding;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
-import org.exolin.citysim.model.Street;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Zone;
+import org.exolin.citysim.model.street.Street;
 
 /**
  *

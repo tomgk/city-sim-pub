@@ -1,7 +1,11 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.street;
 
 import java.util.Arrays;
 import java.util.List;
+import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Rotation;
 
 /**
  *

@@ -6,10 +6,10 @@ import java.awt.Rectangle;
 import static org.exolin.citysim.bt.Streets.street;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
-import org.exolin.citysim.model.StreetType;
-import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_Y;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.street.StreetType;
+import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_Y;
 
 /**
  *

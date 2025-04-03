@@ -578,7 +578,7 @@ public final class GamePanel extends JComponent
             drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
         }
         else
-            drawItem(g, dim, screenPoint.x, screenPoint.y, b.getImage(), b.getSize());
+            drawItem(g, dim, screenPoint.x, screenPoint.y, b.getImage(rotation), b.getSize());
     }
     
     public World getWorld()

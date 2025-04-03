@@ -34,9 +34,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return type;
     }
 
-    public Image getImage()
+    public Image getImage(Rotation rotation)
     {
-        return type.getImage(variant).getDefault();
+        return type.getImage(getVariant(rotation)).getDefault();
     }
     
     public int getSize()
@@ -60,6 +60,11 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     }
 
     public E getVariant()
+    {
+        return variant;
+    }
+    
+    public E getVariant(Rotation rotation)
     {
         return variant;
     }

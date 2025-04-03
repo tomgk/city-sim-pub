@@ -15,6 +15,11 @@ public enum Rotation
     
     private static final Rotation[] values = values();
     
+    public int getAmount()
+    {
+        return ordinal();
+    }
+    
     public Rotation getNext()
     {
         int num = ordinal()+1;

@@ -1,5 +1,7 @@
 package org.exolin.citysim;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,7 +22,22 @@ public class StreetType extends BuildingType<Street, StreetType.Variant>
         T_INTERSECTION_1,
         T_INTERSECTION_2,
         T_INTERSECTION_3,
-        T_INTERSECTION_4,
+        T_INTERSECTION_4;
+        
+        public static Variant rotate(Variant base, Rotation rotation, Variant v1, Variant v2, Variant v3, Variant v4)
+        {
+            Variant[] v = new Variant[]{v1, v2, v3, v4};
+            
+            int pos = Arrays.asList(v).indexOf(base);
+            if(pos == -1)
+                throw new IllegalArgumentException();
+            
+            pos += rotation.getAmount();
+            if(pos >= v.length)
+                pos -= v.length;
+            
+            return v[pos];
+        }
     }
     
     public StreetType(String name, List<Animation> images, int size)

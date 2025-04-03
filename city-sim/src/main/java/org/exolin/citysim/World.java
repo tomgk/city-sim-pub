@@ -128,11 +128,19 @@ public final class World
         
         B b = type.createBuilding(x, y, variant);
         buildings.add(b);
-        buildings.sort(Comparator.comparing(Building::getLevel));
+        buildings.sort(sorter(Rotation.ORIGINAL));
         updateBuilding(b);
         updateBuildCount(b, true);
         onChange();
         return b;
+    }
+    
+    private Comparator<Building> sorter(Rotation rotation)
+    {
+        if(rotation == Rotation.ORIGINAL)
+            return Comparator.comparing(Building::getLevel);
+        
+        return Comparator.comparing((Building b) -> b.getLevel(gridSize, rotation));
     }
     
     private Building getBuildingAtForUpdate(int x, int y)
@@ -196,6 +204,16 @@ public final class World
     public List<Building> getBuildings()
     {
         return buildings;
+    }
+
+    public List<Building> getBuildings(Rotation rotation)
+    {
+        if(rotation == Rotation.ORIGINAL)
+            return buildings;
+        
+        List<Building> buildingsRotated = new ArrayList<>(buildings);
+        buildingsRotated.sort(sorter(rotation));
+        return buildingsRotated;
     }
 
     void onChange()

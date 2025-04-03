@@ -5,8 +5,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import org.exolin.citysim.GetWorld;
-import org.exolin.citysim.World;
+import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.World;
 
 /**
  *

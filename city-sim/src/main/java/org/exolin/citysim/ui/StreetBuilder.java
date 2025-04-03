@@ -3,13 +3,13 @@ package org.exolin.citysim.ui;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import org.exolin.citysim.BuildingType;
-import org.exolin.citysim.GetWorld;
-import org.exolin.citysim.StreetType;
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
-import org.exolin.citysim.World;
 import static org.exolin.citysim.bt.Streets.street;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.StreetType;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.World;
 
 /**
  *

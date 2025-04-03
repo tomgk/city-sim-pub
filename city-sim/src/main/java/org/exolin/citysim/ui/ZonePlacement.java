@@ -2,11 +2,11 @@ package org.exolin.citysim.ui;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import org.exolin.citysim.Building;
-import org.exolin.citysim.BuildingType;
-import org.exolin.citysim.GetWorld;
-import org.exolin.citysim.World;
-import org.exolin.citysim.ZoneType;
+import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.ZoneType;
 
 /**
  *

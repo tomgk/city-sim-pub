@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 import javax.swing.ImageIcon;
-import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.BuildingAction;
 

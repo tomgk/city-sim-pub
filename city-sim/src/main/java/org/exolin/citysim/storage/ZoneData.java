@@ -2,9 +2,9 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.exolin.citysim.BuildingVariant;
-import org.exolin.citysim.Zone;
-import org.exolin.citysim.ZoneType;
+import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Zone;
+import org.exolin.citysim.model.ZoneType;
 
 /**
  *

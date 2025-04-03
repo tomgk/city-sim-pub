@@ -3,7 +3,7 @@ package org.exolin.citysim.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import org.exolin.citysim.World;
+import org.exolin.citysim.model.World;
 
 /**
  *

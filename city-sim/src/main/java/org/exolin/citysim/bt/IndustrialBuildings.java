@@ -1,8 +1,8 @@
 package org.exolin.citysim.bt;
 
-import org.exolin.citysim.ActualBuildingType;
 import static org.exolin.citysim.bt.Buildings.createBuildingType;
 import static org.exolin.citysim.bt.Zones.zone_industrial;
+import org.exolin.citysim.model.ActualBuildingType;
 
 /**
  *

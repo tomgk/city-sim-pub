@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
-import org.exolin.citysim.ActualBuilding;
-import org.exolin.citysim.Building;
-import org.exolin.citysim.BuildingType;
-import org.exolin.citysim.BuildingVariant;
-import org.exolin.citysim.Street;
-import org.exolin.citysim.World;
-import org.exolin.citysim.Zone;
+import org.exolin.citysim.model.ActualBuilding;
+import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Street;
+import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.Zone;
 
 /**
  *

@@ -2,8 +2,8 @@ package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import org.exolin.citysim.GetWorld;
-import org.exolin.citysim.World;
+import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.World;
 
 /**
  *

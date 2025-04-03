@@ -1,4 +1,4 @@
-package org.exolin.citysim;
+package org.exolin.citysim.model;
 
 /**
  *

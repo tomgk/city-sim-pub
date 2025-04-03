@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
-import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.model.BuildingType;
 
 /**
  *

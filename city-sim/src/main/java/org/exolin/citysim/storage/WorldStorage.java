@@ -7,8 +7,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import org.exolin.citysim.Building;
-import org.exolin.citysim.World;
+import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.World;
 
 /**
  *

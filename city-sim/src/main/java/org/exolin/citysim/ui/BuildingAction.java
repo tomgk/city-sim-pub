@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui;
 
-import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.model.BuildingType;
 
 /**
  *

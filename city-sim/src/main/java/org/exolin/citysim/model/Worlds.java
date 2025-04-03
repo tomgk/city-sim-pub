@@ -1,7 +1,5 @@
-package org.exolin.citysim;
+package org.exolin.citysim.model;
 
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
 import static org.exolin.citysim.bt.BusinessBuildings.car_cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.office;
@@ -9,6 +7,8 @@ import static org.exolin.citysim.bt.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.BusinessBuildings.parkbuilding;
 import static org.exolin.citysim.bt.Streets.street;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_Y;
 
 /**
  *

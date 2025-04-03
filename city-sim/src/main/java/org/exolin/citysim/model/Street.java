@@ -1,10 +1,10 @@
-package org.exolin.citysim;
+package org.exolin.citysim.model;
 
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
-import static org.exolin.citysim.StreetType.TIntersection.*;
-import static org.exolin.citysim.StreetType.Curve.*;
-import static org.exolin.citysim.StreetType.XIntersection.X_INTERSECTION;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.StreetType.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.StreetType.Curve.*;
+import static org.exolin.citysim.model.StreetType.TIntersection.*;
+import static org.exolin.citysim.model.StreetType.XIntersection.X_INTERSECTION;
 
 /**
  *

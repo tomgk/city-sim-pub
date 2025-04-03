@@ -1,8 +1,8 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
-import org.exolin.citysim.Animation;
-import org.exolin.citysim.ZoneType;
+import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.ZoneType;
 
 /**
  *

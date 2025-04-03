@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
-import org.exolin.citysim.World;
+import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
 
 /**

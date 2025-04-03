@@ -1,12 +1,18 @@
 package org.exolin.citysim;
 
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.StreetType.TIntersection.*;
+import static org.exolin.citysim.StreetType.Curve.*;
+import static org.exolin.citysim.StreetType.XIntersection.X_INTERSECTION;
+
 /**
  *
  * @author Thomas
  */
-public class Street extends Building<Street, StreetType, StreetType.Variant>
+public class Street extends Building<Street, StreetType, StreetType.StreetVariant>
 {
-    public Street(StreetType type, int x, int y, StreetType.Variant variant)
+    public Street(StreetType type, int x, int y, StreetType.StreetVariant variant)
     {
         super(type, x, y, variant);
     }
@@ -27,45 +33,29 @@ public class Street extends Building<Street, StreetType, StreetType.Variant>
     }
 
     @Override
-    public StreetType.Variant getVariant(Rotation rotation)
+    public StreetType.StreetVariant getVariant(Rotation rotation)
     {
-        StreetType.Variant variant = getVariant();
-        switch(variant)
-        {
-            case CONNECT_X:
-            case CONNECT_Y:
-                return StreetType.Variant.rotate(variant, rotation,
-                        StreetType.Variant.CONNECT_X,
-                        StreetType.Variant.CONNECT_Y,
-                        StreetType.Variant.CONNECT_X,
-                        StreetType.Variant.CONNECT_Y);
-                
-            case CURVE_1:
-            case CURVE_2:
-            case CURVE_3:
-            case CURVE_4:
-                return StreetType.Variant.rotate(variant, rotation,
-                        StreetType.Variant.CURVE_1,
-                        StreetType.Variant.CURVE_2,
-                        StreetType.Variant.CURVE_3,
-                        StreetType.Variant.CURVE_4);
-                
-            case T_INTERSECTION_1:
-            case T_INTERSECTION_2:
-            case T_INTERSECTION_3:
-            case T_INTERSECTION_4:
-                return StreetType.Variant.rotate(variant, rotation,
-                        StreetType.Variant.T_INTERSECTION_1,
-                        StreetType.Variant.T_INTERSECTION_2,
-                        StreetType.Variant.T_INTERSECTION_3,
-                        StreetType.Variant.T_INTERSECTION_4);
-                
-            case X_INTERSECTION:
-                return StreetType.Variant.X_INTERSECTION;
-                
-            default:
-                throw new AssertionError();
-        }
+        StreetType.StreetVariant variant = getVariant();
+        
+        if(variant == CONNECT_X || variant == CONNECT_Y)
+            return StreetType.StreetVariant.rotate(variant, rotation,
+                        CONNECT_X,
+                        CONNECT_Y,
+                        CONNECT_X,
+                        CONNECT_Y);
+        
+        if(variant == CURVE_1 || variant == CURVE_2 || variant == CURVE_3 || variant == CURVE_4)
+                return StreetType.StreetVariant.rotate(variant, rotation,
+                        CURVE_1, CURVE_2, CURVE_3, CURVE_4);
+        
+        if(variant == T_INTERSECTION_1 || variant == T_INTERSECTION_2 || variant == T_INTERSECTION_3 || variant == T_INTERSECTION_4)
+                return StreetType.StreetVariant.rotate(variant, rotation,
+                        T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4);
+        
+        if(variant == X_INTERSECTION)
+            return X_INTERSECTION;
+        
+        throw new AssertionError();
     }
     
     @Override
@@ -80,42 +70,42 @@ public class Street extends Building<Street, StreetType, StreetType.Variant>
         boolean y_after = containsStreet(world, getX(), getY()+1);
         
         if(x_before && x_after && y_before && y_after)
-            setVariant(world, StreetType.Variant.X_INTERSECTION);
+            setVariant(world, X_INTERSECTION);
         
         //----- curves
         
         else if(x_before && !x_after && !y_before && y_after)
-            setVariant(world, StreetType.Variant.CURVE_1);
+            setVariant(world, CURVE_1);
         
         else if(!x_before && x_after && y_before && !y_after)
-            setVariant(world, StreetType.Variant.CURVE_3);
+            setVariant(world, CURVE_3);
         
         else if(!x_before && x_after && !y_before && y_after)
-            setVariant(world, StreetType.Variant.CURVE_2);
+            setVariant(world, CURVE_2);
         
         else if(x_before && !x_after && y_before && !y_after)
-            setVariant(world, StreetType.Variant.CURVE_4);
+            setVariant(world, CURVE_4);
         
         //----- t intersection
         
         else if(x_before && !x_after && y_before && y_after)
-            setVariant(world, StreetType.Variant.T_INTERSECTION_1);
+            setVariant(world, T_INTERSECTION_1);
         
         else if(!x_before && x_after && y_before && y_after)
-            setVariant(world, StreetType.Variant.T_INTERSECTION_3);
+            setVariant(world, T_INTERSECTION_3);
         
         else if(x_before && x_after && !y_before && y_after)
-            setVariant(world, StreetType.Variant.T_INTERSECTION_2);
+            setVariant(world, T_INTERSECTION_2);
         
         else if(x_before && x_after && y_before && !y_after)
-            setVariant(world, StreetType.Variant.T_INTERSECTION_4);
+            setVariant(world, T_INTERSECTION_4);
         
         //----- straight
         
         else if(x_before || x_after)
-            setVariant(world, StreetType.Variant.CONNECT_X);
+            setVariant(world, CONNECT_X);
         
         else if(y_before || y_after)
-            setVariant(world, StreetType.Variant.CONNECT_Y);
+            setVariant(world, CONNECT_Y);
     }
 }

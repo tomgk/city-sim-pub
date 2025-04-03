@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.GetWorld;
 import org.exolin.citysim.StreetType;
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
 import org.exolin.citysim.World;
 import static org.exolin.citysim.bt.Streets.street;
 
@@ -97,20 +99,20 @@ public class StreetBuilder implements BuildingAction
         int diffX;
         int diffY;
         int len;
-        StreetType.Variant variant;
+        StreetType.StreetVariant variant;
         if(marking.width == 1)
         {
             diffX = 0;
             diffY = 1;
             len = marking.height;
-            variant = StreetType.Variant.CONNECT_Y;
+            variant = CONNECT_Y;
         }
         else
         {
             diffX = 1;
             diffY = 0;
             len = marking.width;
-            variant = StreetType.Variant.CONNECT_X;
+            variant = CONNECT_X;
         }
 
         for(int i=0;i<len;++i)
@@ -137,11 +139,11 @@ public class StreetBuilder implements BuildingAction
         if(marking == null)
             return null;
 
-        StreetType.Variant variant;
+        StreetType.StreetVariant variant;
         if(marking.width == 1)
-            variant = StreetType.Variant.CONNECT_Y;
+            variant = CONNECT_Y;
         else
-            variant = StreetType.Variant.CONNECT_X;
+            variant = CONNECT_X;
 
         return street.getBrightImage(variant);
     }

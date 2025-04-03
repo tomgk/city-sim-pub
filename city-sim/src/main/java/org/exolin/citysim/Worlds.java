@@ -1,5 +1,7 @@
 package org.exolin.citysim;
 
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.StreetType.ConnectVariant.CONNECT_Y;
 import static org.exolin.citysim.bt.BusinessBuildings.car_cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.office;
@@ -27,7 +29,7 @@ public class Worlds
         w.addBuilding(parkbuilding, 18, 27);
         w.addBuilding(office3, 15, 27);
         for(int i=0;i<3;++i)
-            w.addBuilding(street, 2+i, 2, StreetType.Variant.CONNECT_X);
+            w.addBuilding(street, 2+i, 2, CONNECT_X);
         
         w.addBuilding(office, 0, 0);
         
@@ -48,10 +50,10 @@ public class Worlds
         w.addBuilding(office2, 19, 2);
         
         for(int i=0;i<25;++i)
-            w.addBuilding(street, 2+i, 5, StreetType.Variant.CONNECT_X);
+            w.addBuilding(street, 2+i, 5, CONNECT_X);
         
         for(int i=0;i<4;++i)
-            w.addBuilding(street, 20, 6+i, StreetType.Variant.CONNECT_Y);
+            w.addBuilding(street, 20, 6+i, CONNECT_Y);
         
         return w;
     }

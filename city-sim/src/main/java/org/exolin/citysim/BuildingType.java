@@ -93,7 +93,11 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     
     public BufferedImage getDefaultImage()
     {
-        return getImage(getVariantClass().getEnumConstants()[0]).getDefault();
+        E[] enumConstants = getVariantClass().getEnumConstants();
+        if(enumConstants == null)
+            return new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
+        
+        return getImage(enumConstants[0]).getDefault();
     }
 
     public BufferedImage getBrightImage()
@@ -101,9 +105,9 @@ public abstract class BuildingType<B, E extends BuildingVariant>
         return getBrightImage(DEFAULT_VARIANT);
     }
 
-    public BufferedImage getBrightImage(Enum<?> variant)
+    public BufferedImage getBrightImage(E variant)
     {
-        return getBrightImage(variant.ordinal());
+        return getBrightImage(variant.index());
     }
 
     public BufferedImage getBrightImage(int variant)

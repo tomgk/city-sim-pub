@@ -12,6 +12,7 @@ import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.StreetType;
+import static org.exolin.citysim.StreetType.TIntersection.T_INTERSECTION_4;
 import org.exolin.citysim.World;
 import org.exolin.citysim.Zone;
 import org.exolin.citysim.ZoneType;
@@ -106,7 +107,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeStreet() throws IOException
     {
-        Street street = new Street(Streets.street, 16, 99, StreetType.Variant.T_INTERSECTION_4);
+        Street street = new Street(Streets.street, 16, 99, T_INTERSECTION_4);
         String output = serialize(WorldStorage::serialize, street);
         String expected = """
                           {"type":"street","x":16,"y":99,"variant":"t_intersection_4"}
@@ -126,7 +127,7 @@ public class WorldStorageTest
         assertEquals(Streets.street, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());
-        assertEquals(StreetType.Variant.T_INTERSECTION_4, b.getVariant());
+        assertEquals(T_INTERSECTION_4, b.getVariant());
     }
     
     @Test
@@ -134,7 +135,7 @@ public class WorldStorageTest
     {
         World w = new World(30);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
-        w.addBuilding(Streets.street, 15, 5, StreetType.Variant.T_INTERSECTION_4);
+        w.addBuilding(Streets.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
@@ -185,7 +186,7 @@ public class WorldStorageTest
             assertEquals(Streets.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
-            assertEquals(StreetType.Variant.T_INTERSECTION_4, b.getVariant());
+            assertEquals(T_INTERSECTION_4, b.getVariant());
         }
         {
             Building b = buildings.get(2);

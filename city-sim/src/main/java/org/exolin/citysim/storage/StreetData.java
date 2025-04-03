@@ -28,6 +28,6 @@ public class StreetData extends BuildingData
     @Override
     protected BuildingVariant getVariant(String name)
     {
-        return StreetType.Variant.valueOf(name);
+        return StreetType.StreetVariant.valueOf(name);
     }
 }

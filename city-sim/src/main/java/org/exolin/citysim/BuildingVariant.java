@@ -6,6 +6,9 @@ package org.exolin.citysim;
  */
 public interface BuildingVariant
 {
-    int ordinal();
+    default int index()
+    {
+        return ((Enum)this).ordinal();
+    }
     String name();
 }

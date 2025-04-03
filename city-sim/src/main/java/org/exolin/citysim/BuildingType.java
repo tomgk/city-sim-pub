@@ -77,13 +77,13 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     
     void checkVariant(E variant)
     {
-        if(variant.ordinal() < 0 || variant.ordinal() >= images.size())
+        if(variant.index()< 0 || variant.index() >= images.size())
             throw new IllegalArgumentException("invalid variant "+variant);
     }
 
     public Animation getImage(E version)
     {
-        return images.get(version.ordinal());
+        return images.get(version.index());
     }
 
     public int getSize()

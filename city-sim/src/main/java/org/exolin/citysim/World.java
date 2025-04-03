@@ -122,7 +122,8 @@ public final class World
         {
             for(int xi=0;xi<size;++xi)
             {
-                removeBuildingAt(x, y, true, true);
+                //remove any, let anything outside be replaced with zone
+                removeBuildingAt(x, y, false, true);
             }
         }
         

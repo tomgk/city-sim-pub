@@ -73,6 +73,13 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return x + y + type.getSize() * 2 / 2;
     }
     
+    public int getLevel(int gridSize, Rotation rotation)
+    {
+        Point p = new Point(-1, -1);
+        rotation.rotate(gridSize, x, y, p);
+        return p.x + p.y + type.getSize() * 2 / 2;
+    }
+    
     public static int getLevel(Rectangle r)
     {
         //divide r.width+r.height by 2 to put level to center

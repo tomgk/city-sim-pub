@@ -548,7 +548,7 @@ public final class GamePanel extends JComponent
             }
         }
         
-        for(Building b: world.getBuildings())
+        for(Building b: world.getBuildings(rotation))
         {
             if(scaleMarker)
             {
@@ -568,12 +568,15 @@ public final class GamePanel extends JComponent
     
     private void drawBuilding(Graphics2D g, int dim, Building b)
     {
+        Point screenPoint = new Point();
+        rotation.rotate(worldHolder.get().getGridSize(), b.getX(), b.getY(), screenPoint);
+        
         if(view == WorldView.ZONES && b.getZoneType() != null)
         {
-            drawItemN(g, dim, b.getX(), b.getY(), b.getZoneType().getDefaultImage(), b.getSize());
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
         }
         else
-            drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
+            drawItem(g, dim, screenPoint.x, screenPoint.y, b.getImage(), b.getSize());
     }
     
     public World getWorld()

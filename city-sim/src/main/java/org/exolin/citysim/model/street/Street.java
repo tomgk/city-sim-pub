@@ -42,10 +42,7 @@ public class Street extends Building<Street, StreetType, StreetType.StreetVarian
         
         if(variant == CONNECT_X || variant == CONNECT_Y)
             return StreetType.StreetVariant.rotate(variant, rotation,
-                        CONNECT_X,
-                        CONNECT_Y,
-                        CONNECT_X,
-                        CONNECT_Y);
+                        CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y);
         
         if(variant == CURVE_1 || variant == CURVE_2 || variant == CURVE_3 || variant == CURVE_4)
                 return StreetType.StreetVariant.rotate(variant, rotation,

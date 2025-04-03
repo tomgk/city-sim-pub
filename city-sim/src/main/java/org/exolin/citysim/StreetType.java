@@ -10,7 +10,12 @@ import java.util.List;
  */
 public class StreetType extends BuildingType<Street, StreetType.Variant>
 {
-    public enum Variant implements BuildingVariant
+    public interface StreetVariant extends BuildingVariant
+    {
+        
+    }
+    
+    public enum Variant implements StreetVariant
     {
         CONNECT_X,
         CONNECT_Y,

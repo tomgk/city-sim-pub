@@ -25,6 +25,48 @@ public class Street extends Building<Street, StreetType, StreetType.Variant>
         
         return b.getType() == getType();
     }
+
+    @Override
+    public StreetType.Variant getVariant(Rotation rotation)
+    {
+        StreetType.Variant variant = getVariant();
+        switch(variant)
+        {
+            case CONNECT_X:
+            case CONNECT_Y:
+                return StreetType.Variant.rotate(variant, rotation,
+                        StreetType.Variant.CONNECT_X,
+                        StreetType.Variant.CONNECT_Y,
+                        StreetType.Variant.CONNECT_X,
+                        StreetType.Variant.CONNECT_Y);
+                
+            case CURVE_1:
+            case CURVE_2:
+            case CURVE_3:
+            case CURVE_4:
+                return StreetType.Variant.rotate(variant, rotation,
+                        StreetType.Variant.CURVE_1,
+                        StreetType.Variant.CURVE_2,
+                        StreetType.Variant.CURVE_3,
+                        StreetType.Variant.CURVE_4);
+                
+            case T_INTERSECTION_1:
+            case T_INTERSECTION_2:
+            case T_INTERSECTION_3:
+            case T_INTERSECTION_4:
+                return StreetType.Variant.rotate(variant, rotation,
+                        StreetType.Variant.T_INTERSECTION_1,
+                        StreetType.Variant.T_INTERSECTION_2,
+                        StreetType.Variant.T_INTERSECTION_3,
+                        StreetType.Variant.T_INTERSECTION_4);
+                
+            case X_INTERSECTION:
+                return StreetType.Variant.X_INTERSECTION;
+                
+            default:
+                throw new AssertionError();
+        }
+    }
     
     @Override
     void update(World world)

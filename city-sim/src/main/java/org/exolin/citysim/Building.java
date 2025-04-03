@@ -1,7 +1,9 @@
 package org.exolin.citysim;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
+import static org.exolin.citysim.Rotation.ORIGINAL;
 
 /**
  *
@@ -32,9 +34,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         return type;
     }
 
-    public Image getImage()
+    public Image getImage(Rotation rotation)
     {
-        return type.getImage(variant).getDefault();
+        return type.getImage(getVariant(rotation)).getDefault();
     }
     
     public int getSize()
@@ -51,8 +53,18 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     {
         return y;
     }
+    
+    public void getViewLocation(int gridSize, Rotation rotation, Point point)
+    {
+        rotation.rotate(gridSize, x, y, point);
+    }
 
     public E getVariant()
+    {
+        return variant;
+    }
+    
+    public E getVariant(Rotation rotation)
     {
         return variant;
     }
@@ -64,6 +76,13 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
         //which fixes the issue of smaller buildings getting hidden
         //by bigger ones on the upper half
         return x + y + type.getSize() * 2 / 2;
+    }
+    
+    public int getLevel(int gridSize, Rotation rotation)
+    {
+        Point p = new Point(-1, -1);
+        rotation.rotate(gridSize, x, y, p);
+        return p.x + p.y + type.getSize() * 2 / 2;
     }
     
     public static int getLevel(Rectangle r)

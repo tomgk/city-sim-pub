@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -28,6 +29,7 @@ import org.exolin.citysim.ActualBuildingType;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
 import org.exolin.citysim.GetWorld;
+import org.exolin.citysim.Rotation;
 import org.exolin.citysim.World;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.ui.Utils.brighter;
@@ -47,6 +49,7 @@ public final class GamePanel extends JComponent
     private int zoom = 0;
     private int xoffset = 0;
     private int yoffset = 0;
+    private Rotation rotation = Rotation.ORIGINAL;
     
     private final Point currentGridPos = new Point();
     
@@ -352,6 +355,8 @@ public final class GamePanel extends JComponent
             g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
             Building b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
             g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
+            g.drawString("View: "+view, 0, start + lineHeight * 4);
+            g.drawString("Rotation: "+rotation, 0, start + lineHeight * 5);
         }
     }
     
@@ -543,7 +548,7 @@ public final class GamePanel extends JComponent
             }
         }
         
-        for(Building b: world.getBuildings())
+        for(Building b: world.getBuildings(rotation))
         {
             if(scaleMarker)
             {
@@ -563,12 +568,17 @@ public final class GamePanel extends JComponent
     
     private void drawBuilding(Graphics2D g, int dim, Building b)
     {
+        Point screenPoint = new Point();
+        //TODO: screenPoint needs to be at the top of the square
+        //which isn't the one closest to (0/0) when the view gets rotated
+        rotation.rotate(worldHolder.get().getGridSize(), b.getX(), b.getY(), screenPoint);
+        
         if(view == WorldView.ZONES && b.getZoneType() != null)
         {
-            drawItemN(g, dim, b.getX(), b.getY(), b.getZoneType().getDefaultImage(), b.getSize());
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
         }
         else
-            drawItem(g, dim, b.getX(), b.getY(), b.getImage(), b.getSize());
+            drawItem(g, dim, screenPoint.x, screenPoint.y, b.getImage(rotation), b.getSize());
     }
     
     public World getWorld()
@@ -672,7 +682,18 @@ public final class GamePanel extends JComponent
 
     public void setView(WorldView view)
     {
-        this.view = view;
+        this.view = Objects.requireNonNull(view);
+        repaint();
+    }
+
+    public Rotation getRotation()
+    {
+        return rotation;
+    }
+
+    public void setRotation(Rotation rotation)
+    {
+        this.rotation = Objects.requireNonNull(rotation);
         repaint();
     }
 }

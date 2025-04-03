@@ -59,7 +59,6 @@ public final class World
 
     public void removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {
-        //System.out.println("Remove "+x+"/"+y);
         for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
         {
             Building b = it.next();
@@ -138,7 +137,6 @@ public final class World
     
     private Building getBuildingAtForUpdate(int x, int y)
     {
-        //System.out.println(x+"/"+y);
         return getBuildingAt(x, y);
     }
     
@@ -150,7 +148,6 @@ public final class World
     
     private void updateBuildingsAround(int bx, int by, int bsize)
     {
-        //System.out.println("-------");
         for(int x=bx-1;x<bx+bsize+1;++x)
         {
             {

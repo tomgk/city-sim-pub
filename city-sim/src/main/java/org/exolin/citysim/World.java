@@ -84,8 +84,8 @@ public final class World
                 if(replaceWithZoning)
                 {
                     if(zoneType != null)
-                        placeZone(zoneType, b.getX(), b.getY(), b.getSize());
-
+                        placeZone(zoneType, b.getX(), b.getY(), b.getSize(), x, y);
+                    
                     updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 }
                 return;
@@ -93,11 +93,18 @@ public final class World
         }
     }
 
-    private void placeZone(ZoneType zoneType, int x, int y, int size)
+    private void placeZone(ZoneType zoneType, int x, int y, int size, int exceptX, int exceptY)
     {
         for(int yi=0;yi<size;++yi)
+        {
             for(int xi=0;xi<size;++xi)
+            {
+                if(y+yi == exceptY && x+xi == exceptX)
+                    continue;
+                
                 addBuilding(zoneType, x+xi, y+yi, ZoneType.Variant.DEFAULT);
+            }
+        }
     }
     
     public <B extends Building, E extends Enum<E>> B addBuilding(BuildingType<B, E> type, int x, int y)

@@ -1,7 +1,9 @@
 package org.exolin.citysim;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
+import static org.exolin.citysim.Rotation.ORIGINAL;
 
 /**
  *
@@ -50,6 +52,11 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E
     public int getY()
     {
         return y;
+    }
+    
+    public void getViewLocation(int gridSize, Rotation rotation, Point point)
+    {
+        rotation.rotate(gridSize, x, y, point);
     }
 
     public E getVariant()

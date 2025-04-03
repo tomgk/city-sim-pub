@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.Building;
 import org.exolin.citysim.BuildingType;
+import org.exolin.citysim.BuildingVariant;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.World;
 import org.exolin.citysim.Zone;
@@ -86,12 +87,12 @@ public abstract class BuildingData
             throw new UnsupportedOperationException(buildingClass.getName());
     }
     
-    protected abstract Class<? extends Enum<?>> getVariantClass();
+    protected abstract BuildingVariant getVariant(String name);
 
     void createBuilding(World w)
     {
         BuildingType buildingType = BuildingType.getByName(type);
-        Enum buildingVariant = Enum.valueOf((Class)getVariantClass(), this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
+        BuildingVariant buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
         
         w.addBuilding(buildingType, x, y, buildingVariant);
     }

@@ -2,6 +2,7 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.exolin.citysim.BuildingVariant;
 import org.exolin.citysim.Zone;
 import org.exolin.citysim.ZoneType;
 
@@ -25,8 +26,8 @@ public class ZoneData extends BuildingData
     }
 
     @Override
-    public Class<? extends Enum<?>> getVariantClass()
+    protected BuildingVariant getVariant(String name)
     {
-        return ZoneType.Variant.class;
+        return ZoneType.Variant.valueOf(name);
     }
 }

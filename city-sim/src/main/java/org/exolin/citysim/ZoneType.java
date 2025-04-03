@@ -11,7 +11,7 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
 {
     private final boolean userPlaceableZone;
     
-    public enum Variant
+    public enum Variant implements BuildingVariant
     {
         DEFAULT
     }

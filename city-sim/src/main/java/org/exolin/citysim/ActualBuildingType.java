@@ -8,7 +8,7 @@ import java.util.Objects;
  */
 public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuildingType.Variant>
 {
-    public enum Variant
+    public enum Variant implements BuildingVariant
     {
         DEFAULT
     }

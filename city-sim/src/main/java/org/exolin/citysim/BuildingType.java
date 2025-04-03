@@ -14,7 +14,7 @@ import org.exolin.citysim.ui.Utils;
  * @param <B> building class
  * @param <E> building variant
  */
-public abstract class BuildingType<B, E extends Enum<E>>
+public abstract class BuildingType<B, E extends BuildingVariant>
 {
     public static final int DEFAULT_VARIANT = 0;
     

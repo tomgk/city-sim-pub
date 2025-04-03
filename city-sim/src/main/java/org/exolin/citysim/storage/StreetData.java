@@ -2,6 +2,7 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.exolin.citysim.BuildingVariant;
 import org.exolin.citysim.Street;
 import org.exolin.citysim.StreetType;
 
@@ -25,8 +26,8 @@ public class StreetData extends BuildingData
     }
 
     @Override
-    public Class<? extends Enum<?>> getVariantClass()
+    protected BuildingVariant getVariant(String name)
     {
-        return StreetType.Variant.class;
+        return StreetType.Variant.valueOf(name);
     }
 }

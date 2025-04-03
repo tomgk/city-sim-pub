@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.ActualBuilding;
 import org.exolin.citysim.ActualBuildingType;
+import org.exolin.citysim.BuildingVariant;
 
 /**
  *
@@ -25,10 +26,8 @@ public class ActualBuildingData extends BuildingData
     }
 
     @Override
-    public Class<? extends Enum<?>> getVariantClass()
+    protected BuildingVariant getVariant(String name)
     {
-        return ActualBuildingType.Variant.class;
+        return ActualBuildingType.Variant.valueOf(name);
     }
-    
-    
 }

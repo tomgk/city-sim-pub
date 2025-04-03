@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class StreetType extends BuildingType<Street, StreetType.Variant>
 {
-    public enum Variant
+    public enum Variant implements BuildingVariant
     {
         CONNECT_X,
         CONNECT_Y,

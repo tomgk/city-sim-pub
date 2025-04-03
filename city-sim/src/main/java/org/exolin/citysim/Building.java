@@ -10,7 +10,7 @@ import java.awt.Rectangle;
  * @param <T> building type
  * @param <E> building variant
  */
-public abstract class Building<B, T extends BuildingType<B, E>, E extends Enum<E>>
+public abstract class Building<B, T extends BuildingType<B, E>, E extends BuildingVariant>
 {
     private final T type;
     private final int x;

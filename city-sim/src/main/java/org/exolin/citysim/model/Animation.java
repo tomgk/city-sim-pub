@@ -12,10 +12,13 @@ import org.exolin.citysim.ui.Utils;
  */
 public class Animation
 {
+    private final String name;
     private final List<BufferedImage> images;
 
-    public Animation(List<BufferedImage> images)
+    public Animation(String name, List<BufferedImage> images)
     {
+        this.name = name;
+        
         if(images.isEmpty())
             throw new IllegalArgumentException();
        
@@ -31,12 +34,17 @@ public class Animation
         for(int i=1;i<numFrames;++i)
             images.add(Utils.loadImage(name+"-"+i));
         
-        return new Animation(List.copyOf(images));
+        return new Animation(name, List.copyOf(images));
     }
     
     public static Animation createUnanimated(String name)
     {
-        return new Animation(List.of(Utils.loadImage(name)));
+        return new Animation(name, List.of(Utils.loadImage(name)));
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     public Image getImage(int index)

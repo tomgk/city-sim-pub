@@ -569,9 +569,7 @@ public final class GamePanel extends JComponent
     private void drawBuilding(Graphics2D g, int dim, Building b)
     {
         Point screenPoint = new Point();
-        //TODO: screenPoint needs to be at the top of the square
-        //which isn't the one closest to (0/0) when the view gets rotated
-        rotation.rotate(worldHolder.get().getGridSize(), b.getX(), b.getY(), screenPoint);
+        rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize(), screenPoint);
         
         if(view == WorldView.ZONES && b.getZoneType() != null)
         {

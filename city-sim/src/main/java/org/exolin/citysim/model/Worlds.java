@@ -7,8 +7,8 @@ import static org.exolin.citysim.bt.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.BusinessBuildings.parkbuilding;
 import static org.exolin.citysim.bt.Streets.street;
-import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 
 /**
  *

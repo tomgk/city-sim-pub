@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.street.Street;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.StreetVariant;
 
 /**
  *
@@ -28,6 +28,6 @@ public class StreetData extends BuildingData
     @Override
     protected BuildingVariant getVariant(String name)
     {
-        return StreetType.StreetVariant.valueOf(name);
+        return StreetVariant.valueOf(name);
     }
 }

@@ -17,7 +17,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Zone;
 import org.exolin.citysim.model.ZoneType;
 import org.exolin.citysim.model.street.Street;
-import static org.exolin.citysim.model.street.StreetType.TIntersection.T_INTERSECTION_4;
+import static org.exolin.citysim.model.street.TIntersection.T_INTERSECTION_4;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;

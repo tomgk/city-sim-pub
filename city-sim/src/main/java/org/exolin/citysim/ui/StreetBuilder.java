@@ -7,9 +7,9 @@ import static org.exolin.citysim.bt.Streets.street;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.street.StreetType;
-import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.StreetType.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.street.StreetVariant;
 
 /**
  *
@@ -99,7 +99,7 @@ public class StreetBuilder implements BuildingAction
         int diffX;
         int diffY;
         int len;
-        StreetType.StreetVariant variant;
+        StreetVariant variant;
         if(marking.width == 1)
         {
             diffX = 0;
@@ -139,7 +139,7 @@ public class StreetBuilder implements BuildingAction
         if(marking == null)
             return null;
 
-        StreetType.StreetVariant variant;
+        StreetVariant variant;
         if(marking.width == 1)
             variant = CONNECT_Y;
         else

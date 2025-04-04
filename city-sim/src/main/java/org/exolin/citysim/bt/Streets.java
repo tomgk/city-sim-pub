@@ -11,14 +11,22 @@ import org.exolin.citysim.model.street.StreetType;
 public class Streets
 {
     public static final StreetType street = createStreetType("street", List.of(
-            "street_1", "street_2",
-            "street_x_intersection",
-            "street_curve_1", "street_curve_2", "street_curve_3", "street_curve_4",
-            "street_t_1", "street_t_2", "street_t_3", "street_t_4"), 1);
+            Animation.createUnanimated("street_1"), Animation.createUnanimated("street_2"),
+            Animation.create("street_x_intersection", 5),
+            
+            Animation.createUnanimated("street_curve_1"),
+            Animation.createUnanimated("street_curve_2"),
+            Animation.createUnanimated("street_curve_3"),
+            Animation.createUnanimated("street_curve_4"),
+            
+            Animation.createUnanimated("street_t_1"),
+            Animation.createUnanimated("street_t_2"),
+            Animation.createUnanimated("street_t_3"),
+            Animation.createUnanimated("street_t_4")), 1);
     
-    private static StreetType createStreetType(String name, List<String> variants, int size)
+    private static StreetType createStreetType(String name, List<Animation> variants, int size)
     {
-        return new StreetType(name, Animation.noAnimation(variants), size);
+        return new StreetType(name, variants, size);
     }
 
     static void init()

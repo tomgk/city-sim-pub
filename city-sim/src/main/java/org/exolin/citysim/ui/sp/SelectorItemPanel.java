@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.ActionWithImage;
 import org.exolin.citysim.ui.BuildingAction;
 
 /**
@@ -35,7 +37,13 @@ public class SelectorItemPanel extends javax.swing.JPanel
         }
         else
         {
-            imageLabel.setIcon(null);//new ImageIcon(action.));
+            Icon icon;
+            if(action instanceof ActionWithImage wa)
+                icon = new ImageIcon(wa.getImage());
+            else
+                icon = null;
+            
+            imageLabel.setIcon(icon);
             imageLabel.setText("");
             nameLabel.setText(action.getName());
             sizeCaptionLabel.setVisible(false);

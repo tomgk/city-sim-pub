@@ -12,7 +12,7 @@ import org.exolin.citysim.model.World;
  *
  * @author Thomas
  */
-public class TearDownAction extends AreaAction implements Action
+public class TearDownAction extends AreaAction implements ActionWithImage
 {
     private final boolean removeZoning;
     
@@ -54,11 +54,19 @@ public class TearDownAction extends AreaAction implements Action
         return removeZoning ? "remove zoning" : "tear down";
     }
     
-    private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(Utils.loadImage("tools/bulldozer"), new Point(0, 27), "bulldozer");
+    private static final Image IMAGE = Utils.loadImage("tools/bulldozer");
+    
+    private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(IMAGE, new Point(0, 27), "bulldozer");
 
     @Override
     public Cursor getCursor()
     {
         return CURSOR;
+    }
+
+    @Override
+    public Image getImage()
+    {
+        return IMAGE;
     }
 }

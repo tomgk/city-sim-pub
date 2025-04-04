@@ -38,24 +38,7 @@ public class Street extends Building<Street, StreetType, StreetVariant>
     @Override
     public StreetVariant getVariant(Rotation rotation)
     {
-        StreetVariant variant = getVariant();
-        
-        if(variant == CONNECT_X || variant == CONNECT_Y)
-            return StreetVariant.rotate(variant, rotation,
-                        CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y);
-        
-        if(variant == CURVE_1 || variant == CURVE_2 || variant == CURVE_3 || variant == CURVE_4)
-                return StreetVariant.rotate(variant, rotation,
-                        CURVE_1, CURVE_2, CURVE_3, CURVE_4);
-        
-        if(variant == T_INTERSECTION_1 || variant == T_INTERSECTION_2 || variant == T_INTERSECTION_3 || variant == T_INTERSECTION_4)
-                return StreetVariant.rotate(variant, rotation,
-                        T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4);
-        
-        if(variant == X_INTERSECTION)
-            return X_INTERSECTION;
-        
-        throw new AssertionError();
+        return getVariant().rotate(rotation);
     }
     
     @Override

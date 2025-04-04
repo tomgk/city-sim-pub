@@ -43,6 +43,8 @@ public interface StreetVariant extends BuildingVariant
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(name));
     }
+    
+    public StreetVariant rotate(Rotation rotation);
 
     public static StreetVariant rotate(StreetVariant base, Rotation rotation, StreetVariant v1, StreetVariant v2, StreetVariant v3, StreetVariant v4)
     {

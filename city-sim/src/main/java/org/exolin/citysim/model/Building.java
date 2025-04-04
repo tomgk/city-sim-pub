@@ -33,9 +33,9 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Buildi
         return type;
     }
 
-    public Image getImage(Rotation rotation)
+    public Animation getAnimation(Rotation rotation)
     {
-        return type.getImage(getVariant(rotation)).getDefault();
+        return type.getImage(getVariant(rotation));
     }
     
     public int getSize()

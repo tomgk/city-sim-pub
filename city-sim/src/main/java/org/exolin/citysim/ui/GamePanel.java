@@ -27,6 +27,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ActualBuildingType;
+import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
@@ -576,7 +577,15 @@ public final class GamePanel extends JComponent
             drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
         }
         else
-            drawItem(g, dim, screenPoint.x, screenPoint.y, b.getImage(rotation), b.getSize());
+            drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize());
+    }
+    
+    private static final int ANIMATION_SPEED = 1000;
+    
+    private Image getCurrentImage(Animation a)
+    {
+        long frame = lastPaint/ANIMATION_SPEED%a.getImageCount();
+        return a.getImage((int)frame);
     }
     
     public World getWorld()

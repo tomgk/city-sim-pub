@@ -231,13 +231,15 @@ public final class GamePanel extends JComponent
         repaintTimer.start();
     }
     
+    private static final int REFRESH_TIME = 1000;
+    
     private synchronized void update()
     {
         execute(() -> {
             World world_ = worldHolder.get();
 
             world_.update();
-            long u = world_.getLastChange();
+            long u = Math.max(world_.getLastChange(), lastPaint+REFRESH_TIME);
             if(u >= lastPaint)
             {
                 //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");

@@ -32,7 +32,7 @@ public class Animation
         images.add(Utils.loadImage(name));
         //add aditional frames (if they exist)
         for(int i=1;i<numFrames;++i)
-            images.add(Utils.loadImage(name+"-"+i));
+            images.add(Utils.loadImage(name+"_"+i));
         
         return new Animation(name, List.copyOf(images));
     }

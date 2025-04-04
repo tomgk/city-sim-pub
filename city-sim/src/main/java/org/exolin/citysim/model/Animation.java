@@ -2,6 +2,7 @@ package org.exolin.citysim.model;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.ui.Utils;
 
@@ -21,15 +22,21 @@ public class Animation
         this.images = List.copyOf(images);
     }
     
-    public static Animation create(String name)
+    public static Animation create(String name, int numFrames)
     {
-        //todo: add other animation parts
-        return new Animation(List.of(Utils.loadImage(name)));
+        List<BufferedImage> images = new ArrayList<>(numFrames);
+        
+        images.add(Utils.loadImage(name));
+        //add aditional frames (if they exist)
+        for(int i=1;i<numFrames;++i)
+            images.add(Utils.loadImage(name+"-"+i));
+        
+        return new Animation(List.copyOf(images));
     }
     
-    public static Animation ofUnanimated(BufferedImage img)
+    public static Animation createUnanimated(String name)
     {
-        return new Animation(List.of(img));
+        return new Animation(List.of(Utils.loadImage(name)));
     }
 
     public Image getImage(int index)
@@ -49,12 +56,8 @@ public class Animation
 
     public static List<Animation> noAnimation(List<String> variants)
     {
-        List<BufferedImage> images = variants.stream()
-                .map(Utils::loadImage)
-                .toList();
-        
-        return images.stream()
-                .map(Animation::ofUnanimated)
+        return variants.stream()
+                .map(Animation::createUnanimated)
                 .toList();
     }
 }

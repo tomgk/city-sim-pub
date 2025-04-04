@@ -23,12 +23,12 @@ public class Zones
     
     private static ZoneType createUserplaceableZone(String name)
     {
-        return new ZoneType(name, Animation.create(name), 1, true);
+        return new ZoneType(name, Animation.createUnanimated(name), 1, true);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType(name, Animation.create(name), 1, false);
+        return new ZoneType(name, Animation.createUnanimated(name), 1, false);
     }
 
     static void init()

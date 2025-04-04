@@ -14,7 +14,7 @@ public class BusinessBuildings
     public static final ActualBuildingType office = createBuildingType("office", 4, zone_business);
     public static final ActualBuildingType office2 = createBuildingType("office_2", 3, zone_business);
     public static final ActualBuildingType office3 = createBuildingType("office_3", 3, zone_business);
-    public static final ActualBuildingType car_cinema = createBuildingType(Animation.create("car-cinema", 9), 4, zone_business);
+    public static final ActualBuildingType car_cinema = createBuildingType(Animation.createAnimation("car-cinema", 9), 4, zone_business);
     public static final ActualBuildingType cinema = createBuildingType("cinema", 3, zone_business);
     public static final ActualBuildingType parkbuilding = createBuildingType("parkbuilding", 3, zone_business);
     

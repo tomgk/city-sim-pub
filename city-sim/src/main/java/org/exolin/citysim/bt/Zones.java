@@ -1,7 +1,7 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
-import org.exolin.citysim.model.Animation;
+import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.ZoneType;
 
 /**
@@ -23,12 +23,12 @@ public class Zones
     
     private static ZoneType createUserplaceableZone(String name)
     {
-        return new ZoneType(name, Animation.createUnanimated(name), 1, true);
+        return new ZoneType(name, createUnanimated(name), 1, true);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType(name, Animation.createUnanimated(name), 1, false);
+        return new ZoneType(name, createUnanimated(name), 1, false);
     }
 
     static void init()

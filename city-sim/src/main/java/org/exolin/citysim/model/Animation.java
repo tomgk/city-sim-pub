@@ -25,7 +25,7 @@ public class Animation
         this.images = List.copyOf(images);
     }
     
-    public static Animation create(String name, int numFrames)
+    public static Animation createAnimation(String name, int numFrames)
     {
         List<BufferedImage> images = new ArrayList<>(numFrames);
         

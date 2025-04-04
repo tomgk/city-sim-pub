@@ -3,12 +3,12 @@ package org.exolin.citysim.ui;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import static org.exolin.citysim.bt.Streets.street;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.street.StreetType;
 import org.exolin.citysim.model.street.StreetVariant;
 
 /**
@@ -18,12 +18,14 @@ import org.exolin.citysim.model.street.StreetVariant;
 public class StreetBuilder implements BuildingAction
 {
     private final GetWorld getWorld;
+    private final StreetType type;
     private Point start;
     private Rectangle marking;
 
-    public StreetBuilder(GetWorld getWorld)
+    public StreetBuilder(GetWorld getWorld, StreetType type)
     {
         this.getWorld = getWorld;
+        this.type = type;
     }
 
     @Override
@@ -120,7 +122,7 @@ public class StreetBuilder implements BuildingAction
             int x = marking.x + diffX * i;
             int y = marking.y + diffY * i;
 
-            world.addBuilding(street, x, y, variant);
+            world.addBuilding(type, x, y, variant);
         }
 
         start = null;
@@ -130,7 +132,7 @@ public class StreetBuilder implements BuildingAction
     @Override
     public BuildingType getBuilding()
     {
-        return street;
+        return type;
     }
 
     @Override
@@ -145,7 +147,7 @@ public class StreetBuilder implements BuildingAction
         else
             variant = CONNECT_X;
 
-        return street.getBrightImage(variant);
+        return type.getBrightImage(variant);
     }
 
     @Override

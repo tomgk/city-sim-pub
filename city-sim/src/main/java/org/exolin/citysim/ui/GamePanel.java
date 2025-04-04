@@ -25,6 +25,7 @@ import java.util.Objects;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import static org.exolin.citysim.bt.Streets.rail;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ActualBuildingType;
 import org.exolin.citysim.model.Animation;
@@ -35,6 +36,7 @@ import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
+import static org.exolin.citysim.bt.Streets.street;
 
 /**
  *
@@ -77,7 +79,8 @@ public final class GamePanel extends JComponent
         List<Action> sactions = new ArrayList<>();
         sactions.add(Action.NONE);
         sactions.add(new TearDownAction(getWorld, false));
-        sactions.add(new StreetBuilder(getWorld));
+        sactions.add(new StreetBuilder(getWorld, street));
+        sactions.add(new StreetBuilder(getWorld, rail));
         actions.put("Special", sactions);
         
         {

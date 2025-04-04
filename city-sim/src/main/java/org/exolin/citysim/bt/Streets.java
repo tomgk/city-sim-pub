@@ -28,6 +28,22 @@ public class Streets
             createUnanimated("street_t_3"),
             createUnanimated("street_t_4")), 1);
     
+    public static final StreetType rail = createStreetType("rail", List.of(
+            createUnanimated("rail_1"),
+            createUnanimated("rail_2"),
+            
+            createUnanimated("rail_x_intersection"),
+            
+            createUnanimated("rail_curve_1"),
+            createUnanimated("rail_curve_2"),
+            createUnanimated("rail_curve_3"),
+            createUnanimated("rail_curve_4"),
+            
+            createUnanimated("rail_t_1"),
+            createUnanimated("rail_t_2"),
+            createUnanimated("rail_t_3"),
+            createUnanimated("rail_t_4")), 1);
+    
     private static StreetType createStreetType(String name, List<Animation> variants, int size)
     {
         return new StreetType(name, variants, size);

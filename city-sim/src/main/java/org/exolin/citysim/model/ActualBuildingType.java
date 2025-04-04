@@ -28,9 +28,9 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     }
 
     @Override
-    public Class<Variant> getVariantClass()
+    public ActualBuildingType.Variant getDefaultVariant()
     {
-        return Variant.class;
+        return ActualBuildingType.Variant.DEFAULT;
     }
 
     @Override

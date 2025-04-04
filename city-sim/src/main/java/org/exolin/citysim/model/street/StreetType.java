@@ -19,11 +19,11 @@ public class StreetType extends BuildingType<Street, StreetVariant>
     }
 
     @Override
-    public Class<StreetVariant> getVariantClass()
+    public StreetVariant getDefaultVariant()
     {
-        return StreetVariant.class;
+        return ConnectVariant.CONNECT_X;
     }
-    
+
     @Override
     public Street createBuilding(int x, int y, StreetVariant variant)
     {

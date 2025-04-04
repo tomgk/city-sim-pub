@@ -25,8 +25,6 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     
     private static final List<BuildingType> instances = new ArrayList<>();
     
-    public abstract Class<E> getVariantClass();
-    
     public static List<BuildingType> types()
     {
         return instances;
@@ -93,12 +91,10 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     
     public BufferedImage getDefaultImage()
     {
-        E[] enumConstants = getVariantClass().getEnumConstants();
-        if(enumConstants == null)
-            return new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
-        
-        return getImage(enumConstants[0]).getDefault();
+        return images.get(getDefaultVariant().index()).getDefault();
     }
+    
+    public abstract E getDefaultVariant();
 
     public BufferedImage getBrightImage()
     {

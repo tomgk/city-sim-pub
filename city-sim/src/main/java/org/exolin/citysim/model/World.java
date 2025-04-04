@@ -110,7 +110,7 @@ public final class World
     
     public <B extends Building, E extends BuildingVariant> B addBuilding(BuildingType<B, E> type, int x, int y)
     {
-        return addBuilding(type, x, y, type.getVariantClass().getEnumConstants()[0]);
+        return addBuilding(type, x, y, type.getDefaultVariant());
     }
     
     public <B extends Building, E extends BuildingVariant> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)

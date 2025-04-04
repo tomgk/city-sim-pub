@@ -47,11 +47,10 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     }
 
     @Override
-    public Class<Variant> getVariantClass()
+    public Variant getDefaultVariant()
     {
-        return Variant.class;
+        return Variant.DEFAULT;
     }
-
 
     @Override
     public Zone createBuilding(int x, int y, Variant variant)

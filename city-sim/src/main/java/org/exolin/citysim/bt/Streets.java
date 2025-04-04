@@ -12,7 +12,10 @@ import org.exolin.citysim.model.street.StreetType;
  */
 public class Streets
 {
-    public static final StreetType street = createStreetType("street", List.of(createUnanimated("street_1"), createUnanimated("street_2"),
+    public static final StreetType street = createStreetType("street", List.of(
+            createUnanimated("street_1"),
+            createUnanimated("street_2"),
+            
             createAnimation("street_x_intersection", 5),
             
             createUnanimated("street_curve_1"),

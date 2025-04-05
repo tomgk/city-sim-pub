@@ -52,6 +52,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
             imageLabel.setText("");
             nameLabel.setText(action.getName());
             sizeCaptionLabel.setVisible(false);
+            subtextLabel.setText("");
             sizeLabel.setVisible(false);
         }
         

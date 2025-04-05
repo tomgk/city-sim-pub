@@ -26,7 +26,7 @@ public class ZonePlacementTest
     
     private void makeMove(Point start, Point end, World world, ZoneType type)
     {
-        ZonePlacement z = new ZonePlacement(() -> world, type);
+        ZonePlacement z = new ZonePlacement(() -> world, type, ZoneType.Variant.DEFAULT);
         
         z.mouseDown(start);
         z.moveMouse(end);

@@ -1,7 +1,6 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
-import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.ZoneType;
 
 /**
@@ -10,9 +9,9 @@ import org.exolin.citysim.model.ZoneType;
  */
 public class Zones
 {
-    public static final ZoneType zone_residential = createUserplaceableZone("zone_residential");
-    public static final ZoneType zone_business = createUserplaceableZone("zone_business");
-    public static final ZoneType zone_industrial = createUserplaceableZone("zone_industrial");
+    public static final ZoneType zone_residential = createUserplaceableZone("zone_residential", true);
+    public static final ZoneType zone_business = createUserplaceableZone("zone_business", true);
+    public static final ZoneType zone_industrial = createUserplaceableZone("zone_industrial", true);
     
     public static ZoneType special = createSpecialZone("zone_special");
     
@@ -21,14 +20,14 @@ public class Zones
     public static final List<ZoneType> BASIC_ZONES = List.of(zone_residential, zone_business, zone_industrial);
     
     
-    private static ZoneType createUserplaceableZone(String name)
+    private static ZoneType createUserplaceableZone(String name, boolean withLowDensity)
     {
-        return new ZoneType(name, createUnanimated(name), 1, true);
+        return new ZoneType(name, 1, true, withLowDensity);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType(name, createUnanimated(name), 1, false);
+        return new ZoneType(name, 1, false, false);
     }
 
     static void init()

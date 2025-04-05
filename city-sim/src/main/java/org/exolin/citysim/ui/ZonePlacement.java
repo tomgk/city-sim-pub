@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ZoneType;
@@ -14,18 +15,35 @@ import org.exolin.citysim.model.ZoneType;
  */
 public class ZonePlacement extends AreaAction implements BuildingAction
 {
-    private final BuildingType building;
+    private final ZoneType zoneType;
+    private final ZoneType.Variant variant;
 
-    public ZonePlacement(GetWorld world, ZoneType building)
+    public ZonePlacement(GetWorld world, ZoneType building, ZoneType.Variant variant)
     {
         super(world);
-        this.building = building;
+        this.zoneType = building;
+        this.variant = variant;
     }
 
     @Override
     public String getName()
     {
-        return "zone for "+building.getName();
+        return "zone for "+zoneType.getName();
+    }
+
+    @Override
+    public String getSubtext()
+    {
+        if(variant == ZoneType.Variant.LOW_DENSITY)
+            return "low density";
+        
+        return null;
+    }
+
+    @Override
+    public BuildingVariant getVariant()
+    {
+        return variant;
     }
 
     @Override
@@ -46,15 +64,15 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                 Building buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
                 if(buildingAt != null)
                 {
-                    ZoneType zoneType = buildingAt.getZoneType();
+                    ZoneType buildingZoneType = buildingAt.getZoneType();
                     //keep non zone buildings
-                    if(zoneType == null)
+                    if(buildingZoneType == null)
                         continue;
                     
                     world.removeBuildingAt(x, y, true, true);
                 }
 
-                world.addBuilding(building, marking.x + x, marking.y + y);
+                world.addBuilding(zoneType, marking.x + x, marking.y + y, variant);
             }
         }
     }
@@ -62,13 +80,13 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public BuildingType getBuilding()
     {
-        return building;
+        return zoneType;
     }
 
     @Override
     public Image getMarker()
     {
-        return building.getDefaultImage();
+        return zoneType.getImage(variant).getDefault();
     }
 
     @Override

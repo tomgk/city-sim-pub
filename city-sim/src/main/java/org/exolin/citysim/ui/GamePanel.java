@@ -26,6 +26,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import static org.exolin.citysim.bt.Streets.rail;
+import static org.exolin.citysim.bt.Streets.street;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ActualBuildingType;
 import org.exolin.citysim.model.Animation;
@@ -34,9 +35,9 @@ import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.ZoneType;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
-import static org.exolin.citysim.bt.Streets.street;
 
 /**
  *
@@ -69,7 +70,13 @@ public final class GamePanel extends JComponent
     private boolean colorGrid = false;
     
     private WorldView view = WorldView.OVERGROUND;
-
+    
+    private void addZone(List<Action> zoneActions, ZoneType zoneType)
+    {
+        zoneActions.add(new ZonePlacement(worldHolder, zoneType, ZoneType.Variant.LOW_DENSITY));
+        zoneActions.add(new ZonePlacement(worldHolder, zoneType, ZoneType.Variant.DEFAULT));
+    }
+    
     public Map<String, List<Action>> getActions()
     {
         GetWorld getWorld = worldHolder;
@@ -86,9 +93,9 @@ public final class GamePanel extends JComponent
         {
             List<Action> zoneActions = new ArrayList<>();
             zoneActions.add(new TearDownAction(getWorld, true));
-            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_residential));
-            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_business));
-            zoneActions.add(new ZonePlacement(getWorld, Zones.zone_industrial));
+            addZone(zoneActions, Zones.zone_residential);
+            addZone(zoneActions, Zones.zone_business);
+            addZone(zoneActions, Zones.zone_industrial);
             actions.put("Zones", zoneActions);
         }
         

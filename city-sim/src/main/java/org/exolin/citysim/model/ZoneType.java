@@ -13,14 +13,28 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     
     public enum Variant implements BuildingVariant
     {
-        DEFAULT
+        DEFAULT,
+        LOW_DENSITY
     }
     
     private final List<ActualBuildingType> buildings = new ArrayList<>();
     
-    public ZoneType(String name, Animation animation, int size, boolean userPlaceableZone)
+    private static List<Animation> getAnimations(String name, boolean withLowDensity)
     {
-        super(name, animation, size);
+        Animation baseAnimation = Animation.createUnanimated(name);
+        
+        if(withLowDensity)
+        {
+            Animation lowRes = Animation.createUnanimated(name+"_low");
+            return List.of(baseAnimation, lowRes);
+        }
+        
+        return List.of(baseAnimation);
+    }
+    
+    public ZoneType(String name, int size, boolean userPlaceableZone, boolean withLowDensity)
+    {
+        super(name, getAnimations(name, withLowDensity), size);
         this.userPlaceableZone = userPlaceableZone;
     }
 

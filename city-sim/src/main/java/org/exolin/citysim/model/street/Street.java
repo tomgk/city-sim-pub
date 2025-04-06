@@ -1,5 +1,7 @@
 package org.exolin.citysim.model.street;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
@@ -26,13 +28,16 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         return (StreetType)super.getType();
     }
     
-    private boolean containsStreet(World world, int x, int y)
+    private Street getStreet(World world, int x, int y)
     {
         Building b = world.getBuildingAt(x, y);
         if(b == null)
-            return false;
+            return null;
         
-        return b.getType() == getType();
+        if(b.getType() != getType())
+            return null;
+        
+        return (Street)b;
     }
 
     @Override
@@ -41,16 +46,33 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         return getVariant().rotate(rotation);
     }
     
+    private final List<Street> connections = new ArrayList<>(4);
+
+    private void addConnection(Street street)
+    {
+        if(street != null)
+            connections.add(street);
+    }
+    
     @Override
     protected void update(World world)
     {
-        //System.out.println("Update street @ "+getX()+"/"+getY());
+        Street x_before_street = getStreet(world, getX()-1, getY());
+        Street x_after_street = getStreet(world, getX()+1, getY());
+        Street y_before_street = getStreet(world, getX(), getY()-1);
+        Street y_after_street = getStreet(world, getX(), getY()+1);
         
-        boolean x_before = containsStreet(world, getX()-1, getY());
-        boolean x_after = containsStreet(world, getX()+1, getY());
+        connections.clear();
+        addConnection(x_before_street);
+        addConnection(x_after_street);
+        addConnection(y_before_street);
+        addConnection(y_after_street);
         
-        boolean y_before = containsStreet(world, getX(), getY()-1);
-        boolean y_after = containsStreet(world, getX(), getY()+1);
+        boolean x_before = x_before_street != null;
+        boolean x_after = x_after_street != null;
+        
+        boolean y_before = y_before_street != null;
+        boolean y_after = y_after_street != null;
         
         if(x_before && x_after && y_before && y_after)
             setVariant(world, X_INTERSECTION);

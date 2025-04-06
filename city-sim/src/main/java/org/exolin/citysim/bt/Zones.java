@@ -22,12 +22,12 @@ public class Zones
     
     private static ZoneType createUserplaceableZone(String name, boolean withLowDensity)
     {
-        return new ZoneType("zone_"+name, "zone/zone_"+name, 1, true, withLowDensity);
+        return new ZoneType("zone_"+name, "zone/"+name, 1, true, withLowDensity);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType("zone_"+name, "zone/zone_"+name, 1, false, false);
+        return new ZoneType("zone_"+name, "zone/"+name, 1, false, false);
     }
 
     static void init()

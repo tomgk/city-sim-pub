@@ -20,6 +20,8 @@ public class ResidentialBuildings
     public static final ActualBuildingType small_houses_7 = createBuildingType("small_houses_7", 1, Zones.zone_residential);
     public static final ActualBuildingType small_houses_8 = createBuildingType("small_houses_8", 1, Zones.zone_residential);
     public static final ActualBuildingType small_houses_9 = createBuildingType("small_houses_9", 1, Zones.zone_residential);
+    public static final ActualBuildingType small_houses_10 = createBuildingType("small_houses_10", 1, Zones.zone_residential);
+    public static final ActualBuildingType small_houses_11 = createBuildingType("small_houses_11", 1, Zones.zone_residential);
     
     public static final ActualBuildingType house_1 = createBuildingType("house_1", 3, Zones.zone_residential);
     public static final ActualBuildingType house_2 = createBuildingType("house_2", 3, Zones.zone_residential);

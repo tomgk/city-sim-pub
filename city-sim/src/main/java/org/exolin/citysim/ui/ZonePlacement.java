@@ -84,6 +84,12 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     }
 
     @Override
+    public Image getIcon()
+    {
+        return Utils.removeGround(zoneType.getImage(variant).getDefault());
+    }
+
+    @Override
     public Image getMarker()
     {
         return zoneType.getImage(variant).getDefault();

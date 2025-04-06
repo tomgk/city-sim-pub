@@ -1,7 +1,13 @@
 package org.exolin.citysim.ui;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -71,5 +77,25 @@ public class Utils
         }
         
         return bi;
+    }
+
+    static Image removeGround(BufferedImage image)
+    {
+        ImageFilter filter = new RGBImageFilter()
+        {
+            @Override
+            public final int filterRGB(int x, int y, int rgb)
+            {
+                System.out.println(Integer.toHexString(rgb));
+                
+                if(rgb == 0xFF988747)
+                    return 0x00000000;
+                
+                return rgb;
+            }
+        };
+
+        ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
+        return Toolkit.getDefaultToolkit().createImage(ip);
     }
 }

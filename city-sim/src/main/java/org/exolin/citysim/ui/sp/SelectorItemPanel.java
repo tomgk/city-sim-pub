@@ -8,7 +8,6 @@ import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.ui.Action;
 import org.exolin.citysim.ui.ActionWithImage;
 import org.exolin.citysim.ui.BuildingAction;
@@ -31,9 +30,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
         {
             BuildingType building = ba.getBuilding();
             
-            BuildingVariant variant = ba.getVariant();
-            
-            imageLabel.setIcon(new ImageIcon(variant != null ? building.getImage(variant).getDefault() : building.getDefaultImage()));
+            imageLabel.setIcon(new ImageIcon(ba.getIcon()));
             imageLabel.setText("");
             nameLabel.setText(building.getName());
             String subtext = ba.getSubtext();

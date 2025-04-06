@@ -22,12 +22,6 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         super(type, x, y, variant);
     }
 
-    @Override
-    public StreetType getType()
-    {
-        return (StreetType)super.getType();
-    }
-    
     private Street getStreet(World world, int x, int y)
     {
         Building b = world.getBuildingAt(x, y);

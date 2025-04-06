@@ -10,10 +10,4 @@ public class Zone extends Building
     {
         super(type, x, y, variant);
     }
-
-    @Override
-    public ZoneType getType()
-    {
-        return (ZoneType)super.getType();
-    }
 }

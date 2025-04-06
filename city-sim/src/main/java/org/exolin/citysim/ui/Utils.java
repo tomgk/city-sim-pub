@@ -86,7 +86,7 @@ public class Utils
             @Override
             public final int filterRGB(int x, int y, int rgb)
             {
-                System.out.println(Integer.toHexString(rgb));
+                //System.out.println(Integer.toHexString(rgb));
                 
                 if(rgb == 0xFF988747)
                     return 0x00000000;

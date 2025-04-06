@@ -64,8 +64,7 @@ public enum Rotation
     
     public void rotateTop(int gridSize, int x, int y, int size, Point point)
     {
-        size -= 1;
-        rotateTop0(gridSize, x, y, size, point);
+        rotateTop0(gridSize, x, y, size-1, point);
     }
     
     protected abstract void rotateTop0(int gridSize, int x, int y, int size, Point point);

@@ -29,6 +29,18 @@ public final class World
     private final int gridSize;
     private final List<Building> buildings = new ArrayList<>();
     
+    private boolean checkOverlap;
+    
+    public void enableOverlap()
+    {
+        checkOverlap = true;
+    }
+    
+    public void disableOverlap()
+    {
+        checkOverlap = false;
+    }
+    
     private final Map<ZoneType, Integer> buildSupply = new HashMap<>();
     {
         for(ZoneType t: Zones.BASIC_ZONES)
@@ -79,6 +91,9 @@ public final class World
                 //but it is about removing zoning
                 else if(zoneType == null && removeZoning)
                     continue;
+                
+                if(checkOverlap)
+                    throw new IllegalArgumentException();
                 
                 it.remove();
                 

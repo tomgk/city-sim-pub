@@ -8,10 +8,38 @@ import java.awt.Point;
  */
 public enum Rotation
 {
-    ORIGINAL,
-    PLUS_90,
-    PLUS_180,
-    PLUS_270;
+    ORIGINAL{
+        @Override
+        protected void rotateTop0(int gridSize, int x, int y, int size, Point point)
+        {
+            point.x = x;
+            point.y = y;
+        }
+    },
+    PLUS_90{
+        @Override
+        protected void rotateTop0(int gridSize, int x, int y, int size, Point point)
+        {
+            point.x = gridSize - y - 1 - size;
+            point.y = x;
+        }
+    },
+    PLUS_180{
+        @Override
+        protected void rotateTop0(int gridSize, int x, int y, int size, Point point)
+        {
+            point.x = gridSize - x - 1 - size;
+            point.y = gridSize - y - 1 - size;
+        }
+    },
+    PLUS_270{
+        @Override
+        protected void rotateTop0(int gridSize, int x, int y, int size, Point point)
+        {
+            point.x = y;
+            point.y = gridSize - x - 1 - size;
+        }
+    };
     
     private static final Rotation[] values = values();
     
@@ -37,30 +65,8 @@ public enum Rotation
     public void rotateTop(int gridSize, int x, int y, int size, Point point)
     {
         size -= 1;
-        
-        switch(this)
-        {
-            case ORIGINAL:
-                point.x = x;
-                point.y = y;
-                break;
-            case PLUS_180:
-                point.x = gridSize - x - 1 - size;
-                point.y = gridSize - y - 1 - size;
-                break;
-                
-            case PLUS_90:
-                point.x = gridSize - y - 1 - size;
-                point.y = x;
-                break;
-                
-            case PLUS_270:
-                point.x = y;
-                point.y = gridSize - x - 1 - size;
-                break;
-                
-            default:
-                throw new AssertionError();
-        }
+        rotateTop0(gridSize, x, y, size, point);
     }
+    
+    protected abstract void rotateTop0(int gridSize, int x, int y, int size, Point point);
 }

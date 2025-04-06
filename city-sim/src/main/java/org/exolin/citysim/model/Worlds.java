@@ -21,6 +21,7 @@ public class Worlds
     public static World World1()
     {
         World w = new World(DEFAULT_GRID_SIZE);
+        w.enableOverlap();
         w.addBuilding(office, 6, 3);
         w.addBuilding(office, 9, 12);
         w.addBuilding(car_cinema, 18, 18);
@@ -33,12 +34,14 @@ public class Worlds
         
         w.addBuilding(office, 0, 0);
         
+        w.disableOverlap();
         return w;
     }
 
     public static World World2()
     {
         World w = new World(DEFAULT_GRID_SIZE);
+        w.enableOverlap();
         
         w.addBuilding(office, 6, 6);
         w.addBuilding(parkbuilding, 3, 6);
@@ -55,6 +58,7 @@ public class Worlds
         for(int i=0;i<4;++i)
             w.addBuilding(street, 20, 6+i, CONNECT_Y);
         
+        w.disableOverlap();
         return w;
     }
 }

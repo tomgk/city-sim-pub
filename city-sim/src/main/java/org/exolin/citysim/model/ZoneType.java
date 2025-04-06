@@ -32,9 +32,9 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
         return List.of(baseAnimation);
     }
     
-    public ZoneType(String name, int size, boolean userPlaceableZone, boolean withLowDensity)
+    public ZoneType(String name, String filename, int size, boolean userPlaceableZone, boolean withLowDensity)
     {
-        super(name, getAnimations(name, withLowDensity), size);
+        super(name, getAnimations(filename, withLowDensity), size);
         this.userPlaceableZone = userPlaceableZone;
     }
 

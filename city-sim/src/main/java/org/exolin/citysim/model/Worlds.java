@@ -21,7 +21,7 @@ public class Worlds
     public static World World1()
     {
         World w = new World(DEFAULT_GRID_SIZE);
-        w.enableOverlap();
+        //w.enableOverlap();
         w.addBuilding(office, 6, 3);
         w.addBuilding(office, 9, 12);
         w.addBuilding(car_cinema, 18, 18);

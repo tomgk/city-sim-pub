@@ -41,6 +41,11 @@ public class Animation
     {
         return new Animation(name, List.of(Utils.loadImage(name)));
     }
+    
+    public static Animation createUnanimated(String name, BufferedImage image)
+    {
+        return new Animation(name, List.of(image));
+    }
 
     public String getName()
     {

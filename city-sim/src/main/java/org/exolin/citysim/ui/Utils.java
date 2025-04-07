@@ -1,6 +1,7 @@
 package org.exolin.citysim.ui;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -8,9 +9,12 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import org.exolin.citysim.model.Animation;
 
 /**
  *
@@ -97,5 +101,16 @@ public class Utils
 
         ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
         return Toolkit.getDefaultToolkit().createImage(ip);
+    }
+
+    public static BufferedImage createOffsetImage(BufferedImage image, int xoffset, int yoffset)
+    {
+        BufferedImage newImage = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = newImage.createGraphics();
+        g2d.drawImage(image, xoffset, yoffset, null);
+        g2d.dispose();
+
+        return newImage;
     }
 }

@@ -8,6 +8,7 @@ import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Tree;
+import org.exolin.citysim.model.TreeType;
 import org.exolin.citysim.model.World;
 
 /**
@@ -63,7 +64,7 @@ public class PlaceTrees implements BuildingAction
         if(alreadyPlaced+1 >= Trees.TREES.size())
             return;
         
-        w.addBuilding(Trees.TREES.get(alreadyPlaced), marking.x, marking.y);
+        w.addBuilding(Trees.TREES.get(alreadyPlaced), marking.x, marking.y, TreeType.Variant.random());
         w.reduceMoney(3);
     }
     

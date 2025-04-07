@@ -30,6 +30,7 @@ public final class World
     private final List<Building> buildings = new ArrayList<>();
     
     private boolean checkOverlap;
+    private long money;
     
     public void enableOverlap()
     {
@@ -52,9 +53,25 @@ public final class World
         return gridSize;
     }
 
-    public World(@JsonProperty("gridSize") int gridSize)
+    public long getMoney()
+    {
+        return money;
+    }
+
+    public void setMoney(long money)
+    {
+        this.money = money;
+    }
+
+    public void reduceMoney(long money)
+    {
+        this.money -= money;
+    }
+    
+    public World(int gridSize, long money)
     {
         this.gridSize = gridSize;
+        this.money = money;
     }
     
     public Building getBuildingAt(int x, int y)

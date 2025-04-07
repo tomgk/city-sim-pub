@@ -63,7 +63,8 @@ public class PlaceTrees implements BuildingAction
         if(alreadyPlaced+1 >= Trees.TREES.size())
             return;
         
-        world.get().addBuilding(Trees.TREES.get(alreadyPlaced), marking.x, marking.y);
+        w.addBuilding(Trees.TREES.get(alreadyPlaced), marking.x, marking.y);
+        w.reduceMoney(3);
     }
     
     @Override

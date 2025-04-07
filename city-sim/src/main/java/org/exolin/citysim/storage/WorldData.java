@@ -15,12 +15,18 @@ public class WorldData
     private final int gridSize;
     
     @JsonProperty
+    private final long money;
+    
+    @JsonProperty
     private final List<BuildingData> buildings;
 
     @JsonCreator
-    public WorldData(@JsonProperty("gridSize") int gridSize, @JsonProperty("buildings") List<BuildingData> buildings)
+    public WorldData(@JsonProperty("gridSize") int gridSize,
+            @JsonProperty("money") int money,
+            @JsonProperty("buildings") List<BuildingData> buildings)
     {
         this.gridSize = gridSize;
+        this.money = money;
         this.buildings = buildings;
     }
 
@@ -30,7 +36,7 @@ public class WorldData
                 .stream()
                 .map(BuildingData::create)
                 .toList();
-        
+        this.money = world.getMoney();
         this.gridSize = world.getGridSize();
     }
 
@@ -44,9 +50,14 @@ public class WorldData
         return gridSize;
     }
 
+    public long getMoney()
+    {
+        return money;
+    }
+    
     public World createWorld()
     {
-        World w = new World(gridSize);
+        World w = new World(gridSize, money);
         
         for(BuildingData bd : buildings)
             bd.createBuilding(w);

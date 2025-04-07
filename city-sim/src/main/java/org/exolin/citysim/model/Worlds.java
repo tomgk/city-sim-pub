@@ -17,10 +17,11 @@ import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 public class Worlds
 {
     private static final int DEFAULT_GRID_SIZE = 30;
+    private static final int DEFAULT_MONEY = 100000;
     
     public static World World1()
     {
-        World w = new World(DEFAULT_GRID_SIZE);
+        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         //w.enableOverlap();
         w.addBuilding(office, 6, 3);
         w.addBuilding(office, 9, 12);
@@ -40,7 +41,7 @@ public class Worlds
 
     public static World World2()
     {
-        World w = new World(DEFAULT_GRID_SIZE);
+        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         w.enableOverlap();
         
         w.addBuilding(office, 6, 6);

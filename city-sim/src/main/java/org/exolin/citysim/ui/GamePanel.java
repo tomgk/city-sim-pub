@@ -371,6 +371,7 @@ public final class GamePanel extends JComponent
             g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
             g.drawString("View: "+view, 0, start + lineHeight * 4);
             g.drawString("Rotation: "+rotation, 0, start + lineHeight * 5);
+            g.drawString("Money: "+worldHolder.get().getMoney(), 0, start + lineHeight * 6);
         }
     }
     

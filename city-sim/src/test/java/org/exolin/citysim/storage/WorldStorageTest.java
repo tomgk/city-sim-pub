@@ -83,7 +83,7 @@ public class WorldStorageTest
         ActualBuilding building = new ActualBuilding(BusinessBuildings.cinema, 16, 99, ActualBuildingType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"cinema","x":16,"y":99}
+                          {"type":"business/cinema","x":16,"y":99}
                           """;
         JSONAssert.assertEquals(expected, output, false);
     }
@@ -93,7 +93,7 @@ public class WorldStorageTest
     {
         World w = new World(30);
         InputStream in = createInputStream("""
-                                           {"type":"cinema","x":16,"y":5}
+                                           {"type":"business/cinema","x":16,"y":5}
                                            """);
         WorldStorage.deserialize(in, w);
         Building b = getBuilding(w);
@@ -143,7 +143,7 @@ public class WorldStorageTest
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
-                                {"type":"cinema","x":16,"y":5}
+                                {"type":"business/cinema","x":16,"y":5}
                             ]
                           }
                           """;
@@ -159,7 +159,7 @@ public class WorldStorageTest
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
-                                {"type":"cinema","x":16,"y":5}
+                                {"type":"business/cinema","x":16,"y":5}
                             ]
                           }
                           """;

@@ -20,6 +20,45 @@ import org.exolin.citysim.ui.sp.SelectorPanel;
  */
 public class Main
 {
+    private static JFrame createSelector(SelectorPanel sp)
+    {
+        JFrame selector = new JFrame("Selector");
+        selector.setLayout(new BorderLayout());
+        selector.add(sp, BorderLayout.CENTER);
+        selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        selector.setSize(300, 700);
+        return selector;
+    }
+    
+    private static class KeyListener extends KeyAdapter
+    {
+        private final GamePanel gp;
+        private final JFrame selector;
+        private final GameControlPanel gd;
+
+        private KeyListener(GamePanel gp, JFrame selector, org.exolin.citysim.ui.GameControlPanel gd)
+        {
+            this.gp = gp;
+            this.selector = selector;
+            this.gd = gd;
+        }
+        
+        @Override
+        public void keyPressed(KeyEvent e)
+        {
+            switch(e.getKeyCode())
+            {
+                case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
+                case KeyEvent.VK_F7 -> gp.setRotation(gp.getRotation().getNext());
+                case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
+                case KeyEvent.VK_F9 -> gp.toggleDebug();
+                case KeyEvent.VK_F10 -> selector.setVisible(!selector.isVisible());
+                case KeyEvent.VK_F11 -> gp.toggleColorGrid();
+                case KeyEvent.VK_F12 -> gd.setVisible(!gd.isVisible());
+            }
+        }
+    }
+    
     public static void main(String[] args)
     {
         BuildingTypes.init();
@@ -57,11 +96,7 @@ public class Main
                 sp.add(e.getKey(), a);
         }
         
-        JFrame selector = new JFrame("Selector");
-        selector.setLayout(new BorderLayout());
-        selector.add(sp, BorderLayout.CENTER);
-        selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        selector.setSize(300, 700);
+        JFrame selector = createSelector(sp);
         selector.setVisible(true);
         
         sp.doneAdding();
@@ -69,23 +104,7 @@ public class Main
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
-        f.addKeyListener(new KeyAdapter()
-        {
-            @Override
-            public void keyPressed(KeyEvent e)
-            {
-                switch(e.getKeyCode())
-                {
-                    case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
-                    case KeyEvent.VK_F7 -> gp.setRotation(gp.getRotation().getNext());
-                    case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
-                    case KeyEvent.VK_F9 -> gp.toggleDebug();
-                    case KeyEvent.VK_F10 -> selector.setVisible(!selector.isVisible());
-                    case KeyEvent.VK_F11 -> gp.toggleColorGrid();
-                    case KeyEvent.VK_F12 -> gd.setVisible(!gd.isVisible());
-                }
-            }
-        });
+        f.addKeyListener(new KeyListener(gp, selector, gd));
         
         gp.start();
         f.setVisible(true);

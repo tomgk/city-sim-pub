@@ -64,6 +64,8 @@ public class Main
         selector.setSize(300, 500);
         selector.setVisible(true);
         
+        sp.doneAdding();
+        
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         

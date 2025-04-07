@@ -40,17 +40,27 @@ public class SelectorPanel extends JPanel
         this.categoriesCombobox = new JComboBox<>(categoriesModel);
         categoriesCombobox.addActionListener((ActionEvent e) ->
         {
-            List<Action> a = actions.get((String)categoriesCombobox.getSelectedItem());
-            setList(a != null ? a : List.of());
-            //reset, so that current action isn't out another category
-            SelectorPanel.this.panel.setAction(Action.NONE);
-            setAction = null;
+            executeSelect((String)categoriesCombobox.getSelectedItem());
         });
         
         this.itemsPanel = new JPanel(new GridLayout(0, 1));
         
         add(categoriesCombobox, BorderLayout.NORTH);
         add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
+    }
+    
+    private void executeSelect(String category)
+    {
+        List<Action> a = actions.get(category);
+        setList(a != null ? a : List.of());
+        //reset, so that current action isn't out another category
+        SelectorPanel.this.panel.setAction(Action.NONE);
+        setAction = null;
+    }
+    
+    public void doneAdding()
+    {
+        executeSelect((String)categoriesCombobox.getSelectedItem());
     }
 
     public void setPanel(GamePanel panel)

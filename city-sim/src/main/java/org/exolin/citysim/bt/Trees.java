@@ -13,7 +13,7 @@ public class Trees
 {
     public static TreeType createTree(int count)
     {
-        return new TreeType("trees_"+count, Animation.createUnanimated("trees_"+count), count);
+        return new TreeType("trees_"+count, Animation.createUnanimated("trees/"+count), count);
     }
     
     public static final List<TreeType> TREES = IntStream.range(1, 8)

@@ -13,36 +13,36 @@ import org.exolin.citysim.model.street.StreetType;
 public class Streets
 {
     public static final StreetType street = createStreetType("street", List.of(
-            createUnanimated("street_1"),
-            createUnanimated("street_2"),
+            createUnanimated("street/street_1"),
+            createUnanimated("street/street_2"),
             
-            createAnimation("street_x_intersection", 5),
+            createAnimation("street/street_x_intersection", 5),
             
-            createUnanimated("street_curve_1"),
-            createUnanimated("street_curve_2"),
-            createUnanimated("street_curve_3"),
-            createUnanimated("street_curve_4"),
+            createUnanimated("street/street_curve_1"),
+            createUnanimated("street/street_curve_2"),
+            createUnanimated("street/street_curve_3"),
+            createUnanimated("street/street_curve_4"),
             
-            createUnanimated("street_t_1"),
-            createUnanimated("street_t_2"),
-            createUnanimated("street_t_3"),
-            createUnanimated("street_t_4")), 1);
+            createUnanimated("street/street_t_1"),
+            createUnanimated("street/street_t_2"),
+            createUnanimated("street/street_t_3"),
+            createUnanimated("street/street_t_4")), 1);
     
     public static final StreetType rail = createStreetType("rail", List.of(
-            createUnanimated("rail_1"),
-            createUnanimated("rail_2"),
+            createUnanimated("rail/rail_1"),
+            createUnanimated("rail/rail_2"),
             
-            createUnanimated("rail_x_intersection"),
+            createUnanimated("rail/rail_x_intersection"),
             
-            createUnanimated("rail_curve_1"),
-            createUnanimated("rail_curve_2"),
-            createUnanimated("rail_curve_3"),
-            createUnanimated("rail_curve_4"),
+            createUnanimated("rail/rail_curve_1"),
+            createUnanimated("rail/rail_curve_2"),
+            createUnanimated("rail/rail_curve_3"),
+            createUnanimated("rail/rail_curve_4"),
             
-            createUnanimated("rail_t_1"),
-            createUnanimated("rail_t_2"),
-            createUnanimated("rail_t_3"),
-            createUnanimated("rail_t_4")), 1);
+            createUnanimated("rail/rail_t_1"),
+            createUnanimated("rail/rail_t_2"),
+            createUnanimated("rail/rail_t_3"),
+            createUnanimated("rail/rail_t_4")), 1);
     
     private static StreetType createStreetType(String name, List<Animation> variants, int size)
     {

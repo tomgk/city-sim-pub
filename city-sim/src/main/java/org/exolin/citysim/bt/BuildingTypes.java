@@ -14,7 +14,8 @@ public class BuildingTypes
             IndustrialBuildings.class,
             ResidentialBuildings.class,
             Streets.class,
-            Zones.class
+            Zones.class,
+            Trees.class
         };
         
         for(Class<?> clazz: classes)

@@ -88,6 +88,7 @@ public final class GamePanel extends JComponent
         sactions.add(new TearDownAction(getWorld, false));
         sactions.add(new StreetBuilder(getWorld, street));
         sactions.add(new StreetBuilder(getWorld, rail));
+        sactions.add(new PlaceTrees(getWorld));
         actions.put("Special", sactions);
         
         {

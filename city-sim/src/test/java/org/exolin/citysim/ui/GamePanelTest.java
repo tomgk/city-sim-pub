@@ -71,7 +71,7 @@ public class GamePanelTest
     @Test
     public void getImage()
     {
-        URL url = GamePanel.class.getClassLoader().getResource("office.png");
+        URL url = GamePanel.class.getClassLoader().getResource("business/office.png");
         assertNotNull(url);
     }
 }

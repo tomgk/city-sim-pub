@@ -3,8 +3,10 @@ package org.exolin.citysim.ui;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import org.exolin.citysim.model.ActualBuildingType;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.World;
 
 /**
  *
@@ -13,10 +15,10 @@ import org.exolin.citysim.model.GetWorld;
 public class PlaceBuilding implements BuildingAction
 {
     private final GetWorld world;
-    private final BuildingType type;
+    private final ActualBuildingType type;
     private final Rectangle marking = new Rectangle();
 
-    public PlaceBuilding(GetWorld world, BuildingType type)
+    public PlaceBuilding(GetWorld world, ActualBuildingType type)
     {
         this.world = world;
         this.type = type;
@@ -43,7 +45,9 @@ public class PlaceBuilding implements BuildingAction
     @Override
     public void mouseDown(Point gridPoint)
     {
-        world.get().addBuilding(type, marking.x, marking.y);
+        World w = world.get();
+        w.addBuilding(type, marking.x, marking.y);
+        w.reduceMoney(type.getCost());
     }
 
     @Override

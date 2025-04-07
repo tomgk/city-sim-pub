@@ -14,12 +14,19 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
     }
     
     private final ZoneType zoneType;
+    private final int cost;
     
-    public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType)
+    public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
         zoneType.addBuilding(this);
+        this.cost = cost;
+    }
+
+    public int getCost()
+    {
+        return cost;
     }
     
     public ZoneType getZoneType()

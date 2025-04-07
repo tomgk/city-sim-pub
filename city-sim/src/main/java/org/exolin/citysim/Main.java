@@ -61,7 +61,7 @@ public class Main
         selector.setLayout(new BorderLayout());
         selector.add(sp, BorderLayout.CENTER);
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        selector.setSize(300, 500);
+        selector.setSize(300, 700);
         selector.setVisible(true);
         
         sp.doneAdding();

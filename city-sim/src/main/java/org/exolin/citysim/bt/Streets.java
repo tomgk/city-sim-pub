@@ -26,7 +26,7 @@ public class Streets
             createUnanimated("street/street_t_1"),
             createUnanimated("street/street_t_2"),
             createUnanimated("street/street_t_3"),
-            createUnanimated("street/street_t_4")), 1);
+            createUnanimated("street/street_t_4")), 1, 10);
     
     public static final StreetType rail = createStreetType("rail", List.of(
             createUnanimated("rail/rail_1"),
@@ -42,11 +42,11 @@ public class Streets
             createUnanimated("rail/rail_t_1"),
             createUnanimated("rail/rail_t_2"),
             createUnanimated("rail/rail_t_3"),
-            createUnanimated("rail/rail_t_4")), 1);
+            createUnanimated("rail/rail_t_4")), 1, 25);
     
-    private static StreetType createStreetType(String name, List<Animation> variants, int size)
+    private static StreetType createStreetType(String name, List<Animation> variants, int size, int cost)
     {
-        return new StreetType(name, variants, size);
+        return new StreetType(name, variants, size, cost);
     }
 
     static void init()

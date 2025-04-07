@@ -10,12 +10,20 @@ import org.exolin.citysim.model.BuildingType;
  */
 public class StreetType extends BuildingType<Street, StreetVariant>
 {
-    public StreetType(String name, List<Animation> images, int size)
+    private final int cost;
+    
+    public StreetType(String name, List<Animation> images, int size, int cost)
     {
         super(name, images, size);
+        this.cost = cost;
         
         if(images.size() != StreetVariant.VALUES.size())
             throw new IllegalArgumentException("incorrect image count");
+    }
+
+    public int getCost()
+    {
+        return cost;
     }
 
     @Override

@@ -124,6 +124,7 @@ public class StreetBuilder implements BuildingAction
 
             world.addBuilding(type, x, y, variant);
         }
+        world.reduceMoney(type.getCost() * len);
 
         start = null;
         marking = null;

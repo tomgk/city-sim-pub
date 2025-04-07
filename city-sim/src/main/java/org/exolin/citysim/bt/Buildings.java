@@ -12,6 +12,7 @@ import org.exolin.citysim.model.ZoneType;
 public class Buildings
 {
     public static final ActualBuildingType plant_solar = createBuildingType("plant_solar", 4, Zones.special);
+    public static final ActualBuildingType gas_plant = createBuildingType(Animation.createAnimation("gas_plant", 8), 4, Zones.special);
     
     static ActualBuildingType createBuildingType(String name, int size, ZoneType zoneType)
     {

@@ -1,5 +1,7 @@
 package org.exolin.citysim.model;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Thomas
@@ -15,5 +17,12 @@ public class ActualBuilding extends Building<ActualBuilding, ActualBuildingType,
     public ZoneType getZoneType()
     {
         return getType().getZoneType();
+    }
+
+    @Override
+    public BigDecimal getMaintenance()
+    {
+        //TODO
+        return BigDecimal.ZERO;
     }
 }

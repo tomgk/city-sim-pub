@@ -1,5 +1,6 @@
 package org.exolin.citysim.model.street;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Building;
@@ -106,5 +107,11 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         
         else if(y_before || y_after)
             setVariant(world, CONNECT_Y);
+    }
+
+    @Override
+    public BigDecimal getMaintenance()
+    {
+        return BigDecimal.valueOf(getType().getCost()).divide(BigDecimal.valueOf(100));
     }
 }

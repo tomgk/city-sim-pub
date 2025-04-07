@@ -2,6 +2,7 @@ package org.exolin.citysim.model;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.math.BigDecimal;
 
 /**
  *
@@ -143,4 +144,6 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Buildi
     {
         return getClass().getSimpleName()+"[x="+x+",y="+y+",type="+type.getName()+"]";
     }
+    
+    public abstract BigDecimal getMaintenance();
 }

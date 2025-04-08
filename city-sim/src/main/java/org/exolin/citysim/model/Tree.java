@@ -18,4 +18,10 @@ public class Tree extends Building<Tree, TreeType, TreeType.Variant>
     {
         return BigDecimal.ZERO;
     }
+
+    @Override
+    public BigDecimal getTaxRevenue()
+    {
+        return BigDecimal.ZERO;
+    }
 }

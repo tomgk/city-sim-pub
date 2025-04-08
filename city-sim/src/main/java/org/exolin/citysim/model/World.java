@@ -1,12 +1,13 @@
 package org.exolin.citysim.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
@@ -25,12 +26,16 @@ public final class World
         BuildingTypes.init();
     }
     
+    //hint: lastChange should not be saved in save file,
+    //so that the time gaps where the game doesnt run are just ignored
     private long lastChange = System.currentTimeMillis();
     private final int gridSize;
     private final List<Building> buildings = new ArrayList<>();
     
     private boolean checkOverlap;
-    private long money;
+    private static final int MONEY_PERIOD = 10_000;//10 seconds
+    private long lastMoneyUpdate = System.currentTimeMillis()/MONEY_PERIOD;
+    private BigDecimal money;
     
     public void enableOverlap()
     {
@@ -53,25 +58,25 @@ public final class World
         return gridSize;
     }
 
-    public long getMoney()
+    public BigDecimal getMoney()
     {
         return money;
     }
 
-    public void setMoney(long money)
+    public void setMoney(BigDecimal money)
     {
         this.money = money;
     }
 
     public void reduceMoney(long money)
     {
-        this.money -= money;
+        this.money = this.money.subtract(BigDecimal.valueOf(money));
     }
     
-    public World(int gridSize, long money)
+    public World(int gridSize, BigDecimal money)
     {
         this.gridSize = gridSize;
-        this.money = money;
+        this.money = Objects.requireNonNull(money);
     }
     
     public Building getBuildingAt(int x, int y)
@@ -285,9 +290,23 @@ public final class World
         
         buildSupply.computeIfPresent(type, (k, v) -> v+factor*building.getSupply());
     }
+    
+    private void updateMoney(int ticks)
+    {
+        BigDecimal bigTicks = BigDecimal.valueOf(ticks);
+        for(Building b : buildings)
+            money = money.subtract(b.getMaintenance().multiply(bigTicks));
+    }
 
     public void update()
     {
+        long moneyTime = System.currentTimeMillis()/MONEY_PERIOD;
+        if(moneyTime != lastMoneyUpdate)
+        {
+            updateMoney((int)(moneyTime - lastMoneyUpdate));
+            lastMoneyUpdate = moneyTime;
+        }
+        
         //TODO: maybe no copy
         List<Building> originalBuildings = new ArrayList<>(this.buildings);
         

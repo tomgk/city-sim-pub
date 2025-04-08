@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.math.BigDecimal;
 import static org.exolin.citysim.bt.BusinessBuildings.car_cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.office;
@@ -17,7 +18,7 @@ import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 public class Worlds
 {
     private static final int DEFAULT_GRID_SIZE = 30;
-    private static final int DEFAULT_MONEY = 100000;
+    private static final BigDecimal DEFAULT_MONEY = BigDecimal.valueOf(100000);
     
     public static World World1()
     {

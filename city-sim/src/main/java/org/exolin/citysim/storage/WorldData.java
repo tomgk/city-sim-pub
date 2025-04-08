@@ -2,6 +2,7 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.math.BigDecimal;
 import java.util.List;
 import org.exolin.citysim.model.World;
 
@@ -15,14 +16,14 @@ public class WorldData
     private final int gridSize;
     
     @JsonProperty
-    private final long money;
+    private final BigDecimal money;
     
     @JsonProperty
     private final List<BuildingData> buildings;
 
     @JsonCreator
     public WorldData(@JsonProperty("gridSize") int gridSize,
-            @JsonProperty("money") int money,
+            @JsonProperty("money") BigDecimal money,
             @JsonProperty("buildings") List<BuildingData> buildings)
     {
         this.gridSize = gridSize;
@@ -50,7 +51,7 @@ public class WorldData
         return gridSize;
     }
 
-    public long getMoney()
+    public BigDecimal getMoney()
     {
         return money;
     }

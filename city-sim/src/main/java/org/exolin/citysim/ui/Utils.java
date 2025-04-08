@@ -9,12 +9,9 @@ import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;
 import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
-import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import org.exolin.citysim.model.Animation;
 
 /**
  *

@@ -114,4 +114,10 @@ public class Street extends Building<Street, StreetType, StreetVariant>
     {
         return BigDecimal.valueOf(getType().getCost()).divide(BigDecimal.valueOf(100));
     }
+
+    @Override
+    public BigDecimal getTaxRevenue()
+    {
+        return BigDecimal.ZERO;
+    }
 }

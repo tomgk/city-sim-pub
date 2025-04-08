@@ -145,5 +145,6 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Buildi
         return getClass().getSimpleName()+"[x="+x+",y="+y+",type="+type.getName()+"]";
     }
     
+    public abstract BigDecimal getTaxRevenue();
     public abstract BigDecimal getMaintenance();
 }

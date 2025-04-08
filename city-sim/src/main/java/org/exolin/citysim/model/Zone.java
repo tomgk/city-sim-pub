@@ -18,4 +18,10 @@ public class Zone extends Building
     {
         return BigDecimal.ZERO;
     }
+
+    @Override
+    public BigDecimal getTaxRevenue()
+    {
+        return BigDecimal.ZERO;
+    }
 }

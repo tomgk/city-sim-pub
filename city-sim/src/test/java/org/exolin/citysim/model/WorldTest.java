@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.math.BigDecimal;
 import org.exolin.citysim.bt.BusinessBuildings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -15,7 +16,7 @@ public class WorldTest
     @Test
     public void testGetBuilding()
     {
-        World w = new World(30, 100000);
+        World w = new World(30, BigDecimal.valueOf(100000));
         
         assertEquals(3, BusinessBuildings.cinema.getSize());
         

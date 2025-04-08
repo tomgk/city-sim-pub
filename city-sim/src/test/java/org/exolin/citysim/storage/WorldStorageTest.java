@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
@@ -65,7 +66,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeZone() throws IOException
     {
-        World w = new World(30, 0);
+        World w = new World(30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"zone_residential","x":16,"y":5}
                                            """);
@@ -91,7 +92,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeActualBuilding_Default() throws IOException
     {
-        World w = new World(30, 0);
+        World w = new World(30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"business/cinema","x":16,"y":5}
                                            """);
@@ -117,7 +118,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeStreet() throws IOException
     {
-        World w = new World(30, 0);
+        World w = new World(30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);
@@ -132,7 +133,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeWorld() throws IOException
     {
-        World w = new World(30, 0);
+        World w = new World(30, BigDecimal.ZERO);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);
@@ -156,6 +157,7 @@ public class WorldStorageTest
         String input =    """
                           {
                             "gridSize":30,
+                            "money": 1234,
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
@@ -168,6 +170,7 @@ public class WorldStorageTest
         World w = WorldStorage.deserialize(in);
         
         assertEquals(30, w.getGridSize());
+        assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         
         List<Building> buildings = w.getBuildings();
         assertEquals(3, buildings.size());

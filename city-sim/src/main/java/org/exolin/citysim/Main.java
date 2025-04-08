@@ -12,6 +12,7 @@ import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.ui.sp.SelectorPanel;
 
 /**
@@ -32,12 +33,14 @@ public class Main
     
     private static class KeyListener extends KeyAdapter
     {
+        private final BudgetWindow bw;
         private final GamePanel gp;
         private final JFrame selector;
         private final GameControlPanel gd;
 
-        private KeyListener(GamePanel gp, JFrame selector, org.exolin.citysim.ui.GameControlPanel gd)
+        private KeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, org.exolin.citysim.ui.GameControlPanel gd)
         {
+            this.bw = bw;
             this.gp = gp;
             this.selector = selector;
             this.gd = gd;
@@ -49,6 +52,10 @@ public class Main
             switch(e.getKeyCode())
             {
                 case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
+                case KeyEvent.VK_F6 -> {
+                    bw.update(gp.getWorld());
+                    bw.setVisible(!bw.isVisible());
+                }
                 case KeyEvent.VK_F7 -> gp.setRotation(gp.getRotation().getNext());
                 case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
                 case KeyEvent.VK_F9 -> gp.toggleDebug();
@@ -89,7 +96,6 @@ public class Main
         });
         f.add(gp, BorderLayout.CENTER);
         
-        
         for(Map.Entry<String, List<Action>> e: gp.getActions().entrySet())
         {
             for(Action a: e.getValue())
@@ -104,7 +110,8 @@ public class Main
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
-        f.addKeyListener(new KeyListener(gp, selector, gd));
+        BudgetWindow bw = new BudgetWindow();
+        f.addKeyListener(new KeyListener(bw, gp, selector, gd));
         
         gp.start();
         f.setVisible(true);

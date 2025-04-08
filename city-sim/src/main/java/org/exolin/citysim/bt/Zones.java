@@ -13,7 +13,7 @@ public class Zones
     public static final ZoneType zone_business = createUserplaceableZone("business", true);
     public static final ZoneType zone_industrial = createUserplaceableZone("industrial", true);
     
-    public static ZoneType special = createSpecialZone("special");
+    public static ZoneType zone_plants = createSpecialZone("special");
     
     public static final int BUILDING_DISTANCE = 3;
     

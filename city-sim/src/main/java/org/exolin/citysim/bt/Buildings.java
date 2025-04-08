@@ -11,8 +11,8 @@ import org.exolin.citysim.model.ZoneType;
  */
 public class Buildings
 {
-    public static final ActualBuildingType plant_solar = createBuildingType("plant_solar", 4, Zones.special, 1300);
-    public static final ActualBuildingType gas_plant = createBuildingType(Animation.createAnimation("gas_plant", 8), 4, Zones.special, 6600);
+    public static final ActualBuildingType plant_solar = createBuildingType("plant_solar", 4, Zones.zone_plants, 1300);
+    public static final ActualBuildingType gas_plant = createBuildingType(Animation.createAnimation("gas_plant", 8), 4, Zones.zone_plants, 6600);
     
     static ActualBuildingType createBuildingType(String name, int size, ZoneType zoneType, int cost)
     {

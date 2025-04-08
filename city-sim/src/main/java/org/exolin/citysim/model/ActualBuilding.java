@@ -34,7 +34,7 @@ public class ActualBuilding extends Building<ActualBuilding, ActualBuildingType,
         
         //very trivial temporary way to get a number
         ZoneType zt = getType().getZoneType();
-        if(zt != null && zt != Zones.special)
+        if(zt != null && zt.isUserPlaceableZone())
         {
             int size = getType().getSize();
             int area = size * size;

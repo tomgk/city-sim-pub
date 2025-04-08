@@ -42,8 +42,8 @@ public class BudgetLinePanel extends javax.swing.JPanel
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 300));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setPreferredSize(new java.awt.Dimension(200, 50));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
         incomeLabel.setForeground(new java.awt.Color(0, 204, 0));
         incomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

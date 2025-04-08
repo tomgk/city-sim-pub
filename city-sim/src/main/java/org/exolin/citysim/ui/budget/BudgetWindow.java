@@ -42,6 +42,9 @@ public class BudgetWindow extends JFrame
         
         sum.setBorder(new MatteBorder(1, 0, 0, 0, Color.BLACK));
         add(sum);
+        
+        setTitle("Budget");
+        pack();
     }
     
     public void update(World w)

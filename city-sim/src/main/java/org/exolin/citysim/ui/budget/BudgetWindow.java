@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
 import org.exolin.citysim.model.Building;
@@ -17,7 +18,7 @@ import org.exolin.citysim.model.World;
 public class BudgetWindow extends JFrame
 {
     private final Map<BudgetCategory, BudgetLinePanel> categories = new LinkedHashMap<>();
-    private final BudgetLinePanel sum = new BudgetLinePanel("");
+    private final BudgetLinePanel sum = new BudgetLinePanel("", Optional.empty());
     
     public BudgetWindow()
     {
@@ -34,7 +35,7 @@ public class BudgetWindow extends JFrame
             if(categories.containsKey(category))
                 continue;
             
-            BudgetLinePanel p = new BudgetLinePanel(category.getTitle());
+            BudgetLinePanel p = new BudgetLinePanel(category.getTitle(), Optional.of(category.isIncome()));
             categories.put(category, p);
             add(p);
         }

@@ -35,4 +35,10 @@ public class ZoneCategory implements BudgetCategory
     {
         return zone.getName();
     }
+
+    @Override
+    public boolean isIncome()
+    {
+        return zone.isUserPlaceableZone();
+    }
 }

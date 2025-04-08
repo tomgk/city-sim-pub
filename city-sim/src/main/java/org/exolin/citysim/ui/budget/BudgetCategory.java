@@ -30,4 +30,6 @@ public interface BudgetCategory
         else
             throw new IllegalArgumentException();
     }
+    
+    boolean isIncome();
 }

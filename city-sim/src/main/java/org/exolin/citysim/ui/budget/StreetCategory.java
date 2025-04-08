@@ -35,4 +35,10 @@ public class StreetCategory implements BudgetCategory
     {
         return type.getName();
     }
+
+    @Override
+    public boolean isIncome()
+    {
+        return false;
+    }
 }

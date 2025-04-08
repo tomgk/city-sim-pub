@@ -1,6 +1,7 @@
 package org.exolin.citysim.ui.budget;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 /**
  *
@@ -8,15 +9,18 @@ import java.math.BigDecimal;
  */
 public class BudgetLinePanel extends javax.swing.JPanel
 {
+    private final Optional<Boolean> isIncome;
     private BigDecimal taxRevenue = BigDecimal.ZERO;
     private BigDecimal expenses = BigDecimal.ZERO;
 
     /**
      * Creates new form BudgetLinePanel
      * @param title
+     * @param isIncome
      */
-    public BudgetLinePanel(String title)
+    public BudgetLinePanel(String title, Optional<Boolean> isIncome)
     {
+        this.isIncome = isIncome;
         initComponents();
         titleLabel.setText(title);
     }
@@ -79,13 +83,13 @@ public class BudgetLinePanel extends javax.swing.JPanel
 
     void showValues()
     {
-        incomeLabel.setText(getText(taxRevenue));
-        expenseLabel.setText(getText(expenses));
+        incomeLabel.setText(getText(taxRevenue, !isIncome.orElse(true)));
+        expenseLabel.setText(getText(expenses, isIncome.orElse(false)));
     }
 
-    private String getText(BigDecimal expenses)
+    private String getText(BigDecimal expenses, boolean zeroIsEmpty)
     {
-        if(expenses.equals(BigDecimal.ZERO))
+        if(expenses.equals(BigDecimal.ZERO) && zeroIsEmpty)
             return "";
         
         return expenses.toPlainString();

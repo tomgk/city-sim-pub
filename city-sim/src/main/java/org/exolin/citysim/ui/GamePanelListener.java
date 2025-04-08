@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui;
 
+import org.exolin.citysim.ui.actions.Action;
+
 /**
  *
  * @author Thomas

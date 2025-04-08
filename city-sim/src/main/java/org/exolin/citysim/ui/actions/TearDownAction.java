@@ -1,4 +1,4 @@
-package org.exolin.citysim.ui;
+package org.exolin.citysim.ui.actions;
 
 import java.awt.Cursor;
 import java.awt.Image;
@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.ui.Utils;
 
 /**
  *

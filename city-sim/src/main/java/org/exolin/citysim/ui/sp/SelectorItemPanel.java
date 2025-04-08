@@ -8,9 +8,9 @@ import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.ui.Action;
-import org.exolin.citysim.ui.ActionWithImage;
-import org.exolin.citysim.ui.BuildingAction;
+import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.actions.ActionWithImage;
+import org.exolin.citysim.ui.actions.BuildingAction;
 
 /**
  *

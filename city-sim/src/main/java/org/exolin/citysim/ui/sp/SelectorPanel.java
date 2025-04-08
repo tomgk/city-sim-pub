@@ -13,7 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.GamePanel;
 
 /**

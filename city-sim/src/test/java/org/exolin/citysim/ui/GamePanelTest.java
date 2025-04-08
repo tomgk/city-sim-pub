@@ -1,5 +1,6 @@
 package org.exolin.citysim.ui;
 
+import org.exolin.citysim.ui.actions.Action;
 import java.awt.Point;
 import java.net.URL;
 import javax.swing.JFrame;

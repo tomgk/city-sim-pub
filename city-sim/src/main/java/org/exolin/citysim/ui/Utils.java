@@ -80,7 +80,7 @@ public class Utils
         return bi;
     }
 
-    static Image removeGround(BufferedImage image)
+    public static Image removeGround(BufferedImage image)
     {
         ImageFilter filter = new RGBImageFilter()
         {

@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.model.Worlds;
-import org.exolin.citysim.ui.Action;
+import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;

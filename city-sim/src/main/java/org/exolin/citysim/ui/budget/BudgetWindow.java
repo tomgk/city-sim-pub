@@ -30,6 +30,10 @@ public class BudgetWindow extends JFrame
             if(category == null)
                 continue;
             
+            //only add once
+            if(categories.containsKey(category))
+                continue;
+            
             BudgetLinePanel p = new BudgetLinePanel(category.getTitle());
             categories.put(category, p);
             add(p);

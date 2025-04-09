@@ -56,6 +56,15 @@ public enum Rotation
         
         return values[num];
     }
+    
+    public Rotation getPrev()
+    {
+        int num = ordinal()-1;
+        if(num == -1)
+            num = values.length-1;
+        
+        return values[num];
+    }
 
     public void rotate(int gridSize, int x, int y, Point point)
     {

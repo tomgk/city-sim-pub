@@ -53,13 +53,15 @@ public class Main
             switch(e.getKeyCode())
             {
                 case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
+                case KeyEvent.VK_PAGE_UP -> gp.setRotation(gp.getRotation().getPrev());
+                case KeyEvent.VK_PAGE_DOWN -> gp.setRotation(gp.getRotation().getNext());
+                
                 case KeyEvent.VK_F6 -> {
                     bw.update(gp.getWorld());
                     bw.setVisible(!bw.isVisible());
                 }
-                case KeyEvent.VK_F7 -> gp.setRotation(gp.getRotation().getNext());
+                case KeyEvent.VK_F7 -> gp.toggleDebug();
                 case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
-                case KeyEvent.VK_F9 -> gp.toggleDebug();
                 case KeyEvent.VK_F10 -> selector.setVisible(!selector.isVisible());
                 case KeyEvent.VK_F11 -> gp.toggleColorGrid();
                 case KeyEvent.VK_F12 -> gd.setVisible(!gd.isVisible());

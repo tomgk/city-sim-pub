@@ -22,8 +22,7 @@ public class ActualBuilding extends Building<ActualBuilding, ActualBuildingType,
     @Override
     public BigDecimal getMaintenance()
     {
-        //TODO
-        return BigDecimal.ZERO;
+        return getType().getMaintenance();
     }
 
     @Override

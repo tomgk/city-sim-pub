@@ -3,10 +3,13 @@ package org.exolin.citysim.ui.budget;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
+import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.World;
@@ -20,21 +23,21 @@ public class BudgetWindow extends JFrame
     private final Map<BudgetCategory, BudgetLinePanel> categories = new LinkedHashMap<>();
     private final BudgetLinePanel sum = new BudgetLinePanel("", Optional.empty());
     
+    private static final List<BudgetCategory> list = List.of(
+            new ZoneCategory(Zones.zone_residential),
+            new ZoneCategory(Zones.zone_business),
+            new ZoneCategory(Zones.zone_industrial),
+            new StreetCategory(Streets.street),
+            new StreetCategory(Streets.rail),
+            new ZoneCategory(Zones.zone_plants)
+    );
+    
     public BudgetWindow()
     {
         setLayout(new GridLayout(0, 1));
         
-        for(BuildingType t : BuildingType.types())
+        for(BudgetCategory category : list)
         {
-            BudgetCategory category = BudgetCategory.getFor(t);
-            
-            if(category == null)
-                continue;
-            
-            //only add once
-            if(categories.containsKey(category))
-                continue;
-            
             BudgetLinePanel p = new BudgetLinePanel(category.getTitle(), Optional.of(category.isIncome()));
             categories.put(category, p);
             add(p);
@@ -60,7 +63,14 @@ public class BudgetWindow extends JFrame
             if(category == null)
                 continue;
             
-            categories.get(category).updateValues(b.getTaxRevenue(), b.getMaintenance());
+            BudgetLinePanel panel = categories.get(category);
+            if(panel == null)
+            {
+                new IllegalArgumentException("not mapped "+category).printStackTrace();
+                continue;
+            }
+
+            panel.updateValues(b.getTaxRevenue(), b.getMaintenance());
         }
         
         for(BudgetLinePanel l : categories.values())

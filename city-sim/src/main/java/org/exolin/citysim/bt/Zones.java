@@ -13,7 +13,7 @@ public class Zones
     public static final ZoneType zone_business = createUserplaceableZone("business", true);
     public static final ZoneType zone_industrial = createUserplaceableZone("industrial", true);
     
-    public static ZoneType zone_plants = createSpecialZone("special");
+    public static ZoneType zone_plants = createSpecialZone("plants");
     
     public static final int BUILDING_DISTANCE = 3;
     
@@ -27,7 +27,7 @@ public class Zones
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType("zone_"+name, "zone/"+name, 1, false, false);
+        return new ZoneType("zone_"+name, "zone/special", 1, false, false);
     }
 
     static void init()

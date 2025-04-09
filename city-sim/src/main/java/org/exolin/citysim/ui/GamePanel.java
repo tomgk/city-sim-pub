@@ -539,25 +539,29 @@ public final class GamePanel extends JComponent
         if(markerImage == null)
             markerImage = land_highlighted;
         
-        for(int y=0;y< world.getGridSize();++y)
+        Point rotatedPoint = new Point();
+        
+        for(int ly=0;ly< world.getGridSize();++ly)
         {
-            for(int x=0;x< world.getGridSize();++x)
+            for(int lx=0;lx< world.getGridSize();++lx)
             {
-                boolean current = currentGridPos.x == x && currentGridPos.y == y;
+                rotation.rotate(world.getGridSize(), lx, ly, rotatedPoint);
+                
+                boolean current = currentGridPos.x == rotatedPoint.x && currentGridPos.y == rotatedPoint.y;
                 Image img = current ? land_highlighted : land;
                 
-                if(r.contains(x, y))
+                if(r.contains(rotatedPoint.x, rotatedPoint.y))
                     img = markerImage;
                 
                 //will be drawn later
-                if(scaleMarker && r.contains(x, y))
+                if(scaleMarker && r.contains(rotatedPoint.x, rotatedPoint.y))
                     continue;
                 
                 if(false)
                 {
-                if(scaleMarker && r.contains(x, y))
+                if(scaleMarker && r.contains(rotatedPoint.x, rotatedPoint.y))
                 {
-                    if(x != r.getMaxX()-1 || y != r.getMaxY()-1)
+                    if(rotatedPoint.x != r.getMaxX()-1 || rotatedPoint.y != r.getMaxY()-1)
                         continue;
                     else
                         drawItem(g, dim, r.x, r.y, markerImage, r.width);
@@ -566,7 +570,7 @@ public final class GamePanel extends JComponent
                 }
                 }
                 
-                drawItem(g, dim, x, y, img, 1);
+                drawItem(g, dim, lx, ly, img, 1);
             }
         }
         

@@ -28,6 +28,7 @@ public class Main
         selector.add(sp, BorderLayout.CENTER);
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         selector.setSize(300, 700);
+        selector.setAlwaysOnTop(true);
         return selector;
     }
     

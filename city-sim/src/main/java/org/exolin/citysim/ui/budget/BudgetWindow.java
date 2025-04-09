@@ -45,6 +45,7 @@ public class BudgetWindow extends JFrame
         
         setTitle("Budget");
         pack();
+        setAlwaysOnTop(true);
     }
     
     public void update(World w)

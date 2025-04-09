@@ -145,6 +145,7 @@ public final class GamePanel extends JComponent
         double x = e.getX();
         double y = e.getY();
         transformBack(getDim(), x, y, currentGridPos);
+        rotation.counterRotate(worldHolder.get().getGridSize(), currentGridPos.x, currentGridPos.y, currentGridPos);
     }
     
     private void execute(Runnable b)

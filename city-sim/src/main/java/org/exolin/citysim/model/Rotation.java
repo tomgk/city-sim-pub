@@ -42,6 +42,14 @@ public enum Rotation
     };
     
     private static final Rotation[] values = values();
+    private Rotation counterRotation;
+    static
+    {
+        ORIGINAL.counterRotation = ORIGINAL;
+        PLUS_180.counterRotation = PLUS_180;
+        PLUS_90.counterRotation = PLUS_270;
+        PLUS_270.counterRotation = PLUS_90;
+    }
     
     public int getAmount()
     {
@@ -65,7 +73,12 @@ public enum Rotation
         
         return values[num];
     }
-
+    
+    public void counterRotate(int gridSize, int x, int y, Point point)
+    {
+        counterRotation.rotate(gridSize, x, y, point);
+    }
+    
     public void rotate(int gridSize, int x, int y, Point point)
     {
         rotateTop(gridSize, x, y, 1, point);

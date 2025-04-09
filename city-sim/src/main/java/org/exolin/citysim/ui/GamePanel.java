@@ -1,11 +1,5 @@
 package org.exolin.citysim.ui;
 
-import org.exolin.citysim.ui.actions.PlaceTrees;
-import org.exolin.citysim.ui.actions.TearDownAction;
-import org.exolin.citysim.ui.actions.ZonePlacement;
-import org.exolin.citysim.ui.actions.StreetBuilder;
-import org.exolin.citysim.ui.actions.Action;
-import org.exolin.citysim.ui.actions.PlaceBuilding;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -44,6 +38,12 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ZoneType;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
+import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.actions.PlaceBuilding;
+import org.exolin.citysim.ui.actions.PlaceTrees;
+import org.exolin.citysim.ui.actions.StreetBuilder;
+import org.exolin.citysim.ui.actions.TearDownAction;
+import org.exolin.citysim.ui.actions.ZonePlacement;
 
 /**
  *

@@ -1,7 +1,6 @@
 package org.exolin.citysim.model;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.bt.Zones;
 
 /**
  *

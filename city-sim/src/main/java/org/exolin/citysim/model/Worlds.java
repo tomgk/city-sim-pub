@@ -85,10 +85,8 @@ public class Worlds
         for(int y = zoneSize/2;y<DEFAULT_GRID_SIZE-2;y+=zoneSize)
             placeStreet(w, 0, y, DEFAULT_GRID_SIZE-1, y);
         
-        //for(int x=zoneSize-1;x<DEFAULT_GRID_SIZE-10;x+=zoneSize)
-        //    placeStreet(w, x, 0, x, DEFAULT_GRID_SIZE);
-        
-        //StreetBuilder streetBuilder = new StreetBuilder(getWorld, street);
+        for(int x = zoneSize/2;x<DEFAULT_GRID_SIZE-2;x+=zoneSize*3/2)
+            placeStreet(w, x, 0, x, DEFAULT_GRID_SIZE-1);
         
         return w;
     }

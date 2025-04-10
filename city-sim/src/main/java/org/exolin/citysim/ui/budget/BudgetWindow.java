@@ -12,7 +12,6 @@ import javax.swing.border.MatteBorder;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.World;
 
 /**

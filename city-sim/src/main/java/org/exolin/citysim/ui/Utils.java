@@ -11,6 +11,7 @@ import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
 import javax.imageio.ImageIO;
 
 /**
@@ -109,5 +110,12 @@ public class Utils
         g2d.dispose();
 
         return newImage;
+    }
+    
+    public static String getFilenameWithoutExt(Path path)
+    {
+        String fn = path.getFileName().toString();
+        int pos = fn.indexOf('.');
+        return pos != -1 ? fn.substring(0, pos) : fn;
     }
 }

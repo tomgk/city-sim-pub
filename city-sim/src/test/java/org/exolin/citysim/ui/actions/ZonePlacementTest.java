@@ -37,7 +37,7 @@ public class ZonePlacementTest
     @Test
     public void testZonePlacementOnEmpty()
     {
-        World world = new World(100, BigDecimal.ZERO);
+        World world = new World("Test", 100, BigDecimal.ZERO);
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.zone_business);
         
@@ -59,7 +59,7 @@ public class ZonePlacementTest
     @Disabled
     public void testZoneDisplacement()
     {
-        World world = new World(100, BigDecimal.ZERO);
+        World world = new World("Test", 100, BigDecimal.ZERO);
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.zone_residential);
         makeMove(new Point(2, 7), new Point(4, 10), world, Zones.zone_business);

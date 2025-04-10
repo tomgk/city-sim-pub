@@ -27,6 +27,8 @@ public final class World
         BuildingTypes.init();
     }
     
+    private final String name;
+    
     //hint: lastChange should not be saved in save file,
     //so that the time gaps where the game doesnt run are just ignored
     private long lastChange = System.currentTimeMillis();
@@ -74,10 +76,16 @@ public final class World
         this.money = this.money.subtract(BigDecimal.valueOf(money));
     }
     
-    public World(int gridSize, BigDecimal money)
+    public World(String name, int gridSize, BigDecimal money)
     {
+        this.name = name;
         this.gridSize = gridSize;
         this.money = Objects.requireNonNull(money);
+    }
+
+    public String getName()
+    {
+        return name;
     }
     
     public Building getBuildingAt(int x, int y)

@@ -272,7 +272,7 @@ public class GameControlPanel extends javax.swing.JPanel
             Path p = fileChooser.getSelectedFile().toPath();
             try(InputStream in = Files.newInputStream(p))
             {
-                World w = WorldStorage.deserialize(in);
+                World w = WorldStorage.deserialize(Utils.getFilenameWithoutExt(p), in);
                 panel.setWorld(w, p);
             }catch(IOException e){
                 ErrorDisplay.show(this, e);

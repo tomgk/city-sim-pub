@@ -56,9 +56,9 @@ public class WorldData
         return money;
     }
     
-    public World createWorld()
+    public World createWorld(String name)
     {
-        World w = new World(gridSize, money);
+        World w = new World(name, gridSize, money);
         
         for(BuildingData bd : buildings)
             bd.createBuilding(w);

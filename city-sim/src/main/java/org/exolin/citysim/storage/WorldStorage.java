@@ -34,10 +34,10 @@ public class WorldStorage
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(out, new WorldData(w));
     }
     
-    public static World deserialize(InputStream in) throws IOException
+    public static World deserialize(String name, InputStream in) throws IOException
     {
         WorldData worldData = objectMapper.readValue(in, WorldData.class);
-        return worldData.createWorld();
+        return worldData.createWorld(name);
     }
 
     public static void save(World world, Path file) throws IOException

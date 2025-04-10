@@ -2,6 +2,7 @@ package org.exolin.citysim.model;
 
 import java.awt.Point;
 import java.math.BigDecimal;
+import java.util.List;
 import static org.exolin.citysim.bt.BusinessBuildings.car_cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.office;
@@ -27,7 +28,7 @@ public class Worlds
     
     public static World World1()
     {
-        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("World1", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         //w.enableOverlap();
         w.addBuilding(office, 6, 3);
         w.addBuilding(office, 9, 12);
@@ -47,7 +48,7 @@ public class Worlds
 
     public static World World2()
     {
-        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("World2", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         w.enableOverlap();
         
         w.addBuilding(office, 6, 6);
@@ -71,7 +72,7 @@ public class Worlds
     
     public static World World3()
     {
-        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("World3", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         //w.enableOverlap();
         
         GetWorld getWorld = GetWorld.ofStatic(w);
@@ -111,5 +112,10 @@ public class Worlds
         a.mouseDown(start);
         a.moveMouse(end);
         a.releaseMouse(end);
+    }
+
+    public static List<World> all()
+    {
+        return List.of(World1(), World2(), World3());
     }
 }

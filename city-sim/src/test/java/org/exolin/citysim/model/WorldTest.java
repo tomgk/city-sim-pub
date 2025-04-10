@@ -16,7 +16,7 @@ public class WorldTest
     @Test
     public void testGetBuilding()
     {
-        World w = new World(30, BigDecimal.valueOf(100000));
+        World w = new World("Test", 30, BigDecimal.valueOf(100000));
         
         assertEquals(3, BusinessBuildings.cinema.getSize());
         

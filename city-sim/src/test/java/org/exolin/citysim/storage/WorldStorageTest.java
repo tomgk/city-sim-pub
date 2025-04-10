@@ -66,7 +66,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeZone() throws IOException
     {
-        World w = new World(30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"zone_residential","x":16,"y":5}
                                            """);
@@ -92,7 +92,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeActualBuilding_Default() throws IOException
     {
-        World w = new World(30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"business/cinema","x":16,"y":5}
                                            """);
@@ -118,7 +118,7 @@ public class WorldStorageTest
     @Test
     public void testDeserializeStreet() throws IOException
     {
-        World w = new World(30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO);
         InputStream in = createInputStream("""
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);
@@ -133,7 +133,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeWorld() throws IOException
     {
-        World w = new World(30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);
@@ -167,8 +167,9 @@ public class WorldStorageTest
                           """;
         InputStream in = createInputStream(input);
         
-        World w = WorldStorage.deserialize(in);
+        World w = WorldStorage.deserialize("Test", in);
         
+        assertEquals("Test", w.getName());
         assertEquals(30, w.getGridSize());
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         

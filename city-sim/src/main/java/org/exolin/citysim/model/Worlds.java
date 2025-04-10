@@ -82,7 +82,7 @@ public class Worlds
         
         int zoneSize = 6;
         
-        placeStreet(w, 0, 0, 10, 0);
+        placeStreet(w, 0, zoneSize-1, DEFAULT_GRID_SIZE-1, zoneSize-1);
         
         //for(int x=zoneSize-1;x<DEFAULT_GRID_SIZE-10;x+=zoneSize)
         //    placeStreet(w, x, 0, x, DEFAULT_GRID_SIZE);

@@ -33,7 +33,7 @@ public class ZoneCategory implements BudgetCategory
     @Override
     public String getTitle()
     {
-        return zone.getName();
+        return zone.getTitle();
     }
 
     @Override

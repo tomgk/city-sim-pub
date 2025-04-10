@@ -72,7 +72,7 @@ public class Worlds
     
     public static World World3()
     {
-        World w = new World("World3", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("Zone World", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         //w.enableOverlap();
         
         GetWorld getWorld = GetWorld.ofStatic(w);

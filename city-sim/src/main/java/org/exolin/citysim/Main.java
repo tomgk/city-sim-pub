@@ -12,6 +12,7 @@ import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.LoadGame;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.ui.sp.SelectorPanel;
@@ -72,7 +73,8 @@ public class Main
     
     public static void main(String[] args)
     {
-        play(Worlds.World3());
+        LoadGame lg = new LoadGame(Worlds.all(), Main::play);
+        lg.setVisible(true);
     }
     
     private static void play(World world)

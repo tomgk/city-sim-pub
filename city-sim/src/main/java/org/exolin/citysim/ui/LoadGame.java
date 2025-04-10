@@ -2,6 +2,8 @@ package org.exolin.citysim.ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -31,15 +33,22 @@ public class LoadGame extends JFrame
         
         list = new JList(worlds.stream().map(World::getName).toArray());
         add(list, BorderLayout.CENTER);
+        list.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if(e.getClickCount() == 2)
+                    executeSelection();
+            }
+        });
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 0));
         
         JButton choose = new JButton("OK");
         buttonPanel.add(choose);
-        choose.addActionListener(a -> {
-            executeSelection();
-        });
+        choose.addActionListener(a -> executeSelection());
         
         JButton close = new JButton("Exit");
         buttonPanel.add(close);

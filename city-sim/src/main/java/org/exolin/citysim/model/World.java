@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -153,7 +154,9 @@ public final class World
     public <B extends Building, E extends BuildingVariant> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)
     {
         if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
-            throw new OutOfGridException("out of grid");
+            throw new OutOfGridException(
+                    "out of grid: "+new Rectangle(x, y, type.getSize(), type.getSize())+
+                            " outside of "+new Rectangle(0, 0, gridSize, gridSize));
         
         int size = type.getSize();
         for(int yi=0;yi<size;++yi)

@@ -7,4 +7,9 @@ package org.exolin.citysim.model;
 public interface GetWorld
 {
     World get();
+    
+    static GetWorld ofStatic(World w)
+    {
+        return () -> w;
+    }
 }

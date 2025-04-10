@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.awt.Point;
 import java.math.BigDecimal;
 import static org.exolin.citysim.bt.BusinessBuildings.car_cinema;
 import static org.exolin.citysim.bt.BusinessBuildings.cinema;
@@ -8,8 +9,12 @@ import static org.exolin.citysim.bt.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.BusinessBuildings.parkbuilding;
 import static org.exolin.citysim.bt.Streets.street;
+import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.actions.StreetBuilder;
+import org.exolin.citysim.ui.actions.ZonePlacement;
 
 /**
  *
@@ -62,5 +67,50 @@ public class Worlds
         
         w.disableOverlap();
         return w;
+    }
+    
+    public static World World3()
+    {
+        World w = new World(DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        //w.enableOverlap();
+        
+        GetWorld getWorld = GetWorld.ofStatic(w);
+        
+        placeZone(w, Zones.zone_residential, ZoneType.Variant.DEFAULT, 0, 0, 20, 15);
+        placeZone(w, Zones.zone_industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
+        placeZone(w, Zones.zone_business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
+        
+        int zoneSize = 6;
+        
+        placeStreet(w, 0, 0, 10, 0);
+        
+        //for(int x=zoneSize-1;x<DEFAULT_GRID_SIZE-10;x+=zoneSize)
+        //    placeStreet(w, x, 0, x, DEFAULT_GRID_SIZE);
+        
+        //StreetBuilder streetBuilder = new StreetBuilder(getWorld, street);
+        
+        return w;
+    }
+    
+    private static void placeZone(World w, ZoneType type, ZoneType.Variant variant, int x, int y, int width, int height)
+    {
+        ZonePlacement zonePlacement = new ZonePlacement(GetWorld.ofStatic(w), type, variant);
+        place(zonePlacement, x, y, width, height);
+    }
+    
+    private static void placeStreet(World w, int x, int y, int width, int height)
+    {
+        StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), street);
+        place(sb, x, y, width, height);
+    }
+    
+    private static void place(Action a, int x, int y, int width, int height)
+    {
+        Point start = new Point(x, y);
+        Point end = new Point(x+width, y+height);
+        
+        a.mouseDown(start);
+        a.moveMouse(end);
+        a.releaseMouse(end);
     }
 }

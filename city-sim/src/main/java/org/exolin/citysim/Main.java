@@ -113,7 +113,7 @@ public class Main
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
-        BudgetWindow bw = new BudgetWindow();
+        BudgetWindow bw = new BudgetWindow(f);
         f.addKeyListener(new KeyListener(bw, gp, selector, gd));
         
         gp.start();

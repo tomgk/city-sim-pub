@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
 import org.exolin.citysim.bt.Streets;
@@ -18,7 +19,7 @@ import org.exolin.citysim.model.World;
  *
  * @author Thomas
  */
-public class BudgetWindow extends JFrame
+public class BudgetWindow extends JDialog
 {
     private final Map<BudgetCategory, BudgetLinePanel> categories = new LinkedHashMap<>();
     private final BudgetLinePanel sum = new BudgetLinePanel("", Optional.empty());
@@ -32,8 +33,9 @@ public class BudgetWindow extends JFrame
             new ZoneCategory(Zones.zone_plants)
     );
     
-    public BudgetWindow()
+    public BudgetWindow(JFrame frame)
     {
+        super(frame, true);
         setLayout(new GridLayout(0, 1));
         
         for(BudgetCategory category : list)
@@ -48,7 +50,8 @@ public class BudgetWindow extends JFrame
         
         setTitle("Budget");
         pack();
-        setAlwaysOnTop(true);
+        setLocationRelativeTo(frame);
+        //setAlwaysOnTop(true);
     }
     
     public void update(World w)

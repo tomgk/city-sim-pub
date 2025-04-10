@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
 import org.exolin.citysim.bt.BuildingTypes;
+import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
@@ -71,6 +72,11 @@ public class Main
     
     public static void main(String[] args)
     {
+        play(Worlds.World3());
+    }
+    
+    private static void play(World world)
+    {
         BuildingTypes.init();
         
         JFrame f = new JFrame();
@@ -82,7 +88,7 @@ public class Main
         
         SelectorPanel sp = new SelectorPanel();
         
-        GamePanel gp = new GamePanel(Worlds.World3(), f, new GamePanelListener()
+        GamePanel gp = new GamePanel(world, f, new GamePanelListener()
         {
             @Override
             public void created(GamePanel panel)

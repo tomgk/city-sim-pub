@@ -58,6 +58,7 @@ public class BudgetWindow extends JDialog
     {
         for(BudgetLinePanel l : categories.values())
             l.resetValues();
+        sum.resetValues();
         
         for(Building b : w.getBuildings())
         {
@@ -74,9 +75,11 @@ public class BudgetWindow extends JDialog
             }
 
             panel.updateValues(b.getTaxRevenue(), b.getMaintenance());
+            sum.updateValues(b.getTaxRevenue(), b.getMaintenance());
         }
         
         for(BudgetLinePanel l : categories.values())
             l.showValues();
+        sum.showValues();
     }
 }

@@ -48,16 +48,19 @@ public class BudgetLinePanel extends javax.swing.JPanel
         incomeLabel.setForeground(new java.awt.Color(0, 204, 0));
         incomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         incomeLabel.setText("income");
+        incomeLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 5));
         jPanel1.add(incomeLabel);
 
         expenseLabel.setForeground(new java.awt.Color(255, 51, 51));
         expenseLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         expenseLabel.setText("expense");
+        expenseLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 5));
         jPanel1.add(expenseLabel);
 
         add(jPanel1, java.awt.BorderLayout.EAST);
 
         titleLabel.setText("Title");
+        titleLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
         add(titleLabel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

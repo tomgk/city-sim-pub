@@ -102,7 +102,7 @@ public class StreetBuilder implements BuildingAction
     }
 
     @Override
-    public void releaseMouse(Point gridPoint)
+    public void mouseReleased(Point gridPoint)
     {
         World world = this.getWorld.get();
         

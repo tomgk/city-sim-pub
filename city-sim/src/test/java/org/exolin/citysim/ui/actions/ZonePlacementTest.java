@@ -31,7 +31,7 @@ public class ZonePlacementTest
         
         z.mouseDown(start);
         z.moveMouse(end);
-        z.releaseMouse(end);
+        z.mouseReleased(end);
     }
     
     @Test

@@ -99,7 +99,7 @@ public class PlaceTrees implements BuildingAction
 
 
     @Override
-    public void releaseMouse(Point gridPoint)
+    public void mouseReleased(Point gridPoint)
     {
         mouseDown = false;
     }

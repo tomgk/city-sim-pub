@@ -67,7 +67,7 @@ public class PlaceBuilding implements BuildingAction
 
 
     @Override
-    public void releaseMouse(Point gridPoint)
+    public void mouseReleased(Point gridPoint)
     {
 
     }

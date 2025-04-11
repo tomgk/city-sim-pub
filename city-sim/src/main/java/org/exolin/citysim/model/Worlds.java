@@ -111,7 +111,7 @@ public class Worlds
         
         a.mouseDown(start);
         a.moveMouse(end);
-        a.releaseMouse(end);
+        a.mouseReleased(end);
     }
 
     public static List<World> all()

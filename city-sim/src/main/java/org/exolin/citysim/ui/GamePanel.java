@@ -173,7 +173,7 @@ public final class GamePanel extends JComponent
             return;
 
         updatePos(e);
-        execute(() -> action.releaseMouse(currentGridPos));
+        execute(() -> action.mouseReleased(currentGridPos));
         repaint();
     }
     

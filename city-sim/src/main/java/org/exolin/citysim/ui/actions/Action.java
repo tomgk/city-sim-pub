@@ -13,7 +13,7 @@ public interface Action
 {
     void mouseDown(Point gridPoint);
     void moveMouse(Point gridPoint);
-    void releaseMouse(Point gridPoint);
+    void mouseReleased(Point gridPoint);
     Rectangle getSelection();
     Image getMarker();
     boolean scaleMarker();
@@ -48,7 +48,7 @@ final class NoAction implements Action
     }
 
     @Override
-    public void releaseMouse(Point gridPoint)
+    public void mouseReleased(Point gridPoint)
     {
 
     }

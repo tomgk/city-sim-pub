@@ -27,6 +27,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import static org.exolin.citysim.bt.Streets.rail;
 import static org.exolin.citysim.bt.Streets.street;
+import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ActualBuildingType;
 import org.exolin.citysim.model.Animation;
@@ -92,8 +93,9 @@ public final class GamePanel extends JComponent
         List<Action> sactions = new ArrayList<>();
         sactions.add(Action.NONE);
         sactions.add(new TearDownAction(getWorld, false));
-        sactions.add(new StreetBuilder(getWorld, street));
-        sactions.add(new StreetBuilder(getWorld, rail));
+        sactions.add(new StreetBuilder(getWorld, street, true));
+        sactions.add(new StreetBuilder(getWorld, rail, true));
+        sactions.add(new StreetBuilder(getWorld, water, false));
         sactions.add(new PlaceTrees(getWorld));
         actions.put("Special", sactions);
         

@@ -36,6 +36,11 @@ public abstract class AreaAction implements Action
     @Override
     public final void moveMouse(Point gridPoint)
     {
+        AreaAction.mouseMove(gridPoint, start, marking);
+    }
+
+    public static void mouseMove(Point gridPoint, Point start, Rectangle marking)
+    {
         if(start == null)
             return;
 

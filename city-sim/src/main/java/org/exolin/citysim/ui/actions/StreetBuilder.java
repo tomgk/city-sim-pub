@@ -10,6 +10,7 @@ import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 import org.exolin.citysim.model.street.StreetType;
 import org.exolin.citysim.model.street.StreetVariant;
+import static org.exolin.citysim.model.street.XIntersection.X_INTERSECTION;
 
 /**
  *
@@ -21,11 +22,13 @@ public class StreetBuilder implements BuildingAction
     private final StreetType type;
     private Point start;
     private Rectangle marking;
+    private boolean onlyLine;
 
-    public StreetBuilder(GetWorld getWorld, StreetType type)
+    public StreetBuilder(GetWorld getWorld, StreetType type, boolean onlyLine)
     {
         this.getWorld = getWorld;
         this.type = type;
+        this.onlyLine = onlyLine;
     }
 
     @Override
@@ -59,38 +62,43 @@ public class StreetBuilder implements BuildingAction
         if(start == null)
             return;
 
-        int diffX = gridPoint.x - start.x;
-        int diffY = gridPoint.y - start.y;
-
-        if(Math.abs(diffX) > Math.abs(diffY))
+        if(onlyLine)
         {
-            diffX = diffX + Integer.signum(diffX);
-            diffY = 1;
+            int diffX = gridPoint.x - start.x;
+            int diffY = gridPoint.y - start.y;
+
+            if(Math.abs(diffX) > Math.abs(diffY))
+            {
+                diffX = diffX + Integer.signum(diffX);
+                diffY = 1;
+            }
+            else
+            {
+                diffX = 1;
+                diffY = diffY + Integer.signum(diffY);
+            }
+
+            marking.x = start.x;
+            marking.y = start.y;
+
+            if(diffX > 0)
+                marking.width = diffX;
+            else
+            {
+                marking.width = -diffX;
+                marking.x += diffX;
+            }
+
+            if(diffY > 0)
+                marking.height = diffY;
+            else
+            {
+                marking.height = -diffY;
+                marking.y += diffY;
+            }
         }
         else
-        {
-            diffX = 1;
-            diffY = diffY + Integer.signum(diffY);
-        }
-
-        marking.x = start.x;
-        marking.y = start.y;
-
-        if(diffX > 0)
-            marking.width = diffX;
-        else
-        {
-            marking.width = -diffX;
-            marking.x += diffX;
-        }
-
-        if(diffY > 0)
-            marking.height = diffY;
-        else
-        {
-            marking.height = -diffY;
-            marking.y += diffY;
-        }
+            AreaAction.mouseMove(gridPoint, start, marking);
     }
 
     @Override
@@ -98,33 +106,40 @@ public class StreetBuilder implements BuildingAction
     {
         World world = this.getWorld.get();
         
-        int diffX;
-        int diffY;
-        int len;
-        StreetVariant variant;
-        if(marking.width == 1)
+        if(onlyLine)
         {
-            diffX = 0;
-            diffY = 1;
-            len = marking.height;
-            variant = CONNECT_Y;
+            int diffX;
+            int diffY;
+            int len;
+            StreetVariant variant;
+            if(marking.width == 1)
+            {
+                diffX = 0;
+                diffY = 1;
+                len = marking.height;
+                variant = CONNECT_Y;
+            }
+            else
+            {
+                diffX = 1;
+                diffY = 0;
+                len = marking.width;
+                variant = CONNECT_X;
+            }
+
+            for(int i=0;i<len;++i)
+            {
+                int x = marking.x + diffX * i;
+                int y = marking.y + diffY * i;
+
+                world.addBuilding(type, x, y, variant);
+            }
+            world.reduceMoney(type.getCost() * len);
         }
         else
         {
-            diffX = 1;
-            diffY = 0;
-            len = marking.width;
-            variant = CONNECT_X;
+            ZonePlacement.performAction(marking, world, type, CONNECT_X);
         }
-
-        for(int i=0;i<len;++i)
-        {
-            int x = marking.x + diffX * i;
-            int y = marking.y + diffY * i;
-
-            world.addBuilding(type, x, y, variant);
-        }
-        world.reduceMoney(type.getCost() * len);
 
         start = null;
         marking = null;
@@ -143,7 +158,9 @@ public class StreetBuilder implements BuildingAction
             return null;
 
         StreetVariant variant;
-        if(marking.width == 1)
+        if(!onlyLine)
+            variant = X_INTERSECTION;
+        else if(marking.width == 1)
             variant = CONNECT_Y;
         else
             variant = CONNECT_X;

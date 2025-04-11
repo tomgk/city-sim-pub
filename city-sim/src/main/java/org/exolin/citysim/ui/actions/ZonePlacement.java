@@ -56,8 +56,11 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
-        World world = getWorld.get();
-        
+        performAction(marking, getWorld.get(), zoneType, variant);
+    }
+
+    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant)
+    {
         for(int y=0;y<marking.height;++y)
         {
             for(int x=0;x<marking.width;++x)
@@ -73,7 +76,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     world.removeBuildingAt(x, y, true, true);
                 }
 
-                world.addBuilding(zoneType, marking.x + x, marking.y + y, variant);
+                world.addBuilding(type, marking.x + x, marking.y + y, variant);
             }
         }
     }

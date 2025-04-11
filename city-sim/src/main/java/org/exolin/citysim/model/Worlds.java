@@ -100,7 +100,7 @@ public class Worlds
     
     private static void placeStreet(World w, int x, int y, int width, int height)
     {
-        StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), street);
+        StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), street, true);
         place(sb, x, y, width, height);
     }
     

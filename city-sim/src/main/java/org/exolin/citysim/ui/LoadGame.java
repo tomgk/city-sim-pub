@@ -4,15 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.exolin.citysim.model.World;
+import static org.exolin.citysim.model.Worlds.DEFAULT_GRID_SIZE;
+import static org.exolin.citysim.model.Worlds.DEFAULT_MONEY;
 
 /**
  *
@@ -31,7 +36,7 @@ public class LoadGame extends JFrame
         setTitle("Select City");
         setLayout(new BorderLayout());
         
-        list = new JList(worlds.stream().map(World::getName).toArray());
+        list = new JList(Stream.concat(Stream.of("New World"), worlds.stream().map(World::getName)).toArray());
         add(list, BorderLayout.CENTER);
         list.addMouseListener(new MouseAdapter()
         {
@@ -65,8 +70,16 @@ public class LoadGame extends JFrame
         int index = list.getSelectedIndex();
         if(index == -1)
             return;
-
-        World w = worlds.get(index);
+        
+        World w;
+        
+        if(index == 0)
+        {
+            String name = JOptionPane.showInputDialog(this, "City Name", "New World", JOptionPane.PLAIN_MESSAGE);
+            w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        }
+        else
+            w = worlds.get(index);
 
         setVisible(false);
         choice.accept(w);

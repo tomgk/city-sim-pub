@@ -23,8 +23,8 @@ import org.exolin.citysim.ui.actions.ZonePlacement;
  */
 public class Worlds
 {
-    private static final int DEFAULT_GRID_SIZE = 30;
-    private static final BigDecimal DEFAULT_MONEY = BigDecimal.valueOf(100000);
+    public static final int DEFAULT_GRID_SIZE = 30;
+    public static final BigDecimal DEFAULT_MONEY = BigDecimal.valueOf(100000);
     
     public static World World1()
     {

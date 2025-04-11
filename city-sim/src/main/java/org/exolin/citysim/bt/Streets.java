@@ -44,6 +44,22 @@ public class Streets
             createUnanimated("rail/rail_t_3"),
             createUnanimated("rail/rail_t_4")), 1, 25);
     
+    public static final StreetType water = createStreetType("water", List.of(
+            createAnimation("water/water_1", 4),
+            createAnimation("water/water_2", 4),
+            
+            createAnimation("water/water_x_intersection", 4),
+            
+            createAnimation("water/water_curve_1", 4),
+            createAnimation("water/water_curve_2", 4),
+            createAnimation("water/water_curve_3", 4),
+            createAnimation("water/water_curve_4", 4),
+            
+            createAnimation("water/water_t_1", 4),
+            createAnimation("water/water_t_2", 4),
+            createAnimation("water/water_t_3", 4),
+            createAnimation("water/water_t_4", 4)), 1, 25);
+    
     private static StreetType createStreetType(String name, List<Animation> variants, int size, int cost)
     {
         return new StreetType(name, variants, size, cost);

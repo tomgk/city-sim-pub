@@ -83,7 +83,7 @@ public class Main
         
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setTitle("City Sim");
+        f.setTitle("City Sim - "+world.getName());
         f.setLayout(new BorderLayout());
         GameControlPanel gd = new GameControlPanel();
         f.add(gd, BorderLayout.NORTH);

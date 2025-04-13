@@ -41,7 +41,7 @@ public class Main
         private final JFrame selector;
         private final GameControlPanel gd;
 
-        private KeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, org.exolin.citysim.ui.GameControlPanel gd)
+        private KeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, GameControlPanel gd)
         {
             this.bw = bw;
             this.gp = gp;

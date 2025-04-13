@@ -14,6 +14,7 @@ public class BuildingTypes
             IndustrialBuildings.class,
             ResidentialBuildings.class,
             Streets.class,
+            CrossConnections.class,
             Zones.class,
             Trees.class
         };

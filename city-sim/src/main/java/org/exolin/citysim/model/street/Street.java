@@ -9,7 +9,9 @@ import org.exolin.citysim.model.World;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 import static org.exolin.citysim.model.street.Curve.*;
+import static org.exolin.citysim.model.street.End.*;
 import static org.exolin.citysim.model.street.TIntersection.*;
+import static org.exolin.citysim.model.street.Unconnected.UNCONNECTED;
 import static org.exolin.citysim.model.street.XIntersection.X_INTERSECTION;
 
 /**
@@ -102,11 +104,26 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         
         //----- straight
         
-        else if(x_before || x_after)
+        else if(x_before && x_after)
             setVariant(world, CONNECT_X);
         
-        else if(y_before || y_after)
+        else if(y_before && y_after)
             setVariant(world, CONNECT_Y);
+        
+        //----- ends
+        else if(x_before)
+            setVariant(world, NORTH);
+        else if(x_after)
+            setVariant(world, SOUTH);
+        
+        else if(y_before)
+            setVariant(world, WEST);
+        
+        else if(y_after)
+            setVariant(world, EAST);
+        
+        else
+            setVariant(world, UNCONNECTED);
     }
 
     @Override

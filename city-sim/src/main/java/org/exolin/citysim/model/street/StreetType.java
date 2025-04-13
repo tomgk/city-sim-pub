@@ -17,8 +17,8 @@ public class StreetType extends BuildingType<Street, StreetVariant>
         super(name, images, size);
         this.cost = cost;
         
-        if(images.size() != StreetVariant.VALUES.size())
-            throw new IllegalArgumentException("incorrect image count");
+        if(images.size() != StreetVariants.VALUES.size())
+            throw new IllegalArgumentException("incorrect image count: expected "+images.size()+" but expected "+StreetVariants.VALUES.size());
     }
 
     public int getCost()

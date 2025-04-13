@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.Rotation;
+import static org.exolin.citysim.model.street.StreetVariants.VALUES;
 
 /**
  *
@@ -21,20 +22,6 @@ public interface StreetVariant extends BuildingVariant
 
         return index;
     }
-
-    public static final List<StreetVariant> VALUES = List.of(
-            ConnectVariant.CONNECT_X,
-            ConnectVariant.CONNECT_Y,
-            XIntersection.X_INTERSECTION,
-            Curve.CURVE_1,
-            Curve.CURVE_2,
-            Curve.CURVE_3,
-            Curve.CURVE_4,
-            TIntersection.T_INTERSECTION_1,
-            TIntersection.T_INTERSECTION_2,
-            TIntersection.T_INTERSECTION_3,
-            TIntersection.T_INTERSECTION_4
-    );
 
     public static StreetVariant valueOf(String name)
     {
@@ -60,4 +47,26 @@ public interface StreetVariant extends BuildingVariant
 
         return v[pos];
     }
+}
+
+class StreetVariants
+{
+    public static final List<StreetVariant> VALUES = List.of(
+            ConnectVariant.CONNECT_X,
+            ConnectVariant.CONNECT_Y,
+            XIntersection.X_INTERSECTION,
+            Curve.CURVE_1,
+            Curve.CURVE_2,
+            Curve.CURVE_3,
+            Curve.CURVE_4,
+            TIntersection.T_INTERSECTION_1,
+            TIntersection.T_INTERSECTION_2,
+            TIntersection.T_INTERSECTION_3,
+            TIntersection.T_INTERSECTION_4,
+            End.NORTH,
+            End.WEST,
+            End.SOUTH,
+            End.EAST,
+            Unconnected.UNCONNECTED
+    );
 }

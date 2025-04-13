@@ -1,9 +1,11 @@
 package org.exolin.citysim.bt;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.street.ConnectVariant;
 import org.exolin.citysim.model.street.StreetType;
 
 /**
@@ -44,7 +46,7 @@ public class Streets
             createUnanimated("rail/rail_t_3"),
             createUnanimated("rail/rail_t_4")), 1, 25);
     
-    public static final StreetType water = createStreetType("water", List.of(
+    public static final StreetType water = createWaterType("water", List.of(
             createAnimation("water/water_1", 4),
             createAnimation("water/water_2", 4),
             
@@ -58,9 +60,32 @@ public class Streets
             createAnimation("water/water_t_1", 4),
             createAnimation("water/water_t_2", 4),
             createAnimation("water/water_t_3", 4),
-            createAnimation("water/water_t_4", 4)), 1, 25);
+            createAnimation("water/water_t_4", 4),
+            
+            createAnimation("water/water_end_1", 4),
+            createAnimation("water/water_end_4", 4),
+            createAnimation("water/water_end_3", 4),
+            createAnimation("water/water_end_2", 4),
+            
+            createAnimation("water/water_unconnected", 4)
+    ), 1, 25);
     
     private static StreetType createStreetType(String name, List<Animation> variants, int size, int cost)
+    {
+        List<Animation> add = new ArrayList<>(variants);
+        
+        //End
+        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
+        add.add(variants.get(ConnectVariant.CONNECT_Y.index()));
+        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
+        add.add(variants.get(ConnectVariant.CONNECT_Y.index()));
+        //Unconnected
+        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
+        
+        return new StreetType(name, add, size, cost);
+    }
+    
+    private static StreetType createWaterType(String name, List<Animation> variants, int size, int cost)
     {
         return new StreetType(name, variants, size, cost);
     }

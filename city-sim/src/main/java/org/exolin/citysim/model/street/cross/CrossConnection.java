@@ -1,13 +1,13 @@
 package org.exolin.citysim.model.street.cross;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.street.AnyStreet;
 
 /**
  *
  * @author Thomas
  */
-public class CrossConnection extends Building<CrossConnection, CrossConnectionType, CrossConnectionType.Variant>
+public class CrossConnection extends AnyStreet<CrossConnection, CrossConnectionType, CrossConnectionType.Variant>
 {
     public CrossConnection(CrossConnectionType type, int x, int y, CrossConnectionType.Variant variant)
     {

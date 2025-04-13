@@ -19,6 +19,7 @@ import org.exolin.citysim.model.Zone;
 import org.exolin.citysim.model.ZoneType;
 import org.exolin.citysim.model.street.Street;
 import static org.exolin.citysim.model.street.TIntersection.T_INTERSECTION_4;
+import static org.exolin.citysim.model.street.Unconnected.UNCONNECTED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -127,7 +128,7 @@ public class WorldStorageTest
         assertEquals(Streets.street, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());
-        assertEquals(T_INTERSECTION_4, b.getVariant());
+        assertEquals(UNCONNECTED, b.getVariant());
     }
     
     @Test
@@ -143,7 +144,7 @@ public class WorldStorageTest
                             "gridSize":30,
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
-                                {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
+                                {"type":"street","x":15,"y":5,"variant":"unconnected"},
                                 {"type":"business/cinema","x":16,"y":5}
                             ]
                           }
@@ -189,7 +190,7 @@ public class WorldStorageTest
             assertEquals(Streets.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
-            assertEquals(T_INTERSECTION_4, b.getVariant());
+            assertEquals(UNCONNECTED, b.getVariant());
         }
         {
             Building b = buildings.get(2);

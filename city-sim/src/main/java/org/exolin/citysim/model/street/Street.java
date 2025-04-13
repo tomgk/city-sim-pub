@@ -18,7 +18,7 @@ import static org.exolin.citysim.model.street.XIntersection.X_INTERSECTION;
  *
  * @author Thomas
  */
-public class Street extends Building<Street, StreetType, StreetVariant>
+public class Street extends AnyStreet<Street, StreetType, StreetVariant>
 {
     public Street(StreetType type, int x, int y, StreetVariant variant)
     {
@@ -45,7 +45,7 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         return getVariant().rotate(rotation);
     }
     
-    private final List<Street> connections = new ArrayList<>(4);
+    private final List<AnyStreet> connections = new ArrayList<>(4);
 
     private void addConnection(Street street)
     {
@@ -124,7 +124,7 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         else if(y_after)
             setVariant(world, EAST);
         
-        else
+        else if(!x_before && !x_after && !y_before && !y_after)
             setVariant(world, UNCONNECTED);
     }
 

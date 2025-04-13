@@ -114,6 +114,6 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     @Override
     public String toString()
     {
-        return getClass().getSimpleName()+"["+name+"]";
+        return getClass().getSimpleName()+"["+name+",size="+size+"]";
     }
 }

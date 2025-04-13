@@ -101,9 +101,12 @@ public final class World
     {
         return getBuildingAt(x, y) != null;
     }
+    
+    private boolean LOG = false;
 
     public void removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {
+        if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
         for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
         {
             Building b = it.next();
@@ -135,9 +138,11 @@ public final class World
                     
                     updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 }
+                if(LOG)System.out.println(" REM "+b.toString());
                 return;
             }
         }
+        if(LOG)System.out.println(" FAILREM");
     }
 
     private void placeZone(ZoneType zoneType, int x, int y, int size, int exceptX, int exceptY)
@@ -166,13 +171,18 @@ public final class World
                     "out of grid: "+new Rectangle(x, y, type.getSize(), type.getSize())+
                             " outside of "+new Rectangle(0, 0, gridSize, gridSize));
         
+        LOG = type.getSize() > 1;
+        if(LOG)
+            System.out.println("ADD @ "+x+"/"+y+" "+type.toString());
+        
         int size = type.getSize();
         for(int yi=0;yi<size;++yi)
         {
             for(int xi=0;xi<size;++xi)
             {
                 //remove any, let anything outside be replaced with zone
-                removeBuildingAt(x, y, false, true);
+                //removeBuildingAt(x, y, false, true);
+                removeBuildingAt(x, y, false, false);
             }
         }
         
@@ -276,19 +286,45 @@ public final class World
         return lastChange;
     }
     
+    private double proabability = 0.01;
+
+    public void setProabability(double proabability)
+    {
+        this.proabability = proabability;
+    }
+    
     private <B> void replaceBuilding(ZoneType type, int x, int y)
     {
         Building b = getBuildingAt(x, y);
         if(b == null)
             return;
         
-        ActualBuildingType bt = type.getRandomBuilding();
-        if(bt != null && Math.random() < 0.01)
+        if(Math.random() < proabability)
+            ;
+        else
+            return;
+        
+        int size = getMaxZone(type, x, y);
+        ActualBuildingType bt = type.getRandomBuilding(1/*size*/);
+        if(bt == null)
+            return;
+        
+        if(bt.getSize() > 1)
         {
-            buildings.remove(b);
-            updateBuildCount(b, false);
-            addBuilding(bt, x, y);
+            bt = bt;
         }
+        
+        /*
+        for(int yi=0;yi<type.getSize();yi++)
+        {
+            for(int xi=0;xi<type.getSize();xi++)
+            {
+                removeBuildingAt(x, y, true, false);
+            }
+        }
+*/
+        updateBuildCount(b, false);
+        addBuilding(bt, x, y);
     }
     
     private void updateBuildCount(Building building, boolean up)
@@ -323,6 +359,10 @@ public final class World
         
         for(Building b: originalBuildings)
         {
+            //if it was already removed, skip it
+            if(!this.buildings.contains(b))
+                continue;
+            
             if(b.getType() instanceof ZoneType z)
             {
                 if(z.getSize() != 1)
@@ -332,6 +372,31 @@ public final class World
                     replaceBuilding(z, b.getX(), b.getY());
             }
         }
+    }
+    
+    private int getMaxZone(ZoneType z, int x, int y)
+    {
+        for(int size=1;size<3;++size)
+        {
+            if(!isFullOf(z, x, y, size))
+                return size-1;
+        }
+        return 3;
+    }
+    
+    private boolean isFullOf(ZoneType z, int x, int y, int size)
+    {
+        for(int yi=0;yi<size;++yi)
+        {
+            for(int xi=0;xi<size;++xi)
+            {
+                Building b = getBuildingAt(x+xi, y+yi);
+                if(b == null || b.getType() != z)
+                    return false;
+            }
+        }
+        
+        return true;
     }
 
     private boolean hasAnyInRadius(StreetType street, int cx, int cy, int distance)

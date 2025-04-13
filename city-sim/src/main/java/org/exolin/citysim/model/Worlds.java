@@ -92,19 +92,19 @@ public class Worlds
         return w;
     }
     
-    private static void placeZone(World w, ZoneType type, ZoneType.Variant variant, int x, int y, int width, int height)
+    public static void placeZone(World w, ZoneType type, ZoneType.Variant variant, int x, int y, int width, int height)
     {
         ZonePlacement zonePlacement = new ZonePlacement(GetWorld.ofStatic(w), type, variant);
         place(zonePlacement, x, y, width, height);
     }
     
-    private static void placeStreet(World w, int x, int y, int width, int height)
+    public static void placeStreet(World w, int x, int y, int width, int height)
     {
         StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), street, true);
         place(sb, x, y, width, height);
     }
     
-    private static void place(Action a, int x, int y, int width, int height)
+    public static void place(Action a, int x, int y, int width, int height)
     {
         Point start = new Point(x, y);
         Point end = new Point(x+width, y+height);

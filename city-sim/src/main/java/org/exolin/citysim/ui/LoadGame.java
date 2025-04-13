@@ -4,12 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -79,7 +77,7 @@ public class LoadGame extends JFrame
             w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         }
         else
-            w = worlds.get(index);
+            w = worlds.get(index-1);
 
         setVisible(false);
         choice.accept(w);

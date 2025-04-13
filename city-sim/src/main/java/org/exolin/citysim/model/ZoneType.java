@@ -56,10 +56,11 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
         this.buildings.add(building);
     }
     
-    ActualBuildingType getRandomBuilding()
+    ActualBuildingType getRandomBuilding(int maxSize)
     {
         List<ActualBuildingType> smallBuildings = buildings.stream()
-                .filter(b -> b.getSize() == 1)
+                .filter(b -> b.getSize() <= maxSize)
+                //.filter(b -> b.getSize() > 1)
                 .toList();
         
         if(smallBuildings.isEmpty())

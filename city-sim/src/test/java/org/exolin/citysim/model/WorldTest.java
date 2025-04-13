@@ -1,10 +1,15 @@
 package org.exolin.citysim.model;
 
 import java.math.BigDecimal;
+import java.util.stream.Collectors;
 import org.exolin.citysim.bt.BusinessBuildings;
+import org.exolin.citysim.bt.Zones;
+import static org.exolin.citysim.model.Worlds.placeStreet;
+import static org.exolin.citysim.model.Worlds.placeZone;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -72,5 +77,22 @@ public class WorldTest
         assertNull(w.getBuildingAt(9, 13));
         //to the bottom right (x+size, y+size)
         assertNull(w.getBuildingAt(13, 13));
+    }
+    
+    @Test
+    @Disabled
+    public void test()
+    {
+        World w = new World("Test", 30, BigDecimal.ONE);
+        
+        GetWorld getWorld = GetWorld.ofStatic(w);
+        
+        placeZone(w, Zones.zone_residential, ZoneType.Variant.DEFAULT, 0, 0, 2, 2);
+        placeStreet(w, 0, 2, 2, 2);
+        
+        w.update();
+        
+        System.out.println(w.getBuildings().stream().map(Object::toString).collect(Collectors.joining("\n")));
+        assertEquals("xxxx", w.getBuildings());
     }
 }

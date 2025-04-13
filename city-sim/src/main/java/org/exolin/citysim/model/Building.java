@@ -142,7 +142,7 @@ public abstract class Building<B, T extends BuildingType<B, E>, E extends Buildi
     @Override
     public String toString()
     {
-        return getClass().getSimpleName()+"[x="+x+",y="+y+",type="+type.getName()+"]";
+        return getClass().getSimpleName()+"[x="+x+",y="+y+",size="+type.getSize()+",type="+type.getName()+"]";
     }
     
     public abstract BigDecimal getTaxRevenue();

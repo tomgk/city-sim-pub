@@ -64,15 +64,15 @@ public class GameControlPanel extends javax.swing.JPanel
     private void initComponents()
     {
 
-        resetPositionLabel = new javax.swing.JLabel();
-        keyLeftLabel = new javax.swing.JLabel();
-        keyTopLabel = new javax.swing.JLabel();
-        keyBottomLabel = new javax.swing.JLabel();
-        keyRightLabel = new javax.swing.JLabel();
-        zoomInLabel = new javax.swing.JLabel();
-        zoomOutLabel = new javax.swing.JLabel();
-        saveLabel = new javax.swing.JLabel();
-        loadLabel = new javax.swing.JLabel();
+        javax.swing.JLabel resetPositionLabel = new javax.swing.JLabel();
+        javax.swing.JLabel keyLeftLabel = new javax.swing.JLabel();
+        javax.swing.JLabel keyTopLabel = new javax.swing.JLabel();
+        javax.swing.JLabel keyBottomLabel = new javax.swing.JLabel();
+        javax.swing.JLabel keyRightLabel = new javax.swing.JLabel();
+        javax.swing.JLabel zoomInLabel = new javax.swing.JLabel();
+        javax.swing.JLabel zoomOutLabel = new javax.swing.JLabel();
+        javax.swing.JLabel saveLabel = new javax.swing.JLabel();
+        javax.swing.JLabel loadLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -281,14 +281,5 @@ public class GameControlPanel extends javax.swing.JPanel
     }//GEN-LAST:event_loadLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel keyBottomLabel;
-    private javax.swing.JLabel keyLeftLabel;
-    private javax.swing.JLabel keyRightLabel;
-    private javax.swing.JLabel keyTopLabel;
-    private javax.swing.JLabel loadLabel;
-    private javax.swing.JLabel resetPositionLabel;
-    private javax.swing.JLabel saveLabel;
-    private javax.swing.JLabel zoomInLabel;
-    private javax.swing.JLabel zoomOutLabel;
     // End of variables declaration//GEN-END:variables
 }

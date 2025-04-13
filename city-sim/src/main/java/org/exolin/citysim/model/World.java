@@ -171,7 +171,7 @@ public final class World
                     "out of grid: "+new Rectangle(x, y, type.getSize(), type.getSize())+
                             " outside of "+new Rectangle(0, 0, gridSize, gridSize));
         
-        LOG = type.getSize() > 1;
+        LOG = type.getSize() > 1 && false;
         if(LOG)
             System.out.println("ADD @ "+x+"/"+y+" "+type.toString());
         

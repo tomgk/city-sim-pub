@@ -23,6 +23,7 @@ public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuild
         this(name, animation, size, zoneType, cost, BigDecimal.ZERO);
     }
     
+    @SuppressWarnings("LeakingThisInConstructor")
     public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         super(name, animation, size);

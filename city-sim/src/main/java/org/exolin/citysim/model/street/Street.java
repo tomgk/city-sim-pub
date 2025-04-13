@@ -31,6 +31,8 @@ public class Street extends Building<Street, StreetType, StreetVariant>
         if(b == null)
             return null;
         
+        //TODO: add cross logic
+        
         if(b.getType() != getType())
             return null;
         

@@ -9,9 +9,9 @@ import org.exolin.citysim.model.ZoneType;
  */
 public class Zones
 {
-    public static final ZoneType zone_residential = createUserplaceableZone("residential", true);
-    public static final ZoneType zone_business = createUserplaceableZone("business", true);
-    public static final ZoneType zone_industrial = createUserplaceableZone("industrial", true);
+    public static final ZoneType zone_residential = createUserplaceableZone("residential", true, 5);
+    public static final ZoneType zone_business = createUserplaceableZone("business", true, 5);
+    public static final ZoneType zone_industrial = createUserplaceableZone("industrial", true, 5);
     
     public static ZoneType zone_plants = createSpecialZone("plants");
     
@@ -20,14 +20,14 @@ public class Zones
     public static final List<ZoneType> BASIC_ZONES = List.of(zone_residential, zone_business, zone_industrial);
     
     
-    private static ZoneType createUserplaceableZone(String name, boolean withLowDensity)
+    private static ZoneType createUserplaceableZone(String name, boolean withLowDensity, int cost)
     {
-        return new ZoneType(name, "zone/"+name, 1, true, withLowDensity);
+        return new ZoneType(name, "zone/"+name, 1, true, withLowDensity, cost);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
-        return new ZoneType(name, "zone/special", 1, false, false);
+        return new ZoneType(name, "zone/special", 1, false, false, 0);
     }
 
     static void init()

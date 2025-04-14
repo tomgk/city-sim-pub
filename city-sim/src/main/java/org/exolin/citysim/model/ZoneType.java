@@ -10,11 +10,24 @@ import java.util.List;
 public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
 {
     private final boolean userPlaceableZone;
+    private final int cost;
     
     public enum Variant implements BuildingVariant
     {
-        DEFAULT,
-        LOW_DENSITY
+        DEFAULT(1),
+        LOW_DENSITY(2);
+        
+        private final int factor;
+
+        private Variant(int factor)
+        {
+            this.factor = factor;
+        }
+
+        public int getFactor()
+        {
+            return factor;
+        }
     }
     
     private final List<ActualBuildingType> buildings = new ArrayList<>();
@@ -34,11 +47,12 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     
     private final String title;
     
-    public ZoneType(String title, String filename, int size, boolean userPlaceableZone, boolean withLowDensity)
+    public ZoneType(String title, String filename, int size, boolean userPlaceableZone, boolean withLowDensity, int cost)
     {
         super("zone_"+title, getAnimations(filename, withLowDensity), size);
         this.userPlaceableZone = userPlaceableZone;
         this.title = title;
+        this.cost = cost;
     }
 
     public String getTitle()
@@ -49,6 +63,11 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
     public boolean isUserPlaceableZone()
     {
         return userPlaceableZone;
+    }
+
+    public int getCost(Variant variant)
+    {
+        return cost * variant.getFactor();
     }
     
     void addBuilding(ActualBuildingType building)

@@ -10,9 +10,11 @@ import static org.exolin.citysim.bt.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.BusinessBuildings.parkbuilding;
 import static org.exolin.citysim.bt.Streets.street;
+import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.street.StreetType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.ZonePlacement;
@@ -92,6 +94,66 @@ public class Worlds
         return w;
     }
     
+    public static World WaterWorld()
+    {
+        World w = new World("Water World", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        
+        GetWorld getWorld = GetWorld.ofStatic(w);
+        
+        int x = DEFAULT_GRID_SIZE/2;
+        int y = DEFAULT_GRID_SIZE/2;
+        
+        int dx = 1;
+        int dy = 1;
+        
+        for(int i=0;i<200;++i)
+        {
+            if(Math.random() < 0.5)
+            {
+                switch((int)(Math.random()*4))
+                {
+                    case 0:
+                        dx = 1;
+                        dy = 0;
+                        break;
+                    case 1:
+                        dx = -1;
+                        dy = 0;
+                        break;
+                    case 2:
+                        dx = 0;
+                        dy = 1;
+                        break;
+                    case 3:
+                        dx = 0;
+                        dy = -1;
+                        break;
+                }
+            }
+            
+            if(x >= 0 && x < DEFAULT_GRID_SIZE && y >= 0 && y < DEFAULT_GRID_SIZE)
+                placeStreet(w, x, y, 1, 1, water);
+            
+            x += dx;
+            y += dy;
+            
+            x = limit(x);
+            y = limit(y);
+        }
+        
+        return w;
+    }
+    
+    private static int limit(int num)
+    {
+        if(num < 0)
+            return num + DEFAULT_GRID_SIZE;
+        else if(num >= DEFAULT_GRID_SIZE)
+            return num - DEFAULT_GRID_SIZE;
+        else
+            return num;
+    }
+    
     public static void placeZone(World w, ZoneType type, ZoneType.Variant variant, int x, int y, int width, int height)
     {
         ZonePlacement zonePlacement = new ZonePlacement(GetWorld.ofStatic(w), type, variant);
@@ -100,7 +162,11 @@ public class Worlds
     
     public static void placeStreet(World w, int x, int y, int width, int height)
     {
-        StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), street, true);
+        placeStreet(w, x, y, width, height, street);
+    }
+    public static void placeStreet(World w, int x, int y, int width, int height, StreetType type)
+    {
+        StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), type, true);
         place(sb, x, y, width, height);
     }
     
@@ -116,6 +182,6 @@ public class Worlds
 
     public static List<World> all()
     {
-        return List.of(World1(), World2(), World3());
+        return List.of(World1(), World2(), World3(), WaterWorld());
     }
 }

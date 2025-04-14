@@ -68,7 +68,7 @@ public class Streets
             createAnimation("water/water_end_2", 4),
             
             createAnimation("water/water_unconnected", 4)
-    ), 1, 25);
+    ), 1, 100);
     
     private static StreetType createStreetType(String name, List<Animation> variants, int size, int cost)
     {

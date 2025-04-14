@@ -54,6 +54,6 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_IndustrialBuildings()
     {
-        assertEquals(new ZoneCategory(Zones.industrial), BudgetCategory.getFor(IndustrialBuildings.industrial_small_1));
+        assertEquals(new ZoneCategory(Zones.industrial), BudgetCategory.getFor(IndustrialBuildings.small_1));
     }
 }

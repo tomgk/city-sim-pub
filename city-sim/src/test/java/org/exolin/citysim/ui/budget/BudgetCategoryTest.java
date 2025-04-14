@@ -48,7 +48,7 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_BusinessBuilding()
     {
-        assertEquals(new ZoneCategory(Zones.zone_business), BudgetCategory.getFor(BusinessBuildings.business_small_1));
+        assertEquals(new ZoneCategory(Zones.zone_business), BudgetCategory.getFor(BusinessBuildings.small_1));
     }
     
     @Test

@@ -19,14 +19,14 @@ public class BusinessBuildings
     public static final ActualBuildingType cinema = createBuildingType(createUnanimated("business/cinema"), 3, zone_business, 0);
     public static final ActualBuildingType parkbuilding = createBuildingType(createUnanimated("business/parkbuilding"), 3, zone_business, 0);
     
-    public static final ActualBuildingType business_small_1 = createBuildingType(createUnanimated("business/business_small_1"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_2 = createBuildingType(createUnanimated("business/business_small_2"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_3 = createBuildingType(createUnanimated("business/business_small_3"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_4 = createBuildingType(createUnanimated("business/business_small_4"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_5 = createBuildingType(createUnanimated("business/business_small_5"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_6 = createBuildingType(createUnanimated("business/business_small_6"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_7 = createBuildingType(createUnanimated("business/business_small_7"), 1, zone_business, 0);
-    public static final ActualBuildingType business_small_8 = createBuildingType(createUnanimated("business/business_small_8"), 1, zone_business, 0);
+    public static final ActualBuildingType small_1 = createBuildingType(createUnanimated("business/small_1"), 1, zone_business, 0);
+    public static final ActualBuildingType small_2 = createBuildingType(createUnanimated("business/small_2"), 1, zone_business, 0);
+    public static final ActualBuildingType small_3 = createBuildingType(createUnanimated("business/small_3"), 1, zone_business, 0);
+    public static final ActualBuildingType small_4 = createBuildingType(createUnanimated("business/small_4"), 1, zone_business, 0);
+    public static final ActualBuildingType small_5 = createBuildingType(createUnanimated("business/small_5"), 1, zone_business, 0);
+    public static final ActualBuildingType small_6 = createBuildingType(createUnanimated("business/small_6"), 1, zone_business, 0);
+    public static final ActualBuildingType small_7 = createBuildingType(createUnanimated("business/small_7"), 1, zone_business, 0);
+    public static final ActualBuildingType small_8 = createBuildingType(createUnanimated("business/small_8"), 1, zone_business, 0);
     
     static void init()
     {

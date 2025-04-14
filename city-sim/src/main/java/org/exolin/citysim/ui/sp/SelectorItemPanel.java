@@ -53,6 +53,9 @@ public class SelectorItemPanel extends javax.swing.JPanel
             sizeLabel.setVisible(false);
         }
         
+        int cost = action.getCost();
+        costLabel.setText(cost != 0 ? cost+"" : "");
+        
         setPreferredSize(new Dimension(300, 100));
         
         addMouseListener(new MouseAdapter()
@@ -101,6 +104,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
         sizeCaptionLabel = new javax.swing.JLabel();
         sizeLabel = new javax.swing.JLabel();
         subtextLabel = new javax.swing.JLabel();
+        costLabel = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -120,6 +124,9 @@ public class SelectorItemPanel extends javax.swing.JPanel
 
         subtextLabel.setText("Subtext");
 
+        costLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        costLabel.setText("0.0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -131,9 +138,11 @@ public class SelectorItemPanel extends javax.swing.JPanel
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(sizeCaptionLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(sizeLabel))
+                        .addComponent(sizeLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                        .addComponent(costLabel))
                     .addComponent(nameLabel))
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +154,8 @@ public class SelectorItemPanel extends javax.swing.JPanel
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sizeCaptionLabel)
-                    .addComponent(sizeLabel))
+                    .addComponent(sizeLabel)
+                    .addComponent(costLabel))
                 .addGap(12, 12, 12))
         );
 
@@ -154,6 +164,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel costLabel;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

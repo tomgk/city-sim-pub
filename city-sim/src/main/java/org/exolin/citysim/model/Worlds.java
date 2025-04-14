@@ -15,6 +15,7 @@ import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
 import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.ZonePlacement;
@@ -131,8 +132,12 @@ public class Worlds
                 }
             }
             
-            if(x >= 0 && x < DEFAULT_GRID_SIZE && y >= 0 && y < DEFAULT_GRID_SIZE)
+            //if(x >= 0 && x < DEFAULT_GRID_SIZE && y >= 0 && y < DEFAULT_GRID_SIZE)
+            try{
                 placeStreet(w, x, y, 1, 1, water);
+            }catch(OutOfGridException e){
+                //ignore
+            }
             
             x += dx;
             y += dy;

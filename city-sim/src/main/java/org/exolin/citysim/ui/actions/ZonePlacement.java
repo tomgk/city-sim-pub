@@ -42,6 +42,12 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     }
 
     @Override
+    public int getCost()
+    {
+        return zoneType.getCost(variant);
+    }
+
+    @Override
     public BuildingVariant getVariant()
     {
         return variant;
@@ -56,10 +62,10 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
-        performAction(marking, getWorld.get(), zoneType, variant);
+        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getCost(variant));
     }
 
-    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant)
+    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant, int cost)
     {
         for(int y=0;y<marking.height;++y)
         {
@@ -77,6 +83,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                 }
 
                 world.addBuilding(type, marking.x + x, marking.y + y, variant);
+                world.reduceMoney(cost);
             }
         }
     }

@@ -104,7 +104,7 @@ public final class World
     
     private boolean LOG = false;
 
-    public void removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
+    public boolean removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
         for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
@@ -139,10 +139,11 @@ public final class World
                     updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 }
                 if(LOG)System.out.println(" REM "+b.toString());
-                return;
+                return true;
             }
         }
         if(LOG)System.out.println(" FAILREM");
+        return false;
     }
 
     private void placeZone(ZoneType zoneType, int x, int y, int size, int exceptX, int exceptY)

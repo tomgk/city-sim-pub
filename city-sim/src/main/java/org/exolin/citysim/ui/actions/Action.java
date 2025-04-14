@@ -18,6 +18,7 @@ public interface Action
     Image getMarker();
     boolean scaleMarker();
     String getName();
+    int getCost();
 
     default Cursor getCursor()
     {
@@ -81,5 +82,11 @@ final class NoAction implements Action
     public String toString()
     {
         return getName();
+    }
+
+    @Override
+    public int getCost()
+    {
+        return 0;
     }
 }

@@ -138,7 +138,7 @@ public class StreetBuilder implements BuildingAction
         }
         else
         {
-            ZonePlacement.performAction(marking, world, type, CONNECT_X);
+            ZonePlacement.performAction(marking, world, type, CONNECT_X, type.getCost());
         }
 
         start = null;
@@ -149,6 +149,12 @@ public class StreetBuilder implements BuildingAction
     public BuildingType getBuilding()
     {
         return type;
+    }
+
+    @Override
+    public int getCost()
+    {
+        return type.getCost();
     }
 
     @Override

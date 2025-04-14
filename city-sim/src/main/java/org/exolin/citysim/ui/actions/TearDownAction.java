@@ -24,6 +24,12 @@ public class TearDownAction extends AreaAction implements ActionWithImage
     }
 
     @Override
+    public int getCost()
+    {
+        return removeZoning ? 0 : 1;
+    }
+
+    @Override
     protected void performAction(Rectangle marking)
     {
         World world = this.getWorld.get();

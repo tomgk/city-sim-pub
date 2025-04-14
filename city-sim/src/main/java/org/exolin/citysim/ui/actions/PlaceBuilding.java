@@ -83,4 +83,10 @@ public class PlaceBuilding implements BuildingAction
     {
         return true;
     }
+
+    @Override
+    public int getCost()
+    {
+        return type.getCost();
+    }
 }

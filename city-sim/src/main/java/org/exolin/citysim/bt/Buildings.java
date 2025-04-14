@@ -16,6 +16,8 @@ public class Buildings
     public static final ActualBuildingType gas_plant = createBuildingType(createAnimation("gas_plant", 8), 4, Zones.zone_plants, 2000);
     public static final ActualBuildingType oil_plant = createBuildingType(createAnimation("oil_plant", 8), 4, Zones.zone_plants, 6600);
     
+    public static final ActualBuildingType zoo = createBuildingType(createUnanimated("parks/zoo"), 4, Zones.zone_parks, 100);
+    
     static ActualBuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost)
     {
         return new ActualBuildingType(animation.getName(), animation, size, zoneType, cost);

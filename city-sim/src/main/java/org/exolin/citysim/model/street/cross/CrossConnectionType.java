@@ -17,14 +17,14 @@ public class CrossConnectionType extends BuildingType<CrossConnection, CrossConn
         DEFAULT
     }
     
-    private final StreetType type1;
-    private final StreetType type2;
+    private final StreetType xtype;
+    private final StreetType ytype;
 
     public CrossConnectionType(String name, Animation animation, int size, StreetType type1, StreetType type2)
     {
         super(name, animation, size);
-        this.type1 = Objects.requireNonNull(type1);
-        this.type2 = Objects.requireNonNull(type2);
+        this.xtype = Objects.requireNonNull(type1);
+        this.ytype = Objects.requireNonNull(type2);
     }
 
     @Override
@@ -33,14 +33,14 @@ public class CrossConnectionType extends BuildingType<CrossConnection, CrossConn
         return new CrossConnection(this, x, y, variant);
     }
 
-    public StreetType getType1()
+    public StreetType getXType()
     {
-        return type1;
+        return xtype;
     }
 
-    public StreetType getType2()
+    public StreetType getYType()
     {
-        return type2;
+        return ytype;
     }
     
     @Override

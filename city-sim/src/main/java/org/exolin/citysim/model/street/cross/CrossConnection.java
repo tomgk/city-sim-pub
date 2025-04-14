@@ -25,6 +25,6 @@ public class CrossConnection extends AnyStreet<CrossConnection, CrossConnectionT
     {
         CrossConnectionType type = getType();
         //TODO: maybe cost more than just the average
-        return BigDecimal.valueOf((type.getType1().getCost()+type.getType2().getCost())/2);
+        return BigDecimal.valueOf((type.getXType().getCost()+type.getYType().getCost())/2);
     }
 }

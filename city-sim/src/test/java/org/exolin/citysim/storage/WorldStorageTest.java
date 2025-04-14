@@ -56,7 +56,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeZone() throws IOException
     {
-        Zone zone = new Zone(Zones.zone_residential, 16, 99, ZoneType.Variant.DEFAULT);
+        Zone zone = new Zone(Zones.residential, 16, 99, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, zone);
         String expected = """
                           {"type":"zone_residential","x":16,"y":99}
@@ -73,7 +73,7 @@ public class WorldStorageTest
                                            """);
         WorldStorage.deserialize(in, w);
         Building b = getBuilding(w);
-        assertEquals(Zones.zone_residential, b.getType());
+        assertEquals(Zones.residential, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());
         assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());
@@ -137,7 +137,7 @@ public class WorldStorageTest
         World w = new World("Test", 30, BigDecimal.ZERO);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, ActualBuildingType.Variant.DEFAULT);
         w.addBuilding(Streets.street, 15, 5, T_INTERSECTION_4);
-        w.addBuilding(Zones.zone_business, 15, 4, ZoneType.Variant.DEFAULT);
+        w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
@@ -179,7 +179,7 @@ public class WorldStorageTest
         
         {
             Building b = buildings.get(0);
-            assertEquals(Zones.zone_business, b.getType());
+            assertEquals(Zones.business, b.getType());
             assertEquals(15, b.getX());
             assertEquals(4, b.getY());
             assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());

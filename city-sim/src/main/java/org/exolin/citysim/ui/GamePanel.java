@@ -102,9 +102,9 @@ public final class GamePanel extends JComponent
         {
             List<Action> zoneActions = new ArrayList<>();
             zoneActions.add(new TearDownAction(getWorld, true));
-            addZone(zoneActions, Zones.zone_residential);
-            addZone(zoneActions, Zones.zone_business);
-            addZone(zoneActions, Zones.zone_industrial);
+            addZone(zoneActions, Zones.residential);
+            addZone(zoneActions, Zones.business);
+            addZone(zoneActions, Zones.industrial);
             actions.put("Zones", zoneActions);
         }
         

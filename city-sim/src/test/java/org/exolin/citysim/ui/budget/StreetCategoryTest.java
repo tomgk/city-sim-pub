@@ -27,6 +27,6 @@ public class StreetCategoryTest
     @Test
     public void testEquals_DifferentClass()
     {
-        assertNotEquals(new StreetCategory(Streets.street), new ZoneCategory(Zones.zone_business));
+        assertNotEquals(new StreetCategory(Streets.street), new ZoneCategory(Zones.business));
     }
 }

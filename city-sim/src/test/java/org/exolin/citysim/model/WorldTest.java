@@ -87,7 +87,7 @@ public class WorldTest
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         
-        placeZone(w, Zones.zone_residential, ZoneType.Variant.DEFAULT, 0, 0, 2, 2);
+        placeZone(w, Zones.residential, ZoneType.Variant.DEFAULT, 0, 0, 2, 2);
         placeStreet(w, 0, 2, 2, 2);
         
         w.update();

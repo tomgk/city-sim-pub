@@ -24,12 +24,12 @@ public class BudgetWindow extends JDialog
     private final BudgetLinePanel sum = new BudgetLinePanel("", Optional.empty());
     
     private static final List<BudgetCategory> list = List.of(
-            new ZoneCategory(Zones.zone_residential),
-            new ZoneCategory(Zones.zone_business),
-            new ZoneCategory(Zones.zone_industrial),
+            new ZoneCategory(Zones.residential),
+            new ZoneCategory(Zones.business),
+            new ZoneCategory(Zones.industrial),
             new StreetCategory(Streets.street),
             new StreetCategory(Streets.rail),
-            new ZoneCategory(Zones.zone_plants)
+            new ZoneCategory(Zones.plants)
     );
     
     public BudgetWindow(JFrame frame)

@@ -39,7 +39,7 @@ public class ZonePlacementTest
     {
         World world = new World("Test", 100, BigDecimal.ZERO);
         
-        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.zone_business);
+        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
         List<Building> buildings = world.getBuildings();
         assertEquals(6, world.getBuildings().size(), buildings.toString());
@@ -47,12 +47,12 @@ public class ZonePlacementTest
         for(Building b: buildings)
             System.out.println(b);
         
-        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.zone_business);
-        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.zone_business);
-        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.zone_business);
+        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
+        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
+        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.business);
+        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
+        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
+        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
     }
     
     @Test
@@ -61,8 +61,8 @@ public class ZonePlacementTest
     {
         World world = new World("Test", 100, BigDecimal.ZERO);
         
-        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.zone_residential);
-        makeMove(new Point(2, 7), new Point(4, 10), world, Zones.zone_business);
+        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
+        makeMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
         
         List<Building> buildings = world.getBuildings();
         assertEquals(10, world.getBuildings().size(), buildings.toString());
@@ -70,11 +70,11 @@ public class ZonePlacementTest
         for(Building b: buildings)
             System.out.println(b);
         
-        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.zone_business);
-        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.zone_business);
-        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.zone_business);
-        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.zone_business);
+        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
+        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
+        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.business);
+        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
+        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
+        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
     }
 }

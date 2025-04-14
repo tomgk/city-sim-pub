@@ -30,7 +30,7 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Zone()
     {
-        assertEquals(null, BudgetCategory.getFor(Zones.zone_business));
+        assertEquals(null, BudgetCategory.getFor(Zones.business));
     }
     
     @Test
@@ -42,18 +42,18 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_ResidentialBuildings()
     {
-        assertEquals(new ZoneCategory(Zones.zone_residential), BudgetCategory.getFor(ResidentialBuildings.house_1));
+        assertEquals(new ZoneCategory(Zones.residential), BudgetCategory.getFor(ResidentialBuildings.house_1));
     }
     
     @Test
     public void testGetFor_BusinessBuilding()
     {
-        assertEquals(new ZoneCategory(Zones.zone_business), BudgetCategory.getFor(BusinessBuildings.small_1));
+        assertEquals(new ZoneCategory(Zones.business), BudgetCategory.getFor(BusinessBuildings.small_1));
     }
     
     @Test
     public void testGetFor_IndustrialBuildings()
     {
-        assertEquals(new ZoneCategory(Zones.zone_industrial), BudgetCategory.getFor(IndustrialBuildings.industrial_small_1));
+        assertEquals(new ZoneCategory(Zones.industrial), BudgetCategory.getFor(IndustrialBuildings.industrial_small_1));
     }
 }

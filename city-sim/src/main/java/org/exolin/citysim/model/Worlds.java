@@ -80,9 +80,9 @@ public class Worlds
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         
-        placeZone(w, Zones.zone_residential, ZoneType.Variant.DEFAULT, 0, 0, 20, 15);
-        placeZone(w, Zones.zone_industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
-        placeZone(w, Zones.zone_business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
+        placeZone(w, Zones.residential, ZoneType.Variant.DEFAULT, 0, 0, 20, 15);
+        placeZone(w, Zones.industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
+        placeZone(w, Zones.business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
         
         int zoneSize = 6;
         

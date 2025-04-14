@@ -24,10 +24,10 @@ public class ResidentialBuildings
     public static final ActualBuildingType small_houses_10 = createBuildingType(createUnanimated("residential/small_houses_10"), 1, Zones.zone_residential, 0);
     public static final ActualBuildingType small_houses_11 = createBuildingType(createUnanimated("residential/small_houses_11"), 1, Zones.zone_residential, 0);
     
-    public static final ActualBuildingType house_1 = createBuildingType(createUnanimated("residential/house_1"), 3, Zones.zone_residential, 0);
-    public static final ActualBuildingType house_2 = createBuildingType(createUnanimated("residential/house_2"), 3, Zones.zone_residential, 0);
-    public static final ActualBuildingType house_3 = createBuildingType(createUnanimated("residential/house_3"), 4, Zones.zone_residential, 0);
-    public static final ActualBuildingType house_4 = createBuildingType(createUnanimated("residential/house_4"), 4, Zones.zone_residential, 0);
+    public static final ActualBuildingType house_1 = createBuildingType(createUnanimated("residential/house_1"), 2, Zones.zone_residential, 0);
+    public static final ActualBuildingType house_2 = createBuildingType(createUnanimated("residential/house_2"), 2, Zones.zone_residential, 0);
+    public static final ActualBuildingType house_3 = createBuildingType(createUnanimated("residential/house_3"), 3, Zones.zone_residential, 0);
+    public static final ActualBuildingType house_4 = createBuildingType(createUnanimated("residential/house_4"), 3, Zones.zone_residential, 0);
     
     public static void init()
     {

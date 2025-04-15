@@ -162,7 +162,7 @@ public class StreetBuilder implements BuildingAction
         }
         else
         {
-            ZonePlacement.performAction(marking, world, type, CONNECT_X, type.getCost());
+            ZonePlacement.performAction(marking, world, type, CONNECT_X, type.getCost(), true);
         }
 
         start = null;

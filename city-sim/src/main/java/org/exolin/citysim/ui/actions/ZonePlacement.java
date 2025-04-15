@@ -62,10 +62,10 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
-        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getCost(variant));
+        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getCost(variant), false);
     }
 
-    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant, int cost)
+    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant, int cost, boolean replaceEverything)
     {
         for(int y=0;y<marking.height;++y)
         {
@@ -76,7 +76,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                 {
                     ZoneType buildingZoneType = buildingAt.getZoneType();
                     //keep non zone buildings
-                    if(buildingZoneType == null)
+                    if(buildingZoneType == null && !replaceEverything)
                         continue;
                     
                     world.removeBuildingAt(x, y, true, true);

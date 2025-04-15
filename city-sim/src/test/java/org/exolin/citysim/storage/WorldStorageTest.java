@@ -30,12 +30,12 @@ import org.skyscreamer.jsonassert.JSONAssert;
  */
 public class WorldStorageTest
 {
-    private interface Serializer<T>
+    public interface Serializer<T>
     {
         void write(T value, OutputStream out) throws IOException;
     }
     
-    private static <T> String serialize(Serializer<T> serializer, T object) throws IOException
+    public static <T> String serialize(Serializer<T> serializer, T object) throws IOException
     {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         serializer.write(object, out);

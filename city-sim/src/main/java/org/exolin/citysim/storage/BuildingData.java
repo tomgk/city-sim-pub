@@ -13,6 +13,7 @@ import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Zone;
+import org.exolin.citysim.model.street.cross.CrossConnection;
 import org.exolin.citysim.model.street.regular.Street;
 
 /**
@@ -71,6 +72,8 @@ public abstract class BuildingData
             return new ActualBuildingData((ActualBuilding)b);
         else if(b.getClass() == Zone.class)
             return new ZoneData((Zone)b);
+        else if(b.getClass() == CrossConnection.class)
+            return new CrossConnectionData((CrossConnection)b);
         else
             throw new UnsupportedOperationException(b.getClass().getName());
     }

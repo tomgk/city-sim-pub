@@ -7,7 +7,7 @@ import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ZoneType;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.Utils;
 
 /**

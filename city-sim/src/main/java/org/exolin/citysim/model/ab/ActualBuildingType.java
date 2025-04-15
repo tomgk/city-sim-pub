@@ -1,7 +1,11 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.ab;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *

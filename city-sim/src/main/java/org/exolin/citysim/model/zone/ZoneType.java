@@ -1,7 +1,11 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.zone;
 
+import org.exolin.citysim.model.ab.ActualBuildingType;
 import java.util.ArrayList;
 import java.util.List;
+import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.BuildingVariant;
 
 /**
  *
@@ -70,12 +74,12 @@ public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
         return cost * variant.getFactor();
     }
     
-    void addBuilding(ActualBuildingType building)
+    public void addBuilding(ActualBuildingType building)
     {
         this.buildings.add(building);
     }
     
-    ActualBuildingType getRandomBuilding(int maxSize)
+    public ActualBuildingType getRandomBuilding(int maxSize)
     {
         List<ActualBuildingType> smallBuildings = buildings.stream()
                 .filter(b -> b.getSize() <= maxSize)

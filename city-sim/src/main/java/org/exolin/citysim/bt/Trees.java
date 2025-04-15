@@ -2,7 +2,7 @@ package org.exolin.citysim.bt;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import org.exolin.citysim.model.TreeType;
+import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.ui.Utils;
 
 /**

@@ -1,7 +1,7 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
-import org.exolin.citysim.model.ZoneType;
+import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *

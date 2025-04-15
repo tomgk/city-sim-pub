@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.model.zone.ZoneType;
 import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.List;

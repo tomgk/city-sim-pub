@@ -1,14 +1,15 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.zone;
 
 import java.math.BigDecimal;
+import org.exolin.citysim.model.Building;
 
 /**
  *
  * @author Thomas
  */
-public class Tree extends Building<Tree, TreeType, TreeType.Variant>
+public class Zone extends Building
 {
-    public Tree(TreeType type, int x, int y, TreeType.Variant variant)
+    public Zone(ZoneType type, int x, int y, ZoneType.Variant variant)
     {
         super(type, x, y, variant);
     }

@@ -7,8 +7,8 @@ import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
-import org.exolin.citysim.model.Tree;
-import org.exolin.citysim.model.TreeType;
+import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.World;
 
 /**

@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.model.ZoneType;
+import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *

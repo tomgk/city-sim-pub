@@ -1,5 +1,8 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.model.ab.ActualBuildingType;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ import java.util.List;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ZoneType;
+import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

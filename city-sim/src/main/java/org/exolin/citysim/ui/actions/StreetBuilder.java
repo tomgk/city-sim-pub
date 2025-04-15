@@ -3,14 +3,18 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import org.exolin.citysim.bt.CrossConnections;
+import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
-import org.exolin.citysim.model.street.StreetType;
-import org.exolin.citysim.model.street.StreetVariant;
-import static org.exolin.citysim.model.street.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.street.AnyStreet;
+import org.exolin.citysim.model.street.AnyStreetType;
+import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.street.regular.StreetVariant;
+import static org.exolin.citysim.model.street.regular.XIntersection.X_INTERSECTION;
 
 /**
  *
@@ -23,6 +27,9 @@ public class StreetBuilder implements BuildingAction
     private Point start;
     private Rectangle marking;
     private boolean onlyLine;
+    
+    public static final boolean AREA = false;
+    public static final boolean ONLY_LINE = true;
 
     public StreetBuilder(GetWorld getWorld, StreetType type, boolean onlyLine)
     {
@@ -131,10 +138,27 @@ public class StreetBuilder implements BuildingAction
             {
                 int x = marking.x + diffX * i;
                 int y = marking.y + diffY * i;
+                
+                AnyStreetType curType;
+                
+                if(world.getBuildingAt(x, y) instanceof AnyStreet<?, ?, ?> t)
+                {
+                    //crossing x if currently not building x
+                    boolean crossX = diffX == 0;
+                    
+                    //type which gets crossed
+                    StreetType crossingType = crossX ? t.getType().getXType() : t.getType().getYType();
+                    //resulting type from crossing
+                    curType = CrossConnections.get(crossX ? crossingType : type, crossX ? type : crossingType);
+                    if(curType == null)
+                        curType = type;
+                }
+                else
+                    curType = type;
 
-                world.addBuilding(type, x, y, variant);
+                world.addBuilding(curType, x, y, curType.getDefaultVariant());
+                world.reduceMoney(type.getCost());
             }
-            world.reduceMoney(type.getCost() * len);
         }
         else
         {

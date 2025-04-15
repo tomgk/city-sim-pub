@@ -4,7 +4,7 @@ import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.street.AnyStreetType;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

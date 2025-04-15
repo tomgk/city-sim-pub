@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street;
+package org.exolin.citysim.model.street.regular;
 
 import org.exolin.citysim.model.Rotation;
 

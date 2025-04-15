@@ -1,10 +1,10 @@
-package org.exolin.citysim.model.street;
+package org.exolin.citysim.model.street.regular;
 
 import java.util.Arrays;
 import java.util.List;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.Rotation;
-import static org.exolin.citysim.model.street.StreetVariants.VALUES;
+import static org.exolin.citysim.model.street.regular.StreetVariants.VALUES;
 
 /**
  *

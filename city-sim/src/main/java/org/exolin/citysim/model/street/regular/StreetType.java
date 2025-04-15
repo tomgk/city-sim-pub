@@ -1,7 +1,8 @@
-package org.exolin.citysim.model.street;
+package org.exolin.citysim.model.street.regular;
 
 import java.util.List;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.street.AnyStreetType;
 
 /**
  *

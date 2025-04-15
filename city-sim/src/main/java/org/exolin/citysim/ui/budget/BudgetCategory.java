@@ -4,7 +4,7 @@ import org.exolin.citysim.model.ActualBuildingType;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.TreeType;
 import org.exolin.citysim.model.ZoneType;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

@@ -5,7 +5,7 @@ import java.util.Map;
 import static org.exolin.citysim.bt.Streets.rail;
 import static org.exolin.citysim.bt.Streets.street;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.StreetType;
 import org.exolin.citysim.model.street.cross.CrossConnectionType;
 
 /**

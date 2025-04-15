@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street;
+package org.exolin.citysim.model.street.regular;
 
 import org.exolin.citysim.model.Rotation;
 
@@ -6,13 +6,13 @@ import org.exolin.citysim.model.Rotation;
  *
  * @author Thomas
  */
-public enum XIntersection implements StreetVariant
+public enum Unconnected implements StreetVariant
 {
-    X_INTERSECTION;
-
+    UNCONNECTED;
+    
     @Override
     public StreetVariant rotate(Rotation rotation)
     {
-        return this;
+        return UNCONNECTED;
     }
 }

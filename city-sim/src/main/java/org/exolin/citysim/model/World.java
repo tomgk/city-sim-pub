@@ -12,8 +12,8 @@ import java.util.Objects;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.street.Street;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.Street;
+import org.exolin.citysim.model.street.regular.StreetType;
 import org.exolin.citysim.ui.OutOfGridException;
 
 /**
@@ -187,7 +187,12 @@ public final class World
             }
         }
         
-        B b = type.createBuilding(x, y, variant);
+        B b;
+        try{
+            b = type.createBuilding(x, y, variant);
+        }catch(ClassCastException e){
+            throw e;
+        }
         buildings.add(b);
         buildings.sort(sorter(Rotation.ORIGINAL));
         updateBuilding(b);

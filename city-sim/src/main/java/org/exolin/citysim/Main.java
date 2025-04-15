@@ -77,7 +77,7 @@ public class Main
         lg.setVisible(true);
     }
     
-    private static void play(World world)
+    public static void play(World world)
     {
         BuildingTypes.init();
         

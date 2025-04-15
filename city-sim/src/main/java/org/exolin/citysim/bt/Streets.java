@@ -5,8 +5,8 @@ import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
-import org.exolin.citysim.model.street.ConnectVariant;
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.ConnectVariant;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

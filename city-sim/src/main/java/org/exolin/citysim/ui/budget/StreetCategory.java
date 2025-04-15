@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.model.street.StreetType;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

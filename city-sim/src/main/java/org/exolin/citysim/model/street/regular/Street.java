@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street;
+package org.exolin.citysim.model.street.regular;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,13 +6,15 @@ import java.util.List;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
-import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.ConnectVariant.CONNECT_Y;
-import static org.exolin.citysim.model.street.Curve.*;
-import static org.exolin.citysim.model.street.End.*;
-import static org.exolin.citysim.model.street.TIntersection.*;
-import static org.exolin.citysim.model.street.Unconnected.UNCONNECTED;
-import static org.exolin.citysim.model.street.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.street.AnyStreet;
+import org.exolin.citysim.model.street.AnyStreetType;
+import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.street.regular.Curve.*;
+import static org.exolin.citysim.model.street.regular.End.*;
+import static org.exolin.citysim.model.street.regular.TIntersection.*;
+import static org.exolin.citysim.model.street.regular.Unconnected.UNCONNECTED;
+import static org.exolin.citysim.model.street.regular.XIntersection.X_INTERSECTION;
 
 /**
  *

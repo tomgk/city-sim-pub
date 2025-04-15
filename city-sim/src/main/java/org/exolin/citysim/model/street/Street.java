@@ -25,7 +25,7 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
         super(type, x, y, variant);
     }
 
-    private Street getStreet(World world, int x, int y)
+    private AnyStreet getStreet(World world, int x, int y, boolean xDirection)
     {
         Building b = world.getBuildingAt(x, y);
         if(b == null)
@@ -33,10 +33,18 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
         
         //TODO: add cross logic
         
-        if(b.getType() != getType())
+        if(!(b instanceof AnyStreet))
             return null;
         
-        return (Street)b;
+        AnyStreet<?, ?, ?> s = (AnyStreet) b;
+        
+        AnyStreetType<?, ?, ?> streetType = s.getType();
+        StreetType conType = xDirection ? streetType.getXType() : streetType.getYType();
+        
+        if(conType != getType())
+            return null;
+        
+        return (AnyStreet)b;
     }
 
     @Override
@@ -47,7 +55,7 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
     
     private final List<AnyStreet> connections = new ArrayList<>(4);
 
-    private void addConnection(Street street)
+    private void addConnection(AnyStreet street)
     {
         if(street != null)
             connections.add(street);
@@ -56,10 +64,10 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
     @Override
     protected void update(World world)
     {
-        Street x_before_street = getStreet(world, getX()-1, getY());
-        Street x_after_street = getStreet(world, getX()+1, getY());
-        Street y_before_street = getStreet(world, getX(), getY()-1);
-        Street y_after_street = getStreet(world, getX(), getY()+1);
+        AnyStreet x_before_street = getStreet(world, getX()-1, getY(), true);
+        AnyStreet x_after_street = getStreet(world, getX()+1, getY(), true);
+        AnyStreet y_before_street = getStreet(world, getX(), getY()-1, false);
+        AnyStreet y_after_street = getStreet(world, getX(), getY()+1, false);
         
         connections.clear();
         addConnection(x_before_street);

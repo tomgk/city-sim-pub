@@ -2,15 +2,15 @@ package org.exolin.citysim.model.street.cross;
 
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.street.AnyStreetType;
 import org.exolin.citysim.model.street.StreetType;
 
 /**
  *
  * @author Thomas
  */
-public class CrossConnectionType extends BuildingType<CrossConnection, CrossConnectionType.Variant>
+public class CrossConnectionType extends AnyStreetType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant>
 {
     public enum Variant implements BuildingVariant
     {
@@ -33,11 +33,13 @@ public class CrossConnectionType extends BuildingType<CrossConnection, CrossConn
         return new CrossConnection(this, x, y, variant);
     }
 
+    @Override
     public StreetType getXType()
     {
         return xtype;
     }
 
+    @Override
     public StreetType getYType()
     {
         return ytype;

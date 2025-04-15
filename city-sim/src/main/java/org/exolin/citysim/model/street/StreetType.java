@@ -2,13 +2,12 @@ package org.exolin.citysim.model.street;
 
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
 
 /**
  *
  * @author Thomas
  */
-public class StreetType extends BuildingType<Street, StreetVariant>
+public class StreetType extends AnyStreetType<Street, StreetType, StreetVariant>
 {
     private final int cost;
     
@@ -24,6 +23,18 @@ public class StreetType extends BuildingType<Street, StreetVariant>
     public int getCost()
     {
         return cost;
+    }
+
+    @Override
+    public StreetType getXType()
+    {
+        return this;
+    }
+
+    @Override
+    public StreetType getYType()
+    {
+        return this;
     }
 
     @Override

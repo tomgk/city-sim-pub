@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street.regular;
+package org.exolin.citysim.model.connection.regular;
 
 import org.exolin.citysim.model.Rotation;
 
@@ -6,7 +6,7 @@ import org.exolin.citysim.model.Rotation;
  *
  * @author Thomas
  */
-public enum End implements StreetVariant
+public enum End implements ConnectionVariant
 {
     NORTH,
     EAST,
@@ -14,11 +14,11 @@ public enum End implements StreetVariant
     WEST;
     
     @Override
-    public StreetVariant rotate(Rotation rotation)
+    public ConnectionVariant rotate(Rotation rotation)
     {
         //return StreetVariant.rotate(this, rotation,
         //                NORTH, EAST, SOUTH, WEST);
-        return StreetVariant.rotate(this, rotation,
+        return ConnectionVariant.rotate(this, rotation,
                         SOUTH, EAST, NORTH, WEST);
     }
 }

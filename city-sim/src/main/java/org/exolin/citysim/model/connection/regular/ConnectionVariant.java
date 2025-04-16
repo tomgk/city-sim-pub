@@ -1,16 +1,16 @@
-package org.exolin.citysim.model.street.regular;
+package org.exolin.citysim.model.connection.regular;
 
 import java.util.Arrays;
 import java.util.List;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.Rotation;
-import static org.exolin.citysim.model.street.regular.StreetVariants.VALUES;
+import static org.exolin.citysim.model.connection.regular.StreetVariants.VALUES;
 
 /**
  *
  * @author Thomas
  */
-public interface StreetVariant extends BuildingVariant
+public interface ConnectionVariant extends BuildingVariant
 {
     @Override
     public default int index()
@@ -23,7 +23,7 @@ public interface StreetVariant extends BuildingVariant
         return index;
     }
 
-    public static StreetVariant valueOf(String name)
+    public static ConnectionVariant valueOf(String name)
     {
         return VALUES.stream()
                 .filter(v -> v.name().equals(name))
@@ -31,11 +31,11 @@ public interface StreetVariant extends BuildingVariant
                 .orElseThrow(() -> new IllegalArgumentException(name));
     }
     
-    public StreetVariant rotate(Rotation rotation);
+    public ConnectionVariant rotate(Rotation rotation);
 
-    public static StreetVariant rotate(StreetVariant base, Rotation rotation, StreetVariant v1, StreetVariant v2, StreetVariant v3, StreetVariant v4)
+    public static ConnectionVariant rotate(ConnectionVariant base, Rotation rotation, ConnectionVariant v1, ConnectionVariant v2, ConnectionVariant v3, ConnectionVariant v4)
     {
-        StreetVariant[] v = new StreetVariant[]{v1, v2, v3, v4};
+        ConnectionVariant[] v = new ConnectionVariant[]{v1, v2, v3, v4};
 
         int pos = Arrays.asList(v).indexOf(base);
         if(pos == -1)
@@ -51,7 +51,7 @@ public interface StreetVariant extends BuildingVariant
 
 class StreetVariants
 {
-    public static final List<StreetVariant> VALUES = List.of(
+    public static final List<ConnectionVariant> VALUES = List.of(
             ConnectVariant.CONNECT_X,
             ConnectVariant.CONNECT_Y,
             XIntersection.X_INTERSECTION,

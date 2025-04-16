@@ -1,26 +1,26 @@
-package org.exolin.citysim.model.street.cross;
+package org.exolin.citysim.model.connection.cross;
 
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.BuildingVariant;
-import org.exolin.citysim.model.street.AnyStreetType;
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.ConnectionType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 
 /**
  *
  * @author Thomas
  */
-public class CrossConnectionType extends AnyStreetType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant>
+public class CrossConnectionType extends ConnectionType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant>
 {
     public enum Variant implements BuildingVariant
     {
         DEFAULT
     }
     
-    private final StreetType xtype;
-    private final StreetType ytype;
+    private final SelfConnectionType xtype;
+    private final SelfConnectionType ytype;
 
-    public CrossConnectionType(String name, Animation animation, int size, StreetType type1, StreetType type2)
+    public CrossConnectionType(String name, Animation animation, int size, SelfConnectionType type1, SelfConnectionType type2)
     {
         super(name, animation, size);
         this.xtype = Objects.requireNonNull(type1);
@@ -34,13 +34,13 @@ public class CrossConnectionType extends AnyStreetType<CrossConnection, CrossCon
     }
 
     @Override
-    public StreetType getXType()
+    public SelfConnectionType getXType()
     {
         return xtype;
     }
 
     @Override
-    public StreetType getYType()
+    public SelfConnectionType getYType()
     {
         return ytype;
     }

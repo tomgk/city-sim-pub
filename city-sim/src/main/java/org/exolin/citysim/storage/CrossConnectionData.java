@@ -3,8 +3,8 @@ package org.exolin.citysim.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.model.BuildingVariant;
-import org.exolin.citysim.model.street.cross.CrossConnection;
-import org.exolin.citysim.model.street.cross.CrossConnectionType;
+import org.exolin.citysim.model.connection.cross.CrossConnection;
+import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 
 /**
  *

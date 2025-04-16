@@ -7,13 +7,13 @@ import org.exolin.citysim.bt.CrossConnections;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.street.AnyStreet;
-import org.exolin.citysim.model.street.AnyStreetType;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
-import org.exolin.citysim.model.street.regular.StreetType;
-import org.exolin.citysim.model.street.regular.StreetVariant;
-import static org.exolin.citysim.model.street.regular.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.connection.Connection;
+import org.exolin.citysim.model.connection.ConnectionType;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 
 /**
  *
@@ -22,7 +22,7 @@ import static org.exolin.citysim.model.street.regular.XIntersection.X_INTERSECTI
 public class StreetBuilder implements BuildingAction
 {
     private final GetWorld getWorld;
-    private final StreetType type;
+    private final SelfConnectionType type;
     private Point start;
     private Rectangle marking;
     private boolean onlyLine;
@@ -30,7 +30,7 @@ public class StreetBuilder implements BuildingAction
     public static final boolean AREA = false;
     public static final boolean ONLY_LINE = true;
 
-    public StreetBuilder(GetWorld getWorld, StreetType type, boolean onlyLine)
+    public StreetBuilder(GetWorld getWorld, SelfConnectionType type, boolean onlyLine)
     {
         this.getWorld = getWorld;
         this.type = type;
@@ -117,7 +117,7 @@ public class StreetBuilder implements BuildingAction
             int diffX;
             int diffY;
             int len;
-            StreetVariant variant;
+            ConnectionVariant variant;
             if(marking.width == 1)
             {
                 diffX = 0;
@@ -138,15 +138,15 @@ public class StreetBuilder implements BuildingAction
                 int x = marking.x + diffX * i;
                 int y = marking.y + diffY * i;
                 
-                AnyStreetType curType;
+                ConnectionType curType;
                 
-                if(world.getBuildingAt(x, y) instanceof AnyStreet<?, ?, ?> t)
+                if(world.getBuildingAt(x, y) instanceof Connection<?, ?, ?> t)
                 {
                     //crossing x if currently not building x
                     boolean crossX = diffX == 0;
                     
                     //type which gets crossed
-                    StreetType crossingType = crossX ? t.getType().getXType() : t.getType().getYType();
+                    SelfConnectionType crossingType = crossX ? t.getType().getXType() : t.getType().getYType();
                     //resulting type from crossing
                     curType = CrossConnections.get(crossX ? crossingType : type, crossX ? type : crossingType);
                     if(curType == null)
@@ -186,7 +186,7 @@ public class StreetBuilder implements BuildingAction
         if(marking == null)
             return null;
 
-        StreetVariant variant;
+        ConnectionVariant variant;
         if(!onlyLine)
             variant = X_INTERSECTION;
         else if(marking.width == 1)

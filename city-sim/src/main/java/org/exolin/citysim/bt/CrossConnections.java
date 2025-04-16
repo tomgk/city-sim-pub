@@ -6,8 +6,8 @@ import static org.exolin.citysim.bt.Streets.rail;
 import static org.exolin.citysim.bt.Streets.street;
 import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.street.cross.CrossConnectionType;
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.cross.CrossConnectionType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 
 /**
  *
@@ -24,9 +24,9 @@ public class CrossConnections
     public static CrossConnectionType RAIL_WATER = createCrossConnectionType(rail, water);
     public static CrossConnectionType WATER_RAIL = createCrossConnectionType(water, rail);
     
-    record Key(StreetType xtype, StreetType ytype){}
+    record Key(SelfConnectionType xtype, SelfConnectionType ytype){}
     
-    public static CrossConnectionType createCrossConnectionType(StreetType xtype, StreetType ytype)
+    public static CrossConnectionType createCrossConnectionType(SelfConnectionType xtype, SelfConnectionType ytype)
     {
         String name = xtype.getName()+"_"+ytype.getName();
         System.out.println(name);
@@ -35,7 +35,7 @@ public class CrossConnections
         return type;
     }
     
-    public static CrossConnectionType get(StreetType xtype, StreetType ytype)
+    public static CrossConnectionType get(SelfConnectionType xtype, SelfConnectionType ytype)
     {
         return types.get(new Key(xtype, ytype));
     }

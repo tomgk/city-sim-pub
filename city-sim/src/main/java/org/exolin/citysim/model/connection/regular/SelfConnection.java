@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street.regular;
+package org.exolin.citysim.model.connection.regular;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,28 +6,28 @@ import java.util.List;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.street.AnyStreet;
-import org.exolin.citysim.model.street.AnyStreetType;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
-import static org.exolin.citysim.model.street.regular.Curve.*;
-import static org.exolin.citysim.model.street.regular.End.*;
-import static org.exolin.citysim.model.street.regular.TIntersection.*;
-import static org.exolin.citysim.model.street.regular.Unconnected.UNCONNECTED;
-import static org.exolin.citysim.model.street.regular.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.connection.Connection;
+import org.exolin.citysim.model.connection.ConnectionType;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;
+import static org.exolin.citysim.model.connection.regular.Curve.*;
+import static org.exolin.citysim.model.connection.regular.End.*;
+import static org.exolin.citysim.model.connection.regular.TIntersection.*;
+import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTED;
+import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
 
 /**
  *
  * @author Thomas
  */
-public class Street extends AnyStreet<Street, StreetType, StreetVariant>
+public class SelfConnection extends Connection<SelfConnection, SelfConnectionType, ConnectionVariant>
 {
-    public Street(StreetType type, int x, int y, StreetVariant variant)
+    public SelfConnection(SelfConnectionType type, int x, int y, ConnectionVariant variant)
     {
         super(type, x, y, variant);
     }
 
-    private AnyStreet getStreet(World world, int x, int y, boolean xDirection)
+    private Connection getStreet(World world, int x, int y, boolean xDirection)
     {
         Building b = world.getBuildingAt(x, y);
         if(b == null)
@@ -35,29 +35,29 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
         
         //TODO: add cross logic
         
-        if(!(b instanceof AnyStreet))
+        if(!(b instanceof Connection))
             return null;
         
-        AnyStreet<?, ?, ?> s = (AnyStreet) b;
+        Connection<?, ?, ?> s = (Connection) b;
         
-        AnyStreetType<?, ?, ?> streetType = s.getType();
-        StreetType conType = xDirection ? streetType.getXType() : streetType.getYType();
+        ConnectionType<?, ?, ?> streetType = s.getType();
+        SelfConnectionType conType = xDirection ? streetType.getXType() : streetType.getYType();
         
         if(conType != getType())
             return null;
         
-        return (AnyStreet)b;
+        return (Connection)b;
     }
 
     @Override
-    public StreetVariant getVariant(Rotation rotation)
+    public ConnectionVariant getVariant(Rotation rotation)
     {
         return getVariant().rotate(rotation);
     }
     
-    private final List<AnyStreet> connections = new ArrayList<>(4);
+    private final List<Connection> connections = new ArrayList<>(4);
 
-    private void addConnection(AnyStreet street)
+    private void addConnection(Connection street)
     {
         if(street != null)
             connections.add(street);
@@ -66,10 +66,10 @@ public class Street extends AnyStreet<Street, StreetType, StreetVariant>
     @Override
     protected void update(World world)
     {
-        AnyStreet x_before_street = getStreet(world, getX()-1, getY(), true);
-        AnyStreet x_after_street = getStreet(world, getX()+1, getY(), true);
-        AnyStreet y_before_street = getStreet(world, getX(), getY()-1, false);
-        AnyStreet y_after_street = getStreet(world, getX(), getY()+1, false);
+        Connection x_before_street = getStreet(world, getX()-1, getY(), true);
+        Connection x_after_street = getStreet(world, getX()+1, getY(), true);
+        Connection y_before_street = getStreet(world, getX(), getY()-1, false);
+        Connection y_after_street = getStreet(world, getX(), getY()+1, false);
         
         connections.clear();
         addConnection(x_before_street);

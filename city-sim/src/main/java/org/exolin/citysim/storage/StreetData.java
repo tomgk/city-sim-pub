@@ -3,8 +3,8 @@ package org.exolin.citysim.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.model.BuildingVariant;
-import org.exolin.citysim.model.street.regular.Street;
-import org.exolin.citysim.model.street.regular.StreetVariant;
+import org.exolin.citysim.model.connection.regular.SelfConnection;
+import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 
 /**
  *
@@ -12,7 +12,7 @@ import org.exolin.citysim.model.street.regular.StreetVariant;
  */
 public class StreetData extends BuildingData
 {
-    public StreetData(Street b)
+    public StreetData(SelfConnection b)
     {
         super(b);
     }
@@ -28,6 +28,6 @@ public class StreetData extends BuildingData
     @Override
     protected BuildingVariant getVariant(String name)
     {
-        return StreetVariant.valueOf(name);
+        return ConnectionVariant.valueOf(name);
     }
 }

@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.street.regular;
+package org.exolin.citysim.model.connection.regular;
 
 import org.exolin.citysim.model.Rotation;
 
@@ -6,7 +6,7 @@ import org.exolin.citysim.model.Rotation;
  *
  * @author Thomas
  */
-public enum Curve implements StreetVariant
+public enum Curve implements ConnectionVariant
 {
     CURVE_1,
     CURVE_2,
@@ -14,9 +14,9 @@ public enum Curve implements StreetVariant
     CURVE_4;
 
     @Override
-    public StreetVariant rotate(Rotation rotation)
+    public ConnectionVariant rotate(Rotation rotation)
     {
-        return StreetVariant.rotate(this, rotation,
+        return ConnectionVariant.rotate(this, rotation,
                         CURVE_1, CURVE_2, CURVE_3, CURVE_4);
     }
 }

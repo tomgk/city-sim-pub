@@ -2,7 +2,7 @@ package org.exolin.citysim.ui.budget;
 
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.ab.ActualBuildingType;
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;
 
@@ -21,7 +21,7 @@ public interface BudgetCategory
             ZoneType zoneType = a.getZoneType();
             return new ZoneCategory(zoneType);
         }
-        else if(type instanceof StreetType s)
+        else if(type instanceof SelfConnectionType s)
             return new StreetCategory(s);
         else if(type instanceof TreeType)
             return null;

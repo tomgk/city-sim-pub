@@ -1,18 +1,18 @@
-package org.exolin.citysim.model.street.regular;
+package org.exolin.citysim.model.connection.regular;
 
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.street.AnyStreetType;
+import org.exolin.citysim.model.connection.ConnectionType;
 
 /**
  *
  * @author Thomas
  */
-public class StreetType extends AnyStreetType<Street, StreetType, StreetVariant>
+public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConnectionType, ConnectionVariant>
 {
     private final int cost;
     
-    public StreetType(String name, List<Animation> images, int size, int cost)
+    public SelfConnectionType(String name, List<Animation> images, int size, int cost)
     {
         super(name, images, size);
         this.cost = cost;
@@ -27,26 +27,26 @@ public class StreetType extends AnyStreetType<Street, StreetType, StreetVariant>
     }
 
     @Override
-    public StreetType getXType()
+    public SelfConnectionType getXType()
     {
         return this;
     }
 
     @Override
-    public StreetType getYType()
+    public SelfConnectionType getYType()
     {
         return this;
     }
 
     @Override
-    public StreetVariant getDefaultVariant()
+    public ConnectionVariant getDefaultVariant()
     {
         return ConnectVariant.CONNECT_X;
     }
 
     @Override
-    public Street createBuilding(int x, int y, StreetVariant variant)
+    public SelfConnection createBuilding(int x, int y, ConnectionVariant variant)
     {
-        return new Street(this, x, y, variant);
+        return new SelfConnection(this, x, y, variant);
     }
 }

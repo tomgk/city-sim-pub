@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 
 /**
  *
@@ -8,9 +8,9 @@ import org.exolin.citysim.model.street.regular.StreetType;
  */
 public class StreetCategory implements BudgetCategory
 {
-    private final StreetType type;
+    private final SelfConnectionType type;
 
-    public StreetCategory(StreetType type)
+    public StreetCategory(SelfConnectionType type)
     {
         this.type = type;
     }

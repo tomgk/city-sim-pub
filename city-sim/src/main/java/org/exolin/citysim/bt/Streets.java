@@ -5,8 +5,8 @@ import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
-import org.exolin.citysim.model.street.regular.ConnectVariant;
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.regular.ConnectVariant;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 
 /**
  *
@@ -14,7 +14,7 @@ import org.exolin.citysim.model.street.regular.StreetType;
  */
 public class Streets
 {
-    public static final StreetType street = createStreetType("street", List.of(
+    public static final SelfConnectionType street = createStreetType("street", List.of(
             createUnanimated("street/street_1"),
             createUnanimated("street/street_2"),
             
@@ -30,7 +30,7 @@ public class Streets
             createUnanimated("street/street_t_3"),
             createUnanimated("street/street_t_4")), 1, 10);
     
-    public static final StreetType rail = createStreetType("rail", List.of(
+    public static final SelfConnectionType rail = createStreetType("rail", List.of(
             createUnanimated("rail/rail_1"),
             createUnanimated("rail/rail_2"),
             
@@ -46,7 +46,7 @@ public class Streets
             createUnanimated("rail/rail_t_3"),
             createUnanimated("rail/rail_t_4")), 1, 25);
     
-    public static final StreetType water = createWaterType("water", List.of(
+    public static final SelfConnectionType water = createWaterType("water", List.of(
             createAnimation("water/water_1", 4),
             createAnimation("water/water_2", 4),
             
@@ -70,7 +70,7 @@ public class Streets
             createAnimation("water/water_unconnected", 4)
     ), 1, 100);
     
-    private static StreetType createStreetType(String name, List<Animation> variants, int size, int cost)
+    private static SelfConnectionType createStreetType(String name, List<Animation> variants, int size, int cost)
     {
         List<Animation> add = new ArrayList<>(variants);
         
@@ -82,12 +82,12 @@ public class Streets
         //Unconnected
         add.add(variants.get(ConnectVariant.CONNECT_X.index()));
         
-        return new StreetType(name, add, size, cost);
+        return new SelfConnectionType(name, add, size, cost);
     }
     
-    private static StreetType createWaterType(String name, List<Animation> variants, int size, int cost)
+    private static SelfConnectionType createWaterType(String name, List<Animation> variants, int size, int cost)
     {
-        return new StreetType(name, variants, size, cost);
+        return new SelfConnectionType(name, variants, size, cost);
     }
 
     static void init()

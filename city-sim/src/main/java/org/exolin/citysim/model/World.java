@@ -13,8 +13,8 @@ import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ab.ActualBuildingType;
-import org.exolin.citysim.model.street.regular.Street;
-import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.connection.regular.SelfConnection;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -116,7 +116,7 @@ public final class World
             if(b.isOccupying(x, y))
             {
                 //removeZoning mode keeps streets
-                if(b instanceof Street && removeZoning)
+                if(b instanceof SelfConnection && removeZoning)
                     continue;
                 
                 ZoneType zoneType = b.getZoneType();
@@ -408,7 +408,7 @@ public final class World
         return true;
     }
 
-    private boolean hasAnyInRadius(StreetType street, int cx, int cy, int distance)
+    private boolean hasAnyInRadius(SelfConnectionType street, int cx, int cy, int distance)
     {
         for(int y=cy-distance;y<=cy+distance;++y)
         {

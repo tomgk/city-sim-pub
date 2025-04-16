@@ -12,9 +12,9 @@ import static org.exolin.citysim.bt.BusinessBuildings.parkbuilding;
 import static org.exolin.citysim.bt.Streets.street;
 import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.bt.Zones;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
-import org.exolin.citysim.model.street.regular.StreetType;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
+import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.ui.actions.Action;
@@ -170,7 +170,7 @@ public class Worlds
     {
         placeStreet(w, x, y, width, height, street);
     }
-    public static void placeStreet(World w, int x, int y, int width, int height, StreetType type)
+    public static void placeStreet(World w, int x, int y, int width, int height, SelfConnectionType type)
     {
         StreetBuilder sb = new StreetBuilder(GetWorld.ofStatic(w), type, true);
         place(sb, x, y, width, height);

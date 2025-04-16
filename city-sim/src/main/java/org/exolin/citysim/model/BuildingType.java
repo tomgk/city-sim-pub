@@ -42,7 +42,7 @@ public abstract class BuildingType<B, E extends BuildingVariant>
 
     public static List<ActualBuildingType> actualBuildingTypes()
     {
-        return instances.values().stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
+        return instances.values().stream().filter(b -> b instanceof ActualBuildingType).map(b -> (ActualBuildingType)b).toList();
     }
     
     public BuildingType(String name, Animation animation, int size)
@@ -60,11 +60,6 @@ public abstract class BuildingType<B, E extends BuildingVariant>
         this.images = images;
         this.size = size;
         instances.put(name, this);
-    }
-    
-    public boolean isBuilding()
-    {
-        return this instanceof ActualBuildingType;
     }
     
     public String getName()

@@ -10,18 +10,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
-import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.ActualBuilding;
 import org.exolin.citysim.model.ab.ActualBuildingType;
-import org.exolin.citysim.model.street.regular.Street;
 import static org.exolin.citysim.model.street.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.street.regular.Unconnected.UNCONNECTED;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeType;
-import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -45,120 +39,15 @@ public class WorldStorageTest
         return out.toString(StandardCharsets.UTF_8);
     }
     
-    private static InputStream createInputStream(String data)
+    static InputStream createInputStream(String data)
     {
         return new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
     }
     
-    private Building getBuilding(World w)
+    static Building getBuilding(World w)
     {
         assertEquals(1, w.getBuildings().size());
         return w.getBuildings().get(0);
-    }
-    
-    @Test
-    public void testSerializeZone() throws IOException
-    {
-        Zone zone = new Zone(Zones.residential, 16, 99, ZoneType.Variant.DEFAULT);
-        String output = serialize(WorldStorage::serialize, zone);
-        String expected = """
-                          {"type":"zone_residential","x":16,"y":99}
-                          """;
-        JSONAssert.assertEquals(expected, output, false);
-    }
-    
-    @Test
-    public void testDeserializeZone() throws IOException
-    {
-        World w = new World("Test", 30, BigDecimal.ZERO);
-        InputStream in = createInputStream("""
-                                           {"type":"zone_residential","x":16,"y":5}
-                                           """);
-        WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
-        assertEquals(Zones.residential, b.getType());
-        assertEquals(16, b.getX());
-        assertEquals(5, b.getY());
-        assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());
-    }
-    
-    @Test
-    public void testSerializeActualBuilding_Default() throws IOException
-    {
-        ActualBuilding building = new ActualBuilding(BusinessBuildings.cinema, 16, 99, ActualBuildingType.Variant.DEFAULT);
-        String output = serialize(WorldStorage::serialize, building);
-        String expected = """
-                          {"type":"business/cinema","x":16,"y":99}
-                          """;
-        JSONAssert.assertEquals(expected, output, false);
-    }
-    
-    @Test
-    public void testDeserializeActualBuilding_Default() throws IOException
-    {
-        World w = new World("Test", 30, BigDecimal.ZERO);
-        InputStream in = createInputStream("""
-                                           {"type":"business/cinema","x":16,"y":5}
-                                           """);
-        WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
-        assertEquals(BusinessBuildings.cinema, b.getType());
-        assertEquals(16, b.getX());
-        assertEquals(5, b.getY());
-        assertEquals(ActualBuildingType.Variant.DEFAULT, b.getVariant());
-    }
-    
-    @Test
-    public void testSerializeStreet() throws IOException
-    {
-        Street street = new Street(Streets.street, 16, 99, T_INTERSECTION_4);
-        String output = serialize(WorldStorage::serialize, street);
-        String expected = """
-                          {"type":"street","x":16,"y":99,"variant":"t_intersection_4"}
-                          """;
-        JSONAssert.assertEquals(expected, output, false);
-    }
-    
-    @Test
-    public void testDeserializeStreet() throws IOException
-    {
-        World w = new World("Test", 30, BigDecimal.ZERO);
-        InputStream in = createInputStream("""
-                                           {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
-                                           """);
-        WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
-        assertEquals(Streets.street, b.getType());
-        assertEquals(16, b.getX());
-        assertEquals(5, b.getY());
-        assertEquals(UNCONNECTED, b.getVariant());
-    }
-    
-    @Test
-    public void testSerializeTree() throws IOException
-    {
-        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeType.Variant.TOP_RIGHT);
-        String output = serialize(WorldStorage::serialize, street);
-        String expected = """
-                          {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
-                          """;
-        JSONAssert.assertEquals(expected, output, false);
-    }
-    
-    @Test
-    public void testDeserializeTree() throws IOException
-    {
-        World w = new World("Test", 30, BigDecimal.ZERO);
-        InputStream in = createInputStream(
-                          """
-                          {"type":"trees_4","x":16,"y":22,"variant":"top_right"}
-                          """);
-        WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
-        assertEquals(Trees.TREES.get(3), b.getType());
-        assertEquals(16, b.getX());
-        assertEquals(22, b.getY());
-        assertEquals(TreeType.Variant.TOP_RIGHT, b.getVariant());
     }
     
     @Test

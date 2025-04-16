@@ -1,11 +1,11 @@
 package org.exolin.citysim.model;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.Map;
 import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.ui.Utils;
 
@@ -19,32 +19,30 @@ public abstract class BuildingType<B, E extends BuildingVariant>
 {
     public static final int DEFAULT_VARIANT = 0;
     
-    private final Set<String> usedNames = new LinkedHashSet<>();
     private final String name;
     private final List<Animation> images;
     private final int size;
     
-    private static final List<BuildingType> instances = new ArrayList<>();
+    private static final Map<String, BuildingType> instances = new LinkedHashMap<>();
     
-    public static List<BuildingType> types()
+    public static Collection<BuildingType> types()
     {
-        return instances;
+        return Collections.unmodifiableCollection(instances.values());
     }
     
     public static BuildingType<?, ?> getByName(String name)
     {
-        Objects.requireNonNull(name);
-        return instances.stream()
-                .filter(b -> b.name.equals(name))
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("no building type "+name));
+        BuildingType<?, ?> bt = instances.get(name);
+        if(bt == null)
+            throw new IllegalArgumentException("no building type "+name);
+        return bt;
     }
     
     public abstract B createBuilding(int x, int y, E variant);
 
     public static List<ActualBuildingType> actualBuildingTypes()
     {
-        return instances.stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
+        return instances.values().stream().filter(b -> b.isBuilding()).map(b -> (ActualBuildingType)b).toList();
     }
     
     public BuildingType(String name, Animation animation, int size)
@@ -55,13 +53,13 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     @SuppressWarnings("LeakingThisInConstructor")
     public BuildingType(String name, List<Animation> images, int size)
     {
-        if(!usedNames.add(name))
+        if(instances.containsKey(name))
             throw new IllegalArgumentException("duplicate ID");
         
         this.name = name;
         this.images = images;
         this.size = size;
-        instances.add(this);
+        instances.put(name, this);
     }
     
     public boolean isBuilding()

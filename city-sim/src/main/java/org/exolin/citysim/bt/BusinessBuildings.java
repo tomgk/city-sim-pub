@@ -2,9 +2,9 @@ package org.exolin.citysim.bt;
 
 import static org.exolin.citysim.bt.Buildings.createBuildingType;
 import static org.exolin.citysim.bt.Zones.business;
-import org.exolin.citysim.model.ab.ActualBuildingType;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.ab.ActualBuildingType;
 
 /**
  *

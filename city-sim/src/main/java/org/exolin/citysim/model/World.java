@@ -1,8 +1,5 @@
 package org.exolin.citysim.model;
 
-import org.exolin.citysim.model.zone.Zone;
-import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.model.ab.ActualBuildingType;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,8 +12,11 @@ import java.util.Objects;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.model.street.regular.Street;
 import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
 
 /**

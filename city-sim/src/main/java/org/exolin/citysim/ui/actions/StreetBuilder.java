@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.bt.CrossConnections;
-import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;

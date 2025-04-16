@@ -1,10 +1,10 @@
 package org.exolin.citysim.model.street;
 
-import org.exolin.citysim.model.street.regular.StreetType;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

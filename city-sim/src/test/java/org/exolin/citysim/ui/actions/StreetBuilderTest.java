@@ -10,7 +10,6 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 

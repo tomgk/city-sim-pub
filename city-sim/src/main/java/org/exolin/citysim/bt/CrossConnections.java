@@ -6,8 +6,8 @@ import static org.exolin.citysim.bt.Streets.rail;
 import static org.exolin.citysim.bt.Streets.street;
 import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.street.regular.StreetType;
 import org.exolin.citysim.model.street.cross.CrossConnectionType;
+import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

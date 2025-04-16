@@ -1,6 +1,5 @@
 package org.exolin.citysim.model;
 
-import org.exolin.citysim.model.zone.ZoneType;
 import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.street.regular.ConnectVariant.CONNECT_Y;
 import org.exolin.citysim.model.street.regular.StreetType;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.StreetBuilder;

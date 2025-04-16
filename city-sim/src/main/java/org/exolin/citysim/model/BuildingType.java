@@ -1,12 +1,12 @@
 package org.exolin.citysim.model;
 
-import org.exolin.citysim.model.ab.ActualBuildingType;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.ui.Utils;
 
 /**

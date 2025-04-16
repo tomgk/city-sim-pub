@@ -1,10 +1,10 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.street.regular.StreetType;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.model.street.regular.StreetType;
 
 /**
  *

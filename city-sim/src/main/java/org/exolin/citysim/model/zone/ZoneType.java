@@ -1,11 +1,11 @@
 package org.exolin.citysim.model.zone;
 
-import org.exolin.citysim.model.ab.ActualBuildingType;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.BuildingType;
 import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.ab.ActualBuildingType;
 
 /**
  *

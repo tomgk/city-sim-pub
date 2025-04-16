@@ -1,9 +1,9 @@
 package org.exolin.citysim.model;
 
-import org.exolin.citysim.model.zone.ZoneType;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
+import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *

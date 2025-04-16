@@ -1,12 +1,12 @@
 package org.exolin.citysim.model;
 
-import org.exolin.citysim.model.zone.ZoneType;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
+import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;

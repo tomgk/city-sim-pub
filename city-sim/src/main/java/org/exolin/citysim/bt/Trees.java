@@ -11,7 +11,7 @@ import org.exolin.citysim.ui.Utils;
  */
 public class Trees
 {
-    public static TreeType createTree(int count)
+    private static TreeType createTree(int count)
     {
         return new TreeType("trees_"+count, Utils.loadImage("trees/"+count), count);
     }

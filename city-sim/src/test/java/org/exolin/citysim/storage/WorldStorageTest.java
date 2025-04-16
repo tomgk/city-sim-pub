@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Building;
 import org.exolin.citysim.model.World;
@@ -18,6 +19,8 @@ import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.model.street.regular.Street;
 import static org.exolin.citysim.model.street.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.street.regular.Unconnected.UNCONNECTED;
+import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -129,6 +132,33 @@ public class WorldStorageTest
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());
         assertEquals(UNCONNECTED, b.getVariant());
+    }
+    
+    @Test
+    public void testSerializeTree() throws IOException
+    {
+        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeType.Variant.TOP_RIGHT);
+        String output = serialize(WorldStorage::serialize, street);
+        String expected = """
+                          {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
+                          """;
+        JSONAssert.assertEquals(expected, output, false);
+    }
+    
+    @Test
+    public void testDeserializeTree() throws IOException
+    {
+        World w = new World("Test", 30, BigDecimal.ZERO);
+        InputStream in = createInputStream(
+                          """
+                          {"type":"trees_4","x":16,"y":22,"variant":"top_right"}
+                          """);
+        WorldStorage.deserialize(in, w);
+        Building b = getBuilding(w);
+        assertEquals(Trees.TREES.get(3), b.getType());
+        assertEquals(16, b.getX());
+        assertEquals(22, b.getY());
+        assertEquals(TreeType.Variant.TOP_RIGHT, b.getVariant());
     }
     
     @Test

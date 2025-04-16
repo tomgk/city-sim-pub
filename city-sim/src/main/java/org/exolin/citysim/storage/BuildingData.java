@@ -89,6 +89,8 @@ public abstract class BuildingData
             return ActualBuildingData.class;
         else if(buildingClass == Zone.class)
             return ZoneData.class;
+        else if(buildingClass == Tree.class)
+            return TreeData.class;
         else
             throw new UnsupportedOperationException(buildingClass.getName());
     }

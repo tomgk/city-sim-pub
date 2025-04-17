@@ -51,8 +51,7 @@ public class LoadGame extends JFrame
             @Override
             public void windowClosing(WindowEvent e)
             {
-                if(!chosen)
-                    choice.accept(null);
+                chose(null);
             }
         });
         
@@ -94,6 +93,14 @@ public class LoadGame extends JFrame
         else
             w = worlds.get(index-1);
 
+        chose(w);
+    }
+    
+    private void chose(World w)
+    {
+        if(chosen)
+            return;
+        
         chosen = true;
         setVisible(false);
         choice.accept(w);

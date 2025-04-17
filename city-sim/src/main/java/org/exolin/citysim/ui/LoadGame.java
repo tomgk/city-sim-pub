@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -45,6 +47,14 @@ public class LoadGame extends JFrame
                     executeSelection();
             }
         });
+        addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                if(!chosen)
+                    choice.accept(null);
+            }
+        });
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(1, 0));
@@ -63,6 +73,8 @@ public class LoadGame extends JFrame
         setLocationRelativeTo(null);
     }
     
+    private boolean chosen = false;
+    
     private void executeSelection()
     {
         int index = list.getSelectedIndex();
@@ -74,11 +86,15 @@ public class LoadGame extends JFrame
         if(index == 0)
         {
             String name = JOptionPane.showInputDialog(this, "City Name", "New World", JOptionPane.PLAIN_MESSAGE);
-            w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+            if(name == null)
+                w = null;
+            else
+                w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         }
         else
             w = worlds.get(index-1);
 
+        chosen = true;
         setVisible(false);
         choice.accept(w);
     }

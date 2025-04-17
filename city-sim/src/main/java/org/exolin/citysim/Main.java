@@ -73,7 +73,12 @@ public class Main
     
     public static void main(String[] args)
     {
-        LoadGame lg = new LoadGame(Worlds.all(), Main::play);
+        LoadGame lg = new LoadGame(Worlds.all(), w -> {
+            if(w == null)
+                System.exit(0);
+            else
+                play(w);
+        });
         lg.setVisible(true);
     }
     

@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.Map;
 public class KeyMapping extends KeyAdapter
 {
     private final Map<Integer, Runnable> actions = new LinkedHashMap<>();
-    private final Map<Integer, String> description = new LinkedHashMap<>();
+    //private final Map<Integer, String> description = new LinkedHashMap<>();
     
     public void add(int key, /*String title, */Runnable r)
     {
@@ -28,5 +29,13 @@ public class KeyMapping extends KeyAdapter
     public void keyPressed(KeyEvent e)
     {
         actions.getOrDefault(e.getKeyCode(), NOTHING).run();
+    }
+
+    public String getText()
+    {
+        return "<html>"+actions.entrySet()
+                .stream()
+                .map(e -> KeyEvent.getKeyText(e.getKey())+": <i>unknown</i>")
+                .collect(Collectors.joining(", "))+"</html>";
     }
 }

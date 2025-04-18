@@ -54,6 +54,12 @@ public class GameControlPanel extends javax.swing.JPanel
         this.panel = panel;
     }
 
+    public void setKeyMapping(KeyMapping mapping)
+    {
+        String text = mapping.getText();
+        keyMappingLabel.setText(text);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,6 +79,7 @@ public class GameControlPanel extends javax.swing.JPanel
         javax.swing.JLabel zoomOutLabel = new javax.swing.JLabel();
         javax.swing.JLabel saveLabel = new javax.swing.JLabel();
         javax.swing.JLabel loadLabel = new javax.swing.JLabel();
+        keyMappingLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -155,6 +162,8 @@ public class GameControlPanel extends javax.swing.JPanel
             }
         });
 
+        keyMappingLabel.setText("<keymapping>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -174,7 +183,9 @@ public class GameControlPanel extends javax.swing.JPanel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(zoomInLabel)
                     .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 491, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(keyMappingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loadLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -208,6 +219,7 @@ public class GameControlPanel extends javax.swing.JPanel
                                     .addComponent(loadLabel))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(keyMappingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -281,5 +293,6 @@ public class GameControlPanel extends javax.swing.JPanel
     }//GEN-LAST:event_loadLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel keyMappingLabel;
     // End of variables declaration//GEN-END:variables
 }

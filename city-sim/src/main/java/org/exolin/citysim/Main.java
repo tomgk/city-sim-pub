@@ -50,6 +50,9 @@ public class Main
         mapping.add(KeyEvent.VK_F10, () -> selector.setVisible(!selector.isVisible()));
         mapping.add(KeyEvent.VK_F11, () -> gp.toggleColorGrid());
         mapping.add(KeyEvent.VK_F12, () -> gd.setVisible(!gd.isVisible()));
+        
+        gd.setKeyMapping(mapping);
+        
         return mapping;
     }
     

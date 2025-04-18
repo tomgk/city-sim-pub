@@ -2,8 +2,9 @@ package org.exolin.citysim.ui;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -12,8 +13,8 @@ import java.util.stream.Collectors;
  */
 public class KeyMapping extends KeyAdapter
 {
-    private final Map<Integer, Runnable> actions = new LinkedHashMap<>();
-    private final Map<Integer, String> description = new LinkedHashMap<>();
+    private final Map<Integer, Runnable> actions = new HashMap<>();
+    private final Map<Integer, String> description = new TreeMap<>();
     
     public void add(int key, String title, Runnable r)
     {

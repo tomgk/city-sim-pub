@@ -35,31 +35,22 @@ public class Main
         return selector;
     }
     
-    private static class KeyListener extends KeyAdapter
+    public static KeyMapping createKeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, GameControlPanel gd)
     {
-        private final KeyMapping mapping = new KeyMapping();
-
-        private KeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, GameControlPanel gd)
-        {
-            mapping.add(KeyEvent.VK_ESCAPE, () -> gp.setAction(Action.NONE));
-            mapping.add(KeyEvent.VK_PAGE_UP, () -> gp.setRotation(gp.getRotation().getPrev()));
-            mapping.add(KeyEvent.VK_PAGE_DOWN, () -> gp.setRotation(gp.getRotation().getNext()));
-            mapping.add(KeyEvent.VK_F6, () -> {
-                    bw.update(gp.getWorld());
-                    bw.setVisible(!bw.isVisible());
-                });
-            mapping.add(KeyEvent.VK_F7, () -> gp.toggleDebug());
-            mapping.add(KeyEvent.VK_F8, () -> gp.setView(gp.getView().getNext()));
-            mapping.add(KeyEvent.VK_F10, () -> selector.setVisible(!selector.isVisible()));
-            mapping.add(KeyEvent.VK_F11, () -> gp.toggleColorGrid());
-            mapping.add(KeyEvent.VK_F12, () -> gd.setVisible(!gd.isVisible()));
-        }
-        
-        @Override
-        public void keyPressed(KeyEvent e)
-        {
-            mapping.execute(e.getKeyCode());
-        }
+        KeyMapping mapping = new KeyMapping();
+        mapping.add(KeyEvent.VK_ESCAPE, () -> gp.setAction(Action.NONE));
+        mapping.add(KeyEvent.VK_PAGE_UP, () -> gp.setRotation(gp.getRotation().getPrev()));
+        mapping.add(KeyEvent.VK_PAGE_DOWN, () -> gp.setRotation(gp.getRotation().getNext()));
+        mapping.add(KeyEvent.VK_F6, () -> {
+                bw.update(gp.getWorld());
+                bw.setVisible(!bw.isVisible());
+            });
+        mapping.add(KeyEvent.VK_F7, () -> gp.toggleDebug());
+        mapping.add(KeyEvent.VK_F8, () -> gp.setView(gp.getView().getNext()));
+        mapping.add(KeyEvent.VK_F10, () -> selector.setVisible(!selector.isVisible()));
+        mapping.add(KeyEvent.VK_F11, () -> gp.toggleColorGrid());
+        mapping.add(KeyEvent.VK_F12, () -> gd.setVisible(!gd.isVisible()));
+        return mapping;
     }
     
     public static void main(String[] args)
@@ -118,7 +109,7 @@ public class Main
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
         BudgetWindow bw = new BudgetWindow(f);
-        f.addKeyListener(new KeyListener(bw, gp, selector, gd));
+        f.addKeyListener(createKeyListener(bw, gp, selector, gd));
         
         gp.start();
         f.setVisible(true);

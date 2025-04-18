@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -7,7 +9,7 @@ import java.util.Map;
  *
  * @author Thomas
  */
-public class KeyMapping
+public class KeyMapping extends KeyAdapter
 {
     private final Map<Integer, Runnable> actions = new LinkedHashMap<>();
     private final Map<Integer, String> description = new LinkedHashMap<>();
@@ -22,8 +24,9 @@ public class KeyMapping
     
     private static final Runnable NOTHING = () -> {};
     
-    public void execute(int key)
+    @Override
+    public void keyPressed(KeyEvent e)
     {
-        actions.getOrDefault(key, NOTHING).run();
+        actions.getOrDefault(e.getKeyCode(), NOTHING).run();
     }
 }

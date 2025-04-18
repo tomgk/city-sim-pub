@@ -12,6 +12,7 @@ import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.KeyMapping;
 import org.exolin.citysim.ui.LoadGame;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.budget.BudgetWindow;
@@ -36,38 +37,28 @@ public class Main
     
     private static class KeyListener extends KeyAdapter
     {
-        private final BudgetWindow bw;
-        private final GamePanel gp;
-        private final JFrame selector;
-        private final GameControlPanel gd;
+        private final KeyMapping mapping = new KeyMapping();
 
         private KeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, GameControlPanel gd)
         {
-            this.bw = bw;
-            this.gp = gp;
-            this.selector = selector;
-            this.gd = gd;
+            mapping.add(KeyEvent.VK_ESCAPE, () -> gp.setAction(Action.NONE));
+            mapping.add(KeyEvent.VK_PAGE_UP, () -> gp.setRotation(gp.getRotation().getPrev()));
+            mapping.add(KeyEvent.VK_PAGE_DOWN, () -> gp.setRotation(gp.getRotation().getNext()));
+            mapping.add(KeyEvent.VK_F6, () -> {
+                    bw.update(gp.getWorld());
+                    bw.setVisible(!bw.isVisible());
+                });
+            mapping.add(KeyEvent.VK_F7, () -> gp.toggleDebug());
+            mapping.add(KeyEvent.VK_F8, () -> gp.setView(gp.getView().getNext()));
+            mapping.add(KeyEvent.VK_F10, () -> selector.setVisible(!selector.isVisible()));
+            mapping.add(KeyEvent.VK_F11, () -> gp.toggleColorGrid());
+            mapping.add(KeyEvent.VK_F12, () -> gd.setVisible(!gd.isVisible()));
         }
         
         @Override
         public void keyPressed(KeyEvent e)
         {
-            switch(e.getKeyCode())
-            {
-                case KeyEvent.VK_ESCAPE -> gp.setAction(Action.NONE);
-                case KeyEvent.VK_PAGE_UP -> gp.setRotation(gp.getRotation().getPrev());
-                case KeyEvent.VK_PAGE_DOWN -> gp.setRotation(gp.getRotation().getNext());
-                
-                case KeyEvent.VK_F6 -> {
-                    bw.update(gp.getWorld());
-                    bw.setVisible(!bw.isVisible());
-                }
-                case KeyEvent.VK_F7 -> gp.toggleDebug();
-                case KeyEvent.VK_F8 -> gp.setView(gp.getView().getNext());
-                case KeyEvent.VK_F10 -> selector.setVisible(!selector.isVisible());
-                case KeyEvent.VK_F11 -> gp.toggleColorGrid();
-                case KeyEvent.VK_F12 -> gd.setVisible(!gd.isVisible());
-            }
+            mapping.execute(e.getKeyCode());
         }
     }
     

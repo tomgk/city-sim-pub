@@ -49,10 +49,32 @@ public abstract class StructureType<B, E extends StructureVariant>
     {
         this(name, List.of(animation), size);
     }
+    
+    public static String transformName(String name)
+    {
+        int p = name.indexOf('/');
+        if(p != -1)
+        {
+            String prefix = name.substring(0, p);
+            
+            int p2 = name.indexOf('_', p);
+            if(p2 != -1)
+            {
+                String n2 = name.substring(p+1, p2);
+                if(prefix.equals(n2))
+                    return name.substring(p+1);
+            }
+            else
+                name = name.replace('/', '_');
+        }
+        return name;
+    }
 
     @SuppressWarnings("LeakingThisInConstructor")
     public StructureType(String name, List<Animation> images, int size)
     {
+        name = transformName(name);
+        
         if(instances.containsKey(name))
             throw new IllegalArgumentException("duplicate ID");
         

@@ -17,6 +17,6 @@ public enum Curve implements ConnectionVariant
     public ConnectionVariant rotate(Rotation rotation)
     {
         return ConnectionVariant.rotate(this, rotation,
-                        CURVE_1, CURVE_2, CURVE_3, CURVE_4);
+                        new ConnectionVariantType(CURVE_1, CURVE_2, CURVE_3, CURVE_4));
     }
 }

@@ -17,6 +17,6 @@ public enum TIntersection implements ConnectionVariant
     public ConnectionVariant rotate(Rotation rotation)
     {
         return ConnectionVariant.rotate(this, rotation,
-                        T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4);
+                        new ConnectionVariantType(T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4));
     }
 }

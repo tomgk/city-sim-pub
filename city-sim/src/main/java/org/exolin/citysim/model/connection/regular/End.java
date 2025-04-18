@@ -19,6 +19,6 @@ public enum End implements ConnectionVariant
         //return StreetVariant.rotate(this, rotation,
         //                NORTH, EAST, SOUTH, WEST);
         return ConnectionVariant.rotate(this, rotation,
-                        SOUTH, EAST, NORTH, WEST);
+                        new ConnectionVariantType(SOUTH, EAST, NORTH, WEST));
     }
 }

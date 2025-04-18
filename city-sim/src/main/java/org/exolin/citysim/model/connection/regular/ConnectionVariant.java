@@ -33,19 +33,9 @@ public interface ConnectionVariant extends BuildingVariant
     
     public ConnectionVariant rotate(Rotation rotation);
 
-    public static ConnectionVariant rotate(ConnectionVariant base, Rotation rotation, ConnectionVariant v1, ConnectionVariant v2, ConnectionVariant v3, ConnectionVariant v4)
+    public static ConnectionVariant rotate(ConnectionVariant base, Rotation rotation, ConnectionVariantType type)
     {
-        ConnectionVariant[] v = new ConnectionVariant[]{v1, v2, v3, v4};
-
-        int pos = Arrays.asList(v).indexOf(base);
-        if(pos == -1)
-            throw new IllegalArgumentException();
-
-        pos += rotation.getAmount();
-        if(pos >= v.length)
-            pos -= v.length;
-
-        return v[pos];
+        return type.rotate(base, rotation);
     }
 }
 

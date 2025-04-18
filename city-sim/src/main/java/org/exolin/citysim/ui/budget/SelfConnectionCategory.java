@@ -6,11 +6,11 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  *
  * @author Thomas
  */
-public class StreetCategory implements BudgetCategory
+public class SelfConnectionCategory implements BudgetCategory
 {
     private final SelfConnectionType type;
 
-    public StreetCategory(SelfConnectionType type)
+    public SelfConnectionCategory(SelfConnectionType type)
     {
         this.type = type;
     }
@@ -18,7 +18,7 @@ public class StreetCategory implements BudgetCategory
     @Override
     public boolean equals(Object obj)
     {
-        if(obj instanceof StreetCategory c)
+        if(obj instanceof SelfConnectionCategory c)
             return type == c.type;
         else
             return false;

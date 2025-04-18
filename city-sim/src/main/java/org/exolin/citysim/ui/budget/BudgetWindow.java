@@ -27,8 +27,8 @@ public class BudgetWindow extends JDialog
             new ZoneCategory(Zones.residential),
             new ZoneCategory(Zones.business),
             new ZoneCategory(Zones.industrial),
-            new StreetCategory(Streets.street),
-            new StreetCategory(Streets.rail),
+            new SelfConnectionCategory(Streets.street),
+            new SelfConnectionCategory(Streets.rail),
             new ZoneCategory(Zones.plants)
     );
     

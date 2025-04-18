@@ -20,7 +20,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
  *
  * @author Thomas
  */
-public class StreetDataTest
+public class SelfConnectionTest
 {
     @Test
     public void testSerializeStreet() throws IOException

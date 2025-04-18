@@ -22,7 +22,7 @@ public interface BudgetCategory
             return new ZoneCategory(zoneType);
         }
         else if(type instanceof SelfConnectionType s)
-            return new StreetCategory(s);
+            return new SelfConnectionCategory(s);
         else if(type instanceof TreeType)
             return null;
         else if(type instanceof ZoneType)

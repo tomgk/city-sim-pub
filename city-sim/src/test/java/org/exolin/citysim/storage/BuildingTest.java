@@ -19,7 +19,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
  *
  * @author Thomas
  */
-public class ActualBuildingTest
+public class BuildingTest
 {
     @Test
     public void testSerializeActualBuilding_Default() throws IOException

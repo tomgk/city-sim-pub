@@ -18,13 +18,13 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Street()
     {
-        assertEquals(new StreetCategory(Streets.street), BudgetCategory.getFor(Streets.street));
+        assertEquals(new SelfConnectionCategory(Streets.street), BudgetCategory.getFor(Streets.street));
     }
     
     @Test
     public void testGetFor_Rail()
     {
-        assertEquals(new StreetCategory(Streets.rail), BudgetCategory.getFor(Streets.rail));
+        assertEquals(new SelfConnectionCategory(Streets.rail), BudgetCategory.getFor(Streets.rail));
     }
     
     @Test

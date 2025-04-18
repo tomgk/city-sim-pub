@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.BusinessBuildings;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ab.ActualBuilding;
 import org.exolin.citysim.model.ab.ActualBuildingType;
@@ -40,7 +40,7 @@ public class ActualBuildingTest
                                            {"type":"business/cinema","x":16,"y":5}
                                            """);
         WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
+        Structure b = getBuilding(w);
         assertEquals(BusinessBuildings.cinema, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());

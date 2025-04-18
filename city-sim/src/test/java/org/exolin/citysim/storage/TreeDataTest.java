@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.Trees;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeType;
@@ -41,7 +41,7 @@ public class TreeDataTest
                           {"type":"trees_4","x":16,"y":22,"variant":"top_right"}
                           """);
         WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
+        Structure b = getBuilding(w);
         assertEquals(Trees.TREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());

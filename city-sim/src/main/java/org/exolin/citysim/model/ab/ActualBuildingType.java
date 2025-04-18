@@ -3,17 +3,17 @@ package org.exolin.citysim.model.ab;
 import java.math.BigDecimal;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
  * @author Thomas
  */
-public class ActualBuildingType extends BuildingType<ActualBuilding, ActualBuildingType.Variant>
+public class ActualBuildingType extends StructureType<ActualBuilding, ActualBuildingType.Variant>
 {
-    public enum Variant implements BuildingVariant
+    public enum Variant implements StructureVariant
     {
         DEFAULT
     }

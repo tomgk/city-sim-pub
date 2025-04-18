@@ -3,7 +3,7 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.Connection;
@@ -29,7 +29,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
 
     private Connection getStreet(World world, int x, int y, boolean xDirection)
     {
-        Building b = world.getBuildingAt(x, y);
+        Structure b = world.getBuildingAt(x, y);
         if(b == null)
             return null;
         

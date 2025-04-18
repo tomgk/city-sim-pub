@@ -12,14 +12,14 @@ import org.exolin.citysim.model.zone.ZoneType;
  * @param <T> building type
  * @param <E> building variant
  */
-public abstract class Building<B, T extends BuildingType<B, E>, E extends BuildingVariant>
+public abstract class Structure<B, T extends StructureType<B, E>, E extends StructureVariant>
 {
     private final T type;
     private final int x;
     private final int y;
     private E variant;
     
-    public Building(T type, int x, int y, E variant)
+    public Structure(T type, int x, int y, E variant)
     {
         type.checkVariant(variant);
         

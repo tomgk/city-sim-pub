@@ -1,8 +1,8 @@
 package org.exolin.citysim.ui.actions;
 
 import java.awt.Image;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -10,12 +10,12 @@ import org.exolin.citysim.model.BuildingVariant;
  */
 public interface BuildingAction extends Action
 {
-    BuildingType getBuilding();
+    StructureType getBuilding();
     
     default Image getIcon()
     {
-        BuildingType building = getBuilding();
-        BuildingVariant variant = getVariant();
+        StructureType building = getBuilding();
+        StructureVariant variant = getVariant();
         return variant != null ? building.getImage(variant).getDefault() : building.getDefaultImage();
     }
     
@@ -23,7 +23,7 @@ public interface BuildingAction extends Action
     {
         return null;
     }
-    default BuildingVariant getVariant()
+    default StructureVariant getVariant()
     {
         return null;
     }

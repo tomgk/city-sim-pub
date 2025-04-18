@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.ab.ActualBuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.TreeType;
@@ -14,7 +14,7 @@ public interface BudgetCategory
 {
     String getTitle();
     
-    static BudgetCategory getFor(BuildingType type)
+    static BudgetCategory getFor(StructureType type)
     {
         if(type instanceof ActualBuildingType a)
         {

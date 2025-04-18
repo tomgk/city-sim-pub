@@ -2,9 +2,9 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -26,7 +26,7 @@ public class TreeData extends BuildingData
     }
 
     @Override
-    protected BuildingVariant getVariant(String name)
+    protected StructureVariant getVariant(String name)
     {
         return TreeType.Variant.valueOf(name);
     }

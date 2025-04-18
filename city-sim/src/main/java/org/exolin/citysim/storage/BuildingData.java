@@ -7,15 +7,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
-import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ab.ActualBuilding;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -52,7 +52,7 @@ public abstract class BuildingData
         this.variant = variant;
     }
     
-    public BuildingData(Building b)
+    public BuildingData(Structure b)
     {
         this.type = b.getType().getName();
         this.x = b.getX();
@@ -65,7 +65,7 @@ public abstract class BuildingData
             this.variant = b.getVariant().name().toLowerCase();
     }
     
-    public static BuildingData create(Building b)
+    public static BuildingData create(Structure b)
     {
         if(b.getClass() == SelfConnection.class)
             return new StreetData((SelfConnection)b);
@@ -95,12 +95,12 @@ public abstract class BuildingData
             throw new UnsupportedOperationException(buildingClass.getName());
     }
     
-    protected abstract BuildingVariant getVariant(String name);
+    protected abstract StructureVariant getVariant(String name);
 
     void createBuilding(World w)
     {
-        BuildingType buildingType = BuildingType.getByName(type);
-        BuildingVariant buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
+        StructureType buildingType = StructureType.getByName(type);
+        StructureVariant buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
         
         w.addBuilding(buildingType, x, y, buildingVariant);
     }

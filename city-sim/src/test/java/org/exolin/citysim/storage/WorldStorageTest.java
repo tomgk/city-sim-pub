@@ -11,7 +11,7 @@ import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ab.ActualBuildingType;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
@@ -44,7 +44,7 @@ public class WorldStorageTest
         return new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
     }
     
-    static Building getBuilding(World w)
+    static Structure getBuilding(World w)
     {
         assertEquals(1, w.getBuildings().size());
         return w.getBuildings().get(0);
@@ -93,11 +93,11 @@ public class WorldStorageTest
         assertEquals(30, w.getGridSize());
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         
-        List<Building> buildings = w.getBuildings();
+        List<Structure> buildings = w.getBuildings();
         assertEquals(3, buildings.size());
         
         {
-            Building b = buildings.get(0);
+            Structure b = buildings.get(0);
             assertEquals(Zones.business, b.getType());
             assertEquals(15, b.getX());
             assertEquals(4, b.getY());
@@ -105,14 +105,14 @@ public class WorldStorageTest
         }
         
         {
-            Building b = buildings.get(1);
+            Structure b = buildings.get(1);
             assertEquals(Streets.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
             assertEquals(UNCONNECTED, b.getVariant());
         }
         {
-            Building b = buildings.get(2);
+            Structure b = buildings.get(2);
             assertEquals(BusinessBuildings.cinema, b.getType());
             assertEquals(16, b.getX());
             assertEquals(5, b.getY());

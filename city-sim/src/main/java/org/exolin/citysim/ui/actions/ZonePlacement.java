@@ -2,13 +2,13 @@ package org.exolin.citysim.ui.actions;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.Utils;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     }
 
     @Override
-    public BuildingVariant getVariant()
+    public StructureVariant getVariant()
     {
         return variant;
     }
@@ -65,13 +65,13 @@ public class ZonePlacement extends AreaAction implements BuildingAction
         performAction(marking, getWorld.get(), zoneType, variant, zoneType.getCost(variant), false);
     }
 
-    public static void performAction(Rectangle marking, World world, BuildingType type, BuildingVariant variant, int cost, boolean replaceEverything)
+    public static void performAction(Rectangle marking, World world, StructureType type, StructureVariant variant, int cost, boolean replaceEverything)
     {
         for(int y=0;y<marking.height;++y)
         {
             for(int x=0;x<marking.width;++x)
             {
-                Building buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
+                Structure buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
                 if(buildingAt != null)
                 {
                     ZoneType buildingZoneType = buildingAt.getZoneType();
@@ -89,7 +89,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     }
 
     @Override
-    public BuildingType getBuilding()
+    public StructureType getBuilding()
     {
         return zoneType;
     }

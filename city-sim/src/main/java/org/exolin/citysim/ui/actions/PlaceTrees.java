@@ -4,8 +4,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.bt.Trees;
-import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
@@ -29,7 +29,7 @@ public class PlaceTrees implements BuildingAction
     }
 
     @Override
-    public BuildingType getBuilding()
+    public StructureType getBuilding()
     {
         return Trees.TREES.getFirst();
     }
@@ -55,7 +55,7 @@ public class PlaceTrees implements BuildingAction
         
         World w = world.get();
         int alreadyPlaced = 0;
-        Building buildingAt = w.getBuildingAt(marking.x, marking.y);
+        Structure buildingAt = w.getBuildingAt(marking.x, marking.y);
         //if trees already planted there, add one more
         if(buildingAt instanceof Tree t)
             alreadyPlaced = t.getType().getCount();

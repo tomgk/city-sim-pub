@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 
 /**
@@ -59,7 +59,7 @@ public class BudgetWindow extends JDialog
             l.resetValues();
         sum.resetValues();
         
-        for(Building b : w.getBuildings())
+        for(Structure b : w.getBuildings())
         {
             BudgetCategory category = BudgetCategory.getFor(b.getType());
             

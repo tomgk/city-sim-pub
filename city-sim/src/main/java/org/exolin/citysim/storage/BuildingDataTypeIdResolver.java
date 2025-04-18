@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.StructureType;
 
 /**
  *
@@ -39,7 +39,7 @@ public class BuildingDataTypeIdResolver implements TypeIdResolver
     @Override
     public JavaType typeFromId(DatabindContext context, String id) throws IOException
     {
-        Class<?> buildingTypeClass = BuildingType.getByName(id).getClass();
+        Class<?> buildingTypeClass = StructureType.getByName(id).getClass();
         
         ParameterizedType superClass = (ParameterizedType)buildingTypeClass.getGenericSuperclass();
         Class<?> buildingClass = (Class)superClass.getActualTypeArguments()[0];

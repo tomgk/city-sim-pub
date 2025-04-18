@@ -3,7 +3,7 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.ab.ActualBuildingType;
@@ -25,7 +25,7 @@ public class PlaceBuilding implements BuildingAction
     }
 
     @Override
-    public BuildingType getBuilding()
+    public StructureType getBuilding()
     {
         return type;
     }

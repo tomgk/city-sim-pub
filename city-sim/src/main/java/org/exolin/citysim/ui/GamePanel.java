@@ -30,8 +30,8 @@ import static org.exolin.citysim.bt.Streets.street;
 import static org.exolin.citysim.bt.Streets.water;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
@@ -110,7 +110,7 @@ public final class GamePanel extends JComponent
         
         //actions.add(new PlaceBuilding(World.office));
         
-        for(ActualBuildingType type : BuildingType.actualBuildingTypes())
+        for(ActualBuildingType type : StructureType.actualBuildingTypes())
         {
             String categoryName = type.getZoneType() != null ? type.getZoneType().getName() : "Special buildings";
             
@@ -376,7 +376,7 @@ public final class GamePanel extends JComponent
             g.drawString("Zoom: "+zoom+" | "+f, 0, start);
             g.drawString("Offset: "+xoffset+"/"+yoffset, 0, start + lineHeight * 1);
             g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
-            Building b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
+            Structure b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
             g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
             g.drawString("View: "+view, 0, start + lineHeight * 4);
             g.drawString("Rotation: "+rotation, 0, start + lineHeight * 5);
@@ -572,11 +572,11 @@ public final class GamePanel extends JComponent
             }
         }
         
-        for(Building b: world.getBuildings(rotation))
+        for(Structure b: world.getBuildings(rotation))
         {
             if(scaleMarker)
             {
-                if(b.getLevel() == Building.getLevel(r))
+                if(b.getLevel() == Structure.getLevel(r))
                 {
                     drawItem(g, dim, r.x, r.y, markerImage, r.width);
                     scaleMarker = false;
@@ -590,7 +590,7 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
-    private void drawBuilding(Graphics2D g, int dim, Building b)
+    private void drawBuilding(Graphics2D g, int dim, Structure b)
     {
         Point screenPoint = new Point();
         rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize(), screenPoint);

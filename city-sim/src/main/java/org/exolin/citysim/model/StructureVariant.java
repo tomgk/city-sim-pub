@@ -4,7 +4,7 @@ package org.exolin.citysim.model;
  *
  * @author Thomas
  */
-public interface BuildingVariant
+public interface StructureVariant
 {
     default int index()
     {

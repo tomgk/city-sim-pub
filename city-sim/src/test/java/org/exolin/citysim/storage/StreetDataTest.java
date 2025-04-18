@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.Streets;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
@@ -41,7 +41,7 @@ public class StreetDataTest
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);
         WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
+        Structure b = getBuilding(w);
         assertEquals(Streets.street, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());

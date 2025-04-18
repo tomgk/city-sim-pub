@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.List;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ZonePlacementTest
 {
-    private void assertZone(Building b, int x, int y, ZoneType t)
+    private void assertZone(Structure b, int x, int y, ZoneType t)
     {
         String msg = x+"/"+y;
         assertEquals(x, b.getX(), msg+" - x");
@@ -41,10 +41,10 @@ public class ZonePlacementTest
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
-        List<Building> buildings = world.getBuildings();
+        List<Structure> buildings = world.getBuildings();
         assertEquals(6, world.getBuildings().size(), buildings.toString());
         
-        for(Building b: buildings)
+        for(Structure b: buildings)
             System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
@@ -64,10 +64,10 @@ public class ZonePlacementTest
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
         makeMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
         
-        List<Building> buildings = world.getBuildings();
+        List<Structure> buildings = world.getBuildings();
         assertEquals(10, world.getBuildings().size(), buildings.toString());
         
-        for(Building b: buildings)
+        for(Structure b: buildings)
             System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);

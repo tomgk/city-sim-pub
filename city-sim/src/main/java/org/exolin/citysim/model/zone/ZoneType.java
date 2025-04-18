@@ -3,20 +3,20 @@ package org.exolin.citysim.model.zone;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
  * @author Thomas
  */
-public class ZoneType extends BuildingType<Zone, ZoneType.Variant>
+public class ZoneType extends StructureType<Zone, ZoneType.Variant>
 {
     private final boolean userPlaceableZone;
     private final int cost;
     
-    public enum Variant implements BuildingVariant
+    public enum Variant implements StructureVariant
     {
         DEFAULT(1),
         LOW_DENSITY(2);

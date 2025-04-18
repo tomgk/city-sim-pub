@@ -2,9 +2,9 @@ package org.exolin.citysim.model.connection;
 
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -13,7 +13,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  * @param <T>
  * @param <E>
  */
-public abstract class ConnectionType<B extends Connection<B, T, E>, T extends ConnectionType<B, T, E>, E extends BuildingVariant> extends BuildingType<B, E>
+public abstract class ConnectionType<B extends Connection<B, T, E>, T extends ConnectionType<B, T, E>, E extends StructureVariant> extends StructureType<B, E>
 {
     public ConnectionType(String name, Animation animation, int size)
     {

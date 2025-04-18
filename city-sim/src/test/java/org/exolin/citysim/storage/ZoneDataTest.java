@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -40,7 +40,7 @@ public class ZoneDataTest
                                            {"type":"zone_residential","x":16,"y":5}
                                            """);
         WorldStorage.deserialize(in, w);
-        Building b = getBuilding(w);
+        Structure b = getBuilding(w);
         assertEquals(Zones.residential, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());

@@ -4,17 +4,17 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.BuildingType;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.ui.Utils;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
  * @author Thomas
  */
-public class TreeType extends BuildingType<Tree, TreeType.Variant>
+public class TreeType extends StructureType<Tree, TreeType.Variant>
 {
-    public enum Variant implements BuildingVariant
+    public enum Variant implements StructureVariant
     {
         DEFAULT(0, 0),
         LEFT(-1, 0),

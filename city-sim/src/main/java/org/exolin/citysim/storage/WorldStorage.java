@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 
 /**
@@ -18,7 +18,7 @@ public class WorldStorage
 {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     
-    public static void serialize(Building b, OutputStream out) throws IOException
+    public static void serialize(Structure b, OutputStream out) throws IOException
     {
         objectMapper.writeValue(out, BuildingData.create(b));
     }

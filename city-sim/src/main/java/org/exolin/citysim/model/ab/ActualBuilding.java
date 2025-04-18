@@ -1,14 +1,14 @@
 package org.exolin.citysim.model.ab;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *
  * @author Thomas
  */
-public class ActualBuilding extends Building<ActualBuilding, ActualBuildingType, ActualBuildingType.Variant>
+public class ActualBuilding extends Structure<ActualBuilding, ActualBuildingType, ActualBuildingType.Variant>
 {
     public ActualBuilding(ActualBuildingType type, int x, int y, ActualBuildingType.Variant version)
     {

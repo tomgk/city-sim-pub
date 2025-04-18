@@ -1,7 +1,7 @@
 package org.exolin.citysim.model.connection;
 
-import org.exolin.citysim.model.Building;
-import org.exolin.citysim.model.BuildingVariant;
+import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *
@@ -10,7 +10,7 @@ import org.exolin.citysim.model.BuildingVariant;
  * @param <T>
  * @param <E>
  */
-public abstract class Connection<B extends Connection<B, T, E>, T extends ConnectionType<B, T, E>, E extends BuildingVariant> extends Building<B, T, E>
+public abstract class Connection<B extends Connection<B, T, E>, T extends ConnectionType<B, T, E>, E extends StructureVariant> extends Structure<B, T, E>
 {
     public Connection(T type, int x, int y, E variant)
     {

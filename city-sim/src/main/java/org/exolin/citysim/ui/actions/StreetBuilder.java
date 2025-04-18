@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import org.exolin.citysim.bt.CrossConnections;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.Connection;
@@ -169,7 +169,7 @@ public class StreetBuilder implements BuildingAction
     }
 
     @Override
-    public BuildingType getBuilding()
+    public StructureType getBuilding()
     {
         return type;
     }

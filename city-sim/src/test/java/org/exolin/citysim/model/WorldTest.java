@@ -27,7 +27,7 @@ public class WorldTest
         assertEquals(3, BusinessBuildings.cinema.getSize());
         
         //[10, 7] .. [12, 9]
-        Building b = w.addBuilding(BusinessBuildings.cinema, 10, 7);
+        Structure b = w.addBuilding(BusinessBuildings.cinema, 10, 7);
         
         //-----------------
         

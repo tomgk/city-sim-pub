@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import org.exolin.citysim.model.BuildingType;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.ActionWithImage;
 import org.exolin.citysim.ui.actions.BuildingAction;
@@ -28,7 +28,7 @@ public class SelectorItemPanel extends javax.swing.JPanel
         
         if(action instanceof BuildingAction ba)
         {
-            BuildingType building = ba.getBuilding();
+            StructureType building = ba.getBuilding();
             
             imageLabel.setIcon(new ImageIcon(ba.getIcon()));
             imageLabel.setText("");

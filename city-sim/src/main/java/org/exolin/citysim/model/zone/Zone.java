@@ -1,13 +1,13 @@
 package org.exolin.citysim.model.zone;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.Building;
+import org.exolin.citysim.model.Structure;
 
 /**
  *
  * @author Thomas
  */
-public class Zone extends Building
+public class Zone extends Structure
 {
     public Zone(ZoneType type, int x, int y, ZoneType.Variant variant)
     {

@@ -15,7 +15,7 @@ import org.exolin.citysim.ui.Utils;
  * @param <B> building class
  * @param <E> building variant
  */
-public abstract class BuildingType<B, E extends BuildingVariant>
+public abstract class StructureType<B, E extends StructureVariant>
 {
     public static final int DEFAULT_VARIANT = 0;
     
@@ -23,16 +23,16 @@ public abstract class BuildingType<B, E extends BuildingVariant>
     private final List<Animation> images;
     private final int size;
     
-    private static final Map<String, BuildingType> instances = new LinkedHashMap<>();
+    private static final Map<String, StructureType> instances = new LinkedHashMap<>();
     
-    public static Collection<BuildingType> types()
+    public static Collection<StructureType> types()
     {
         return Collections.unmodifiableCollection(instances.values());
     }
     
-    public static BuildingType<?, ?> getByName(String name)
+    public static StructureType<?, ?> getByName(String name)
     {
-        BuildingType<?, ?> bt = instances.get(name);
+        StructureType<?, ?> bt = instances.get(name);
         if(bt == null)
             throw new IllegalArgumentException("no building type "+name);
         return bt;
@@ -45,13 +45,13 @@ public abstract class BuildingType<B, E extends BuildingVariant>
         return instances.values().stream().filter(b -> b instanceof ActualBuildingType).map(b -> (ActualBuildingType)b).toList();
     }
     
-    public BuildingType(String name, Animation animation, int size)
+    public StructureType(String name, Animation animation, int size)
     {
         this(name, List.of(animation), size);
     }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, List<Animation> images, int size)
+    public StructureType(String name, List<Animation> images, int size)
     {
         if(instances.containsKey(name))
             throw new IllegalArgumentException("duplicate ID");

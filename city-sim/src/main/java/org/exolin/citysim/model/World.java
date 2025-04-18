@@ -36,7 +36,7 @@ public final class World
     //so that the time gaps where the game doesnt run are just ignored
     private long lastChange = System.currentTimeMillis();
     private final int gridSize;
-    private final List<Building> buildings = new ArrayList<>();
+    private final List<Structure> buildings = new ArrayList<>();
     
     private boolean checkOverlap;
     private static final int MONEY_PERIOD = 10_000;//10 seconds
@@ -91,9 +91,9 @@ public final class World
         return name;
     }
     
-    public Building getBuildingAt(int x, int y)
+    public Structure getBuildingAt(int x, int y)
     {
-        for(Building b: buildings)
+        for(Structure b: buildings)
             if(b.isOccupying(x, y))
                 return b;
         
@@ -110,9 +110,9 @@ public final class World
     public boolean removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
-        for (Iterator<Building> it = buildings.iterator(); it.hasNext();)
+        for (Iterator<Structure> it = buildings.iterator(); it.hasNext();)
         {
-            Building b = it.next();
+            Structure b = it.next();
             if(b.isOccupying(x, y))
             {
                 //removeZoning mode keeps streets
@@ -163,12 +163,12 @@ public final class World
         }
     }
     
-    public <B extends Building, E extends BuildingVariant> B addBuilding(BuildingType<B, E> type, int x, int y)
+    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E> type, int x, int y)
     {
         return addBuilding(type, x, y, type.getDefaultVariant());
     }
     
-    public <B extends Building, E extends BuildingVariant> B addBuilding(BuildingType<B, E> type, int x, int y, E variant)
+    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E> type, int x, int y, E variant)
     {
         if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
             throw new OutOfGridException(
@@ -204,20 +204,20 @@ public final class World
         return b;
     }
     
-    private Comparator<Building> sorter(Rotation rotation)
+    private Comparator<Structure> sorter(Rotation rotation)
     {
         if(rotation == Rotation.ORIGINAL)
-            return Comparator.comparing(Building::getLevel);
+            return Comparator.comparing(Structure::getLevel);
         
-        return Comparator.comparing((Building b) -> b.getLevel(gridSize, rotation));
+        return Comparator.comparing((Structure b) -> b.getLevel(gridSize, rotation));
     }
     
-    private Building getBuildingAtForUpdate(int x, int y)
+    private Structure getBuildingAtForUpdate(int x, int y)
     {
         return getBuildingAt(x, y);
     }
     
-    private void updateBuilding(Building b)
+    private void updateBuilding(Structure b)
     {
         b.update(this);
         updateBuildingsAround(b.getX(), b.getY(), b.getSize());
@@ -232,7 +232,7 @@ public final class World
                 //   ***
                 //   ***
                 //   ***
-                Building buildingAt = getBuildingAtForUpdate(x, by-1);
+                Structure buildingAt = getBuildingAtForUpdate(x, by-1);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
@@ -241,7 +241,7 @@ public final class World
                 //   ***
                 //   ***
                 //  xxxxx
-                Building buildingAt = getBuildingAtForUpdate(x, by+bsize);
+                Structure buildingAt = getBuildingAtForUpdate(x, by+bsize);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
@@ -255,7 +255,7 @@ public final class World
             //  x***
             //  x***
             {
-                Building buildingAt = getBuildingAtForUpdate(bx-1, y);
+                Structure buildingAt = getBuildingAtForUpdate(bx-1, y);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
@@ -263,24 +263,24 @@ public final class World
             //   ***x
             //   ***x
             {
-                Building buildingAt = getBuildingAtForUpdate(bx+bsize, y);
+                Structure buildingAt = getBuildingAtForUpdate(bx+bsize, y);
                 if(buildingAt != null)
                     buildingAt.update(this);
             }
         }
     }
 
-    public List<Building> getBuildings()
+    public List<Structure> getBuildings()
     {
         return buildings;
     }
 
-    public List<Building> getBuildings(Rotation rotation)
+    public List<Structure> getBuildings(Rotation rotation)
     {
         if(rotation == Rotation.ORIGINAL)
             return buildings;
         
-        List<Building> buildingsRotated = new ArrayList<>(buildings);
+        List<Structure> buildingsRotated = new ArrayList<>(buildings);
         buildingsRotated.sort(sorter(rotation));
         return buildingsRotated;
     }
@@ -304,7 +304,7 @@ public final class World
     
     private <B> void replaceBuilding(ZoneType type, int x, int y)
     {
-        Building b = getBuildingAt(x, y);
+        Structure b = getBuildingAt(x, y);
         if(b == null)
             return;
         
@@ -336,7 +336,7 @@ public final class World
         addBuilding(bt, x, y);
     }
     
-    private void updateBuildCount(Building building, boolean up)
+    private void updateBuildCount(Structure building, boolean up)
     {
         ZoneType type = building.getZoneType();
         if(type == null)
@@ -350,7 +350,7 @@ public final class World
     private void updateMoney(int ticks)
     {
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
-        for(Building b : buildings)
+        for(Structure b : buildings)
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
     }
 
@@ -364,9 +364,9 @@ public final class World
         }
         
         //TODO: maybe no copy
-        List<Building> originalBuildings = new ArrayList<>(this.buildings);
+        List<Structure> originalBuildings = new ArrayList<>(this.buildings);
         
-        for(Building b: originalBuildings)
+        for(Structure b: originalBuildings)
         {
             //if it was already removed, skip it
             if(!this.buildings.contains(b))
@@ -399,7 +399,7 @@ public final class World
         {
             for(int xi=0;xi<size;++xi)
             {
-                Building b = getBuildingAt(x+xi, y+yi);
+                Structure b = getBuildingAt(x+xi, y+yi);
                 if(b == null || b.getType() != z)
                     return false;
             }
@@ -414,7 +414,7 @@ public final class World
         {
             for(int x=cx-distance;x<=cx+distance;++x)
             {
-                Building b = getBuildingAt(x, y);
+                Structure b = getBuildingAt(x, y);
                 if(b == null)
                     continue;
                 if(b.getType() == street)

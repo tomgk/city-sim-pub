@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.ActualBuilding;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.Building;
+import org.exolin.citysim.model.ab.BuildingType;
 import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
@@ -24,7 +24,7 @@ public class ActualBuildingTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        ActualBuilding building = new ActualBuilding(BusinessBuildings.cinema, 16, 99, ActualBuildingType.Variant.DEFAULT);
+        Building building = new Building(BusinessBuildings.cinema, 16, 99, BuildingType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"business/cinema","x":16,"y":99}
@@ -44,6 +44,6 @@ public class ActualBuildingTest
         assertEquals(BusinessBuildings.cinema, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());
-        assertEquals(ActualBuildingType.Variant.DEFAULT, b.getVariant());
+        assertEquals(BuildingType.Variant.DEFAULT, b.getVariant());
     }
 }

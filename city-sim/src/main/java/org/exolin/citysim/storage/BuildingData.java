@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.ActualBuilding;
+import org.exolin.citysim.model.ab.Building;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.tree.Tree;
@@ -69,8 +69,8 @@ public abstract class BuildingData
     {
         if(b.getClass() == SelfConnection.class)
             return new StreetData((SelfConnection)b);
-        else if(b.getClass() == ActualBuilding.class)
-            return new ActualBuildingData((ActualBuilding)b);
+        else if(b.getClass() == Building.class)
+            return new ActualBuildingData((Building)b);
         else if(b.getClass() == Zone.class)
             return new ZoneData((Zone)b);
         else if(b.getClass() == CrossConnection.class)
@@ -85,7 +85,7 @@ public abstract class BuildingData
     {
         if(buildingClass == SelfConnection.class)
             return StreetData.class;
-        else if(buildingClass == ActualBuilding.class)
+        else if(buildingClass == Building.class)
             return ActualBuildingData.class;
         else if(buildingClass == Zone.class)
             return ZoneData.class;

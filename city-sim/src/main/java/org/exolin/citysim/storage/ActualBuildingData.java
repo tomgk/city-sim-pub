@@ -2,8 +2,8 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.exolin.citysim.model.ab.ActualBuilding;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.Building;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.StructureVariant;
 
 /**
@@ -12,7 +12,7 @@ import org.exolin.citysim.model.StructureVariant;
  */
 public class ActualBuildingData extends BuildingData
 {
-    public ActualBuildingData(ActualBuilding b)
+    public ActualBuildingData(Building b)
     {
         super(b);
     }
@@ -28,6 +28,6 @@ public class ActualBuildingData extends BuildingData
     @Override
     protected StructureVariant getVariant(String name)
     {
-        return ActualBuildingType.Variant.valueOf(name);
+        return BuildingType.Variant.valueOf(name);
     }
 }

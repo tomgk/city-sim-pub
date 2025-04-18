@@ -12,7 +12,7 @@ import java.util.Objects;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.Streets;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;
@@ -314,7 +314,7 @@ public final class World
             return;
         
         int size = getMaxZone(type, x, y);
-        ActualBuildingType bt = type.getRandomBuilding(1/*size*/);
+        BuildingType bt = type.getRandomBuilding(1/*size*/);
         if(bt == null)
             return;
         

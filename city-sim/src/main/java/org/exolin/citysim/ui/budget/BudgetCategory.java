@@ -1,7 +1,7 @@
 package org.exolin.citysim.ui.budget;
 
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -16,7 +16,7 @@ public interface BudgetCategory
     
     static BudgetCategory getFor(StructureType type)
     {
-        if(type instanceof ActualBuildingType a)
+        if(type instanceof BuildingType a)
         {
             ZoneType zoneType = a.getZoneType();
             return new ZoneCategory(zoneType);

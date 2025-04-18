@@ -35,7 +35,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;
@@ -110,7 +110,7 @@ public final class GamePanel extends JComponent
         
         //actions.add(new PlaceBuilding(World.office));
         
-        for(ActualBuildingType type : StructureType.actualBuildingTypes())
+        for(BuildingType type : StructureType.actualBuildingTypes())
         {
             String categoryName = type.getZoneType() != null ? type.getZoneType().getName() : "Special buildings";
             

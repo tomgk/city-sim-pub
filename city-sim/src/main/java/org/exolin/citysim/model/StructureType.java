@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.ui.Utils;
 
 /**
@@ -40,9 +40,9 @@ public abstract class StructureType<B, E extends StructureVariant>
     
     public abstract B createBuilding(int x, int y, E variant);
 
-    public static List<ActualBuildingType> actualBuildingTypes()
+    public static List<BuildingType> actualBuildingTypes()
     {
-        return instances.values().stream().filter(b -> b instanceof ActualBuildingType).map(b -> (ActualBuildingType)b).toList();
+        return instances.values().stream().filter(b -> b instanceof BuildingType).map(b -> (BuildingType)b).toList();
     }
     
     public StructureType(String name, Animation animation, int size)

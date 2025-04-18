@@ -11,7 +11,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class ActualBuildingType extends StructureType<ActualBuilding, ActualBuildingType.Variant>
+public class BuildingType extends StructureType<Building, BuildingType.Variant>
 {
     public enum Variant implements StructureVariant
     {
@@ -22,13 +22,13 @@ public class ActualBuildingType extends StructureType<ActualBuilding, ActualBuil
     private final int cost;
     private final BigDecimal maintenance;
     
-    public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
+    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
     {
         this(name, animation, size, zoneType, cost, BigDecimal.ZERO);
     }
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public ActualBuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
@@ -53,14 +53,14 @@ public class ActualBuildingType extends StructureType<ActualBuilding, ActualBuil
     }
 
     @Override
-    public ActualBuildingType.Variant getDefaultVariant()
+    public BuildingType.Variant getDefaultVariant()
     {
-        return ActualBuildingType.Variant.DEFAULT;
+        return BuildingType.Variant.DEFAULT;
     }
 
     @Override
-    public ActualBuilding createBuilding(int x, int y, Variant variant)
+    public Building createBuilding(int x, int y, Variant variant)
     {
-        return new ActualBuilding(this, x, y, variant);
+        return new Building(this, x, y, variant);
     }
 }

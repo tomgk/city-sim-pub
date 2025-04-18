@@ -8,9 +8,9 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class ActualBuilding extends Structure<ActualBuilding, ActualBuildingType, ActualBuildingType.Variant>
+public class Building extends Structure<Building, BuildingType, BuildingType.Variant>
 {
-    public ActualBuilding(ActualBuildingType type, int x, int y, ActualBuildingType.Variant version)
+    public Building(BuildingType type, int x, int y, BuildingType.Variant version)
     {
         super(type, x, y, version);
     }

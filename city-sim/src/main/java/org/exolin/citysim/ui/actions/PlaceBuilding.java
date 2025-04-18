@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 
 /**
  *
@@ -15,10 +15,10 @@ import org.exolin.citysim.model.ab.ActualBuildingType;
 public class PlaceBuilding implements BuildingAction
 {
     private final GetWorld world;
-    private final ActualBuildingType type;
+    private final BuildingType type;
     private final Rectangle marking = new Rectangle();
 
-    public PlaceBuilding(GetWorld world, ActualBuildingType type)
+    public PlaceBuilding(GetWorld world, BuildingType type)
     {
         this.world = world;
         this.type = type;

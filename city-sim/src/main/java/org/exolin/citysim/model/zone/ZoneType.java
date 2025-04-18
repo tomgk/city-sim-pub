@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.ab.ActualBuildingType;
+import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.StructureVariant;
 
 /**
@@ -34,7 +34,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant>
         }
     }
     
-    private final List<ActualBuildingType> buildings = new ArrayList<>();
+    private final List<BuildingType> buildings = new ArrayList<>();
     
     private static List<Animation> getAnimations(String name, boolean withLowDensity)
     {
@@ -74,14 +74,14 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant>
         return cost * variant.getFactor();
     }
     
-    public void addBuilding(ActualBuildingType building)
+    public void addBuilding(BuildingType building)
     {
         this.buildings.add(building);
     }
     
-    public ActualBuildingType getRandomBuilding(int maxSize)
+    public BuildingType getRandomBuilding(int maxSize)
     {
-        List<ActualBuildingType> smallBuildings = buildings.stream()
+        List<BuildingType> smallBuildings = buildings.stream()
                 .filter(b -> b.getSize() <= maxSize)
                 //.filter(b -> b.getSize() > 1)
                 .toList();

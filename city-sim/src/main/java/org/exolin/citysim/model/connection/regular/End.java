@@ -13,12 +13,14 @@ public enum End implements ConnectionVariant
     SOUTH,
     WEST;
     
+    private static final ConnectionVariantType<End> TYPE =
+            new ConnectionVariantType<>(SOUTH, EAST, NORTH, WEST);
+    
     @Override
     public ConnectionVariant rotate(Rotation rotation)
     {
         //return StreetVariant.rotate(this, rotation,
         //                NORTH, EAST, SOUTH, WEST);
-        return ConnectionVariant.rotate(this, rotation,
-                        new ConnectionVariantType(SOUTH, EAST, NORTH, WEST));
+        return TYPE.rotate(this, rotation);
     }
 }

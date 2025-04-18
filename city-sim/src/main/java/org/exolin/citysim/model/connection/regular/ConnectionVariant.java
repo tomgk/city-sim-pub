@@ -1,6 +1,5 @@
 package org.exolin.citysim.model.connection.regular;
 
-import java.util.Arrays;
 import java.util.List;
 import org.exolin.citysim.model.BuildingVariant;
 import org.exolin.citysim.model.Rotation;
@@ -32,11 +31,6 @@ public interface ConnectionVariant extends BuildingVariant
     }
     
     public ConnectionVariant rotate(Rotation rotation);
-
-    public static ConnectionVariant rotate(ConnectionVariant base, Rotation rotation, ConnectionVariantType type)
-    {
-        return type.rotate(base, rotation);
-    }
 }
 
 class StreetVariants

@@ -13,10 +13,12 @@ public enum Curve implements ConnectionVariant
     CURVE_3,
     CURVE_4;
 
+    private static final ConnectionVariantType<Curve> TYPE =
+            new ConnectionVariantType<>(CURVE_1, CURVE_2, CURVE_3, CURVE_4);
+    
     @Override
     public ConnectionVariant rotate(Rotation rotation)
     {
-        return ConnectionVariant.rotate(this, rotation,
-                        new ConnectionVariantType(CURVE_1, CURVE_2, CURVE_3, CURVE_4));
+        return TYPE.rotate(this, rotation);
     }
 }

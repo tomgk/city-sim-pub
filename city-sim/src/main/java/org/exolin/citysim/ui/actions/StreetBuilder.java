@@ -11,9 +11,9 @@ import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.connection.ConnectionType;
 import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
-import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 
 /**
  *

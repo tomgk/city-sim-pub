@@ -13,10 +13,12 @@ public enum TIntersection implements ConnectionVariant
     T_INTERSECTION_3,
     T_INTERSECTION_4;
 
+    private static final ConnectionVariantType<TIntersection> TYPE =
+            new ConnectionVariantType<>(T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4);
+    
     @Override
     public ConnectionVariant rotate(Rotation rotation)
     {
-        return ConnectionVariant.rotate(this, rotation,
-                        new ConnectionVariantType(T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4));
+        return TYPE.rotate(this, rotation);
     }
 }

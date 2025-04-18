@@ -10,11 +10,13 @@ public enum ConnectVariant implements ConnectionVariant
 {
     CONNECT_X,
     CONNECT_Y;
+    
+    private static final ConnectionVariantType<ConnectVariant> TYPE = 
+            new ConnectionVariantType<>(CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y);
 
     @Override
     public ConnectionVariant rotate(Rotation rotation)
     {
-        return ConnectionVariant.rotate(this, rotation, 
-                new ConnectionVariantType(CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y));
+        return TYPE.rotate(this, rotation);
     }
 }

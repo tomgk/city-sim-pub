@@ -1,5 +1,6 @@
 package org.exolin.citysim.ui;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -56,8 +57,11 @@ public class GameControlPanel extends javax.swing.JPanel
 
     public void setKeyMapping(KeyMapping mapping)
     {
-        String text = mapping.getText();
-        keyMappingLabel.setText(text);
+        String html = mapping.getHTML();
+        Font f = keyMappingLabel.getFont();
+        f = f.deriveFont(Font.PLAIN);
+        keyMappingLabel.setFont(f);
+        keyMappingLabel.setText(html);
     }
 
     /**

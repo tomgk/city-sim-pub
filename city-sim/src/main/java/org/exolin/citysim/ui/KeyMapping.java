@@ -31,11 +31,11 @@ public class KeyMapping extends KeyAdapter
         actions.getOrDefault(e.getKeyCode(), NOTHING).run();
     }
 
-    public String getText()
+    public String getHTML()
     {
         return "<html>"+description.entrySet()
                 .stream()
-                .map(e -> KeyEvent.getKeyText(e.getKey())+": "+e.getValue())
+                .map(e -> "<b>"+KeyEvent.getKeyText(e.getKey())+"</b>: "+e.getValue())
                 .collect(Collectors.joining(", "))+"</html>";
     }
 }

@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.connection.regular;
 
 import java.util.Arrays;
+import java.util.Objects;
 import org.exolin.citysim.model.Rotation;
 
 /**
@@ -15,6 +16,13 @@ public class ConnectionVariantType<T extends ConnectionVariant>
     public ConnectionVariantType(T v1, T v2, T v3, T v4)
     {
         this.values = new ConnectionVariant[]{v1, v2, v3, v4};
+        Class<?> t = v1.getClass();
+        for(ConnectionVariant v : values)
+        {
+            Objects.requireNonNull(v);
+            if(t != v.getClass())
+                throw new IllegalArgumentException("wrong type");
+        }
     }
 
     public Object[] getValues()

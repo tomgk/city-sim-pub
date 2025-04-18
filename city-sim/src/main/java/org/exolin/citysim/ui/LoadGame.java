@@ -64,7 +64,7 @@ public class LoadGame extends JFrame
         
         JButton close = new JButton("Exit");
         buttonPanel.add(close);
-        close.addActionListener(a->setVisible(false));
+        close.addActionListener(a -> chose(null));
         
         add(buttonPanel, BorderLayout.SOUTH);
         

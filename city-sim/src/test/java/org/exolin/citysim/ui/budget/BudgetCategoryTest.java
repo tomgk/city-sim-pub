@@ -3,7 +3,7 @@ package org.exolin.citysim.ui.budget;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.IndustrialBuildings;
 import org.exolin.citysim.bt.ResidentialBuildings;
-import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,13 +18,13 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Street()
     {
-        assertEquals(new SelfConnectionCategory(Streets.street), BudgetCategory.getFor(Streets.street));
+        assertEquals(new SelfConnectionCategory(SelfConnections.street), BudgetCategory.getFor(SelfConnections.street));
     }
     
     @Test
     public void testGetFor_Rail()
     {
-        assertEquals(new SelfConnectionCategory(Streets.rail), BudgetCategory.getFor(Streets.rail));
+        assertEquals(new SelfConnectionCategory(SelfConnections.rail), BudgetCategory.getFor(SelfConnections.rail));
     }
     
     @Test

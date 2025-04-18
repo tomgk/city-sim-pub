@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import org.exolin.citysim.bt.BuildingTypes;
-import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.ab.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
@@ -377,7 +377,7 @@ public final class World
                 if(z.getSize() != 1)
                     continue;
                 
-                if(hasAnyInRadius(Streets.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
+                if(hasAnyInRadius(SelfConnections.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
                     replaceBuilding(z, b.getX(), b.getY());
             }
         }

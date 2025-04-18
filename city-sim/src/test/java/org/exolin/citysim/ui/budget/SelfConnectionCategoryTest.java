@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -14,19 +14,19 @@ public class SelfConnectionCategoryTest
     @Test
     public void testEquals()
     {
-        assertEquals(new SelfConnectionCategory(Streets.street), new SelfConnectionCategory(Streets.street));
-        assertEquals(new SelfConnectionCategory(Streets.street).hashCode(), new SelfConnectionCategory(Streets.street).hashCode());
+        assertEquals(new SelfConnectionCategory(SelfConnections.street), new SelfConnectionCategory(SelfConnections.street));
+        assertEquals(new SelfConnectionCategory(SelfConnections.street).hashCode(), new SelfConnectionCategory(SelfConnections.street).hashCode());
     }
     
     @Test
     public void testEquals_DifferentType()
     {
-        assertNotEquals(new SelfConnectionCategory(Streets.street), new SelfConnectionCategory(Streets.rail));
+        assertNotEquals(new SelfConnectionCategory(SelfConnections.street), new SelfConnectionCategory(SelfConnections.rail));
     }
     
     @Test
     public void testEquals_DifferentClass()
     {
-        assertNotEquals(new SelfConnectionCategory(Streets.street), new ZoneCategory(Zones.business));
+        assertNotEquals(new SelfConnectionCategory(SelfConnections.street), new ZoneCategory(Zones.business));
     }
 }

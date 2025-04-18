@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
-import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
@@ -55,7 +55,7 @@ public class WorldStorageTest
     {
         World w = new World("Test", 30, BigDecimal.ZERO);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
-        w.addBuilding(Streets.street, 15, 5, T_INTERSECTION_4);
+        w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
@@ -106,7 +106,7 @@ public class WorldStorageTest
         
         {
             Structure b = buildings.get(1);
-            assertEquals(Streets.street, b.getType());
+            assertEquals(SelfConnections.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
             assertEquals(UNCONNECTED, b.getVariant());

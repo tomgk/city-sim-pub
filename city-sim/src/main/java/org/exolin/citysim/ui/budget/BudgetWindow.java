@@ -9,7 +9,7 @@ import java.util.Optional;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
-import org.exolin.citysim.bt.Streets;
+import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
@@ -23,12 +23,11 @@ public class BudgetWindow extends JDialog
     private final Map<BudgetCategory, BudgetLinePanel> categories = new LinkedHashMap<>();
     private final BudgetLinePanel sum = new BudgetLinePanel("", Optional.empty());
     
-    private static final List<BudgetCategory> list = List.of(
-            new ZoneCategory(Zones.residential),
+    private static final List<BudgetCategory> list = List.of(new ZoneCategory(Zones.residential),
             new ZoneCategory(Zones.business),
             new ZoneCategory(Zones.industrial),
-            new SelfConnectionCategory(Streets.street),
-            new SelfConnectionCategory(Streets.rail),
+            new SelfConnectionCategory(SelfConnections.street),
+            new SelfConnectionCategory(SelfConnections.rail),
             new ZoneCategory(Zones.plants)
     );
     

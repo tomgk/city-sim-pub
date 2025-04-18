@@ -12,7 +12,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  *
  * @author Thomas
  */
-public class Streets
+public class SelfConnections
 {
     public static final SelfConnectionType street = createTransportType("street", List.of(
             createUnanimated("street/street_1"),

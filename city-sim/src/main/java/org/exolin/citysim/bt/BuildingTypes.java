@@ -13,7 +13,7 @@ public class BuildingTypes
             BusinessBuildings.class,
             IndustrialBuildings.class,
             ResidentialBuildings.class,
-            Streets.class,
+            SelfConnections.class,
             CrossConnections.class,
             Zones.class,
             Trees.class,

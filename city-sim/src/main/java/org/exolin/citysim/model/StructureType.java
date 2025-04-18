@@ -32,7 +32,7 @@ public abstract class StructureType<B, E extends StructureVariant>
     
     public static StructureType<?, ?> getByName(String name)
     {
-        StructureType<?, ?> bt = instances.get(name);
+        StructureType<?, ?> bt = instances.get(transformName(name));
         if(bt == null)
             throw new IllegalArgumentException("no building type "+name);
         return bt;

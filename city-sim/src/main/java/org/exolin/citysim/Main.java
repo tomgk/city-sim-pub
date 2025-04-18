@@ -38,18 +38,18 @@ public class Main
     public static KeyMapping createKeyListener(BudgetWindow bw, GamePanel gp, JFrame selector, GameControlPanel gd)
     {
         KeyMapping mapping = new KeyMapping();
-        mapping.add(KeyEvent.VK_ESCAPE, () -> gp.setAction(Action.NONE));
-        mapping.add(KeyEvent.VK_PAGE_UP, () -> gp.setRotation(gp.getRotation().getPrev()));
-        mapping.add(KeyEvent.VK_PAGE_DOWN, () -> gp.setRotation(gp.getRotation().getNext()));
-        mapping.add(KeyEvent.VK_F6, () -> {
+        mapping.add(KeyEvent.VK_ESCAPE, "Select no tool", () -> gp.setAction(Action.NONE));
+        mapping.add(KeyEvent.VK_PAGE_UP, "Rotate left", () -> gp.setRotation(gp.getRotation().getPrev()));
+        mapping.add(KeyEvent.VK_PAGE_DOWN, "Rotate right", () -> gp.setRotation(gp.getRotation().getNext()));
+        mapping.add(KeyEvent.VK_F6, "Toggle budget window", () -> {
                 bw.update(gp.getWorld());
                 bw.setVisible(!bw.isVisible());
             });
-        mapping.add(KeyEvent.VK_F7, () -> gp.toggleDebug());
-        mapping.add(KeyEvent.VK_F8, () -> gp.setView(gp.getView().getNext()));
-        mapping.add(KeyEvent.VK_F10, () -> selector.setVisible(!selector.isVisible()));
-        mapping.add(KeyEvent.VK_F11, () -> gp.toggleColorGrid());
-        mapping.add(KeyEvent.VK_F12, () -> gd.setVisible(!gd.isVisible()));
+        mapping.add(KeyEvent.VK_F7, "Toggle debug", () -> gp.toggleDebug());
+        mapping.add(KeyEvent.VK_F8, "Go to next view", () -> gp.setView(gp.getView().getNext()));
+        mapping.add(KeyEvent.VK_F10, "Toggle selector visibility", () -> selector.setVisible(!selector.isVisible()));
+        mapping.add(KeyEvent.VK_F11, "Toggle color grid", () -> gp.toggleColorGrid());
+        mapping.add(KeyEvent.VK_F12, "Toggle control panel", () -> gd.setVisible(!gd.isVisible()));
         
         gd.setKeyMapping(mapping);
         

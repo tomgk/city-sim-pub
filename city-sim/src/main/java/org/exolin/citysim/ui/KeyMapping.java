@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 public class KeyMapping extends KeyAdapter
 {
     private final Map<Integer, Runnable> actions = new LinkedHashMap<>();
-    //private final Map<Integer, String> description = new LinkedHashMap<>();
+    private final Map<Integer, String> description = new LinkedHashMap<>();
     
-    public void add(int key, /*String title, */Runnable r)
+    public void add(int key, String title, Runnable r)
     {
         if(actions.putIfAbsent(key, r) != null)
             throw new IllegalStateException();
         
-        //description.put(key, title);
+        description.put(key, title);
     }
     
     private static final Runnable NOTHING = () -> {};
@@ -33,9 +33,9 @@ public class KeyMapping extends KeyAdapter
 
     public String getText()
     {
-        return "<html>"+actions.entrySet()
+        return "<html>"+description.entrySet()
                 .stream()
-                .map(e -> KeyEvent.getKeyText(e.getKey())+": <i>unknown</i>")
+                .map(e -> KeyEvent.getKeyText(e.getKey())+": "+e.getValue())
                 .collect(Collectors.joining(", "))+"</html>";
     }
 }

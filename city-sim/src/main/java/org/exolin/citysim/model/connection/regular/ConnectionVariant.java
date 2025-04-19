@@ -2,8 +2,8 @@ package org.exolin.citysim.model.connection.regular;
 
 import java.util.List;
 import org.exolin.citysim.model.Rotation;
-import static org.exolin.citysim.model.connection.regular.StreetVariants.VALUES;
 import org.exolin.citysim.model.StructureVariant;
+import static org.exolin.citysim.model.connection.regular.StreetVariants.VALUES;
 
 /**
  *

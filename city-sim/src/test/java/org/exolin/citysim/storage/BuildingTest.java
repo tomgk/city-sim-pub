@@ -27,7 +27,7 @@ public class BuildingTest
         Building building = new Building(BusinessBuildings.cinema, 16, 99, BuildingType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"business/cinema","x":16,"y":99}
+                          {"type":"business_cinema","x":16,"y":99}
                           """;
         JSONAssert.assertEquals(expected, output, false);
     }

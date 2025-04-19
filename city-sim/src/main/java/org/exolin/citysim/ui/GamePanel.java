@@ -28,6 +28,7 @@ import javax.swing.Timer;
 import static org.exolin.citysim.bt.SelfConnections.rail;
 import static org.exolin.citysim.bt.SelfConnections.street;
 import static org.exolin.citysim.bt.SelfConnections.water;
+import org.exolin.citysim.bt.Destruction;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.GetWorld;
@@ -97,6 +98,7 @@ public final class GamePanel extends JComponent
         sactions.add(new StreetBuilder(getWorld, rail, true));
         sactions.add(new StreetBuilder(getWorld, water, false));
         sactions.add(new PlaceTrees(getWorld));
+        sactions.add(new PlaceBuilding(getWorld, Destruction.fire));
         actions.put("Special", sactions);
         
         {

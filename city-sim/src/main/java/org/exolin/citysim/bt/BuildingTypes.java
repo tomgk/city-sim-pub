@@ -17,7 +17,8 @@ public class BuildingTypes
             CrossConnections.class,
             Zones.class,
             Trees.class,
-            Plants.class
+            Plants.class,
+            Destruction.class,
         };
         
         for(Class<?> clazz: classes)

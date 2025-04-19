@@ -15,6 +15,7 @@ public class Zones
     
     public static ZoneType plants = createSpecialZone("plants");
     public static ZoneType parks = createSpecialZone("parks");
+    public static ZoneType destroyed = createSpecialZone("destroyed");
     
     public static final int BUILDING_DISTANCE = 3;
     

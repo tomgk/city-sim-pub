@@ -10,7 +10,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class CrossConnectionData extends BuildingData
+public class CrossConnectionData extends StructureData
 {
     public CrossConnectionData(CrossConnection b)
     {

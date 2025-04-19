@@ -19,12 +19,12 @@ public class WorldData
     private final BigDecimal money;
     
     @JsonProperty
-    private final List<BuildingData> buildings;
+    private final List<StructureData> buildings;
 
     @JsonCreator
     public WorldData(@JsonProperty("gridSize") int gridSize,
             @JsonProperty("money") BigDecimal money,
-            @JsonProperty("buildings") List<BuildingData> buildings)
+            @JsonProperty("buildings") List<StructureData> buildings)
     {
         this.gridSize = gridSize;
         this.money = money;
@@ -35,13 +35,13 @@ public class WorldData
     {
         this.buildings = world.getBuildings()
                 .stream()
-                .map(BuildingData::create)
+                .map(StructureData::create)
                 .toList();
         this.money = world.getMoney();
         this.gridSize = world.getGridSize();
     }
 
-    public List<BuildingData> getBuildings()
+    public List<StructureData> getBuildings()
     {
         return buildings;
     }
@@ -60,7 +60,7 @@ public class WorldData
     {
         World w = new World(name, gridSize, money);
         
-        for(BuildingData bd : buildings)
+        for(StructureData bd : buildings)
             bd.createBuilding(w);
         
         return w;

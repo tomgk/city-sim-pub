@@ -10,7 +10,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class TreeData extends BuildingData
+public class TreeData extends StructureData
 {
     public TreeData(Tree b)
     {

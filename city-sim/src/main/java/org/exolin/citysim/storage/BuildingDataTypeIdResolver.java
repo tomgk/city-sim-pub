@@ -44,7 +44,7 @@ public class BuildingDataTypeIdResolver implements TypeIdResolver
         ParameterizedType superClass = (ParameterizedType)buildingTypeClass.getGenericSuperclass();
         Class<?> buildingClass = (Class)superClass.getActualTypeArguments()[0];
         
-        return context.constructSpecializedType(superType, BuildingData.getBuildingDataClass(buildingClass));
+        return context.constructSpecializedType(superType, StructureData.getBuildingDataClass(buildingClass));
     }
 
     @Override

@@ -20,12 +20,12 @@ public class WorldStorage
     
     public static void serialize(Structure b, OutputStream out) throws IOException
     {
-        objectMapper.writeValue(out, BuildingData.create(b));
+        objectMapper.writeValue(out, StructureData.create(b));
     }
     
     public static void deserialize(InputStream in, World w) throws IOException
     {
-        BuildingData bd = objectMapper.readValue(in, BuildingData.class);
+        StructureData bd = objectMapper.readValue(in, StructureData.class);
         bd.createBuilding(w);
     }
     

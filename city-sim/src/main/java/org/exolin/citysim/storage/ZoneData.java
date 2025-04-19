@@ -10,7 +10,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class ZoneData extends BuildingData
+public class ZoneData extends StructureData
 {
     public ZoneData(Zone b)
     {

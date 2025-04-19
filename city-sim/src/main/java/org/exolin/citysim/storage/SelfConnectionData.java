@@ -10,15 +10,15 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class StreetData extends BuildingData
+public class SelfConnectionData extends StructureData
 {
-    public StreetData(SelfConnection b)
+    public SelfConnectionData(SelfConnection b)
     {
         super(b);
     }
 
     @JsonCreator
-    public StreetData(@JsonProperty("type") String type,
+    public SelfConnectionData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant)
     {

@@ -14,13 +14,13 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class BuildingType extends StructureType<Building, BuildingType.Variant>
 {
-    public interface Updater
+    public interface UpdateAfterTick
     {
         void update(World world, Building b);
         public static final Nothing NOTHING = new Nothing();
     }
     
-    private static class Nothing implements Updater
+    private static class Nothing implements UpdateAfterTick
     {
         @Override
         public void update(World t, Building u)
@@ -36,22 +36,22 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
     private final ZoneType zoneType;
     private final int cost;
     private final BigDecimal maintenance;
-    private final Updater update;
+    private final UpdateAfterTick updateAfterTick;
     
     public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
     {
-        this(name, animation, size, zoneType, cost, BigDecimal.ZERO, Updater.NOTHING);
+        this(name, animation, size, zoneType, cost, BigDecimal.ZERO, UpdateAfterTick.NOTHING);
     }
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, Updater update)
+    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick updateAfterTick)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
         zoneType.addBuilding(this);
         this.cost = cost;
         this.maintenance = maintenance;
-        this.update = Objects.requireNonNull(update);
+        this.updateAfterTick = Objects.requireNonNull(updateAfterTick);
     }
 
     public int getCost()
@@ -81,8 +81,8 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
         return new Building(this, x, y, variant);
     }
 
-    void update(World world, Building building)
+    void updateAfterTick(World world, Building building)
     {
-        update.update(world, building);
+        updateAfterTick.update(world, building);
     }
 }

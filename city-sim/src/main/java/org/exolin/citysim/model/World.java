@@ -219,7 +219,7 @@ public final class World
     
     private void updateBuilding(Structure b)
     {
-        b.update(this);
+        b.updateAfterChange(this);
         updateBuildingsAround(b.getX(), b.getY(), b.getSize());
     }
     
@@ -234,7 +234,7 @@ public final class World
                 //   ***
                 Structure buildingAt = getBuildingAtForUpdate(x, by-1);
                 if(buildingAt != null)
-                    buildingAt.update(this);
+                    buildingAt.updateAfterChange(this);
             }
             {
                 //   ***
@@ -243,7 +243,7 @@ public final class World
                 //  xxxxx
                 Structure buildingAt = getBuildingAtForUpdate(x, by+bsize);
                 if(buildingAt != null)
-                    buildingAt.update(this);
+                    buildingAt.updateAfterChange(this);
             }
         }
         
@@ -257,7 +257,7 @@ public final class World
             {
                 Structure buildingAt = getBuildingAtForUpdate(bx-1, y);
                 if(buildingAt != null)
-                    buildingAt.update(this);
+                    buildingAt.updateAfterChange(this);
             }
             //   ***x
             //   ***x
@@ -265,7 +265,7 @@ public final class World
             {
                 Structure buildingAt = getBuildingAtForUpdate(bx+bsize, y);
                 if(buildingAt != null)
-                    buildingAt.update(this);
+                    buildingAt.updateAfterChange(this);
             }
         }
     }
@@ -354,7 +354,7 @@ public final class World
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
     }
 
-    public void update()
+    public void updateAfterTick()
     {
         long moneyTime = System.currentTimeMillis()/MONEY_PERIOD;
         if(moneyTime != lastMoneyUpdate)
@@ -380,6 +380,8 @@ public final class World
                 if(hasAnyInRadius(SelfConnections.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
                     replaceBuilding(z, b.getX(), b.getY());
             }
+            else
+                b.updateAfterTick(this);
         }
     }
     

@@ -244,7 +244,7 @@ public final class GamePanel extends JComponent
         
         repaintTimer = new Timer(10, (ActionEvent e) ->
         {
-            update();
+            updateAfterTick();
         });
     }
     
@@ -255,12 +255,12 @@ public final class GamePanel extends JComponent
     
     private static final int REFRESH_TIME = 1000;
     
-    private synchronized void update()
+    private synchronized void updateAfterTick()
     {
         execute(() -> {
             World world_ = worldHolder.get();
 
-            world_.update();
+            world_.updateAfterTick();
             long u = Math.max(world_.getLastChange(), lastPaint+REFRESH_TIME);
             if(u >= lastPaint)
             {

@@ -64,7 +64,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
     }
     
     @Override
-    protected void update(World world)
+    protected void updateAfterChange(World world)
     {
         Connection x_before_street = getStreet(world, getX()-1, getY(), true);
         Connection x_after_street = getStreet(world, getX()+1, getY(), true);

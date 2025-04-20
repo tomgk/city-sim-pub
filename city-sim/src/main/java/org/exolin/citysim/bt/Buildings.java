@@ -3,7 +3,7 @@ package org.exolin.citysim.bt;
 import java.math.BigDecimal;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.building.BuildingType.UpdateAfterTick;
+import org.exolin.citysim.model.building.UpdateAfterTick;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**

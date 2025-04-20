@@ -14,20 +14,6 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class BuildingType extends StructureType<Building, BuildingType.Variant>
 {
-    public interface UpdateAfterTick
-    {
-        void update(World world, Building b);
-        public static final Nothing NOTHING = new Nothing();
-    }
-    
-    private static class Nothing implements UpdateAfterTick
-    {
-        @Override
-        public void update(World t, Building u)
-        {
-        }
-    }
- 
     public enum Variant implements StructureVariant
     {
         DEFAULT

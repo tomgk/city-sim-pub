@@ -41,7 +41,7 @@ public class Destruction
     private static void maybeAddFire(World w, int x, int y)
     {
         int size = w.getGridSize();
-        if(x < 0 || x >= size || y < 0 || y <= size)
+        if(x < 0 || x >= size || y < 0 || y >= size)
             return;
         
         if(!spreadFire())

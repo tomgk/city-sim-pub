@@ -29,7 +29,6 @@ public class CrossConnections
     public static CrossConnectionType createCrossConnectionType(SelfConnectionType xtype, SelfConnectionType ytype)
     {
         String name = xtype.getName()+"_"+ytype.getName();
-        System.out.println(name);
         CrossConnectionType type = new CrossConnectionType(name, Animation.createUnanimated("cross_connection/"+name), 1, xtype, ytype);
         types.put(new Key(xtype, ytype), type);
         return type;

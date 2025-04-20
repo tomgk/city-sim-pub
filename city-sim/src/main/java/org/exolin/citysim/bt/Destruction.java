@@ -20,10 +20,7 @@ public class Destruction
     private static boolean spreadFire()
     {
         double r = Math.random();
-        System.out.println(r);
         boolean spread = r < 0.0001;
-        if(spread)
-            System.out.println("SPREAD FIRE");
         return spread;
     }
     

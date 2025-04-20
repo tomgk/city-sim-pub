@@ -21,7 +21,7 @@ public class Destruction
     {
         double r = Math.random();
         System.out.println(r);
-        boolean spread = r < 0.1;
+        boolean spread = r < 0.0001;
         if(spread)
             System.out.println("SPREAD FIRE");
         return spread;

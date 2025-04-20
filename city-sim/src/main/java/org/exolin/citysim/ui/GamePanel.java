@@ -605,11 +605,9 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize());
     }
     
-    private static final int ANIMATION_SPEED = 1000;
-    
     private Image getCurrentImage(Animation a)
     {
-        long frame = lastPaint/ANIMATION_SPEED%a.getImageCount();
+        long frame = lastPaint/a.getAnimationSpeed()%a.getImageCount();
         return a.getImage((int)frame);
     }
     

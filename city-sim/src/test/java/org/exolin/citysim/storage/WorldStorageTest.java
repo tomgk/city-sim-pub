@@ -64,7 +64,7 @@ public class WorldStorageTest
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
-                                {"type":"business/cinema","x":16,"y":5}
+                                {"type":"business_cinema","x":16,"y":5}
                             ]
                           }
                           """;

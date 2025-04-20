@@ -10,5 +10,5 @@ import org.exolin.citysim.model.ab.BuildingType;
  */
 public class Destruction
 {
-    public static final BuildingType fire = createBuildingType(createAnimation("destruction/fire", 4), 1, Zones.destroyed, 0);
+    public static final BuildingType fire = createBuildingType(createAnimation("destruction/fire", 4, 500), 1, Zones.destroyed, 0);
 }

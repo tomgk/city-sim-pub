@@ -2,7 +2,7 @@ package org.exolin.citysim.bt;
 
 import static org.exolin.citysim.bt.Buildings.createBuildingType;
 import static org.exolin.citysim.model.Animation.createAnimation;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 
 /**
  *

@@ -36,7 +36,7 @@ import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.exolin.citysim.ui.Utils.brighter;
 import static org.exolin.citysim.ui.Utils.loadImage;

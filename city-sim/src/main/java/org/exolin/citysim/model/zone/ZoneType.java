@@ -5,7 +5,7 @@ import java.util.List;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 
 /**
  *

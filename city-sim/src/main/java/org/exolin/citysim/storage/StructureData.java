@@ -11,7 +11,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.Building;
+import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.tree.Tree;

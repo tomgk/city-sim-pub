@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 
 /**
  *

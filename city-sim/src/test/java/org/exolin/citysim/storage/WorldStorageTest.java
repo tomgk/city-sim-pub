@@ -13,7 +13,7 @@ import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTED;
 import org.exolin.citysim.model.zone.ZoneType;

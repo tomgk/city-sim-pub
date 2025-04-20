@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.ab;
+package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
 import java.util.Objects;

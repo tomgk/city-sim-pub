@@ -1,7 +1,7 @@
 package org.exolin.citysim.ui.budget;
 
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.ab.BuildingType;
+import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;

@@ -17,10 +17,11 @@ public class Destruction
             createAnimation("destruction/fire", 4, 500),
             1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire);
     
-    private static boolean spreadFire()
+    private static boolean spreadFire(boolean high)
     {
         double r = Math.random();
-        boolean spread = r < 0.0001;
+        double probability = high ? 0.0001 : 0.0001/3;
+        boolean spread = r < probability;
         return spread;
     }
     
@@ -29,19 +30,24 @@ public class Destruction
         int x = b.getX();
         int y = b.getY();
         
-        maybeAddFire(w, x-1, y);
-        maybeAddFire(w, x+1, y);
-        maybeAddFire(w, x, y-1);
-        maybeAddFire(w, x, y+1);
+        maybeAddFire(w, x-1, y, true);
+        maybeAddFire(w, x+1, y, true);
+        maybeAddFire(w, x, y-1, true);
+        maybeAddFire(w, x, y+1, true);
+        
+        maybeAddFire(w, x-1, y-1, false);
+        maybeAddFire(w, x-1, y+1, false);
+        maybeAddFire(w, x+1, y-1, false);
+        maybeAddFire(w, x+1, y+1, false);
     }
     
-    private static void maybeAddFire(World w, int x, int y)
+    private static void maybeAddFire(World w, int x, int y, boolean high)
     {
         int size = w.getGridSize();
         if(x < 0 || x >= size || y < 0 || y >= size)
             return;
         
-        if(!spreadFire())
+        if(!spreadFire(high))
             return;
         
         w.addBuilding(fire, x, y);

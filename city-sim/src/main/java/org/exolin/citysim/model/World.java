@@ -296,13 +296,8 @@ public final class World
         return lastChange;
     }
     
-    private double tickProababilityForBuilding = 0.01;
+    private static final double tickProababilityForBuilding = 0.01;
 
-    public void setProabability(double proabability)
-    {
-        this.tickProababilityForBuilding = proabability;
-    }
-    
     private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {
         Structure b = getBuildingAt(x, y);

@@ -18,7 +18,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
-import org.exolin.citysim.ui.Utils;
+import org.exolin.citysim.utils.Utils;
 
 /**
  *

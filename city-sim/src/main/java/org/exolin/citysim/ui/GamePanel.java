@@ -38,14 +38,14 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
-import static org.exolin.citysim.ui.Utils.brighter;
-import static org.exolin.citysim.ui.Utils.loadImage;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
+import static org.exolin.citysim.utils.Utils.brighter;
+import static org.exolin.citysim.utils.Utils.loadImage;
 
 /**
  *

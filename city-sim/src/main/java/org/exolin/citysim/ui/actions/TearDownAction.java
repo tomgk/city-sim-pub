@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.ui.Utils;
+import org.exolin.citysim.utils.Utils;
 
 /**
  *

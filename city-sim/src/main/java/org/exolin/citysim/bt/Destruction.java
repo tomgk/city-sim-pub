@@ -8,7 +8,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.Connection;
-import org.exolin.citysim.ui.Utils;
+import org.exolin.citysim.utils.Utils;
 
 /**
  *

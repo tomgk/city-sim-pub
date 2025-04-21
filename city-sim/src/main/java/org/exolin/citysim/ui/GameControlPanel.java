@@ -1,7 +1,6 @@
 package org.exolin.citysim.ui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -17,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
+import org.exolin.citysim.utils.Utils;
 
 /**
  *

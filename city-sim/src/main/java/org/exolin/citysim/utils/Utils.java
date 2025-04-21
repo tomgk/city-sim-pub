@@ -1,4 +1,4 @@
-package org.exolin.citysim.ui;
+package org.exolin.citysim.utils;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import javax.imageio.ImageIO;
+import org.exolin.citysim.ui.GamePanel;
 
 /**
  *

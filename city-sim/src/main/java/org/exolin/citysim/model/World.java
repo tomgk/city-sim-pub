@@ -18,6 +18,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
+import org.exolin.citysim.ui.Utils;
 
 /**
  *
@@ -295,20 +296,20 @@ public final class World
         return lastChange;
     }
     
-    private double proabability = 0.01;
+    private double tickProababilityForBuilding = 0.01;
 
     public void setProabability(double proabability)
     {
-        this.proabability = proabability;
+        this.tickProababilityForBuilding = proabability;
     }
     
-    private <B> void replaceBuilding(ZoneType type, int x, int y)
+    private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {
         Structure b = getBuildingAt(x, y);
         if(b == null)
             return;
         
-        if(Math.random() < proabability)
+        if(Math.random() < Utils.getProbabilityForTicks(tickProababilityForBuilding, ticks))
             ;
         else
             return;
@@ -354,12 +355,17 @@ public final class World
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
     }
 
-    public void updateAfterTick()
+    public void updateAfterTick(int ticks)
     {
+        if(ticks == 0)
+            return;
+        else if(ticks < 0)
+            throw new IllegalArgumentException();
+        
         long moneyTime = System.currentTimeMillis()/MONEY_PERIOD;
         if(moneyTime != lastMoneyUpdate)
         {
-            updateMoney((int)(moneyTime - lastMoneyUpdate));
+            updateMoney((int)(moneyTime - lastMoneyUpdate) * ticks);
             lastMoneyUpdate = moneyTime;
         }
         
@@ -378,10 +384,10 @@ public final class World
                     continue;
                 
                 if(hasAnyInRadius(SelfConnections.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
-                    replaceBuilding(z, b.getX(), b.getY());
+                    replaceBuilding(z, b.getX(), b.getY(), ticks);
             }
             else
-                b.updateAfterTick(this);
+                b.updateAfterTick(this, ticks);
         }
     }
     

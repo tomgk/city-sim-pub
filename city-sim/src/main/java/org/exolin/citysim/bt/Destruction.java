@@ -8,6 +8,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.Connection;
+import org.exolin.citysim.ui.Utils;
 
 /**
  *
@@ -19,10 +20,11 @@ public class Destruction
             createAnimation("destruction/fire", 4, 500),
             1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire);
     
-    private static boolean spreadFire(double speed)
+    private static boolean spreadFire(double speed, int ticks)
     {
+        double probability = Utils.getProbabilityForTicks(speed * 0.0001, ticks);
+        
         double r = Math.random();
-        double probability = speed * 0.0001;
         boolean spread = r < probability;
         return spread;
     }
@@ -31,30 +33,33 @@ public class Destruction
     private static final double DIAGONAL = 1/3.;
     private static final double JUMP = 0.125;
     
-    private static void updateFire(World w, Building b)
+    private static void updateFire(World w, Building b, int ticks)
     {
+        if(ticks <= 0)
+            throw new IllegalArgumentException();
+        
         int x = b.getX();
         int y = b.getY();
         
-        boolean leftCanBurn = maybeAddFire(w, x-1, y, NORMAL);
-        boolean rightCanBurn = maybeAddFire(w, x+1, y, NORMAL);
-        boolean downCanBurn = maybeAddFire(w, x, y-1, NORMAL);
-        boolean upCanBurn = maybeAddFire(w, x, y+1, NORMAL);
+        boolean leftCanBurn = maybeAddFire(w, x-1, y, NORMAL, ticks);
+        boolean rightCanBurn = maybeAddFire(w, x+1, y, NORMAL, ticks);
+        boolean downCanBurn = maybeAddFire(w, x, y-1, NORMAL, ticks);
+        boolean upCanBurn = maybeAddFire(w, x, y+1, NORMAL, ticks);
         
-        maybeAddFire(w, x-1, y-1, DIAGONAL);
-        maybeAddFire(w, x-1, y+1, DIAGONAL);
-        maybeAddFire(w, x+1, y-1, DIAGONAL);
-        maybeAddFire(w, x+1, y+1, DIAGONAL);
+        maybeAddFire(w, x-1, y-1, DIAGONAL, ticks);
+        maybeAddFire(w, x-1, y+1, DIAGONAL, ticks);
+        maybeAddFire(w, x+1, y-1, DIAGONAL, ticks);
+        maybeAddFire(w, x+1, y+1, DIAGONAL, ticks);
         
         //only jump if there is something in the way
         if(!leftCanBurn)
-            maybeAddFire(w, x-2, y, JUMP);
+            maybeAddFire(w, x-2, y, JUMP, ticks);
         if(!rightCanBurn)
-            maybeAddFire(w, x+2, y, JUMP);
+            maybeAddFire(w, x+2, y, JUMP, ticks);
         if(!downCanBurn)
-            maybeAddFire(w, x, y-2, JUMP);
+            maybeAddFire(w, x, y-2, JUMP, ticks);
         if(!upCanBurn)
-            maybeAddFire(w, x, y+2, JUMP);
+            maybeAddFire(w, x, y+2, JUMP, ticks);
     }
     
     /**
@@ -65,7 +70,7 @@ public class Destruction
      * @param speed
      * @return {@true} if fire can spread here, regardless if it did now
      */
-    private static boolean maybeAddFire(World w, int x, int y, double speed)
+    private static boolean maybeAddFire(World w, int x, int y, double speed, int ticks)
     {
         int size = w.getGridSize();
         if(x < 0 || x >= size || y < 0 || y >= size)
@@ -76,7 +81,7 @@ public class Destruction
         if(b instanceof Connection)
             return false;
         
-        if(!spreadFire(speed))
+        if(!spreadFire(speed, ticks))
             return true;
         
         w.addBuilding(fire, x, y);

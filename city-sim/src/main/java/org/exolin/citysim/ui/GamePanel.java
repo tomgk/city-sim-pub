@@ -254,13 +254,19 @@ public final class GamePanel extends JComponent
     }
     
     private static final int REFRESH_TIME = 1000;
+    private int tickFactor = 1;
+
+    public void setTickFactor(int tickFactor)
+    {
+        this.tickFactor = tickFactor;
+    }
     
     private synchronized void updateAfterTick()
     {
         execute(() -> {
             World world_ = worldHolder.get();
 
-            world_.updateAfterTick();
+            world_.updateAfterTick(tickFactor);
             long u = Math.max(world_.getLastChange(), lastPaint+REFRESH_TIME);
             if(u >= lastPaint)
             {

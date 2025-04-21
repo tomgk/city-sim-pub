@@ -91,7 +91,7 @@ public class WorldTest
         placeZone(w, Zones.residential, ZoneType.Variant.DEFAULT, 0, 0, 2, 2);
         placeStreet(w, 0, 2, 2, 2);
         
-        w.updateAfterTick();
+        w.updateAfterTick(1);
         
         System.out.println(w.getBuildings().stream().map(Object::toString).collect(Collectors.joining("\n")));
         assertEquals("xxxx", w.getBuildings());

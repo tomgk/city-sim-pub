@@ -67,8 +67,8 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
         return new Building(this, x, y, variant);
     }
 
-    void updateAfterTick(World world, Building building)
+    void updateAfterTick(World world, Building building, int ticks)
     {
-        updateAfterTick.update(world, building);
+        updateAfterTick.update(world, building, ticks);
     }
 }

@@ -122,7 +122,7 @@ public abstract class Structure<B, T extends StructureType<B, E>, E extends Stru
         
     }
     
-    protected void updateAfterTick(World world)
+    protected void updateAfterTick(World world, int ticks)
     {
         
     }

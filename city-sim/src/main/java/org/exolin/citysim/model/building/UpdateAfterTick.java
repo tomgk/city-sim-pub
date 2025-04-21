@@ -8,14 +8,14 @@ import org.exolin.citysim.model.World;
  */
 public interface UpdateAfterTick
 {
-    void update(World world, Building b);
+    void update(World world, Building b, int ticks);
     public static final UpdateAfterTick NOTHING = new NothingUpdateAfterTick();    
 }
 
 class NothingUpdateAfterTick implements UpdateAfterTick
 {
     @Override
-    public void update(World t, Building u)
+    public void update(World t, Building u, int ticks)
     {
     }
 }

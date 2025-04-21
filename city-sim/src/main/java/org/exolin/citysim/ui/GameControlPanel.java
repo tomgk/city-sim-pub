@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -8,7 +10,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
@@ -42,12 +47,19 @@ public class GameControlPanel extends javax.swing.JPanel
          });
     }
     
+    private final Map<JLabel, Integer> speeds = new LinkedHashMap<>();
+    
     /**
      * Creates new form GameData
      */
     public GameControlPanel()
     {
         initComponents();
+        
+        speeds.put(pauseLabel, 0);
+        speeds.put(speed1Label, 1);
+        speeds.put(speed2Label, 3);
+        speeds.put(speed3Label, 9);
     }
 
     public void setPanel(GamePanel panel)
@@ -84,6 +96,10 @@ public class GameControlPanel extends javax.swing.JPanel
         javax.swing.JLabel saveLabel = new javax.swing.JLabel();
         javax.swing.JLabel loadLabel = new javax.swing.JLabel();
         keyMappingLabel = new javax.swing.JLabel();
+        pauseLabel = new javax.swing.JLabel();
+        speed1Label = new javax.swing.JLabel();
+        speed2Label = new javax.swing.JLabel();
+        speed3Label = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -168,13 +184,58 @@ public class GameControlPanel extends javax.swing.JPanel
 
         keyMappingLabel.setText("<keymapping>");
 
+        pauseLabel.setText("||");
+        pauseLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                speedLabelClicked(evt);
+            }
+        });
+
+        speed1Label.setText(">");
+        speed1Label.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                speedLabelClicked(evt);
+            }
+        });
+
+        speed2Label.setText(">>");
+        speed2Label.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                speedLabelClicked(evt);
+            }
+        });
+
+        speed3Label.setText(">>>");
+        speed3Label.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                speedLabelClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(resetPositionLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(resetPositionLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pauseLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(speed1Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(speed2Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(speed3Label)))
                 .addGap(31, 31, 31)
                 .addComponent(keyLeftLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,6 +258,7 @@ public class GameControlPanel extends javax.swing.JPanel
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(keyMappingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -208,9 +270,7 @@ public class GameControlPanel extends javax.swing.JPanel
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(resetPositionLabel)
-                                        .addComponent(keyLeftLabel))
+                                    .addComponent(keyLeftLabel)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(keyRightLabel)
                                         .addComponent(zoomInLabel))))
@@ -220,10 +280,17 @@ public class GameControlPanel extends javax.swing.JPanel
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(zoomOutLabel)
-                                    .addComponent(loadLabel))))
+                                    .addComponent(loadLabel)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(resetPositionLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(pauseLabel)
+                                    .addComponent(speed1Label)
+                                    .addComponent(speed2Label)
+                                    .addComponent(speed3Label))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(keyMappingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -296,7 +363,25 @@ public class GameControlPanel extends javax.swing.JPanel
         }
     }//GEN-LAST:event_loadLabelMouseClicked
 
+    private void speedLabelClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_speedLabelClicked
+    {//GEN-HEADEREND:event_speedLabelClicked
+        JLabel selected = (JLabel)evt.getComponent();
+        Integer tickFactor = speeds.get(selected);
+        if(tickFactor == null)
+            throw new NullPointerException();
+        
+        for(JLabel c : speeds.keySet())
+            c.setForeground(Color.black);
+        selected.setForeground(Color.red);
+        
+        panel.setTickFactor(tickFactor);
+    }//GEN-LAST:event_speedLabelClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel keyMappingLabel;
+    private javax.swing.JLabel pauseLabel;
+    private javax.swing.JLabel speed1Label;
+    private javax.swing.JLabel speed2Label;
+    private javax.swing.JLabel speed3Label;
     // End of variables declaration//GEN-END:variables
 }

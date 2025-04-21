@@ -118,4 +118,13 @@ public class Utils
         int pos = fn.indexOf('.');
         return pos != -1 ? fn.substring(0, pos) : fn;
     }
+    
+    public static double getProbabilityForTicks(double tickProbability, int ticks)
+    {
+        double tickNotProbability = 1 - tickProbability;
+        //act like it got called every tick
+        //by compounding the probability of it not happening
+        double notProbability = Math.pow(tickNotProbability, ticks);
+        return 1 - notProbability;
+    }
 }

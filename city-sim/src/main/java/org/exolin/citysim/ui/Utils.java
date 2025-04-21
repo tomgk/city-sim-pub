@@ -20,9 +20,11 @@ import javax.imageio.ImageIO;
  */
 public class Utils
 {
+    public static final String RESOURCE_PREFIX = "org/exolin/citysim/";
+    
     public static BufferedImage loadImage(String name)
     {
-        String resourcePath = name+".png";
+        String resourcePath = RESOURCE_PREFIX+name+".png";
         URL resource = GamePanel.class.getClassLoader().getResource(resourcePath);
         if(resource == null)
             throw new IllegalArgumentException("not found: resource "+resourcePath);

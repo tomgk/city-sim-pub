@@ -296,7 +296,7 @@ public final class World
         return lastChange;
     }
     
-    private static final double tickProababilityForBuilding = 0.01;
+    private static final double TICK_PROBABILTY_FOR_BUILDING = 0.01;
 
     private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {
@@ -304,7 +304,7 @@ public final class World
         if(b == null)
             return;
         
-        if(Math.random() < Utils.getProbabilityForTicks(tickProababilityForBuilding, ticks))
+        if(Math.random() < Utils.getProbabilityForTicks(TICK_PROBABILTY_FOR_BUILDING, ticks))
             ;
         else
             return;

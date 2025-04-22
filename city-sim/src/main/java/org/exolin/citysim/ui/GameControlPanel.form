@@ -28,9 +28,11 @@
                       <Component id="speed2Label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="speed3Label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="speed4Label" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="keyLeftLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -46,10 +48,15 @@
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="keyMappingLabel" min="-2" pref="532" max="-2" attributes="0"/>
-              <EmptySpace pref="360" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="saveLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="loadLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="360" max="32767" attributes="0"/>
+                      <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -94,6 +101,7 @@
                                   <Component id="speed1Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="speed2Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="speed3Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="speed4Label" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -246,6 +254,14 @@
     <Component class="javax.swing.JLabel" name="speed3Label">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;&gt;&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="speedLabelClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="speed4Label">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="x4"/>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="speedLabelClicked"/>

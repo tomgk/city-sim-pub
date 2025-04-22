@@ -33,6 +33,7 @@ import org.exolin.citysim.bt.destruction.Destruction;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Rotation;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
@@ -254,9 +255,9 @@ public final class GamePanel extends JComponent
     }
     
     private static final int REFRESH_TIME = 1000;
-    private int tickFactor = 1;
+    private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
 
-    public void setTickFactor(int tickFactor)
+    public void setTickFactor(SimulationSpeed tickFactor)
     {
         this.tickFactor = tickFactor;
     }
@@ -266,7 +267,7 @@ public final class GamePanel extends JComponent
         execute(() -> {
             World world_ = worldHolder.get();
 
-            world_.updateAfterTick(tickFactor);
+            world_.updateAfterTick(tickFactor.getTickCount());
             long u = Math.max(world_.getLastChange(), lastPaint+REFRESH_TIME);
             if(u >= lastPaint)
             {

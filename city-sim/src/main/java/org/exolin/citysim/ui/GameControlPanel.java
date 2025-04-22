@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
 import org.exolin.citysim.utils.Utils;
@@ -47,7 +48,7 @@ public class GameControlPanel extends javax.swing.JPanel
          });
     }
     
-    private final Map<JLabel, Integer> speeds = new LinkedHashMap<>();
+    private final Map<JLabel, SimulationSpeed> speeds = new LinkedHashMap<>();
     
     /**
      * Creates new form GameData
@@ -56,12 +57,12 @@ public class GameControlPanel extends javax.swing.JPanel
     {
         initComponents();
         
-        speeds.put(pauseLabel, 0);
-        speeds.put(speed1Label, 1);
-        speeds.put(speed2Label, 3);
-        speeds.put(speed3Label, 9);
-        speeds.put(speed4Label, 27);
-        speeds.put(speed5Label, 81);
+        speeds.put(pauseLabel, SimulationSpeed.PAUSED);
+        speeds.put(speed1Label, SimulationSpeed.SPEED1);
+        speeds.put(speed2Label, SimulationSpeed.SPEED2);
+        speeds.put(speed3Label, SimulationSpeed.SPEED3);
+        speeds.put(speed4Label, SimulationSpeed.SPEED4);
+        speeds.put(speed5Label, SimulationSpeed.SPEED5);
         
         selectSpeedLabel(speed1Label);
     }
@@ -401,13 +402,13 @@ public class GameControlPanel extends javax.swing.JPanel
     private void speedLabelClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_speedLabelClicked
     {//GEN-HEADEREND:event_speedLabelClicked
         JLabel selected = (JLabel)evt.getComponent();
-        int tickFactor = selectSpeedLabel(selected);
+        SimulationSpeed tickFactor = selectSpeedLabel(selected);
         panel.setTickFactor(tickFactor);
     }//GEN-LAST:event_speedLabelClicked
 
-    private int selectSpeedLabel(JLabel selected)
+    private SimulationSpeed selectSpeedLabel(JLabel selected)
     {
-        Integer tickFactor = speeds.get(selected);
+        SimulationSpeed tickFactor = speeds.get(selected);
         if(tickFactor == null)
             throw new NullPointerException();
         

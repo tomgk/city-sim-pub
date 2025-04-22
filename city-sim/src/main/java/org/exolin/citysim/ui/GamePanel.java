@@ -255,11 +255,10 @@ public final class GamePanel extends JComponent
     }
     
     private static final int REFRESH_TIME = 1000;
-    private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
 
     public void setTickFactor(SimulationSpeed tickFactor)
     {
-        this.tickFactor = tickFactor;
+        worldHolder.get().setTickFactor(tickFactor);
     }
     
     private synchronized void updateAfterTick()
@@ -267,7 +266,7 @@ public final class GamePanel extends JComponent
         execute(() -> {
             World world_ = worldHolder.get();
 
-            world_.updateAfterTick(tickFactor.getTickCount());
+            world_.updateAfterTick(worldHolder.get().getTickFactor().getTickCount());
             long u = Math.max(world_.getLastChange(), lastPaint+REFRESH_TIME);
             if(u >= lastPaint)
             {

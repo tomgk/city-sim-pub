@@ -45,6 +45,18 @@ public final class World
     private long lastMoneyUpdate = System.currentTimeMillis()/MONEY_PERIOD;
     private BigDecimal money;
     
+    private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
+
+    public SimulationSpeed getTickFactor()
+    {
+        return tickFactor;
+    }
+
+    public void setTickFactor(SimulationSpeed tickFactor)
+    {
+        this.tickFactor = tickFactor;
+    }
+    
     public void enableOverlap()
     {
         checkOverlap = true;

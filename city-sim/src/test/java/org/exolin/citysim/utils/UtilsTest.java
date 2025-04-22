@@ -25,18 +25,18 @@ public class UtilsTest
     private static Stream<Arguments> probabilityForTicksTestValues()
     {
         return Stream.of(
-                Arguments.of(0.1, 0, 0),
-                Arguments.of(0.1, 1, 0.1),
-                Arguments.of(0.1, 2, 0.19),
-                Arguments.of(0.1, 3, 0.271),
-                Arguments.of(0.1, 10, 0.6513215599),
+                Arguments.of(0.1,   0, 0),
+                Arguments.of(0.1,   1, 0.1),
+                Arguments.of(0.1,   2, 0.19),
+                Arguments.of(0.1,   3, 0.271),
+                Arguments.of(0.1,  10, 0.6513215599),
                 Arguments.of(0.1, 100, 0.9999734386),
                 
-                Arguments.of(0.001, 0, 0),
-                Arguments.of(0.001, 1, 0.001),
-                Arguments.of(0.001, 2, 0.001999),
-                Arguments.of(0.001, 10, 0.00995511979),
-                Arguments.of(0.001, 100, 0.09520785288),
+                Arguments.of(0.001,    0, 0),
+                Arguments.of(0.001,    1, 0.001),
+                Arguments.of(0.001,    2, 0.001999),
+                Arguments.of(0.001,   10, 0.00995511979),
+                Arguments.of(0.001,  100, 0.09520785288),
                 Arguments.of(0.001, 1000, 0.63230457522),
                 
                 Arguments.of(0.1, 0, 0)

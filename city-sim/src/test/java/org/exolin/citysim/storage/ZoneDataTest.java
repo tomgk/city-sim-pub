@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.Zone;
@@ -35,7 +36,7 @@ public class ZoneDataTest
     @Test
     public void testDeserializeZone() throws IOException
     {
-        World w = new World("Test", 30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         InputStream in = createInputStream("""
                                            {"type":"zone_residential","x":16,"y":5}
                                            """);

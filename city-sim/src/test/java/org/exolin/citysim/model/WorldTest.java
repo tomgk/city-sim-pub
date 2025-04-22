@@ -22,7 +22,7 @@ public class WorldTest
     @Test
     public void testGetBuilding()
     {
-        World w = new World("Test", 30, BigDecimal.valueOf(100000));
+        World w = new World("Test", 30, BigDecimal.valueOf(100000), SimulationSpeed.PAUSED);
         
         assertEquals(3, BusinessBuildings.cinema.getSize());
         
@@ -84,7 +84,7 @@ public class WorldTest
     @Disabled
     public void test()
     {
-        World w = new World("Test", 30, BigDecimal.ONE);
+        World w = new World("Test", 30, BigDecimal.ONE, SimulationSpeed.PAUSED);
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         

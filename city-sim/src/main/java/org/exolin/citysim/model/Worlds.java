@@ -32,7 +32,7 @@ public class Worlds
     
     public static World World1()
     {
-        World w = new World("World1", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("World1", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         //w.enableOverlap();
         w.addBuilding(office, 6, 3);
         w.addBuilding(office, 9, 12);
@@ -52,7 +52,7 @@ public class Worlds
 
     public static World World2()
     {
-        World w = new World("World2", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("World2", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         w.enableOverlap();
         
         w.addBuilding(office, 6, 6);
@@ -76,7 +76,7 @@ public class Worlds
     
     public static World World3()
     {
-        World w = new World("Zone World", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("Zone World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         //w.enableOverlap();
         
         GetWorld getWorld = GetWorld.ofStatic(w);
@@ -98,7 +98,7 @@ public class Worlds
     
     public static World WaterWorld()
     {
-        World w = new World("Water World", DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+        World w = new World("Water World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         

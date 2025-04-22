@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import static org.exolin.citysim.model.Worlds.DEFAULT_GRID_SIZE;
 import static org.exolin.citysim.model.Worlds.DEFAULT_MONEY;
@@ -88,7 +89,7 @@ public class LoadGame extends JFrame
             if(name == null)
                 return;
             
-            w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+            w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.SPEED1);
         }
         else
             w = worlds.get(index-1);

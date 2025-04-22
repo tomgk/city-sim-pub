@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.List;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -37,7 +38,7 @@ public class ZonePlacementTest
     @Test
     public void testZonePlacementOnEmpty()
     {
-        World world = new World("Test", 100, BigDecimal.ZERO);
+        World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
@@ -59,7 +60,7 @@ public class ZonePlacementTest
     @Disabled
     public void testZoneDisplacement()
     {
-        World world = new World("Test", 100, BigDecimal.ZERO);
+        World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
         makeMove(new Point(2, 7), new Point(4, 10), world, Zones.business);

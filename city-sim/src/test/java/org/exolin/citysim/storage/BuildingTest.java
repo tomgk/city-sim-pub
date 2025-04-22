@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.BusinessBuildings;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
@@ -35,7 +36,7 @@ public class BuildingTest
     @Test
     public void testDeserializeActualBuilding_Default() throws IOException
     {
-        World w = new World("Test", 30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         InputStream in = createInputStream("""
                                            {"type":"business/cinema","x":16,"y":5}
                                            """);

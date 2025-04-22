@@ -7,6 +7,7 @@ import org.exolin.citysim.Main;
 import static org.exolin.citysim.bt.SelfConnections.rail;
 import static org.exolin.citysim.bt.SelfConnections.street;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
@@ -22,7 +23,7 @@ public class StreetBuilderTest
     @Test
     public World testCrossing() throws IOException
     {
-        World w = new World("test", 30, BigDecimal.ONE);
+        World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.PAUSED);
         StreetBuilder streetBuilder = new StreetBuilder(GetWorld.ofStatic(w), street, StreetBuilder.ONLY_LINE);
         StreetBuilder railBuilder = new StreetBuilder(GetWorld.ofStatic(w), rail, StreetBuilder.ONLY_LINE);
         

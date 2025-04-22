@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import org.exolin.citysim.bt.SelfConnections;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
@@ -36,7 +37,7 @@ public class SelfConnectionTest
     @Test
     public void testDeserializeStreet() throws IOException
     {
-        World w = new World("Test", 30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         InputStream in = createInputStream("""
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);

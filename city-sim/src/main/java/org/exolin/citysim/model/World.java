@@ -45,7 +45,7 @@ public final class World
     private long lastMoneyUpdate = System.currentTimeMillis()/MONEY_PERIOD;
     private BigDecimal money;
     
-    private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
+    private SimulationSpeed tickFactor;
 
     public SimulationSpeed getTickFactor()
     {
@@ -93,7 +93,7 @@ public final class World
         this.money = this.money.subtract(BigDecimal.valueOf(money));
     }
     
-    public World(String name, int gridSize, BigDecimal money)
+    public World(String name, int gridSize, BigDecimal money, SimulationSpeed speed)
     {
         this.name = name;
         this.gridSize = gridSize;

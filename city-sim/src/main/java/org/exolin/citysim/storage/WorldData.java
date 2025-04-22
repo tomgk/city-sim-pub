@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.List;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 
 /**
@@ -20,15 +21,20 @@ public class WorldData
     
     @JsonProperty
     private final List<StructureData> buildings;
+    
+    @JsonProperty
+    private final String speed;
 
     @JsonCreator
     public WorldData(@JsonProperty("gridSize") int gridSize,
             @JsonProperty("money") BigDecimal money,
-            @JsonProperty("buildings") List<StructureData> buildings)
+            @JsonProperty("buildings") List<StructureData> buildings,
+            @JsonProperty("speed") String speed)
     {
         this.gridSize = gridSize;
         this.money = money;
         this.buildings = buildings;
+        this.speed = speed;
     }
 
     public WorldData(World world)
@@ -39,6 +45,7 @@ public class WorldData
                 .toList();
         this.money = world.getMoney();
         this.gridSize = world.getGridSize();
+        this.speed = world.getTickFactor().name();
     }
 
     public List<StructureData> getBuildings()
@@ -58,7 +65,7 @@ public class WorldData
     
     public World createWorld(String name)
     {
-        World w = new World(name, gridSize, money);
+        World w = new World(name, gridSize, money, SimulationSpeed.valueOf(speed));
         
         for(StructureData bd : buildings)
             bd.createBuilding(w);

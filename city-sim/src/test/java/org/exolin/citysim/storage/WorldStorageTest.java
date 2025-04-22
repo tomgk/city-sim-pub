@@ -11,6 +11,7 @@ import java.util.List;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
@@ -53,7 +54,7 @@ public class WorldStorageTest
     @Test
     public void testSerializeWorld() throws IOException
     {
-        World w = new World("Test", 30, BigDecimal.ZERO);
+        World w = new World("Test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
@@ -78,6 +79,7 @@ public class WorldStorageTest
                           {
                             "gridSize":30,
                             "money": 1234,
+                            "speed": "PAUSED",
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},

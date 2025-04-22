@@ -81,7 +81,7 @@ public class WorldStorageTest
                             "money": 1234,
                             "speed": "PAUSED",
                             "buildings":[
-                                {"type": "zone_business", "x": 15, "y": 4},
+                                {"type": "zone/business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
                                 {"type":"business/cinema","x":16,"y":5}
                             ]

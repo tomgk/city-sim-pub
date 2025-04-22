@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.utils.Utils;
 
@@ -34,7 +35,7 @@ public abstract class StructureType<B, E extends StructureVariant>
     {
         StructureType<?, ?> bt = instances.get(transformName(name));
         if(bt == null)
-            throw new IllegalArgumentException("no building type "+name);
+            throw new IllegalArgumentException("no building type "+name+" found only\n"+instances.keySet().stream().collect(Collectors.joining("  \n")));
         return bt;
     }
     

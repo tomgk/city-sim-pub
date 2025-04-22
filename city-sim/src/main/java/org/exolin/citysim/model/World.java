@@ -45,7 +45,7 @@ public final class World
     private long lastMoneyUpdate = System.currentTimeMillis()/MONEY_PERIOD;
     private BigDecimal money;
     
-    private SimulationSpeed tickFactor;
+    private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
 
     public SimulationSpeed getTickFactor()
     {

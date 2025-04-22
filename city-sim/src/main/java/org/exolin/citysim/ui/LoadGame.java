@@ -86,9 +86,9 @@ public class LoadGame extends JFrame
         {
             String name = JOptionPane.showInputDialog(this, "City Name", "New World", JOptionPane.PLAIN_MESSAGE);
             if(name == null)
-                w = null;
-            else
-                w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
+                return;
+            
+            w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY);
         }
         else
             w = worlds.get(index-1);

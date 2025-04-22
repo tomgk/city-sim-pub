@@ -108,6 +108,12 @@ public final class World
     }
     
     private boolean LOG = false;
+    
+    public void removeBuildingAt(Structure s)
+    {
+        if(!buildings.remove(s))
+            throw new IllegalArgumentException("not part of world");
+    }
 
     public boolean removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
     {

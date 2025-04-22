@@ -20,9 +20,12 @@ public class Destruction
             createAnimation("destruction/fire", 4, 500),
             1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire);
     
+    public static final double SPREAD_PROBABILITY = 0.0001;
+    public static final double STOP_PROBABILITY = 0.00001;
+    
     private static boolean spreadFire(double speed, int ticks)
     {
-        double probability = Utils.getProbabilityForTicks(speed * 0.0001, ticks);
+        double probability = Utils.getProbabilityForTicks(speed * SPREAD_PROBABILITY, ticks);
         
         double r = Math.random();
         boolean spread = r < probability;
@@ -37,6 +40,12 @@ public class Destruction
     {
         if(ticks <= 0)
             throw new IllegalArgumentException();
+        
+        if(Math.random() < STOP_PROBABILITY)
+        {
+            w.removeBuildingAt(b);
+            return;
+        }
         
         int x = b.getX();
         int y = b.getY();

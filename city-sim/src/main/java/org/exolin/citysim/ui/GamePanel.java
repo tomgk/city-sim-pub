@@ -25,7 +25,7 @@ import java.util.Objects;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import org.exolin.citysim.bt.Destruction;
+import org.exolin.citysim.bt.destruction.Destruction;
 import static org.exolin.citysim.bt.SelfConnections.rail;
 import static org.exolin.citysim.bt.SelfConnections.street;
 import static org.exolin.citysim.bt.SelfConnections.water;

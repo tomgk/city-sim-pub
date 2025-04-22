@@ -1,5 +1,7 @@
 package org.exolin.citysim.bt;
 
+import org.exolin.citysim.bt.destruction.Destruction;
+
 /**
  *
  * @author Thomas

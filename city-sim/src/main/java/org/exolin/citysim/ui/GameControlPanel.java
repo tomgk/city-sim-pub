@@ -61,6 +61,7 @@ public class GameControlPanel extends javax.swing.JPanel
         speeds.put(speed2Label, 3);
         speeds.put(speed3Label, 9);
         speeds.put(speed4Label, 27);
+        speeds.put(speed5Label, 81);
         
         selectSpeedLabel(speed1Label);
     }
@@ -104,6 +105,7 @@ public class GameControlPanel extends javax.swing.JPanel
         speed2Label = new javax.swing.JLabel();
         speed3Label = new javax.swing.JLabel();
         speed4Label = new javax.swing.JLabel();
+        speed5Label = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -233,6 +235,15 @@ public class GameControlPanel extends javax.swing.JPanel
             }
         });
 
+        speed5Label.setText("x5");
+        speed5Label.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                speedLabelClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -250,8 +261,10 @@ public class GameControlPanel extends javax.swing.JPanel
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(speed3Label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(speed4Label)))
-                .addGap(15, 15, 15)
+                        .addComponent(speed4Label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(speed5Label)))
+                .addGap(74, 74, 74)
                 .addComponent(keyLeftLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,40 +278,23 @@ public class GameControlPanel extends javax.swing.JPanel
                     .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(keyMappingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
-                        .addComponent(loadLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(saveLabel)))
+                    .addComponent(loadLabel)
+                    .addComponent(saveLabel))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(keyMappingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(keyTopLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                        .addComponent(keyBottomLabel))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(keyLeftLabel)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(keyRightLabel)
-                                        .addComponent(zoomInLabel))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(saveLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(zoomOutLabel)
-                                    .addComponent(loadLabel)))
+                                .addComponent(loadLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(resetPositionLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -307,8 +303,28 @@ public class GameControlPanel extends javax.swing.JPanel
                                     .addComponent(speed1Label)
                                     .addComponent(speed2Label)
                                     .addComponent(speed3Label)
-                                    .addComponent(speed4Label))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(speed4Label)
+                                    .addComponent(speed5Label))))
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(keyMappingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(keyTopLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                            .addComponent(keyBottomLabel))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(15, 15, 15)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(keyLeftLabel)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(keyRightLabel)
+                                            .addComponent(zoomInLabel))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addComponent(zoomOutLabel)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -408,5 +424,6 @@ public class GameControlPanel extends javax.swing.JPanel
     private javax.swing.JLabel speed2Label;
     private javax.swing.JLabel speed3Label;
     private javax.swing.JLabel speed4Label;
+    private javax.swing.JLabel speed5Label;
     // End of variables declaration//GEN-END:variables
 }

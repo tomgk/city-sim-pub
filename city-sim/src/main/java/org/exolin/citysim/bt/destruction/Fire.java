@@ -1,12 +1,9 @@
-package org.exolin.citysim.bt;
+package org.exolin.citysim.bt.destruction;
 
-import java.math.BigDecimal;
-import static org.exolin.citysim.bt.Buildings.createBuildingType;
-import static org.exolin.citysim.model.Animation.createAnimation;
+import static org.exolin.citysim.bt.destruction.Destruction.fire;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
-import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.utils.Utils;
 
@@ -14,12 +11,8 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class Destruction
+public class Fire
 {
-    public static final BuildingType fire = createBuildingType(
-            createAnimation("destruction/fire", 4, 500),
-            1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire, null);
-    
     public static final double SPREAD_PROBABILITY = 0.0001;
     public static final double STOP_PROBABILITY = 0.00001;
     
@@ -36,7 +29,7 @@ public class Destruction
     private static final double DIAGONAL = 1/3.;
     private static final double JUMP = 0.125;
     
-    private static void updateFire(World w, Building b, int ticks, Object data)
+    public static void updateFire(World w, Building b, int ticks, Object data)
     {
         if(ticks <= 0)
             throw new IllegalArgumentException();

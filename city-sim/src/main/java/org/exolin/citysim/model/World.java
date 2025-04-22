@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
@@ -349,6 +350,22 @@ public final class World
         for(Structure b : buildings)
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
     }
+    
+    private void iterateBuildings(Consumer<Structure> consumer)
+    {
+        
+        //TODO: maybe no copy
+        List<Structure> originalBuildings = new ArrayList<>(this.buildings);
+        
+        for(Structure b: originalBuildings)
+        {
+            //if it was already removed, skip it
+            if(!this.buildings.contains(b))
+                continue;
+            
+            consumer.accept(b);
+        }
+    }
 
     public void updateAfterTick(int ticks)
     {
@@ -364,26 +381,18 @@ public final class World
             lastMoneyUpdate = moneyTime;
         }
         
-        //TODO: maybe no copy
-        List<Structure> originalBuildings = new ArrayList<>(this.buildings);
-        
-        for(Structure b: originalBuildings)
-        {
-            //if it was already removed, skip it
-            if(!this.buildings.contains(b))
-                continue;
-            
+        iterateBuildings(b -> {
             if(b.getType() instanceof ZoneType z)
             {
                 if(z.getSize() != 1)
-                    continue;
+                    return;
                 
                 if(hasAnyInRadius(SelfConnections.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
                     replaceBuilding(z, b.getX(), b.getY(), ticks);
             }
             else
                 b.updateAfterTick(this, ticks);
-        }
+        });
     }
     
     private int getMaxZone(ZoneType z, int x, int y)

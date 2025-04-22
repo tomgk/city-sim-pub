@@ -124,6 +124,9 @@ public class Utils
     
     public static double getProbabilityForTicks(double tickProbability, int ticks)
     {
+        if(ticks < 0)
+            throw new IllegalArgumentException();
+        
         double tickNotProbability = 1 - tickProbability;
         //act like it got called every tick
         //by compounding the probability of it not happening

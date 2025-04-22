@@ -1,8 +1,12 @@
 package org.exolin.citysim.utils;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  *
@@ -10,40 +14,33 @@ import org.junit.jupiter.api.Test;
  */
 public class UtilsTest
 {
-    @Test
-    public void testGetProbabilityForTicks_0()
+    @ParameterizedTest
+    @MethodSource("probabilityForTicksTestValues")
+    public void testGetProbabilityForTicks(double probability, int ticks, double expected)
     {
-        assertEquals(0, Utils.getProbabilityForTicks(0.1, 0));
+        assertEquals(expected, Utils.getProbabilityForTicks(probability, ticks), 0.0001);
     }
     
-    @Test
-    public void testGetProbabilityForTicks_1()
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> probabilityForTicksTestValues()
     {
-        assertEquals(0.1, Utils.getProbabilityForTicks(0.1, 1), 0.0001);
-    }
-    
-    @Test
-    public void testGetProbabilityForTicks_2()
-    {
-        assertEquals(0.19, Utils.getProbabilityForTicks(0.1, 2), 0.0001);
-    }
-    
-    @Test
-    public void testGetProbabilityForTicks_3()
-    {
-        assertEquals(0.271, Utils.getProbabilityForTicks(0.1, 3), 0.0001);
-    }
-    
-    @Test
-    public void testGetProbabilityForTicks_10()
-    {
-        assertEquals(0.6513215599, Utils.getProbabilityForTicks(0.1, 10), 0.0001);
-    }
-    
-    @Test
-    public void testGetProbabilityForTicks_100()
-    {
-        assertEquals(0.9999734386, Utils.getProbabilityForTicks(0.1, 100), 0.0001);
+        return Stream.of(
+                Arguments.of(0.1, 0, 0),
+                Arguments.of(0.1, 1, 0.1),
+                Arguments.of(0.1, 2, 0.19),
+                Arguments.of(0.1, 3, 0.271),
+                Arguments.of(0.1, 10, 0.6513215599),
+                Arguments.of(0.1, 100, 0.9999734386),
+                
+                Arguments.of(0.001, 0, 0),
+                Arguments.of(0.001, 1, 0.001),
+                Arguments.of(0.001, 2, 0.001999),
+                Arguments.of(0.001, 10, 0.00995511979),
+                Arguments.of(0.001, 100, 0.09520785288),
+                Arguments.of(0.001, 1000, 0.63230457522),
+                
+                Arguments.of(0.1, 0, 0)
+        );
     }
     
     @Test

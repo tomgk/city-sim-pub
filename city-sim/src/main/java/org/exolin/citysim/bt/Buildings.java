@@ -14,12 +14,12 @@ public class Buildings
 {
     static BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost)
     {
-        return createBuildingType(animation, size, zoneType, cost, BigDecimal.ZERO, UpdateAfterTick.NOTHING);
+        return createBuildingType(animation, size, zoneType, cost, BigDecimal.ZERO, UpdateAfterTick.NOTHING, UpdateAfterTick.NOTHING_DATA);
     }
     
-    static BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick update)
+    static <T> BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick<T> update, T data)
     {
-        return new BuildingType(animation.getName(), animation, size, zoneType, cost, maintenance, update);
+        return new BuildingType(animation.getName(), animation, size, zoneType, cost, maintenance, update, data);
     }
 
     static void init()

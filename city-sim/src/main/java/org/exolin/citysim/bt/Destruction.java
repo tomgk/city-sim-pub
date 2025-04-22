@@ -18,7 +18,7 @@ public class Destruction
 {
     public static final BuildingType fire = createBuildingType(
             createAnimation("destruction/fire", 4, 500),
-            1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire);
+            1, Zones.destroyed, 0, BigDecimal.ZERO, Destruction::updateFire, null);
     
     public static final double SPREAD_PROBABILITY = 0.0001;
     public static final double STOP_PROBABILITY = 0.00001;
@@ -36,7 +36,7 @@ public class Destruction
     private static final double DIAGONAL = 1/3.;
     private static final double JUMP = 0.125;
     
-    private static void updateFire(World w, Building b, int ticks)
+    private static void updateFire(World w, Building b, int ticks, Object data)
     {
         if(ticks <= 0)
             throw new IllegalArgumentException();

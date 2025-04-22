@@ -1,8 +1,8 @@
 package org.exolin.citysim.bt.destruction;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.bt.Buildings.createBuildingType;
+import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import org.exolin.citysim.model.building.BuildingType;
 

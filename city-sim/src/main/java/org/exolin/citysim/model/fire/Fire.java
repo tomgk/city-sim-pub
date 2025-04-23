@@ -31,12 +31,6 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
         return BigDecimal.ZERO;
     }
 
-    @Override
-    protected void updateAfterTick(World world, int ticks)
-    {
-        updateFire(world, this, ticks, null);
-    }
-    
     public static final double BURN_TREE_PROBABILITY = 0.0002;
     public static final double BURN_PROBABILITY = 0.0001;
     public static final double BURN_EMPTY_PROBABILITY = 0.000005;
@@ -65,8 +59,11 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
     private static final double DIAGONAL = 1/3.;
     private static final double JUMP = 0.125;
     
-    public static void updateFire(World w, Structure b, int ticks, Object data)
+    @Override
+    protected void updateAfterTick(World w, int ticks)
     {
+        Structure b = this;
+        
         if(ticks <= 0)
             throw new IllegalArgumentException();
         

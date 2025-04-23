@@ -62,19 +62,17 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
     @Override
     protected void updateAfterTick(World w, int ticks)
     {
-        Structure b = this;
-        
         if(ticks <= 0)
             throw new IllegalArgumentException();
         
         if(Math.random() < STOP_PROBABILITY)
         {
-            w.removeBuildingAt(b);
+            w.removeBuildingAt(this);
             return;
         }
         
-        int x = b.getX();
-        int y = b.getY();
+        int x = getX();
+        int y = getY();
         
         boolean leftCanBurn = maybeAddFire(w, x-1, y, NORMAL, ticks);
         boolean rightCanBurn = maybeAddFire(w, x+1, y, NORMAL, ticks);

@@ -42,7 +42,7 @@ public class Fire
     private static final double DIAGONAL = 1/3.;
     private static final double JUMP = 0.125;
     
-    public static void updateFire(World w, Building b, int ticks, Object data)
+    public static void updateFire(World w, Structure b, int ticks, Object data)
     {
         if(ticks <= 0)
             throw new IllegalArgumentException();
@@ -95,7 +95,7 @@ public class Fire
         Structure s = w.getBuildingAt(x, y);
         if(s instanceof Connection)
             return false;
-        else if(s instanceof Building b && b.getType() == Destruction.fire)
+        else if(s instanceof org.exolin.citysim.model.fire.Fire)
             //count as spread
             return true;
         

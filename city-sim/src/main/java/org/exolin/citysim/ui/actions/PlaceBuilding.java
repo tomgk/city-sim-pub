@@ -7,6 +7,7 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.fire.FireType;
 
 /**
  *
@@ -15,13 +16,22 @@ import org.exolin.citysim.model.building.BuildingType;
 public class PlaceBuilding implements BuildingAction
 {
     private final GetWorld world;
-    private final BuildingType type;
+    private final StructureType type;
     private final Rectangle marking = new Rectangle();
+    private final int cost;
 
     public PlaceBuilding(GetWorld world, BuildingType type)
     {
         this.world = world;
         this.type = type;
+        this.cost = type.getCost();
+    }
+
+    public PlaceBuilding(GetWorld world, FireType type)
+    {
+        this.world = world;
+        this.type = type;
+        this.cost = 0;
     }
 
     @Override
@@ -47,7 +57,7 @@ public class PlaceBuilding implements BuildingAction
     {
         World w = world.get();
         w.addBuilding(type, marking.x, marking.y);
-        w.reduceMoney(type.getCost());
+        w.reduceMoney(cost);
     }
 
     @Override
@@ -87,6 +97,6 @@ public class PlaceBuilding implements BuildingAction
     @Override
     public int getCost()
     {
-        return type.getCost();
+        return cost;
     }
 }

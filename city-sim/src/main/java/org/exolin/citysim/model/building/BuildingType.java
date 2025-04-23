@@ -23,7 +23,6 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
     private final int cost;
     private final BigDecimal maintenance;
     private final UpdateAfterTick updateAfterTick;
-    private final Object buildingData;
     
     /*
     public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
@@ -32,7 +31,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
     }*/
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public <T> BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick updateAfterTick, T buildingData)
+    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick updateAfterTick)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
@@ -40,7 +39,6 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
         this.cost = cost;
         this.maintenance = maintenance;
         this.updateAfterTick = Objects.requireNonNull(updateAfterTick);
-        this.buildingData = buildingData;
     }
 
     public int getCost()
@@ -70,7 +68,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant>
         return new Building(this, x, y, variant);
     }
 
-    void updateAfterTick(World world, Building building, int ticks)
+    void updateAfterTick(World world, Building building, int ticks, Object buildingData)
     {
         updateAfterTick.update(world, building, ticks, buildingData);
     }

@@ -14,5 +14,5 @@ public class Destruction
 {
     public static final BuildingType fire = createBuildingType(
             createAnimation("destruction/fire", 4, 500),
-            1, Zones.destroyed, 0, BigDecimal.ZERO, Fire::updateFire, null);
+            1, Zones.destroyed, 0, BigDecimal.ZERO, Fire::updateFire);
 }

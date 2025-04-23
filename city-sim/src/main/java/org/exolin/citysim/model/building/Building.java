@@ -25,7 +25,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     @Override
     protected void updateAfterTick(World world, int ticks)
     {
-        getType().updateAfterTick(world, this, ticks);
+        getType().updateAfterTick(world, this, ticks, null);
     }
 
     @Override

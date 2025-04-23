@@ -5,6 +5,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.Connection;
+import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -13,12 +14,24 @@ import org.exolin.citysim.utils.Utils;
  */
 public class Fire
 {
-    public static final double SPREAD_PROBABILITY = 0.0001;
+    public static final double BURN_TREE_PROBABILITY = 0.0002;
+    public static final double BURN_PROBABILITY = 0.0001;
+    public static final double BURN_EMPTY_PROBABILITY = 0.000005;
     public static final double STOP_PROBABILITY = 0.00001;
+    
+    private static double getSpreadProbability(Structure s)
+    {
+        if(s == null)
+            return BURN_EMPTY_PROBABILITY;
+        else if(s instanceof Tree t)
+            return Utils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
+        else
+            return BURN_PROBABILITY;
+    }
     
     private static boolean spreadFire(double speed, int ticks, Structure s)
     {
-        double probability = Utils.getProbabilityForTicks(speed * SPREAD_PROBABILITY, ticks);
+        double probability = Utils.getProbabilityForTicks(speed * getSpreadProbability(s), ticks);
         
         double r = Math.random();
         boolean spread = r < probability;

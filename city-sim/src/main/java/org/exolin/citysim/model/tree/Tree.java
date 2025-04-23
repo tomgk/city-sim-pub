@@ -13,6 +13,11 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant>
     {
         super(type, x, y, variant);
     }
+    
+    public int getCount()
+    {
+        return getType().getCount();
+    }
 
     @Override
     public BigDecimal getMaintenance()

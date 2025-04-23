@@ -14,6 +14,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
+import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 
@@ -77,6 +78,8 @@ public abstract class StructureData
             return new CrossConnectionData((CrossConnection)b);
         else if(b.getClass() == Tree.class)
             return new TreeData((Tree)b);
+        else if(b.getClass() == Fire.class)
+            return new FireData((Fire)b);
         else
             throw new UnsupportedOperationException(b.getClass().getName());
     }
@@ -91,6 +94,8 @@ public abstract class StructureData
             return ZoneData.class;
         else if(buildingClass == Tree.class)
             return TreeData.class;
+        else if(buildingClass == Fire.class)
+            return FireData.class;
         else
             throw new UnsupportedOperationException(buildingClass.getName());
     }

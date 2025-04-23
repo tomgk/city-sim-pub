@@ -12,7 +12,7 @@ public class FireType extends StructureType<Fire, FireType.Variant>
 {
     public enum Variant implements StructureVariant
     {
-        DEFAULT
+        DEFAULT;
     }
     
     public FireType(String name, Animation animation, int size)

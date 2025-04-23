@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.fire;
 
 import org.exolin.citysim.model.Animation;
+import static org.exolin.citysim.model.Animation.createAnimation;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 
@@ -10,6 +11,8 @@ import org.exolin.citysim.model.StructureVariant;
  */
 public class FireType extends StructureType<Fire, FireType.Variant>
 {
+    public static final FireType fire = new FireType("fire", createAnimation("destruction/fire", 4, 500), 1);
+    
     public enum Variant implements StructureVariant
     {
         DEFAULT;

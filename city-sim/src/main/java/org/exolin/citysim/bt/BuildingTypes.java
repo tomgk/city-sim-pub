@@ -1,6 +1,6 @@
 package org.exolin.citysim.bt;
 
-import org.exolin.citysim.bt.destruction.Destruction;
+import org.exolin.citysim.model.fire.FireType;
 
 /**
  *
@@ -20,7 +20,7 @@ public class BuildingTypes
             Zones.class,
             Trees.class,
             Plants.class,
-            Destruction.class,
+            FireType.class,
         };
         
         for(Class<?> clazz: classes)

@@ -3,7 +3,6 @@ package org.exolin.citysim.storage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import org.exolin.citysim.bt.destruction.Destruction;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
@@ -25,7 +24,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(Destruction.fire, 16, 99, FireType.Variant.DEFAULT);
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT);
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99}
@@ -42,7 +41,7 @@ public class FireDataTest
                                            """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);
-        assertEquals(Destruction.fire, b.getType());
+        assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
         assertEquals(FireType.Variant.DEFAULT, b.getVariant());

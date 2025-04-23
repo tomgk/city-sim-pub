@@ -29,7 +29,6 @@ import static org.exolin.citysim.bt.SelfConnections.rail;
 import static org.exolin.citysim.bt.SelfConnections.street;
 import static org.exolin.citysim.bt.SelfConnections.water;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.bt.destruction.Destruction;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Rotation;
@@ -38,6 +37,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
@@ -99,7 +99,7 @@ public final class GamePanel extends JComponent
         sactions.add(new StreetBuilder(getWorld, rail, true));
         sactions.add(new StreetBuilder(getWorld, water, false));
         sactions.add(new PlaceTrees(getWorld));
-        sactions.add(new PlaceBuilding(getWorld, Destruction.fire));
+        sactions.add(new PlaceBuilding(getWorld, FireType.fire));
         actions.put("Special", sactions);
         
         {

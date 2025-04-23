@@ -1,7 +1,6 @@
 package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
-import static org.exolin.citysim.bt.destruction.Destruction.fire;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.Connection;
@@ -121,7 +120,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
             return true;
         
         if(s == null)
-            w.addBuilding(fire, x, y);
+            w.addBuilding(FireType.fire, x, y);
         else
             replaceWithFire(w, s);
         
@@ -136,7 +135,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(fire, x+xi, y+yi);
+                w.addBuilding(FireType.fire, x+xi, y+yi);
         }
     }
 }

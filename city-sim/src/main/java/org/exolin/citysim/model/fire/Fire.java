@@ -30,10 +30,10 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
         return BigDecimal.ZERO;
     }
 
-    public static final double BURN_TREE_PROBABILITY = 0.0002;
-    public static final double BURN_PROBABILITY = 0.0001;
-    public static final double BURN_EMPTY_PROBABILITY = 0.000005;
-    public static final double STOP_PROBABILITY = 0.00001;
+    private static final double BURN_TREE_PROBABILITY = 0.0002;
+    private static final double BURN_PROBABILITY = 0.0001;
+    private static final double BURN_EMPTY_PROBABILITY = 0.000005;
+    private static final double STOP_PROBABILITY = 0.00001;
     
     private static double getSpreadProbability(Structure s)
     {

@@ -12,17 +12,22 @@ import org.exolin.citysim.model.fire.FireType;
  */
 public class FireData extends StructureData
 {
+    private final int remaining;
+    
     public FireData(Fire f)
     {
         super(f.getType().getName(), f.getX(), f.getY(), f.getVariant().name());
+        this.remaining = f.getRemaining();
     }
 
     @JsonCreator
     public FireData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant)
+            @JsonProperty("variant") String variant,
+            @JsonProperty("remaining") int remaining)
     {
         super(type, x, y, variant);
+        this.remaining = remaining;
     }
 
     @Override

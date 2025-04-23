@@ -26,7 +26,8 @@ public class FireType extends StructureType<Fire, FireType.Variant>
     @Override
     public Fire createBuilding(int x, int y, Variant variant)
     {
-        return new Fire(this, x, y, variant);
+        throw new UnsupportedOperationException();
+        //return new Fire(this, x, y, variant);
     }
 
     @Override

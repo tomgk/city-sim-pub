@@ -13,9 +13,17 @@ import org.exolin.citysim.utils.Utils;
  */
 public class Fire extends Structure<Fire, FireType, FireType.Variant>
 {
-    public Fire(FireType type, int x, int y, FireType.Variant variant)
+    private int remaining;
+    
+    public Fire(FireType type, int x, int y, FireType.Variant variant, int remaining)
     {
         super(type, x, y, variant);
+        this.remaining = remaining;
+    }
+
+    public int getRemaining()
+    {
+        return remaining;
     }
 
     @Override

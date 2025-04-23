@@ -24,7 +24,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT);
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT, 1);
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99}

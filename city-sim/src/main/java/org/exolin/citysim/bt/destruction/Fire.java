@@ -16,7 +16,7 @@ public class Fire
     public static final double SPREAD_PROBABILITY = 0.0001;
     public static final double STOP_PROBABILITY = 0.00001;
     
-    private static boolean spreadFire(double speed, int ticks)
+    private static boolean spreadFire(double speed, int ticks, Structure s)
     {
         double probability = Utils.getProbabilityForTicks(speed * SPREAD_PROBABILITY, ticks);
         
@@ -74,19 +74,38 @@ public class Fire
      */
     private static boolean maybeAddFire(World w, int x, int y, double speed, int ticks)
     {
-        int size = w.getGridSize();
-        if(x < 0 || x >= size || y < 0 || y >= size)
+        int gridSize = w.getGridSize();
+        if(x < 0 || x >= gridSize || y < 0 || y >= gridSize)
             return true;
         
         //don't put street/rail/water on fire
-        Structure b = w.getBuildingAt(x, y);
-        if(b instanceof Connection)
+        Structure s = w.getBuildingAt(x, y);
+        if(s instanceof Connection)
             return false;
-        
-        if(!spreadFire(speed, ticks))
+        else if(s instanceof Building b && b.getType() == Destruction.fire)
+            //count as spread
             return true;
         
-        w.addBuilding(fire, x, y);
+        if(!spreadFire(speed, ticks, s))
+            return true;
+        
+        if(s == null)
+            w.addBuilding(fire, x, y);
+        else
+            replaceWithFire(w, s);
+        
         return true;
+    }
+    
+    private static void replaceWithFire(World w, Structure s)
+    {
+        int x = s.getX();
+        int y = s.getY();
+        int buildingSize = s.getSize();
+        for(int yi=0;yi<buildingSize;++yi)
+        {
+            for(int xi=0;xi<buildingSize;++xi)
+                w.addBuilding(fire, x+xi, y+yi);
+        }
     }
 }

@@ -381,14 +381,19 @@ public final class GamePanel extends JComponent
             int start = 12;
             int lineHeight = 15;
             
-            g.drawString("Zoom: "+zoom+" | "+f, 0, start);
-            g.drawString("Offset: "+xoffset+"/"+yoffset, 0, start + lineHeight * 1);
-            g.drawString("Current tile: "+currentGridPos.x+"/"+currentGridPos.y, 0, start + lineHeight * 2);
             Structure b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
-            g.drawString("On current tile: "+(b != null ? b.getType().getName() : "none"), 0, start + lineHeight * 3);
-            g.drawString("View: "+view, 0, start + lineHeight * 4);
-            g.drawString("Rotation: "+rotation, 0, start + lineHeight * 5);
-            g.drawString("Money: "+worldHolder.get().getMoney(), 0, start + lineHeight * 6);
+            List<String> lines = List.of(
+                    "Zoom: "+zoom+" | "+f,
+                    "Offset: "+xoffset+"/"+yoffset,
+                    "Current tile: "+currentGridPos.x+"/"+currentGridPos.y,
+                    "On current tile: "+(b != null ? b.getType().getName() : "none"),
+                    "View: "+view,
+                    "Rotation: "+rotation,
+                    "Money: "+worldHolder.get().getMoney()
+            );
+            
+            for(int i=0;i<lines.size();++i)
+                g.drawString(lines.get(i), 0, start + lineHeight * i);
         }
     }
     

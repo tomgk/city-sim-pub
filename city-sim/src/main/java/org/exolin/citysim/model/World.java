@@ -315,7 +315,7 @@ public final class World
         return lastChange;
     }
     
-    private static final double TICK_PROBABILTY_FOR_BUILDING = 0.01;
+    private static final double TICK_PROBABILTY_FOR_BUILDING = 0.0001;
 
     private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {

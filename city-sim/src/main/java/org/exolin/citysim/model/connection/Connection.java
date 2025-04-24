@@ -1,8 +1,8 @@
 package org.exolin.citysim.model.connection;
 
 import org.exolin.citysim.model.Structure;
-import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.StructureParameters;
+import org.exolin.citysim.model.StructureVariant;
 
 /**
  *

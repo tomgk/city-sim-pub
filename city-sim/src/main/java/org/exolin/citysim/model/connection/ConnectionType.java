@@ -2,10 +2,10 @@ package org.exolin.citysim.model.connection;
 
 import java.util.List;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
-import org.exolin.citysim.model.StructureParameters;
 
 /**
  *

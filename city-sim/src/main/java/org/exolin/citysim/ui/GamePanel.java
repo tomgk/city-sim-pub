@@ -80,6 +80,8 @@ public final class GamePanel extends JComponent
     
     private WorldView view = WorldView.OVERGROUND;
     
+    private long passedTicks = 0;
+    
     private void addZone(List<Action> zoneActions, ZoneType zoneType)
     {
         zoneActions.add(new ZonePlacement(worldHolder, zoneType, ZoneType.Variant.LOW_DENSITY));
@@ -266,8 +268,10 @@ public final class GamePanel extends JComponent
         execute(() -> {
             World world = worldHolder.get();
 
-            world.updateAfterTick(world.getTickFactor().getTickCount());
+            int ticks = world.getTickFactor().getTickCount();
+            world.updateAfterTick(ticks);
             long u = Math.max(world.getLastChange(), lastPaint+REFRESH_TIME);
+            passedTicks += ticks;
             if(u >= lastPaint)
             {
                 //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
@@ -389,7 +393,8 @@ public final class GamePanel extends JComponent
                     "On current tile: "+(b != null ? b.getType().getName() : "none"),
                     "View: "+view,
                     "Rotation: "+rotation,
-                    "Money: "+worldHolder.get().getMoney()
+                    "Money: "+worldHolder.get().getMoney(),
+                    "Passed Ticks: "+passedTicks
             );
             
             for(int i=0;i<lines.size();++i)

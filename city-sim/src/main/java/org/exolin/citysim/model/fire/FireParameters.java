@@ -6,24 +6,24 @@ import org.exolin.citysim.model.StructureParameters;
  *
  * @author Thomas
  */
-public class FireData implements StructureParameters<FireData>
+public class FireParameters implements StructureParameters<FireParameters>
 {
     int remainingLife;
 
-    public FireData()
+    public FireParameters()
     {
         this(10000);
     }
 
-    public FireData(int remainingLife)
+    public FireParameters(int remainingLife)
     {
         this.remainingLife = remainingLife;
     }
     
 
     @Override
-    public FireData copy()
+    public FireParameters copy()
     {
-        return new FireData(remainingLife);
+        return new FireParameters(remainingLife);
     }
 }

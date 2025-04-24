@@ -9,7 +9,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class FireType extends StructureType<Fire, FireType.Variant, FireData>
+public class FireType extends StructureType<Fire, FireType.Variant, FireParameters>
 {
     public static final FireType fire = new FireType("fire", createAnimation("destruction/fire", 4, 500), 1);
     
@@ -24,7 +24,7 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireData>
     }
 
     @Override
-    public Fire createBuilding(int x, int y, Variant variant, FireData data)
+    public Fire createBuilding(int x, int y, Variant variant, FireParameters data)
     {
         return new Fire(this, x, y, variant, data);
     }

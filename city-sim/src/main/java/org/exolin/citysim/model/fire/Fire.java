@@ -15,14 +15,14 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class Fire extends Structure<Fire, FireType, FireType.Variant, FireData>
+public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParameters>
 {
     public Fire(FireType type, int x, int y, FireType.Variant variant)
     {
-        this(type, x, y, variant, new FireData());
+        this(type, x, y, variant, new FireParameters());
     }
     
-    public Fire(FireType type, int x, int y, FireType.Variant variant, FireData data)
+    public Fire(FireType type, int x, int y, FireType.Variant variant, FireParameters data)
     {
         super(type, x, y, variant, data);
     }
@@ -144,7 +144,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireData>
             return true;
         
         if(s == null)
-            w.addBuilding(FireType.fire, x, y, FireType.Variant.DEFAULT, new FireData(getExpectedLife(s)));
+            w.addBuilding(FireType.fire, x, y, FireType.Variant.DEFAULT, new FireParameters(getExpectedLife(s)));
         else
             replaceWithFire(w, s);
         
@@ -180,7 +180,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireData>
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.DEFAULT, new FireData(getExpectedLife(s)));
+                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.DEFAULT, new FireParameters(getExpectedLife(s)));
         }
     }
 }

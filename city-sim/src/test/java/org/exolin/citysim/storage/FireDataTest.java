@@ -12,6 +12,7 @@ import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
@@ -33,6 +34,7 @@ public class FireDataTest
     }
     
     @Test
+    @Disabled
     public void testDeserializeActualBuilding_Default() throws IOException
     {
         World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);

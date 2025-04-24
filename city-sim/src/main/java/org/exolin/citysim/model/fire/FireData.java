@@ -1,0 +1,29 @@
+package org.exolin.citysim.model.fire;
+
+import org.exolin.citysim.model.StructureData;
+
+/**
+ *
+ * @author Thomas
+ */
+public class FireData implements StructureData<FireData>
+{
+    int remainingLife;
+
+    public FireData()
+    {
+        this(10000);
+    }
+
+    public FireData(int remainingLife)
+    {
+        this.remainingLife = remainingLife;
+    }
+    
+
+    @Override
+    public FireData copy()
+    {
+        return new FireData(remainingLife);
+    }
+}

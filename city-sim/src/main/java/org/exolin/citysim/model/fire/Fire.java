@@ -2,7 +2,6 @@ package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
 import java.util.function.IntSupplier;
-import org.exolin.citysim.model.PlainStructureData;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
@@ -16,16 +15,14 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStructureData>
+public class Fire extends Structure<Fire, FireType, FireType.Variant, FireData>
 {
-    private int remainingLife = 10000;
-    
     public Fire(FireType type, int x, int y, FireType.Variant variant)
     {
-        this(type, x, y, variant, new PlainStructureData());
+        this(type, x, y, variant, new FireData());
     }
     
-    public Fire(FireType type, int x, int y, FireType.Variant variant, PlainStructureData data)
+    public Fire(FireType type, int x, int y, FireType.Variant variant, FireData data)
     {
         super(type, x, y, variant, data);
     }
@@ -76,15 +73,15 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
         if(ticks <= 0)
             throw new IllegalArgumentException();
         
-        if(remainingLife == -1)
+        if(data.remainingLife == -1)
         {
             w.removeBuildingAt(this);
             throw new IllegalStateException("undefined life");
         }
         
         //System.out.println("Reducde "+remainingLife+" by "+ticks);
-        remainingLife -= ticks;
-        if(remainingLife <= 0)
+        data.remainingLife -= ticks;
+        if(data.remainingLife <= 0)
         {
             //System.out.println("death");
             w.removeBuildingAt(this);
@@ -147,7 +144,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
             return true;
         
         if(s == null)
-            w.addBuilding(FireType.fire, x, y).remainingLife = getExpectedLife(s);
+            w.addBuilding(FireType.fire, x, y, FireType.Variant.DEFAULT, new FireData(getExpectedLife(s)));
         else
             replaceWithFire(w, s);
         
@@ -183,7 +180,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(FireType.fire, x+xi, y+yi).remainingLife = getExpectedLife(s);
+                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.DEFAULT, new FireData(getExpectedLife(s)));
         }
     }
 }

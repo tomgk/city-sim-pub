@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
@@ -101,12 +102,13 @@ public abstract class StructureData
     }
     
     protected abstract StructureVariant getVariant(String name);
+    protected abstract StructureParameters getParameters();
 
     void createBuilding(World w)
     {
         StructureType buildingType = StructureType.getByName(type);
         StructureVariant buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
         
-        w.addBuilding(buildingType, x, y, buildingVariant);
+        w.addBuilding(buildingType, x, y, buildingVariant, getParameters());
     }
 }

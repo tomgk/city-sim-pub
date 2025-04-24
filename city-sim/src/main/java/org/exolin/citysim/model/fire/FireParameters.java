@@ -19,7 +19,11 @@ public class FireParameters implements StructureParameters<FireParameters>
     {
         this.remainingLife = remainingLife;
     }
-    
+
+    public int getRemainingLife()
+    {
+        return remainingLife;
+    }
 
     @Override
     public FireParameters copy()

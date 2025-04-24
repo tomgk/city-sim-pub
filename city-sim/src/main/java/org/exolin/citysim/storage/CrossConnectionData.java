@@ -2,6 +2,8 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
@@ -30,5 +32,10 @@ public class CrossConnectionData extends StructureData
     {
         return CrossConnectionType.Variant.valueOf(name);
     }
-    
+
+    @Override
+    protected StructureParameters getParameters()
+    {
+        return new PlainStructureParameters();
+    }
 }

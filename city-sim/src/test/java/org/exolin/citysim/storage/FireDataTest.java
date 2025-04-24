@@ -34,7 +34,6 @@ public class FireDataTest
     }
     
     @Test
-    @Disabled
     public void testDeserializeActualBuilding_Default() throws IOException
     {
         World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);

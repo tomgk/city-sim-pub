@@ -2,6 +2,8 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
@@ -29,5 +31,11 @@ public class BuildingData extends StructureData
     protected StructureVariant getVariant(String name)
     {
         return BuildingType.Variant.valueOf(name);
+    }
+
+    @Override
+    protected StructureParameters getParameters()
+    {
+        return new PlainStructureParameters();
     }
 }

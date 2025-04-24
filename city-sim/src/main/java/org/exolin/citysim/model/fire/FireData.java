@@ -1,12 +1,12 @@
 package org.exolin.citysim.model.fire;
 
-import org.exolin.citysim.model.StructureData;
+import org.exolin.citysim.model.StructureParameters;
 
 /**
  *
  * @author Thomas
  */
-public class FireData implements StructureData<FireData>
+public class FireData implements StructureParameters<FireData>
 {
     int remainingLife;
 

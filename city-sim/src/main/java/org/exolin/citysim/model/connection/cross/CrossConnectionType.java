@@ -2,7 +2,7 @@ package org.exolin.citysim.model.connection.cross;
 
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.PlainStructureData;
+import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
@@ -11,7 +11,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  *
  * @author Thomas
  */
-public class CrossConnectionType extends ConnectionType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant, PlainStructureData>
+public class CrossConnectionType extends ConnectionType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant, PlainStructureParameters>
 {
     public enum Variant implements StructureVariant
     {
@@ -29,7 +29,7 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
 
     @Override
-    public CrossConnection createBuilding(int x, int y, Variant variant, PlainStructureData data)
+    public CrossConnection createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
     {
         return new CrossConnection(this, x, y, variant, data);
     }

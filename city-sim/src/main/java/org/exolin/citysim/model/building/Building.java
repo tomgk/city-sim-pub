@@ -1,7 +1,7 @@
 package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.PlainStructureData;
+import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -10,14 +10,14 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class Building extends Structure<Building, BuildingType, BuildingType.Variant, PlainStructureData>
+public class Building extends Structure<Building, BuildingType, BuildingType.Variant, PlainStructureParameters>
 {   
     public Building(BuildingType type, int x, int y, BuildingType.Variant version)
     {
-        this(type, x, y, version, new PlainStructureData());
+        this(type, x, y, version, new PlainStructureParameters());
     }
     
-    public Building(BuildingType type, int x, int y, BuildingType.Variant version, PlainStructureData data)
+    public Building(BuildingType type, int x, int y, BuildingType.Variant version, PlainStructureParameters data)
     {
         super(type, x, y, version, data);
     }

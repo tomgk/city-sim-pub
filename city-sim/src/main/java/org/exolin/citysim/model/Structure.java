@@ -13,7 +13,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  * @param <E> building variant
  * @param <D>
  */
-public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureData<D>>
+public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureParameters<D>>
 {
     private final T type;
     private final int x;

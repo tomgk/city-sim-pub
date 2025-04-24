@@ -16,7 +16,7 @@ import org.exolin.citysim.utils.Utils;
  * @param <B> building class
  * @param <E> building variant
  */
-public abstract class StructureType<B, E extends StructureVariant, D extends StructureData>
+public abstract class StructureType<B, E extends StructureVariant, D extends StructureParameters>
 {
     public static final int DEFAULT_VARIANT = 0;
     

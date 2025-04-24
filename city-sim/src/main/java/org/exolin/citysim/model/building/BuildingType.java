@@ -3,7 +3,7 @@ package org.exolin.citysim.model.building;
 import java.math.BigDecimal;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.PlainStructureData;
+import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
@@ -13,7 +13,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class BuildingType extends StructureType<Building, BuildingType.Variant, PlainStructureData>
+public class BuildingType extends StructureType<Building, BuildingType.Variant, PlainStructureParameters>
 {
     public enum Variant implements StructureVariant
     {
@@ -64,7 +64,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }
 
     @Override
-    public Building createBuilding(int x, int y, Variant variant, PlainStructureData data)
+    public Building createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
     {
         return new Building(this, x, y, variant, data);
     }

@@ -1,21 +1,21 @@
 package org.exolin.citysim.model.tree;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.PlainStructureData;
+import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
 
 /**
  *
  * @author Thomas
  */
-public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStructureData>
+public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStructureParameters>
 {
     public Tree(TreeType type, int x, int y, TreeType.Variant variant)
     {
-        this(type, x, y, variant, new PlainStructureData());
+        this(type, x, y, variant, new PlainStructureParameters());
     }
     
-    public Tree(TreeType type, int x, int y, TreeType.Variant variant, PlainStructureData data)
+    public Tree(TreeType type, int x, int y, TreeType.Variant variant, PlainStructureParameters data)
     {
         super(type, x, y, variant, data);
     }

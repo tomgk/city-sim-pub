@@ -3,6 +3,7 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.exolin.citysim.model.PlainStructureData;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
@@ -20,7 +21,7 @@ import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERS
  *
  * @author Thomas
  */
-public class SelfConnection extends Connection<SelfConnection, SelfConnectionType, ConnectionVariant>
+public class SelfConnection extends Connection<SelfConnection, SelfConnectionType, ConnectionVariant, PlainStructureData>
 {
     public SelfConnection(SelfConnectionType type, int x, int y, ConnectionVariant variant)
     {
@@ -38,9 +39,9 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         if(!(b instanceof Connection))
             return null;
         
-        Connection<?, ?, ?> s = (Connection) b;
+        Connection<?, ?, ?, ?> s = (Connection) b;
         
-        ConnectionType<?, ?, ?> streetType = s.getType();
+        ConnectionType<?, ?, ?, ?> streetType = s.getType();
         SelfConnectionType conType = xDirection ? streetType.getXType() : streetType.getYType();
         
         if(conType != getType())

@@ -140,7 +140,7 @@ public class StreetBuilder implements BuildingAction
                 
                 ConnectionType curType;
                 
-                if(world.getBuildingAt(x, y) instanceof Connection<?, ?, ?> t)
+                if(world.getBuildingAt(x, y) instanceof Connection<?, ?, ?, ?> t)
                 {
                     //crossing x if currently not building x
                     boolean crossX = diffX == 0;

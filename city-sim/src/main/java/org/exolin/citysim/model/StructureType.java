@@ -16,7 +16,7 @@ import org.exolin.citysim.utils.Utils;
  * @param <B> building class
  * @param <E> building variant
  */
-public abstract class StructureType<B, E extends StructureVariant>
+public abstract class StructureType<B, E extends StructureVariant, D extends StructureData>
 {
     public static final int DEFAULT_VARIANT = 0;
     
@@ -31,9 +31,9 @@ public abstract class StructureType<B, E extends StructureVariant>
         return Collections.unmodifiableCollection(instances.values());
     }
     
-    public static StructureType<?, ?> getByName(String name)
+    public static StructureType<?, ?, ?> getByName(String name)
     {
-        StructureType<?, ?> bt = instances.get(transformName(name));
+        StructureType<?, ?, ?> bt = instances.get(transformName(name));
         if(bt == null)
             throw new IllegalArgumentException("no building type "+name+" found only\n"+instances.keySet().stream().collect(Collectors.joining("  \n")));
         return bt;

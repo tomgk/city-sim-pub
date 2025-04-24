@@ -183,12 +183,12 @@ public final class World
         }
     }
     
-    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E> type, int x, int y)
+    public <B extends Structure, E extends StructureVariant, D extends StructureData> B addBuilding(StructureType<B, E, D> type, int x, int y)
     {
         return addBuilding(type, x, y, type.getDefaultVariant());
     }
     
-    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E> type, int x, int y, E variant)
+    public <B extends Structure, E extends StructureVariant, D extends StructureData> B addBuilding(StructureType<B, E, D> type, int x, int y, E variant)
     {
         if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
             throw new OutOfGridException(

@@ -2,6 +2,7 @@ package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
 import java.util.function.IntSupplier;
+import org.exolin.citysim.model.PlainStructureData;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
@@ -14,7 +15,7 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class Fire extends Structure<Fire, FireType, FireType.Variant>
+public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStructureData>
 {
     private int remainingLife = 10000;
     

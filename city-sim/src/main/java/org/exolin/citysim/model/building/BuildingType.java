@@ -3,6 +3,7 @@ package org.exolin.citysim.model.building;
 import java.math.BigDecimal;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.PlainStructureData;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
@@ -12,7 +13,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class BuildingType extends StructureType<Building, BuildingType.Variant>
+public class BuildingType extends StructureType<Building, BuildingType.Variant, PlainStructureData>
 {
     public enum Variant implements StructureVariant
     {

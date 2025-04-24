@@ -64,9 +64,9 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }
 
     @Override
-    public Building createBuilding(int x, int y, Variant variant)
+    public Building createBuilding(int x, int y, Variant variant, PlainStructureData data)
     {
-        return new Building(this, x, y, variant);
+        return new Building(this, x, y, variant, data);
     }
 
     void updateAfterTick(World world, Building building, int ticks, Object buildingData)

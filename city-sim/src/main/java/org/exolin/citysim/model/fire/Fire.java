@@ -8,6 +8,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.utils.Utils;
 
@@ -21,7 +22,12 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
     
     public Fire(FireType type, int x, int y, FireType.Variant variant)
     {
-        super(type, x, y, variant);
+        this(type, x, y, variant, new PlainStructureData());
+    }
+    
+    public Fire(FireType type, int x, int y, FireType.Variant variant, PlainStructureData data)
+    {
+        super(type, x, y, variant, data);
     }
 
     @Override
@@ -151,7 +157,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
     private static int getExpectedLife(Structure s)
     {
         IntSupplier el = () -> {
-            if(s == null)
+            if(s == null || s instanceof Zone)
                 return 5;
             else if(s instanceof Building)
                 return 15;
@@ -159,7 +165,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, PlainStruc
                 return 10;
             else
             {
-                ErrorDisplay.show(null, new UnsupportedOperationException("Unsupported"));
+                ErrorDisplay.show(null, new UnsupportedOperationException("Unsupported: "+s.getClass().getName()));
                 return 0;
             }
         };

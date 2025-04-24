@@ -6,7 +6,6 @@ import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +16,15 @@ public class ErrorDisplay
 {
     private static final Map<String, Long> oneTimeErrors = new LinkedHashMap<>();
     
-    @SuppressWarnings("ThrowableResultIgnored")
     public static void show(Component parent, Exception e)
     {
-        Objects.requireNonNull(parent);
+        //Objects.requireNonNull(parent);
+        show0(parent, e);
+    }
+
+    @SuppressWarnings("ThrowableResultIgnored")
+    private static void show0(Component parent, Exception e)
+    {
         Objects.requireNonNull(e);
         
         if(e instanceof OutOfGridException)
@@ -43,6 +47,6 @@ public class ErrorDisplay
         oneTimeErrors.put(message, now);
         
         UnsupportedOperationException e = new UnsupportedOperationException(message);
-        show(null, e);
+        show0(null, e);
     }
 }

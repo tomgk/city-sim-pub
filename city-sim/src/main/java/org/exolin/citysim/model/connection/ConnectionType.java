@@ -15,7 +15,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  * @param <E>
  * @param <D>
  */
-public abstract class ConnectionType<B extends Connection<B, T, E, D>, T extends ConnectionType<B, T, E, D>, E extends StructureVariant, D extends StructureData> extends StructureType<B, E, D>
+public abstract class ConnectionType<B extends Connection<B, T, E, D>, T extends ConnectionType<B, T, E, D>, E extends StructureVariant, D extends StructureData<D>> extends StructureType<B, E, D>
 {
     public ConnectionType(String name, Animation animation, int size)
     {

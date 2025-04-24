@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.zone;
 
 import java.math.BigDecimal;
+import org.exolin.citysim.model.PlainStructureData;
 import org.exolin.citysim.model.Structure;
 
 /**
@@ -11,7 +12,12 @@ public class Zone extends Structure
 {
     public Zone(ZoneType type, int x, int y, ZoneType.Variant variant)
     {
-        super(type, x, y, variant);
+        this(type, x, y, variant, new PlainStructureData());
+    }
+    
+    public Zone(ZoneType type, int x, int y, ZoneType.Variant variant, PlainStructureData data)
+    {
+        super(type, x, y, variant, data);
     }
 
     @Override

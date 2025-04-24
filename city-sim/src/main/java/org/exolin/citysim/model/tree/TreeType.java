@@ -80,9 +80,9 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
     }
     
     @Override
-    public Tree createBuilding(int x, int y, Variant variant)
+    public Tree createBuilding(int x, int y, Variant variant, PlainStructureData data)
     {
-        return new Tree(this, x, y, variant);
+        return new Tree(this, x, y, variant, data);
     }
 
     @Override

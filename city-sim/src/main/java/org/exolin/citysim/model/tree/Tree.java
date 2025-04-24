@@ -12,7 +12,12 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStruc
 {
     public Tree(TreeType type, int x, int y, TreeType.Variant variant)
     {
-        super(type, x, y, variant);
+        this(type, x, y, variant, new PlainStructureData());
+    }
+    
+    public Tree(TreeType type, int x, int y, TreeType.Variant variant, PlainStructureData data)
+    {
+        super(type, x, y, variant, data);
     }
     
     public int getCount()

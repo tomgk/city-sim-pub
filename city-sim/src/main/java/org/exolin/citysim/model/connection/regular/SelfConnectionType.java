@@ -46,8 +46,8 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
     }
 
     @Override
-    public SelfConnection createBuilding(int x, int y, ConnectionVariant variant)
+    public SelfConnection createBuilding(int x, int y, ConnectionVariant variant, PlainStructureData data)
     {
-        return new SelfConnection(this, x, y, variant);
+        return new SelfConnection(this, x, y, variant, data);
     }
 }

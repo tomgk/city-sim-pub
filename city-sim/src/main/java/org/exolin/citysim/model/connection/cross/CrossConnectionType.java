@@ -29,9 +29,9 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
 
     @Override
-    public CrossConnection createBuilding(int x, int y, Variant variant)
+    public CrossConnection createBuilding(int x, int y, Variant variant, PlainStructureData data)
     {
-        return new CrossConnection(this, x, y, variant);
+        return new CrossConnection(this, x, y, variant, data);
     }
 
     @Override

@@ -14,7 +14,12 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
 {   
     public Building(BuildingType type, int x, int y, BuildingType.Variant version)
     {
-        super(type, x, y, version);
+        this(type, x, y, version, new PlainStructureData());
+    }
+    
+    public Building(BuildingType type, int x, int y, BuildingType.Variant version, PlainStructureData data)
+    {
+        super(type, x, y, version, data);
     }
 
     @Override

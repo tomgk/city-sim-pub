@@ -25,7 +25,12 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
 {
     public SelfConnection(SelfConnectionType type, int x, int y, ConnectionVariant variant)
     {
-        super(type, x, y, variant);
+        this(type, x, y, variant, new PlainStructureData());
+    }
+    
+    public SelfConnection(SelfConnectionType type, int x, int y, ConnectionVariant variant, PlainStructureData data)
+    {
+        super(type, x, y, variant, data);
     }
 
     private Connection getStreet(World world, int x, int y, boolean xDirection)

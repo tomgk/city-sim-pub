@@ -25,9 +25,9 @@ public class FireType extends StructureType<Fire, FireType.Variant, PlainStructu
     }
 
     @Override
-    public Fire createBuilding(int x, int y, Variant variant)
+    public Fire createBuilding(int x, int y, Variant variant, PlainStructureData data)
     {
-        return new Fire(this, x, y, variant);
+        return new Fire(this, x, y, variant, data);
     }
 
     @Override

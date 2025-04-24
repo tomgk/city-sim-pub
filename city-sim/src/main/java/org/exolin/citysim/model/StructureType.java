@@ -39,7 +39,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         return bt;
     }
     
-    public abstract B createBuilding(int x, int y, E variant);
+    public abstract B createBuilding(int x, int y, E variant, D data);
 
     public static List<BuildingType> actualBuildingTypes()
     {

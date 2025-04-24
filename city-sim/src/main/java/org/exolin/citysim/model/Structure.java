@@ -11,15 +11,17 @@ import org.exolin.citysim.model.zone.ZoneType;
  * @param <B> building class
  * @param <T> building type
  * @param <E> building variant
+ * @param <D>
  */
-public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureData>
+public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureData<D>>
 {
     private final T type;
     private final int x;
     private final int y;
     private E variant;
+    protected final D data;
     
-    public Structure(T type, int x, int y, E variant)
+    public Structure(T type, int x, int y, E variant, D data)
     {
         type.checkVariant(variant);
         
@@ -27,6 +29,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         this.x = x;
         this.y = y;
         this.variant = variant;
+        this.data = data.copy();
     }
 
     public T getType()

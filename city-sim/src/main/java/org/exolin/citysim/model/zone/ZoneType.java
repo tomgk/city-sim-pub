@@ -100,8 +100,8 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructu
     }
 
     @Override
-    public Zone createBuilding(int x, int y, Variant variant)
+    public Zone createBuilding(int x, int y, Variant variant, PlainStructureData data)
     {
-        return new Zone(this, x, y, variant);
+        return new Zone(this, x, y, variant, data);
     }
 }

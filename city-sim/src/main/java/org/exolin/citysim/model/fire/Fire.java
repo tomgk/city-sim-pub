@@ -1,10 +1,13 @@
 package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
+import java.util.function.IntSupplier;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -13,6 +16,8 @@ import org.exolin.citysim.utils.Utils;
  */
 public class Fire extends Structure<Fire, FireType, FireType.Variant>
 {
+    private int remainingLife = 10000;
+    
     public Fire(FireType type, int x, int y, FireType.Variant variant)
     {
         super(type, x, y, variant);
@@ -63,6 +68,21 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
     {
         if(ticks <= 0)
             throw new IllegalArgumentException();
+        
+        if(remainingLife == -1)
+        {
+            w.removeBuildingAt(this);
+            throw new IllegalStateException("undefined life");
+        }
+        
+        //System.out.println("Reducde "+remainingLife+" by "+ticks);
+        remainingLife -= ticks;
+        if(remainingLife <= 0)
+        {
+            //System.out.println("death");
+            w.removeBuildingAt(this);
+            return;
+        }
         
         if(Math.random() < STOP_PROBABILITY)
         {
@@ -120,11 +140,32 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
             return true;
         
         if(s == null)
-            w.addBuilding(FireType.fire, x, y);
+            w.addBuilding(FireType.fire, x, y).remainingLife = getExpectedLife(s);
         else
             replaceWithFire(w, s);
         
         return true;
+    }
+
+    private static int getExpectedLife(Structure s)
+    {
+        IntSupplier el = () -> {
+            if(s == null)
+                return 5;
+            else if(s instanceof Building)
+                return 15;
+            else if(s instanceof Tree)
+                return 10;
+            else
+            {
+                ErrorDisplay.show(null, new UnsupportedOperationException("Unsupported"));
+                return 0;
+            }
+        };
+        
+        int e = el.getAsInt() * 1000;
+        //System.out.println("Start with "+e);
+        return e;
     }
     
     private static void replaceWithFire(World w, Structure s)
@@ -135,7 +176,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant>
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(FireType.fire, x+xi, y+yi);
+                w.addBuilding(FireType.fire, x+xi, y+yi).remainingLife = getExpectedLife(s);
         }
     }
 }

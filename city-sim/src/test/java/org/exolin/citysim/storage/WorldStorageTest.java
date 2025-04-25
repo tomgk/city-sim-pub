@@ -17,6 +17,9 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTED;
+import org.exolin.citysim.model.fire.Fire;
+import org.exolin.citysim.model.fire.FireParameters;
+import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -58,6 +61,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
+        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.DEFAULT, new FireParameters(134));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
@@ -67,7 +71,8 @@ public class WorldStorageTest
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
-                                {"type":"business_cinema","x":16,"y":5}
+                                {"type":"business_cinema","x":16,"y":5},
+                                {"type": "fire", "x": 29, "y": 28, "remainingLife": 134}
                             ]
                           }
                           """;
@@ -85,7 +90,8 @@ public class WorldStorageTest
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
-                                {"type":"business/cinema","x":16,"y":5}
+                                {"type":"business/cinema","x":16,"y":5},
+                                {"type": "fire", "x": 29, "y": 28, "remainingLife": 134}
                             ]
                           }
                           """;
@@ -98,7 +104,7 @@ public class WorldStorageTest
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         
         List<Structure> buildings = w.getBuildings();
-        assertEquals(3, buildings.size());
+        assertEquals(4, buildings.size());
         
         {
             Structure b = buildings.get(0);
@@ -121,6 +127,15 @@ public class WorldStorageTest
             assertEquals(16, b.getX());
             assertEquals(5, b.getY());
             assertEquals(BuildingType.Variant.DEFAULT, b.getVariant());
+        }
+        {
+            Structure b = buildings.get(3);
+            assertEquals(FireType.fire, b.getType());
+            assertEquals(29, b.getX());
+            assertEquals(28, b.getY());
+            assertEquals(FireType.Variant.DEFAULT, b.getVariant());
+            Fire f = (Fire)b;
+            assertEquals(134, f.getData().getRemainingLife());
         }
     }
 }

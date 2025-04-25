@@ -7,6 +7,7 @@ import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.fire.Fire;
+import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireType;
 import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
@@ -24,12 +25,13 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT);
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT, new FireParameters(123));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99}
+                          {"type":"fire","x":16,"y":99,"variant":"DEFAULT","remainingLife": 123}
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        System.out.println(output);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test
@@ -37,7 +39,7 @@ public class FireDataTest
     {
         World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         InputStream in = createInputStream("""
-                                           {"type":"fire","x":16,"y":99}
+                                           {"type":"fire","x":16,"y":99,"remainingLife": 123}
                                            """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);
@@ -45,5 +47,7 @@ public class FireDataTest
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
         assertEquals(FireType.Variant.DEFAULT, b.getVariant());
+        Fire f = (Fire)b;
+        assertEquals(123, f.getData().getRemainingLife());
     }
 }

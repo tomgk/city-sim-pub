@@ -9,12 +9,12 @@ import org.exolin.citysim.model.StructureParameters;
 public class FireParameters implements StructureParameters<FireParameters>
 {
     int remainingLife;
-
+/*
     public FireParameters()
     {
         this(10000);
     }
-
+*/
     public FireParameters(int remainingLife)
     {
         this.remainingLife = remainingLife;

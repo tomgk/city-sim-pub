@@ -17,10 +17,11 @@ import org.exolin.citysim.utils.Utils;
  */
 public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParameters>
 {
+    /*
     public Fire(FireType type, int x, int y, FireType.Variant variant)
     {
         this(type, x, y, variant, new FireParameters());
-    }
+    }*/
     
     public Fire(FireType type, int x, int y, FireType.Variant variant, FireParameters data)
     {

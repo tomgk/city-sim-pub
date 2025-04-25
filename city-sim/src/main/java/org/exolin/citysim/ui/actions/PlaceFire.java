@@ -5,7 +5,6 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.fire.Fire;
-import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireType;
 
 /**

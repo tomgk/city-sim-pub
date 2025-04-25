@@ -155,7 +155,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
     private static int getExpectedLife(Structure s)
     {
         IntSupplier el = () -> {
-            if(s == null || s instanceof Zone)
+            if(s == null || s instanceof Zone || s instanceof Connection)
                 return 5;
             else if(s instanceof Building)
                 return 15;

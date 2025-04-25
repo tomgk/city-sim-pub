@@ -67,7 +67,7 @@ public class WorldStorageTest
                           {
                             "gridSize":30,
                             "money": 0,
-                            "speed": "PAUSED",
+                            "speed": "paused",
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
@@ -86,7 +86,7 @@ public class WorldStorageTest
                           {
                             "gridSize":30,
                             "money": 1234,
-                            "speed": "PAUSED",
+                            "speed": "paused",
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},

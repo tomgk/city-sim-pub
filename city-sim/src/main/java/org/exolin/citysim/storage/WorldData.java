@@ -45,7 +45,7 @@ public class WorldData
                 .toList();
         this.money = world.getMoney();
         this.gridSize = world.getGridSize();
-        this.speed = world.getTickFactor().name();
+        this.speed = world.getTickFactor().name().toLowerCase();
     }
 
     public List<StructureData> getBuildings()
@@ -65,7 +65,7 @@ public class WorldData
     
     public World createWorld(String name)
     {
-        World w = new World(name, gridSize, money, SimulationSpeed.valueOf(speed));
+        World w = new World(name, gridSize, money, SimulationSpeed.valueOf(speed.toUpperCase()));
         
         for(StructureData bd : buildings)
             bd.createBuilding(w);

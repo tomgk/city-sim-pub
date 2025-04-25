@@ -37,10 +37,10 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
-import org.exolin.citysim.ui.actions.PlaceStructure;
+import org.exolin.citysim.ui.actions.PlaceBuilding;
+import org.exolin.citysim.ui.actions.PlaceFire;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
@@ -101,7 +101,7 @@ public final class GamePanel extends JComponent
         sactions.add(new StreetBuilder(getWorld, rail, true));
         sactions.add(new StreetBuilder(getWorld, water, false));
         sactions.add(new PlaceTrees(getWorld));
-        sactions.add(new PlaceStructure(getWorld, FireType.fire));
+        sactions.add(new PlaceFire(getWorld));
         actions.put("Special", sactions);
         
         {
@@ -122,7 +122,7 @@ public final class GamePanel extends JComponent
             if(!actions.containsKey(categoryName))
                 actions.put(categoryName, new ArrayList<>());
             
-            actions.get(categoryName).add(new PlaceStructure(getWorld, type));
+            actions.get(categoryName).add(new PlaceBuilding(getWorld, type));
         }
         
         return actions;

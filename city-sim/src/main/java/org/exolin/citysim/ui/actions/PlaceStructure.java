@@ -3,60 +3,31 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.function.Supplier;
 import org.exolin.citysim.model.GetWorld;
-import org.exolin.citysim.model.PlainStructureParameters;
-import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.fire.FireParameters;
-import org.exolin.citysim.model.fire.FireType;
-import org.exolin.citysim.storage.BuildingData;
-import org.exolin.citysim.storage.StructureData;
 
 /**
  *
  * @author Thomas
  */
-public class PlaceStructure implements BuildingAction
+public abstract class PlaceStructure implements BuildingAction
 {
     private final GetWorld world;
-    private final StructureType type;
     private final Rectangle marking = new Rectangle();
-    private final int cost;
-    private final Supplier<StructureVariant> variant;
-    private final Supplier<StructureParameters> parameters;
 
-    public PlaceStructure(GetWorld world, BuildingType type)
+    public PlaceStructure(GetWorld world)
     {
         this.world = world;
-        this.type = type;
-        this.cost = type.getCost();
-        this.variant = () -> BuildingType.Variant.DEFAULT;
-        this.parameters = () -> new PlainStructureParameters();
-    }
-
-    public PlaceStructure(GetWorld world, FireType type)
-    {
-        this.world = world;
-        this.type = type;
-        this.cost = 0;
-        this.variant = FireType.Variant::random;
-        this.parameters = () -> new FireParameters(10000);//TODO: constant
     }
 
     @Override
-    public StructureType getBuilding()
-    {
-        return type;
-    }
+    public abstract StructureType getBuilding();
 
     @Override
     public String getName()
     {
-        return "build "+type.getName();
+        return "build "+getBuilding().getName();
     }
 
     @Override
@@ -64,13 +35,14 @@ public class PlaceStructure implements BuildingAction
     {
         return getName();
     }
+    
+    protected abstract void addBuilding(World w, int x, int y);
 
     @Override
     public void mouseDown(Point gridPoint)
     {
         World w = world.get();
-        w.addBuilding(type, marking.x, marking.y, variant.get(), parameters.get());
-        w.reduceMoney(cost);
+        addBuilding(w, marking.x, marking.y);
     }
 
     @Override
@@ -84,6 +56,7 @@ public class PlaceStructure implements BuildingAction
     {
         marking.x = gridPoint.x;
         marking.y = gridPoint.y;
+        StructureType type = getBuilding();
         marking.width = type.getSize();
         marking.height = type.getSize();
     }
@@ -98,7 +71,7 @@ public class PlaceStructure implements BuildingAction
     @Override
     public Image getMarker()
     {
-        return type.getBrightImage();
+        return getBuilding().getBrightImage();
     }
 
     @Override
@@ -108,8 +81,5 @@ public class PlaceStructure implements BuildingAction
     }
 
     @Override
-    public int getCost()
-    {
-        return cost;
-    }
+    public abstract int getCost();
 }

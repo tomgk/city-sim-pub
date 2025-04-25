@@ -45,6 +45,11 @@ public class Animation
         return new Animation(name, List.copyOf(images), animationSpeed);
     }
     
+    public Animation createRotated(String name, int distance)
+    {
+        return new Animation(name, Utils.rotate(images, distance), animationSpeed);
+    }
+    
     public static Animation createUnanimated(String name)
     {
         return new Animation(name, List.of(Utils.loadImage(name)), 1);

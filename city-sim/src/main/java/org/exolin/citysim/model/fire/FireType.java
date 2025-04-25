@@ -1,5 +1,6 @@
 package org.exolin.citysim.model.fire;
 
+import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import org.exolin.citysim.model.StructureType;
@@ -11,14 +12,31 @@ import org.exolin.citysim.model.StructureVariant;
  */
 public class FireType extends StructureType<Fire, FireType.Variant, FireParameters>
 {
-    public static final FireType fire = new FireType("fire", createAnimation("destruction/fire", 4, 500), 1);
+    private static final Animation fireAnimation = createAnimation("destruction/fire", 4, 500);
+    
+    public static final FireType fire = new FireType("fire", List.of(
+            fireAnimation,
+            fireAnimation.createRotated("destruction/fire2", 1),
+            fireAnimation.createRotated("destruction/fire2", 2),
+            fireAnimation.createRotated("destruction/fire2", 3)
+    ), 1);
     
     public enum Variant implements StructureVariant
     {
-        DEFAULT;
+        V1,
+        V2,
+        V3,
+        V4;
+        
+        private static final Variant[] values = values();
+        
+        public static Variant random()
+        {
+            return values[(int)(Math.random()*values.length)];
+        }
     }
     
-    public FireType(String name, Animation animation, int size)
+    public FireType(String name, List<Animation> animation, int size)
     {
         super(name, animation, size);
     }
@@ -32,6 +50,6 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireParamete
     @Override
     public Variant getDefaultVariant()
     {
-        return Variant.DEFAULT;
+        return Variant.V1;
     }
 }

@@ -107,7 +107,21 @@ public abstract class StructureData
     void createBuilding(World w)
     {
         StructureType buildingType = StructureType.getByName(type);
-        StructureVariant buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
+        StructureVariant buildingVariant;
+        try{
+            buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
+        }catch(IllegalArgumentException e){
+            StackTraceElement[] stackTrace = e.getStackTrace();
+            StackTraceElement origin = stackTrace[0];
+            if(origin.getClassName().equals(Enum.class.getName()) && origin.getMethodName().equals("valueOf"))
+            {
+                IllegalArgumentException e2 = new IllegalArgumentException("no variant specified and no default variant for "+stackTrace[1].getClassName());
+                e2.addSuppressed(e);
+                throw e2;
+            }
+            
+            throw e;
+        }
         
         w.addBuilding(buildingType, x, y, buildingVariant, getParameters());
     }

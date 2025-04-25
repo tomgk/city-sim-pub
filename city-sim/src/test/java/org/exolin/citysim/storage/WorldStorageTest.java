@@ -61,7 +61,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
-        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.DEFAULT, new FireParameters(134));
+        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.V1, new FireParameters(134));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
@@ -72,7 +72,7 @@ public class WorldStorageTest
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
                                 {"type":"business_cinema","x":16,"y":5},
-                                {"type": "fire", "x": 29, "y": 28, "remainingLife": 134}
+                                {"type": "fire", "x": 29, "y": 28, "variant":"v1", "remainingLife": 134}
                             ]
                           }
                           """;
@@ -91,7 +91,7 @@ public class WorldStorageTest
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
                                 {"type":"business/cinema","x":16,"y":5},
-                                {"type": "fire", "x": 29, "y": 28, "remainingLife": 134}
+                                {"type": "fire", "x": 29, "y": 28, "variant":"v1", "remainingLife": 134}
                             ]
                           }
                           """;
@@ -134,7 +134,7 @@ public class WorldStorageTest
             assertEquals(FireType.fire, b.getType());
             assertEquals(29, b.getX());
             assertEquals(28, b.getY());
-            assertEquals(FireType.Variant.DEFAULT, b.getVariant());
+            assertEquals(FireType.Variant.V1, b.getVariant());
             Fire f = (Fire)b;
             assertEquals(134, f.getData().getRemainingLife());
         }

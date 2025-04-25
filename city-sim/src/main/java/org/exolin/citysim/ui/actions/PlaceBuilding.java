@@ -3,11 +3,18 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.function.Supplier;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireType;
+import org.exolin.citysim.storage.BuildingData;
+import org.exolin.citysim.storage.StructureData;
 
 /**
  *
@@ -19,12 +26,16 @@ public class PlaceBuilding implements BuildingAction
     private final StructureType type;
     private final Rectangle marking = new Rectangle();
     private final int cost;
+    private final Supplier<StructureVariant> variant;
+    private final Supplier<StructureParameters> parameters;
 
     public PlaceBuilding(GetWorld world, BuildingType type)
     {
         this.world = world;
         this.type = type;
         this.cost = type.getCost();
+        this.variant = () -> BuildingType.Variant.DEFAULT;
+        this.parameters = () -> new PlainStructureParameters();
     }
 
     public PlaceBuilding(GetWorld world, FireType type)
@@ -32,6 +43,8 @@ public class PlaceBuilding implements BuildingAction
         this.world = world;
         this.type = type;
         this.cost = 0;
+        this.variant = FireType.Variant::random;
+        this.parameters = () -> new FireParameters(10000);//TODO: constant
     }
 
     @Override
@@ -56,7 +69,7 @@ public class PlaceBuilding implements BuildingAction
     public void mouseDown(Point gridPoint)
     {
         World w = world.get();
-        w.addBuilding(type, marking.x, marking.y);
+        w.addBuilding(type, marking.x, marking.y, variant.get(), parameters.get());
         w.reduceMoney(cost);
     }
 

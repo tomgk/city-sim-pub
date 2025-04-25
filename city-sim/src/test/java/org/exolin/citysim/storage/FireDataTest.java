@@ -25,11 +25,12 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT, new FireParameters(123));
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"remainingLife": 123}
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123}
                           """;
+        System.out.println(expected);
         System.out.println(output);
         JSONAssert.assertEquals(expected, output, true);
     }
@@ -39,14 +40,14 @@ public class FireDataTest
     {
         World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         InputStream in = createInputStream("""
-                                           {"type":"fire","x":16,"y":99,"remainingLife": 123}
+                                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123}
                                            """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);
         assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
-        assertEquals(FireType.Variant.DEFAULT, b.getVariant());
+        assertEquals(FireType.Variant.V1, b.getVariant());
         Fire f = (Fire)b;
         assertEquals(123, f.getData().getRemainingLife());
     }

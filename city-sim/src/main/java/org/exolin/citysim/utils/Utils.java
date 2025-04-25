@@ -12,6 +12,9 @@ import java.awt.image.RGBImageFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.imageio.ImageIO;
 import org.exolin.citysim.ui.GamePanel;
 
@@ -132,5 +135,12 @@ public class Utils
         //by compounding the probability of it not happening
         double notProbability = Math.pow(tickNotProbability, ticks);
         return 1 - notProbability;
+    }
+    
+    public static <T> List<T> rotate(List<T> list, int distance)
+    {
+        List<T> copy = new ArrayList<>(list);
+        Collections.rotate(copy, distance);
+        return copy;
     }
 }

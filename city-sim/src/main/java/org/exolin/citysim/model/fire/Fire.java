@@ -145,7 +145,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
             return true;
         
         if(s == null)
-            w.addBuilding(FireType.fire, x, y, FireType.Variant.DEFAULT, new FireParameters(getExpectedLife(s)));
+            w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(s)));
         else
             replaceWithFire(w, s);
         
@@ -181,7 +181,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.DEFAULT, new FireParameters(getExpectedLife(s)));
+                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.random(), new FireParameters(getExpectedLife(s)));
         }
     }
 }

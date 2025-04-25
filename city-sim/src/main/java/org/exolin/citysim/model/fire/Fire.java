@@ -145,7 +145,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
             return true;
         
         if(s == null)
-            w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(s)));
+            placeFire(w, x, y);
         else
             replaceWithFire(w, s);
         
@@ -173,7 +173,12 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         return e;
     }
     
-    private static void replaceWithFire(World w, Structure s)
+    public static void placeFire(World w, int x, int y)
+    {
+        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null)));
+    }
+    
+    public static void replaceWithFire(World w, Structure s)
     {
         int x = s.getX();
         int y = s.getY();

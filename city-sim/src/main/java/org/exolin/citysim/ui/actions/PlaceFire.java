@@ -1,8 +1,10 @@
 package org.exolin.citysim.ui.actions;
 
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireType;
 
@@ -20,7 +22,11 @@ public class PlaceFire extends PlaceStructure
     @Override
     protected void addBuilding(World w, int x, int y)
     {
-        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(10000));//TODO: constant
+        Structure b = w.getBuildingAt(x, y);
+        if(b == null)
+            Fire.placeFire(w, x, y);
+        else
+            Fire.replaceWithFire(w, b);
     }
 
     @Override

@@ -6,7 +6,6 @@ import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
-import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -23,7 +22,6 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     private final ZoneType zoneType;
     private final int cost;
     private final BigDecimal maintenance;
-    private final UpdateAfterTick updateAfterTick;
     
     /*
     public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
@@ -32,14 +30,13 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }*/
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance, UpdateAfterTick updateAfterTick)
+    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
         zoneType.addBuilding(this);
         this.cost = cost;
         this.maintenance = maintenance;
-        this.updateAfterTick = Objects.requireNonNull(updateAfterTick);
     }
 
     public int getCost()
@@ -67,10 +64,5 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     public Building createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
     {
         return new Building(this, x, y, variant, data);
-    }
-
-    void updateAfterTick(World world, Building building, int ticks, Object buildingData)
-    {
-        updateAfterTick.update(world, building, ticks, buildingData);
     }
 }

@@ -3,7 +3,6 @@ package org.exolin.citysim.model.building;
 import java.math.BigDecimal;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
-import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -26,12 +25,6 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     public ZoneType getZoneType()
     {
         return getType().getZoneType();
-    }
-
-    @Override
-    protected void updateAfterTick(World world, int ticks)
-    {
-        getType().updateAfterTick(world, this, ticks, null);
     }
 
     @Override

@@ -98,6 +98,7 @@ public final class World
         this.name = name;
         this.gridSize = gridSize;
         this.money = Objects.requireNonNull(money);
+        this.tickFactor = speed;
     }
 
     public String getName()

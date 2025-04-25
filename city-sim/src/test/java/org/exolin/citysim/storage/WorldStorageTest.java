@@ -67,7 +67,7 @@ public class WorldStorageTest
                           {
                             "gridSize":30,
                             "money": 0,
-                            "speed": "SPEED1",
+                            "speed": "PAUSED",
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
@@ -100,6 +100,7 @@ public class WorldStorageTest
         World w = WorldStorage.deserialize("Test", in);
         
         assertEquals("Test", w.getName());
+        assertEquals(SimulationSpeed.PAUSED, w.getTickFactor());
         assertEquals(30, w.getGridSize());
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         

@@ -20,7 +20,7 @@ import org.exolin.citysim.storage.StructureData;
  *
  * @author Thomas
  */
-public class PlaceBuilding implements BuildingAction
+public class PlaceStructure implements BuildingAction
 {
     private final GetWorld world;
     private final StructureType type;
@@ -29,7 +29,7 @@ public class PlaceBuilding implements BuildingAction
     private final Supplier<StructureVariant> variant;
     private final Supplier<StructureParameters> parameters;
 
-    public PlaceBuilding(GetWorld world, BuildingType type)
+    public PlaceStructure(GetWorld world, BuildingType type)
     {
         this.world = world;
         this.type = type;
@@ -38,7 +38,7 @@ public class PlaceBuilding implements BuildingAction
         this.parameters = () -> new PlainStructureParameters();
     }
 
-    public PlaceBuilding(GetWorld world, FireType type)
+    public PlaceStructure(GetWorld world, FireType type)
     {
         this.world = world;
         this.type = type;

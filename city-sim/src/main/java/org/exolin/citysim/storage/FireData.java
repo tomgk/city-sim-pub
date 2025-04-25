@@ -19,7 +19,7 @@ public class FireData extends StructureData
     
     public FireData(Fire f)
     {
-        super(f.getType().getName(), f.getX(), f.getY(), f.getVariant().name());
+        super(f);
         FireParameters data = f.getData();
         this.remainingLife = data.getRemainingLife();
     }

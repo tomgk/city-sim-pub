@@ -28,7 +28,7 @@ public class FireDataTest
         Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.DEFAULT, new FireParameters(123));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"variant":"DEFAULT","remainingLife": 123}
+                          {"type":"fire","x":16,"y":99,"remainingLife": 123}
                           """;
         System.out.println(output);
         JSONAssert.assertEquals(expected, output, true);

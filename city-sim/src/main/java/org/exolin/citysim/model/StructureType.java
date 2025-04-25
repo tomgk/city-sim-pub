@@ -15,6 +15,7 @@ import org.exolin.citysim.utils.Utils;
  * @author Thomas
  * @param <B> building class
  * @param <E> building variant
+ * @param <D>
  */
 public abstract class StructureType<B, E extends StructureVariant, D extends StructureParameters>
 {

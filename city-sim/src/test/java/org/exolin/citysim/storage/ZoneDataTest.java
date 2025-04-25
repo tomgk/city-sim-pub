@@ -30,7 +30,7 @@ public class ZoneDataTest
         String expected = """
                           {"type":"zone_residential","x":16,"y":99}
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test

@@ -30,7 +30,7 @@ public class BuildingTest
         String expected = """
                           {"type":"business_cinema","x":16,"y":99}
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test

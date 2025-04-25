@@ -147,7 +147,7 @@ public class StreetBuilderTest
                             } ]
                           }
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
         
         return w;
     }

@@ -62,6 +62,8 @@ public class WorldStorageTest
         String expected = """
                           {
                             "gridSize":30,
+                            "money": 0,
+                            "speed": "SPEED1",
                             "buildings":[
                                 {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"unconnected"},
@@ -69,7 +71,7 @@ public class WorldStorageTest
                             ]
                           }
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test
@@ -81,7 +83,7 @@ public class WorldStorageTest
                             "money": 1234,
                             "speed": "PAUSED",
                             "buildings":[
-                                {"type": "zone/business", "x": 15, "y": 4},
+                                {"type": "zone_business", "x": 15, "y": 4},
                                 {"type":"street","x":15,"y":5,"variant":"t_intersection_4"},
                                 {"type":"business/cinema","x":16,"y":5}
                             ]

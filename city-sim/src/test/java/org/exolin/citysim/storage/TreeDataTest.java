@@ -30,7 +30,7 @@ public class TreeDataTest
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test

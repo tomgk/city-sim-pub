@@ -31,7 +31,7 @@ public class SelfConnectionTest
         String expected = """
                           {"type":"street","x":16,"y":99,"variant":"t_intersection_4"}
                           """;
-        JSONAssert.assertEquals(expected, output, false);
+        JSONAssert.assertEquals(expected, output, true);
     }
     
     @Test

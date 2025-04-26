@@ -24,7 +24,7 @@ public class PlaceFire extends PlaceStructure
     {
         Structure b = w.getBuildingAt(x, y);
         if(b == null)
-            Fire.placeFire(w, x, y, Optional.empty());
+            Fire.placeFire(w, x, y, Optional.empty(), false);
         else
             Fire.replaceWithFire(w, b);
     }

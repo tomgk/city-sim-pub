@@ -13,18 +13,20 @@ public class FireParameters implements StructureParameters<FireParameters>
 {
     int remainingLife;
     final Optional<ZoneType> zone;
+    final boolean returnToZone;
 /*
     public FireParameters()
     {
         this(10000);
     }
 */
-    public FireParameters(int remainingLife, Optional<ZoneType> zone)
+    public FireParameters(int remainingLife, Optional<ZoneType> zone, boolean returnToZone)
     {
         this.remainingLife = remainingLife;
-        this.zone = Objects.requireNonNull(zone);
+        this.zone = zone;
+        this.returnToZone = returnToZone;
     }
-    
+
     public int getRemainingLife()
     {
         return remainingLife;
@@ -34,10 +36,15 @@ public class FireParameters implements StructureParameters<FireParameters>
     {
         return zone;
     }
+
+    public boolean isReturnToZone()
+    {
+        return returnToZone;
+    }
     
     @Override
     public FireParameters copy()
     {
-        return new FireParameters(remainingLife, zone);
+        return new FireParameters(remainingLife, zone, returnToZone);
     }
 }

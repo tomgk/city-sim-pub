@@ -129,7 +129,12 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         Optional<ZoneType> z = getData().zone;
         
         if(z.isPresent())
-            w.addBuilding(Vacants.tore_down.getVacantBuilding(z.get()), getX(), getY());
+        {
+            if(getData().returnToZone)
+                w.addBuilding(z.get(), getX(), getY());
+            else
+                w.addBuilding(Vacants.tore_down.getVacantBuilding(z.get()), getX(), getY());
+        }
     }
 
     @Override
@@ -166,18 +171,20 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
             return true;
         
         if(s == null)
-            placeFire(w, x, y, Optional.empty());
+            placeFire(w, x, y, Optional.empty(), false);
         else
             replaceWithFire(w, s);
         
         return true;
     }
+    
+    private static final int EMPTY_LIFE = 3;
 
     private static int getExpectedLife(Structure s)
     {
         IntSupplier el = () -> {
             if(s == null || s instanceof Zone || s instanceof Connection)
-                return 5;
+                return EMPTY_LIFE;
             else if(s instanceof Building)
                 return 15;
             else if(s instanceof Tree)
@@ -194,9 +201,9 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         return e;
     }
     
-    public static void placeFire(World w, int x, int y, Optional<ZoneType> zone)
+    public static void placeFire(World w, int x, int y, Optional<ZoneType> zone, boolean returnToZone)
     {
-        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null), zone));
+        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null), zone, returnToZone));
     }
     
     public static void replaceWithFire(World w, Structure s)
@@ -204,7 +211,22 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         int x = s.getX();
         int y = s.getY();
         int buildingSize = s.getSize();
-        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(s.getZoneType()));
+        
+        boolean returnToZone;
+        ZoneType zt;
+        
+        if(s.getType() instanceof ZoneType z)
+        {
+            returnToZone = true;
+            zt = z;
+        }
+        else
+        {
+            returnToZone = false;
+            zt = s.getZoneType();
+        }
+        
+        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(zt), returnToZone);
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)

@@ -26,6 +26,9 @@ public class FireData extends StructureData
     @JsonProperty
     public String zone;
     
+    @JsonProperty
+    public boolean returnToZone;
+    
     public FireData(Fire f)
     {
         super(f);
@@ -39,11 +42,13 @@ public class FireData extends StructureData
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant,
             @JsonProperty("remainingLife") int remainingLife,
-            @JsonProperty("zone") String zone)
+            @JsonProperty("zone") String zone,
+            @JsonProperty("returnToZone") boolean returnToZone)
     {
         super(type, x, y, variant);
         this.remainingLife = remainingLife;
         this.zone = zone;
+        this.returnToZone = returnToZone;
     }
 
     @Override
@@ -58,6 +63,6 @@ public class FireData extends StructureData
         Optional<ZoneType> zoneType = Optional.ofNullable(zone)
                 .map(n -> BuildingType.getByName(ZoneType.class, n));
         
-        return new FireParameters(remainingLife, zoneType);
+        return new FireParameters(remainingLife, zoneType, returnToZone);
     }
 }

@@ -27,10 +27,10 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123, Optional.empty()));
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123, Optional.empty(), false));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123}
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123, "returnToZone": false}
                           """;
         System.out.println(expected);
         System.out.println(output);
@@ -40,10 +40,21 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_WithZone() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123, Optional.of(Zones.business)));
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123, Optional.of(Zones.business), false));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business"}
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false}
+                          """;
+        JSONAssert.assertEquals(expected, output, true);
+    }
+    
+    @Test
+    public void testSerializeActualBuilding_ReturnToZone() throws IOException
+    {
+        Fire building = new Fire(FireType.fire, 16, 99, FireType.Variant.V1, new FireParameters(123, Optional.of(Zones.business), true));
+        String output = serialize(WorldStorage::serialize, building);
+        String expected = """
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false}
                           """;
         JSONAssert.assertEquals(expected, output, true);
     }
@@ -64,6 +75,7 @@ public class FireDataTest
         Fire f = (Fire)b;
         assertEquals(123, f.getData().getRemainingLife());
         assertEquals(Optional.empty(), f.getData().getZone());
+        assertEquals(false, f.getData().isReturnToZone());
     }
     
     @Test
@@ -82,5 +94,25 @@ public class FireDataTest
         Fire f = (Fire)b;
         assertEquals(123, f.getData().getRemainingLife());
         assertEquals(Optional.of(Zones.business), f.getData().getZone());
+        assertEquals(false, f.getData().isReturnToZone());
+    }
+    
+    @Test
+    public void testDeserializeActualBuilding_ReturnToZone() throws IOException
+    {
+        World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);
+        InputStream in = createInputStream("""
+                                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true}
+                                           """);
+        WorldStorage.deserialize(in, w);
+        Structure b = getBuilding(w);
+        assertEquals(FireType.fire, b.getType());
+        assertEquals(16, b.getX());
+        assertEquals(99, b.getY());
+        assertEquals(FireType.Variant.V1, b.getVariant());
+        Fire f = (Fire)b;
+        assertEquals(123, f.getData().getRemainingLife());
+        assertEquals(Optional.of(Zones.business), f.getData().getZone());
+        assertEquals(true, f.getData().isReturnToZone());
     }
 }

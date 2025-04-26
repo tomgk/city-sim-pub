@@ -32,6 +32,16 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         return Collections.unmodifiableCollection(instances.values());
     }
     
+    
+    public static <T extends StructureType> List<T> types(Class<T> clazz)
+    {
+        return instances.values()
+                .stream()
+                .filter(t -> clazz.isInstance(t))
+                .map(t -> (T)t)
+                .toList();
+    }
+    
     public static StructureType<?, ?, ?> getByName(String name)
     {
         StructureType<?, ?, ?> bt = instances.get(transformName(name));
@@ -44,7 +54,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
 
     public static List<BuildingType> actualBuildingTypes()
     {
-        return instances.values().stream().filter(b -> b instanceof BuildingType).map(b -> (BuildingType)b).toList();
+        return types(BuildingType.class);
     }
     
     public StructureType(String name, Animation animation, int size)

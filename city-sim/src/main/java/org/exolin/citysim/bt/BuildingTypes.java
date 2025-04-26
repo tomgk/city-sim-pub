@@ -1,5 +1,7 @@
 package org.exolin.citysim.bt;
 
+import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.fire.FireType;
 
 /**
@@ -9,6 +11,10 @@ import org.exolin.citysim.model.fire.FireType;
 public class BuildingTypes
 {
     public static void init()
+    {
+    }
+    
+    static
     {
         Class<?> classes[] = {
             Buildings.class,
@@ -32,5 +38,11 @@ public class BuildingTypes
                 throw new RuntimeException(e);
             }
         }
+    }
+    
+    public static void main(String[] args)
+    {
+        for(StructureType t : BuildingType.types())
+            System.out.println(t.getName());
     }
 }

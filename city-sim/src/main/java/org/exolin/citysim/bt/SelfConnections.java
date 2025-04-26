@@ -7,6 +7,7 @@ import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.connection.regular.ConnectVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.connection.regular.XIntersection;
 
 /**
  *
@@ -82,12 +83,12 @@ public class SelfConnections
         //Unconnected
         add.add(variants.get(ConnectVariant.CONNECT_X.index()));
         
-        return new SelfConnectionType(name, add, size, cost);
+        return new SelfConnectionType(name, add, size, cost, ConnectVariant.CONNECT_X);
     }
     
     private static SelfConnectionType createAreaType(String name, List<Animation> variants, int size, int cost)
     {
-        return new SelfConnectionType(name, variants, size, cost);
+        return new SelfConnectionType(name, variants, size, cost, XIntersection.X_INTERSECTION);
     }
 
     static void init()

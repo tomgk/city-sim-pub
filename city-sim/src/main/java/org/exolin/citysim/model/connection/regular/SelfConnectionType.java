@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.connection.regular;
 
 import java.util.List;
+import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.connection.ConnectionType;
@@ -12,14 +13,17 @@ import org.exolin.citysim.model.connection.ConnectionType;
 public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConnectionType, ConnectionVariant, PlainStructureParameters>
 {
     private final int cost;
+    private final ConnectionVariant defaultImageVariant;
     
-    public SelfConnectionType(String name, List<Animation> images, int size, int cost)
+    public SelfConnectionType(String name, List<Animation> images, int size, int cost, ConnectionVariant defaultImageVariant)
     {
         super(name, images, size);
         this.cost = cost;
         
         if(images.size() != StreetVariants.VALUES.size())
             throw new IllegalArgumentException("incorrect image count: expected "+images.size()+" but expected "+StreetVariants.VALUES.size());
+        
+        this.defaultImageVariant = Objects.requireNonNull(defaultImageVariant);
     }
 
     public int getCost()
@@ -42,7 +46,7 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
     @Override
     public ConnectionVariant getVariantForDefaultImage()
     {
-        return ConnectVariant.CONNECT_X;
+        return defaultImageVariant;
     }
 
     @Override

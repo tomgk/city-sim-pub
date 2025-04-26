@@ -28,7 +28,7 @@ public class DestroyedType extends StructureType<Destroyed, DestroyedType.Varian
     }
 
     @Override
-    public Variant getDefaultVariant()
+    public Variant getVariantForDefaultImage()
     {
         return Variant.DEFAULT;
     }

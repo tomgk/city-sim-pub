@@ -40,7 +40,7 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
     }
 
     @Override
-    public ConnectionVariant getDefaultVariant()
+    public ConnectionVariant getVariantForDefaultImage()
     {
         return ConnectVariant.CONNECT_X;
     }

@@ -47,7 +47,7 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
     
     @Override
-    public Variant getDefaultVariant()
+    public Variant getVariantForDefaultImage()
     {
         return Variant.DEFAULT;
     }

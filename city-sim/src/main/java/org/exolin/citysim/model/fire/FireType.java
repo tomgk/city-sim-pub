@@ -48,7 +48,7 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireParamete
     }
 
     @Override
-    public Variant getDefaultVariant()
+    public Variant getVariantForDefaultImage()
     {
         return Variant.V1;
     }

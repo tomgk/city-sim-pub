@@ -109,10 +109,10 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     
     public BufferedImage getDefaultImage()
     {
-        return images.get(getDefaultVariant().index()).getDefault();
+        return images.get(getVariantForDefaultImage().index()).getDefault();
     }
     
-    public abstract E getDefaultVariant();
+    public abstract E getVariantForDefaultImage();
 
     public BufferedImage getBrightImage()
     {

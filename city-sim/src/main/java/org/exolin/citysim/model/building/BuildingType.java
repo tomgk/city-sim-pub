@@ -55,7 +55,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }
 
     @Override
-    public BuildingType.Variant getDefaultVariant()
+    public BuildingType.Variant getVariantForDefaultImage()
     {
         return BuildingType.Variant.DEFAULT;
     }

@@ -86,7 +86,7 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
     }
 
     @Override
-    public Variant getDefaultVariant()
+    public Variant getVariantForDefaultImage()
     {
         return Variant.DEFAULT;
     }

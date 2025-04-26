@@ -155,7 +155,7 @@ public class StreetBuilder implements BuildingAction
                 else
                     curType = type;
 
-                world.addBuilding(curType, x, y, curType.getDefaultVariant());
+                world.addBuilding(curType, x, y, curType.getVariantForDefaultImage());
                 world.reduceMoney(type.getCost());
             }
         }

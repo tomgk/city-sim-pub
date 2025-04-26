@@ -94,7 +94,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructu
     }
 
     @Override
-    public Variant getDefaultVariant()
+    public Variant getVariantForDefaultImage()
     {
         return Variant.DEFAULT;
     }

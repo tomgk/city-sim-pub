@@ -42,6 +42,14 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
                 .toList();
     }
     
+    public static <T extends StructureType<?, ?, ?>> T getByName(Class<T> clazz, String name)
+    {
+        StructureType<?, ?, ?> t = getByName(name);
+        if(!clazz.isInstance(t))
+            throw new IllegalArgumentException(name+" is a "+t.getName()+", not a "+clazz.getName());
+        return (T)t;
+    }
+    
     public static StructureType<?, ?, ?> getByName(String name)
     {
         StructureType<?, ?, ?> bt = instances.get(transformName(name));

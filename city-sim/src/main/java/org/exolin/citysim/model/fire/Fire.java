@@ -1,13 +1,16 @@
 package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.function.IntSupplier;
+import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.utils.Utils;
 
@@ -85,13 +88,13 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         if(data.remainingLife <= 0)
         {
             //System.out.println("death");
-            w.removeBuildingAt(this);
+            die(w);
             return;
         }
         
         if(Math.random() < STOP_PROBABILITY)
         {
-            w.removeBuildingAt(this);
+            die(w);
             return;
         }
         
@@ -119,6 +122,24 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
             maybeAddFire(w, x, y+2, JUMP, ticks);
     }
     
+    private void die(World w)
+    {
+        w.removeBuildingAt(this);
+        
+        Optional<ZoneType> z = getData().zone;
+        
+        if(z.isPresent())
+            w.addBuilding(Vacants.tore_down.getVacantBuilding(z.get()), getX(), getY());
+    }
+
+    @Override
+    public ZoneType getZoneType()
+    {
+        //should fire be put out, the zone should reappear
+        //also, in zone view the zone should be visible
+        return getData().zone.orElse(null);
+    }
+    
     /**
      * 
      * @param w
@@ -135,7 +156,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         
         //don't put street/rail/water on fire
         Structure s = w.getBuildingAt(x, y);
-        if(s instanceof Connection)
+        if(s instanceof Connection || (s != null && Vacants.isVacant(s.getType())))
             return false;
         else if(s instanceof org.exolin.citysim.model.fire.Fire)
             //count as spread
@@ -145,7 +166,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
             return true;
         
         if(s == null)
-            placeFire(w, x, y);
+            placeFire(w, x, y, Optional.empty());
         else
             replaceWithFire(w, s);
         
@@ -173,9 +194,9 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         return e;
     }
     
-    public static void placeFire(World w, int x, int y)
+    public static void placeFire(World w, int x, int y, Optional<ZoneType> zone)
     {
-        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null)));
+        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null), zone));
     }
     
     public static void replaceWithFire(World w, Structure s)
@@ -183,10 +204,13 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         int x = s.getX();
         int y = s.getY();
         int buildingSize = s.getSize();
+        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(s.getZoneType()));
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)
-                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.random(), new FireParameters(getExpectedLife(s)));
+            {
+                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.random(), args);
+            }
         }
     }
 }

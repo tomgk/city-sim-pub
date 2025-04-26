@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
@@ -61,7 +62,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
-        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.V1, new FireParameters(134));
+        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.V1, new FireParameters(134, Optional.empty()));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
@@ -137,6 +138,7 @@ public class WorldStorageTest
             assertEquals(FireType.Variant.V1, b.getVariant());
             Fire f = (Fire)b;
             assertEquals(134, f.getData().getRemainingLife());
+            assertEquals(Optional.empty(), f.getData().getZone());
         }
     }
 }

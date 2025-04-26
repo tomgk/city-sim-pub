@@ -21,6 +21,7 @@ public class BuildingTypes
             Trees.class,
             Plants.class,
             FireType.class,
+            Vacants.class,
         };
         
         for(Class<?> clazz: classes)

@@ -3,7 +3,7 @@ package org.exolin.citysim.model.connection.regular;
 import java.util.List;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.StructureVariant;
-import static org.exolin.citysim.model.connection.regular.StreetVariants.VALUES;
+import static org.exolin.citysim.model.connection.regular.ConnectionVariants.VALUES;
 
 /**
  *
@@ -33,7 +33,7 @@ public interface ConnectionVariant extends StructureVariant
     public ConnectionVariant rotate(Rotation rotation);
 }
 
-class StreetVariants
+class ConnectionVariants
 {
     public static final List<ConnectionVariant> VALUES = List.of(
             ConnectVariant.CONNECT_X,

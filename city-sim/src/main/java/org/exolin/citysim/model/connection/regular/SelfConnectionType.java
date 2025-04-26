@@ -20,8 +20,8 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
         super(name, images, size);
         this.cost = cost;
         
-        if(images.size() != StreetVariants.VALUES.size())
-            throw new IllegalArgumentException("incorrect image count: expected "+images.size()+" but expected "+StreetVariants.VALUES.size());
+        if(images.size() != ConnectionVariants.VALUES.size())
+            throw new IllegalArgumentException("incorrect image count: expected "+images.size()+" but expected "+ConnectionVariants.VALUES.size());
         
         this.defaultImageVariant = Objects.requireNonNull(defaultImageVariant);
     }

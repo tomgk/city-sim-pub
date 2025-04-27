@@ -12,10 +12,10 @@ import org.exolin.citysim.model.building.BuildingType;
  */
 public class BusinessBuildings
 {
-    public static final BuildingType office = createBuildingType(createUnanimated("business/office"), 4, business, 0);
+    public static final BuildingType office = createBuildingType(createUnanimated("business/office"), 3, business, 0);
     public static final BuildingType office2 = createBuildingType(createUnanimated("business/office_2"), 3, business, 0);
     public static final BuildingType office3 = createBuildingType(createUnanimated("business/office_3"), 3, business, 0);
-    public static final BuildingType car_cinema = createBuildingType(createAnimation("business/car-cinema", 9), 4, business, 0);
+    public static final BuildingType car_cinema = createBuildingType(createAnimation("business/car-cinema", 9), 3, business, 0);
     public static final BuildingType cinema = createBuildingType(createUnanimated("business/cinema"), 3, business, 0);
     public static final BuildingType parkbuilding = createBuildingType(createUnanimated("business/parkbuilding"), 3, business, 0);
     

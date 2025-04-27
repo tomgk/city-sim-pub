@@ -2,6 +2,7 @@ package org.exolin.citysim.bt;
 
 import java.util.List;
 import org.exolin.citysim.model.building.vacant.VacantsPack;
+import org.exolin.citysim.utils.Utils;
 
 /**
  *
@@ -19,10 +20,11 @@ public class Vacants
     public static final VacantsPack tore_down3 = new VacantsPack("destruction/tore_down_2", 1);
     public static final VacantsPack tore_down4 = new VacantsPack("destruction/tore_down_3", 1);
     
+    private static final List<VacantsPack> TORE_DOWN = List.of(tore_down1, tore_down2, tore_down3, tore_down4);
+    
     public static VacantsPack tore_down()
     {
-        List<VacantsPack> v = List.of(tore_down1, tore_down2, tore_down3, tore_down4);
-        return v.get((int)(Math.random() * v.size()));
+        return Utils.random(TORE_DOWN);
     }
     
     public static final VacantsPack abandoned_small_1 = new VacantsPack("destruction/abandoned_small_1", 1);

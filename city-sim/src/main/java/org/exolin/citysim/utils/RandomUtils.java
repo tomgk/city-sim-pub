@@ -20,7 +20,7 @@ public class RandomUtils
 
     public static <T> T random(List<T> list)
     {
-        return list.get((int)(random() * list.size()));
+        return list.get(randInt(list.size()));
     }
 
     public static boolean atLeast(double value)

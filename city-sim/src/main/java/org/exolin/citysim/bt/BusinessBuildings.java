@@ -28,9 +28,6 @@ public class BusinessBuildings
     public static final BuildingType small_7 = createBuildingType(createUnanimated("business/small_7"), 1, business, 0);
     public static final BuildingType small_8 = createBuildingType(createUnanimated("business/small_8"), 1, business, 0);
     
-    public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), 1, business, 0);
-    public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, business, 0);
-    
     static void init()
     {
         BuildingTypes.init();

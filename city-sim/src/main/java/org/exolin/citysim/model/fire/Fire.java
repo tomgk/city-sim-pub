@@ -184,6 +184,9 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
 
     private static int getExpectedLife(Structure s)
     {
+        if(s instanceof Fire)
+            throw new IllegalArgumentException("fire on fire");
+        
         IntSupplier el = () -> {
             if(s == null || s instanceof Zone || s instanceof Connection || s instanceof Vacant)
                 return EMPTY_LIFE;
@@ -210,6 +213,9 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     
     public static void replaceWithFire(World w, Structure s)
     {
+        if(s instanceof Fire)
+            return;
+        
         int x = s.getX();
         int y = s.getY();
         int buildingSize = s.getSize();

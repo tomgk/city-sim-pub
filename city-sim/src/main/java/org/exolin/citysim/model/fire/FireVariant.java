@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 import org.exolin.citysim.model.StructureVariant;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -31,7 +32,7 @@ public class FireVariant implements StructureVariant
 
     public static FireVariant random()
     {
-        return VALUES.get((int)(Math.random()*VALUES.size()));
+        return RandomUtils.random(VALUES);
     }
 
     @Override

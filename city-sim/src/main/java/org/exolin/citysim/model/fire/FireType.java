@@ -12,7 +12,7 @@ import org.exolin.citysim.model.StructureVariant;
  */
 public class FireType extends StructureType<Fire, FireType.Variant, FireParameters>
 {
-    private static final Animation fireAnimation = createAnimation("destruction/fire", 4, 500);
+    private static final Animation fireAnimation = createAnimation("destruction/fire", 16, 500);
     
     public static final FireType fire = new FireType("fire", List.of(
             fireAnimation,

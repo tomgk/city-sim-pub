@@ -32,8 +32,8 @@ public class FireDataTest
         String expected = """
                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123, "returnToZone": false}
                           """;
-        System.out.println(expected);
-        System.out.println(output);
+        //System.out.println(expected);
+        //System.out.println(output);
         JSONAssert.assertEquals(expected, output, true);
     }
     

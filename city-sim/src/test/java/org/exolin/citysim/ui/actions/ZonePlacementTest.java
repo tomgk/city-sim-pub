@@ -45,8 +45,8 @@ public class ZonePlacementTest
         List<Structure> buildings = world.getBuildings();
         assertEquals(6, world.getBuildings().size(), buildings.toString());
         
-        for(Structure b: buildings)
-            System.out.println(b);
+        //for(Structure b: buildings)
+        //    System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
         assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);

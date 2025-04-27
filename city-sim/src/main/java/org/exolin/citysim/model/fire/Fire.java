@@ -15,7 +15,6 @@ import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.utils.RandomUtils;
-import org.exolin.citysim.utils.Utils;
 
 /**
  *

@@ -7,6 +7,7 @@ import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
+import org.exolin.citysim.model.building.vacant.Vacant;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
@@ -183,7 +184,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
     private static int getExpectedLife(Structure s)
     {
         IntSupplier el = () -> {
-            if(s == null || s instanceof Zone || s instanceof Connection)
+            if(s == null || s instanceof Zone || s instanceof Connection || s instanceof Vacant)
                 return EMPTY_LIFE;
             else if(s instanceof Building)
                 return 15;

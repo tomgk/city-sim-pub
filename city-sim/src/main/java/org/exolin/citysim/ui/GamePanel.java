@@ -266,16 +266,20 @@ public final class GamePanel extends JComponent
     private synchronized void updateAfterTick()
     {
         execute(() -> {
-            World world = worldHolder.get();
+            try{
+                World world = worldHolder.get();
 
-            int ticks = world.getTickFactor().getTickCount();
-            world.updateAfterTick(ticks);
-            long u = Math.max(world.getLastChange(), lastPaint+REFRESH_TIME);
-            passedTicks += ticks;
-            if(u >= lastPaint)
-            {
-                //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
-                repaint();
+                int ticks = world.getTickFactor().getTickCount();
+                world.updateAfterTick(ticks);
+                long u = Math.max(world.getLastChange(), lastPaint+REFRESH_TIME);
+                passedTicks += ticks;
+                if(u >= lastPaint)
+                {
+                    //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
+                    repaint();
+                }
+            }catch(Exception e){
+                ErrorDisplay.show(this, e);
             }
         });
     }

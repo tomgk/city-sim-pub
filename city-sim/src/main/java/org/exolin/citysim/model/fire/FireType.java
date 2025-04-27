@@ -17,8 +17,8 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireParamete
     public static final FireType fire = new FireType("fire", List.of(
             fireAnimation,
             fireAnimation.createRotated("destruction/fire2", 1),
-            fireAnimation.createRotated("destruction/fire2", 2),
-            fireAnimation.createRotated("destruction/fire2", 3)
+            fireAnimation.createRotated("destruction/fire3", 2),
+            fireAnimation.createRotated("destruction/fire4", 3)
     ), 1);
     
     public enum Variant implements StructureVariant

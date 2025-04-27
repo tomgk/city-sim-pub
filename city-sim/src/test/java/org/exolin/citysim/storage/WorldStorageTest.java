@@ -21,6 +21,7 @@ import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTE
 import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireType;
+import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
-        w.addBuilding(FireType.fire, 29, 28, FireType.Variant.V1, new FireParameters(134, Optional.empty(), false));
+        w.addBuilding(FireType.fire, 29, 28, FireVariant.V1, new FireParameters(134, Optional.empty(), false));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
@@ -135,7 +136,7 @@ public class WorldStorageTest
             assertEquals(FireType.fire, b.getType());
             assertEquals(29, b.getX());
             assertEquals(28, b.getY());
-            assertEquals(FireType.Variant.V1, b.getVariant());
+            assertEquals(FireVariant.V1, b.getVariant());
             Fire f = (Fire)b;
             assertEquals(134, f.getData().getRemainingLife());
             assertEquals(Optional.empty(), f.getData().getZone());

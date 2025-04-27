@@ -7,6 +7,7 @@ import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.destroyed.DestroyedType;
 import org.exolin.citysim.model.fire.FireType;
+import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,7 +76,7 @@ public class StructureTypeTest
     @Test
     public void testGetStructureVariantClass_FireType()
     {
-        assertEquals(FireType.Variant.class, StructureType.getStructureVariantClass(FireType.class));
+        assertEquals(FireVariant.class, StructureType.getStructureVariantClass(FireType.class));
     }
     
     @Test

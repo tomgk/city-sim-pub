@@ -20,7 +20,7 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParameters>
+public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
 {
     /*
     public Fire(FireType type, int x, int y, FireType.Variant variant)
@@ -28,7 +28,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         this(type, x, y, variant, new FireParameters());
     }*/
     
-    public Fire(FireType type, int x, int y, FireType.Variant variant, FireParameters data)
+    public Fire(FireType type, int x, int y, FireVariant variant, FireParameters data)
     {
         super(type, x, y, variant, data);
     }
@@ -205,7 +205,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
     
     public static void placeFire(World w, int x, int y, Optional<ZoneType> zone, boolean returnToZone)
     {
-        w.addBuilding(FireType.fire, x, y, FireType.Variant.random(), new FireParameters(getExpectedLife(null), zone, returnToZone));
+        w.addBuilding(FireType.fire, x, y, FireVariant.random(), new FireParameters(getExpectedLife(null), zone, returnToZone));
     }
     
     public static void replaceWithFire(World w, Structure s)
@@ -233,7 +233,7 @@ public class Fire extends Structure<Fire, FireType, FireType.Variant, FireParame
         {
             for(int xi=0;xi<buildingSize;++xi)
             {
-                w.addBuilding(FireType.fire, x+xi, y+yi, FireType.Variant.random(), args);
+                w.addBuilding(FireType.fire, x+xi, y+yi, FireVariant.random(), args);
             }
         }
     }

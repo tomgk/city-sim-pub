@@ -13,7 +13,7 @@ import org.exolin.citysim.model.StructureVariant;
  *
  * @author Thomas
  */
-public class FireType extends StructureType<Fire, FireType.Variant, FireParameters>
+public class FireType extends StructureType<Fire, FireVariant, FireParameters>
 {
     private static List<Animation> create()
     {
@@ -34,69 +34,20 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireParamete
     
     public static final FireType fire = new FireType("fire", create(), 1);
     
-    public static class Variant implements StructureVariant
-    {
-        private final int version;
-
-        public Variant(int version)
-        {
-            this.version = version;
-        }
-        
-        private static final List<Variant> VALUES = IntStream.range(1, 17)
-                .mapToObj(i -> new Variant(i))
-                .toList();
-        
-        public static final Variant V1 = VALUES.getFirst();
-        
-        public static int getVariantCount()
-        {
-            return VALUES.size();
-        }
-        
-        public static Variant random()
-        {
-            return VALUES.get((int)(Math.random()*VALUES.size()));
-        }
-
-        @Override
-        public int index()
-        {
-            return version-1;
-        }
-
-        @Override
-        public String name()
-        {
-            return "V"+version;
-        }
-        
-        public static Variant valueOf(String name)
-        {
-            for(Variant v : VALUES)
-            {
-                if(v.name().equals(name))
-                    return v;
-            }
-            
-            throw new NoSuchElementException();
-        }
-    }
-    
     public FireType(String name, List<Animation> animation, int size)
     {
         super(name, animation, size);
     }
 
     @Override
-    public Fire createBuilding(int x, int y, Variant variant, FireParameters data)
+    public Fire createBuilding(int x, int y, FireVariant variant, FireParameters data)
     {
         return new Fire(this, x, y, variant, data);
     }
 
     @Override
-    public Variant getVariantForDefaultImage()
+    public FireVariant getVariantForDefaultImage()
     {
-        return Variant.V1;
+        return FireVariant.V1;
     }
 }

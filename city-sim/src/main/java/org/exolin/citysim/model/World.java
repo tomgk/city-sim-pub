@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 import org.exolin.citysim.bt.BuildingTypes;
 import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;

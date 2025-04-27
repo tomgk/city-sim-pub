@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  *
  * @author Thomas
  */
-public class UtilsTest
+public class RandomUtilsTest
 {
     @ParameterizedTest
     @MethodSource("probabilityForTicksTestValues")

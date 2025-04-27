@@ -1,6 +1,9 @@
 package org.exolin.citysim.model.building.vacant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import org.exolin.citysim.model.Animation;
@@ -14,6 +17,7 @@ import org.exolin.citysim.model.zone.ZoneType;
 public class VacantsPack
 {
     private final Map<ZoneType, VacantType> versions = new HashMap<>();
+    private static final Map<ZoneType, Map<Integer, List<VacantType>>> vacants = new LinkedHashMap<>();
 
     public VacantsPack(String name, int size)
     {
@@ -21,7 +25,15 @@ public class VacantsPack
         {
             VacantType t = new VacantType(z.getName()+":"+name, Animation.createUnanimated(name), size, z);
             versions.put(z, t);
+            addVacant(t);
         }
+    }
+
+    private void addVacant(VacantType t)
+    {
+        Map<Integer, List<VacantType>> forZone = vacants.computeIfAbsent(t.getZoneType(), k -> new LinkedHashMap<>());
+        List<VacantType> forSize = forZone.computeIfAbsent(t.getSize(), s -> new ArrayList<>());
+        forSize.add(t);
     }
     
     public VacantType getVacantBuilding(ZoneType zone)

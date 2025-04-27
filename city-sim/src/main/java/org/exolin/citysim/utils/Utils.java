@@ -145,7 +145,7 @@ public class Utils
         return copy;
     }
 
-    public static VacantType random(List<VacantType> list)
+    public static <T> T random(List<T> list)
     {
         return list.get((int)(Math.random() * list.size()));
     }

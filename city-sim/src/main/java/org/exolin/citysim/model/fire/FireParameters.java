@@ -1,6 +1,5 @@
 package org.exolin.citysim.model.fire;
 
-import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.zone.ZoneType;

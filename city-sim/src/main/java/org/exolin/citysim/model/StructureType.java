@@ -34,7 +34,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
                     return c;
         }
         
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Could not determine "+StructureVariant.class.getName()+" for "+clazz.getName());
     }
     
     private final String name;

@@ -135,7 +135,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             if(getData().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
-                w.addBuilding(Vacants.tore_down.getVacantBuilding(z.get()), getX(), getY());
+                w.addBuilding(Vacants.tore_down().getVacantBuilding(z.get()), getX(), getY());
         }
     }
 

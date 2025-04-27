@@ -1,5 +1,6 @@
 package org.exolin.citysim.model.fire;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
@@ -12,26 +13,24 @@ import org.exolin.citysim.model.StructureVariant;
  */
 public class FireType extends StructureType<Fire, FireType.Variant, FireParameters>
 {
-    private static final Animation fireAnimation = createAnimation("destruction/fire", 16, 500);
+    private static List<Animation> create()
+    {
+        int len = 16;
+        Animation fireAnimation = createAnimation("destruction/fire", len, 500);
+        
+        List<Animation> images = new ArrayList<>();
+        for(int i=0;i<len;++i)
+        {
+            if(i == 0)
+                images.add(fireAnimation);
+            else
+                images.add(fireAnimation.createRotated("destruction/fire"+(i+1), i));
+        }
+        
+        return images;
+    }
     
-    public static final FireType fire = new FireType("fire", List.of(
-            fireAnimation,
-            fireAnimation.createRotated("destruction/fire2", 1),
-            fireAnimation.createRotated("destruction/fire3", 2),
-            fireAnimation.createRotated("destruction/fire4", 3),
-            fireAnimation.createRotated("destruction/fire4", 4),
-            fireAnimation.createRotated("destruction/fire5", 5),
-            fireAnimation.createRotated("destruction/fire6", 6),
-            fireAnimation.createRotated("destruction/fire7", 7),
-            fireAnimation.createRotated("destruction/fire8", 8),
-            fireAnimation.createRotated("destruction/fire9", 9),
-            fireAnimation.createRotated("destruction/fire10", 10),
-            fireAnimation.createRotated("destruction/fire11", 11),
-            fireAnimation.createRotated("destruction/fire12", 12),
-            fireAnimation.createRotated("destruction/fire13", 13),
-            fireAnimation.createRotated("destruction/fire14", 14),
-            fireAnimation.createRotated("destruction/fire15", 15)
-    ), 1);
+    public static final FireType fire = new FireType("fire", create(), 1);
     
     public enum Variant implements StructureVariant
     {

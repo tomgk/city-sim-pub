@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.imageio.ImageIO;
-import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.ui.GamePanel;
 
 /**
@@ -143,10 +142,5 @@ public class Utils
         List<T> copy = new ArrayList<>(list);
         Collections.rotate(copy, distance);
         return copy;
-    }
-
-    public static <T> T random(List<T> list)
-    {
-        return list.get((int)(Math.random() * list.size()));
     }
 }

@@ -2,7 +2,7 @@ package org.exolin.citysim.bt;
 
 import java.util.List;
 import org.exolin.citysim.model.building.vacant.VacantsPack;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -24,7 +24,7 @@ public class Vacants
     
     public static VacantsPack tore_down()
     {
-        return Utils.random(TORE_DOWN);
+        return RandomUtils.random(TORE_DOWN);
     }
     
     public static final VacantsPack abandoned_small_1 = new VacantsPack("destruction/abandoned_small_1", 1);

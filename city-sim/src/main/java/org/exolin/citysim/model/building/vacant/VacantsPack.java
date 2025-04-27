@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -40,7 +40,7 @@ public class VacantsPack
         if(forSize == null)
             throw new IllegalArgumentException("nothing for "+size);
         
-        return Utils.random(forSize);
+        return RandomUtils.random(forSize);
     }
 
     private void addVacant(VacantType t)

@@ -2,7 +2,10 @@ package org.exolin.citysim.model.tree;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
@@ -58,6 +61,8 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
     
     private final int count;
     
+    private static final Map<Integer, TreeType> instances = new LinkedHashMap<>();
+    
     private static List<Animation> createVariants(String name, BufferedImage image)
     {
         List<Animation> variants = new ArrayList<>(Variant.VALUES.size());
@@ -72,6 +77,13 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
     {
         super(name, createVariants(name, image), 1);
         this.count = count;
+        if(instances.putIfAbsent(count, this) != null)
+            throw new IllegalArgumentException();
+    }
+    
+    public Optional<TreeType> plusOne()
+    {
+        return Optional.ofNullable(instances.get(count+1));
     }
 
     public int getCount()

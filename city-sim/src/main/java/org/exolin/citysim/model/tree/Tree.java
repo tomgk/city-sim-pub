@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.tree;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
@@ -40,7 +41,7 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStruc
         return BigDecimal.ZERO;
     }
     
-    private static final double PROBABILITY_GROWTH = 0.001;
+    private static final double PROBABILITY_GROWTH = 0.00005;
     private static final double PROBABILITY_SPREAD = 0.0001;
 
     @Override
@@ -48,9 +49,12 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStruc
     {
         if(Math.random() < Utils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks))
         {
-            if(false)
+            Optional<TreeType> plusOne = getType().plusOne();
+            if(plusOne.isPresent())
+            {
                 world.removeBuildingAt(this);
-            //world.addBuilding(getType().plusOne(), getX(), getY(), getVariant());
+                world.addBuilding(plusOne.get(), getX(), getY(), getVariant());
+            }
         }
         
         maybeGrow(world, getX()-1, getY(), ticks);

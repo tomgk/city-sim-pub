@@ -12,6 +12,11 @@ public class RandomUtils
     {
         return Math.random();
     }
+    
+    public static int randInt(int max)
+    {
+        return (int)(Math.random() * max);
+    }
 
     public static <T> T random(List<T> list)
     {

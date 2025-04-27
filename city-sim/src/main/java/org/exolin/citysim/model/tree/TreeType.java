@@ -10,6 +10,7 @@ import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
+import org.exolin.citysim.utils.RandomUtils;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -55,7 +56,7 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
         
         public static Variant random()
         {
-            return VALUES.get((int)(Math.random() * VALUES.size()));
+            return RandomUtils.random(VALUES);
         }
     }
     

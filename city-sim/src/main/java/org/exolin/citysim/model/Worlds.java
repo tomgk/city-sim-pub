@@ -20,6 +20,7 @@ import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.ZonePlacement;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -110,9 +111,9 @@ public class Worlds
         
         for(int i=0;i<200;++i)
         {
-            if(Math.random() < 0.5)
+            if(RandomUtils.random() < 0.5)
             {
-                switch((int)(Math.random()*4))
+                switch(RandomUtils.randInt(4))
                 {
                     case 0:
                         dx = 1;

@@ -9,6 +9,7 @@ import java.util.Set;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -17,14 +18,14 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Vacants
 {
-    private static final Set<BuildingType> vacantBuildings = new LinkedHashSet<>();
-    private final Map<ZoneType, BuildingType> versions = new HashMap<>();
+    private static final Set<VacantType> vacantBuildings = new LinkedHashSet<>();
+    private final Map<ZoneType, VacantType> versions = new HashMap<>();
 
     public Vacants(String name, int size)
     {
         for(ZoneType z : ZoneType.types(ZoneType.class))
         {
-            BuildingType t = new BuildingType(z.getName()+":"+name, Animation.createUnanimated(name), size, z, 0, BigDecimal.ZERO);
+            VacantType t = new VacantType(z.getName()+":"+name, Animation.createUnanimated(name), size, z);
             versions.put(z, t);
             vacantBuildings.add(t);
         }
@@ -35,9 +36,9 @@ public class Vacants
         BuildingTypes.init();
     }
     
-    public BuildingType getVacantBuilding(ZoneType zone)
+    public VacantType getVacantBuilding(ZoneType zone)
     {
-        BuildingType t = versions.get(zone);
+        VacantType t = versions.get(zone);
         if(t == null)
             throw new NoSuchElementException("no vacant building for "+zone.getName());
         return t;
@@ -45,13 +46,13 @@ public class Vacants
     
     public static boolean isVacant(StructureType type)
     {
-        if(type instanceof BuildingType t)
+        if(type instanceof VacantType t)
             return isVacant(t);
         else
             return false;
     }
     
-    public static boolean isVacant(BuildingType type)
+    public static boolean isVacant(VacantType type)
     {
         return vacantBuildings.contains(type);
     }

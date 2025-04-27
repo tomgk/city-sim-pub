@@ -335,7 +335,7 @@ public final class World
             return;
         
         int size = getMaxZone(type, x, y);
-        BuildingType bt = type.getRandomBuilding(1/*size*/);
+        StructureType bt = type.getRandomBuilding(1/*size*/);
         if(bt == null)
             return;
         

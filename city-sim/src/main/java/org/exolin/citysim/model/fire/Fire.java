@@ -14,6 +14,7 @@ import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
+import org.exolin.citysim.utils.RandomUtils;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -63,10 +64,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     private static boolean spreadFire(double speed, int ticks, Structure s)
     {
         double probability = Utils.getProbabilityForTicks(speed * getSpreadProbability(s), ticks);
-        
-        double r = Math.random();
-        boolean spread = r < probability;
-        return spread;
+        return RandomUtils.atLeast(probability);
     }
     
     private static final double NORMAL = 1;
@@ -94,7 +92,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             return;
         }
         
-        if(Math.random() < STOP_PROBABILITY)
+        if(RandomUtils.atLeast(STOP_PROBABILITY))
         {
             die(w);
             return;

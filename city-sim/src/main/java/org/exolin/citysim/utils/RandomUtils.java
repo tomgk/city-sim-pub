@@ -22,4 +22,9 @@ public class RandomUtils
     {
         return list.get((int)(Math.random() * list.size()));
     }
+
+    public static boolean atLeast(double value)
+    {
+        return Math.random() < value;
+    }
 }

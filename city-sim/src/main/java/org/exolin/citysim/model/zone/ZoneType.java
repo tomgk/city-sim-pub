@@ -8,6 +8,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -96,7 +97,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructu
         if(smallBuildings.isEmpty())
             return null;
         
-        return smallBuildings.get((int)(Math.random()*smallBuildings.size()));
+        return RandomUtils.random(smallBuildings);
     }
 
     @Override

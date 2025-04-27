@@ -18,7 +18,6 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Vacants
 {
-    private static final Set<VacantType> vacantBuildings = new LinkedHashSet<>();
     private final Map<ZoneType, VacantType> versions = new HashMap<>();
 
     public Vacants(String name, int size)
@@ -27,7 +26,6 @@ public class Vacants
         {
             VacantType t = new VacantType(z.getName()+":"+name, Animation.createUnanimated(name), size, z);
             versions.put(z, t);
-            vacantBuildings.add(t);
         }
     }
     
@@ -46,15 +44,7 @@ public class Vacants
     
     public static boolean isVacant(StructureType type)
     {
-        if(type instanceof VacantType t)
-            return isVacant(t);
-        else
-            return false;
-    }
-    
-    public static boolean isVacant(VacantType type)
-    {
-        return vacantBuildings.contains(type);
+        return type instanceof VacantType;
     }
     
     public static final Vacants tore_down = new Vacants("destruction/tore_down", 1);

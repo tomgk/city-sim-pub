@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.ImageUtils;
 
 /**
  *
@@ -61,7 +61,7 @@ public class TearDownAction extends AreaAction implements ActionWithImage
         return removeZoning ? "remove zoning" : "tear down";
     }
     
-    private static final Image IMAGE = Utils.loadImage("tools/bulldozer");
+    private static final Image IMAGE = ImageUtils.loadImage("tools/bulldozer");
     
     private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(IMAGE, new Point(0, 27), "bulldozer");
 

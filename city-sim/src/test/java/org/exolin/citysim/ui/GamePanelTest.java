@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.JFrame;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.utils.ImageUtils;
 import org.exolin.citysim.utils.Utils;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -73,7 +74,7 @@ public class GamePanelTest
     @Test
     public void getImage()
     {
-        URL url = GamePanel.class.getClassLoader().getResource(Utils.RESOURCE_PREFIX+"business/office.png");
+        URL url = GamePanel.class.getClassLoader().getResource(ImageUtils.RESOURCE_PREFIX+"business/office.png");
         assertNotNull(url);
     }
 }

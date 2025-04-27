@@ -56,14 +56,14 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         if(s == null)
             return BURN_EMPTY_PROBABILITY;
         else if(s instanceof Tree t)
-            return Utils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
+            return RandomUtils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
         else
             return BURN_PROBABILITY;
     }
     
     private static boolean spreadFire(double speed, int ticks, Structure s)
     {
-        double probability = Utils.getProbabilityForTicks(speed * getSpreadProbability(s), ticks);
+        double probability = RandomUtils.getProbabilityForTicks(speed * getSpreadProbability(s), ticks);
         return RandomUtils.atLeast(probability);
     }
     

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.Constants;
+import org.exolin.citysim.utils.ImageUtils;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -37,10 +38,10 @@ public class Animation
     {
         List<BufferedImage> images = new ArrayList<>(numFrames);
         
-        images.add(Utils.loadImage(name));
+        images.add(ImageUtils.loadImage(name));
         //add aditional frames (if they exist)
         for(int i=1;i<numFrames;++i)
-            images.add(Utils.loadImage(name+"_"+i));
+            images.add(ImageUtils.loadImage(name+"_"+i));
         
         return new Animation(name, List.copyOf(images), animationSpeed);
     }
@@ -52,7 +53,7 @@ public class Animation
     
     public static Animation createUnanimated(String name)
     {
-        return new Animation(name, List.of(Utils.loadImage(name)), 1);
+        return new Animation(name, List.of(ImageUtils.loadImage(name)), 1);
     }
     
     public static Animation createUnanimated(String name, BufferedImage image)

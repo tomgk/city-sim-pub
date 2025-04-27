@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.ImageUtils;
 
 /**
  *
@@ -169,7 +169,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
 
     public BufferedImage getBrightImage(int variant)
     {
-        return Utils.brighter(images.get(variant).getDefault());
+        return ImageUtils.brighter(images.get(variant).getDefault());
     }
 
     @Override

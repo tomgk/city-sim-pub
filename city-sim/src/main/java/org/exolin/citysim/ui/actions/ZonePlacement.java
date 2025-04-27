@@ -8,7 +8,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.ImageUtils;
 
 /**
  *
@@ -97,7 +97,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public Image getIcon()
     {
-        return Utils.removeGround(zoneType.getImage(variant).getDefault());
+        return ImageUtils.removeGround(zoneType.getImage(variant).getDefault());
     }
 
     @Override

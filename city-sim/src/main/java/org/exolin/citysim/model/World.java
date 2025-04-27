@@ -19,7 +19,6 @@ import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
-import org.exolin.citysim.utils.Utils;
 
 /**
  *
@@ -329,7 +328,7 @@ public final class World
         if(b == null)
             return;
         
-        if(RandomUtils.random() < Utils.getProbabilityForTicks(TICK_PROBABILTY_FOR_BUILDING, ticks))
+        if(RandomUtils.random() < RandomUtils.getProbabilityForTicks(TICK_PROBABILTY_FOR_BUILDING, ticks))
             ;
         else
             return;

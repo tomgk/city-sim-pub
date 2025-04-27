@@ -7,7 +7,6 @@ import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.utils.RandomUtils;
-import org.exolin.citysim.utils.Utils;
 
 /**
  *
@@ -48,7 +47,7 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStruc
     @Override
     protected void updateAfterTick(World world, int ticks)
     {
-        if(RandomUtils.atLeast(Utils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
+        if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
         {
             Optional<TreeType> plusOne = getType().plusOne();
             if(plusOne.isPresent())
@@ -77,7 +76,7 @@ public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStruc
         if(world.getBuildingAt(x, y) != null)
             return;
         
-        double p = Utils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
+        double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
             world.addBuilding(Trees.TREES.getFirst(), x, y);
     }

@@ -10,8 +10,8 @@ import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
+import org.exolin.citysim.utils.ImageUtils;
 import org.exolin.citysim.utils.RandomUtils;
-import org.exolin.citysim.utils.Utils;
 
 /**
  *
@@ -69,7 +69,7 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
         List<Animation> variants = new ArrayList<>(Variant.VALUES.size());
         
         for(Variant v : Variant.VALUES)
-            variants.add(Animation.createUnanimated(name+"_"+v, Utils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
+            variants.add(Animation.createUnanimated(name+"_"+v, ImageUtils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
         
         return variants;
     }

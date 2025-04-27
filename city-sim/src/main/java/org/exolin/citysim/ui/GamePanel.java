@@ -45,8 +45,8 @@ import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
-import static org.exolin.citysim.utils.Utils.brighter;
-import static org.exolin.citysim.utils.Utils.loadImage;
+import static org.exolin.citysim.utils.ImageUtils.brighter;
+import static org.exolin.citysim.utils.ImageUtils.loadImage;
 
 /**
  *

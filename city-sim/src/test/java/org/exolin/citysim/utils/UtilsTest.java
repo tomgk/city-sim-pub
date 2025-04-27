@@ -18,7 +18,7 @@ public class UtilsTest
     @MethodSource("probabilityForTicksTestValues")
     public void testGetProbabilityForTicks(double probability, int ticks, double expected)
     {
-        assertEquals(expected, Utils.getProbabilityForTicks(probability, ticks), 0.0001);
+        assertEquals(expected, RandomUtils.getProbabilityForTicks(probability, ticks), 0.0001);
     }
     
     @SuppressWarnings("unused")
@@ -47,6 +47,6 @@ public class UtilsTest
     @SuppressWarnings("ThrowableResultIgnored")
     public void testGetProbabilityForTicks_Negative()
     {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Utils.getProbabilityForTicks(0.1, -1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> RandomUtils.getProbabilityForTicks(0.1, -1));
     }
 }

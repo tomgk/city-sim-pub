@@ -31,6 +31,11 @@ public interface ConnectionVariant extends StructureVariant
     }
     
     public ConnectionVariant rotate(Rotation rotation);
+    
+    public static int getVariantCount()
+    {
+        return ConnectionVariants.VALUES.size();
+    }
 }
 
 class ConnectionVariants

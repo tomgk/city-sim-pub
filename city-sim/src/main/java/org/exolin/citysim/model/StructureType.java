@@ -1,6 +1,8 @@
 package org.exolin.citysim.model;
 
 import java.awt.image.BufferedImage;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -20,6 +22,20 @@ import org.exolin.citysim.utils.Utils;
 public abstract class StructureType<B, E extends StructureVariant, D extends StructureParameters>
 {
     public static final int DEFAULT_VARIANT = 0;
+    
+    public static Class<? extends StructureVariant> getStructureVariantClass(Class<? extends StructureType> clazz)
+    {
+        ParameterizedType superClass = (ParameterizedType)clazz.getGenericSuperclass();
+        
+        for(Type t : superClass.getActualTypeArguments())
+        {
+            if(t instanceof Class c)
+                if(StructureVariant.class.isAssignableFrom(c))
+                    return c;
+        }
+        
+        throw new IllegalArgumentException();
+    }
     
     private final String name;
     private final List<Animation> images;
@@ -101,6 +117,11 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         
         if(instances.containsKey(name))
             throw new IllegalArgumentException("duplicate ID");
+        
+        int expected = StructureVariant.getVariantCount(getStructureVariantClass(getClass()));
+        if(expected != images.size())
+            throw new IllegalArgumentException("wrong number of images for variants: "
+                    + "expected "+expected+" but got "+images.size());
         
         this.name = name;
         this.images = images;

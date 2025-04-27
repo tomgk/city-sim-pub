@@ -46,8 +46,8 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructu
             Animation lowRes = Animation.createUnanimated(name+"_low");
             return List.of(baseAnimation, lowRes);
         }
-        
-        return List.of(baseAnimation);
+        else
+            return List.of(baseAnimation, baseAnimation);
     }
     
     private final String title;

@@ -2,12 +2,9 @@ package org.exolin.citysim.model.fire;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.IntStream;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.StructureVariant;
 
 /**
  *

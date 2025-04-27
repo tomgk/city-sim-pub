@@ -5,11 +5,8 @@ import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.building.vacant.Vacant;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.building.vacant.VacantsPack;
-import org.exolin.citysim.model.connection.Connection;
-import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**

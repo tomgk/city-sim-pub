@@ -10,7 +10,6 @@ import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.fire.FireParameters;
-import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.zone.ZoneType;
 

@@ -19,13 +19,20 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, PlainS
     }
     
     private final ZoneType zoneType;
+    private final boolean destroyed;
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public VacantType(String name, Animation animation, int size, ZoneType zoneType)
+    public VacantType(String name, Animation animation, int size, ZoneType zoneType, boolean destroyed)
     {
         super(name, animation, size);
         this.zoneType = Objects.requireNonNull(zoneType);
+        this.destroyed = destroyed;
         zoneType.addVacant(this);
+    }
+
+    public boolean isDestroyed()
+    {
+        return destroyed;
     }
     
     public ZoneType getZoneType()

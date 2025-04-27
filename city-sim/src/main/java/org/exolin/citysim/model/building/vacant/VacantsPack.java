@@ -20,11 +20,11 @@ public class VacantsPack
     private final Map<ZoneType, VacantType> versions = new HashMap<>();
     private static final Map<ZoneType, Map<Integer, List<VacantType>>> vacants = new LinkedHashMap<>();
 
-    public VacantsPack(String name, int size)
+    public VacantsPack(String name, int size, boolean destroyed)
     {
         for(ZoneType z : ZoneType.types(ZoneType.class))
         {
-            VacantType t = new VacantType(z.getName()+":"+name, Animation.createUnanimated(name), size, z);
+            VacantType t = new VacantType(z.getName()+":"+name, Animation.createUnanimated(name), size, z, destroyed);
             versions.put(z, t);
             addVacant(t);
         }
@@ -58,8 +58,11 @@ public class VacantsPack
         return t;
     }
     
-    public static boolean isVacant(StructureType type)
+    public static boolean isDestroyed(StructureType type)
     {
-        return type instanceof VacantType;
+        if(type instanceof VacantType t)
+            return t.isDestroyed();
+        else
+            return false;
     }
 }

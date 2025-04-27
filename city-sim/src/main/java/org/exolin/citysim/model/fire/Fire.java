@@ -160,7 +160,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         
         //don't put street/rail/water on fire
         Structure s = w.getBuildingAt(x, y);
-        if(s instanceof Connection || (s != null && VacantsPack.isVacant(s.getType())))
+        if(s instanceof Connection || (s != null && VacantsPack.isDestroyed(s.getType())))
             return false;
         else if(s instanceof org.exolin.citysim.model.fire.Fire)
             //count as spread
@@ -178,6 +178,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     }
     
     private static final int EMPTY_LIFE = 3;
+    private static final int BUILDING_FIRE = 15;
 
     private static int getExpectedLife(Structure s)
     {
@@ -185,10 +186,14 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             throw new IllegalArgumentException("fire on fire");
         
         IntSupplier el = () -> {
-            if(s == null || s instanceof Zone || s instanceof Connection || s instanceof Vacant)
+            if(s == null || s instanceof Zone || s instanceof Connection)
                 return EMPTY_LIFE;
+            else if(s instanceof Vacant)
+            {
+                return BUILDING_FIRE/2;
+            }
             else if(s instanceof Building)
-                return 15;
+                return BUILDING_FIRE;
             else if(s instanceof Tree)
                 return 10;
             else

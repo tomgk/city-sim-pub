@@ -2,6 +2,8 @@ package org.exolin.citysim.model.fire;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import org.exolin.citysim.model.StructureType;
@@ -32,16 +34,52 @@ public class FireType extends StructureType<Fire, FireType.Variant, FireParamete
     
     public static final FireType fire = new FireType("fire", create(), 1);
     
-    public enum Variant implements StructureVariant
+    public static class Variant implements StructureVariant
     {
-        V1, V2, V3, V4, V5, V6, V7, V8,
-        V9, V10, V11, V12, V13, V14, V15, V16;
+        private final int version;
+
+        public Variant(int version)
+        {
+            this.version = version;
+        }
         
-        private static final Variant[] values = values();
+        private static final List<Variant> VALUES = IntStream.range(1, 17)
+                .mapToObj(i -> new Variant(i))
+                .toList();
+        
+        public static final Variant V1 = VALUES.getFirst();
+        
+        public static int getVariantCount()
+        {
+            return VALUES.size();
+        }
         
         public static Variant random()
         {
-            return values[(int)(Math.random()*values.length)];
+            return VALUES.get((int)(Math.random()*VALUES.size()));
+        }
+
+        @Override
+        public int index()
+        {
+            return version-1;
+        }
+
+        @Override
+        public String name()
+        {
+            return "V"+version;
+        }
+        
+        public static Variant valueOf(String name)
+        {
+            for(Variant v : VALUES)
+            {
+                if(v.name().equals(name))
+                    return v;
+            }
+            
+            throw new NoSuchElementException();
         }
     }
     

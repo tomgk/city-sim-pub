@@ -54,7 +54,8 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     {
         StructureType<?, ?, ?> bt = instances.get(transformName(name));
         if(bt == null)
-            throw new IllegalArgumentException("no building type "+name+" found only\n"+instances.keySet().stream().collect(Collectors.joining("  \n")));
+            throw new IllegalArgumentException("no building type "+name+" found only\n"+
+                    instances.keySet().stream().collect(Collectors.joining("  \n")));
         return bt;
     }
     
@@ -70,6 +71,9 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         this(name, List.of(animation), size);
     }
     
+    //x -> x
+    //x/y -> x/y
+    //x/x_y -> x/y
     public static String transformName(String name)
     {
         int p = name.indexOf('/');

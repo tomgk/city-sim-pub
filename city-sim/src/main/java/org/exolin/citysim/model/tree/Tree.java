@@ -12,14 +12,14 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class Tree extends Structure<Tree, TreeType, TreeType.Variant, PlainStructureParameters>
+public class Tree extends Structure<Tree, TreeType, TreeVariant, PlainStructureParameters>
 {
-    public Tree(TreeType type, int x, int y, TreeType.Variant variant)
+    public Tree(TreeType type, int x, int y, TreeVariant variant)
     {
         this(type, x, y, variant, new PlainStructureParameters());
     }
     
-    public Tree(TreeType type, int x, int y, TreeType.Variant variant, PlainStructureParameters data)
+    public Tree(TreeType type, int x, int y, TreeVariant variant, PlainStructureParameters data)
     {
         super(type, x, y, variant, data);
     }

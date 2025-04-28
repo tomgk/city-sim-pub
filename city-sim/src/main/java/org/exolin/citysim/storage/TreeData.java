@@ -6,7 +6,7 @@ import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.tree.TreeVariant;
 
 /**
  *
@@ -30,7 +30,7 @@ public class TreeData extends StructureData
     @Override
     protected StructureVariant getVariant(String name)
     {
-        return TreeType.Variant.valueOf(name);
+        return TreeVariant.valueOf(name);
     }
 
     @Override

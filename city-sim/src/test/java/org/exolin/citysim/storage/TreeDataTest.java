@@ -8,7 +8,7 @@ import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.tree.TreeVariant;
 import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
@@ -25,7 +25,7 @@ public class TreeDataTest
     @Test
     public void testSerializeTree() throws IOException
     {
-        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeType.Variant.TOP_RIGHT);
+        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeVariant.TOP_RIGHT);
         String output = serialize(WorldStorage::serialize, street);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
@@ -46,6 +46,6 @@ public class TreeDataTest
         assertEquals(Trees.TREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
-        assertEquals(TreeType.Variant.TOP_RIGHT, b.getVariant());
+        assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
     }
 }

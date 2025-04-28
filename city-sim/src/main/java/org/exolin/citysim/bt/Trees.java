@@ -11,12 +11,12 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class Trees
 {
-    private static TreeType createTree(int count)
+    private static TreeType createTree(int count, boolean alive)
     {
-        return new TreeType("trees_"+count, ImageUtils.loadImage("trees/"+count), count);
+        return new TreeType("trees_"+count, ImageUtils.loadImage("trees/"+count), count, alive);
     }
     
     public static final List<TreeType> TREES = IntStream.range(1, 8)
-            .mapToObj(Trees::createTree)
+            .mapToObj(count -> createTree(count, true))
             .toList();
 }

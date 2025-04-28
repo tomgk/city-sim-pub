@@ -9,82 +9,47 @@ import java.util.Optional;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.utils.ImageUtils;
-import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
  * @author Thomas
  */
-public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructureParameters>
+public class TreeType extends StructureType<Tree, TreeVariant, PlainStructureParameters>
 {
-    public enum Variant implements StructureVariant
-    {
-        DEFAULT(0, 0),
-        LEFT(-1, 0),
-        RIGHT(1, 0),
-        
-        TOP_LEFT(-1, -1),
-        TOP_MIDDLE(0, -1),
-        TOP_RIGHT(1, -1),
-        
-        BOTTOM_LEFT(-1, -1),
-        BOTTOM_MIDDLE(0, -1),
-        BOTTOM_RIGHT(1, -1);
-        
-        private static final List<Variant> VALUES = List.of(values());
-        
-        private final int xoffset;
-        private final int yoffset;
-
-        private Variant(int xoffset, int yoffset)
-        {
-            this.xoffset = xoffset;
-            this.yoffset = yoffset;
-        }
-
-        public int getXoffset()
-        {
-            return xoffset;
-        }
-
-        public int getYoffset()
-        {
-            return yoffset;
-        }
-        
-        public static Variant random()
-        {
-            return RandomUtils.random(VALUES);
-        }
-    }
-    
     private final int count;
+    private final boolean alive;
     
-    private static final Map<Integer, TreeType> instances = new LinkedHashMap<>();
+    private static final Map<Integer, TreeType> aliveInstances = new LinkedHashMap<>();
+    private static final Map<Integer, TreeType> deadInstances = new LinkedHashMap<>();
     
     private static List<Animation> createVariants(String name, BufferedImage image)
     {
-        List<Animation> variants = new ArrayList<>(Variant.VALUES.size());
+        List<Animation> variants = new ArrayList<>(TreeVariant.VALUES.size());
         
-        for(Variant v : Variant.VALUES)
+        for(TreeVariant v : TreeVariant.VALUES)
             variants.add(Animation.createUnanimated(name+"_"+v, ImageUtils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
         
         return variants;
     }
+
+    private static Map<Integer, TreeType> getInstances(boolean alive)
+    {
+        return alive ? aliveInstances : deadInstances;
+    }
     
-    public TreeType(String name, BufferedImage image, int count)
+    public TreeType(String name, BufferedImage image, int count, boolean alive)
     {
         super(name, createVariants(name, image), 1);
         this.count = count;
-        if(instances.putIfAbsent(count, this) != null)
+        this.alive = alive;
+        if(getInstances(alive).putIfAbsent(count, this) != null)
             throw new IllegalArgumentException();
     }
     
     public Optional<TreeType> plusOne()
     {
-        return Optional.ofNullable(instances.get(count+1));
+        return Optional.ofNullable(getInstances(alive).get(count+1));
     }
 
     public int getCount()
@@ -93,14 +58,14 @@ public class TreeType extends StructureType<Tree, TreeType.Variant, PlainStructu
     }
     
     @Override
-    public Tree createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
+    public Tree createBuilding(int x, int y, TreeVariant variant, PlainStructureParameters data)
     {
         return new Tree(this, x, y, variant, data);
     }
 
     @Override
-    public Variant getVariantForDefaultImage()
+    public TreeVariant getVariantForDefaultImage()
     {
-        return Variant.DEFAULT;
+        return TreeVariant.DEFAULT;
     }
 }

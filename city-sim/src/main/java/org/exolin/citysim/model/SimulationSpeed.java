@@ -15,11 +15,6 @@ public enum SimulationSpeed
     
     private final int tickCount;
 
-    private SimulationSpeed()
-    {
-        this.tickCount = 0;
-    }
-
     private SimulationSpeed(int tickCount)
     {
         this.tickCount = tickCount;

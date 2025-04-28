@@ -47,6 +47,9 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, PlainStructureP
     @Override
     protected void updateAfterTick(World world, int ticks)
     {
+        if(!getType().isAlive())
+            return;
+        
         if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
         {
             Optional<TreeType> plusOne = getType().plusOne();

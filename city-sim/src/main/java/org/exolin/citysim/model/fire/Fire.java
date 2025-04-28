@@ -55,7 +55,12 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         if(s == null)
             return BURN_EMPTY_PROBABILITY;
         else if(s instanceof Tree t)
-            return RandomUtils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
+        {
+            if(t.isAlive())
+                return RandomUtils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
+            else
+                return BURN_EMPTY_PROBABILITY;
+        }
         else
             return BURN_PROBABILITY;
     }

@@ -80,4 +80,9 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, PlainStructureP
         if(RandomUtils.atLeast(p))
             world.addBuilding(Trees.TREES.getFirst(), x, y);
     }
+
+    public boolean isAlive()
+    {
+        return getType().isAlive();
+    }
 }

@@ -68,4 +68,9 @@ public class TreeType extends StructureType<Tree, TreeVariant, PlainStructurePar
     {
         return TreeVariant.DEFAULT;
     }
+
+    boolean isAlive()
+    {
+        return alive;
+    }
 }

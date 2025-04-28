@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.IntSupplier;
 import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.vacant.Vacant;
@@ -130,8 +131,14 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     {
         w.removeBuildingAt(this);
         
-        Optional<ZoneType> z = getData().zone;
+        Optional<StructureType> afterBurn = getData().afterBurn;
+        if(afterBurn.isPresent())
+        {
+            w.addBuilding(afterBurn.get(), getX(), getY());
+            return;
+        }
         
+        Optional<ZoneType> z = getData().zone;
         if(z.isPresent())
         {
             if(getData().returnToZone)
@@ -175,7 +182,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             return true;
         
         if(s == null)
-            placeFire(w, x, y, Optional.empty(), false);
+            placeFire(w, x, y);
         else
             replaceWithFire(w, s);
         
@@ -213,9 +220,17 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         return e;
     }
     
-    public static void placeFire(World w, int x, int y, Optional<ZoneType> zone, boolean returnToZone)
+    public static void placeFire(World w, int x, int y)
     {
-        w.addBuilding(FireType.fire, x, y, FireVariant.random(), new FireParameters(getExpectedLife(null), zone, returnToZone));
+        w.addBuilding(FireType.fire, x, y, FireVariant.random(), new FireParameters(getExpectedLife(null), Optional.empty(), false, Optional.empty()));
+    }
+    
+    private static Optional<StructureType> getAfterBurn(Structure s)
+    {
+        if(s instanceof Tree t)
+            return Optional.of(t.getType().getDead());
+        else
+            return Optional.empty();
     }
     
     public static void replaceWithFire(World w, Structure s)
@@ -241,7 +256,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             zt = s.getZoneType();
         }
         
-        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(zt), returnToZone);
+        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(zt), returnToZone, getAfterBurn(s));
         for(int yi=0;yi<buildingSize;++yi)
         {
             for(int xi=0;xi<buildingSize;++xi)

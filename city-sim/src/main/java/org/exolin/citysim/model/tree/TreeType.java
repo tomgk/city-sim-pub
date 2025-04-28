@@ -32,7 +32,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, PlainStructurePar
         
         return variants;
     }
-
+    
     private static Map<Integer, TreeType> getInstances(boolean alive)
     {
         return alive ? aliveInstances : deadInstances;
@@ -50,6 +50,14 @@ public class TreeType extends StructureType<Tree, TreeVariant, PlainStructurePar
     public Optional<TreeType> plusOne()
     {
         return Optional.ofNullable(getInstances(alive).get(count+1));
+    }
+    
+    public TreeType getDead()
+    {
+        TreeType tree = getInstances(false).get(count);
+        if(tree == null)
+            throw new IllegalArgumentException();
+        return tree;
     }
 
     public int getCount()

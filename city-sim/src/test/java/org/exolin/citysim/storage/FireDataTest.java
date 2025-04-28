@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Optional;
+import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
@@ -28,7 +29,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_Default() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.empty(), false));
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.empty(), false, Optional.empty()));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123, "returnToZone": false}
@@ -41,7 +42,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_WithZone() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false));
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.empty()));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false}
@@ -52,10 +53,21 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_ReturnToZone() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), true));
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), true, Optional.empty()));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false}
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true}
+                          """;
+        JSONAssert.assertEquals(expected, output, true);
+    }
+    
+    @Test
+    public void testSerializeActualBuilding_AfterBurn() throws IOException
+    {
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Trees.DEAD_TREES.get(3))));
+        String output = serialize(WorldStorage::serialize, building);
+        String expected = """
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false, "afterBurn": "dead_trees_4"}
                           """;
         JSONAssert.assertEquals(expected, output, true);
     }
@@ -115,5 +127,25 @@ public class FireDataTest
         assertEquals(123, f.getData().getRemainingLife());
         assertEquals(Optional.of(Zones.business), f.getData().getZone());
         assertEquals(true, f.getData().isReturnToZone());
+    }
+    
+    @Test
+    public void testDeserializeActualBuilding_AfterBurn() throws IOException
+    {
+        World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);
+        InputStream in = createInputStream("""
+                                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true, "afterBurn": "dead_trees_2"}
+                                           """);
+        WorldStorage.deserialize(in, w);
+        Structure b = getBuilding(w);
+        assertEquals(FireType.fire, b.getType());
+        assertEquals(16, b.getX());
+        assertEquals(99, b.getY());
+        assertEquals(FireVariant.V1, b.getVariant());
+        Fire f = (Fire)b;
+        assertEquals(123, f.getData().getRemainingLife());
+        assertEquals(Optional.of(Zones.business), f.getData().getZone());
+        assertEquals(true, f.getData().isReturnToZone());
+        assertEquals(Optional.of(Trees.DEAD_TREES.get(1)), f.getData().getAfterBurn());
     }
 }

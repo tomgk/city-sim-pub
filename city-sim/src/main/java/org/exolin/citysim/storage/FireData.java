@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.fire.Fire;
@@ -21,13 +22,16 @@ import org.exolin.citysim.model.zone.ZoneType;
 public class FireData extends StructureData
 {
     @JsonProperty
-    public int remainingLife;
+    public final int remainingLife;
     
     @JsonProperty
-    public String zone;
+    public final String zone;
     
     @JsonProperty
-    public boolean returnToZone;
+    public final boolean returnToZone;
+    
+    @JsonProperty
+    public final String afterBurn;
     
     public FireData(Fire f)
     {
@@ -35,6 +39,8 @@ public class FireData extends StructureData
         FireParameters data = f.getData();
         this.remainingLife = data.getRemainingLife();
         this.zone = Optional.ofNullable(f.getZoneType()).map(ZoneType::getName).orElse(null);
+        this.returnToZone = data.isReturnToZone();
+        this.afterBurn = data.getAfterBurn().map(StructureType::getName).orElse(null);
     }
 
     @JsonCreator
@@ -43,12 +49,14 @@ public class FireData extends StructureData
             @JsonProperty("variant") String variant,
             @JsonProperty("remainingLife") int remainingLife,
             @JsonProperty("zone") String zone,
-            @JsonProperty("returnToZone") boolean returnToZone)
+            @JsonProperty("returnToZone") boolean returnToZone,
+            @JsonProperty("afterBurn") String afterBurn)
     {
         super(type, x, y, variant);
         this.remainingLife = remainingLife;
         this.zone = zone;
         this.returnToZone = returnToZone;
+        this.afterBurn = afterBurn;
     }
 
     @Override
@@ -62,7 +70,9 @@ public class FireData extends StructureData
     {
         Optional<ZoneType> zoneType = Optional.ofNullable(zone)
                 .map(n -> BuildingType.getByName(ZoneType.class, n));
+        Optional<StructureType> afterBurnType = Optional.ofNullable(afterBurn)
+                .map(StructureType::getByName);
         
-        return new FireParameters(remainingLife, zoneType, returnToZone);
+        return new FireParameters(remainingLife, zoneType, returnToZone, afterBurnType);
     }
 }

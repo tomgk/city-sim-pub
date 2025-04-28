@@ -63,7 +63,7 @@ public class WorldStorageTest
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
         w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
-        w.addBuilding(FireType.fire, 29, 28, FireVariant.V1, new FireParameters(134, Optional.empty(), false));
+        w.addBuilding(FireType.fire, 29, 28, FireVariant.V1, new FireParameters(134, Optional.empty(), false, Optional.empty()));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {

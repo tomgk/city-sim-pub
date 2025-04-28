@@ -2,6 +2,7 @@ package org.exolin.citysim.model.fire;
 
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -13,19 +14,22 @@ public class FireParameters implements StructureParameters<FireParameters>
     int remainingLife;
     final Optional<ZoneType> zone;
     final boolean returnToZone;
-/*
-    public FireParameters()
+    final Optional<StructureType> afterBurn;
+
+    public FireParameters(int remainingLife, Optional<ZoneType> zone, boolean returnToZone, Optional<StructureType> afterBurn)
     {
-        this(10000);
-    }
-*/
-    public FireParameters(int remainingLife, Optional<ZoneType> zone, boolean returnToZone)
-    {
+        if(returnToZone)
+        {
+            if(zone.isEmpty())
+                throw new IllegalArgumentException();
+        }
+        
         this.remainingLife = remainingLife;
         this.zone = zone;
         this.returnToZone = returnToZone;
+        this.afterBurn = afterBurn;
     }
-
+    
     public int getRemainingLife()
     {
         return remainingLife;
@@ -40,10 +44,15 @@ public class FireParameters implements StructureParameters<FireParameters>
     {
         return returnToZone;
     }
+
+    public Optional<StructureType> getAfterBurn()
+    {
+        return afterBurn;
+    }
     
     @Override
     public FireParameters copy()
     {
-        return new FireParameters(remainingLife, zone, returnToZone);
+        return new FireParameters(remainingLife, zone, returnToZone, afterBurn);
     }
 }

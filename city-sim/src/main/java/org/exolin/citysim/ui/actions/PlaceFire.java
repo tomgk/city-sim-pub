@@ -1,6 +1,5 @@
 package org.exolin.citysim.ui.actions;
 
-import java.util.Optional;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
@@ -24,7 +23,7 @@ public class PlaceFire extends PlaceStructure
     {
         Structure b = w.getBuildingAt(x, y);
         if(b == null)
-            Fire.placeFire(w, x, y, Optional.empty(), false);
+            Fire.placeFire(w, x, y);
         else
             Fire.replaceWithFire(w, b);
     }

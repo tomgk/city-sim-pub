@@ -18,7 +18,7 @@ public class Trees
     
     private static TreeType createDeadTree(int count)
     {
-        return new TreeType("dead_trees_"+count, ImageUtils.loadDeadImage("trees/"+count), count, false);
+        return new TreeType("dead_trees_"+count, ImageUtils.loadImage("trees/dead_"+count), count, false);
     }
     
     public static final List<TreeType> TREES = IntStream.range(1, 8)

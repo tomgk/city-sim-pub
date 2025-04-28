@@ -115,9 +115,12 @@ public class ImageUtils
         return newImage;
     }
 
+    /*
     public static BufferedImage loadDeadImage(String string)
     {
         BufferedImage image = loadImage(string);
+        if(true)
+            return image;
         
         ImageFilter filter = new RGBImageFilter()
         {
@@ -139,6 +142,7 @@ public class ImageUtils
         ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
         return toBufferedImage(Toolkit.getDefaultToolkit().createImage(ip));
     }
+*/
     
     private static BufferedImage toBufferedImage(Image img)
     {

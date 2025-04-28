@@ -25,7 +25,7 @@ public class StreetBuilder implements BuildingAction
     private final SelfConnectionType type;
     private Point start;
     private Rectangle marking;
-    private boolean onlyLine;
+    private final boolean onlyLine;
     
     public static final boolean AREA = false;
     public static final boolean ONLY_LINE = true;

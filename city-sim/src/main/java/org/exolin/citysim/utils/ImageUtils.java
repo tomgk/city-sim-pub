@@ -11,6 +11,7 @@ import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import org.exolin.citysim.ui.GamePanel;
 
@@ -112,5 +113,53 @@ public class ImageUtils
         g2d.dispose();
 
         return newImage;
+    }
+
+    public static BufferedImage loadDeadImage(String string)
+    {
+        BufferedImage image = loadImage(string);
+        if(true)
+            return image;
+        
+        ImageFilter filter = new RGBImageFilter()
+        {
+            @Override
+            public final int filterRGB(int x, int y, int rgb)
+            {
+                int r = (rgb >> 16) & 0xff;
+                int g = (rgb >> 8) & 0xff;
+                int b = rgb & 0xff;
+                
+                int Red = (r << 16) & 0x00FF0000; //Shift red 16-bits and mask out other stuff
+                int Green = (g << 8) & 0x0000FF00; //Shift Green 8-bits and mask out other stuff
+                int Blue = b & 0x000000FF; //Mask out anything not blue.
+                
+                return Red | Green | Blue;
+            }
+        };
+
+        ImageProducer ip = new FilteredImageSource(image.getSource(), filter);
+        return toBufferedImage(Toolkit.getDefaultToolkit().createImage(ip));
+    }
+    
+    private static BufferedImage toBufferedImage(Image img)
+    {
+        Objects.requireNonNull(img);
+        
+        if (img instanceof BufferedImage)
+        {
+            return (BufferedImage) img;
+        }
+
+        // Create a buffered image with transparency
+        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+        // Draw the image on to the buffered image
+        Graphics2D bGr = bimage.createGraphics();
+        bGr.drawImage(img, 0, 0, null);
+        bGr.dispose();
+
+        // Return the buffered image
+        return bimage;
     }
 }

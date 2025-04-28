@@ -118,8 +118,6 @@ public class ImageUtils
     public static BufferedImage loadDeadImage(String string)
     {
         BufferedImage image = loadImage(string);
-        if(true)
-            return image;
         
         ImageFilter filter = new RGBImageFilter()
         {
@@ -130,9 +128,9 @@ public class ImageUtils
                 int g = (rgb >> 8) & 0xff;
                 int b = rgb & 0xff;
                 
-                int Red = (r << 16) & 0x00FF0000; //Shift red 16-bits and mask out other stuff
-                int Green = (g << 8) & 0x0000FF00; //Shift Green 8-bits and mask out other stuff
-                int Blue = b & 0x000000FF; //Mask out anything not blue.
+                int Red = (r << 16) & 0xFF0000; //Shift red 16-bits and mask out other stuff
+                int Green = (g << 8) & 0x00FF00; //Shift Green 8-bits and mask out other stuff
+                int Blue = b & 0x0000FF; //Mask out anything not blue.
                 
                 return Red | Green | Blue;
             }

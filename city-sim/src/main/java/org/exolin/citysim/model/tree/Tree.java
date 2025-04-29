@@ -3,7 +3,7 @@ package org.exolin.citysim.model.tree;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
-import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.utils.RandomUtils;
@@ -12,14 +12,14 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class Tree extends Structure<Tree, TreeType, TreeVariant, PlainStructureParameters>
+public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureParameters>
 {
     public Tree(TreeType type, int x, int y, TreeVariant variant)
     {
-        this(type, x, y, variant, new PlainStructureParameters());
+        this(type, x, y, variant, EmptyStructureParameters.getInstance());
     }
     
-    public Tree(TreeType type, int x, int y, TreeVariant variant, PlainStructureParameters data)
+    public Tree(TreeType type, int x, int y, TreeVariant variant, EmptyStructureParameters data)
     {
         super(type, x, y, variant, data);
     }

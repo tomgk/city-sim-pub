@@ -2,7 +2,7 @@ package org.exolin.citysim.model.building.vacant;
 
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -11,7 +11,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class VacantType extends StructureType<Vacant, VacantType.Variant, PlainStructureParameters>
+public class VacantType extends StructureType<Vacant, VacantType.Variant, EmptyStructureParameters>
 {
     public enum Variant implements StructureVariant
     {
@@ -47,7 +47,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, PlainS
     }
 
     @Override
-    public Vacant createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
+    public Vacant createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
     {
         return new Vacant(this, x, y, variant, data);
     }

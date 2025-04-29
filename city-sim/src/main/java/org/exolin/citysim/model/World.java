@@ -183,14 +183,14 @@ public final class World
         }
     }
     
-    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E, PlainStructureParameters> type, int x, int y)
+    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E, EmptyStructureParameters> type, int x, int y)
     {
         return addBuilding(type, x, y, type.getVariantForDefaultImage());
     }
     
-    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E, PlainStructureParameters> type, int x, int y, E variant)
+    public <B extends Structure, E extends StructureVariant> B addBuilding(StructureType<B, E, EmptyStructureParameters> type, int x, int y, E variant)
     {
-        return addBuilding(type, x, y, variant, new PlainStructureParameters());
+        return addBuilding(type, x, y, variant, EmptyStructureParameters.getInstance());
     }
     
     public <B extends Structure, E extends StructureVariant, D extends StructureParameters<D>> B addBuilding(StructureType<B, E, D> type, int x, int y, E variant, D data)

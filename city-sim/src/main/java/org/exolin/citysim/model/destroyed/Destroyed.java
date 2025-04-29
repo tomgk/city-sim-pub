@@ -1,16 +1,16 @@
 package org.exolin.citysim.model.destroyed;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 
 /**
  *
  * @author Thomas
  */
-public class Destroyed extends Structure<Destroyed, DestroyedType, DestroyedType.Variant, PlainStructureParameters>
+public class Destroyed extends Structure<Destroyed, DestroyedType, DestroyedType.Variant, EmptyStructureParameters>
 {
-    public Destroyed(DestroyedType type, int x, int y, DestroyedType.Variant variant, PlainStructureParameters data)
+    public Destroyed(DestroyedType type, int x, int y, DestroyedType.Variant variant, EmptyStructureParameters data)
     {
         super(type, x, y, variant, data);
     }

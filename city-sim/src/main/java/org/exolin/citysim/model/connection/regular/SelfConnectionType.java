@@ -3,14 +3,14 @@ package org.exolin.citysim.model.connection.regular;
 import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.connection.ConnectionType;
 
 /**
  *
  * @author Thomas
  */
-public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConnectionType, ConnectionVariant, PlainStructureParameters>
+public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConnectionType, ConnectionVariant, EmptyStructureParameters>
 {
     private final int cost;
     private final ConnectionVariant defaultImageVariant;
@@ -53,7 +53,7 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
     }
 
     @Override
-    public SelfConnection createBuilding(int x, int y, ConnectionVariant variant, PlainStructureParameters data)
+    public SelfConnection createBuilding(int x, int y, ConnectionVariant variant, EmptyStructureParameters data)
     {
         return new SelfConnection(this, x, y, variant, data);
     }

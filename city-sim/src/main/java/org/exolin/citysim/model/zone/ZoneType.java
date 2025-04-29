@@ -3,7 +3,7 @@ package org.exolin.citysim.model.zone;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.PlainStructureParameters;
+import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
@@ -14,7 +14,7 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructureParameters>
+public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructureParameters>
 {
     private final boolean userPlaceableZone;
     private final int cost;
@@ -107,7 +107,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, PlainStructu
     }
 
     @Override
-    public Zone createBuilding(int x, int y, Variant variant, PlainStructureParameters data)
+    public Zone createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
     {
         return new Zone(this, x, y, variant, data);
     }

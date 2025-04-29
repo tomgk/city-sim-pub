@@ -13,7 +13,7 @@ public final class EmptyStructureParameters implements StructureParameters<Empty
     private EmptyStructureParameters()
     {
         if(INSTANCE != null)
-            throw new IllegalStateException();
+            throw new IllegalStateException("only allowed once");
     }
 
     /**

@@ -1,10 +1,12 @@
 package org.exolin.citysim.ui.budget;
 
+import java.util.Objects;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.ui.ErrorDisplay;
 
 /**
  *
@@ -16,6 +18,8 @@ public interface BudgetCategory
     
     static BudgetCategory getFor(StructureType type)
     {
+        Objects.requireNonNull(type);
+        
         if(type instanceof BuildingType a)
         {
             ZoneType zoneType = a.getZoneType();
@@ -28,7 +32,10 @@ public interface BudgetCategory
         else if(type instanceof ZoneType)
             return null;
         else
-            throw new IllegalArgumentException();
+        {
+            ErrorDisplay.showOneTimeError(new UnsupportedOperationException("Not supported: "+type.getClass().getName()));
+            return null;
+        }
     }
     
     boolean isIncome();

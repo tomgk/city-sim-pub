@@ -1,5 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.LinkedHashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.connections.SelfConnections;
@@ -31,20 +33,24 @@ public class BudgetWindow extends JDialog
             new ZoneCategory(Zones.plants)
     );
     
+    private final JPanel lines = new JPanel(new GridLayout(0, 1));
+    
     public BudgetWindow(JFrame frame)
     {
         super(frame, true);
-        setLayout(new GridLayout(0, 1));
+        setLayout(new BorderLayout());
         
         for(BudgetCategory category : list)
         {
             BudgetLinePanel p = new BudgetLinePanel(category.getTitle(), Optional.of(category.isIncome()));
             categories.put(category, p);
-            add(p);
+            lines.add(p);
         }
         
         sum.setBorder(new MatteBorder(1, 0, 0, 0, Color.BLACK));
-        add(sum);
+        lines.add(sum);
+        
+        add(lines, BorderLayout.CENTER);
         
         setTitle("Budget");
         pack();

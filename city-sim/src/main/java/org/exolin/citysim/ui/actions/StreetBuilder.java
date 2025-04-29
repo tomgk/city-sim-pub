@@ -156,12 +156,12 @@ public class StreetBuilder implements BuildingAction
                     curType = type;
 
                 world.addBuilding(curType, x, y, curType.getVariantForDefaultImage());
-                world.reduceMoney(type.getCost());
+                world.reduceMoney(type.getBuildingCost());
             }
         }
         else
         {
-            ZonePlacement.performAction(marking, world, type, CONNECT_X, type.getCost(), true);
+            ZonePlacement.performAction(marking, world, type, CONNECT_X, type.getBuildingCost(), true);
         }
 
         start = null;
@@ -177,7 +177,7 @@ public class StreetBuilder implements BuildingAction
     @Override
     public int getCost()
     {
-        return type.getCost();
+        return type.getBuildingCost();
     }
 
     @Override

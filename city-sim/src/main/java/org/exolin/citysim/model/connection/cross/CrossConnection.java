@@ -26,6 +26,6 @@ public class CrossConnection extends Connection<CrossConnection, CrossConnection
     {
         CrossConnectionType type = getType();
         //TODO: maybe cost more than just the average
-        return BigDecimal.valueOf((type.getXType().getCost()+type.getYType().getCost())/2);
+        return BigDecimal.valueOf((type.getXType().getBuildingCost()+type.getYType().getBuildingCost())/2);
     }
 }

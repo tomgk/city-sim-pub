@@ -147,7 +147,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
     @Override
     public BigDecimal getMaintenance()
     {
-        return BigDecimal.valueOf(getType().getCost()).divide(BigDecimal.valueOf(100));
+        return BigDecimal.valueOf(getType().getBuildingCost()).divide(BigDecimal.valueOf(100));
     }
 
     @Override

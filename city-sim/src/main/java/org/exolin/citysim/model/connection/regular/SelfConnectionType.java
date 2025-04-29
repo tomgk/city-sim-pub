@@ -26,7 +26,10 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
         this.defaultImageVariant = Objects.requireNonNull(defaultImageVariant);
     }
 
-    public int getCost()
+    /**
+     * @return how much it costs to build one section
+     */
+    public int getBuildingCost()
     {
         return cost;
     }

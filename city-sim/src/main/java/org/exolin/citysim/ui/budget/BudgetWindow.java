@@ -34,6 +34,7 @@ public class BudgetWindow extends JDialog
     );
     
     private final JPanel lines = new JPanel(new GridLayout(0, 1));
+    private final DiffPanel diffPanel = new DiffPanel();
     
     public BudgetWindow(JFrame frame)
     {
@@ -51,6 +52,7 @@ public class BudgetWindow extends JDialog
         lines.add(sum);
         
         add(lines, BorderLayout.CENTER);
+        add(diffPanel, BorderLayout.SOUTH);
         
         setTitle("Budget");
         pack();
@@ -85,5 +87,7 @@ public class BudgetWindow extends JDialog
         for(BudgetLinePanel l : categories.values())
             l.showValues();
         sum.showValues();
+        
+        diffPanel.update(w, sum.getTaxRevenue(), sum.getExpenses());
     }
 }

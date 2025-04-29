@@ -97,4 +97,14 @@ public class BudgetLinePanel extends javax.swing.JPanel
         
         return expenses.toPlainString();
     }
+
+    public BigDecimal getTaxRevenue()
+    {
+        return taxRevenue;
+    }
+
+    public BigDecimal getExpenses()
+    {
+        return expenses;
+    }
 }

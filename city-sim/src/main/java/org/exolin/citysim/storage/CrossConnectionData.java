@@ -36,6 +36,6 @@ public class CrossConnectionData extends StructureData
     @Override
     protected StructureParameters getParameters()
     {
-        return new EmptyStructureParameters();
+        return EmptyStructureParameters.getInstance();
     }
 }

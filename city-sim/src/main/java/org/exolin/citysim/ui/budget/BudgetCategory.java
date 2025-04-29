@@ -21,10 +21,7 @@ public interface BudgetCategory
         Objects.requireNonNull(type);
         
         if(type instanceof BuildingType a)
-        {
-            ZoneType zoneType = a.getZoneType();
-            return new ZoneCategory(zoneType);
-        }
+            return new ZoneCategory(a.getZoneType());
         else if(type instanceof SelfConnectionType s)
             return new SelfConnectionCategory(s);
         else if(type instanceof TreeType)

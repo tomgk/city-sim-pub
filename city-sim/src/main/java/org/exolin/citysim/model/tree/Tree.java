@@ -76,8 +76,23 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureP
         if(y >= world.getGridSize())
             return;
         
-        if(world.getBuildingAt(x, y) != null)
+        Structure b = world.getBuildingAt(x, y);
+        if(b != null)
+        {
+            if(b instanceof Tree t)
+            {
+                if(!t.isAlive())
+                {
+                   if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
+                   {
+                       world.removeBuildingAt(x, y, true, false);
+                       world.addBuilding(Trees.TREES.getFirst(), x, y);
+                   }
+                }
+            }
+            
             return;
+        }
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))

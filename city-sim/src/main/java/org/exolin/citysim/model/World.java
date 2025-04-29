@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
-import org.exolin.citysim.bt.BuildingTypes;
-import org.exolin.citysim.bt.SelfConnections;
+import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.Zone;
@@ -28,7 +28,7 @@ public final class World
 {
     static
     {
-        BuildingTypes.init();
+        StructureTypes.init();
     }
     
     private final String name;

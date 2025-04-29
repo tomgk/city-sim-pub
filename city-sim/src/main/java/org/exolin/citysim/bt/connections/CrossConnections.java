@@ -1,10 +1,10 @@
-package org.exolin.citysim.bt;
+package org.exolin.citysim.bt.connections;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import static org.exolin.citysim.bt.SelfConnections.rail;
-import static org.exolin.citysim.bt.SelfConnections.street;
-import static org.exolin.citysim.bt.SelfConnections.water;
+import static org.exolin.citysim.bt.connections.SelfConnections.rail;
+import static org.exolin.citysim.bt.connections.SelfConnections.street;
+import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;

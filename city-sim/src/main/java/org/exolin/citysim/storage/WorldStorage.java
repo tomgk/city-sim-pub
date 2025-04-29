@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import org.exolin.citysim.bt.BuildingTypes;
+import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 
@@ -22,7 +22,7 @@ public class WorldStorage
         //WorldStorage loads types by name and not variable reference,
         //so it's possible that the types aren't loaded when WorldStorage is used
         //load manually here for that reason
-        BuildingTypes.init();
+        StructureTypes.init();
     }
     
     private static final ObjectMapper objectMapper = new ObjectMapper();

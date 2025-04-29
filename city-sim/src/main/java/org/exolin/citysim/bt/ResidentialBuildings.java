@@ -1,6 +1,6 @@
 package org.exolin.citysim.bt;
 
-import static org.exolin.citysim.bt.Buildings.createBuildingType;
+import static org.exolin.citysim.bt.buildings.Buildings.createBuildingType;
 import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.building.BuildingType;
 

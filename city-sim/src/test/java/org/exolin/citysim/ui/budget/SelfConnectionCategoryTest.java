@@ -1,7 +1,7 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

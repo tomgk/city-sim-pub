@@ -3,7 +3,7 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
-import org.exolin.citysim.bt.CrossConnections;
+import org.exolin.citysim.bt.connections.CrossConnections;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;

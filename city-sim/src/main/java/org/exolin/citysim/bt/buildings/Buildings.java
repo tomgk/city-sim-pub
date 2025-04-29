@@ -1,6 +1,7 @@
-package org.exolin.citysim.bt;
+package org.exolin.citysim.bt.buildings;
 
 import java.math.BigDecimal;
+import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -23,6 +24,6 @@ public class Buildings
 
     static void init()
     {
-        BuildingTypes.init();
+        StructureTypes.init();
     }
 }

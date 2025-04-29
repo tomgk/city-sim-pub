@@ -3,7 +3,7 @@ package org.exolin.citysim.storage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import org.exolin.citysim.bt.BusinessBuildings;
+import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;

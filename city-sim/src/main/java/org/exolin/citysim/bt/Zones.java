@@ -34,6 +34,6 @@ public class Zones
 
     static void init()
     {
-        BuildingTypes.init();
+        StructureTypes.init();
     }
 }

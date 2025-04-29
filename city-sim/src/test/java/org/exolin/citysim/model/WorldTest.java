@@ -2,8 +2,8 @@ package org.exolin.citysim.model;
 
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
-import org.exolin.citysim.bt.BusinessBuildings;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
 import org.exolin.citysim.model.zone.ZoneType;

@@ -1,11 +1,11 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.bt.BusinessBuildings;
-import org.exolin.citysim.bt.IndustrialBuildings;
 import org.exolin.citysim.bt.ResidentialBuildings;
-import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.buildings.BusinessBuildings;
+import org.exolin.citysim.bt.buildings.IndustrialBuildings;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

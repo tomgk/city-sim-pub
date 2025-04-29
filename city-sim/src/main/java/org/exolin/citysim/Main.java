@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
-import org.exolin.citysim.bt.BuildingTypes;
+import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GameControlPanel;
@@ -68,7 +68,7 @@ public class Main
     
     public static void play(World world)
     {
-        BuildingTypes.init();
+        StructureTypes.init();
         
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

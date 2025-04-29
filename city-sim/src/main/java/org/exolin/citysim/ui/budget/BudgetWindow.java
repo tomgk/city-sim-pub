@@ -9,8 +9,8 @@ import java.util.Optional;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.border.MatteBorder;
-import org.exolin.citysim.bt.SelfConnections;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 

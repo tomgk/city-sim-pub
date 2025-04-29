@@ -1,7 +1,8 @@
-package org.exolin.citysim.bt;
+package org.exolin.citysim.bt.connections;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
@@ -93,6 +94,6 @@ public class SelfConnections
 
     static void init()
     {
-        BuildingTypes.init();
+        StructureTypes.init();
     }
 }

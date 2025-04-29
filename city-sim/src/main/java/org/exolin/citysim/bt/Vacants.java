@@ -12,7 +12,7 @@ public class Vacants
 {
     static
     {
-        BuildingTypes.init();
+        StructureTypes.init();
     }
     
     public static final VacantsPack tore_down1 = new VacantsPack("destruction/tore_down", 1, true);

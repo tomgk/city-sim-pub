@@ -1,7 +1,7 @@
 package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.bt.SelfConnections;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.PlainStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;

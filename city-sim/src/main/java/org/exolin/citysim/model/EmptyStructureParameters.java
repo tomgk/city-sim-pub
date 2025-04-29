@@ -10,7 +10,11 @@ public final class EmptyStructureParameters implements StructureParameters<Empty
 {
     private static final EmptyStructureParameters INSTANCE = new EmptyStructureParameters();
     
-    private EmptyStructureParameters(){}
+    private EmptyStructureParameters()
+    {
+        if(INSTANCE != null)
+            throw new IllegalStateException();
+    }
 
     /**
      * Returns the one instance.

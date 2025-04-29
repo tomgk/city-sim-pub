@@ -36,6 +36,15 @@ public class ErrorDisplay
         JOptionPane.showMessageDialog(parent, out.toString(), "Unexpected Exception", JOptionPane.ERROR_MESSAGE);
     }
     
+    public static void showOneTimeError(Exception message)
+    {
+        StringWriter out = new StringWriter();
+        PrintWriter pw = new PrintWriter(out);
+        message.printStackTrace(pw);
+        pw.flush();
+        showOneTimeError(out.toString());
+    }
+    
     public static void showOneTimeError(String message)
     {
         Long last = oneTimeErrors.get(message);

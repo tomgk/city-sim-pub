@@ -96,15 +96,22 @@ public final class GamePanel extends JComponent
         
         Map<String, List<Action>> actions = new LinkedHashMap<>();
         
-        List<Action> sactions = new ArrayList<>();
-        sactions.add(Action.NONE);
-        sactions.add(new TearDownAction(getWorld, false));
-        sactions.add(new StreetBuilder(getWorld, street, true));
-        sactions.add(new StreetBuilder(getWorld, rail, true));
-        sactions.add(new StreetBuilder(getWorld, water, false));
-        sactions.add(new PlaceTrees(getWorld));
-        sactions.add(new PlaceFire(getWorld));
-        actions.put("Special", sactions);
+        {
+            List<Action> sactions = new ArrayList<>();
+            sactions.add(Action.NONE);
+            sactions.add(new TearDownAction(getWorld, false));
+            sactions.add(new PlaceTrees(getWorld));
+            sactions.add(new PlaceFire(getWorld));
+            actions.put("Special", sactions);
+        }
+        
+        {
+            List<Action> sactions = new ArrayList<>();
+            sactions.add(new StreetBuilder(getWorld, street, true));
+            sactions.add(new StreetBuilder(getWorld, rail, true));
+            sactions.add(new StreetBuilder(getWorld, water, false));
+            actions.put("Infrastructure", sactions);
+        }
         
         {
             List<Action> zoneActions = new ArrayList<>();

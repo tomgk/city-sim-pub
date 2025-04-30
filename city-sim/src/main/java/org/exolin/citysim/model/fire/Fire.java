@@ -9,6 +9,8 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.vacant.Vacant;
+import org.exolin.citysim.model.building.vacant.VacantParameters;
+import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.building.vacant.VacantsPack;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
@@ -144,7 +146,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             if(getData().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
-                w.addBuilding(Vacants.tore_down().getVacantBuilding(z.get()), getX(), getY());
+                w.addBuilding(Vacants.tore_down().getVacantBuilding(z.get()), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters());
         }
     }
 

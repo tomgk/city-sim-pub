@@ -11,7 +11,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class VacantType extends StructureType<Vacant, VacantType.Variant, EmptyStructureParameters>
+public class VacantType extends StructureType<Vacant, VacantType.Variant, VacantParameters>
 {
     public enum Variant implements StructureVariant
     {
@@ -47,7 +47,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, EmptyS
     }
 
     @Override
-    public Vacant createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
+    public Vacant createBuilding(int x, int y, Variant variant, VacantParameters data)
     {
         return new Vacant(this, x, y, variant, data);
     }

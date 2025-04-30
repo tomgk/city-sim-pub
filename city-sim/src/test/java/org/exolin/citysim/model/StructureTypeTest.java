@@ -6,7 +6,6 @@ import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
-import org.exolin.citysim.model.destroyed.DestroyedType;
 import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.tree.TreeType;
@@ -67,12 +66,6 @@ public class StructureTypeTest
     public void testGetStructureVariantClass_SelfConnectionType()
     {
         assertEquals(ConnectionVariant.class, StructureType.getStructureVariantClass(SelfConnectionType.class));
-    }
-    
-    @Test
-    public void testGetStructureVariantClass_DestroyedType()
-    {
-        assertEquals(DestroyedType.Variant.class, StructureType.getStructureVariantClass(DestroyedType.class));
     }
     
     @Test

@@ -1,6 +1,7 @@
 package org.exolin.citysim.model;
 
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.ConnectionVariant;
@@ -72,6 +73,12 @@ public class StructureTypeTest
     public void testGetStructureVariantClass_DestroyedType()
     {
         assertEquals(DestroyedType.Variant.class, StructureType.getStructureVariantClass(DestroyedType.class));
+    }
+    
+    @Test
+    public void testGetStructureVariantClass_VacantType()
+    {
+        assertEquals(VacantType.Variant.class, StructureType.getStructureVariantClass(VacantType.class));
     }
     
     @Test

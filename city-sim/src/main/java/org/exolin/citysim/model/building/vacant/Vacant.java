@@ -18,7 +18,7 @@ public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, Va
     @Override
     public ZoneType getZoneType()
     {
-        return getData().getZone();
+        return getData().getZoneType();
     }
 
     @Override

@@ -9,21 +9,21 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class VacantParameters implements StructureParameters<VacantParameters>
 {
-    private final ZoneType zone;
+    private final ZoneType zoneType;
 
-    public VacantParameters(ZoneType zone)
+    public VacantParameters(ZoneType zoneType)
     {
-        this.zone = zone;
+        this.zoneType = zoneType;
     }
 
-    public ZoneType getZone()
+    public ZoneType getZoneType()
     {
-        return zone;
+        return zoneType;
     }
-    
+
     @Override
     public VacantParameters copy()
     {
-        return new VacantParameters(zone);
+        return new VacantParameters(zoneType);
     }
 }

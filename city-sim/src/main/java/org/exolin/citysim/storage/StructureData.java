@@ -13,6 +13,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
+import org.exolin.citysim.model.building.vacant.Vacant;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.fire.Fire;
@@ -29,17 +30,17 @@ import org.exolin.citysim.model.zone.Zone;
 public abstract class StructureData
 {
     @JsonProperty
-    public String type;
+    private final String type;
     
     @JsonProperty
-    public int x;
+    private final int x;
     
     @JsonProperty
-    public int y;
+    private final int y;
     
     @JsonProperty
     @JsonInclude(Include.NON_NULL)
-    public String variant;
+    private final String variant;
     
     private static final String DEFAULT_NAME = "DEFAULT";
 
@@ -81,6 +82,8 @@ public abstract class StructureData
             return new TreeData((Tree)b);
         else if(b.getClass() == Fire.class)
             return new FireData((Fire)b);
+        else if(b.getClass() == Vacant.class)
+            return new VacantData((Vacant)b);
         else
             throw new UnsupportedOperationException(b.getClass().getName());
     }
@@ -97,6 +100,8 @@ public abstract class StructureData
             return TreeData.class;
         else if(buildingClass == Fire.class)
             return FireData.class;
+        else if(buildingClass == Vacant.class)
+            return VacantData.class;
         else
             throw new UnsupportedOperationException(buildingClass.getName());
     }

@@ -37,11 +37,13 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceFire;
 import org.exolin.citysim.ui.actions.PlaceTrees;
+import org.exolin.citysim.ui.actions.PlaceVacant;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
@@ -123,6 +125,19 @@ public final class GamePanel extends JComponent
                 actions.put(categoryName, new ArrayList<>());
             
             actions.get(categoryName).add(new PlaceBuilding(getWorld, type));
+        }
+        
+        for(VacantType type : VacantType.vacantTypes())
+        {
+            for(ZoneType zoneType : ZoneType.types(ZoneType.class))
+            {
+                String categoryName = zoneType.getName();
+
+                if(!actions.containsKey(categoryName))
+                    actions.put(categoryName, new ArrayList<>());
+
+                actions.get(categoryName).add(new PlaceVacant(getWorld, type, zoneType));
+            }
         }
         
         return actions;

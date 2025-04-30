@@ -25,6 +25,11 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
         
         return RandomUtils.random(forSize);
     }
+    
+    public static List<VacantType> vacantTypes()
+    {
+        return types(VacantType.class);
+    }
 
     private void addVacant(VacantType t)
     {

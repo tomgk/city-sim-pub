@@ -7,7 +7,6 @@ import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.utils.RandomUtils;
 
 /**
@@ -37,7 +36,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
         }
     }
     
-    private final List<StructureType> buildings = new ArrayList<>();
+    private final List<BuildingType> buildings = new ArrayList<>();
     
     private static List<Animation> getAnimations(String name, boolean withLowDensity)
     {
@@ -82,14 +81,9 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
         this.buildings.add(building);
     }
     
-    public void addVacant(VacantType building)
+    public BuildingType getRandomBuilding(int maxSize)
     {
-        this.buildings.add(building);
-    }
-    
-    public StructureType getRandomBuilding(int maxSize)
-    {
-        List<StructureType> smallBuildings = buildings.stream()
+        List<BuildingType> smallBuildings = buildings.stream()
                 .filter(b -> b.getSize() <= maxSize)
                 //.filter(b -> b.getSize() > 1)
                 .toList();

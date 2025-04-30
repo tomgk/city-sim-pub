@@ -1,7 +1,6 @@
 package org.exolin.citysim.model.building.vacant;
 
 import java.math.BigDecimal;
-import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.zone.ZoneType;
 
@@ -9,14 +8,9 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, EmptyStructureParameters>
+public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, VacantParameters>
 {   
-    public Vacant(VacantType type, int x, int y, VacantType.Variant version)
-    {
-        this(type, x, y, version, EmptyStructureParameters.getInstance());
-    }
-    
-    public Vacant(VacantType type, int x, int y, VacantType.Variant version, EmptyStructureParameters data)
+    public Vacant(VacantType type, int x, int y, VacantType.Variant version, VacantParameters data)
     {
         super(type, x, y, version, data);
     }
@@ -24,7 +18,7 @@ public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, Em
     @Override
     public ZoneType getZoneType()
     {
-        return getType().getZoneType();
+        return getData().getZone();
     }
 
     @Override

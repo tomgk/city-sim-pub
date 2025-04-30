@@ -9,7 +9,8 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.vacant.Vacant;
-import org.exolin.citysim.model.building.vacant.VacantsPack;
+import org.exolin.citysim.model.building.vacant.VacantParameters;
+import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
@@ -144,7 +145,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             if(getData().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
-                w.addBuilding(Vacants.tore_down().getVacantBuilding(z.get()), getX(), getY());
+                w.addBuilding(Vacants.tore_down(), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(z.get()));
         }
     }
 
@@ -172,7 +173,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         
         //don't put street/rail/water on fire
         Structure s = w.getBuildingAt(x, y);
-        if(s instanceof Connection || (s != null && VacantsPack.isDestroyed(s.getType())))
+        if(s instanceof Connection || (s != null && VacantType.isDestroyed(s.getType())))
             return false;
         else if(s instanceof org.exolin.citysim.model.fire.Fire)
             //count as spread

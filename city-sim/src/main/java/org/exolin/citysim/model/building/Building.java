@@ -5,8 +5,8 @@ import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.building.vacant.VacantParameters;
 import org.exolin.citysim.model.building.vacant.VacantType;
-import org.exolin.citysim.model.building.vacant.VacantsPack;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -77,7 +77,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         }
         
         world.removeBuildingAt(this);
-        VacantType vacant = VacantsPack.getRandom(getZoneType(), getSize());
-        world.addBuilding(vacant, getX(), getY());
+        VacantType vacant = VacantType.getRandom(getSize());
+        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getZoneType()));
     }
 }

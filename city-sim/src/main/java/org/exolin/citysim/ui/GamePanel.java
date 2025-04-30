@@ -119,7 +119,7 @@ public final class GamePanel extends JComponent
         
         for(BuildingType type : StructureType.actualBuildingTypes())
         {
-            String categoryName = type.getZoneType() != null ? type.getZoneType().getName() : "Special buildings";
+            String categoryName = type.getZoneType() != null ? type.getZoneType().getTitle(): "Special buildings";
             
             if(!actions.containsKey(categoryName))
                 actions.put(categoryName, new ArrayList<>());
@@ -131,7 +131,7 @@ public final class GamePanel extends JComponent
         {
             for(ZoneType zoneType : ZoneType.types(ZoneType.class))
             {
-                String categoryName = zoneType.getName();
+                String categoryName = zoneType.getTitle();
 
                 if(!actions.containsKey(categoryName))
                     actions.put(categoryName, new ArrayList<>());

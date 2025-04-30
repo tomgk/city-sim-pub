@@ -24,13 +24,30 @@ public class SelectorPanel extends JPanel
 {
     private GamePanel panel;
     
-    private final DefaultComboBoxModel<String> categoriesModel;
-    private final JComboBox<String> categoriesCombobox;
+    private final DefaultComboBoxModel<Category> categoriesModel;
+    private final JComboBox<Category> categoriesCombobox;
     private final JPanel itemsPanel;
-    private final Map<String, List<Action>> actions = new LinkedHashMap<>();
-    private final Map<Action, String> actionCategories = new IdentityHashMap<>();
+    private final Map<String, Category> actions = new LinkedHashMap<>();
+    private final Map<Action, Category> actionCategories = new IdentityHashMap<>();
     private SelectorItemPanel selected = null;
     private Action setAction;
+    
+    private static class Category
+    {
+        private final String title;
+        private final List<Action> actions = new ArrayList<>();
+
+        public Category(String title)
+        {
+            this.title = title;
+        }
+
+        @Override
+        public String toString()
+        {
+            return title;
+        }
+    }
     
     public SelectorPanel()
     {
@@ -40,7 +57,7 @@ public class SelectorPanel extends JPanel
         this.categoriesCombobox = new JComboBox<>(categoriesModel);
         categoriesCombobox.addActionListener((ActionEvent e) ->
         {
-            executeSelect((String)categoriesCombobox.getSelectedItem());
+            executeSelect((Category)categoriesCombobox.getSelectedItem());
         });
         
         this.itemsPanel = new JPanel(new GridLayout(0, 1));
@@ -49,10 +66,9 @@ public class SelectorPanel extends JPanel
         add(new JScrollPane(itemsPanel), BorderLayout.CENTER);
     }
     
-    private void executeSelect(String category)
+    private void executeSelect(Category category)
     {
-        List<Action> a = actions.get(category);
-        setList(a != null ? a : List.of());
+        setList(category);
         //reset, so that current action isn't out another category
         SelectorPanel.this.panel.setAction(Action.NONE);
         setAction = null;
@@ -60,7 +76,7 @@ public class SelectorPanel extends JPanel
     
     public void doneAdding()
     {
-        executeSelect((String)categoriesCombobox.getSelectedItem());
+        executeSelect((Category)categoriesCombobox.getSelectedItem());
     }
 
     public void setPanel(GamePanel panel)
@@ -68,10 +84,10 @@ public class SelectorPanel extends JPanel
         this.panel = panel;
     }
     
-    private void setList(List<Action> list)
+    private void setList(Category list)
     {
         itemsPanel.removeAll();
-        for(Action action : list)
+        for(Action action : list.actions)
             itemsPanel.add(new SelectorItemPanel(action));
         itemsPanel.revalidate();
         itemsPanel.repaint();
@@ -79,14 +95,16 @@ public class SelectorPanel extends JPanel
     
     public void add(String name, Action action)
     {
-        if(!actions.containsKey(name))
+        Category c = actions.get(name);
+        if(c == null)
         {
-            actions.put(name, new ArrayList<>());
-            categoriesModel.addElement(name);
+            c = new Category(name);
+            actions.put(name, c);
+            categoriesModel.addElement(c);
         }
         
-        actionCategories.put(action, name);
-        actions.computeIfAbsent(name, n -> new ArrayList<>()).add(action);
+        actionCategories.put(action, c);
+        c.actions.add(action);
     }
 
     void select(SelectorItemPanel item)
@@ -119,20 +137,16 @@ public class SelectorPanel extends JPanel
         if(setAction == newAction)
             return;
         
-        String category = actionCategories.get(newAction);
+        Category category = actionCategories.get(newAction);
         if(category == null)
             throw new IllegalArgumentException(newAction.getName()+" vs "+actionCategories);
         
-        List<Action> cactions = this.actions.get(category);
-        if(cactions == null)
-            throw new IllegalArgumentException(newAction.getName());
-        
-        int index = cactions.indexOf(newAction);
+        int index = category.actions.indexOf(newAction);
         if(index == -1)
             throw new IllegalArgumentException();
         
         categoriesCombobox.setSelectedItem(category);
-        setList(cactions);
+        setList(category);
         SelectorItemPanel component = (SelectorItemPanel)itemsPanel.getComponent(index);
         component.setSelected(true);
     }

@@ -1,10 +1,13 @@
 package org.exolin.citysim.model.building.vacant;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
-import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.utils.RandomUtils;
 
 /**
  *
@@ -12,31 +15,49 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class VacantType extends StructureType<Vacant, VacantType.Variant, VacantParameters>
 {
+    private static final Map<Integer, List<VacantType>> vacants = new LinkedHashMap<>();
+    
+    public static VacantType getRandom(int size)
+    {
+        List<VacantType> forSize = vacants.get(size);
+        if(forSize == null)
+            throw new IllegalArgumentException("nothing for "+size);
+        
+        return RandomUtils.random(forSize);
+    }
+
+    private void addVacant(VacantType t)
+    {
+        List<VacantType> forSize = vacants.computeIfAbsent(t.getSize(), s -> new ArrayList<>());
+        forSize.add(t);
+    }
+    
+    public static boolean isDestroyed(StructureType type)
+    {
+        if(type instanceof VacantType t)
+            return t.isDestroyed();
+        else
+            return false;
+    }
+    
     public enum Variant implements StructureVariant
     {
         DEFAULT
     }
     
-    private final ZoneType zoneType;
     private final boolean destroyed;
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public VacantType(String name, Animation animation, int size, ZoneType zoneType, boolean destroyed)
+    public VacantType(String name, int size, boolean destroyed)
     {
-        super(name, animation, size);
-        this.zoneType = Objects.requireNonNull(zoneType);
+        super(name, Animation.createUnanimated(name), size);
         this.destroyed = destroyed;
-        zoneType.addVacant(this);
+        addVacant(this);
     }
 
     public boolean isDestroyed()
     {
         return destroyed;
-    }
-    
-    public ZoneType getZoneType()
-    {
-        return zoneType;
     }
 
     @Override

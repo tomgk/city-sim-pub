@@ -10,11 +10,6 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, VacantParameters>
 {   
-    public Vacant(VacantType type, int x, int y, VacantType.Variant version)
-    {
-        this(type, x, y, version, new VacantParameters());
-    }
-    
     public Vacant(VacantType type, int x, int y, VacantType.Variant version, VacantParameters data)
     {
         super(type, x, y, version, data);
@@ -23,7 +18,7 @@ public class Vacant extends Structure<Vacant, VacantType, VacantType.Variant, Va
     @Override
     public ZoneType getZoneType()
     {
-        return getType().getZoneType();
+        return getData().getZone();
     }
 
     @Override

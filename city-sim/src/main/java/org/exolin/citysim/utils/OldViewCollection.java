@@ -19,12 +19,12 @@ public class OldViewCollection<T> extends AbstractCollection<T>
     private static class Entry<T>
     {
         private final T object;
-        private final int version;
+        private final int logicalIndex;
 
         public Entry(T object, int version)
         {
             this.object = object;
-            this.version = version;
+            this.logicalIndex = version;
         }
     }
     
@@ -34,43 +34,29 @@ public class OldViewCollection<T> extends AbstractCollection<T>
     //got removed. Then a check can be added, if the currently pointed to element
     //is the expected one, and if not, search into the direction where the correct element is
     //(up, if the currently pointed element is a lower version, down if it is too high)
-    private class Iter<T> implements Iterator<T>
+    private class Iter implements Iterator<T>
     {
-        private final Iterator<Entry<T>> iterator;
-        private final int logicalIndex;
-        private Object next;
-        private static final Object TO_BE_READ = new Object();
-        private static final Object END = new Object();
+        private int pointer;
+        private int logicalIndex;
+        private final int maxIndex;
 
-        public Iter(Iterator<Entry<T>> iterator, int logicalIndex)
+        public Iter(int maxLogicalIndex)
         {
-            this.iterator = iterator;
-            this.logicalIndex = logicalIndex;
-            this.next = TO_BE_READ;
+            this.pointer = 0;
+            this.logicalIndex = entries.getFirst().logicalIndex;
+            this.maxIndex = maxLogicalIndex;
         }
         
-        private void readNext()
+        private void adjustPointer()
         {
-            while(iterator.hasNext())
-            {
-                Entry<T> cur = iterator.next();
-                if(cur.version <= logicalIndex)
-                {
-                    next = cur.object;
-                    return;
-                }
-            }
-            
-            next = END;
+            if(logicalIndex != entries.get(pointer).logicalIndex)
+                throw new UnsupportedOperationException("TODO");
         }
         
         @Override
         public boolean hasNext()
         {
-            if(next == TO_BE_READ)
-                readNext();
-            
-            return next != END;
+            return logicalIndex <= maxIndex;
         }
 
         @Override
@@ -79,15 +65,32 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             if(!hasNext())
                 throw new NoSuchElementException();
             
-            T val = (T)next;
-            readNext();
+            adjustPointer();
+            
+            T val = entries.get(pointer).object;
+            
+            //move to next
+            ++pointer;
+            logicalIndex = entries.get(pointer).logicalIndex;
+            
             return val;
         }
 
         @Override
         public void remove()
         {
-            iterator.remove();
+            //TODO: check if next has been called before
+            
+            adjustPointer();
+            
+            entries.remove(pointer);
+            //the element that was after the removed one is now in place
+            //this move could move it beyond maxIndex, but that gets checked for
+            //in readNext()
+            logicalIndex = entries.get(pointer).logicalIndex;
+            
+            //pointer stays the same, since it already moved to the next element
+            
             //no change in addCount, since nothing new got added
         }
     }
@@ -103,7 +106,7 @@ public class OldViewCollection<T> extends AbstractCollection<T>
     @Override
     public Iterator<T> iterator()
     {
-        return new Iter<>(entries.iterator(), addCount);
+        return new Iter(addCount);
     }
 
     @Override

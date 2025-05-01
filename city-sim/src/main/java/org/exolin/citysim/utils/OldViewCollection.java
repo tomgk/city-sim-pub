@@ -52,10 +52,54 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             this.maxIndex = maxLogicalIndex;
         }
         
+        private int getLogicalIndexAt(int index)
+        {
+            return entries.get(index).logicalIndex;
+        }
+        
         private void adjustPointer()
         {
-            if(logicalIndex != entries.get(pointer).logicalIndex)
-                throw new UnsupportedOperationException("TODO");
+            int actLogicalIndex = getLogicalIndexAt(pointer);
+            
+            //current log. index not high enoug -> go further
+            if(logicalIndex > actLogicalIndex)
+            {
+                while(logicalIndex > actLogicalIndex)
+                {
+                    ++pointer;
+                    actLogicalIndex = getLogicalIndexAt(pointer);
+                }
+                
+                //previously pointed to element might no longer be here
+                //then point to whatever came after
+                logicalIndex = actLogicalIndex;
+            }
+            //
+            else if(logicalIndex < actLogicalIndex)
+            {
+                //TODO: when going back, sometimes it's needed to go forward one again
+                //example:
+                //  logicalIndex = 4
+                //  entries = [1, 2, 5, 6]
+                //in this case logicalIndex should point to 5, since 4 was deleted
+                while(logicalIndex < actLogicalIndex)
+                {
+                    --pointer;
+                    actLogicalIndex = getLogicalIndexAt(pointer);
+                }
+                
+                //if target was deleted -> move to next,
+                //since that is what should be pointed to after a deletion
+                if(logicalIndex != actLogicalIndex)
+                {
+                    ++pointer;
+                    actLogicalIndex = getLogicalIndexAt(pointer);
+                }
+                
+                //previously pointed to element might no longer be here
+                //then point to whatever came after
+                logicalIndex = actLogicalIndex;
+            }
         }
         
         @Override
@@ -92,7 +136,7 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             //the element that was after the removed one is now in place
             //this move could move it beyond maxIndex, but that gets checked for
             //in readNext()
-            logicalIndex = entries.get(pointer).logicalIndex;
+            logicalIndex = getLogicalIndexAt(pointer);
             
             //pointer stays the same, since it already moved to the next element
             

@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
- *
+ * A collection that allows modification during iteration,
+ * with the iterator only returning items that were in the
+ * collection at the time of creation of the iterator and
+ * have not been removed yet.
+ * 
  * @author Thomas
  * @param <T>
  */

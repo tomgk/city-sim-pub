@@ -111,6 +111,7 @@ public class OldViewCollection<T> extends AbstractCollection<T>
         @Override
         public boolean hasNext()
         {
+            adjustPointer();
             return logicalIndex <= maxIndex;
         }
 

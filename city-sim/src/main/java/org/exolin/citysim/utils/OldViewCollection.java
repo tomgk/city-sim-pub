@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 public class OldViewCollection<T> extends AbstractCollection<T>
 {
     private final List<Entry<T>> entries = new ArrayList<>();
-    private int currentVersion = 0;
+    private int addCount = 0;
     
     private static class Entry<T>
     {
@@ -29,18 +29,23 @@ public class OldViewCollection<T> extends AbstractCollection<T>
     }
     
     //TODO: can't deal with modification outside of Iterator
+    //potential fix: give each entry an own version,
+    //basically having each entry the index in the collection if nothing ever
+    //got removed. Then a check can be added, if the currently pointed to element
+    //is the expected one, and if not, search into the direction where the correct element is
+    //(up, if the currently pointed element is a lower version, down if it is too high)
     private class Iter<T> implements Iterator<T>
     {
         private final Iterator<Entry<T>> iterator;
-        private final int version;
+        private final int logicalIndex;
         private Object next;
         private static final Object TO_BE_READ = new Object();
         private static final Object END = new Object();
 
-        public Iter(Iterator<Entry<T>> iterator, int version)
+        public Iter(Iterator<Entry<T>> iterator, int logicalIndex)
         {
             this.iterator = iterator;
-            this.version = version;
+            this.logicalIndex = logicalIndex;
             this.next = TO_BE_READ;
         }
         
@@ -49,7 +54,7 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             while(iterator.hasNext())
             {
                 Entry<T> cur = iterator.next();
-                if(cur.version <= version)
+                if(cur.version <= logicalIndex)
                 {
                     next = cur.object;
                     return;
@@ -83,22 +88,22 @@ public class OldViewCollection<T> extends AbstractCollection<T>
         public void remove()
         {
             iterator.remove();
-            ++currentVersion;
+            //no change in addCount, since nothing new got added
         }
     }
     
     @Override
     public boolean add(T e)
     {
-        ++currentVersion;
-        entries.add(new Entry<>(e, currentVersion));
+        ++addCount;
+        entries.add(new Entry<>(e, addCount));
         return true;
     }
 
     @Override
     public Iterator<T> iterator()
     {
-        return new Iter<>(entries.iterator(), currentVersion);
+        return new Iter<>(entries.iterator(), addCount);
     }
 
     @Override

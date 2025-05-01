@@ -57,6 +57,12 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             return entries.get(index).logicalIndex;
         }
         
+        /**
+         * Moves the {@link #pointer} to the appropriate entry for
+         * {@link #logicalIndex}.
+         * 
+         * This changes the {@link #logicalIndex}, if that entry has been removed.
+         */
         private void adjustPointer()
         {
             int actLogicalIndex = getLogicalIndexAt(pointer);

@@ -12,6 +12,11 @@ import java.util.Objects;
  * with the iterator only returning items that were in the
  * collection at the time of creation of the iterator and
  * have not been removed yet.
+ * <p>
+ * 
+ * <em>IMPORTANT</em>: The call to {@link Iterator#next()} has to be called
+ * after {@link Iterator#hasNext()} without removing elements from the collection
+ * because otherwise, the call to {@link Iterator#next()} might change
  * 
  * @author Thomas
  * @param <T>

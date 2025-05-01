@@ -114,4 +114,28 @@ public class OldViewCollection<T> extends AbstractCollection<T>
     {
         return entries.size();
     }
+
+    @Override
+    public boolean contains(Object o)
+    {
+        return entries.stream().anyMatch(e -> Objects.equals(e.object, o));
+    }
+
+    @Override
+    public void clear()
+    {
+        entries.clear();
+    }
+
+    @Override
+    public Object[] toArray()
+    {
+        //this optimization only works with the Object[] version of toArray
+        //where wrapped and unwrapped fit into it
+        Object[] arr = entries.toArray();
+        for(int i=0;i<arr.length;++i)
+            arr[i] = ((Entry<T>)arr[i]).object;
+        return arr;
+    }
+
 }

@@ -2,10 +2,9 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.exolin.citysim.model.EmptyStructureParameters;
-import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
 
 /**
@@ -34,8 +33,8 @@ public class TreeData extends StructureData
     }
 
     @Override
-    protected StructureParameters getParameters()
+    protected TreeParameters getParameters()
     {
-        return EmptyStructureParameters.getInstance();
+        return new TreeParameters();
     }
 }

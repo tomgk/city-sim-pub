@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.exolin.citysim.model.Animation;
-import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.utils.ImageUtils;
 
@@ -15,7 +14,7 @@ import org.exolin.citysim.utils.ImageUtils;
  *
  * @author Thomas
  */
-public class TreeType extends StructureType<Tree, TreeVariant, EmptyStructureParameters>
+public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
 {
     private final int count;
     private final boolean alive;
@@ -66,7 +65,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, EmptyStructurePar
     }
     
     @Override
-    public Tree createBuilding(int x, int y, TreeVariant variant, EmptyStructureParameters data)
+    public Tree createBuilding(int x, int y, TreeVariant variant, TreeParameters data)
     {
         return new Tree(this, x, y, variant, data);
     }

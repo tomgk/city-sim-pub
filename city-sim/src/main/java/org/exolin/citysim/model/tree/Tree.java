@@ -3,7 +3,6 @@ package org.exolin.citysim.model.tree;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
-import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.utils.RandomUtils;
@@ -12,14 +11,14 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureParameters>
+public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
 {
     public Tree(TreeType type, int x, int y, TreeVariant variant)
     {
-        this(type, x, y, variant, EmptyStructureParameters.getInstance());
+        this(type, x, y, variant, new TreeParameters());
     }
     
-    public Tree(TreeType type, int x, int y, TreeVariant variant, EmptyStructureParameters data)
+    public Tree(TreeType type, int x, int y, TreeVariant variant, TreeParameters data)
     {
         super(type, x, y, variant, data);
     }
@@ -56,7 +55,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureP
             if(plusOne.isPresent())
             {
                 world.removeBuildingAt(this);
-                world.addBuilding(plusOne.get(), getX(), getY(), getVariant());
+                world.addBuilding(plusOne.get(), getX(), getY(), getVariant(), getData());
             }
         }
         
@@ -86,7 +85,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureP
                    if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                    {
                        world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
-                       world.addBuilding(Trees.TREES.getFirst(), x, y);
+                       world.addBuilding(Trees.TREES.getFirst(), x, y, getVariant(), t.getData());
                    }
                 }
             }
@@ -96,7 +95,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureP
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Trees.TREES.getFirst(), x, y);
+            world.addBuilding(Trees.TREES.getFirst(), x, y, TreeVariant.random(), new TreeParameters());
     }
 
     public boolean isAlive()

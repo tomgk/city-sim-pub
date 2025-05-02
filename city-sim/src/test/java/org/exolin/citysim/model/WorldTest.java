@@ -3,21 +3,17 @@ package org.exolin.citysim.model;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
-import org.exolin.citysim.Main;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
-import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.storage.WorldStorage;
 import org.exolin.citysim.storage.WorldStorageTest;
-import org.exolin.citysim.ui.actions.ZonePlacement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -131,8 +127,6 @@ public class WorldTest
         */
         Fire.placeMultiple(w, Zones.business, 1, 1, 4, 4, ZoneType.Variant.DEFAULT, EmptyStructureParameters.getInstance());
         
-        assertEquals(13, w.getBuildings().size());
-        
         WorldStorage.serialize(w, System.out);
         
         System.out.println();
@@ -148,6 +142,8 @@ public class WorldTest
         */
         w.addBuilding(BusinessBuildings.car_cinema, 3, 3);
         
+        assertEquals(13, w.getBuildings().size());
+        
         WorldStorage.serialize(w, System.out);
         
         String expected = """
@@ -155,6 +151,10 @@ public class WorldTest
                             "gridSize" : 30,
                             "money" : 0,
                             "buildings" : [ {
+                              "type" : "zone_business",
+                              "x" : 1,
+                              "y" : 1
+                            }, {
                               "type" : "zone_business",
                               "x" : 2,
                               "y" : 1
@@ -166,6 +166,10 @@ public class WorldTest
                               "type" : "zone_business",
                               "x" : 3,
                               "y" : 1
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 2,
+                              "y" : 2
                             }, {
                               "type" : "zone_business",
                               "x" : 1,

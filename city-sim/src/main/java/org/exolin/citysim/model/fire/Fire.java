@@ -222,6 +222,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     
     private static Optional<StructureType> getAfterBurn(Structure s)
     {
+        //TODO: burning a zone or a tree with a zone should have the zone behind
         if(s instanceof Tree t)
             return Optional.of(t.getType().getDead());
         else

@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.fire;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.IntSupplier;
 import org.exolin.citysim.bt.Vacants;
@@ -26,12 +27,6 @@ import org.exolin.citysim.utils.RandomUtils;
  */
 public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
 {
-    /*
-    public Fire(FireType type, int x, int y, FireType.Variant variant)
-    {
-        this(type, x, y, variant, new FireParameters());
-    }*/
-    
     public Fire(FireType type, int x, int y, FireVariant variant, FireParameters data)
     {
         super(type, x, y, variant, data);
@@ -91,11 +86,9 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             throw new IllegalStateException("undefined life");
         }
         
-        //System.out.println("Reducde "+remainingLife+" by "+ticks);
         data.remainingLife -= ticks;
         if(data.remainingLife <= 0)
         {
-            //System.out.println("death");
             die(w);
             return;
         }
@@ -219,7 +212,6 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         };
         
         int e = el.getAsInt() * 1000;
-        //System.out.println("Start with "+e);
         return e;
     }
     
@@ -238,6 +230,8 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     
     public static void replaceWithFire(World w, Structure s)
     {
+        Objects.requireNonNull(s);
+        
         if(s instanceof Fire)
             return;
         

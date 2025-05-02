@@ -15,23 +15,23 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class TreeData extends StructureData
 {
     @JsonProperty
-    private final String zone;
+    private final Optional<String> zone;
     
     public TreeData(Tree b)
     {
         super(b);
-        this.zone = b.getData().getZone().map(ZoneType::getName).orElse(null);
+        this.zone = b.getData().getZone().map(ZoneType::getName);
     }
 
     @JsonCreator
     public TreeData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant,
-            @JsonProperty("zone") String zone)
+            @JsonProperty("zone") Optional<String> zone)
     {
         super(type, x, y, variant);
         this.zone = zone;
@@ -46,6 +46,6 @@ public class TreeData extends StructureData
     @Override
     protected TreeParameters getParameters()
     {
-        return new TreeParameters(Optional.ofNullable(zone).map(n -> BuildingType.getByName(ZoneType.class, n)));
+        return new TreeParameters(zone.map(n -> BuildingType.getByName(ZoneType.class, n)));
     }
 }

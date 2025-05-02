@@ -644,7 +644,16 @@ public final class GamePanel extends JComponent
             drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
         }
         else
+        {
+            ZoneType zoneType = b.getZoneType();
+            if(b.drawZone() && zoneType != null)
+            {
+                Animation zoneImage = zoneType.getImage(zoneType.getVariantForDefaultImage());
+                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(zoneImage), b.getSize());
+            }
+            
             drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize());
+        }
     }
     
     private Image getCurrentImage(Animation a)

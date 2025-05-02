@@ -113,4 +113,10 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     {
         getData().setZone(zone);
     }
+    
+    @Override
+    public boolean drawZone()
+    {
+        return true;
+    }
 }

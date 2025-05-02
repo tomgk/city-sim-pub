@@ -161,4 +161,9 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     
     public abstract BigDecimal getTaxRevenue();
     public abstract BigDecimal getMaintenance();
+    
+    public boolean drawZone()
+    {
+        return false;
+    }
 }

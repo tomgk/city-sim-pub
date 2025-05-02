@@ -1,6 +1,7 @@
 package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
@@ -15,6 +16,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class VacantData extends StructureData
 {
     @JsonProperty
@@ -24,7 +26,7 @@ public class VacantData extends StructureData
     {
         super(f);
         VacantParameters data = f.getData();
-        this.zone = Optional.ofNullable(data.getZoneType()).map(ZoneType::getName).orElse(null);
+        this.zone = data.getZoneType().map(ZoneType::getName).orElse(null);
     }
 
     @JsonCreator
@@ -46,6 +48,6 @@ public class VacantData extends StructureData
     @Override
     protected StructureParameters getParameters()
     {
-        return new VacantParameters(StructureType.getByName(ZoneType.class, zone));
+        return new VacantParameters(Optional.ofNullable(zone).map(n -> StructureType.getByName(ZoneType.class, n)));
     }
 }

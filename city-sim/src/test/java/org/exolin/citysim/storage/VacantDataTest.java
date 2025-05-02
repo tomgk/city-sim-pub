@@ -3,6 +3,7 @@ package org.exolin.citysim.storage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
@@ -25,9 +26,9 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class VacantDataTest
 {
     @Test
-    public void testSerializeActualBuilding() throws IOException
+    public void testSerializeActualBuilding_WithZone() throws IOException
     {
-        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, VacantType.Variant.DEFAULT, new VacantParameters(Zones.business));
+        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, VacantType.Variant.DEFAULT, new VacantParameters(Optional.of(Zones.business)));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"destruction/abandoned_big_1","x":16,"y":99,"zone":"zone_business"}

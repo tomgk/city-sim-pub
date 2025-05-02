@@ -1,5 +1,7 @@
 package org.exolin.citysim.model.building.vacant;
 
+import java.util.Objects;
+import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.zone.ZoneType;
 
@@ -9,14 +11,14 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class VacantParameters implements StructureParameters<VacantParameters>
 {
-    private final ZoneType zoneType;
+    private final Optional<ZoneType> zoneType;
 
-    public VacantParameters(ZoneType zoneType)
+    public VacantParameters(Optional<ZoneType> zoneType)
     {
-        this.zoneType = zoneType;
+        this.zoneType = Objects.requireNonNull(zoneType);
     }
 
-    public ZoneType getZoneType()
+    public Optional<ZoneType> getZoneType()
     {
         return zoneType;
     }

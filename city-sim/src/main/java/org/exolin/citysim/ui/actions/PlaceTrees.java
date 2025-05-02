@@ -65,7 +65,7 @@ public class PlaceTrees implements BuildingAction
         if(buildingAt instanceof Tree t)
         {
             alreadyPlaced = t.getType().getCount();
-            zoneType = Optional.ofNullable(t.getZoneType());
+            zoneType = t.getZoneType();
         }
         //trees keep zone if empty zone
         else if(buildingAt instanceof Zone z)

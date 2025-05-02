@@ -3,6 +3,7 @@ package org.exolin.citysim.model;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -138,9 +139,9 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     /**
      * @return zone type or {@code null} if not belonging to a zone type
      */
-    public ZoneType getZoneType()
+    public Optional<ZoneType> getZoneType()
     {
-        return null;
+        return Optional.empty();
     }
 
     /**

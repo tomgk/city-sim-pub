@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
@@ -26,9 +27,9 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     }
 
     @Override
-    public ZoneType getZoneType()
+    public Optional<ZoneType> getZoneType()
     {
-        return getType().getZoneType();
+        return Optional.of(getType().getZoneType());
     }
 
     @Override

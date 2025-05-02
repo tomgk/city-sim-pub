@@ -104,9 +104,9 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     }
 
     @Override
-    public ZoneType getZoneType()
+    public Optional<ZoneType> getZoneType()
     {
-        return getData().getZone().orElse(null);
+        return getData().getZone();
     }
     
     public void setZone(Optional<ZoneType> zone)

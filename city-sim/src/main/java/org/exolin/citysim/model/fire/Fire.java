@@ -140,16 +140,16 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             if(getData().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
-                w.addBuilding(Vacants.tore_down(), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(z.get()));
+                w.addBuilding(Vacants.tore_down(), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(z));
         }
     }
 
     @Override
-    public ZoneType getZoneType()
+    public Optional<ZoneType> getZoneType()
     {
         //should fire be put out, the zone should reappear
         //also, in zone view the zone should be visible
-        return getData().zone.orElse(null);
+        return getData().zone;
     }
     
     /**
@@ -240,12 +240,12 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         int buildingSize = s.getSize();
         
         boolean returnToZone;
-        ZoneType zt;
+        Optional<ZoneType> zt;
         
         if(s.getType() instanceof ZoneType z)
         {
             returnToZone = true;
-            zt = z;
+            zt = Optional.of(z);
         }
         else
         {
@@ -253,7 +253,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             zt = s.getZoneType();
         }
         
-        FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(zt), returnToZone, getAfterBurn(s));
+        FireParameters args = new FireParameters(getExpectedLife(s), zt, returnToZone, getAfterBurn(s));
         placeMultiple(w, FireType.fire, x, y, buildingSize, buildingSize, FireVariant.random(), args);
     }
     

@@ -78,9 +78,9 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                 Structure buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
                 if(buildingAt != null)
                 {
-                    ZoneType buildingZoneType;
+                    Optional<ZoneType> buildingZoneType;
                     if(buildingAt instanceof Zone z)
-                        buildingZoneType = z.getType();
+                        buildingZoneType = Optional.of(z.getType());
                     //putting a zone on a tree => keed & zone tree
                     else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
                     {
@@ -91,10 +91,10 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                         buildingZoneType = buildingAt.getZoneType();
                     
                     //keep non zone buildings
-                    if(buildingZoneType == null && !replaceEverything)
+                    if(buildingZoneType.isEmpty() && !replaceEverything)
                         continue;
                     //don't change if already right zone
-                    else if(buildingZoneType != null && buildingZoneType == type)
+                    else if(buildingZoneType.equals(Optional.of(type)))
                         continue;
                     
                     world.removeBuildingAt(marking.x + x, marking.y + y, World.RemoveMode.CLEAR);

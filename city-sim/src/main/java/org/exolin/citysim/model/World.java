@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
@@ -158,7 +159,7 @@ public final class World
                 if(b instanceof SelfConnection && mode == RemoveMode.REMOVE_ZONING)
                     continue;
                 
-                ZoneType zoneType = b.getZoneType();
+                Optional<ZoneType> zoneType = b.getZoneType();
                 
                 if(mode == RemoveMode.REMOVE_ZONING)
                 {
@@ -167,7 +168,7 @@ public final class World
                         ;
                     //keep building if not belonging to a zone
                     //but it is about removing zoning
-                    else if(zoneType == null)
+                    else if(zoneType.isEmpty())
                         continue;
                 }
                 
@@ -180,7 +181,7 @@ public final class World
                 if(mode == RemoveMode.TEAR_DOWN)
                 {
                     if(zoneType != null)
-                        placeZone(zoneType, b.getX(), b.getY(), b.getSize(), x, y);
+                        placeZone(zoneType.get(), b.getX(), b.getY(), b.getSize(), x, y);
                     
                     updateBuildingsAround(b.getX(), b.getY(), b.getSize());
                 }
@@ -381,13 +382,12 @@ public final class World
     
     private void updateBuildCount(Structure building, boolean up)
     {
-        ZoneType type = building.getZoneType();
-        if(type == null)
+        Optional<ZoneType> type = building.getZoneType();
+        if(type.isEmpty())
             return;
         
         int factor = up ? +1 : -1;
-        
-        buildSupply.computeIfPresent(type, (k, v) -> v+factor*building.getSupply());
+        buildSupply.computeIfPresent(type.get(), (k, v) -> v+factor*building.getSupply());
     }
     
     private void updateMoney(int ticks)

@@ -22,6 +22,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -634,21 +635,22 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
-    private void drawBuilding(Graphics2D g, int dim, Structure b)
+    private void drawBuilding(Graphics2D g, int dim, Structure<?, ?, ?, ?> b)
     {
         Point screenPoint = new Point();
         rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize(), screenPoint);
         
-        if(view == WorldView.ZONES && b.getZoneType() != null)
+        if(view == WorldView.ZONES && b.getZoneType().isPresent())
         {
-            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().getDefaultImage(), b.getSize());
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().get().getDefaultImage(), b.getSize());
         }
         else
         {
-            ZoneType zoneType = b.getZoneType();
-            if(b.drawZone() && zoneType != null)
+            Optional<ZoneType> zoneType = b.getZoneType();
+            if(b.drawZone() && zoneType.isPresent())
             {
-                Animation zoneImage = zoneType.getImage(zoneType.getVariantForDefaultImage());
+                ZoneType zt = zoneType.get();
+                Animation zoneImage = zt.getImage(zt.getVariantForDefaultImage());
                 drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(zoneImage), b.getSize());
             }
             

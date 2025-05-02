@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui.actions;
 
+import java.util.Objects;
+import java.util.Optional;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
@@ -14,13 +16,18 @@ import org.exolin.citysim.model.zone.ZoneType;
 public class PlaceVacant extends PlaceStructure
 {
     private final VacantType vacantType;
-    private final ZoneType zoneType;
+    private final Optional<ZoneType> zoneType;
 
     public PlaceVacant(GetWorld world, VacantType vacantType, ZoneType zoneType)
     {
+        this(world, vacantType, Optional.of(Objects.requireNonNull(zoneType)));
+    }
+    
+    public PlaceVacant(GetWorld world, VacantType vacantType, Optional<ZoneType> zoneType)
+    {
         super(world);
         this.vacantType = vacantType;
-        this.zoneType = zoneType;
+        this.zoneType = Objects.requireNonNull(zoneType);
     }
 
     @Override

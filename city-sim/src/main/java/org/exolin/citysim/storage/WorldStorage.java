@@ -1,6 +1,7 @@
 package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,6 +27,10 @@ public class WorldStorage
     }
     
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    static
+    {
+        objectMapper.registerModule(new Jdk8Module());
+    }
     
     public static void serialize(Structure b, OutputStream out) throws IOException
     {

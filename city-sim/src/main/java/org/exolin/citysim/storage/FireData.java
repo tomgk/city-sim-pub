@@ -18,7 +18,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_ABSENT)
 public class FireData extends StructureData
 {
     @JsonProperty

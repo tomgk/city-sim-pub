@@ -16,24 +16,24 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class VacantData extends StructureData
 {
     @JsonProperty
-    public final String zone;
+    public final Optional<String> zone;
     
     public VacantData(Vacant f)
     {
         super(f);
         VacantParameters data = f.getData();
-        this.zone = data.getZoneType().map(ZoneType::getName).orElse(null);
+        this.zone = data.getZoneType().map(ZoneType::getName);
     }
 
     @JsonCreator
     public VacantData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant,
-            @JsonProperty("zone") String zone)
+            @JsonProperty("zone") Optional<String> zone)
     {
         super(type, x, y, variant);
         this.zone = zone;
@@ -48,6 +48,6 @@ public class VacantData extends StructureData
     @Override
     protected StructureParameters getParameters()
     {
-        return new VacantParameters(Optional.ofNullable(zone).map(n -> StructureType.getByName(ZoneType.class, n)));
+        return new VacantParameters(zone.map(n -> StructureType.getByName(ZoneType.class, n)));
     }
 }

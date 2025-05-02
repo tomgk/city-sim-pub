@@ -63,7 +63,10 @@ public class PlaceTrees implements BuildingAction
         Optional<ZoneType> zoneType = Optional.empty();
         //if trees already planted there, add one more
         if(buildingAt instanceof Tree t)
+        {
             alreadyPlaced = t.getType().getCount();
+            zoneType = Optional.ofNullable(t.getZoneType());
+        }
         //trees keep zone if empty zone
         else if(buildingAt instanceof Zone z)
             zoneType = Optional.of(z.getType());

@@ -5,6 +5,8 @@ import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.RandomUtils;
 
 /**
@@ -13,11 +15,6 @@ import org.exolin.citysim.utils.RandomUtils;
  */
 public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
 {
-    public Tree(TreeType type, int x, int y, TreeVariant variant)
-    {
-        this(type, x, y, variant, new TreeParameters());
-    }
-    
     public Tree(TreeType type, int x, int y, TreeVariant variant, TreeParameters data)
     {
         super(type, x, y, variant, data);
@@ -76,7 +73,10 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
             return;
         
         Structure b = world.getBuildingAt(x, y);
-        if(b != null)
+        Optional<ZoneType> zoneType = Optional.empty();
+        if(b instanceof Zone z)
+            zoneType = Optional.of(z.getType());
+        else if(b != null)
         {
             if(b instanceof Tree t)
             {
@@ -95,11 +95,22 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Trees.TREES.getFirst(), x, y, TreeVariant.random(), new TreeParameters());
+            world.addBuilding(Trees.TREES.getFirst(), x, y, TreeVariant.random(), new TreeParameters(zoneType));
     }
 
     public boolean isAlive()
     {
         return getType().isAlive();
+    }
+
+    @Override
+    public ZoneType getZoneType()
+    {
+        return getData().getZone().orElse(null);
+    }
+    
+    public void setZone(Optional<ZoneType> zone)
+    {
+        getData().setZone(zone);
     }
 }

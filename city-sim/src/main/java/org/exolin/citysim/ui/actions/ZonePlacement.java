@@ -2,11 +2,14 @@ package org.exolin.citysim.ui.actions;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.Optional;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.ImageUtils;
@@ -78,6 +81,12 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     ZoneType buildingZoneType;
                     if(buildingAt instanceof Zone z)
                         buildingZoneType = z.getType();
+                    //putting a zone on a tree => keed & zone tree
+                    else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
+                    {
+                        t.setZone(Optional.of(z));
+                        continue;
+                    }
                     else
                         buildingZoneType = buildingAt.getZoneType();
                     

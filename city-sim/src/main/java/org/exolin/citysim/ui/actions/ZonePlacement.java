@@ -7,6 +7,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.ImageUtils;
 
@@ -74,9 +75,17 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                 Structure buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
                 if(buildingAt != null)
                 {
-                    ZoneType buildingZoneType = buildingAt.getZoneType();
+                    ZoneType buildingZoneType;
+                    if(buildingAt instanceof Zone z)
+                        buildingZoneType = z.getType();
+                    else
+                        buildingZoneType = buildingAt.getZoneType();
+                    
                     //keep non zone buildings
                     if(buildingZoneType == null && !replaceEverything)
+                        continue;
+                    //don't change if already right zone
+                    else if(buildingZoneType != null && buildingZoneType == type)
                         continue;
                     
                     world.removeBuildingAt(marking.x + x, marking.y + y, World.RemoveMode.CLEAR);

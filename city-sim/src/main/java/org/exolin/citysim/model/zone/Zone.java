@@ -8,7 +8,7 @@ import org.exolin.citysim.model.Structure;
  *
  * @author Thomas
  */
-public class Zone extends Structure
+public class Zone extends Structure<Zone, ZoneType, ZoneType.Variant, EmptyStructureParameters>
 {
     public Zone(ZoneType type, int x, int y, ZoneType.Variant variant)
     {

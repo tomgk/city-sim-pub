@@ -37,6 +37,17 @@ public class VacantDataTest
     }
     
     @Test
+    public void testSerializeActualBuilding_NoZone() throws IOException
+    {
+        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, VacantType.Variant.DEFAULT, new VacantParameters(Optional.empty()));
+        String output = serialize(WorldStorage::serialize, building);
+        String expected = """
+                          {"type":"destruction/abandoned_big_1","x":16,"y":99}
+                          """;
+        JSONAssert.assertEquals(expected, output, true);
+    }
+    
+    @Test
     public void testDeserializeActualBuilding_WithZone() throws IOException
     {
         World w = new World("Test", 120, BigDecimal.ZERO, SimulationSpeed.PAUSED);
@@ -50,6 +61,23 @@ public class VacantDataTest
         assertEquals(99, b.getY());
         assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
         Vacant f = (Vacant)b;
-        assertEquals(Zones.business, f.getData().getZoneType());
+        assertEquals(Optional.of(Zones.business), f.getData().getZoneType());
+    }
+    
+    @Test
+    public void testDeserializeActualBuilding_NoZone() throws IOException
+    {
+        World w = new World("Test", 120, BigDecimal.ZERO, SimulationSpeed.PAUSED);
+        InputStream in = createInputStream("""
+                                           {"type":"destruction/abandoned_big_1","x":16,"y":99}
+                                           """);
+        WorldStorage.deserialize(in, w);
+        Structure b = getBuilding(w);
+        assertEquals(Vacants.abandoned_big_1, b.getType());
+        assertEquals(16, b.getX());
+        assertEquals(99, b.getY());
+        assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
+        Vacant f = (Vacant)b;
+        assertEquals(Optional.empty(), f.getData().getZoneType());
     }
 }

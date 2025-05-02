@@ -46,7 +46,7 @@ public class FireData extends StructureData
     @JsonCreator
     public FireData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant,
+            @JsonProperty("variant") Optional<String> variant,
             @JsonProperty("remainingLife") int remainingLife,
             @JsonProperty("zone") String zone,
             @JsonProperty("returnToZone") boolean returnToZone,

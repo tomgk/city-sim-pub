@@ -2,6 +2,7 @@ package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Optional;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
@@ -22,7 +23,7 @@ public class BuildingData extends StructureData
     @JsonCreator
     public BuildingData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant)
+            @JsonProperty("variant") Optional<String> variant)
     {
         super(type, x, y, variant);
     }

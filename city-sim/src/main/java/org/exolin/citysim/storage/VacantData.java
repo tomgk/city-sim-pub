@@ -32,7 +32,7 @@ public class VacantData extends StructureData
     @JsonCreator
     public VacantData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant,
+            @JsonProperty("variant") Optional<String> variant,
             @JsonProperty("zone") Optional<String> zone)
     {
         super(type, x, y, variant);

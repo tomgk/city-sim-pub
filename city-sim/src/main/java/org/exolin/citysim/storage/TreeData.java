@@ -30,7 +30,7 @@ public class TreeData extends StructureData
     @JsonCreator
     public TreeData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant,
+            @JsonProperty("variant") Optional<String> variant,
             @JsonProperty("zone") String zone)
     {
         super(type, x, y, variant);

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
+import java.util.Objects;
+import java.util.Optional;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
@@ -40,19 +42,19 @@ public abstract class StructureData
     
     @JsonProperty
     @JsonInclude(Include.NON_NULL)
-    private final String variant;
+    private final Optional<String> variant;
     
     private static final String DEFAULT_NAME = "DEFAULT";
 
     @JsonCreator
     public StructureData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
-            @JsonProperty("variant") String variant)
+            @JsonProperty("variant") Optional<String> variant)
     {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.variant = variant;
+        this.variant = Objects.requireNonNull(variant);
     }
     
     public StructureData(Structure b)
@@ -63,9 +65,9 @@ public abstract class StructureData
         //only remove it from the file if it is named default
         //if it just happens to be the first, don't do it
         if(b.getVariant().name().equals(DEFAULT_NAME))
-            this.variant = null;
+            this.variant = Optional.empty();
         else
-            this.variant = b.getVariant().name().toLowerCase();
+            this.variant = Optional.of(b.getVariant().name().toLowerCase());
     }
     
     public static StructureData create(Structure b)
@@ -114,7 +116,7 @@ public abstract class StructureData
         StructureType buildingType = StructureType.getByName(type);
         StructureVariant buildingVariant;
         try{
-            buildingVariant = getVariant(this.variant != null ? this.variant.toUpperCase() : DEFAULT_NAME);
+            buildingVariant = getVariant(this.variant.map(String::toUpperCase).orElse(DEFAULT_NAME));
         }catch(IllegalArgumentException e){
             StackTraceElement[] stackTrace = e.getStackTrace();
             StackTraceElement origin = stackTrace[0];

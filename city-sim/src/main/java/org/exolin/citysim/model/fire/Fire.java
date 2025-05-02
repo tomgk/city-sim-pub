@@ -5,7 +5,9 @@ import java.util.Optional;
 import java.util.function.IntSupplier;
 import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.vacant.Vacant;
@@ -258,11 +260,21 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         }
         
         FireParameters args = new FireParameters(getExpectedLife(s), Optional.ofNullable(zt), returnToZone, getAfterBurn(s));
-        for(int yi=0;yi<buildingSize;++yi)
+        placeMultiple(w, FireType.fire, x, y, buildingSize, buildingSize, FireVariant.random(), args);
+    }
+    
+    public static <B extends Structure, E extends StructureVariant, D extends StructureParameters<D>> void placeMultiple(
+            World world,
+            StructureType<B, E, D> type,
+            int x, int y,
+            int w, int h,
+            E variant, D data)
+    {
+        for(int yi=0;yi<h;++yi)
         {
-            for(int xi=0;xi<buildingSize;++xi)
+            for(int xi=0;xi<w;++xi)
             {
-                w.addBuilding(FireType.fire, x+xi, y+yi, FireVariant.random(), args);
+                world.addBuilding(type, x+xi, y+yi, variant, data);
             }
         }
     }

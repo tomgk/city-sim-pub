@@ -270,6 +270,9 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             int w, int h,
             E variant, D data)
     {
+        if(type.getSize() != 1)
+            throw new IllegalArgumentException("only allowed for 1x1");
+        
         for(int yi=0;yi<h;++yi)
         {
             for(int xi=0;xi<w;++xi)

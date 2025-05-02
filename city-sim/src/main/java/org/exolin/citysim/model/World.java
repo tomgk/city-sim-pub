@@ -126,8 +126,27 @@ public final class World
         if(!buildings.remove(s))
             throw new IllegalArgumentException("not part of world");
     }
+    
+    public enum RemoveMode
+    {
+        /**
+         * removes zones and any building with a zone, keeps everything else;
+         * no replacement for removals
+         */
+        REMOVE_ZONING,
+        
+        /**
+         * removes buildings, leaves back zones if zoned
+         */
+        TEAR_DOWN,
+        
+        /**
+         * remove, leave nothing behind, expect outside of (x,y)
+         */
+        CLEAR
+    }
 
-    public boolean removeBuildingAt(int x, int y, boolean removeZoning, boolean replaceWithZoning)
+    public boolean removeBuildingAt(int x, int y, RemoveMode mode)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
         for (Iterator<Structure> it = buildings.iterator(); it.hasNext();)
@@ -136,25 +155,29 @@ public final class World
             if(b.isOccupying(x, y))
             {
                 //removeZoning mode keeps streets
-                if(b instanceof SelfConnection && removeZoning)
+                if(b instanceof SelfConnection && mode == RemoveMode.REMOVE_ZONING)
                     continue;
                 
                 ZoneType zoneType = b.getZoneType();
                 
-                //if remove zone and it is a zone, continue
-                if(removeZoning && b instanceof Zone)
-                    ;
-                //keep building if not belonging to a zone
-                //but it is about removing zoning
-                else if(zoneType == null && removeZoning)
-                    continue;
+                if(mode == RemoveMode.REMOVE_ZONING)
+                {
+                    //if remove zone and it is a zone, continue
+                    if(b instanceof Zone)
+                        ;
+                    //keep building if not belonging to a zone
+                    //but it is about removing zoning
+                    else if(zoneType == null)
+                        continue;
+                }
                 
-                if(checkOverlap)
-                    throw new IllegalArgumentException();
+                //if(checkOverlap)
+                //    throw new IllegalArgumentException();
                 
                 it.remove();
                 
-                if(replaceWithZoning)
+                //TODO: CLEAR should place zone outside of (x,y) itself
+                if(mode == RemoveMode.TEAR_DOWN)
                 {
                     if(zoneType != null)
                         placeZone(zoneType, b.getX(), b.getY(), b.getSize(), x, y);
@@ -211,7 +234,7 @@ public final class World
             {
                 //remove any, let anything outside be replaced with zone
                 //removeBuildingAt(x, y, false, true);
-                removeBuildingAt(x, y, false, false);
+                removeBuildingAt(x+xi, x+yi, RemoveMode.CLEAR);
             }
         }
         

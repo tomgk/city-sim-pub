@@ -85,7 +85,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, EmptyStructureP
                 {
                    if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                    {
-                       world.removeBuildingAt(x, y, true, false);
+                       world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
                        world.addBuilding(Trees.TREES.getFirst(), x, y);
                    }
                 }

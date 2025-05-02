@@ -38,6 +38,11 @@ public class WorldStorageTest
         void write(T value, OutputStream out) throws IOException;
     }
     
+    public static <T> String serialize(World object) throws IOException
+    {
+        return serialize(WorldStorage::serialize, object);
+    }
+    
     public static <T> String serialize(Serializer<T> serializer, T object) throws IOException
     {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

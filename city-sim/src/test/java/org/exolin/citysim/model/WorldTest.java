@@ -1,17 +1,26 @@
 package org.exolin.citysim.model;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
+import org.exolin.citysim.Main;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
+import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.storage.WorldStorage;
+import org.exolin.citysim.storage.WorldStorageTest;
+import org.exolin.citysim.ui.actions.ZonePlacement;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
  *
@@ -78,6 +87,125 @@ public class WorldTest
         assertNull(w.getBuildingAt(9, 13));
         //to the bottom right (x+size, y+size)
         assertNull(w.getBuildingAt(13, 13));
+    }
+    
+    @Test
+    public void testPlaceBiggerBuilding_OnBigger() throws IOException
+    {
+        World w = new World("test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
+        
+        w.addBuilding(BusinessBuildings.car_cinema, 1, 1);
+        
+        //should remove the other building
+        w.addBuilding(BusinessBuildings.car_cinema, 3, 3);
+        
+        String expected = """
+                          {
+                            "gridSize" : 30,
+                            "money" : 0,
+                            "buildings" : [ {
+                              "type" : "business_car-cinema",
+                              "x" : 3,
+                              "y" : 3
+                            } ],
+                            "speed" : "paused"
+                          }
+                          """;
+        
+        //WorldStorage.serialize(w, System.out);
+        
+        JSONAssert.assertEquals(WorldStorageTest.serialize(w), expected, true);
+    }
+    
+    @Test
+    public void testPlaceBiggerBuilding_OnMultipleSmaller() throws IOException, InterruptedException
+    {
+        World w = new World("test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
+        
+        /*
+        0
+         xxxx
+         xxxx
+         xxxx
+         xxxx
+        */
+        Fire.placeMultiple(w, Zones.business, 1, 1, 4, 4, ZoneType.Variant.DEFAULT, EmptyStructureParameters.getInstance());
+        
+        assertEquals(13, w.getBuildings().size());
+        
+        WorldStorage.serialize(w, System.out);
+        
+        System.out.println();
+        System.out.println("---------------");
+        
+        /*
+        0
+         xxxx
+         xxxx
+         xxBBBB
+         xxBBBB
+           BBBB
+        */
+        w.addBuilding(BusinessBuildings.car_cinema, 3, 3);
+        
+        WorldStorage.serialize(w, System.out);
+        
+        String expected = """
+                          {
+                            "gridSize" : 30,
+                            "money" : 0,
+                            "buildings" : [ {
+                              "type" : "zone_business",
+                              "x" : 2,
+                              "y" : 1
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 1,
+                              "y" : 2
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 3,
+                              "y" : 1
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 1,
+                              "y" : 3
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 4,
+                              "y" : 1
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 3,
+                              "y" : 2
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 2,
+                              "y" : 3
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 1,
+                              "y" : 4
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 4,
+                              "y" : 2
+                            }, {
+                              "type" : "zone_business",
+                              "x" : 2,
+                              "y" : 4
+                            }, {
+                              "type" : "business_car-cinema",
+                              "x" : 3,
+                              "y" : 3
+                            } ],
+                            "speed" : "paused"
+                          }
+                          """;
+        
+        //WorldStorage.serialize(w, System.out);
+        
+        JSONAssert.assertEquals(WorldStorageTest.serialize(w), expected, true);
     }
     
     @Test

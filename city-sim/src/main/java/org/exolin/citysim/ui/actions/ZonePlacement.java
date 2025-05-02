@@ -79,7 +79,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     if(buildingZoneType == null && !replaceEverything)
                         continue;
                     
-                    world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
+                    world.removeBuildingAt(marking.x + x, marking.y + y, World.RemoveMode.CLEAR);
                 }
 
                 world.addBuilding(type, marking.x + x, marking.y + y, variant);

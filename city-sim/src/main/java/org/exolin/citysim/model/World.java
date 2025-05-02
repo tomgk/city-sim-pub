@@ -234,7 +234,7 @@ public final class World
             {
                 //remove any, let anything outside be replaced with zone
                 //removeBuildingAt(x, y, false, true);
-                removeBuildingAt(x+xi, x+yi, RemoveMode.CLEAR);
+                removeBuildingAt(x+xi, y+yi, RemoveMode.CLEAR);
             }
         }
         

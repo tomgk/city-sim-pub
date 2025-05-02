@@ -25,22 +25,22 @@ public class FireData extends StructureData
     public final int remainingLife;
     
     @JsonProperty
-    public final String zone;
+    public final Optional<String> zone;
     
     @JsonProperty
     public final boolean returnToZone;
     
     @JsonProperty
-    public final String afterBurn;
+    public final Optional<String> afterBurn;
     
     public FireData(Fire f)
     {
         super(f);
         FireParameters data = f.getData();
         this.remainingLife = data.getRemainingLife();
-        this.zone = f.getZoneType().map(ZoneType::getName).orElse(null);
+        this.zone = f.getZoneType().map(ZoneType::getName);
         this.returnToZone = data.isReturnToZone();
-        this.afterBurn = data.getAfterBurn().map(StructureType::getName).orElse(null);
+        this.afterBurn = data.getAfterBurn().map(StructureType::getName);
     }
 
     @JsonCreator
@@ -48,9 +48,9 @@ public class FireData extends StructureData
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant,
             @JsonProperty("remainingLife") int remainingLife,
-            @JsonProperty("zone") String zone,
+            @JsonProperty("zone") Optional<String> zone,
             @JsonProperty("returnToZone") boolean returnToZone,
-            @JsonProperty("afterBurn") String afterBurn)
+            @JsonProperty("afterBurn") Optional<String> afterBurn)
     {
         super(type, x, y, variant);
         this.remainingLife = remainingLife;
@@ -68,9 +68,9 @@ public class FireData extends StructureData
     @Override
     protected StructureParameters getParameters()
     {
-        Optional<ZoneType> zoneType = Optional.ofNullable(zone)
+        Optional<ZoneType> zoneType = zone
                 .map(n -> BuildingType.getByName(ZoneType.class, n));
-        Optional<StructureType> afterBurnType = Optional.ofNullable(afterBurn)
+        Optional<StructureType> afterBurnType = afterBurn
                 .map(StructureType::getByName);
         
         return new FireParameters(remainingLife, zoneType, returnToZone, afterBurnType);

@@ -105,6 +105,6 @@ public class LoadGame extends JFrame
         
         chosen = true;
         setVisible(false);
-        choice.accept(Optional.of(w));
+        choice.accept(Optional.ofNullable(w));
     }
 }

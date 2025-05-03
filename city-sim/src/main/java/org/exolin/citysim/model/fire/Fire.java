@@ -16,6 +16,9 @@ import org.exolin.citysim.model.building.vacant.VacantParameters;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.tree.TreeParameters;
+import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.tree.TreeVariant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
@@ -130,7 +133,11 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         Optional<StructureType> afterBurn = getData().afterBurn;
         if(afterBurn.isPresent())
         {
-            w.addBuilding(afterBurn.get(), getX(), getY());
+            if(afterBurn.get() instanceof TreeType)
+                //TODO: does random make sense? (movement of trees after fire)
+                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getData().zone));
+            else
+                w.addBuilding(afterBurn.get(), getX(), getY());
             return;
         }
         
@@ -222,7 +229,6 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     
     private static Optional<StructureType> getAfterBurn(Structure s)
     {
-        //TODO: burning a zone or a tree with a zone should have the zone behind
         if(s instanceof Tree t)
             return Optional.of(t.getType().getDead());
         else

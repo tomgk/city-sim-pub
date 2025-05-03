@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import javax.swing.JButton;
@@ -28,9 +29,9 @@ public class LoadGame extends JFrame
 {
     private final List<World> worlds;
     private final JList list;
-    private final Consumer<World> choice;
+    private final Consumer<Optional<World>> choice;
     
-    public LoadGame(List<World> worlds, Consumer<World> choice)
+    public LoadGame(List<World> worlds, Consumer<Optional<World>> choice)
     {
         this.worlds = Objects.requireNonNull(worlds);
         this.choice = Objects.requireNonNull(choice);
@@ -104,6 +105,6 @@ public class LoadGame extends JFrame
         
         chosen = true;
         setVisible(false);
-        choice.accept(w);
+        choice.accept(Optional.of(w));
     }
 }

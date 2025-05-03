@@ -59,10 +59,7 @@ public class Main
     public static void main(String[] args)
     {
         LoadGame lg = new LoadGame(Worlds.all(), w -> {
-            if(w == null)
-                System.exit(0);
-            else
-                play(w);
+            w.ifPresentOrElse(Main::play, () -> System.exit(0));
         });
         lg.setVisible(true);
     }

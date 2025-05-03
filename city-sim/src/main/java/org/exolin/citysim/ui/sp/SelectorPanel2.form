@@ -44,7 +44,6 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/org/exolin/citysim/menu/emergency.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="emergency"/>
           </Properties>
         </Component>
       </SubComponents>

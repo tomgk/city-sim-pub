@@ -57,7 +57,6 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jPanel1.add(jButton2);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/emergency.png"))); // NOI18N
-        jButton3.setText("emergency");
         jPanel1.add(jButton3);
 
         add(jPanel1);

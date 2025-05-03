@@ -46,7 +46,7 @@ public class SelectorPanel2 extends javax.swing.JPanel
 
         jPanel1.setLayout(new java.awt.GridLayout());
 
-        jButton1.setText("tear down");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/bulldoze.png"))); // NOI18N
         jPanel1.add(jButton1);
 
         jButton2.setText("tree/water");

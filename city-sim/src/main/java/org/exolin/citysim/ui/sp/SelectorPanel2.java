@@ -45,6 +45,10 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(0, 1));
 
@@ -73,6 +77,19 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jPanel2.add(jButton6);
 
         add(jPanel2);
+
+        jPanel3.setLayout(new java.awt.GridLayout());
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/street.png"))); // NOI18N
+        jPanel3.add(jButton7);
+
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/rail.png"))); // NOI18N
+        jPanel3.add(jButton8);
+
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/port.png"))); // NOI18N
+        jPanel3.add(jButton9);
+
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -83,7 +100,11 @@ public class SelectorPanel2 extends javax.swing.JPanel
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

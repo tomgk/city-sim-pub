@@ -30,6 +30,7 @@ public class Main
         selector.add(sp, BorderLayout.CENTER);
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         selector.setSize(300, 800);
+        selector.setLocation(0, 90);
         selector.setAlwaysOnTop(true);
         return selector;
     }

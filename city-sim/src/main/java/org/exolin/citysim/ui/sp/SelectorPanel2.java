@@ -41,6 +41,10 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(0, 1));
 
@@ -52,10 +56,24 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/tree_water.png"))); // NOI18N
         jPanel1.add(jButton2);
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/emergency.png"))); // NOI18N
         jButton3.setText("emergency");
         jPanel1.add(jButton3);
 
         add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.GridLayout());
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/electricity.png"))); // NOI18N
+        jPanel2.add(jButton4);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/water.png"))); // NOI18N
+        jPanel2.add(jButton5);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/city_hall.png"))); // NOI18N
+        jPanel2.add(jButton6);
+
+        add(jPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -63,6 +81,10 @@ public class SelectorPanel2 extends javax.swing.JPanel
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

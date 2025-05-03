@@ -81,6 +81,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     if(buildingAt instanceof Zone z)
                         buildingZoneType = Optional.of(z.getType());
                     //putting a zone on a tree => keed & zone tree
+                    //maybe here for #109
                     else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
                     {
                         t.setZone(Optional.of(z));

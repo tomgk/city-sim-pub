@@ -29,6 +29,20 @@ public class FireParameters implements StructureParameters<FireParameters>
         this.returnToZone = returnToZone;
         this.afterBurn = afterBurn;
     }
+
+    @Override
+    public void writeAdditional(StringBuilder sb)
+    {
+        sb.append(",remainingLife=").append(remainingLife);
+        zone.ifPresent(z -> {
+            sb.append(",zone=").append(z.getName());
+        });
+        if(returnToZone)
+            sb.append(",returnToZone=true");
+        afterBurn.ifPresent(a -> {
+            sb.append(",afterBurn=").append(a.getName());
+        });
+    }
     
     public int getRemainingLife()
     {

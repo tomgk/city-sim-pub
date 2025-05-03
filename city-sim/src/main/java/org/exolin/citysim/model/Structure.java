@@ -210,7 +210,23 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     @Override
     public String toString()
     {
-        return getClass().getSimpleName()+"[x="+x+",y="+y+",size="+type.getSize()+",type="+type.getName()+"]";
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(getClass().getSimpleName());
+        sb.append("[x=");
+        sb.append(x);
+        sb.append(",y=");
+        sb.append(y);
+        sb.append(",size=");
+        sb.append(type.getSize());
+        sb.append(",type=");
+        sb.append(type.getName());
+        
+        data.writeAdditional(sb);
+        
+        sb.append("]");
+        
+        return sb.toString();
     }
     
     /**

@@ -28,4 +28,12 @@ public class VacantParameters implements StructureParameters<VacantParameters>
     {
         return new VacantParameters(zoneType);
     }
+
+    @Override
+    public void writeAdditional(StringBuilder sb)
+    {
+        zoneType.ifPresent(z -> {
+            sb.append(",zone=").append(z.getName());
+        });
+    }
 }

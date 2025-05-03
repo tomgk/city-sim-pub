@@ -39,4 +39,10 @@ public final class EmptyStructureParameters implements StructureParameters<Empty
     {
         return INSTANCE;
     }
+
+    @Override
+    public void writeAdditional(StringBuilder sb)
+    {
+        
+    }
 }

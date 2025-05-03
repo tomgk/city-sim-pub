@@ -18,4 +18,11 @@ public interface StructureParameters<T extends StructureParameters<T>>
      * @return a logical copy
      */
     T copy();
+    
+    /**
+     * Writes the additional fields as string representation to {@code sp}.
+     * 
+     * @param sb the target
+     */
+    void writeAdditional(StringBuilder sb);
 }

@@ -18,6 +18,14 @@ public class TreeParameters implements StructureParameters<TreeParameters>
         this.zone = Objects.requireNonNull(zone);
     }
 
+    @Override
+    public void writeAdditional(StringBuilder sb)
+    {
+        zone.ifPresent(z -> {
+            sb.append(",zone=").append(z.getName());
+        });
+    }
+
     public Optional<ZoneType> getZone()
     {
         return zone;

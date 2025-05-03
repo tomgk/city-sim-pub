@@ -69,7 +69,7 @@ public class PropertyWriter
     public void finish()
     {
         if(finished)
-            throw new IllegalStateException();
+            throw new IllegalStateException("already finished");
         
         sb.append("]");
         finished = true;
@@ -79,7 +79,7 @@ public class PropertyWriter
     public String toString()
     {
         if(!finished)
-            throw new IllegalStateException();
+            throw new IllegalStateException("not finished yet");
         
         return sb.toString();
     }

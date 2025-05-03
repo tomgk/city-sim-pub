@@ -2,6 +2,7 @@ package org.exolin.citysim.utils;
 
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -77,5 +78,30 @@ public class PropertyWriterTest
         p.finish();
         
         assertEquals("test[object=beans]", p.toString());
+    }
+    
+    @Test
+    public void testPrematureToString()
+    {
+        PropertyWriter p = new PropertyWriter("test");
+        try{
+            p.toString();
+            fail();
+        }catch(IllegalStateException e){
+            assertEquals("not finished yet", e.getMessage());
+        }
+    }
+    
+    @Test
+    public void testDoubleFinish()
+    {
+        PropertyWriter p = new PropertyWriter("test");
+        p.finish();
+        try{
+            p.finish();
+            fail();
+        }catch(IllegalStateException e){
+            assertEquals("already finished", e.getMessage());
+        }
     }
 }

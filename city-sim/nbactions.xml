@@ -7,4 +7,12 @@
                 <goal>javadoc:javadoc</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-Generate JavaDoc with private</actionName>
+            <displayName>Generate JavaDoc with private</displayName>
+            <goals>
+                <goal>javadoc:javadoc</goal>
+                <goal>-Dshow=private</goal>
+            </goals>
+        </action>
     </actions>

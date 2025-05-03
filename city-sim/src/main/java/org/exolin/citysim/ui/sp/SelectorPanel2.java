@@ -115,13 +115,14 @@ public class SelectorPanel2 extends javax.swing.JPanel
 
         jPanel5.setLayout(new java.awt.GridLayout());
 
-        jButton13.setText("x");
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/school.png"))); // NOI18N
         jPanel5.add(jButton13);
 
-        jButton14.setText("x");
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/police.png"))); // NOI18N
+        jButton14.setToolTipText("");
         jPanel5.add(jButton14);
 
-        jButton15.setText("x");
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/party.png"))); // NOI18N
         jPanel5.add(jButton15);
 
         add(jPanel5);

@@ -1,6 +1,7 @@
 package org.exolin.citysim.utils;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  *
@@ -8,12 +9,33 @@ import java.util.Optional;
  */
 public class PropertyWriter
 {
-    private final StringBuilder sb = new StringBuilder();
+    private final StringBuilder sb;
     private boolean first = true;
+    private boolean finished = false;
 
     public PropertyWriter(String type)
     {
+        sb = new StringBuilder();
         sb.append(type).append("[");
+    }
+    
+    public void addSubObject(String name, String type, Consumer<PropertyWriter> writer)
+    {
+        maybeAddComma();
+        sb.append(name).append("=").append(type).append("[");
+        writer.accept(this);
+        sb.append("]");
+    }
+    
+    private void maybeAddComma()
+    {
+        if(finished)
+            throw new IllegalStateException();
+        
+        if(!first)
+            sb.append(",");
+        else
+            first = true;
     }
     
     public void addOptional(String name, boolean value)
@@ -34,10 +56,7 @@ public class PropertyWriter
     
     private void add(String name, Object value)
     {
-        if(!first)
-            sb.append(",");
-        else
-            first = true;
+        maybeAddComma();
         
         sb.append(name).append("=").append(value);
     }
@@ -49,12 +68,19 @@ public class PropertyWriter
 
     public void finish()
     {
+        if(finished)
+            throw new IllegalStateException();
+        
         sb.append("]");
+        finished = true;
     }
 
     @Override
     public String toString()
     {
+        if(!finished)
+            throw new IllegalStateException();
+        
         return sb.toString();
     }
 }

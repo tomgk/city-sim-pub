@@ -1,5 +1,6 @@
 package org.exolin.citysim.utils;
 
+import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -56,5 +57,25 @@ public class PropertyWriterTest
         p.finish();
         
         assertEquals("test[advanced=true]", p.toString());
+    }
+    
+    @Test
+    public void testAddOptional_Object_false()
+    {
+        PropertyWriter p = new PropertyWriter("test");
+        p.addOptional("object", Optional.empty());
+        p.finish();
+        
+        assertEquals("test[]", p.toString());
+    }
+    
+    @Test
+    public void testAddOptional_Object_true()
+    {
+        PropertyWriter p = new PropertyWriter("test");
+        p.addOptional("object", Optional.of("beans"));
+        p.finish();
+        
+        assertEquals("test[object=beans]", p.toString());
     }
 }

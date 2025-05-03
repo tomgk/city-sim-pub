@@ -49,6 +49,10 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
 
         setLayout(new java.awt.GridLayout(0, 1));
 
@@ -90,11 +94,28 @@ public class SelectorPanel2 extends javax.swing.JPanel
         jPanel3.add(jButton9);
 
         add(jPanel3);
+
+        jPanel4.setLayout(new java.awt.GridLayout());
+
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/residential.png"))); // NOI18N
+        jPanel4.add(jButton10);
+
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/business.png"))); // NOI18N
+        jPanel4.add(jButton11);
+
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/industry.png"))); // NOI18N
+        jButton12.setToolTipText("");
+        jPanel4.add(jButton12);
+
+        add(jPanel4);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -106,5 +127,6 @@ public class SelectorPanel2 extends javax.swing.JPanel
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

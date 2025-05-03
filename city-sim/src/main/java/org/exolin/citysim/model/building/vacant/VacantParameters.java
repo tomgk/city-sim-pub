@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.utils.PropertyWriter;
 
 /**
  *
@@ -30,10 +31,8 @@ public class VacantParameters implements StructureParameters<VacantParameters>
     }
 
     @Override
-    public void writeAdditional(StringBuilder sb)
+    public void writeAdditional(PropertyWriter writer)
     {
-        zoneType.ifPresent(z -> {
-            sb.append(",zone=").append(z.getName());
-        });
+        writer.addOptional("zone", zoneType);
     }
 }

@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.utils.PropertyWriter;
 
 /**
  *
@@ -31,17 +32,12 @@ public class FireParameters implements StructureParameters<FireParameters>
     }
 
     @Override
-    public void writeAdditional(StringBuilder sb)
+    public void writeAdditional(PropertyWriter writer)
     {
-        sb.append(",remainingLife=").append(remainingLife);
-        zone.ifPresent(z -> {
-            sb.append(",zone=").append(z.getName());
-        });
-        if(returnToZone)
-            sb.append(",returnToZone=true");
-        afterBurn.ifPresent(a -> {
-            sb.append(",afterBurn=").append(a.getName());
-        });
+        writer.add("remainingLife", remainingLife);
+        writer.addOptional("zone", zone.map(ZoneType::getName));
+        writer.addOptional("returnToZone", returnToZone);
+        writer.addOptional("afterBurn", afterBurn.map(StructureType::getName));
     }
     
     public int getRemainingLife()

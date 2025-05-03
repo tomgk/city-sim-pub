@@ -1,5 +1,7 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.utils.PropertyWriter;
+
 /**
  * An implementation of {@link StructureParameters} for when there is no need
  * for additional data for a {@link Structure}.
@@ -41,7 +43,7 @@ public final class EmptyStructureParameters implements StructureParameters<Empty
     }
 
     @Override
-    public void writeAdditional(StringBuilder sb)
+    public void writeAdditional(PropertyWriter writer)
     {
         
     }

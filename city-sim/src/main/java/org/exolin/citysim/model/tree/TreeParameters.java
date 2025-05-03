@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.utils.PropertyWriter;
 
 /**
  *
@@ -19,11 +20,9 @@ public class TreeParameters implements StructureParameters<TreeParameters>
     }
 
     @Override
-    public void writeAdditional(StringBuilder sb)
+    public void writeAdditional(PropertyWriter writer)
     {
-        zone.ifPresent(z -> {
-            sb.append(",zone=").append(z.getName());
-        });
+        writer.addOptional("zone", zone.map(ZoneType::getName));
     }
 
     public Optional<ZoneType> getZone()

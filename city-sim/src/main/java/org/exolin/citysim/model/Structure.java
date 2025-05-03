@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.utils.PropertyWriter;
 
 /**
  * Any structure on the terrain.
@@ -210,21 +211,16 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
+        PropertyWriter sb = new PropertyWriter(getClass().getSimpleName());
         
-        sb.append(getClass().getSimpleName());
-        sb.append("[x=");
-        sb.append(x);
-        sb.append(",y=");
-        sb.append(y);
-        sb.append(",size=");
-        sb.append(type.getSize());
-        sb.append(",type=");
-        sb.append(type.getName());
+        sb.add("x", x);
+        sb.add("y", y);
+        sb.add("size", type.getSize());
+        sb.add("type", type.getName());
         
         data.writeAdditional(sb);
         
-        sb.append("]");
+        sb.finish();
         
         return sb.toString();
     }

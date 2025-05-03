@@ -1,5 +1,7 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.utils.PropertyWriter;
+
 /**
  * Holds additional data for a structure besides the basics
  * (type, coordinates and variant).
@@ -20,9 +22,9 @@ public interface StructureParameters<T extends StructureParameters<T>>
     T copy();
     
     /**
-     * Writes the additional fields as string representation to {@code sp}.
+     * Writes the additional fields as string representation to {@code writer}.
      * 
-     * @param sb the target
+     * @param writer the target
      */
-    void writeAdditional(StringBuilder sb);
+    void writeAdditional(PropertyWriter writer);
 }

@@ -7,12 +7,13 @@ import java.util.Optional;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
- *
+ * Any structure on the terrain.
+ * 
  * @author Thomas
  * @param <B> building class
  * @param <T> building type
  * @param <E> building variant
- * @param <D>
+ * @param <D> additional data type
  */
 public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureParameters<D>>
 {

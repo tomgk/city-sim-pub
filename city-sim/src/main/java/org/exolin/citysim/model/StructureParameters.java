@@ -2,6 +2,7 @@ package org.exolin.citysim.model;
 
 /**
  * Holds additional data for a structure besides the basics
+ * (type, coordinates and variant).
  * 
  * @author Thomas
  * @param <T>

@@ -22,6 +22,7 @@ import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
 
 /**
+ * Logical representation of the world.
  *
  * @author Thomas
  */

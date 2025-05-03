@@ -3,7 +3,8 @@ package org.exolin.citysim.model;
 import java.awt.Point;
 
 /**
- *
+ * Rotation view on the world.
+ * 
  * @author Thomas
  */
 public enum Rotation

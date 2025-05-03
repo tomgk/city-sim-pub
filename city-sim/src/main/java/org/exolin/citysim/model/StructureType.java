@@ -13,7 +13,9 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.utils.ImageUtils;
 
 /**
- *
+ * Type of {@link Structure}, for example a particular building or
+ * infrastructure like street or rail.
+ * 
  * @author Thomas
  * @param <B> building class
  * @param <E> building variant

@@ -9,6 +9,8 @@ import org.exolin.citysim.utils.ImageUtils;
 import org.exolin.citysim.utils.Utils;
 
 /**
+ * Animation with multiple frames.
+ * Can also be an unanimated image by just having one frame.
  *
  * @author Thomas
  */

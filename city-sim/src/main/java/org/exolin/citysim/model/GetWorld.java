@@ -1,7 +1,9 @@
 package org.exolin.citysim.model;
 
 /**
- * Allows accessing the current world
+ * Allows accessing the current world.
+ * Necessary, so that the world can be replaced
+ * without searching every use of {@link World}.
  *
  * @author Thomas
  */

@@ -4,17 +4,36 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- *
+ * For a given {@link StructureType} the variant of it.
+ * For example for a street variants can be straigth connection,
+ * curves or intersections.
+ * 
  * @author Thomas
  */
 public interface StructureVariant
 {
+    /**
+     * The index in the set of variants.
+     * A {@link StructureVariant} acts like an enum (but doesn't need to be an
+     * {@link Enum}.
+     * 
+     * @implSpec the default implementation assumes that an {@link Enum} is used
+     * and just calls {@link Enum#ordinal()}. If the implementation doesn't use
+     * {@link Enum} then this method has to be implemented
+     * 
+     * @return the index
+     */
     default int index()
     {
         return ((Enum)this).ordinal();
     }
-    String name();
     
+    /**
+     * Returns the name, which has to be unique for the set of variants.
+     * 
+     * @return the name
+     */
+    String name();
       
     /**
      * Returns how many variants there are of the same type.

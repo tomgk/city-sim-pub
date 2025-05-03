@@ -16,6 +16,7 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -428,18 +429,30 @@ public final class World
             lastMoneyUpdate = moneyTime;
         }
         
-        iterateBuildings(b -> {
-            if(b.getType() instanceof ZoneType z)
+        iterateBuildings(s -> {
+            if(s.getType() instanceof ZoneType z)
             {
-                if(z.getSize() != 1)
-                    return;
-                
-                if(hasAnyInRadius(SelfConnections.street, b.getX(), b.getY(), Zones.BUILDING_DISTANCE))
-                    replaceBuilding(z, b.getX(), b.getY(), ticks);
+                handleZone(s, ticks, z);
             }
-            else
-                b.updateAfterTick(this, ticks);
+            
+            s.updateAfterTick(this, ticks);
+            
+            if(s instanceof Tree t)
+            {
+                t.getData().getZone().ifPresent(z -> {
+                    handleZone(s, ticks, z);
+                });
+            }
         });
+    }
+    
+    private void handleZone(Structure s, int ticks, ZoneType z)
+    {
+        if(z.getSize() != 1)
+            return;
+
+        if(hasAnyInRadius(SelfConnections.street, s.getX(), s.getY(), Zones.BUILDING_DISTANCE))
+            replaceBuilding(z, s.getX(), s.getY(), ticks);
     }
     
     private int getMaxZone(ZoneType z, int x, int y)

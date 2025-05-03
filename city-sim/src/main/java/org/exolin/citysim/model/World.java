@@ -40,7 +40,7 @@ public final class World
     //so that the time gaps where the game doesnt run are just ignored
     private long lastChange = System.currentTimeMillis();
     private final int gridSize;
-    private final List<Structure> buildings = new ArrayList<>();
+    private final List<Structure> structures = new ArrayList<>();
     
     private boolean checkOverlap;
     private static final int MONEY_PERIOD = 10_000;//10 seconds
@@ -110,7 +110,7 @@ public final class World
     
     public Structure getBuildingAt(int x, int y)
     {
-        for(Structure b: buildings)
+        for(Structure b: structures)
             if(b.isOccupying(x, y))
                 return b;
         
@@ -126,7 +126,7 @@ public final class World
     
     public void removeBuildingAt(Structure s)
     {
-        if(!buildings.remove(s))
+        if(!structures.remove(s))
             throw new IllegalArgumentException("not part of world");
     }
     
@@ -152,7 +152,7 @@ public final class World
     public boolean removeBuildingAt(int x, int y, RemoveMode mode)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
-        for (Iterator<Structure> it = buildings.iterator(); it.hasNext();)
+        for (Iterator<Structure> it = structures.iterator(); it.hasNext();)
         {
             Structure b = it.next();
             if(b.isOccupying(x, y))
@@ -185,7 +185,7 @@ public final class World
                     if(zoneType != null)
                         placeZone(zoneType.get(), b.getX(), b.getY(), b.getSize(), x, y);
                     
-                    updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+                    updateStructuresAround(b.getX(), b.getY(), b.getSize());
                 }
                 if(LOG)System.out.println(" REM "+b.toString());
                 return true;
@@ -247,8 +247,8 @@ public final class World
         }catch(ClassCastException e){
             throw e;
         }
-        buildings.add(b);
-        buildings.sort(sorter(Rotation.ORIGINAL));
+        structures.add(b);
+        structures.sort(sorter(Rotation.ORIGINAL));
         updateBuilding(b);
         updateBuildCount(b, true);
         onChange();
@@ -271,10 +271,10 @@ public final class World
     private void updateBuilding(Structure b)
     {
         b.updateAfterChange(this);
-        updateBuildingsAround(b.getX(), b.getY(), b.getSize());
+        updateStructuresAround(b.getX(), b.getY(), b.getSize());
     }
     
-    private void updateBuildingsAround(int bx, int by, int bsize)
+    private void updateStructuresAround(int bx, int by, int bsize)
     {
         for(int x=bx-1;x<bx+bsize+1;++x)
         {
@@ -321,19 +321,19 @@ public final class World
         }
     }
 
-    public List<Structure> getBuildings()
+    public List<Structure> getStructures()
     {
-        return buildings;
+        return structures;
     }
 
-    public List<Structure> getBuildings(Rotation rotation)
+    public List<Structure> getStructures(Rotation rotation)
     {
         if(rotation == Rotation.ORIGINAL)
-            return buildings;
+            return structures;
         
-        List<Structure> buildingsRotated = new ArrayList<>(buildings);
-        buildingsRotated.sort(sorter(rotation));
-        return buildingsRotated;
+        List<Structure> structuresRotated = new ArrayList<>(structures);
+        structuresRotated.sort(sorter(rotation));
+        return structuresRotated;
     }
 
     void onChange()
@@ -395,20 +395,20 @@ public final class World
     private void updateMoney(int ticks)
     {
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
-        for(Structure b : buildings)
+        for(Structure b : structures)
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
     }
     
-    private void iterateBuildings(Consumer<Structure> consumer)
+    private void iterateStructures(Consumer<Structure> consumer)
     {
         
         //TODO: maybe no copy
-        List<Structure> originalBuildings = new ArrayList<>(this.buildings);
+        List<Structure> originalStructures = new ArrayList<>(this.structures);
         
-        for(Structure b: originalBuildings)
+        for(Structure b: originalStructures)
         {
             //if it was already removed, skip it
-            if(!this.buildings.contains(b))
+            if(!this.structures.contains(b))
                 continue;
             
             consumer.accept(b);
@@ -429,7 +429,7 @@ public final class World
             lastMoneyUpdate = moneyTime;
         }
         
-        iterateBuildings(s -> {
+        iterateStructures(s -> {
             if(s.getType() instanceof ZoneType z)
             {
                 handleZone(s, ticks, z);

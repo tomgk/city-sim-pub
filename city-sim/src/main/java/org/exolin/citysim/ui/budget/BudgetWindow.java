@@ -66,7 +66,7 @@ public class BudgetWindow extends JDialog
             l.resetValues();
         sum.resetValues();
         
-        for(Structure b : w.getBuildings())
+        for(Structure b : w.getStructures())
         {
             BudgetCategory category = BudgetCategory.getFor(b.getType());
             

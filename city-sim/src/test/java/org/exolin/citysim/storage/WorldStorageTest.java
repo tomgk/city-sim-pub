@@ -57,8 +57,8 @@ public class WorldStorageTest
     
     static Structure getBuilding(World w)
     {
-        assertEquals(1, w.getBuildings().size());
-        return w.getBuildings().get(0);
+        assertEquals(1, w.getStructures().size());
+        return w.getStructures().get(0);
     }
     
     @Test
@@ -111,7 +111,7 @@ public class WorldStorageTest
         assertEquals(30, w.getGridSize());
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         
-        List<Structure> buildings = w.getBuildings();
+        List<Structure> buildings = w.getStructures();
         assertEquals(4, buildings.size());
         
         {

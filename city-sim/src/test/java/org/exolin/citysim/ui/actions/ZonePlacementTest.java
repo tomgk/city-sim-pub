@@ -42,8 +42,8 @@ public class ZonePlacementTest
         
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
-        List<Structure> buildings = world.getBuildings();
-        assertEquals(6, world.getBuildings().size(), buildings.toString());
+        List<Structure> buildings = world.getStructures();
+        assertEquals(6, world.getStructures().size(), buildings.toString());
         
         //for(Structure b: buildings)
         //    System.out.println(b);
@@ -65,8 +65,8 @@ public class ZonePlacementTest
         makeMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
         makeMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
         
-        List<Structure> buildings = world.getBuildings();
-        assertEquals(10, world.getBuildings().size(), buildings.toString());
+        List<Structure> buildings = world.getStructures();
+        assertEquals(10, world.getStructures().size(), buildings.toString());
         
         for(Structure b: buildings)
             System.out.println(b);

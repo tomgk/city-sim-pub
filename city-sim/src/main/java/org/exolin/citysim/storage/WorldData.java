@@ -39,7 +39,7 @@ public class WorldData
 
     public WorldData(World world)
     {
-        this.buildings = world.getBuildings()
+        this.buildings = world.getStructures()
                 .stream()
                 .map(StructureData::create)
                 .toList();

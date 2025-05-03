@@ -617,7 +617,7 @@ public final class GamePanel extends JComponent
             }
         }
         
-        for(Structure b: world.getBuildings(rotation))
+        for(Structure b: world.getStructures(rotation))
         {
             if(scaleMarker)
             {

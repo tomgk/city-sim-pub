@@ -142,7 +142,7 @@ public class WorldTest
         */
         w.addBuilding(BusinessBuildings.car_cinema, 3, 3);
         
-        assertEquals(13, w.getBuildings().size());
+        assertEquals(13, w.getStructures().size());
         
         //WorldStorage.serialize(w, System.out);
         
@@ -225,7 +225,7 @@ public class WorldTest
         
         w.updateAfterTick(1);
         
-        System.out.println(w.getBuildings().stream().map(Object::toString).collect(Collectors.joining("\n")));
-        assertEquals("xxxx", w.getBuildings());
+        System.out.println(w.getStructures().stream().map(Object::toString).collect(Collectors.joining("\n")));
+        assertEquals("xxxx", w.getStructures());
     }
 }

@@ -108,7 +108,7 @@ public class WorldTest
                           }
                           """;
         
-        //WorldStorage.serialize(w, System.out);
+        WorldStorage.serialize(w, System.out);
         
         JSONAssert.assertEquals(WorldStorageTest.serialize(w), expected, true);
     }
@@ -127,10 +127,10 @@ public class WorldTest
         */
         Fire.placeMultiple(w, Zones.business, 1, 1, 4, 4, ZoneType.Variant.DEFAULT, EmptyStructureParameters.getInstance());
         
-        WorldStorage.serialize(w, System.out);
+        //WorldStorage.serialize(w, System.out);
         
-        System.out.println();
-        System.out.println("---------------");
+        //System.out.println();
+        //System.out.println("---------------");
         
         /*
         0
@@ -144,7 +144,7 @@ public class WorldTest
         
         assertEquals(13, w.getBuildings().size());
         
-        WorldStorage.serialize(w, System.out);
+        //WorldStorage.serialize(w, System.out);
         
         String expected = """
                           {

@@ -1,6 +1,7 @@
 package org.exolin.citysim.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureParameters;
@@ -12,6 +13,7 @@ import org.exolin.citysim.model.building.BuildingType;
  *
  * @author Thomas
  */
+@JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class BuildingData extends StructureData
 {
     public BuildingData(Building b)

@@ -9,7 +9,6 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.ImageUtils;

@@ -17,10 +17,29 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public abstract class Structure<B, T extends StructureType<B, E, D>, E extends StructureVariant, D extends StructureParameters<D>>
 {
+    /**
+     * type
+     */
     private final T type;
+    
+    /**
+     * X-coordinate for top left corner
+     */
     private final int x;
+    
+    /**
+     * Y-coordinate for top left corner
+     */
     private final int y;
+    
+    /**
+     * variant
+     */
     private E variant;
+    
+    /**
+     * additional data, otherwise {@link EmptyStructureParameters}
+     */
     protected final D data;
     
     public Structure(T type, int x, int y, E variant, D data)
@@ -88,6 +107,14 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         return x + y + type.getSize() * 2 / 2;
     }
     
+    /**
+     * Calculates the level, which determines the order in which
+     * structures get drawn.
+     * 
+     * @param gridSize grid size of world
+     * @param rotation current rotation view
+     * @return level
+     */
     public int getLevel(int gridSize, Rotation rotation)
     {
         Point p = new Point(-1, -1);
@@ -95,6 +122,13 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         return p.x + p.y + type.getSize() * 2 / 2;
     }
     
+    /**
+     * Calculates the level, which determines the order in which
+     * structures get drawn.
+     * 
+     * @param r position and size
+     * @return level
+     */
     public static int getLevel(Rectangle r)
     {
         //divide r.width+r.height by 2 to put level to center
@@ -103,6 +137,13 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         return r.x+r.y+(r.width+r.height)/2;
     }
     
+    /**
+     * Returns if the structure occupies the given coordinates
+     * 
+     * @param x X-coordinate
+     * @param y y-coordinate
+     * @return {@code true} if structure is there, otherwise {@code false}
+     */
     public boolean isOccupying(int x, int y)
     {
         if(x < this.x)
@@ -127,11 +168,22 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         w.onChange();
     }
 
+    /**
+     * Gets alled when something changed around the structure.
+     * 
+     * @param world the world
+     */
     protected void updateAfterChange(World world)
     {
         
     }
     
+    /**
+     * Gets called periodically.
+     * 
+     * @param world the world
+     * @param ticks the number of ticks (can be higher than 1 if sped up)
+     */
     protected void updateAfterTick(World world, int ticks)
     {
         
@@ -161,9 +213,25 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         return getClass().getSimpleName()+"[x="+x+",y="+y+",size="+type.getSize()+",type="+type.getName()+"]";
     }
     
+    /**
+     * Returns the tax revenue.
+     * 
+     * @return tax revenue
+     */
     public abstract BigDecimal getTaxRevenue();
+    
+    /**
+     * Returns the maintenance cost for the structure.
+     * 
+     * @return maintenance cost
+     */
     public abstract BigDecimal getMaintenance();
     
+    /**
+     * Returns if zone should be drawn too.
+     * 
+     * @return if zone should be drawn
+     */
     public boolean drawZone()
     {
         return false;

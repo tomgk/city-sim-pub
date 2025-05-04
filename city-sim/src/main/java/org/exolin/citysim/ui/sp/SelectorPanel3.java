@@ -18,57 +18,56 @@ public class SelectorPanel3 extends JPanel
     {
         setLayout(new GridBagLayout());
         
-        x = 0;
-        registerButton("bulldoze.png");
-        registerButton("tree_water.png");
-        registerButton("emergency.png");
+        
+        registerButton(0, "bulldoze.png");
+        registerButton(2, "tree_water.png");
+        registerButton(4, "emergency.png");
         ++y;
 
-        x = 0;
-        registerButton("electricity.png");
-        registerButton("water.png");
-        registerButton("city_hall.png");
+        
+        registerButton(0, "electricity.png");
+        registerButton(2, "water.png");
+        registerButton(4, "city_hall.png");
         ++y;
 
-        x = 0;
-        registerButton("street.png");
-        registerButton("rail.png");
-        registerButton("port.png");
+        
+        registerButton(0, "street.png");
+        registerButton(2, "rail.png");
+        registerButton(4, "port.png");
         ++y;
 
-        x = 0;
-        registerButton("residential.png");
-        registerButton("business.png");
-        registerButton("industry.png");
+        
+        registerButton(0, "residential.png");
+        registerButton(2, "business.png");
+        registerButton(4, "industry.png");
         ++y;
 
-        x = 0;
-        registerButton("school.png");
-        registerButton("police.png");
-        registerButton("party.png");
+        
+        registerButton(0, "school.png");
+        registerButton(2, "police.png");
+        registerButton(4, "party.png");
         ++y;
         
         w = 3;
-        x = 0;
-        registerButton("sign.png");
-        registerButton("info.png");
+        
+        registerButton(0, "sign.png");
+        registerButton(3, "info.png");
         ++y;
 
         w = 3;
-        x = 0;
-        registerButton("turn_left.png");
-        registerButton("turn_right.png");
+        
+        registerButton(0, "turn_left.png");
+        registerButton(3, "turn_right.png");
         ++y;
 
         w = 2;
-        x = 0;
-        registerButton("zoom_out.png");
-        registerButton("zoom_in.png");
-        registerButton("center.png");
+        
+        registerButton(0, "zoom_out.png");
+        registerButton(2, "zoom_in.png");
+        registerButton(4, "center.png");
         ++y;
     }
     
-    private int x = 0;
     private int y = 0;
     private int w = 2;
     
@@ -83,7 +82,7 @@ public class SelectorPanel3 extends JPanel
         return constraints;
     }
 
-    private void registerButton(String path)
+    private void registerButton(int x, String path)
     {
         JButton button = new javax.swing.JButton();
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
@@ -98,7 +97,7 @@ public class SelectorPanel3 extends JPanel
         x += w;
         if(x >= 6)
         {
-            x = 0;
+            
             ++y;
         }
     }

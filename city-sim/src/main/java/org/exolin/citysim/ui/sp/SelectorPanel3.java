@@ -1,6 +1,7 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.ImageIcon;
@@ -80,6 +81,7 @@ public class SelectorPanel3 extends JPanel
             JButton button = new javax.swing.JButton();
             ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/rci.png"));
             button.setIcon(icon);
+            button.setPreferredSize(new Dimension(30, 90));
 
             GridBagConstraints constraints = createConstraints(4, yRCI, 2, 3);
 
@@ -106,6 +108,7 @@ public class SelectorPanel3 extends JPanel
         JButton button = new javax.swing.JButton();
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
+        button.setPreferredSize(new Dimension(w * 10, 30));
         
         GridBagConstraints constraints = createConstraints(x, y, w, 1);
         

@@ -19,52 +19,52 @@ public class SelectorPanel3 extends JPanel
         setLayout(new GridBagLayout());
         
         x = 0;
-        registerButton("/org/exolin/citysim/menu/bulldoze.png");
-        registerButton("/org/exolin/citysim/menu/tree_water.png");
-        registerButton("/org/exolin/citysim/menu/emergency.png");
+        registerButton("bulldoze.png");
+        registerButton("tree_water.png");
+        registerButton("emergency.png");
         ++y;
 
         x = 0;
-        registerButton("/org/exolin/citysim/menu/electricity.png");
-        registerButton("/org/exolin/citysim/menu/water.png");
-        registerButton("/org/exolin/citysim/menu/city_hall.png");
+        registerButton("electricity.png");
+        registerButton("water.png");
+        registerButton("city_hall.png");
         ++y;
 
         x = 0;
-        registerButton("/org/exolin/citysim/menu/street.png");
-        registerButton("/org/exolin/citysim/menu/rail.png");
-        registerButton("/org/exolin/citysim/menu/port.png");
+        registerButton("street.png");
+        registerButton("rail.png");
+        registerButton("port.png");
         ++y;
 
         x = 0;
-        registerButton("/org/exolin/citysim/menu/residential.png");
-        registerButton("/org/exolin/citysim/menu/business.png");
-        registerButton("/org/exolin/citysim/menu/industry.png");
+        registerButton("residential.png");
+        registerButton("business.png");
+        registerButton("industry.png");
         ++y;
 
         x = 0;
-        registerButton("/org/exolin/citysim/menu/school.png");
-        registerButton("/org/exolin/citysim/menu/police.png");
-        registerButton("/org/exolin/citysim/menu/party.png");
+        registerButton("school.png");
+        registerButton("police.png");
+        registerButton("party.png");
         ++y;
         
         w = 3;
         x = 0;
-        registerButton("/org/exolin/citysim/menu/sign.png");
-        registerButton("/org/exolin/citysim/menu/info.png");
+        registerButton("sign.png");
+        registerButton("info.png");
         ++y;
 
         w = 3;
         x = 0;
-        registerButton("/org/exolin/citysim/menu/turn_left.png");
-        registerButton("/org/exolin/citysim/menu/turn_right.png");
+        registerButton("turn_left.png");
+        registerButton("turn_right.png");
         ++y;
 
         w = 2;
         x = 0;
-        registerButton("/org/exolin/citysim/menu/zoom_out.png");
-        registerButton("/org/exolin/citysim/menu/zoom_in.png");
-        registerButton("/org/exolin/citysim/menu/center.png");
+        registerButton("zoom_out.png");
+        registerButton("zoom_in.png");
+        registerButton("center.png");
         ++y;
     }
     
@@ -85,7 +85,7 @@ public class SelectorPanel3 extends JPanel
     private void registerButton(String path)
     {
         JButton button = new javax.swing.JButton();
-        ImageIcon icon = new ImageIcon(getClass().getResource(path));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         
         GridBagConstraints constraints = createConstraints(x, y, w, 2);

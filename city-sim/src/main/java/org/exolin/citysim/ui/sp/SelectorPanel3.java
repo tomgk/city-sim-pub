@@ -18,38 +18,52 @@ public class SelectorPanel3 extends JPanel
     {
         setLayout(new GridBagLayout());
         
+        x = 0;
         registerButton("/org/exolin/citysim/menu/bulldoze.png");
         registerButton("/org/exolin/citysim/menu/tree_water.png");
         registerButton("/org/exolin/citysim/menu/emergency.png");
+        ++y;
 
+        x = 0;
         registerButton("/org/exolin/citysim/menu/electricity.png");
         registerButton("/org/exolin/citysim/menu/water.png");
         registerButton("/org/exolin/citysim/menu/city_hall.png");
+        ++y;
 
+        x = 0;
         registerButton("/org/exolin/citysim/menu/street.png");
         registerButton("/org/exolin/citysim/menu/rail.png");
         registerButton("/org/exolin/citysim/menu/port.png");
+        ++y;
 
+        x = 0;
         registerButton("/org/exolin/citysim/menu/residential.png");
         registerButton("/org/exolin/citysim/menu/business.png");
         registerButton("/org/exolin/citysim/menu/industry.png");
+        ++y;
 
+        x = 0;
         registerButton("/org/exolin/citysim/menu/school.png");
         registerButton("/org/exolin/citysim/menu/police.png");
         registerButton("/org/exolin/citysim/menu/party.png");
-
-        w = 2;
+        ++y;
+        
+        w = 3;
+        x = 0;
         registerButton("/org/exolin/citysim/menu/sign.png");
         registerButton("/org/exolin/citysim/menu/info.png");
+        ++y;
 
-        w = 2;
+        w = 3;
+        x = 0;
         registerButton("/org/exolin/citysim/menu/turn_left.png");
         registerButton("/org/exolin/citysim/menu/turn_right.png");
+        ++y;
     }
     
     private int x = 0;
     private int y = 0;
-    private int w = 3;
+    private int w = 2;
 
     private void registerButton(String path)
     {
@@ -60,13 +74,15 @@ public class SelectorPanel3 extends JPanel
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = x;
         constraints.gridy = y;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
+        constraints.gridwidth = w;
+        constraints.gridheight = 2;
         
         add(button, constraints);
         
-        ++x;
-        if(x >= w)
+        //System.out.println(x+","+y);
+        
+        x += w;
+        if(x >= 6)
         {
             x = 0;
             ++y;

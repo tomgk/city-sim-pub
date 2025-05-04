@@ -79,6 +79,7 @@ public class SelectorPanel3 extends JPanel
         constraints.gridy = y;
         constraints.gridwidth = w;
         constraints.gridheight = h;
+        constraints.fill = GridBagConstraints.BOTH;
         return constraints;
     }
 

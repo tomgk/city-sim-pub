@@ -1,5 +1,6 @@
 package org.exolin.citysim.utils;
 
+import java.nio.file.Paths;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -41,5 +42,13 @@ public class UtilsTest
         assertEquals(List.of(2, 3, 1), Utils.rotate(List.of(1, 2, 3), 2));
         assertEquals(List.of(1, 2, 3), Utils.rotate(List.of(1, 2, 3), 3));
         assertEquals(List.of(2, 3, 1), Utils.rotate(List.of(1, 2, 3), -1));
+    }
+    
+    @Test
+    public void testGetFilenameWithoutExt()
+    {
+        assertEquals("xx", Utils.getFilenameWithoutExt(Paths.get("xx")));
+        assertEquals("xx", Utils.getFilenameWithoutExt(Paths.get("xx.y")));
+        assertEquals("xx.y", Utils.getFilenameWithoutExt(Paths.get("xx.y.z")));
     }
 }

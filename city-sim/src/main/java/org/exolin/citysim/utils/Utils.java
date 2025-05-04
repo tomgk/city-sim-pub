@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.exolin.citysim.ui.WorldView;
 
 /**
  *
@@ -15,7 +14,7 @@ public class Utils
     public static String getFilenameWithoutExt(Path path)
     {
         String fn = path.getFileName().toString();
-        int pos = fn.indexOf('.');
+        int pos = fn.lastIndexOf('.');
         return pos != -1 ? fn.substring(0, pos) : fn;
     }
     

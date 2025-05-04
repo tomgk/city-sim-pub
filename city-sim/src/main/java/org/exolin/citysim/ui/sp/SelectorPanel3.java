@@ -21,6 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.buildings.Plants;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
@@ -31,6 +32,7 @@ import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.ZonePlacement;
@@ -60,7 +62,13 @@ public class SelectorPanel3 extends JPanel
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
         
-        registerButton(0, "electricity.png", Action.NONE);
+        registerButton(0, "electricity.png", Map.of(
+                "Gas", new PlaceBuilding(getWorld, Plants.gas_plant),
+                "Oil", new PlaceBuilding(getWorld, Plants.oil_plant),
+                "Solar", new PlaceBuilding(getWorld, Plants.plant_solar),
+                "Protest", new PlaceBuilding(getWorld, Plants.protest),
+                "Pump", new PlaceBuilding(getWorld, Plants.pump)
+        ));
         registerButton(2, "water.png", new StreetBuilder(getWorld, water, false));
         registerButton(4, "city_hall.png", Action.NONE);
         ++y;

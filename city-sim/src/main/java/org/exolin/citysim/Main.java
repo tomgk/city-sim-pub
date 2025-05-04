@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
@@ -16,6 +17,7 @@ import org.exolin.citysim.ui.LoadGame;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.ui.sp.SelectorPanel;
+import org.exolin.citysim.ui.sp.SelectorPanel3;
 
 /**
  *
@@ -23,7 +25,7 @@ import org.exolin.citysim.ui.sp.SelectorPanel;
  */
 public class Main
 {
-    private static JFrame createSelector(SelectorPanel sp)
+    private static JFrame createSelector(JPanel sp)
     {
         JFrame selector = new JFrame("Selector");
         selector.setLayout(new BorderLayout());
@@ -76,6 +78,7 @@ public class Main
         f.add(gd, BorderLayout.NORTH);
         
         SelectorPanel sp = new SelectorPanel();
+        SelectorPanel3 sp3 = new SelectorPanel3();
         
         GamePanel gp = new GamePanel(world, f, new GamePanelListener()
         {
@@ -84,12 +87,14 @@ public class Main
             {
                 gd.setPanel(panel);
                 sp.setPanel(panel);
+                sp3.setGamePanel(panel);
             }
 
             @Override
             public void onActionChanged(Action newAction)
             {
                 sp.setAction(newAction);
+                sp3.setAction(newAction);
             }
         });
         f.add(gp, BorderLayout.CENTER);
@@ -104,6 +109,9 @@ public class Main
         selector.setVisible(true);
         
         sp.doneAdding();
+        
+        JFrame selector3 = createSelector(sp3);
+        selector3.setVisible(true);
         
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);

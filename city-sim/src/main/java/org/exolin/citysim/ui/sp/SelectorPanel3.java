@@ -23,12 +23,10 @@ import org.exolin.citysim.ui.actions.Action;
 public class SelectorPanel3 extends JPanel
 {
     private final RCIPanel rciPanel;
-    private final GamePanel world;
+    private GamePanel gamePanel;
     
-    public SelectorPanel3(GamePanel world)
+    public SelectorPanel3()
     {
-        this.world = Objects.requireNonNull(world);
-        
         setLayout(new GridBagLayout());
         
         registerButton(0, "bulldoze.png", Action.NONE);
@@ -98,6 +96,16 @@ public class SelectorPanel3 extends JPanel
             add(rciPanel, constraints);
         }
     }
+
+    public void setAction(Action newAction)
+    {
+        
+    }
+
+    public void setGamePanel(GamePanel gamePanel)
+    {
+        this.gamePanel = gamePanel;
+    }
     
     private int y = 0;
     private int w = 2;
@@ -120,7 +128,7 @@ public class SelectorPanel3 extends JPanel
         button.setIcon(icon);
         button.setPreferredSize(new Dimension(w * 10, 30));
         
-        button.addActionListener(e -> world.setAction(a));
+        button.addActionListener(e -> gamePanel.setAction(a));
         
         GridBagConstraints constraints = createConstraints(x, y, w, 1);
         
@@ -129,7 +137,7 @@ public class SelectorPanel3 extends JPanel
     
     public static void main(String[] args)
     {
-        GamePanel w = new GamePanel(Worlds.World1(), new JFrame(), new GamePanelListener()
+        GamePanel gp = new GamePanel(Worlds.World1(), new JFrame(), new GamePanelListener()
         {
             @Override
             public void created(GamePanel panel)
@@ -143,7 +151,9 @@ public class SelectorPanel3 extends JPanel
         });
         
         JFrame f = new JFrame();
-        f.add(new SelectorPanel3(w), BorderLayout.CENTER);
+        SelectorPanel3 sp = new SelectorPanel3();
+        sp.setGamePanel(gp);
+        f.add(sp, BorderLayout.CENTER);
         f.pack();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);

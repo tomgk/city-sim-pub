@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui;
 
+import org.exolin.citysim.utils.Utils;
+
 /**
  *
  * @author Thomas
@@ -11,12 +13,13 @@ public enum WorldView
     
     private static final WorldView[] values = values();
     
+    public WorldView getPrev()
+    {
+        return Utils.getPrev(values, ordinal());
+    }
+    
     public WorldView getNext()
     {
-        int num = ordinal()+1;
-        if(num == values.length)
-            num = 0;
-        
-        return values[num];
+        return Utils.getNext(values, ordinal());
     }
 }

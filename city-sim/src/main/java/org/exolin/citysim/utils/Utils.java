@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.exolin.citysim.ui.WorldView;
 
 /**
  *
@@ -11,7 +12,6 @@ import java.util.List;
  */
 public class Utils
 {
-    
     public static String getFilenameWithoutExt(Path path)
     {
         String fn = path.getFileName().toString();
@@ -24,5 +24,23 @@ public class Utils
         List<T> copy = new ArrayList<>(list);
         Collections.rotate(copy, distance);
         return copy;
+    }
+
+    public static <E extends Enum<E>> E getPrev(E[] values, int ordinal)
+    {
+        int num = ordinal-1;
+        if(num == -1)
+            num = values.length-1;
+        
+        return values[num];
+    }
+
+    public static <E extends Enum<E>> E getNext(E[] values, int ordinal)
+    {
+        int num = ordinal+1;
+        if(num == values.length)
+            num = 0;
+        
+        return values[num];
     }
 }

@@ -51,7 +51,8 @@ public class SelectorPanel3 extends JPanel
         
         registerButton(0, "bulldoze.png", Action.NONE);
         registerButton(2, "tree_water.png", Map.of(
-                "Trees", new PlaceTrees(getWorld)
+                "Trees", new PlaceTrees(getWorld),
+                "Water", new StreetBuilder(getWorld, water, false)
         ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;

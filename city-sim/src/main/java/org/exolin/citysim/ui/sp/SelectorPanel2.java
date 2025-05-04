@@ -143,7 +143,7 @@ public class SelectorPanel2 extends javax.swing.JPanel
 
         add(jPanel6);
 
-        jPanel7.setLayout(new java.awt.GridLayout());
+        jPanel7.setLayout(new java.awt.GridLayout(1, 0));
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/exolin/citysim/menu/turn_left.png"))); // NOI18N
         jPanel7.add(jButton18);

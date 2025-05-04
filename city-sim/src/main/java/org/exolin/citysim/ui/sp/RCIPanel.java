@@ -47,7 +47,7 @@ public class RCIPanel extends JPanel
             int y = 31;
 
             int h = 31 * value / 100;
-            System.out.println("h="+h);
+            //System.out.println("h="+h);
             y -= h;
 
             g.setColor(color);
@@ -58,7 +58,7 @@ public class RCIPanel extends JPanel
             int y = 46;
 
             int h = 31 * -value / 100;
-            System.out.println("h="+h);
+            //System.out.println("h="+h);
 
             g.setColor(color);
             g.fillRect(x, y, 3, h);

@@ -15,6 +15,8 @@ import javax.swing.JPanel;
  */
 public class SelectorPanel3 extends JPanel
 {
+    private final RCIPanel rciPanel;
+    
     public SelectorPanel3()
     {
         setLayout(new GridBagLayout());
@@ -78,14 +80,12 @@ public class SelectorPanel3 extends JPanel
         ++y;
         
         {
-            JButton button = new javax.swing.JButton();
-            ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/rci.png"));
-            button.setIcon(icon);
-            button.setPreferredSize(new Dimension(30, 90));
+            rciPanel = new RCIPanel(50, -30, 70);
+            rciPanel.setPreferredSize(new Dimension(30, 90));
 
             GridBagConstraints constraints = createConstraints(4, yRCI, 2, 3);
 
-            add(button, constraints);
+            add(rciPanel, constraints);
         }
     }
     

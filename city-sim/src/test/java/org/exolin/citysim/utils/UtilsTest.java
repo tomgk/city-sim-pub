@@ -1,5 +1,6 @@
 package org.exolin.citysim.utils;
 
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -30,5 +31,15 @@ public class UtilsTest
         assertEquals(Value.b, Utils.getNext(values, 0));
         assertEquals(Value.c, Utils.getNext(values, 1));
         assertEquals(Value.a, Utils.getNext(values, 2));
+    }
+    
+    @Test
+    public void testRotate()
+    {
+        assertEquals(List.of(1, 2, 3), Utils.rotate(List.of(1, 2, 3), 0));
+        assertEquals(List.of(3, 1, 2), Utils.rotate(List.of(1, 2, 3), 1));
+        assertEquals(List.of(2, 3, 1), Utils.rotate(List.of(1, 2, 3), 2));
+        assertEquals(List.of(1, 2, 3), Utils.rotate(List.of(1, 2, 3), 3));
+        assertEquals(List.of(2, 3, 1), Utils.rotate(List.of(1, 2, 3), -1));
     }
 }

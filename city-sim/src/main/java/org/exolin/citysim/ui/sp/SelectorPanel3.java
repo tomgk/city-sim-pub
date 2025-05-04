@@ -144,11 +144,12 @@ public class SelectorPanel3 extends JPanel
         {
             JMenuItem i = new JMenuItem(e.getKey());
             i.addActionListener(evt -> gamePanel.setAction(e.getValue()));
+            System.out.println(e);
         }
         
         registerButton(x, path, e -> {
             try{
-                m.show((Component)e.getSource(), 0, 0);
+                m.show((Component)e.getSource(), e.getX(), e.getY());
             }catch(ClassCastException ex){
                 ErrorDisplay.show(this, ex);
             }

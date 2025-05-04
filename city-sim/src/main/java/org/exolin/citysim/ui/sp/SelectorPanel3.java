@@ -67,9 +67,14 @@ public class SelectorPanel3 extends JPanel
         registerButton(4, "port.png", Action.NONE);
         ++y;
         
-        registerButton(0, "residential.png", new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY));
-        registerButton(2, "business.png", new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY));
-        registerButton(4, "industry.png", new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY));
+        registerButton(0, "residential.png", Map.of(
+                "Light", new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY)
+        ));
+        registerButton(2, "business.png", Map.of(
+                "Light", new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY)
+        ));
+        registerButton(4, "industry.png", Map.of("Light", new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY)
+        ));
         ++y;
         
         registerButton(0, "school.png", Action.NONE);

@@ -1,19 +1,26 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Worlds;
+import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.actions.PlaceTrees;
 
 /**
  *
@@ -23,13 +30,16 @@ public class SelectorPanel3 extends JPanel
 {
     private final RCIPanel rciPanel;
     private GamePanel gamePanel;
+    private final GetWorld getWorld = () -> gamePanel.getWorld();
     
     public SelectorPanel3()
     {
         setLayout(new GridBagLayout());
         
         registerButton(0, "bulldoze.png", Action.NONE);
-        registerButton(2, "tree_water.png", Action.NONE);
+        registerButton(2, "tree_water.png", Map.of(
+                "Trees", new PlaceTrees(getWorld)
+        ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
         
@@ -123,6 +133,24 @@ public class SelectorPanel3 extends JPanel
     private void registerButton(int x, String path, Action a)
     {
         registerButton(x, path, e -> gamePanel.setAction(a));
+    }
+    
+    private void registerButton(int x, String path, Map<String, Action> a)
+    {
+        JPopupMenu m = new JPopupMenu();
+        for(Map.Entry<String, Action> e : a.entrySet())
+        {
+            JMenuItem i = new JMenuItem(e.getKey());
+            i.addActionListener(evt -> gamePanel.setAction(e.getValue()));
+        }
+        
+        registerButton(x, path, e -> {
+            try{
+                m.show((Component)e.getSource(), 0, 0);
+            }catch(ClassCastException ex){
+                ErrorDisplay.show(this, ex);
+            }
+        });
     }
     
     private void registerButton(int x, String path, ActionListener a)

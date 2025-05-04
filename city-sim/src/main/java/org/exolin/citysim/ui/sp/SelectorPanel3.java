@@ -8,11 +8,15 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -146,6 +150,34 @@ public class SelectorPanel3 extends JPanel
     
     private void registerButton(int x, String path, Map<String, Action> a)
     {
+        JDialog f = new JDialog();
+        JList<String> list = new JList<>(a.keySet().toArray(new String[0]));
+        list.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                if(e.getClickCount() == 2)
+                {
+                    f.setVisible(false);
+            
+                    String sel = list.getSelectedValue();
+                    System.out.println("SelectedValue="+sel);
+                    Action action = a.get(sel);
+                    gamePanel.setAction(action);
+                }
+            }
+        });
+        f.add(list, BorderLayout.CENTER);
+        f.pack();
+        f.setLocationRelativeTo(null);
+        registerButton(x, path, e -> {
+            f.setVisible(true);
+        });
+        
+        if(true)
+            return;
+        
         JPopupMenu m = new JPopupMenu();
         for(Map.Entry<String, Action> e : a.entrySet())
         {

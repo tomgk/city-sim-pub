@@ -1,12 +1,20 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Objects;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
+import org.exolin.citysim.model.Worlds;
+import org.exolin.citysim.ui.GamePanel;
+import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.actions.Action;
 
 /**
  *
@@ -14,61 +22,91 @@ import javax.swing.JPanel;
  */
 public class SelectorPanel3 extends JPanel
 {
+    private final RCIPanel rciPanel;
+    private GamePanel gamePanel;
+    
     public SelectorPanel3()
     {
         setLayout(new GridBagLayout());
         
-        x = 0;
-        registerButton("bulldoze.png");
-        registerButton("tree_water.png");
-        registerButton("emergency.png");
+        registerButton(0, "bulldoze.png", Action.NONE);
+        registerButton(2, "tree_water.png", Action.NONE);
+        registerButton(4, "emergency.png", Action.NONE);
         ++y;
-
-        x = 0;
-        registerButton("electricity.png");
-        registerButton("water.png");
-        registerButton("city_hall.png");
+        
+        registerButton(0, "electricity.png", Action.NONE);
+        registerButton(2, "water.png", Action.NONE);
+        registerButton(4, "city_hall.png", Action.NONE);
         ++y;
-
-        x = 0;
-        registerButton("street.png");
-        registerButton("rail.png");
-        registerButton("port.png");
+        
+        registerButton(0, "street.png", Action.NONE);
+        registerButton(2, "rail.png", Action.NONE);
+        registerButton(4, "port.png", Action.NONE);
         ++y;
-
-        x = 0;
-        registerButton("residential.png");
-        registerButton("business.png");
-        registerButton("industry.png");
+        
+        registerButton(0, "residential.png", Action.NONE);
+        registerButton(2, "business.png", Action.NONE);
+        registerButton(4, "industry.png", Action.NONE);
         ++y;
-
-        x = 0;
-        registerButton("school.png");
-        registerButton("police.png");
-        registerButton("party.png");
+        
+        registerButton(0, "school.png", Action.NONE);
+        registerButton(2, "police.png", Action.NONE);
+        registerButton(4, "party.png", Action.NONE);
         ++y;
         
         w = 3;
-        x = 0;
-        registerButton("sign.png");
-        registerButton("info.png");
+        registerButton(0, "sign.png", Action.NONE);
+        registerButton(3, "info.png", Action.NONE);
         ++y;
 
         w = 3;
-        x = 0;
-        registerButton("turn_left.png");
-        registerButton("turn_right.png");
+        registerButton(0, "turn_left.png", Action.NONE);
+        registerButton(3, "turn_right.png", Action.NONE);
         ++y;
 
         w = 2;
-        x = 0;
-        registerButton("zoom_out.png");
-        registerButton("zoom_in.png");
-        registerButton("center.png");
+        registerButton(0, "zoom_out.png", Action.NONE);
+        registerButton(2, "zoom_in.png", Action.NONE);
+        registerButton(4, "center.png", Action.NONE);
         ++y;
+        
+        int yRCI = y;
+        
+        w = 2;
+        registerButton(0, "map.png", Action.NONE);
+        registerButton(2, "diagrams.png", Action.NONE);
+        ++y;
+        
+        w = 2;
+        registerButton(0, "population.png", Action.NONE);
+        registerButton(2, "industries.png", Action.NONE);
+        ++y;
+        
+        w = 2;
+        registerButton(0, "neighbors.png", Action.NONE);
+        registerButton(2, "budget.png", Action.NONE);
+        ++y;
+        
+        {
+            rciPanel = new RCIPanel(50, -30, 70);
+            rciPanel.setPreferredSize(new Dimension(30, 90));
+
+            GridBagConstraints constraints = createConstraints(4, yRCI, 2, 3);
+
+            add(rciPanel, constraints);
+        }
+    }
+
+    public void setAction(Action newAction)
+    {
+        
+    }
+
+    public void setGamePanel(GamePanel gamePanel)
+    {
+        this.gamePanel = gamePanel;
     }
     
-    private int x = 0;
     private int y = 0;
     private int w = 2;
     
@@ -83,30 +121,39 @@ public class SelectorPanel3 extends JPanel
         return constraints;
     }
 
-    private void registerButton(String path)
+    private void registerButton(int x, String path, Action a)
     {
-        JButton button = new javax.swing.JButton();
+        AbstractButton button = Action.isNone(a) ? new JButton() : new JToggleButton();
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
+        button.setPreferredSize(new Dimension(w * 10, 30));
         
-        GridBagConstraints constraints = createConstraints(x, y, w, 2);
+        button.addActionListener(e -> gamePanel.setAction(a));
+        
+        GridBagConstraints constraints = createConstraints(x, y, w, 1);
         
         add(button, constraints);
-        
-        //System.out.println(x+","+y);
-        
-        x += w;
-        if(x >= 6)
-        {
-            x = 0;
-            ++y;
-        }
     }
     
     public static void main(String[] args)
     {
+        GamePanel gp = new GamePanel(Worlds.World1(), new JFrame(), new GamePanelListener()
+        {
+            @Override
+            public void created(GamePanel panel)
+            {
+            }
+
+            @Override
+            public void onActionChanged(Action newAction)
+            {
+            }
+        });
+        
         JFrame f = new JFrame();
-        f.add(new SelectorPanel3(), BorderLayout.CENTER);
+        SelectorPanel3 sp = new SelectorPanel3();
+        sp.setGamePanel(gp);
+        f.add(sp, BorderLayout.CENTER);
         f.pack();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);

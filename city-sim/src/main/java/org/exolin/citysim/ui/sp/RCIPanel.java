@@ -41,24 +41,34 @@ public class RCIPanel extends JPanel
 
     private void drawValue(Graphics g, int index, int value, Color color)
     {
-        if(value < 0)
-            return;
-        
         int x = 5 + index * 8;
-        int y = 31;
-        
-        int h = 31 * value / 100;
-        System.out.println("h="+h);
-        y -= h;
-        
-        g.setColor(color);
-        g.fillRect(x, y, 3, h);
+        if(value > 0)
+        {
+            int y = 31;
+
+            int h = 31 * value / 100;
+            System.out.println("h="+h);
+            y -= h;
+
+            g.setColor(color);
+            g.fillRect(x, y, 3, h);
+        }
+        else if(value < 0)
+        {
+            int y = 46;
+
+            int h = 31 * -value / 100;
+            System.out.println("h="+h);
+
+            g.setColor(color);
+            g.fillRect(x, y, 3, h);
+        }
     }
     
     public static void main(String[] args)
     {
         JFrame f = new JFrame();
-        f.add(new RCIPanel(50, 30, 70), BorderLayout.CENTER);
+        f.add(new RCIPanel(50, -30, 70), BorderLayout.CENTER);
         f.pack();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);

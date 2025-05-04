@@ -71,6 +71,16 @@ public class SelectorPanel3 extends JPanel
     private int x = 0;
     private int y = 0;
     private int w = 2;
+    
+    private GridBagConstraints createConstraints(int x, int y, int w, int h)
+    {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = x;
+        constraints.gridy = y;
+        constraints.gridwidth = w;
+        constraints.gridheight = h;
+        return constraints;
+    }
 
     private void registerButton(String path)
     {
@@ -78,11 +88,7 @@ public class SelectorPanel3 extends JPanel
         ImageIcon icon = new ImageIcon(getClass().getResource(path));
         button.setIcon(icon);
         
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = x;
-        constraints.gridy = y;
-        constraints.gridwidth = w;
-        constraints.gridheight = 2;
+        GridBagConstraints constraints = createConstraints(x, y, w, 2);
         
         add(button, constraints);
         

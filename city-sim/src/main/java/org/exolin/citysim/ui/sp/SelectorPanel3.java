@@ -58,6 +58,21 @@ public class SelectorPanel3 extends JPanel
         registerButton(2, "zoom_in.png");
         registerButton(4, "center.png");
         ++y;
+        
+        w = 2;
+        registerButton(0, "map.png");
+        registerButton(2, "diagrams.png");
+        ++y;
+        
+        w = 2;
+        registerButton(0, "population.png");
+        registerButton(2, "industries.png");
+        ++y;
+        
+        w = 2;
+        registerButton(0, "neighbors.png");
+        registerButton(2, "budget.png");
+        ++y;
     }
     
     private int y = 0;

@@ -59,6 +59,8 @@ public class SelectorPanel3 extends JPanel
         registerButton(4, "center.png");
         ++y;
         
+        int yRCI = y;
+        
         w = 2;
         registerButton(0, "map.png");
         registerButton(2, "diagrams.png");
@@ -73,6 +75,16 @@ public class SelectorPanel3 extends JPanel
         registerButton(0, "neighbors.png");
         registerButton(2, "budget.png");
         ++y;
+        
+        {
+            JButton button = new javax.swing.JButton();
+            ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/rci.png"));
+            button.setIcon(icon);
+
+            GridBagConstraints constraints = createConstraints(4, yRCI, 2, 3);
+
+            add(button, constraints);
+        }
     }
     
     private int y = 0;

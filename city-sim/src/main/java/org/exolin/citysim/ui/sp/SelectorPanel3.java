@@ -5,10 +5,12 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.Objects;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
@@ -113,7 +115,7 @@ public class SelectorPanel3 extends JPanel
 
     private void registerButton(int x, String path, Action a)
     {
-        JButton button = new javax.swing.JButton();
+        AbstractButton button = Action.isNone(a) ? new JButton() : new JToggleButton();
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         button.setPreferredSize(new Dimension(w * 10, 30));

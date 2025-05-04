@@ -4,13 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.Objects;
+import java.awt.event.ActionListener;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
@@ -123,12 +122,17 @@ public class SelectorPanel3 extends JPanel
 
     private void registerButton(int x, String path, Action a)
     {
-        AbstractButton button = Action.isNone(a) ? new JButton() : new JToggleButton();
+        registerButton(x, path, e -> gamePanel.setAction(a));
+    }
+    
+    private void registerButton(int x, String path, ActionListener a)
+    {
+        AbstractButton button = /*Action.isNone(a) ?*/ new JButton() /*: new JToggleButton()*/;
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         button.setPreferredSize(new Dimension(w * 10, 30));
         
-        button.addActionListener(e -> gamePanel.setAction(a));
+        button.addActionListener(a);
         
         GridBagConstraints constraints = createConstraints(x, y, w, 1);
         

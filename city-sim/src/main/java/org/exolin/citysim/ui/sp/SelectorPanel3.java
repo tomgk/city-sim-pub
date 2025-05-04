@@ -45,6 +45,9 @@ public class SelectorPanel3 extends JPanel
     private GamePanel gamePanel;
     private final GetWorld getWorld = () -> gamePanel.getWorld();
     
+    private static final String LIGHT = "Light";
+    private static final String HIGH = "High";
+    
     public SelectorPanel3()
     {
         setLayout(new GridBagLayout());
@@ -68,13 +71,16 @@ public class SelectorPanel3 extends JPanel
         ++y;
         
         registerButton(0, "residential.png", Map.of(
-                "Light", new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY)
+                LIGHT, new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.DEFAULT)
         ));
         registerButton(2, "business.png", Map.of(
-                "Light", new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY)
+                LIGHT, new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.DEFAULT)
         ));
         registerButton(4, "industry.png", Map.of(
-                "Light", new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY)
+                LIGHT, new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.DEFAULT)
         ));
         ++y;
         

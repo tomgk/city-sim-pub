@@ -26,6 +26,11 @@ public interface Action
     }
     
     public static final NoAction NONE = NoAction.INSTANCE;
+    
+    public static boolean isNone(Action a)
+    {
+        return a instanceof NoAction;
+    }
 }
 
 final class NoAction implements Action

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -153,14 +155,26 @@ public class SelectorPanel3 extends JPanel
         });
     }
     
-    private void registerButton(int x, String path, ActionListener a)
+    public static interface ButtonListener
+    {
+        void perform(MouseEvent e);
+    }
+    
+    private void registerButton(int x, String path, ButtonListener a)
     {
         AbstractButton button = /*Action.isNone(a) ?*/ new JButton() /*: new JToggleButton()*/;
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         button.setPreferredSize(new Dimension(w * 10, 30));
         
-        button.addActionListener(a);
+        button.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                a.perform(e);
+            }
+        });
         
         GridBagConstraints constraints = createConstraints(x, y, w, 1);
         

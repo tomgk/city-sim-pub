@@ -5,11 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -103,8 +100,8 @@ public class SelectorPanel3 extends JPanel
         ++y;
 
         w = 3;
-        registerButton(0, "turn_left.png", e -> gamePanel.setView(gamePanel.getView().getPrev()));
-        registerButton(3, "turn_right.png", e -> gamePanel.setView(gamePanel.getView().getNext()));
+        registerButton(0, "turn_left.png", e -> gamePanel.setView(gamePanel.getView().getPrev()), true);
+        registerButton(3, "turn_right.png", e -> gamePanel.setView(gamePanel.getView().getNext()), true);
         ++y;
 
         w = 2;
@@ -166,7 +163,7 @@ public class SelectorPanel3 extends JPanel
 
     private void registerButton(int x, String path, Action a)
     {
-        registerButton(x, path, e -> gamePanel.setAction(a));
+        registerButton(x, path, e -> gamePanel.setAction(a), Action.isNone(a));
     }
     
     private void registerButton(int x, String path, Map<String, Action> a)
@@ -194,7 +191,7 @@ public class SelectorPanel3 extends JPanel
         f.setLocationRelativeTo(null);
         registerButton(x, path, e -> {
             f.setVisible(true);
-        });
+        }, false);
         
         if(true)
             return;
@@ -213,7 +210,7 @@ public class SelectorPanel3 extends JPanel
             }catch(ClassCastException ex){
                 ErrorDisplay.show(this, ex);
             }
-        });
+        }, false);
     }
     
     public static interface ButtonListener
@@ -221,7 +218,7 @@ public class SelectorPanel3 extends JPanel
         void perform(MouseEvent e);
     }
     
-    private void registerButton(int x, String path, ButtonListener a)
+    private void registerButton(int x, String path, ButtonListener a, boolean disabled)
     {
         AbstractButton button = /*Action.isNone(a) ?*/ new JButton() /*: new JToggleButton()*/;
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));

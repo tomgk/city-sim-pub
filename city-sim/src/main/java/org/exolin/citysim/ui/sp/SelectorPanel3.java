@@ -16,13 +16,20 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import org.exolin.citysim.bt.Zones;
+import static org.exolin.citysim.bt.connections.SelfConnections.rail;
+import static org.exolin.citysim.bt.connections.SelfConnections.street;
+import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Worlds;
+import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceTrees;
+import org.exolin.citysim.ui.actions.StreetBuilder;
+import org.exolin.citysim.ui.actions.ZonePlacement;
 
 /**
  *
@@ -46,18 +53,18 @@ public class SelectorPanel3 extends JPanel
         ++y;
         
         registerButton(0, "electricity.png", Action.NONE);
-        registerButton(2, "water.png", Action.NONE);
+        registerButton(2, "water.png", new StreetBuilder(getWorld, water, false));
         registerButton(4, "city_hall.png", Action.NONE);
         ++y;
         
-        registerButton(0, "street.png", Action.NONE);
-        registerButton(2, "rail.png", Action.NONE);
+        registerButton(0, "street.png", new StreetBuilder(getWorld, street, true));
+        registerButton(2, "rail.png", new StreetBuilder(getWorld, rail, true));
         registerButton(4, "port.png", Action.NONE);
         ++y;
         
-        registerButton(0, "residential.png", Action.NONE);
-        registerButton(2, "business.png", Action.NONE);
-        registerButton(4, "industry.png", Action.NONE);
+        registerButton(0, "residential.png", new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY));
+        registerButton(2, "business.png", new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY));
+        registerButton(4, "industry.png", new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY));
         ++y;
         
         registerButton(0, "school.png", Action.NONE);

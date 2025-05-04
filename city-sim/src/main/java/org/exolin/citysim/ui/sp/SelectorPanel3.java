@@ -59,6 +59,13 @@ public class SelectorPanel3 extends JPanel
         registerButton("/org/exolin/citysim/menu/turn_left.png");
         registerButton("/org/exolin/citysim/menu/turn_right.png");
         ++y;
+
+        w = 2;
+        x = 0;
+        registerButton("/org/exolin/citysim/menu/zoom_out.png");
+        registerButton("/org/exolin/citysim/menu/zoom_in.png");
+        registerButton("/org/exolin/citysim/menu/center.png");
+        ++y;
     }
     
     private int x = 0;

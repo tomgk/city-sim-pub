@@ -80,18 +80,9 @@ public class SelectorPanel3 extends JPanel
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         
-        GridBagConstraints constraints = createConstraints(x, y, w, 2);
+        GridBagConstraints constraints = createConstraints(x, y, w, 1);
         
         add(button, constraints);
-        
-        //System.out.println(x+","+y);
-        
-        x += w;
-        if(x >= 6)
-        {
-            
-            ++y;
-        }
     }
     
     public static void main(String[] args)

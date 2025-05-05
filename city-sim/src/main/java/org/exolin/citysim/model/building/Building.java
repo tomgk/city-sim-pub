@@ -47,8 +47,10 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         ZoneType zt = getType().getZoneType();
         if(zt != null && zt.isUserPlaceableZone())
         {
+            int FACTOR = 1;
+            
             int size = getType().getSize();
-            int area = size * size;
+            int area = size * size * FACTOR;
             
             return BigDecimal.valueOf(area).divide(BigDecimal.TEN);
         }

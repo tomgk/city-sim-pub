@@ -396,7 +396,10 @@ public final class World
     {
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
         for(Structure b : structures)
+        {
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
+            money = money.add(b.getTaxRevenue().multiply(bigTicks));
+        }
     }
     
     private void iterateStructures(Consumer<Structure> consumer)

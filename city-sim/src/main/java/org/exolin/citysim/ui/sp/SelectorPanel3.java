@@ -7,10 +7,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Map;
 import javax.swing.AbstractButton;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.Plants;
@@ -191,13 +195,7 @@ public class SelectorPanel3 extends JPanel
                 }
             }
         });
-        f.addWindowFocusListener(new WindowFocusListener()
-        {
-            @Override
-            public void windowGainedFocus(WindowEvent e)
-            {
-            }
-
+        f.addWindowFocusListener(new WindowAdapter(){
             @Override
             public void windowLostFocus(WindowEvent e)
             {

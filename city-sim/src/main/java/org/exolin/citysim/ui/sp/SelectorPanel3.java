@@ -241,6 +241,7 @@ public class SelectorPanel3 extends JPanel
         ImageIcon icon = new ImageIcon(getClass().getResource("/org/exolin/citysim/menu/"+path));
         button.setIcon(icon);
         button.setPreferredSize(new Dimension(w * 10, 30));
+        button.setEnabled(!disabled);
         
         button.addMouseListener(new MouseAdapter()
         {

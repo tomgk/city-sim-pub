@@ -178,7 +178,7 @@ public class SelectorPanel3 extends JPanel
         JDialog f = new JDialog(SwingUtilities.getWindowAncestor(this));
         //f.setModal(true);
         f.setUndecorated(true);
-        JList<String> list = new JList<>(a.keySet().toArray(new String[0]));
+        JList<String> list = new JList<>(a.keySet().toArray(String[]::new));
         list.addMouseListener(new MouseAdapter()
         {
             @Override

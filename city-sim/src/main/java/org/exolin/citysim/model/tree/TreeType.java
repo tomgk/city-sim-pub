@@ -16,11 +16,16 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
 {
+    private final boolean isGrass;
     private final int count;
     private final boolean alive;
     
-    private static final Map<Integer, TreeType> aliveInstances = new LinkedHashMap<>();
-    private static final Map<Integer, TreeType> deadInstances = new LinkedHashMap<>();
+    private record Key(int number, boolean alive, boolean isGrass)
+    {
+        
+    }
+    
+    private static final Map<Key, TreeType> instances = new LinkedHashMap<>();
     
     private static List<Animation> createVariants(String name, BufferedImage image)
     {
@@ -32,28 +37,24 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return variants;
     }
     
-    private static Map<Integer, TreeType> getInstances(boolean alive)
-    {
-        return alive ? aliveInstances : deadInstances;
-    }
-    
-    public TreeType(String name, BufferedImage image, int count, boolean alive)
+    public TreeType(boolean isGrass, String name, BufferedImage image, int count, boolean alive)
     {
         super(name, createVariants(name, image), 1);
+        this.isGrass = isGrass;
         this.count = count;
         this.alive = alive;
-        if(getInstances(alive).putIfAbsent(count, this) != null)
+        if(instances.putIfAbsent(new Key(count, alive, isGrass), this) != null)
             throw new IllegalArgumentException();
     }
     
     public Optional<TreeType> plusOne()
     {
-        return Optional.ofNullable(getInstances(alive).get(count+1));
+        return Optional.ofNullable(instances.get(new Key(count+1, alive, isGrass)));
     }
     
     public TreeType getDead()
     {
-        TreeType tree = getInstances(false).get(count);
+        TreeType tree = instances.get(new Key(count, false, isGrass));
         if(tree == null)
             throw new IllegalArgumentException();
         return tree;

@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -170,14 +172,15 @@ public class SelectorPanel3 extends JPanel
     private void registerButton(int x, String path, Map<String, Action> a)
     {
         JDialog f = new JDialog(SwingUtilities.getWindowAncestor(this));
-        f.setModal(true);
+        //f.setModal(true);
+        f.setUndecorated(true);
         JList<String> list = new JList<>(a.keySet().toArray(new String[0]));
         list.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                if(e.getClickCount() == 2)
+                //if(e.getClickCount() == 2)
                 {
                     f.setVisible(false);
             
@@ -188,10 +191,24 @@ public class SelectorPanel3 extends JPanel
                 }
             }
         });
+        f.addWindowFocusListener(new WindowFocusListener()
+        {
+            @Override
+            public void windowGainedFocus(WindowEvent e)
+            {
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e)
+            {
+                f.setVisible(false);
+            }
+        });
         f.add(list, BorderLayout.CENTER);
         f.pack();
         f.setLocationRelativeTo(null);
         registerButton(x, path, e -> {
+            f.setLocation(e.getXOnScreen(), e.getYOnScreen());
             f.setVisible(true);
         }, false);
         

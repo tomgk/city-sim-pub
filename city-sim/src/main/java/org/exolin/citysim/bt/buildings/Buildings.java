@@ -12,6 +12,11 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Buildings
 {
+    public static BuildingType createZoneBuildingType(Animation animation, int size, ZoneType zoneType)
+    {
+        return createBuildingType(animation, size, zoneType, 0);
+    }
+    
     public static BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost)
     {
         return createBuildingType(animation, size, zoneType, cost, BigDecimal.ZERO);

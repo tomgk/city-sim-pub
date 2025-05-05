@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.Plants;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
@@ -168,7 +169,8 @@ public class SelectorPanel3 extends JPanel
     
     private void registerButton(int x, String path, Map<String, Action> a)
     {
-        JDialog f = new JDialog();
+        JDialog f = new JDialog(SwingUtilities.getWindowAncestor(this));
+        f.setModal(true);
         JList<String> list = new JList<>(a.keySet().toArray(new String[0]));
         list.addMouseListener(new MouseAdapter()
         {

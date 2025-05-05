@@ -4,6 +4,7 @@ import org.exolin.citysim.bt.buildings.Buildings;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.bt.buildings.IndustrialBuildings;
 import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.ResidentialBuildings;
 import org.exolin.citysim.bt.connections.CrossConnections;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.StructureType;

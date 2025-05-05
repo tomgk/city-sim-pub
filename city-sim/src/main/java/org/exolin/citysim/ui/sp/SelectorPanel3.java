@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.math.BigDecimal;
 import java.util.Map;
 import javax.swing.AbstractButton;
 import javax.swing.AbstractListModel;
@@ -30,6 +31,8 @@ import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.SimulationSpeed;
+import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
@@ -40,6 +43,7 @@ import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.ZonePlacement;
+import org.exolin.citysim.ui.budget.BudgetWindow;
 
 /**
  *
@@ -49,50 +53,50 @@ public class SelectorPanel3 extends JPanel
 {
     private final RCIPanel rciPanel;
     private GamePanel gamePanel;
-    private final GetWorld getWorld = () -> gamePanel.getWorld();
+    private final GetWorld world = () -> gamePanel.getWorld();
     
     private static final String LIGHT = "Light";
     private static final String HIGH = "High";
     
-    public SelectorPanel3()
+    public SelectorPanel3(BudgetWindow budgetWindow)
     {
         setLayout(new GridBagLayout());
         
         registerButton(0, "bulldoze.png", Action.NONE);
         registerButton(2, "tree_water.png", Map.of(
-                "Trees", new PlaceTrees(getWorld),
-                "Water", new StreetBuilder(getWorld, water, false)
+                "Trees", new PlaceTrees(world),
+                "Water", new StreetBuilder(world, water, false)
         ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
         
         registerButton(0, "electricity.png", Map.of(
-                "Gas", new PlaceBuilding(getWorld, Plants.gas_plant),
-                "Oil", new PlaceBuilding(getWorld, Plants.oil_plant),
-                "Solar", new PlaceBuilding(getWorld, Plants.plant_solar),
-                "Protest", new PlaceBuilding(getWorld, Plants.protest),
-                "Pump", new PlaceBuilding(getWorld, Plants.pump)
+                "Gas", new PlaceBuilding(world, Plants.gas_plant),
+                "Oil", new PlaceBuilding(world, Plants.oil_plant),
+                "Solar", new PlaceBuilding(world, Plants.plant_solar),
+                "Protest", new PlaceBuilding(world, Plants.protest),
+                "Pump", new PlaceBuilding(world, Plants.pump)
         ));
-        registerButton(2, "water.png", new StreetBuilder(getWorld, water, false));
+        registerButton(2, "water.png", Action.NONE);
         registerButton(4, "city_hall.png", Action.NONE);
         ++y;
         
-        registerButton(0, "street.png", new StreetBuilder(getWorld, street, true));
-        registerButton(2, "rail.png", new StreetBuilder(getWorld, rail, true));
+        registerButton(0, "street.png", new StreetBuilder(world, street, true));
+        registerButton(2, "rail.png", new StreetBuilder(world, rail, true));
         registerButton(4, "port.png", Action.NONE);
         ++y;
         
         registerButton(0, "residential.png", Map.of(
-                LIGHT, new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.LOW_DENSITY),
-                HIGH, new ZonePlacement(getWorld, Zones.residential, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.residential, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(world, Zones.residential, ZoneType.Variant.DEFAULT)
         ));
         registerButton(2, "business.png", Map.of(
-                LIGHT, new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.LOW_DENSITY),
-                HIGH, new ZonePlacement(getWorld, Zones.business, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.business, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(world, Zones.business, ZoneType.Variant.DEFAULT)
         ));
         registerButton(4, "industry.png", Map.of(
-                LIGHT, new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.LOW_DENSITY),
-                HIGH, new ZonePlacement(getWorld, Zones.industrial, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.industrial, ZoneType.Variant.LOW_DENSITY),
+                HIGH, new ZonePlacement(world, Zones.industrial, ZoneType.Variant.DEFAULT)
         ));
         ++y;
         
@@ -131,7 +135,10 @@ public class SelectorPanel3 extends JPanel
         
         w = 2;
         registerButton(0, "neighbors.png", Action.NONE);
-        registerButton(2, "budget.png", Action.NONE);
+        registerButton(2, "budget.png", e -> {
+            budgetWindow.update(world.get());
+            budgetWindow.setVisible(true);
+        }, false);
         ++y;
         
         {
@@ -207,6 +214,8 @@ public class SelectorPanel3 extends JPanel
         f.setLocationRelativeTo(null);
         registerButton(x, path, e -> {
             f.setLocation(e.getXOnScreen(), e.getYOnScreen());
+            f.setAlwaysOnTop(false);
+            f.setAlwaysOnTop(f.isAlwaysOnTop());
             f.setVisible(true);
         }, false);
         
@@ -273,7 +282,7 @@ public class SelectorPanel3 extends JPanel
         });
         
         JFrame f = new JFrame();
-        SelectorPanel3 sp = new SelectorPanel3();
+        SelectorPanel3 sp = new SelectorPanel3(new BudgetWindow(f));
         sp.setGamePanel(gp);
         f.add(sp, BorderLayout.CENTER);
         f.pack();

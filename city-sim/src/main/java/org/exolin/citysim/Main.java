@@ -25,7 +25,7 @@ import org.exolin.citysim.ui.sp.SelectorPanel3;
  */
 public class Main
 {
-    private static JFrame createSelector(JPanel sp)
+    private static JFrame createSelector(JPanel sp, boolean aot)
     {
         JFrame selector = new JFrame("Selector");
         selector.setLayout(new BorderLayout());
@@ -33,7 +33,7 @@ public class Main
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         selector.setSize(300, 800);
         selector.setLocation(0, 90);
-        selector.setAlwaysOnTop(true);
+        selector.setAlwaysOnTop(aot);
         return selector;
     }
     
@@ -77,8 +77,10 @@ public class Main
         GameControlPanel gd = new GameControlPanel();
         f.add(gd, BorderLayout.NORTH);
         
+        BudgetWindow bw = new BudgetWindow(f);
+        
         SelectorPanel sp = new SelectorPanel();
-        SelectorPanel3 sp3 = new SelectorPanel3();
+        SelectorPanel3 sp3 = new SelectorPanel3(bw);
         
         GamePanel gp = new GamePanel(world, f, new GamePanelListener()
         {
@@ -105,18 +107,17 @@ public class Main
                 sp.add(e.getKey(), a);
         }
         
-        JFrame selector = createSelector(sp);
+        JFrame selector = createSelector(sp, true);
         selector.setVisible(true);
         
         sp.doneAdding();
         
-        JFrame selector3 = createSelector(sp3);
+        JFrame selector3 = createSelector(sp3, false);
         selector3.setVisible(true);
         
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         
-        BudgetWindow bw = new BudgetWindow(f);
         f.addKeyListener(createKeyListener(bw, gp, selector, gd));
         
         gp.start();

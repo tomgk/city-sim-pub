@@ -25,4 +25,16 @@ public interface GetWorld
     {
         return () -> w;
     }
+    
+    /**
+     * Creates a placeholder that fails if used.
+     * 
+     * @return placeholder
+     */
+    static GetWorld unset()
+    {
+        return () -> {
+            throw new IllegalStateException("not assigned");
+        };
+    }
 }

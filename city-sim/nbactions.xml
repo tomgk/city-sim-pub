@@ -15,4 +15,12 @@
                 <goal>-Dshow=private</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-Run headless tests</actionName>
+            <displayName>Run headless tests</displayName>
+            <goals>
+                <goal>test</goal>
+                <goal>-Djava.awt.headless=true</goal>
+            </goals>
+        </action>
     </actions>

@@ -3,6 +3,7 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.List;
 import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.GetWorld;
@@ -11,6 +12,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
+import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.tree.TreeVariant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -26,16 +28,23 @@ public class PlaceTrees implements BuildingAction
     private boolean mouseDown;
     private long lastPlaced;
     private static final long PLANT_COOLDOWN = 250;//ms
+    private final boolean isGrass;
 
-    public PlaceTrees(GetWorld world)
+    public PlaceTrees(GetWorld world, boolean isGrass)
     {
         this.world = world;
+        this.isGrass = isGrass;
+    }
+    
+    private List<TreeType> get()
+    {
+        return (isGrass ? Trees.GRASS : Trees.XTREES);
     }
 
     @Override
     public StructureType getBuilding()
     {
-        return Trees.TREES.getFirst();
+        return get().getFirst();
     }
 
     @Override
@@ -74,10 +83,10 @@ public class PlaceTrees implements BuildingAction
         else if(buildingAt != null)
             return;
         
-        if(alreadyPlaced+1 >= Trees.TREES.size())
+        if(alreadyPlaced+1 >= get().size())
             return;
         
-        w.addBuilding(Trees.TREES.get(alreadyPlaced), marking.x, marking.y, TreeVariant.random(), new TreeParameters(zoneType));
+        w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, TreeVariant.random(), new TreeParameters(zoneType));
         w.reduceMoney(COST);
     }
 
@@ -126,7 +135,7 @@ public class PlaceTrees implements BuildingAction
     @Override
     public Image getMarker()
     {
-        return Trees.TREES.getFirst().getBrightImage();
+        return get().getFirst().getBrightImage();
     }
 
     @Override

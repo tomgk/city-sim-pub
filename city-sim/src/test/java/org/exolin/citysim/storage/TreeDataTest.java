@@ -28,7 +28,7 @@ public class TreeDataTest
     @Test
     public void testSerializeTree() throws IOException
     {
-        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.empty()));
+        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.empty()));
         String output = serialize(WorldStorage::serialize, street);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
@@ -40,7 +40,7 @@ public class TreeDataTest
     @Test
     public void testSerializeTree_WithZone() throws IOException
     {
-        Tree street = new Tree(Trees.TREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.of(Zones.residential)));
+        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.of(Zones.residential)));
         String output = serialize(WorldStorage::serialize, street);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right","zone":"zone_residential"}
@@ -58,7 +58,7 @@ public class TreeDataTest
                           """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);
-        assertEquals(Trees.TREES.get(3), b.getType());
+        assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
@@ -76,7 +76,7 @@ public class TreeDataTest
                           """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);
-        assertEquals(Trees.TREES.get(3), b.getType());
+        assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());

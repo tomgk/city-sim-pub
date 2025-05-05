@@ -85,7 +85,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
                    if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                    {
                        world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
-                       world.addBuilding(Trees.TREES.getFirst(), x, y, getVariant(), t.getData());
+                       world.addBuilding(Trees.get(getType().isGrass()).getFirst(), x, y, getVariant(), t.getData());
                    }
                 }
             }
@@ -95,7 +95,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Trees.TREES.getFirst(), x, y, TreeVariant.random(), new TreeParameters(zoneType));
+            world.addBuilding(Trees.get(getType().isGrass()).getFirst(), x, y, TreeVariant.random(), new TreeParameters(zoneType));
     }
 
     public boolean isAlive()

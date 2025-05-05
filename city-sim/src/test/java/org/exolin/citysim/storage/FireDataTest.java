@@ -64,7 +64,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_AfterBurn() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Trees.DEAD_TREES.get(3))));
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Trees.XDEAD_TREES.get(3))));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false, "afterBurn": "dead_trees_4"}
@@ -146,6 +146,6 @@ public class FireDataTest
         assertEquals(123, f.getData().getRemainingLife());
         assertEquals(Optional.of(Zones.business), f.getData().getZone());
         assertEquals(true, f.getData().isReturnToZone());
-        assertEquals(Optional.of(Trees.DEAD_TREES.get(1)), f.getData().getAfterBurn());
+        assertEquals(Optional.of(Trees.XDEAD_TREES.get(1)), f.getData().getAfterBurn());
     }
 }

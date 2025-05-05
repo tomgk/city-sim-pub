@@ -81,4 +81,9 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
     {
         return alive;
     }
+
+    public boolean isGrass()
+    {
+        return isGrass;
+    }
 }

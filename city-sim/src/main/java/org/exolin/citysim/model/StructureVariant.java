@@ -46,11 +46,11 @@ public interface StructureVariant
      */
     static int getVariantCount(Class<? extends StructureVariant> clazz)
     {
-        if(clazz.isEnum())
-            return clazz.getEnumConstants().length;
-        
         if(!StructureVariant.class.isAssignableFrom(clazz))
             throw new IllegalArgumentException(clazz.getName()+" is not a "+StructureVariant.class.getName());
+        
+        if(clazz.isEnum())
+            return clazz.getEnumConstants().length;
         
         try{
             Method m = clazz.getMethod("getVariantCount");

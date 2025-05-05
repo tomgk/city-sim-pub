@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
  */
 public class GamePanelTest
 {
-    private static final GamePanel gamePanel = new GamePanel(Worlds.World2(), new JFrame(), new GamePanelListener(){
+    private static final GamePanel gamePanel = new GamePanel(Worlds.World2(), null, new GamePanelListener(){
         @Override
         public void created(GamePanel panel)
         {

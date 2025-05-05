@@ -251,6 +251,8 @@ public final class GamePanel extends JComponent
             }
         };
         
+        if(frame != null)
+        {
         frame.addMouseListener(a);
         frame.addMouseMotionListener(a);
         
@@ -267,6 +269,7 @@ public final class GamePanel extends JComponent
                 GamePanel.this.keyPressed(e.getKeyCode());
             }
         });
+        }
         
         repaintTimer = new Timer(10, (ActionEvent e) ->
         {

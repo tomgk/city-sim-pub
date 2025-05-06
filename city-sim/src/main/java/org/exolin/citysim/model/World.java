@@ -182,7 +182,7 @@ public final class World
                 //TODO: CLEAR should place zone outside of (x,y) itself
                 if(mode == RemoveMode.TEAR_DOWN)
                 {
-                    if(zoneType != null)
+                    if(zoneType.isPresent())
                         placeZone(zoneType.get(), b.getX(), b.getY(), b.getSize(), x, y);
                     
                     updateStructuresAround(b.getX(), b.getY(), b.getSize());

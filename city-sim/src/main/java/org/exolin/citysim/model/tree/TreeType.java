@@ -32,7 +32,13 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         List<Animation> variants = new ArrayList<>(TreeVariant.VALUES.size());
         
         for(TreeVariant v : TreeVariant.VALUES)
-            variants.add(Animation.createUnanimated(name+"_"+v, ImageUtils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
+        {
+            String variantName = name;
+            if(v != TreeVariant.DEFAULT)
+                variantName += "@"+v;
+            
+            variants.add(Animation.createUnanimated(variantName, variantName, ImageUtils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
+        }
         
         return variants;
     }

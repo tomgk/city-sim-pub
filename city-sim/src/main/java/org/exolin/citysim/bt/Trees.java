@@ -11,30 +11,31 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class Trees
 {
-    private static TreeType createAliveTree(boolean isGrass, int count)
+    private static TreeType create(boolean isGrass, boolean isDead, int count)
     {
-        return new TreeType(isGrass, (isGrass ? "grass_" : "trees_")+count, ImageUtils.loadImage("trees/"+count), count, true);
-    }
-    
-    private static TreeType createDeadTree(boolean isGrass, int count)
-    {
-        return new TreeType(isGrass, (isGrass ? "dead_grass" : "dead_trees_")+count, ImageUtils.loadImage("trees/dead_"+count), count, false);
+        String baseName = (isGrass ? "grass" : "trees");
+        String add = isDead ? "dead_" : "";
+        
+        String name = baseName+"_"+add+count;
+        String fname = baseName+"/"+add+count;
+        
+        return new TreeType(isGrass, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
     public static final List<TreeType> XTREES = IntStream.range(1, 8)
-            .mapToObj(count -> createAliveTree(false, count))
+            .mapToObj(count -> create(false, false, count))
             .toList();
     
     public static final List<TreeType> XDEAD_TREES = IntStream.range(1, 8)
-            .mapToObj(count -> createDeadTree(false, count))
+            .mapToObj(count -> create(false, true, count))
             .toList();
     
     public static final List<TreeType> GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> createAliveTree(true, count))
+            .mapToObj(count -> create(true, false, count))
             .toList();
     
     public static final List<TreeType> DEAD_GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> createDeadTree(true, count))
+            .mapToObj(count -> create(true, true, count))
             .toList();
     
     public static List<TreeType> get(boolean isGrass)

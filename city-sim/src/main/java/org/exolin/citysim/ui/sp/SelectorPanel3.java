@@ -35,6 +35,7 @@ import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
+import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
 import org.exolin.citysim.ui.budget.BudgetWindow;
 
@@ -55,7 +56,7 @@ public class SelectorPanel3 extends JPanel
     {
         setLayout(new GridBagLayout());
         
-        registerButton(0, "bulldoze.png", Action.NONE);
+        registerButton(0, "bulldoze.png", TearDownAction.createTearDown(world));
         registerButton(2, "tree_water.png", Map.of(
                 "Trees", new PlaceTrees(world, false),
                 "Grass", new PlaceTrees(world, true),

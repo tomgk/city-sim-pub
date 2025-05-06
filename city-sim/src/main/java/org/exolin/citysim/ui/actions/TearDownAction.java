@@ -17,10 +17,20 @@ public class TearDownAction extends AreaAction implements ActionWithImage
 {
     private final boolean removeZoning;
     
-    public TearDownAction(GetWorld world, boolean removeZoning)
+    private TearDownAction(GetWorld world, boolean removeZoning)
     {
         super(world);
         this.removeZoning = removeZoning;
+    }
+    
+    public static TearDownAction createTearDown(GetWorld world)
+    {
+        return new TearDownAction(world, false);
+    }
+    
+    public static TearDownAction createDezoning(GetWorld world)
+    {
+        return new TearDownAction(world, true);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
+import static org.exolin.citysim.ui.actions.ZonePlacement.DEBUG_TREEZONE;
 import org.exolin.citysim.utils.RandomUtils;
 
 /**
@@ -18,6 +19,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     public Tree(TreeType type, int x, int y, TreeVariant variant, TreeParameters data)
     {
         super(type, x, y, variant, data);
+        if(DEBUG_TREEZONE) System.out.println("New tree "+System.identityHashCode(this)+" with zone "+data.getZone());
     }
     
     public int getCount()
@@ -113,6 +115,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     
     public void setZone(Optional<ZoneType> zone)
     {
+        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone);
         getData().setZone(zone);
     }
     

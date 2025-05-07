@@ -21,6 +21,8 @@ public class ZonePlacement extends AreaAction implements BuildingAction
 {
     private final ZoneType zoneType;
     private final ZoneType.Variant variant;
+    
+    public static boolean DEBUG_TREEZONE = false;
 
     public ZonePlacement(GetWorld world, ZoneType building, ZoneType.Variant variant)
     {
@@ -85,6 +87,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
                     {
                         t.setZone(Optional.of(z));
+                        if(DEBUG_TREEZONE) System.out.println(t);
                         continue;
                     }
                     else

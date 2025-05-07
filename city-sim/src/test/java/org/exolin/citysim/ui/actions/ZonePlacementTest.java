@@ -9,6 +9,7 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.tree.TreeVariant;
@@ -73,25 +74,35 @@ public class ZonePlacementTest
     @Disabled
     public void testZonePlacementOnTrees()
     {
-        World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
-        
-        world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
-        
-        makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
-        
-        List<Structure> buildings = world.getStructures();
-        assertEquals(6, world.getStructures().size(), buildings.toString());
-        
-        //for(Structure b: buildings)
-        //    System.out.println(b);
-        
-        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
-        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
-        assertTree(world.getBuildingAt(1, 8), 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
-        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
-        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
-        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
-        
-        buildings.stream().forEach(System.out::println);
+        ZonePlacement.DEBUG_TREEZONE = true;
+        System.out.println("START testZonePlacementOnTrees");
+        try{
+            World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
+
+            Tree t = world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
+            System.out.println("Tree="+System.identityHashCode(t));
+
+            makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
+
+            List<Structure> buildings = world.getStructures();
+            assertEquals(6, world.getStructures().size(), buildings.toString());
+
+            //for(Structure b: buildings)
+            //    System.out.println(b);
+            Structure tt = world.getBuildingAt(1, 8);
+            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
+
+            assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
+            assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
+            assertTree(tt, 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
+            assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
+            assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
+            assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
+
+            buildings.stream().forEach(System.out::println);
+        }finally{
+            ZonePlacement.DEBUG_TREEZONE = false;
+            System.out.println("END testZonePlacementOnTrees");
+        }
     }
 }

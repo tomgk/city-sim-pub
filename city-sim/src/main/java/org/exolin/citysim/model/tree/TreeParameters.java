@@ -22,7 +22,7 @@ public class TreeParameters implements StructureParameters<TreeParameters>
     @Override
     public void writeAdditional(PropertyWriter writer)
     {
-        writer.addOptional("zone", zone.map(ZoneType::getName));
+        writer.addOptionalExplicit("zone", zone.map(ZoneType::getName));
     }
 
     public Optional<ZoneType> getZone()

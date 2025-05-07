@@ -115,8 +115,13 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     
     public void setZone(Optional<ZoneType> zone)
     {
-        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone);
+        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone+", tree="+toString());
         getData().setZone(zone);
+        
+        if(zone.isPresent() != getZoneType().isEmpty())
+            throw new IllegalStateException();
+        
+        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+" after setZone: "+toString());
     }
     
     @Override

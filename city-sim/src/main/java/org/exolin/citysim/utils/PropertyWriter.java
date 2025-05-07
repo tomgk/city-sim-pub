@@ -56,6 +56,9 @@ public class PropertyWriter
     
     private void add(String name, Object value)
     {
+        if(value instanceof Optional)
+            throw new IllegalArgumentException();
+        
         maybeAddComma();
         
         sb.append(name).append("=").append(value);
@@ -64,6 +67,11 @@ public class PropertyWriter
     public void addOptional(String name, Optional<?> value)
     {
         value.ifPresent(v -> add(name, v));
+    }
+
+    public void addOptionalExplicit(String name, Optional<?> value)
+    {
+        value.ifPresentOrElse(v -> add(name, v), () -> add(name, "(none)"));
     }
 
     public void finish()

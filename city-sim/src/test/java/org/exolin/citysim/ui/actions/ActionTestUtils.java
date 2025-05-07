@@ -3,12 +3,14 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Point;
 import java.util.Optional;
 import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  *
@@ -16,8 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class ActionTestUtils
 {
+    private static void assertStructure(Structure b, int x, int y, StructureType<?, ?, ?> expectedType)
+    {
+        if(b == null)
+            fail("Expected "+expectedType.getName()+" but there is nothing at "+x+"/"+y);
+    }
+    
     public static void assertZone(Structure b, int x, int y, ZoneType t)
     {
+        assertStructure(b, x, y, t);
+        
         String msg = x+"/"+y;
         assertEquals(x, b.getX(), msg+" - x");
         assertEquals(y, b.getY());
@@ -27,6 +37,8 @@ public class ActionTestUtils
     
     public static void assertTree(Structure b, int x, int y, TreeType t, Optional<ZoneType> zone)
     {
+        assertStructure(b, x, y, t);
+        
         String msg = x+"/"+y;
         assertEquals(x, b.getX(), msg+" - x");
         assertEquals(y, b.getY());

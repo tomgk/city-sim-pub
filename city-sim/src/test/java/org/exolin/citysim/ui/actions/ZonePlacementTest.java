@@ -71,6 +71,36 @@ public class ZonePlacementTest
     }
     
     @Test
+    public void testZonePlacementOnTrees_Single()
+    {
+        ZonePlacement.DEBUG_TREEZONE = true;
+        System.out.println("START testZonePlacementOnTrees_Single");
+        try{
+            World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
+
+            Tree t = world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
+            System.out.println("Created Tree in test="+System.identityHashCode(t)+" with "+t.getZoneType());
+
+            makeZonePlacementMove(new Point(1, 8), new Point(2, 9), world, Zones.business);
+            
+            System.out.println("Test Tree after zone placement="+System.identityHashCode(t)+" with "+t.getZoneType());
+
+            List<Structure> buildings = world.getStructures();
+            assertEquals(1, world.getStructures().size(), buildings.toString());
+
+            Structure tt = world.getBuildingAt(1, 8);
+            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
+
+            assertTree(tt, 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
+
+            buildings.stream().forEach(System.out::println);
+        }finally{
+            ZonePlacement.DEBUG_TREEZONE = false;
+            System.out.println("END testZonePlacementOnTrees_Single");
+        }
+    }
+    
+    @Test
     @Disabled
     public void testZonePlacementOnTrees()
     {
@@ -87,8 +117,6 @@ public class ZonePlacementTest
             List<Structure> buildings = world.getStructures();
             assertEquals(6, world.getStructures().size(), buildings.toString());
 
-            //for(Structure b: buildings)
-            //    System.out.println(b);
             Structure tt = world.getBuildingAt(1, 8);
             System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
 

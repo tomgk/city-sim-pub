@@ -3,10 +3,16 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Point;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.tree.TreeParameters;
+import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.tree.TreeVariant;
+import static org.exolin.citysim.ui.actions.ActionTestUtils.assertTree;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.assertZone;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.makeZonePlacementMove;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -69,6 +75,8 @@ public class ZonePlacementTest
     {
         World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         
+        world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
+        
         makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
         List<Structure> buildings = world.getStructures();
@@ -79,9 +87,11 @@ public class ZonePlacementTest
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
         assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
-        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.business);
+        assertTree(world.getBuildingAt(1, 8), 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
         assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
         assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
         assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
+        
+        buildings.stream().forEach(System.out::println);
     }
 }

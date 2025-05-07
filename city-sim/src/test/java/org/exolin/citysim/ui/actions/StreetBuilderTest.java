@@ -27,19 +27,16 @@ public class StreetBuilderTest
         StreetBuilder streetBuilder = new StreetBuilder(GetWorld.ofStatic(w), street, StreetBuilder.ONLY_LINE);
         StreetBuilder railBuilder = new StreetBuilder(GetWorld.ofStatic(w), rail, StreetBuilder.ONLY_LINE);
         
-        streetBuilder.mouseDown(new Point(5, 0));
-        streetBuilder.moveMouse(new Point(5, 10));
-        streetBuilder.mouseReleased(new Point(5, 10));
+        ActionTestUtils.makeMove(new Point(5, 0), new Point(5, 10), w, streetBuilder);
         
-        railBuilder.mouseDown(new Point(0, 5));
-        railBuilder.moveMouse(new Point(10, 5));
-        railBuilder.mouseReleased(new Point(10, 5));
+        ActionTestUtils.makeMove(new Point(0, 5), new Point(10, 5), w, railBuilder);
         
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
                           {
                             "gridSize" : 30,
                             "money" : -384,
+                            "speed": "paused",
                             "buildings" : [ {
                               "type" : "street",
                               "x" : 5,

@@ -8,6 +8,7 @@ import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
+import static org.exolin.citysim.ui.actions.ActionTestUtils.makeZonePlacementMove;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -26,21 +27,12 @@ public class ZonePlacementTest
         assertEquals(t, b.getType());
     }
     
-    private void makeMove(Point start, Point end, World world, ZoneType type)
-    {
-        ZonePlacement z = new ZonePlacement(() -> world, type, ZoneType.Variant.DEFAULT);
-        
-        z.mouseDown(start);
-        z.moveMouse(end);
-        z.mouseReleased(end);
-    }
-    
     @Test
     public void testZonePlacementOnEmpty()
     {
         World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         
-        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
+        makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
         List<Structure> buildings = world.getStructures();
         assertEquals(6, world.getStructures().size(), buildings.toString());
@@ -62,14 +54,36 @@ public class ZonePlacementTest
     {
         World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
         
-        makeMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
-        makeMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
+        makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
+        makeZonePlacementMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
         
         List<Structure> buildings = world.getStructures();
         assertEquals(10, world.getStructures().size(), buildings.toString());
         
         for(Structure b: buildings)
             System.out.println(b);
+        
+        assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
+        assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
+        assertZone(world.getBuildingAt(1, 8), 1, 8, Zones.business);
+        assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
+        assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
+        assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);
+    }
+    
+    @Test
+    @Disabled
+    public void testZonePlacementOnTrees()
+    {
+        World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
+        
+        makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
+        
+        List<Structure> buildings = world.getStructures();
+        assertEquals(6, world.getStructures().size(), buildings.toString());
+        
+        //for(Structure b: buildings)
+        //    System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
         assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);

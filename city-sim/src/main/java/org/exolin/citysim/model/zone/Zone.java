@@ -31,4 +31,9 @@ public class Zone extends Structure<Zone, ZoneType, ZoneType.Variant, EmptyStruc
     {
         return BigDecimal.ZERO;
     }
+
+    public ZoneState getZoneState()
+    {
+        return new ZoneState(getType(), getVariant());
+    }
 }

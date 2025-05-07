@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.Optional;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.PropertyWriter;
 
@@ -198,7 +199,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     /**
      * @return zone type or {@code null} if not belonging to a zone type
      */
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneState> getZoneType()
     {
         return Optional.empty();
     }

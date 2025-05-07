@@ -20,6 +20,7 @@ import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.tree.TreeVariant;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.utils.RandomUtils;
@@ -135,7 +136,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         {
             if(afterBurn.get() instanceof TreeType)
                 //TODO: does random make sense? (movement of trees after fire)
-                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getDataRaw().zone));
+                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getZoneType()));
             else
                 w.addBuilding(afterBurn.get(), getX(), getY());
             return;
@@ -152,11 +153,12 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneState> getZoneType()
     {
         //should fire be put out, the zone should reappear
         //also, in zone view the zone should be visible
-        return getDataRaw().zone;
+        //TODO: variant
+        return getDataRaw().zone.map(z -> new ZoneState(z, ZoneType.Variant.DEFAULT));
     }
     
     /**

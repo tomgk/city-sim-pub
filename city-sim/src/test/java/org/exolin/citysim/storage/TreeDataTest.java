@@ -12,6 +12,8 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.zone.ZoneState;
+import org.exolin.citysim.model.zone.ZoneType;
 import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
@@ -40,7 +42,8 @@ public class TreeDataTest
     @Test
     public void testSerializeTree_WithZone() throws IOException
     {
-        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.of(Zones.residential)));
+        //TODO: variant
+        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.of(new ZoneState(Zones.residential, ZoneType.Variant.DEFAULT))));
         String output = serialize(WorldStorage::serialize, street);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right","zone":"zone_residential"}

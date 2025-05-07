@@ -39,6 +39,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
@@ -645,11 +646,12 @@ public final class GamePanel extends JComponent
         
         if(view == WorldView.ZONES && b.getZoneType().isPresent())
         {
-            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().get().getDefaultImage(), b.getSize());
+            //TODO: consider variant
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().get().type().getDefaultImage(), b.getSize());
         }
         else
         {
-            Optional<ZoneType> zoneType = b.getZoneType();
+            Optional<ZoneType> zoneType = b.getZoneType().map(ZoneState::type);
             if(b.drawZone() && zoneType.isPresent())
             {
                 ZoneType zt = zoneType.get();

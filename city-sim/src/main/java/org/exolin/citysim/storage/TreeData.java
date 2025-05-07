@@ -9,6 +9,7 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -24,7 +25,7 @@ public class TreeData extends StructureData
     public TreeData(Tree b)
     {
         super(b);
-        this.zone = b.getDataCopy().getZone().map(ZoneType::getName);
+        this.zone = b.getDataCopy().getZone().map(ZoneState::type).map(ZoneType::getName);
     }
 
     @JsonCreator
@@ -46,6 +47,7 @@ public class TreeData extends StructureData
     @Override
     protected TreeParameters getParameters()
     {
-        return new TreeParameters(zone.map(n -> BuildingType.getByName(ZoneType.class, n)));
+        //TODO: variant
+        return new TreeParameters(zone.map(n -> BuildingType.getByName(ZoneType.class, n)).map(z-> new ZoneState(z, ZoneType.Variant.DEFAULT)));
     }
 }

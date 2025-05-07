@@ -10,6 +10,7 @@ import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.ImageUtils;
 
@@ -86,7 +87,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     //maybe here for #109
                     else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
                     {
-                        t.setZone(Optional.of(z));
+                        t.setZone(Optional.of(new ZoneState(z, (ZoneType.Variant)variant)));
                         if(DEBUG_TREEZONE) System.out.println(t);
                         continue;
                     }

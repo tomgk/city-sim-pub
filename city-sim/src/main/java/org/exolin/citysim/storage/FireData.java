@@ -12,6 +12,7 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.fire.FireParameters;
 import org.exolin.citysim.model.fire.FireVariant;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -38,7 +39,7 @@ public class FireData extends StructureData
         super(f);
         FireParameters data = f.getDataCopy();
         this.remainingLife = data.getRemainingLife();
-        this.zone = f.getZoneType().map(ZoneType::getName);
+        this.zone = f.getZoneType().map(ZoneState::type).map(ZoneType::getName);
         this.returnToZone = data.isReturnToZone();
         this.afterBurn = data.getAfterBurn().map(StructureType::getName);
     }

@@ -15,6 +15,7 @@ import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.tree.TreeVariant;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -69,7 +70,7 @@ public class PlaceTrees implements BuildingAction
         World w = world.get();
         int alreadyPlaced = 0;
         Structure buildingAt = w.getBuildingAt(marking.x, marking.y);
-        Optional<ZoneType> zoneType = Optional.empty();
+        Optional<ZoneState> zoneType = Optional.empty();
         //if trees already planted there, add one more
         if(buildingAt instanceof Tree t)
         {
@@ -78,7 +79,7 @@ public class PlaceTrees implements BuildingAction
         }
         //trees keep zone if empty zone
         else if(buildingAt instanceof Zone z)
-            zoneType = Optional.of(z.getType());
+            zoneType = Optional.of(z.getZoneState());
         //trees cant displace anything else
         else if(buildingAt != null)
             return;
@@ -86,6 +87,7 @@ public class PlaceTrees implements BuildingAction
         if(alreadyPlaced+1 >= get().size())
             return;
         
+        //TODO: variant
         w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, TreeVariant.random(), new TreeParameters(zoneType));
         w.reduceMoney(COST);
     }

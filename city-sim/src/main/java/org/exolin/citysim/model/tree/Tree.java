@@ -6,6 +6,7 @@ import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.Zone;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.exolin.citysim.ui.actions.ZonePlacement.DEBUG_TREEZONE;
 import org.exolin.citysim.utils.RandomUtils;
@@ -75,9 +76,9 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
             return;
         
         Structure b = world.getBuildingAt(x, y);
-        Optional<ZoneType> zoneType = Optional.empty();
+        Optional<ZoneState> zoneType = Optional.empty();
         if(b instanceof Zone z)
-            zoneType = Optional.of(z.getType());
+            zoneType = Optional.of(z.getZoneState());
         else if(b instanceof Tree t)
             zoneType = b.getZoneType();
         else if(b != null)
@@ -108,12 +109,12 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneState> getZoneType()
     {
         return getDataRaw().getZone();
     }
     
-    public void setZone(Optional<ZoneType> zone)
+    public void setZone(Optional<ZoneState> zone)
     {
         if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone+", tree="+toString());
         getDataRaw().setZone(zone);

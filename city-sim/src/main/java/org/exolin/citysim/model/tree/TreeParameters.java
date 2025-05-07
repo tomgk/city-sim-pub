@@ -3,6 +3,7 @@ package org.exolin.citysim.model.tree;
 import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureParameters;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.PropertyWriter;
 
@@ -12,9 +13,9 @@ import org.exolin.citysim.utils.PropertyWriter;
  */
 public class TreeParameters implements StructureParameters<TreeParameters>
 {
-    private Optional<ZoneType> zone;
+    private Optional<ZoneState> zone;
 
-    public TreeParameters(Optional<ZoneType> zone)
+    public TreeParameters(Optional<ZoneState> zone)
     {
         this.zone = Objects.requireNonNull(zone);
     }
@@ -22,15 +23,15 @@ public class TreeParameters implements StructureParameters<TreeParameters>
     @Override
     public void writeAdditional(PropertyWriter writer)
     {
-        writer.addOptionalExplicit("zone", zone.map(ZoneType::getName));
+        zone.ifPresent(z -> z.write(writer));
     }
 
-    public Optional<ZoneType> getZone()
+    public Optional<ZoneState> getZone()
     {
         return zone;
     }
 
-    void setZone(Optional<ZoneType> zone)
+    void setZone(Optional<ZoneState> zone)
     {
         this.zone = Objects.requireNonNull(zone);
     }

@@ -8,6 +8,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.vacant.VacantParameters;
 import org.exolin.citysim.model.building.vacant.VacantType;
+import org.exolin.citysim.model.zone.ZoneState;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -25,11 +26,21 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     {
         super(type, x, y, version, data);
     }
+    
+    private ZoneType.Variant getZoneVariant()
+    {
+        //TODO: don't use default
+        return ZoneType.Variant.DEFAULT;
+    }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneState> getZoneType()
     {
-        return Optional.of(getType().getZoneType());
+        ZoneType zt = getType().getZoneType();
+        if(zt == null)
+            return Optional.empty();
+        
+        return Optional.of(new ZoneState(zt, getZoneVariant()));
     }
 
     @Override
@@ -81,6 +92,6 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         
         world.removeBuildingAt(this);
         VacantType vacant = VacantType.getRandom(getSize());
-        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getZoneType()));
+        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getZoneType().map(ZoneState::type)));
     }
 }

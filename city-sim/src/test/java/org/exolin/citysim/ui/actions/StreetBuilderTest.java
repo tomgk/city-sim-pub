@@ -21,7 +21,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class StreetBuilderTest
 {
     @Test
-    public World testCrossing() throws IOException
+    public void testCrossing() throws IOException
     {
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.PAUSED);
         StreetBuilder streetBuilder = new StreetBuilder(GetWorld.ofStatic(w), street, StreetBuilder.ONLY_LINE);
@@ -148,13 +148,5 @@ public class StreetBuilderTest
                           }
                           """;
         JSONAssert.assertEquals(expected, output, true);
-        
-        return w;
-    }
-    
-    public static void main(String[] args) throws IOException
-    {
-        StreetBuilderTest t = new StreetBuilderTest();
-        Main.play(t.testCrossing());
     }
 }

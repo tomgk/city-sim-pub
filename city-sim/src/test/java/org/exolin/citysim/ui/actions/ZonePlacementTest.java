@@ -7,7 +7,7 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.zone.ZoneType;
+import static org.exolin.citysim.ui.actions.ActionTestUtils.assertZone;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.makeZonePlacementMove;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Disabled;
@@ -19,14 +19,6 @@ import org.junit.jupiter.api.Test;
  */
 public class ZonePlacementTest
 {
-    private void assertZone(Structure b, int x, int y, ZoneType t)
-    {
-        String msg = x+"/"+y;
-        assertEquals(x, b.getX(), msg+" - x");
-        assertEquals(y, b.getY());
-        assertEquals(t, b.getType());
-    }
-    
     @Test
     public void testZonePlacementOnEmpty()
     {

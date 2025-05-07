@@ -35,7 +35,7 @@ public class PropertyWriter
         if(!first)
             sb.append(",");
         else
-            first = true;
+            first = false;
     }
     
     public void addOptional(String name, boolean value)

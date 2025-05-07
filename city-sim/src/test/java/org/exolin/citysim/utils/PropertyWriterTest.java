@@ -104,4 +104,17 @@ public class PropertyWriterTest
             assertEquals("already finished", e.getMessage());
         }
     }
+    
+    @Test
+    public void testMultiple()
+    {
+        PropertyWriter p = new PropertyWriter("test");
+        p.add("x", 4);
+        p.add("y", 7);
+        p.add("type", "tree");
+        p.finish();
+        
+        assertEquals("test[x=4,y=7,type=tree]", p.toString());
+    }
+    
 }

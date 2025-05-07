@@ -67,7 +67,7 @@ public class FireDataTest
         Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Trees.XDEAD_TREES.get(3))));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
-                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false, "afterBurn": "dead_trees_4"}
+                          {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false, "afterBurn": "trees_dead_4"}
                           """;
         JSONAssert.assertEquals(expected, output, true);
     }
@@ -134,7 +134,7 @@ public class FireDataTest
     {
         World w = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         InputStream in = createInputStream("""
-                                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true, "afterBurn": "dead_trees_2"}
+                                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true, "afterBurn": "trees_dead_2"}
                                            """);
         WorldStorage.deserialize(in, w);
         Structure b = getBuilding(w);

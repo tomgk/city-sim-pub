@@ -76,6 +76,8 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         Optional<ZoneType> zoneType = Optional.empty();
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());
+        else if(b instanceof Tree t)
+            zoneType = b.getZoneType();
         else if(b != null)
         {
             if(b instanceof Tree t)

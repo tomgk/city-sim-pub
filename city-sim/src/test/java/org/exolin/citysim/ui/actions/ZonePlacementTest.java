@@ -101,7 +101,6 @@ public class ZonePlacementTest
     }
     
     @Test
-    @Disabled
     public void testZonePlacementOnTrees()
     {
         ZonePlacement.DEBUG_TREEZONE = true;

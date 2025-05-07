@@ -86,9 +86,9 @@ public class FireDataTest
         assertEquals(99, b.getY());
         assertEquals(FireVariant.V1, b.getVariant());
         Fire f = (Fire)b;
-        assertEquals(123, f.getData().getRemainingLife());
-        assertEquals(Optional.empty(), f.getData().getZone());
-        assertEquals(false, f.getData().isReturnToZone());
+        assertEquals(123, f.getDataCopy().getRemainingLife());
+        assertEquals(Optional.empty(), f.getDataCopy().getZone());
+        assertEquals(false, f.getDataCopy().isReturnToZone());
     }
     
     @Test
@@ -105,9 +105,9 @@ public class FireDataTest
         assertEquals(99, b.getY());
         assertEquals(FireVariant.V1, b.getVariant());
         Fire f = (Fire)b;
-        assertEquals(123, f.getData().getRemainingLife());
-        assertEquals(Optional.of(Zones.business), f.getData().getZone());
-        assertEquals(false, f.getData().isReturnToZone());
+        assertEquals(123, f.getDataCopy().getRemainingLife());
+        assertEquals(Optional.of(Zones.business), f.getDataCopy().getZone());
+        assertEquals(false, f.getDataCopy().isReturnToZone());
     }
     
     @Test
@@ -124,9 +124,9 @@ public class FireDataTest
         assertEquals(99, b.getY());
         assertEquals(FireVariant.V1, b.getVariant());
         Fire f = (Fire)b;
-        assertEquals(123, f.getData().getRemainingLife());
-        assertEquals(Optional.of(Zones.business), f.getData().getZone());
-        assertEquals(true, f.getData().isReturnToZone());
+        assertEquals(123, f.getDataCopy().getRemainingLife());
+        assertEquals(Optional.of(Zones.business), f.getDataCopy().getZone());
+        assertEquals(true, f.getDataCopy().isReturnToZone());
     }
     
     @Test
@@ -143,9 +143,9 @@ public class FireDataTest
         assertEquals(99, b.getY());
         assertEquals(FireVariant.V1, b.getVariant());
         Fire f = (Fire)b;
-        assertEquals(123, f.getData().getRemainingLife());
-        assertEquals(Optional.of(Zones.business), f.getData().getZone());
-        assertEquals(true, f.getData().isReturnToZone());
-        assertEquals(Optional.of(Trees.XDEAD_TREES.get(1)), f.getData().getAfterBurn());
+        assertEquals(123, f.getDataCopy().getRemainingLife());
+        assertEquals(Optional.of(Zones.business), f.getDataCopy().getZone());
+        assertEquals(true, f.getDataCopy().isReturnToZone());
+        assertEquals(Optional.of(Trees.XDEAD_TREES.get(1)), f.getDataCopy().getAfterBurn());
     }
 }

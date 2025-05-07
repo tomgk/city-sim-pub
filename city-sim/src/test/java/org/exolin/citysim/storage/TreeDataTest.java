@@ -62,7 +62,7 @@ public class TreeDataTest
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
-        TreeParameters data = (TreeParameters) b.getData();
+        TreeParameters data = (TreeParameters) b.getDataCopy();
         assertEquals(Optional.empty(), data.getZone());
     }
     
@@ -80,7 +80,7 @@ public class TreeDataTest
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
-        TreeParameters data = (TreeParameters) b.getData();
+        TreeParameters data = (TreeParameters) b.getDataCopy();
         assertEquals(Optional.of(Zones.residential), data.getZone());
     }
 }

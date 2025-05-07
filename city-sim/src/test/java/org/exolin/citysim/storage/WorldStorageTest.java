@@ -143,9 +143,9 @@ public class WorldStorageTest
             assertEquals(28, b.getY());
             assertEquals(FireVariant.V1, b.getVariant());
             Fire f = (Fire)b;
-            assertEquals(134, f.getData().getRemainingLife());
-            assertEquals(Optional.empty(), f.getData().getZone());
-            assertEquals(false, f.getData().isReturnToZone());
+            assertEquals(134, f.getDataCopy().getRemainingLife());
+            assertEquals(Optional.empty(), f.getDataCopy().getZone());
+            assertEquals(false, f.getDataCopy().isReturnToZone());
         }
     }
 }

@@ -24,7 +24,7 @@ public class TreeData extends StructureData
     public TreeData(Tree b)
     {
         super(b);
-        this.zone = b.getData().getZone().map(ZoneType::getName);
+        this.zone = b.getDataCopy().getZone().map(ZoneType::getName);
     }
 
     @JsonCreator

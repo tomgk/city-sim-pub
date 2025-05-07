@@ -54,7 +54,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
             if(plusOne.isPresent())
             {
                 world.removeBuildingAt(this);
-                world.addBuilding(plusOne.get(), getX(), getY(), getVariant(), getData());
+                world.addBuilding(plusOne.get(), getX(), getY(), getVariant(), getDataRaw());
             }
         }
         
@@ -89,7 +89,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
                    if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                    {
                        world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
-                       world.addBuilding(Trees.get(getType().isGrass()).getFirst(), x, y, getVariant(), t.getData());
+                       world.addBuilding(Trees.get(getType().isGrass()).getFirst(), x, y, getVariant(), t.getDataCopy());
                    }
                 }
             }
@@ -110,16 +110,18 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     @Override
     public Optional<ZoneType> getZoneType()
     {
-        return getData().getZone();
+        return getDataRaw().getZone();
     }
     
     public void setZone(Optional<ZoneType> zone)
     {
         if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone+", tree="+toString());
-        getData().setZone(zone);
+        getDataRaw().setZone(zone);
         
-        if(zone.isPresent() != getZoneType().isEmpty())
-            throw new IllegalStateException();
+        if(zone.isPresent() != getDataRaw().getZone().isPresent())
+            throw new IllegalStateException("expected "+zone+" but got "+getDataRaw().getZone());
+        else
+            System.out.println(toString());
         
         if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+" after setZone: "+toString());
     }

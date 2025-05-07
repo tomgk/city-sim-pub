@@ -130,21 +130,21 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     {
         w.removeBuildingAt(this);
         
-        Optional<StructureType> afterBurn = getData().afterBurn;
+        Optional<StructureType> afterBurn = getDataRaw().afterBurn;
         if(afterBurn.isPresent())
         {
             if(afterBurn.get() instanceof TreeType)
                 //TODO: does random make sense? (movement of trees after fire)
-                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getData().zone));
+                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getDataRaw().zone));
             else
                 w.addBuilding(afterBurn.get(), getX(), getY());
             return;
         }
         
-        Optional<ZoneType> z = getData().zone;
+        Optional<ZoneType> z = getDataRaw().zone;
         if(z.isPresent())
         {
-            if(getData().returnToZone)
+            if(getDataRaw().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
                 w.addBuilding(Vacants.tore_down(), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(z));
@@ -156,7 +156,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     {
         //should fire be put out, the zone should reappear
         //also, in zone view the zone should be visible
-        return getData().zone;
+        return getDataRaw().zone;
     }
     
     /**

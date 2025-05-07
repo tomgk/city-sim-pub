@@ -442,7 +442,7 @@ public final class World
             
             if(s instanceof Tree t)
             {
-                t.getData().getZone().ifPresent(z -> {
+                t.getDataCopy().getZone().ifPresent(z -> {
                     handleZone(s, ticks, z);
                 });
             }

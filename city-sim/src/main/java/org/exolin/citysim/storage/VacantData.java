@@ -25,7 +25,7 @@ public class VacantData extends StructureData
     public VacantData(Vacant f)
     {
         super(f);
-        VacantParameters data = f.getData();
+        VacantParameters data = f.getDataCopy();
         this.zone = data.getZoneType().map(ZoneType::getName);
     }
 

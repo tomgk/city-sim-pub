@@ -36,7 +36,7 @@ public class FireData extends StructureData
     public FireData(Fire f)
     {
         super(f);
-        FireParameters data = f.getData();
+        FireParameters data = f.getDataCopy();
         this.remainingLife = data.getRemainingLife();
         this.zone = f.getZoneType().map(ZoneType::getName);
         this.returnToZone = data.isReturnToZone();

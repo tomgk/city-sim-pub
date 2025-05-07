@@ -61,7 +61,7 @@ public class VacantDataTest
         assertEquals(99, b.getY());
         assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
         Vacant f = (Vacant)b;
-        assertEquals(Optional.of(Zones.business), f.getData().getZoneType());
+        assertEquals(Optional.of(Zones.business), f.getDataCopy().getZoneType());
     }
     
     @Test
@@ -78,6 +78,6 @@ public class VacantDataTest
         assertEquals(99, b.getY());
         assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
         Vacant f = (Vacant)b;
-        assertEquals(Optional.empty(), f.getData().getZoneType());
+        assertEquals(Optional.empty(), f.getDataCopy().getZoneType());
     }
 }

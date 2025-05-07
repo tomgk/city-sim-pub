@@ -54,9 +54,14 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         this.data = data.copy();
     }
 
-    public D getData()
+    public D getDataCopy()
     {
         return data.copy();
+    }
+
+    protected D getDataRaw()
+    {
+        return data;
     }
 
     public T getType()

@@ -11,7 +11,6 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeType;
 import org.exolin.citysim.model.tree.TreeVariant;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.assertTree;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.assertZone;

@@ -87,7 +87,6 @@ public final class GamePanel extends JComponent
     
     private void addZone(List<Action> zoneActions, ZoneType zoneType)
     {
-        zoneActions.add(new ZonePlacement(worldHolder, zoneType, ZoneType.Variant.LOW_DENSITY));
         zoneActions.add(new ZonePlacement(worldHolder, zoneType, ZoneType.Variant.DEFAULT));
     }
     
@@ -118,8 +117,11 @@ public final class GamePanel extends JComponent
             List<Action> zoneActions = new ArrayList<>();
             zoneActions.add(TearDownAction.createDezoning(getWorld));
             addZone(zoneActions, Zones.residential);
+            addZone(zoneActions, Zones.low_residential);
             addZone(zoneActions, Zones.business);
+            addZone(zoneActions, Zones.low_business);
             addZone(zoneActions, Zones.industrial);
+            addZone(zoneActions, Zones.low_industrial);
             actions.put("Zones", zoneActions);
         }
         

@@ -40,8 +40,8 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public String getSubtext()
     {
-        if(variant == ZoneType.Variant.LOW_DENSITY)
-            return "low density";
+        //if(variant == ZoneType.Variant.LOW_DENSITY)
+        //    return "low density";
         
         return null;
     }

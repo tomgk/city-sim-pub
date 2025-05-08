@@ -2,6 +2,7 @@ package org.exolin.citysim.model.zone;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
@@ -15,50 +16,23 @@ import org.exolin.citysim.utils.RandomUtils;
  */
 public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructureParameters>
 {
-    private final boolean userPlaceableZone;
-    private final int cost;
-    
     public enum Variant implements StructureVariant
     {
-        DEFAULT(1),
-        LOW_DENSITY(2);
-        
-        private final int factor;
-
-        private Variant(int factor)
-        {
-            this.factor = factor;
-        }
-
-        public int getFactor()
-        {
-            return factor;
-        }
+        DEFAULT
     }
     
+    private final ZoneTypeType type;
+    private final Density density;
     private final List<BuildingType> buildings = new ArrayList<>();
-    
-    private static List<Animation> getAnimations(String name, boolean withLowDensity)
-    {
-        Animation baseAnimation = Animation.createUnanimated(name);
-        
-        if(withLowDensity)
-        {
-            Animation lowRes = Animation.createUnanimated(name+"_low");
-            return List.of(baseAnimation, lowRes);
-        }
-        else
-            return List.of(baseAnimation, baseAnimation);
-    }
     
     private final String title;
     
-    public ZoneType(String title, String filename, int size, boolean userPlaceableZone, boolean withLowDensity, int cost)
+    public ZoneType(String title, String filename, int size, ZoneTypeType type, Density density)
     {
-        super("zone_"+title, getAnimations(filename, withLowDensity), size);
-        this.userPlaceableZone = userPlaceableZone;
-        this.title = title;
-        this.cost = cost;
+        super("zone_"+title, List.of(Animation.createUnanimated(density.isLowDensity() ? filename+"_low" : filename)), size);
+        this.title = Objects.requireNonNull(title);
+        this.type = Objects.requireNonNull(type);
+        this.density = Objects.requireNonNull(density);
     }
 
     public String getTitle()
@@ -66,14 +40,19 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
         return title;
     }
     
+    public ZoneTypeType getCategory()
+    {
+        return type;
+    }
+    
     public boolean isUserPlaceableZone()
     {
-        return userPlaceableZone;
+        return type.isUserPlaceableZone();
     }
 
     public int getCost(Variant variant)
     {
-        return cost * variant.getFactor();
+        return type.getCost() * density.getFactor();
     }
     
     public void addBuilding(BuildingType building)

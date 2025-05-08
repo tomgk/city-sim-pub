@@ -3,7 +3,6 @@ package org.exolin.citysim.ui.actions;
 import java.awt.Point;
 import java.io.IOException;
 import java.math.BigDecimal;
-import org.exolin.citysim.Main;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.GetWorld;

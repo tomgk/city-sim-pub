@@ -383,14 +383,14 @@ public final class World
         addBuilding(bt, x, y);
     }
     
-    private void updateBuildCount(Structure building, boolean up)
+    private void updateBuildCount(Structure<?,?,?,?> building, boolean up)
     {
-        Optional<ZoneType> type = building.getZoneType();
+        Optional<ZoneState> type = building.getZoneType();
         if(type.isEmpty())
             return;
         
         int factor = up ? +1 : -1;
-        buildSupply.computeIfPresent(type.get(), (k, v) -> v+factor*building.getSupply());
+        buildSupply.computeIfPresent(type.get().type(), (k, v) -> v+factor*building.getSupply());
     }
     
     private void updateMoney(int ticks)

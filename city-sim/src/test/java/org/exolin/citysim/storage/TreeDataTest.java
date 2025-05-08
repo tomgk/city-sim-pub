@@ -84,6 +84,6 @@ public class TreeDataTest
         assertEquals(22, b.getY());
         assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
         TreeParameters data = (TreeParameters) b.getDataCopy();
-        assertEquals(Optional.of(Zones.residential), data.getZone());
+        assertEquals(Optional.of(new ZoneState(Zones.residential, ZoneType.Variant.DEFAULT)), data.getZone());
     }
 }

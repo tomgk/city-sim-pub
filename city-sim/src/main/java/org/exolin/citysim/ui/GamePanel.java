@@ -337,6 +337,10 @@ public final class GamePanel extends JComponent
         double f = 50;
         switch(keyCode)
         {
+            case KeyEvent.VK_ESCAPE:
+                setAction(Action.NONE);
+                break;
+            
             case KeyEvent.VK_LEFT:
                 xoffset += getZoomFactor() * f;
                 break;

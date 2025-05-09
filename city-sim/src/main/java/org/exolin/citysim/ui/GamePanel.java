@@ -696,8 +696,18 @@ public final class GamePanel extends JComponent
     {
         return rotation;
     }
+    
+    public void rotateLeft()
+    {
+        setRotation(rotation.getPrev());
+    }
+    
+    public void rotateRight()
+    {
+        setRotation(rotation.getNext());
+    }
 
-    public void setRotation(Rotation rotation)
+    private void setRotation(Rotation rotation)
     {
         this.rotation = Objects.requireNonNull(rotation);
         repaint();

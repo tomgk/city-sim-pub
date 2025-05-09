@@ -103,8 +103,8 @@ public class SelectorPanel3 extends JPanel
         ++y;
 
         w = 3;
-        registerButton(0, "turn_left.png", e -> gamePanel.setRotation(gamePanel.getRotation().getPrev()), false);
-        registerButton(3, "turn_right.png", e -> gamePanel.setRotation(gamePanel.getRotation().getNext()), false);
+        registerButton(0, "turn_left.png", e -> gamePanel.rotateLeft(), false);
+        registerButton(3, "turn_right.png", e -> gamePanel.rotateRight(), false);
         ++y;
 
         w = 2;

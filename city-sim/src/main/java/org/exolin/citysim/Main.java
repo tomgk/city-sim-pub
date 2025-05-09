@@ -42,8 +42,8 @@ public class Main
     {
         KeyMapping mapping = new KeyMapping();
         mapping.add(KeyEvent.VK_ESCAPE, "Select no tool", () -> gp.setAction(Action.NONE));
-        mapping.add(KeyEvent.VK_PAGE_UP, "Rotate left", () -> gp.setRotation(gp.getRotation().getPrev()));
-        mapping.add(KeyEvent.VK_PAGE_DOWN, "Rotate right", () -> gp.setRotation(gp.getRotation().getNext()));
+        mapping.add(KeyEvent.VK_PAGE_UP, "Rotate left", gp::rotateLeft);
+        mapping.add(KeyEvent.VK_PAGE_DOWN, "Rotate right", gp::rotateRight);
         mapping.add(KeyEvent.VK_F6, "Toggle budget window", () -> {
                 bw.update(gp.getWorld());
                 bw.setVisible(!bw.isVisible());

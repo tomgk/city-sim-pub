@@ -226,7 +226,7 @@ public final class GamePanel extends JComponent
         });
     }
     
-    void onZoom(int amount)
+    public void onZoom(int amount)
     {
         zoom += amount;
 

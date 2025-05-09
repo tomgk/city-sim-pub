@@ -344,6 +344,7 @@ public final class GamePanel extends JComponent
                     "View: "+view,
                     "Rotation: "+rotation,
                     "Money: "+worldHolder.get().getMoney(),
+                    "Next Money: "+worldHolder.get().getNextMoney(passedTicks),
                     "Passed Ticks: "+passedTicks
             );
             

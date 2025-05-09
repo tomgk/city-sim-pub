@@ -129,6 +129,12 @@ public final class World
         if(!structures.remove(s))
             throw new IllegalArgumentException("not part of world");
     }
+
+    public long getNextMoney(long passedTicks)
+    {
+        //TODO: consider lastMoneyUpdate
+        return MONEY_PERIOD - (System.currentTimeMillis()%MONEY_PERIOD);
+    }
     
     public enum RemoveMode
     {

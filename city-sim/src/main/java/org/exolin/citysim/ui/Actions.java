@@ -33,7 +33,7 @@ public class Actions
         zoneActions.add(new ZonePlacement(getWorld, zoneType, ZoneType.Variant.DEFAULT));
     }
     
-    public static Map<String, List<Action>> getActions(GetWorld getWorld)
+    public static Map<String, List<Action>> getActions(GetWorld getWorld, boolean debugMode)
     {
         Map<String, List<Action>> actions = new LinkedHashMap<>();
         
@@ -68,26 +68,29 @@ public class Actions
         
         //actions.add(new PlaceBuilding(World.office));
         
-        for(BuildingType type : StructureType.actualBuildingTypes())
+        if(debugMode)
         {
-            String categoryName = type.getZoneType() != null ? type.getZoneType().getTitle(): "Special buildings";
-            
-            if(!actions.containsKey(categoryName))
-                actions.put(categoryName, new ArrayList<>());
-            
-            actions.get(categoryName).add(new PlaceBuilding(getWorld, type));
-        }
-        
-        for(VacantType type : VacantType.vacantTypes())
-        {
-            for(ZoneType zoneType : ZoneType.types(ZoneType.class))
+            for(BuildingType type : StructureType.actualBuildingTypes())
             {
-                String categoryName = zoneType.getTitle();
+                String categoryName = type.getZoneType() != null ? type.getZoneType().getTitle(): "Special buildings";
 
                 if(!actions.containsKey(categoryName))
                     actions.put(categoryName, new ArrayList<>());
 
-                actions.get(categoryName).add(new PlaceVacant(getWorld, type, zoneType));
+                actions.get(categoryName).add(new PlaceBuilding(getWorld, type));
+            }
+
+            for(VacantType type : VacantType.vacantTypes())
+            {
+                for(ZoneType zoneType : ZoneType.types(ZoneType.class))
+                {
+                    String categoryName = zoneType.getTitle();
+
+                    if(!actions.containsKey(categoryName))
+                        actions.put(categoryName, new ArrayList<>());
+
+                    actions.get(categoryName).add(new PlaceVacant(getWorld, type, zoneType));
+                }
             }
         }
         

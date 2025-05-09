@@ -61,13 +61,18 @@ public class Main
     
     public static void main(String[] args)
     {
+        main(args, true);
+    }
+    
+    public static void main(String[] args, boolean debugMode)
+    {
         LoadGame lg = new LoadGame(Worlds.all(), w -> {
-            w.ifPresentOrElse(Main::play, () -> System.exit(0));
+            w.ifPresentOrElse(world -> play(world, debugMode), () -> System.exit(0));
         });
         lg.setVisible(true);
     }
     
-    public static void play(World world)
+    public static void play(World world, boolean debugMode)
     {
         StructureTypes.init();
         
@@ -102,7 +107,7 @@ public class Main
         });
         f.add(gp, BorderLayout.CENTER);
         
-        for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld).entrySet())
+        for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld, debugMode).entrySet())
         {
             for(Action a: e.getValue())
                 sp.add(e.getKey(), a);

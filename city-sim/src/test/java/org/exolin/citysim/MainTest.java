@@ -10,6 +10,6 @@ public class MainTest
 {
     public static void testPlay(World world)
     {
-        Main.play(world);
+        Main.play(world, true);
     }
 }

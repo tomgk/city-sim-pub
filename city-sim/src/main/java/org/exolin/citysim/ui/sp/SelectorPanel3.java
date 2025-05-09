@@ -14,7 +14,6 @@ import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -26,11 +25,9 @@ import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.GetWorld;
-import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
-import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
@@ -259,29 +256,5 @@ public class SelectorPanel3 extends JPanel
         GridBagConstraints constraints = createConstraints(x, y, w, 1);
         
         add(button, constraints);
-    }
-    
-    public static void main(String[] args)
-    {
-        GamePanel gp = new GamePanel(Worlds.World1(), new JFrame(), new GamePanelListener()
-        {
-            @Override
-            public void created(GamePanel panel)
-            {
-            }
-
-            @Override
-            public void onActionChanged(Action newAction)
-            {
-            }
-        });
-        
-        JFrame f = new JFrame();
-        SelectorPanel3 sp = new SelectorPanel3(new BudgetWindow(f));
-        sp.setGamePanel(gp);
-        f.add(sp, BorderLayout.CENTER);
-        f.pack();
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setVisible(true);
     }
 }

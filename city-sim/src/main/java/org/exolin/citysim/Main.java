@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
+import org.exolin.citysim.ui.Actions;
 import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
@@ -101,7 +102,7 @@ public class Main
         });
         f.add(gp, BorderLayout.CENTER);
         
-        for(Map.Entry<String, List<Action>> e: gp.getActions().entrySet())
+        for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld).entrySet())
         {
             for(Action a: e.getValue())
                 sp.add(e.getKey(), a);

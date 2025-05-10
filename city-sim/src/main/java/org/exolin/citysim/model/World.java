@@ -398,8 +398,15 @@ public final class World
         buildSupply.computeIfPresent(type.get(), (k, v) -> v+factor*building.getSupply());
     }
     
-    private void updateMoney(int ticks)
+    private void updateMoney(long passedTicks)
     {
+        long moneyTime = passedTicks*GamePanel.TICK_LENGTH/MONEY_PERIOD;
+        if(moneyTime == lastMoneyUpdate)
+            return;
+        
+        int ticks = (int)(moneyTime - lastMoneyUpdate);
+        lastMoneyUpdate = moneyTime;
+        
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
         for(Structure b : structures)
         {
@@ -431,12 +438,7 @@ public final class World
         else if(ticks < 0)
             throw new IllegalArgumentException();
         
-        long moneyTime = passedTicks*GamePanel.TICK_LENGTH/MONEY_PERIOD;
-        if(moneyTime != lastMoneyUpdate)
-        {
-            updateMoney((int)(moneyTime - lastMoneyUpdate));
-            lastMoneyUpdate = moneyTime;
-        }
+        updateMoney(passedTicks);
         
         iterateStructures(s -> {
             if(s.getType() instanceof ZoneType z)

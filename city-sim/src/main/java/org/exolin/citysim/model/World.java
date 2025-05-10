@@ -19,6 +19,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.model.zone.ZoneTypeType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
@@ -49,7 +50,14 @@ public final class World
     private BigDecimal money;
     
     private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
+    
+    private final RCI rci = new RCI();
 
+    public RCI getRCI()
+    {
+        return rci;
+    }
+    
     public SimulationSpeed getTickFactor()
     {
         return tickFactor;
@@ -408,14 +416,14 @@ public final class World
         lastMoneyUpdate = moneyTime;
         
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
-        for(Structure b : structures)
+        for(Structure<?, ?, ?, ?> b : structures)
         {
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
             money = money.add(b.getTaxRevenue().multiply(bigTicks));
         }
     }
     
-    private void iterateStructures(Consumer<Structure> consumer)
+    private void iterateStructures(Consumer<Structure<?, ?, ?, ?>> consumer)
     {
         
         //TODO: maybe no copy
@@ -439,6 +447,7 @@ public final class World
             throw new IllegalArgumentException();
         
         updateMoney(passedTicks);
+        updateRCI();
         
         iterateStructures(s -> {
             if(s.getType() instanceof ZoneType z)
@@ -455,6 +464,46 @@ public final class World
                 });
             }
         });
+    }
+
+    private void updateRCI()
+    {
+        int total = 0;
+        int r = 0;
+        int c = 0;
+        int i = 0;
+        
+        for(Structure<?, ?, ?, ?> s: structures)
+        {
+            if(s.getZoneType().isEmpty())
+                continue;
+            
+            ZoneType z = s.getZoneType().get();
+            
+            ZoneTypeType category = z.getCategory();
+            int sizeq = s.getSize() * s.getSize();
+            if(category == Zones.residential_category)
+                r += sizeq;
+            else if(category == Zones.business_category)
+                c += sizeq;
+            else if(category == Zones.industrial_category)
+                i += sizeq;
+            else
+                continue;
+            
+            total += sizeq;
+        }
+        
+        if(total == 0)
+            rci.set(100, 100, 100);
+        else
+            rci.set(getRCI(r, total), getRCI(c, total), getRCI(i, total));
+    }
+    
+    private static int getRCI(int supply, int total)
+    {
+        int current = supply * 100 / total;
+        return 100 - current;
     }
     
     private void handleZone(Structure s, int ticks, ZoneType z)

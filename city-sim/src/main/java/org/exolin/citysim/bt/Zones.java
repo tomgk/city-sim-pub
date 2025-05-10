@@ -13,10 +13,13 @@ public class Zones
 {
     public static final ZoneType residential = createUserplaceableZone("residential", 5);
     public static final ZoneType low_residential = createLowDensity("residential_low", residential);
+    public static final ZoneTypeType residential_category = residential.getCategory();
     public static final ZoneType business = createUserplaceableZone("business", 5);
     public static final ZoneType low_business = createLowDensity("business_low", business);
+    public static final ZoneTypeType business_category = business.getCategory();
     public static final ZoneType industrial = createUserplaceableZone("industrial", 5);
     public static final ZoneType low_industrial = createLowDensity("industrial_low", industrial);
+    public static final ZoneTypeType industrial_category = industrial.getCategory();
     
     public static ZoneType plants = createSpecialZone("plants");
     public static ZoneType parks = createSpecialZone("parks");

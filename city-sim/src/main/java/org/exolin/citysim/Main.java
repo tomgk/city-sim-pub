@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.exolin.citysim.bt.StructureTypes;
+import org.exolin.citysim.model.RCI;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.Actions;
@@ -112,6 +113,12 @@ public class Main
             {
                 sp.setAction(newAction);
                 sp3.setAction(newAction);
+            }
+
+            @Override
+            public void onRCIChanged(RCI rci)
+            {
+                sp3.setRCI(rci);
             }
         });
         f.add(gp, BorderLayout.CENTER);

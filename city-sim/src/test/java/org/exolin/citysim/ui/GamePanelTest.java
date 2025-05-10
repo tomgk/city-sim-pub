@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.net.URL;
+import org.exolin.citysim.model.RCI;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.utils.ImageUtils;
@@ -26,6 +27,12 @@ public class GamePanelTest
         public void onActionChanged(Action newAction)
         {
             assertNotNull(newAction);
+        }
+
+        @Override
+        public void onRCIChanged(RCI rci)
+        {
+            assertNotNull(rci);
         }
     });
     

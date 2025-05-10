@@ -8,6 +8,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import org.exolin.citysim.model.RCI;
 
 /**
  *
@@ -26,6 +27,14 @@ public class RCIPanel extends JPanel
         this.i = i;
         
         setPreferredSize(new Dimension(30, 90));
+    }
+
+    void set(RCI rci)
+    {
+        this.r = rci.getR();
+        this.c = rci.getC();
+        this.i = rci.getI();
+        repaint();
     }
     
     private final Image icon = new ImageIcon(RCIPanel.class.getResource("/org/exolin/citysim/menu/rci_label.png")).getImage();

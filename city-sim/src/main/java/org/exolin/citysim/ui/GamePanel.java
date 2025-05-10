@@ -222,6 +222,7 @@ public final class GamePanel extends JComponent
                     //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
                     repaint();
                 }
+                listener.onRCIChanged(world.getRCI());
             }catch(Exception e){
                 ErrorDisplay.show(this, e);
             }

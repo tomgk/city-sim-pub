@@ -435,6 +435,7 @@ public final class World
         if(moneyTime != lastMoneyUpdate)
         {
             //TODO: only works for ticks=1
+            //=> maybe just remove ticks since the diff should already capture what has passed?
             updateMoney((int)(moneyTime - lastMoneyUpdate) * ticks);
             lastMoneyUpdate = moneyTime;
         }

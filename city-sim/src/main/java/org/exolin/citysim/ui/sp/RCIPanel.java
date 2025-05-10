@@ -33,6 +33,8 @@ public class RCIPanel extends JPanel
     @Override
     public void paint(Graphics g)
     {
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(0, 0, getWidth(), getHeight());
         g.drawImage(icon, 2, 31, this);
         drawValue(g, 0, r, Color.GREEN);
         drawValue(g, 1, c, Color.BLUE);

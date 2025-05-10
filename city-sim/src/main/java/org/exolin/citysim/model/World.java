@@ -434,9 +434,7 @@ public final class World
         long moneyTime = passedTicks*GamePanel.TICK_LENGTH/MONEY_PERIOD;
         if(moneyTime != lastMoneyUpdate)
         {
-            //TODO: only works for ticks=1
-            //=> maybe just remove ticks since the diff should already capture what has passed?
-            updateMoney((int)(moneyTime - lastMoneyUpdate) * ticks);
+            updateMoney((int)(moneyTime - lastMoneyUpdate));
             lastMoneyUpdate = moneyTime;
         }
         

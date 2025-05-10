@@ -26,14 +26,23 @@ import org.exolin.citysim.ui.sp.SelectorPanel3;
  */
 public class Main
 {
-    private static JFrame createSelector(JPanel sp, boolean aot)
+    private static JFrame createSelector(JPanel sp, boolean aot, boolean small)
     {
         JFrame selector = new JFrame("Selector");
         selector.setLayout(new BorderLayout());
         selector.add(sp, BorderLayout.CENTER);
         selector.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        selector.setSize(300, 800);
-        selector.setLocation(0, 90);
+        if(small)
+        {
+            selector.setSize(85, 340);
+            selector.setLocation(10, 650);
+            selector.setUndecorated(true);
+        }
+        else
+        {
+            selector.setSize(300, 800);
+            selector.setLocation(0, 90);
+        }
         selector.setAlwaysOnTop(aot);
         return selector;
     }
@@ -113,12 +122,12 @@ public class Main
                 sp.add(e.getKey(), a);
         }
         
-        JFrame selector = createSelector(sp, true);
+        JFrame selector = createSelector(sp, true, false);
         selector.setVisible(true);
         
         sp.doneAdding();
         
-        JFrame selector3 = createSelector(sp3, false);
+        JFrame selector3 = createSelector(sp3, false, true);
         selector3.setVisible(true);
         
         f.setSize(640, 480);

@@ -19,6 +19,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
 
@@ -132,8 +133,7 @@ public final class World
 
     public long getNextMoney(long passedTicks)
     {
-        //TODO: consider lastMoneyUpdate
-        return MONEY_PERIOD - (System.currentTimeMillis()%MONEY_PERIOD);
+        return MONEY_PERIOD - passedTicks*GamePanel.TICK_LENGTH%MONEY_PERIOD;
     }
     
     public enum RemoveMode
@@ -424,16 +424,17 @@ public final class World
         }
     }
 
-    public void updateAfterTick(int ticks)
+    public void updateAfterTick(int ticks, long passedTicks)
     {
         if(ticks == 0)
             return;
         else if(ticks < 0)
             throw new IllegalArgumentException();
         
-        long moneyTime = System.currentTimeMillis()/MONEY_PERIOD;
+        long moneyTime = passedTicks*GamePanel.TICK_LENGTH/MONEY_PERIOD;
         if(moneyTime != lastMoneyUpdate)
         {
+            //TODO: only works for ticks=1
             updateMoney((int)(moneyTime - lastMoneyUpdate) * ticks);
             lastMoneyUpdate = moneyTime;
         }

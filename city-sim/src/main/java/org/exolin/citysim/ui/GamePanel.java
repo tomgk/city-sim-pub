@@ -187,7 +187,7 @@ public final class GamePanel extends JComponent
         });
         }
         
-        repaintTimer = new Timer(10, (ActionEvent e) ->
+        repaintTimer = new Timer(TICK_LENGTH, (ActionEvent e) ->
         {
             updateAfterTick();
         });
@@ -197,6 +197,8 @@ public final class GamePanel extends JComponent
     {
         repaintTimer.start();
     }
+    
+    public static final int TICK_LENGTH = 10;
     
     private static final int REFRESH_TIME = 1000;
 
@@ -212,9 +214,9 @@ public final class GamePanel extends JComponent
                 World world = worldHolder.get();
 
                 int ticks = world.getTickFactor().getTickCount();
-                world.updateAfterTick(ticks);
-                long u = Math.max(world.getLastChange(), lastPaint+REFRESH_TIME);
                 passedTicks += ticks;
+                world.updateAfterTick(ticks, passedTicks);
+                long u = Math.max(world.getLastChange(), lastPaint+REFRESH_TIME);
                 if(u >= lastPaint)
                 {
                     //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");

@@ -45,7 +45,7 @@ public final class World
     
     private boolean checkOverlap;
     private static final int MONEY_PERIOD = 10_000;//10 seconds
-    private long lastMoneyUpdate = System.currentTimeMillis()/MONEY_PERIOD;
+    private long lastMoneyUpdate = 0;
     private BigDecimal money;
     
     private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;

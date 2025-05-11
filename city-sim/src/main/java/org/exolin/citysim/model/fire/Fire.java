@@ -52,7 +52,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     private static final double BURN_EMPTY_PROBABILITY = 0.000005;
     private static final double STOP_PROBABILITY = 0.00001;
     
-    private static double getSpreadProbability(Structure s)
+    private static double getSpreadProbability(Structure<?, ?, ?, ?> s)
     {
         if(s == null)
             return BURN_EMPTY_PROBABILITY;
@@ -67,7 +67,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             return BURN_PROBABILITY;
     }
     
-    private static boolean spreadFire(double speed, int ticks, Structure s)
+    private static boolean spreadFire(double speed, int ticks, Structure<?, ?, ?, ?> s)
     {
         double probability = RandomUtils.getProbabilityForTicks(speed * getSpreadProbability(s), ticks);
         return RandomUtils.atLeast(probability);
@@ -174,7 +174,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             return true;
         
         //don't put street/rail/water on fire
-        Structure s = w.getBuildingAt(x, y);
+        Structure<?, ?, ?, ?> s = w.getBuildingAt(x, y);
         if(s instanceof Connection || (s != null && VacantType.isDestroyed(s.getType())))
             return false;
         else if(s instanceof org.exolin.citysim.model.fire.Fire)
@@ -195,7 +195,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     private static final int EMPTY_LIFE = 3;
     private static final int BUILDING_FIRE = 15;
 
-    private static int getExpectedLife(Structure s)
+    private static int getExpectedLife(Structure<?, ?, ?, ?> s)
     {
         if(s instanceof Fire)
             throw new IllegalArgumentException("fire on fire");
@@ -227,7 +227,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         w.addBuilding(FireType.fire, x, y, FireVariant.random(), new FireParameters(getExpectedLife(null), Optional.empty(), false, Optional.empty()));
     }
     
-    private static Optional<StructureType> getAfterBurn(Structure s)
+    private static Optional<StructureType> getAfterBurn(Structure<?, ?, ?, ?> s)
     {
         if(s instanceof Tree t)
             return Optional.of(t.getType().getDead());
@@ -235,7 +235,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             return Optional.empty();
     }
     
-    public static void replaceWithFire(World w, Structure s)
+    public static void replaceWithFire(World w, Structure<?, ?, ?, ?> s)
     {
         Objects.requireNonNull(s);
         

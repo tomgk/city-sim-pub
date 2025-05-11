@@ -55,7 +55,7 @@ public class VacantDataTest
                                            {"type":"destruction/abandoned_big_1","x":16,"y":99,"zone":"zone_business"}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(Vacants.abandoned_big_1, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
@@ -72,7 +72,7 @@ public class VacantDataTest
                                            {"type":"destruction/abandoned_big_1","x":16,"y":99}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(Vacants.abandoned_big_1, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());

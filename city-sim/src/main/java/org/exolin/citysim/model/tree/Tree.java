@@ -74,7 +74,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         if(y >= world.getGridSize())
             return;
         
-        Structure b = world.getBuildingAt(x, y);
+        Structure<?, ?, ?, ?> b = world.getBuildingAt(x, y);
         Optional<ZoneType> zoneType = Optional.empty();
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());

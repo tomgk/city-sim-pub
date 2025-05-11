@@ -76,7 +76,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
         {
             for(int x=0;x<marking.width;++x)
             {
-                Structure buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
+                Structure<?, ?, ?, ?> buildingAt = world.getBuildingAt(marking.x + x, marking.y + y);
                 if(buildingAt != null)
                 {
                     Optional<ZoneType> buildingZoneType;

@@ -57,7 +57,7 @@ public class TreeDataTest
                           {"type":"trees_4","x":16,"y":22,"variant":"top_right"}
                           """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
@@ -75,7 +75,7 @@ public class TreeDataTest
                           {"type":"trees_4","x":16,"y":22,"variant":"top_right","zone":"zone_residential"}
                           """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());

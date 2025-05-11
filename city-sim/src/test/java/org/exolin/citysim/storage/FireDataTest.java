@@ -80,7 +80,7 @@ public class FireDataTest
                                            {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
@@ -99,7 +99,7 @@ public class FireDataTest
                                            {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business"}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
@@ -118,7 +118,7 @@ public class FireDataTest
                                            {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
@@ -137,7 +137,7 @@ public class FireDataTest
                                            {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": true, "afterBurn": "trees_dead_2"}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(FireType.fire, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());

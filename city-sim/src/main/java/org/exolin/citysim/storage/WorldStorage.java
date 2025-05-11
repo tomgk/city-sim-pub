@@ -32,7 +32,7 @@ public class WorldStorage
         objectMapper.registerModule(new Jdk8Module());
     }
     
-    public static void serialize(Structure b, OutputStream out) throws IOException
+    public static void serialize(Structure<?, ?, ?, ?> b, OutputStream out) throws IOException
     {
         objectMapper.writeValue(out, StructureData.create(b));
     }

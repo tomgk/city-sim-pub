@@ -32,10 +32,10 @@ public class ZonePlacementTest
         
         makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
         
-        List<Structure> buildings = world.getStructures();
+        List<Structure<?, ?, ?, ?>> buildings = world.getStructures();
         assertEquals(6, world.getStructures().size(), buildings.toString());
         
-        //for(Structure b: buildings)
+        //for(Structure<?, ?, ?, ?> b: buildings)
         //    System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
@@ -55,10 +55,10 @@ public class ZonePlacementTest
         makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.residential);
         makeZonePlacementMove(new Point(2, 7), new Point(4, 10), world, Zones.business);
         
-        List<Structure> buildings = world.getStructures();
+        List<Structure<?, ?, ?, ?>> buildings = world.getStructures();
         assertEquals(10, world.getStructures().size(), buildings.toString());
         
-        for(Structure b: buildings)
+        for(Structure<?, ?, ?, ?> b: buildings)
             System.out.println(b);
         
         assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
@@ -84,10 +84,10 @@ public class ZonePlacementTest
             
             System.out.println("Test Tree after zone placement="+System.identityHashCode(t)+" with "+t.getZoneType());
 
-            List<Structure> buildings = world.getStructures();
+            List<Structure<?, ?, ?, ?>> buildings = world.getStructures();
             assertEquals(1, world.getStructures().size(), buildings.toString());
 
-            Structure tt = world.getBuildingAt(1, 8);
+            Structure<?, ?, ?, ?> tt = world.getBuildingAt(1, 8);
             System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
 
             assertTree(tt, 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
@@ -112,10 +112,10 @@ public class ZonePlacementTest
 
             makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
 
-            List<Structure> buildings = world.getStructures();
+            List<Structure<?, ?, ?, ?>> buildings = world.getStructures();
             assertEquals(6, world.getStructures().size(), buildings.toString());
 
-            Structure tt = world.getBuildingAt(1, 8);
+            Structure<?, ?, ?, ?> tt = world.getBuildingAt(1, 8);
             System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
 
             assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);

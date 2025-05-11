@@ -73,7 +73,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         {
             for(int x = xstart; x < xend; ++x)
             {
-                Structure s = world.getBuildingAt(x, y);
+                Structure<?, ?, ?, ?> s = world.getBuildingAt(x, y);
                 if(s != null && s.getType() == SelfConnections.street)
                     return;
             }

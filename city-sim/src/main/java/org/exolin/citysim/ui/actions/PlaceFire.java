@@ -21,7 +21,7 @@ public class PlaceFire extends PlaceStructure
     @Override
     protected void addBuilding(World w, int x, int y)
     {
-        Structure b = w.getBuildingAt(x, y);
+        Structure<?, ?, ?, ?> b = w.getBuildingAt(x, y);
         if(b == null)
             Fire.placeFire(w, x, y);
         else

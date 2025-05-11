@@ -35,7 +35,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
 
     private Connection getStreet(World world, int x, int y, boolean xDirection)
     {
-        Structure b = world.getBuildingAt(x, y);
+        Structure<?, ?, ?, ?> b = world.getBuildingAt(x, y);
         if(b == null)
             return null;
         

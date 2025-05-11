@@ -19,7 +19,6 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.model.zone.ZoneTypeType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
@@ -42,7 +41,7 @@ public final class World
     //so that the time gaps where the game doesnt run are just ignored
     private long lastChange = System.currentTimeMillis();
     private final int gridSize;
-    private final List<Structure> structures = new ArrayList<>();
+    private final List<Structure<?, ?, ?, ?>> structures = new ArrayList<>();
     
     private boolean checkOverlap;
     private static final int MONEY_PERIOD = 10_000;//10 seconds
@@ -117,9 +116,9 @@ public final class World
         return name;
     }
     
-    public Structure getBuildingAt(int x, int y)
+    public Structure<?, ?, ?, ?> getBuildingAt(int x, int y)
     {
-        for(Structure b: structures)
+        for(Structure<?, ?, ?, ?> b: structures)
             if(b.isOccupying(x, y))
                 return b;
         
@@ -133,7 +132,7 @@ public final class World
     
     private boolean LOG = false;
     
-    public void removeBuildingAt(Structure s)
+    public void removeBuildingAt(Structure<?, ?, ?, ?> s)
     {
         if(!structures.remove(s))
             throw new IllegalArgumentException("not part of world");
@@ -166,9 +165,9 @@ public final class World
     public boolean removeBuildingAt(int x, int y, RemoveMode mode)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);
-        for (Iterator<Structure> it = structures.iterator(); it.hasNext();)
+        for (Iterator<Structure<?, ?, ?, ?>> it = structures.iterator(); it.hasNext();)
         {
-            Structure b = it.next();
+            Structure<?, ?, ?, ?> b = it.next();
             if(b.isOccupying(x, y))
             {
                 //removeZoning mode keeps streets
@@ -274,15 +273,15 @@ public final class World
         if(rotation == Rotation.ORIGINAL)
             return Comparator.comparing(Structure::getLevel);
         
-        return Comparator.comparing((Structure b) -> b.getLevel(gridSize, rotation));
+        return Comparator.comparing(b -> b.getLevel(gridSize, rotation));
     }
     
-    private Structure getBuildingAtForUpdate(int x, int y)
+    private Structure<?, ?, ?, ?> getBuildingAtForUpdate(int x, int y)
     {
         return getBuildingAt(x, y);
     }
     
-    private void updateBuilding(Structure b)
+    private void updateBuilding(Structure<?, ?, ?, ?> b)
     {
         b.updateAfterChange(this);
         updateStructuresAround(b.getX(), b.getY(), b.getSize());
@@ -297,7 +296,7 @@ public final class World
                 //   ***
                 //   ***
                 //   ***
-                Structure buildingAt = getBuildingAtForUpdate(x, by-1);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by-1);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
@@ -306,7 +305,7 @@ public final class World
                 //   ***
                 //   ***
                 //  xxxxx
-                Structure buildingAt = getBuildingAtForUpdate(x, by+bsize);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by+bsize);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
@@ -320,7 +319,7 @@ public final class World
             //  x***
             //  x***
             {
-                Structure buildingAt = getBuildingAtForUpdate(bx-1, y);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx-1, y);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
@@ -328,24 +327,24 @@ public final class World
             //   ***x
             //   ***x
             {
-                Structure buildingAt = getBuildingAtForUpdate(bx+bsize, y);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx+bsize, y);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
         }
     }
 
-    public List<Structure> getStructures()
+    public List<Structure<?, ?, ?, ?>> getStructures()
     {
         return structures;
     }
 
-    public List<Structure> getStructures(Rotation rotation)
+    public List<Structure<?, ?, ?, ?>> getStructures(Rotation rotation)
     {
         if(rotation == Rotation.ORIGINAL)
             return structures;
         
-        List<Structure> structuresRotated = new ArrayList<>(structures);
+        List<Structure<?, ?, ?, ?>> structuresRotated = new ArrayList<>(structures);
         structuresRotated.sort(sorter(rotation));
         return structuresRotated;
     }
@@ -364,7 +363,7 @@ public final class World
 
     private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {
-        Structure b = getBuildingAt(x, y);
+        Structure<?, ?, ?, ?> b = getBuildingAt(x, y);
         if(b == null)
             return;
         
@@ -396,7 +395,7 @@ public final class World
         addBuilding(bt, x, y);
     }
     
-    private void updateBuildCount(Structure building, boolean up)
+    private void updateBuildCount(Structure<?, ?, ?, ?> building, boolean up)
     {
         Optional<ZoneType> type = building.getZoneType();
         if(type.isEmpty())
@@ -429,7 +428,7 @@ public final class World
         //TODO: maybe no copy
         List<Structure> originalStructures = new ArrayList<>(this.structures);
         
-        for(Structure b: originalStructures)
+        for(Structure<?, ?, ?, ?> b: originalStructures)
         {
             //if it was already removed, skip it
             if(!this.structures.contains(b))
@@ -506,7 +505,7 @@ public final class World
         return 100 - current;
     }
     
-    private void handleZone(Structure s, int ticks, ZoneType z)
+    private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)
     {
         if(z.getSize() != 1)
             return;
@@ -531,7 +530,7 @@ public final class World
         {
             for(int xi=0;xi<size;++xi)
             {
-                Structure b = getBuildingAt(x+xi, y+yi);
+                Structure<?, ?, ?, ?> b = getBuildingAt(x+xi, y+yi);
                 if(b == null || b.getType() != z)
                     return false;
             }
@@ -546,7 +545,7 @@ public final class World
         {
             for(int x=cx-distance;x<=cx+distance;++x)
             {
-                Structure b = getBuildingAt(x, y);
+                Structure<?, ?, ?, ?> b = getBuildingAt(x, y);
                 if(b == null)
                     continue;
                 if(b.getType() == street)

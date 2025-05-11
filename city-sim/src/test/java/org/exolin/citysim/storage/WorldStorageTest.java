@@ -55,7 +55,7 @@ public class WorldStorageTest
         return new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8));
     }
     
-    static Structure getBuilding(World w)
+    static Structure<?, ?, ?, ?> getBuilding(World w)
     {
         assertEquals(1, w.getStructures().size());
         return w.getStructures().get(0);
@@ -111,11 +111,11 @@ public class WorldStorageTest
         assertEquals(30, w.getGridSize());
         assertEquals(BigDecimal.valueOf(1234), w.getMoney());
         
-        List<Structure> buildings = w.getStructures();
+        List<Structure<?, ?, ?, ?>> buildings = w.getStructures();
         assertEquals(4, buildings.size());
         
         {
-            Structure b = buildings.get(0);
+            Structure<?, ?, ?, ?> b = buildings.get(0);
             assertEquals(Zones.business, b.getType());
             assertEquals(15, b.getX());
             assertEquals(4, b.getY());
@@ -123,21 +123,21 @@ public class WorldStorageTest
         }
         
         {
-            Structure b = buildings.get(1);
+            Structure<?, ?, ?, ?> b = buildings.get(1);
             assertEquals(SelfConnections.street, b.getType());
             assertEquals(15, b.getX());
             assertEquals(5, b.getY());
             assertEquals(UNCONNECTED, b.getVariant());
         }
         {
-            Structure b = buildings.get(2);
+            Structure<?, ?, ?, ?> b = buildings.get(2);
             assertEquals(BusinessBuildings.cinema, b.getType());
             assertEquals(16, b.getX());
             assertEquals(5, b.getY());
             assertEquals(BuildingType.Variant.DEFAULT, b.getVariant());
         }
         {
-            Structure b = buildings.get(3);
+            Structure<?, ?, ?, ?> b = buildings.get(3);
             assertEquals(FireType.fire, b.getType());
             assertEquals(29, b.getX());
             assertEquals(28, b.getY());

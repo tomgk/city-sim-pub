@@ -42,7 +42,7 @@ public class SelfConnectionTest
                                            {"type":"street","x":16,"y":5,"variant":"t_intersection_4"}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(SelfConnections.street, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());

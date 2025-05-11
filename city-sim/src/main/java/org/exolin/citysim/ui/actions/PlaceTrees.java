@@ -68,7 +68,7 @@ public class PlaceTrees implements BuildingAction
         
         World w = world.get();
         int alreadyPlaced = 0;
-        Structure buildingAt = w.getBuildingAt(marking.x, marking.y);
+        Structure<?, ?, ?, ?> buildingAt = w.getBuildingAt(marking.x, marking.y);
         Optional<ZoneType> zoneType = Optional.empty();
         //if trees already planted there, add one more
         if(buildingAt instanceof Tree t)

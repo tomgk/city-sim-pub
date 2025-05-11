@@ -53,7 +53,7 @@ public abstract class StructureData
         this.variant = Optional.ofNullable(variant);
     }
     
-    public StructureData(Structure b)
+    public StructureData(Structure<?, ?, ?, ?> b)
     {
         this.type = b.getType().getName();
         this.x = b.getX();
@@ -66,7 +66,7 @@ public abstract class StructureData
             this.variant = Optional.of(b.getVariant().name().toLowerCase());
     }
     
-    public static StructureData create(Structure b)
+    public static StructureData create(Structure<?, ?, ?, ?> b)
     {
         if(b.getClass() == SelfConnection.class)
             return new SelfConnectionData((SelfConnection)b);

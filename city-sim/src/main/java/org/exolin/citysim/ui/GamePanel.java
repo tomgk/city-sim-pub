@@ -338,7 +338,7 @@ public final class GamePanel extends JComponent
             int start = 12;
             int lineHeight = 15;
             
-            Structure b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
+            Structure<?, ?, ?, ?> b = worldHolder.get().getBuildingAt(currentGridPos.x, currentGridPos.y);
             List<String> lines = List.of(
                     "Zoom: "+zoom+" | "+f,
                     "Offset: "+xoffset+"/"+yoffset,
@@ -544,7 +544,7 @@ public final class GamePanel extends JComponent
             }
         }
         
-        for(Structure b: world.getStructures(rotation))
+        for(Structure<?, ?, ?, ?> b: world.getStructures(rotation))
         {
             if(scaleMarker)
             {

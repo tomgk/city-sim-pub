@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.fail;
  */
 public class ActionTestUtils
 {
-    private static void assertStructure(Structure b, int x, int y, StructureType<?, ?, ?> expectedType)
+    private static void assertStructure(Structure<?, ?, ?, ?> b, int x, int y, StructureType<?, ?, ?> expectedType)
     {
         if(b == null)
             fail("Expected "+expectedType.getName()+" but there is nothing at "+x+"/"+y);
     }
     
-    public static void assertZone(Structure b, int x, int y, ZoneType t)
+    public static void assertZone(Structure<?, ?, ?, ?> b, int x, int y, ZoneType t)
     {
         assertStructure(b, x, y, t);
         
@@ -35,7 +35,7 @@ public class ActionTestUtils
         assertEquals(Zone.class, b.getClass());
     }
     
-    public static void assertTree(Structure b, int x, int y, TreeType t, Optional<ZoneType> zone)
+    public static void assertTree(Structure<?, ?, ?, ?> b, int x, int y, TreeType t, Optional<ZoneType> zone)
     {
         assertStructure(b, x, y, t);
         

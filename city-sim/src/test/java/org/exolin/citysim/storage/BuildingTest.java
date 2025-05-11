@@ -42,7 +42,7 @@ public class BuildingTest
                                            {"type":"business/cinema","x":16,"y":5}
                                            """);
         WorldStorage.deserialize(in, w);
-        Structure b = getBuilding(w);
+        Structure<?, ?, ?, ?> b = getBuilding(w);
         assertEquals(BusinessBuildings.cinema, b.getType());
         assertEquals(16, b.getX());
         assertEquals(5, b.getY());

@@ -446,7 +446,7 @@ public final class World
             throw new IllegalArgumentException();
         
         updateMoney(passedTicks);
-        updateRCI();
+        rci.update(structures);
         
         iterateStructures(s -> {
             if(s.getType() instanceof ZoneType z)
@@ -463,46 +463,6 @@ public final class World
                 });
             }
         });
-    }
-
-    private void updateRCI()
-    {
-        int total = 0;
-        int r = 0;
-        int c = 0;
-        int i = 0;
-        
-        for(Structure<?, ?, ?, ?> s: structures)
-        {
-            if(s.getZoneType().isEmpty())
-                continue;
-            
-            ZoneType z = s.getZoneType().get();
-            
-            ZoneTypeType category = z.getCategory();
-            int sizeq = s.getSize() * s.getSize();
-            if(category == Zones.residential_category)
-                r += sizeq;
-            else if(category == Zones.business_category)
-                c += sizeq;
-            else if(category == Zones.industrial_category)
-                i += sizeq;
-            else
-                continue;
-            
-            total += sizeq;
-        }
-        
-        if(total == 0)
-            rci.set(100, 100, 100);
-        else
-            rci.set(getRCI(r, total), getRCI(c, total), getRCI(i, total));
-    }
-    
-    private static int getRCI(int supply, int total)
-    {
-        int current = supply * 100 / total;
-        return 100 - current;
     }
     
     private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)

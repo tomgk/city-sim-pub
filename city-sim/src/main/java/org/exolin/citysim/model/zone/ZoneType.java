@@ -3,8 +3,10 @@ package org.exolin.citysim.model.zone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
@@ -83,5 +85,15 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
     public Zone createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
     {
         return new Zone(this, x, y, variant, data);
+    }
+
+    public static Optional<ZoneType> getZoneType(Structure<?, ?, ?, ?> s)
+    {
+        Objects.requireNonNull(s);
+        
+        if(s instanceof Zone z)
+            return Optional.of(z.getType());
+        else
+            return s.getZoneType();
     }
 }

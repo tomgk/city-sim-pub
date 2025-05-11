@@ -91,7 +91,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                         continue;
                     }
                     else
-                        buildingZoneType = buildingAt.getZoneType();
+                        buildingZoneType = buildingAt.getTheZoneType();
                     
                     //keep non zone buildings
                     if(buildingZoneType.isEmpty() && !replaceEverything)

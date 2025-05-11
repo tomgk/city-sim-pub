@@ -27,7 +27,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneType> getZoneType(boolean includeEmptyZone)
     {
         return Optional.of(getType().getZoneType());
     }
@@ -81,6 +81,6 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         
         world.removeBuildingAt(this);
         VacantType vacant = VacantType.getRandom(getSize());
-        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getZoneType()));
+        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getTheZoneType()));
     }
 }

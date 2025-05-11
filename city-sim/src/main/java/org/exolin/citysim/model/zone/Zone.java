@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.zone;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Structure;
 
@@ -30,5 +31,11 @@ public class Zone extends Structure<Zone, ZoneType, ZoneType.Variant, EmptyStruc
     public BigDecimal getTaxRevenue()
     {
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public Optional<ZoneType> getZoneType(boolean includeEmptyZone)
+    {
+        return includeEmptyZone ? Optional.of(getType()) : Optional.empty();
     }
 }

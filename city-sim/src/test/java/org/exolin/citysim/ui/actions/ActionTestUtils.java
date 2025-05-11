@@ -43,7 +43,7 @@ public class ActionTestUtils
         assertEquals(x, b.getX(), msg+" - x");
         assertEquals(y, b.getY());
         assertEquals(t, b.getType());
-        assertEquals(zone, b.getZoneType());
+        assertEquals(zone, b.getTheZoneType());
         assertEquals(Tree.class, b.getClass());
     }
     

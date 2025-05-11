@@ -17,7 +17,6 @@ import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -174,18 +173,11 @@ public final class World
                 if(b instanceof SelfConnection && mode == RemoveMode.REMOVE_ZONING)
                     continue;
                 
-                Optional<ZoneType> zoneType = b.getZoneType();
+                Optional<ZoneType> zoneType = b.getTheZoneType();
                 
-                if(mode == RemoveMode.REMOVE_ZONING)
-                {
-                    //if remove zone and it is a zone, continue
-                    if(b instanceof Zone)
-                        ;
-                    //keep building if not belonging to a zone
-                    //but it is about removing zoning
-                    else if(zoneType.isEmpty())
-                        continue;
-                }
+                //for REMOVE_ZONE, skip anything with a zone
+                if(mode == RemoveMode.REMOVE_ZONING && zoneType.isEmpty())
+                    continue;
                 
                 //if(checkOverlap)
                 //    throw new IllegalArgumentException();
@@ -397,7 +389,7 @@ public final class World
     
     private void updateBuildCount(Structure<?, ?, ?, ?> building, boolean up)
     {
-        Optional<ZoneType> type = building.getZoneType();
+        Optional<ZoneType> type = building.getUnderlyingZoneType();
         if(type.isEmpty())
             return;
         

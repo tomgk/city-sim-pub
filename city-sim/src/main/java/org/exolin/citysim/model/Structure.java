@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.Optional;
+import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.PropertyWriter;
 
@@ -196,11 +197,22 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     }
     
     /**
+     * @param includeEmptyZone {@link true} if {@link Zone} should also return it's type, otherwise {@link Zone} will return empty.
      * @return zone type or {@code null} if not belonging to a zone type
      */
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneType> getZoneType(boolean includeEmptyZone)
     {
         return Optional.empty();
+    }
+    
+    public final Optional<ZoneType> getUnderlyingZoneType()
+    {
+        return getZoneType(false);
+    }
+    
+    public final Optional<ZoneType> getTheZoneType()
+    {
+        return getZoneType(false);
     }
 
     /**

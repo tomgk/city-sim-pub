@@ -78,17 +78,17 @@ public class ZonePlacementTest
             World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
 
             Tree t = world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
-            System.out.println("Created Tree in test="+System.identityHashCode(t)+" with "+t.getZoneType());
+            System.out.println("Created Tree in test="+System.identityHashCode(t)+" with "+t.getTheZoneType());
 
             makeZonePlacementMove(new Point(1, 8), new Point(2, 9), world, Zones.business);
             
-            System.out.println("Test Tree after zone placement="+System.identityHashCode(t)+" with "+t.getZoneType());
+            System.out.println("Test Tree after zone placement="+System.identityHashCode(t)+" with "+t.getTheZoneType());
 
             List<Structure<?, ?, ?, ?>> buildings = world.getStructures();
             assertEquals(1, world.getStructures().size(), buildings.toString());
 
             Structure<?, ?, ?, ?> tt = world.getBuildingAt(1, 8);
-            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
+            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getTheZoneType());
 
             assertTree(tt, 1, 8, Trees.XTREES.get(1), Optional.of(Zones.business));
 
@@ -116,7 +116,7 @@ public class ZonePlacementTest
             assertEquals(6, world.getStructures().size(), buildings.toString());
 
             Structure<?, ?, ?, ?> tt = world.getBuildingAt(1, 8);
-            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getZoneType());
+            System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getTheZoneType());
 
             assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
             assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);

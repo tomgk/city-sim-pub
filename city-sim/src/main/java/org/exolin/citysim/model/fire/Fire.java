@@ -152,7 +152,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneType> getZoneType(boolean includeEmptyZone)
     {
         //should fire be put out, the zone should reappear
         //also, in zone view the zone should be visible
@@ -257,7 +257,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         else
         {
             returnToZone = false;
-            zt = s.getZoneType();
+            zt = s.getTheZoneType();
         }
         
         FireParameters args = new FireParameters(getExpectedLife(s), zt, returnToZone, getAfterBurn(s));

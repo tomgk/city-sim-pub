@@ -79,9 +79,10 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());
         else if(b instanceof Tree t)
-            zoneType = b.getZoneType();
+            zoneType = t.getTheZoneType();
         else if(b != null)
         {
+            //TODO: check what this code is for when Tree has already been checked before
             if(b instanceof Tree t)
             {
                 if(!t.isAlive())
@@ -108,7 +109,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
     }
 
     @Override
-    public Optional<ZoneType> getZoneType()
+    public Optional<ZoneType> getZoneType(boolean includeEmptyZone)
     {
         return getDataRaw().getZone();
     }

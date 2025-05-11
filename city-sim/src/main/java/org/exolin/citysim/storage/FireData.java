@@ -38,7 +38,7 @@ public class FireData extends StructureData
         super(f);
         FireParameters data = f.getDataCopy();
         this.remainingLife = data.getRemainingLife();
-        this.zone = f.getZoneType().map(ZoneType::getName);
+        this.zone = f.getTheZoneType().map(ZoneType::getName);
         this.returnToZone = data.isReturnToZone();
         this.afterBurn = data.getAfterBurn().map(StructureType::getName);
     }

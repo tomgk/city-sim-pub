@@ -567,13 +567,14 @@ public final class GamePanel extends JComponent
         Point screenPoint = new Point();
         rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize(), screenPoint);
         
-        if(view == WorldView.ZONES && b.getZoneType().isPresent())
+        Optional<ZoneType> zoneType = b.getTheZoneType();
+        
+        if(view == WorldView.ZONES && zoneType.isPresent())
         {
-            drawItemN(g, dim, screenPoint.x, screenPoint.y, b.getZoneType().get().getDefaultImage(), b.getSize());
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, zoneType.get().getDefaultImage(), b.getSize());
         }
         else
         {
-            Optional<ZoneType> zoneType = b.getZoneType();
             if(b.drawZone() && zoneType.isPresent())
             {
                 ZoneType zt = zoneType.get();

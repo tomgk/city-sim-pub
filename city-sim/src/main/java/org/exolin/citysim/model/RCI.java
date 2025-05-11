@@ -47,7 +47,7 @@ public class RCI
         
         for(Structure<?, ?, ?, ?> s: structures)
         {
-            Optional<ZoneType> zoneType = ZoneType.getZoneType(s);
+            Optional<ZoneType> zoneType = s.getTheZoneType();
             if(zoneType.isEmpty())
                 continue;
             

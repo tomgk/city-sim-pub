@@ -7,7 +7,8 @@ import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.model.zone.ZoneTypeType;
 
 /**
- *
+ * Demand for resistendal, commercial and industrial
+ * 
  * @author Thomas
  */
 public class RCI
@@ -40,10 +41,10 @@ public class RCI
     
     void update(List<Structure<?, ?, ?, ?>> structures)
     {
-        int total = 0;
-        int r = 0;
-        int c = 0;
-        int i = 0;
+        int totalCount = 0;
+        int rCount = 0;
+        int cCount = 0;
+        int iCount = 0;
         
         for(Structure<?, ?, ?, ?> s: structures)
         {
@@ -56,21 +57,21 @@ public class RCI
             ZoneTypeType category = z.getCategory();
             int sizeq = s.getSize() * s.getSize();
             if(category == Zones.residential_category)
-                r += sizeq;
+                rCount += sizeq;
             else if(category == Zones.business_category)
-                c += sizeq;
+                cCount += sizeq;
             else if(category == Zones.industrial_category)
-                i += sizeq;
+                iCount += sizeq;
             else
                 continue;
             
-            total += sizeq;
+            totalCount += sizeq;
         }
         
-        if(total == 0)
+        if(totalCount == 0)
             set(100, 100, 100);
         else
-            set(getRCI(r, total), getRCI(c, total), getRCI(i, total));
+            set(getRCI(rCount, totalCount), getRCI(cCount, totalCount), getRCI(iCount, totalCount));
     }
 
     private static int getRCI(int supply, int total)

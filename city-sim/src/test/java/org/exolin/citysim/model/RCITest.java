@@ -45,4 +45,18 @@ public class RCITest
         assertEquals(0, r.getC());
         assertEquals(100, r.getI());
     }
+    
+    @Test
+    public void testThreeZone()
+    {
+        RCI r = new RCI();
+        r.update(List.of(
+                new Zone(Zones.residential, 1, 1, ZoneType.Variant.DEFAULT),
+                new Zone(Zones.business, 1, 1, ZoneType.Variant.DEFAULT),
+                new Zone(Zones.industrial, 1, 1, ZoneType.Variant.DEFAULT)
+        ));
+        assertEquals(34, r.getR());
+        assertEquals(34, r.getC());
+        assertEquals(34, r.getI());
+    }
 }

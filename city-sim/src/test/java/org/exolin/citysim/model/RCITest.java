@@ -32,4 +32,17 @@ public class RCITest
         assertEquals(-100, r.getC());
         assertEquals(100, r.getI());
     }
+    
+    @Test
+    public void testTwoZone()
+    {
+        RCI r = new RCI();
+        r.update(List.of(
+                new Zone(Zones.residential, 1, 1, ZoneType.Variant.DEFAULT),
+                new Zone(Zones.business, 1, 1, ZoneType.Variant.DEFAULT)
+        ));
+        assertEquals(0, r.getR());
+        assertEquals(0, r.getC());
+        assertEquals(100, r.getI());
+    }
 }

@@ -212,7 +212,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     
     public final Optional<ZoneType> getTheZoneType()
     {
-        return getZoneType(false);
+        return getZoneType(true);
     }
 
     /**

@@ -76,7 +76,7 @@ public class RCI
 
     private static int getRCI(int supply, int total)
     {
-        int current = supply * 100 / total;
+        int current = supply * 200 / total;
         return 100 - current;
     }
 }

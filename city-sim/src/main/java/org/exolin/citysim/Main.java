@@ -96,7 +96,6 @@ public class Main
         BudgetWindow bw = new BudgetWindow(f);
         
         SelectorPanel sp = new SelectorPanel();
-        SelectorPanel3 sp3 = new SelectorPanel3(bw);
         
         GamePanel gp = new GamePanel(world, f, new GamePanelListener()
         {
@@ -105,20 +104,17 @@ public class Main
             {
                 gd.setPanel(panel);
                 sp.setPanel(panel);
-                sp3.setGamePanel(panel);
             }
 
             @Override
             public void onActionChanged(Action newAction)
             {
                 sp.setAction(newAction);
-                sp3.setAction(newAction);
             }
 
             @Override
             public void onRCIChanged(RCI rci)
             {
-                sp3.setRCI(rci);
             }
         }, bw);
         f.add(gp, BorderLayout.CENTER);
@@ -133,9 +129,6 @@ public class Main
         selector.setVisible(true);
         
         sp.doneAdding();
-        
-        JFrame selector3 = createSelector(sp3, false, true);
-        selector3.setVisible(true);
         
         f.setSize(640, 480);
         f.setExtendedState(f.getExtendedState() | JFrame.MAXIMIZED_BOTH);

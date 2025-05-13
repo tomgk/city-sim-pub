@@ -17,6 +17,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -62,7 +63,7 @@ public final class GamePanel extends JComponent
     
     private final WorldHolder worldHolder;
     
-    private final GamePanelListener listener;
+    private final List<GamePanelListener> listeners = new ArrayList<>();
     private boolean colorGrid = false;
     
     private WorldView view = WorldView.OVERGROUND;
@@ -85,7 +86,7 @@ public final class GamePanel extends JComponent
         this.action = action;
         
         setCursor(cursor);
-        listener.onActionChanged(action);
+        listeners.forEach(listener -> listener.onActionChanged(action));
     }
     
     private void updatePos(MouseEvent e)
@@ -137,10 +138,10 @@ public final class GamePanel extends JComponent
     public GamePanel(World world, JFrame frame, GamePanelListener listener, BudgetWindow budgetWindow)
     {
         this.worldHolder = new WorldHolder(world);
-        this.listener = listener;
         setBackground(Color.black);
         
         listener.created(this);
+        listeners.add(listener);
         
         MouseAdapter a  = new MouseAdapter()
         {
@@ -195,6 +196,7 @@ public final class GamePanel extends JComponent
         sp.setLocation(10, 600);
         sp.setSize(sp.getPreferredSize());
         sp.setGamePanel(this);
+        listeners.add(sp);
 
         repaintTimer = new Timer(TICK_LENGTH, (ActionEvent e) ->
         {
@@ -231,7 +233,7 @@ public final class GamePanel extends JComponent
                     //System.out.println(new Timestamp(System.currentTimeMillis())+"Timeout repaint");
                     repaint();
                 }
-                listener.onRCIChanged(world.getRCI());
+                listeners.forEach(listener -> listener.onRCIChanged(world.getRCI()));
             }catch(Exception e){
                 ErrorDisplay.show(this, e);
             }

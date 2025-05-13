@@ -29,6 +29,7 @@ import org.exolin.citysim.model.RCI;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
+import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceTrees;
@@ -41,7 +42,7 @@ import org.exolin.citysim.ui.budget.BudgetWindow;
  *
  * @author Thomas
  */
-public class SelectorPanel3 extends JPanel
+public class SelectorPanel3 extends JPanel implements GamePanelListener
 {
     private final RCIPanel rciPanel;
     private GamePanel gamePanel;
@@ -235,6 +236,23 @@ public class SelectorPanel3 extends JPanel
     public void setRCI(RCI rci)
     {
         rciPanel.set(rci);
+    }
+
+    @Override
+    public void created(GamePanel panel)
+    {
+    }
+
+    @Override
+    public void onActionChanged(Action newAction)
+    {
+        setAction(newAction);
+    }
+
+    @Override
+    public void onRCIChanged(RCI rci)
+    {
+        setRCI(rci);
     }
     
     public static interface ButtonListener

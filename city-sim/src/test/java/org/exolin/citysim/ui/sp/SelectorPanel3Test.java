@@ -14,7 +14,7 @@ public class SelectorPanel3Test
 {
     public static void main(String[] args)
     {
-        GamePanel gp = new GamePanel(Worlds.World1(), new JFrame(), new EmptyGamePanelListener());
+        GamePanel gp = new GamePanel(Worlds.World1(), new JFrame(), new EmptyGamePanelListener(), new BudgetWindow(new JFrame()));
         JFrame f = new JFrame();
         SelectorPanel3 sp = new SelectorPanel3(new BudgetWindow(f));
         sp.setGamePanel(gp);

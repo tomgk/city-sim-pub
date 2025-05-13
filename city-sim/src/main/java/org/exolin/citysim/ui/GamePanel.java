@@ -30,6 +30,8 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
+import org.exolin.citysim.ui.budget.BudgetWindow;
+import org.exolin.citysim.ui.sp.SelectorPanel3;
 import static org.exolin.citysim.utils.ImageUtils.brighter;
 import static org.exolin.citysim.utils.ImageUtils.loadImage;
 
@@ -132,7 +134,7 @@ public final class GamePanel extends JComponent
         repaint();
     }
     
-    public GamePanel(World world, JFrame frame, GamePanelListener listener)
+    public GamePanel(World world, JFrame frame, GamePanelListener listener, BudgetWindow budgetWindow)
     {
         this.worldHolder = new WorldHolder(world);
         this.listener = listener;
@@ -187,6 +189,13 @@ public final class GamePanel extends JComponent
         });
         }
         
+        setLayout(null);
+        SelectorPanel3 sp = new SelectorPanel3(budgetWindow);
+        add(sp);
+        sp.setLocation(10, 600);
+        sp.setSize(sp.getPreferredSize());
+        sp.setGamePanel(this);
+
         repaintTimer = new Timer(TICK_LENGTH, (ActionEvent e) ->
         {
             updateAfterTick();
@@ -302,9 +311,15 @@ public final class GamePanel extends JComponent
     {
         return Math.min(getWidth(), getHeight()*FACTOR);
     }
-    
+
     @Override
     public void paint(Graphics g)
+    {
+        paintx(g);
+        super.paint(g);
+    }
+    
+    private void paintx(Graphics g)
     {
         lastPaint = System.currentTimeMillis();
         

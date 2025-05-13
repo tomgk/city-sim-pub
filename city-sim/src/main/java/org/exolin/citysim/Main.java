@@ -120,7 +120,7 @@ public class Main
             {
                 sp3.setRCI(rci);
             }
-        });
+        }, bw);
         f.add(gp, BorderLayout.CENTER);
         
         for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld, debugMode).entrySet())

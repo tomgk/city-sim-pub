@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.exolin.citysim.bt.StructureTypes;
@@ -19,7 +20,6 @@ import org.exolin.citysim.ui.LoadGame;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.ui.sp.SelectorPanel;
-import org.exolin.citysim.ui.sp.SelectorPanel3;
 
 /**
  *
@@ -116,7 +116,7 @@ public class Main
             public void onRCIChanged(RCI rci)
             {
             }
-        }, bw);
+        }, Optional.of(bw));
         f.add(gp, BorderLayout.CENTER);
         
         for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld, debugMode).entrySet())

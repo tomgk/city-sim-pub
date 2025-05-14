@@ -2,11 +2,10 @@ package org.exolin.citysim.ui;
 
 import java.awt.Point;
 import java.net.URL;
-import javax.swing.JFrame;
+import java.util.Optional;
 import org.exolin.citysim.model.RCI;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.actions.Action;
-import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.utils.ImageUtils;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -36,7 +35,7 @@ public class GamePanelTest
         {
             assertNotNull(rci);
         }
-    }, new BudgetWindow(new JFrame()));
+    }, Optional.empty());
     
     @Test
     public void testTranform_00()

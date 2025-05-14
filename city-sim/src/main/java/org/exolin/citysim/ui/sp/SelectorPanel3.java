@@ -3,6 +3,7 @@ package org.exolin.citysim.ui.sp;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
@@ -10,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Map;
+import java.util.Optional;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -51,7 +53,11 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
     private static final String LIGHT = "Light";
     private static final String HIGH = "High";
     
-    public SelectorPanel3(BudgetWindow budgetWindow)
+    /**
+     * 
+     * @param budgetWindow optional because of unit tests
+     */
+    public SelectorPanel3(Optional<BudgetWindow> budgetWindow)
     {
         setLayout(new GridBagLayout());
         
@@ -129,10 +135,20 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         
         w = 2;
         registerButton(0, "neighbors.png", Action.NONE);
-        registerButton(2, "budget.png", e -> {
-            budgetWindow.update(world.get());
-            budgetWindow.setVisible(true);
-        }, false);
+        
+        ButtonListener bl;
+        if(budgetWindow.isPresent())
+        {
+            BudgetWindow b = budgetWindow.get();
+            bl = e -> {
+                b.update(world.get());
+                b.setVisible(true);
+            };
+        }
+        else
+            bl = e -> {};
+        
+        registerButton(2, "budget.png", bl, budgetWindow.isEmpty());
         ++y;
         
         {
@@ -176,6 +192,10 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
     
     private void registerButton(int x, String path, Map<String, Action> a)
     {
+        //for unit tests
+        if(GraphicsEnvironment.isHeadless())
+            return;
+        
         JDialog f = new JDialog(SwingUtilities.getWindowAncestor(this));
         //f.setModal(true);
         f.setUndecorated(true);

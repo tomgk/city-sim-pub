@@ -1,6 +1,7 @@
 package org.exolin.citysim.ui.actions;
 
 import java.awt.Cursor;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -73,7 +74,14 @@ public class TearDownAction extends AreaAction implements ActionWithImage
     
     private static final Image IMAGE = ImageUtils.loadImage("tools/bulldozer");
     
-    private static final Cursor CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(IMAGE, new Point(0, 27), "bulldozer");
+    private static final Cursor CURSOR;
+    static
+    {
+        if(!GraphicsEnvironment.isHeadless())
+            CURSOR = Toolkit.getDefaultToolkit().createCustomCursor(IMAGE, new Point(0, 27), "bulldozer");
+        else
+            CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+    }
 
     @Override
     public Cursor getCursor()

@@ -135,7 +135,7 @@ public final class GamePanel extends JComponent
         repaint();
     }
     
-    public GamePanel(World world, JFrame frame, GamePanelListener listener, BudgetWindow budgetWindow)
+    public GamePanel(World world, JFrame frame, GamePanelListener listener, Optional<BudgetWindow> budgetWindow)
     {
         this.worldHolder = new WorldHolder(world);
         setBackground(Color.black);

@@ -8,8 +8,6 @@
 
 name: Java CI with Maven
 
-runs-on: s
-
 on:
   push:
     branches: [ "main" ]

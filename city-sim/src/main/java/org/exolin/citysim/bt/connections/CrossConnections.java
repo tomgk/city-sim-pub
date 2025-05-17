@@ -28,6 +28,8 @@ public class CrossConnections
     
     public static CrossConnectionType RAIL_WATER = createCrossConnectionType(rail, water);
     public static CrossConnectionType WATER_RAIL = createCrossConnectionType(water, rail);
+    public static CrossConnectionType RAIL_CIRCUIT = createCrossConnectionType(rail, circuit);
+    public static CrossConnectionType CIRCUIT_RAIL = createCrossConnectionType(circuit, rail);
     
     record Key(SelfConnectionType xtype, SelfConnectionType ytype){}
     

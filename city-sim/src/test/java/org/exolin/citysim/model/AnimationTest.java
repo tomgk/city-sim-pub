@@ -30,6 +30,8 @@ public class AnimationTest
         ), a.getFileNames());
         
         assertEquals(Constants.DEFAULT_ANIMATION_SPEED, a.getAnimationSpeed());
+        assertEquals("plants/gas_plant", a.getName());
+        assertEquals(8, a.getImageCount());
         
         try{
             a.getUnaminatedFileName();
@@ -46,5 +48,7 @@ public class AnimationTest
         assertEquals(List.of("plants/gas_plant"), a.getFileNames());
         assertEquals("plants/gas_plant", a.getUnaminatedFileName());
         assertEquals(DEFAULT_NONANIMATION_SPEED, a.getAnimationSpeed());
+        assertEquals("plants/gas_plant", a.getName());
+        assertEquals(1, a.getImageCount());
     }
 }

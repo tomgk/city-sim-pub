@@ -78,6 +78,11 @@ public class Animation
     {
         return new Animation(name, List.of(filename), List.of(image), 1);
     }
+    
+    public static Animation stack(Animation a, Animation b)
+    {
+        throw new UnsupportedOperationException("not supported yet");
+    }
 
     public List<String> getFileNames()
     {

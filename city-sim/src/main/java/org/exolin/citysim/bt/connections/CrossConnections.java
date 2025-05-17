@@ -2,6 +2,7 @@ package org.exolin.citysim.bt.connections;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
@@ -22,6 +23,9 @@ public class CrossConnections
     public static CrossConnectionType RAIL_STREET = createCrossConnectionType(rail, street);
     public static CrossConnectionType STREET_WATER = createCrossConnectionType(street, water);
     public static CrossConnectionType WATER_STREET = createCrossConnectionType(water, street);
+    public static CrossConnectionType STREET_CIRCUIT = createCrossConnectionType(street, circuit);
+    public static CrossConnectionType CIRCUIT_STREET = createCrossConnectionType(circuit, street);
+    
     public static CrossConnectionType RAIL_WATER = createCrossConnectionType(rail, water);
     public static CrossConnectionType WATER_RAIL = createCrossConnectionType(water, rail);
     

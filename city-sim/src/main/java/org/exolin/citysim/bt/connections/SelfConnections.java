@@ -48,6 +48,22 @@ public class SelfConnections
             createUnanimated("rail/rail_t_3"),
             createUnanimated("rail/rail_t_4")), 1, 25);
     
+    public static final SelfConnectionType circuit = createTransportType("circuit", List.of(
+            createUnanimated("circuit/circuit_1"),
+            createUnanimated("circuit/circuit_2"),
+            
+            createUnanimated("circuit/circuit_x_intersection"),
+            
+            createUnanimated("circuit/circuit_curve_1"),
+            createUnanimated("circuit/circuit_curve_2"),
+            createUnanimated("circuit/circuit_curve_3"),
+            createUnanimated("circuit/circuit_curve_4"),
+            
+            createUnanimated("circuit/circuit_t_1"),
+            createUnanimated("circuit/circuit_t_2"),
+            createUnanimated("circuit/circuit_t_3"),
+            createUnanimated("circuit/circuit_t_4")), 1, 25);
+    
     public static final SelfConnectionType water = createAreaType("water", List.of(
             createAnimation("water/water_1", 4),
             createAnimation("water/water_2", 4),

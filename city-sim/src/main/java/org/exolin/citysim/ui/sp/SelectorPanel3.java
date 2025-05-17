@@ -23,6 +23,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.Plants;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
@@ -71,6 +72,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         ++y;
         
         registerButton(0, "electricity.png", Map.of(
+                "Power Line", new StreetBuilder(world, circuit, true),
                 "Gas", new PlaceBuilding(world, Plants.gas_plant),
                 "Oil", new PlaceBuilding(world, Plants.oil_plant),
                 "Solar", new PlaceBuilding(world, Plants.plant_solar),

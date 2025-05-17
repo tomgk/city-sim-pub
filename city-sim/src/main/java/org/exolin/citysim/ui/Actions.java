@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.exolin.citysim.bt.Zones;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
@@ -50,6 +51,7 @@ public class Actions
             List<Action> sactions = new ArrayList<>();
             sactions.add(new StreetBuilder(getWorld, street, true));
             sactions.add(new StreetBuilder(getWorld, rail, true));
+            sactions.add(new StreetBuilder(getWorld, circuit, true));
             sactions.add(new StreetBuilder(getWorld, water, false));
             actions.put("Infrastructure", sactions);
         }

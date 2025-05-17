@@ -34,4 +34,12 @@ public class AnimationTest
             assertEquals("not an unanimation", e.getMessage());
         }
     }
+    
+    @Test
+    public void createUnnimated()
+    {
+        Animation a = Animation.createUnanimated("plants/gas_plant");
+        assertEquals(List.of("plants/gas_plant"), a.getFileNames());
+        assertEquals("plants/gas_plant", a.getUnaminatedFileName());
+    }
 }

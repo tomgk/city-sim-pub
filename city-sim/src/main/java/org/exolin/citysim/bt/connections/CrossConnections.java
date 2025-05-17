@@ -6,6 +6,7 @@ import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 
@@ -34,8 +35,14 @@ public class CrossConnections
         return type;
     }
     
-    public static CrossConnectionType get(SelfConnectionType xtype, SelfConnectionType ytype)
+    public static ConnectionType<?, ?, ?, ?> get(SelfConnectionType xtype, SelfConnectionType ytype)
     {
-        return types.get(new Key(xtype, ytype));
+        if(xtype == ytype)
+            return xtype;
+        
+        CrossConnectionType ct = types.get(new Key(xtype, ytype));
+        if(ct == null)
+            throw new UnsupportedOperationException(xtype.getName()+"/"+ytype.getName());
+        return ct;
     }
 }

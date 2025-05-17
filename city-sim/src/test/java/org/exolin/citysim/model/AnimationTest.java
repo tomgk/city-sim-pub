@@ -41,14 +41,19 @@ public class AnimationTest
         }
     }
     
+    private void testUnanimated(String name)
+    {
+        Animation a = Animation.createUnanimated(name);
+        assertEquals(List.of(name), a.getFileNames());
+        assertEquals(name, a.getUnaminatedFileName());
+        assertEquals(DEFAULT_NONANIMATION_SPEED, a.getAnimationSpeed());
+        assertEquals(name, a.getName());
+        assertEquals(1, a.getImageCount());
+    }
+    
     @Test
     public void createUnnimated()
     {
-        Animation a = Animation.createUnanimated("plants/gas_plant");
-        assertEquals(List.of("plants/gas_plant"), a.getFileNames());
-        assertEquals("plants/gas_plant", a.getUnaminatedFileName());
-        assertEquals(DEFAULT_NONANIMATION_SPEED, a.getAnimationSpeed());
-        assertEquals("plants/gas_plant", a.getName());
-        assertEquals(1, a.getImageCount());
+        testUnanimated("plants/gas_plant");
     }
 }

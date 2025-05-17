@@ -118,7 +118,7 @@ public class Animation
         return images.get(0);
     }
 
-    public static List<Animation> noAnimation(List<String> variants)
+    private static List<Animation> noAnimation(List<String> variants)
     {
         return variants.stream()
                 .map(Animation::createUnanimated)

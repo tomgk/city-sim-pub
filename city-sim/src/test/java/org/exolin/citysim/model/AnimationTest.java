@@ -3,6 +3,7 @@ package org.exolin.citysim.model;
 import java.util.List;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,5 +26,12 @@ public class AnimationTest
                 "plants/gas_plant_6",
                 "plants/gas_plant_7"
         ), a.getFileNames());
+        
+        try{
+            a.getUnaminatedFileName();
+            fail();
+        }catch(IllegalStateException e){
+            assertEquals("not an unanimation", e.getMessage());
+        }
     }
 }

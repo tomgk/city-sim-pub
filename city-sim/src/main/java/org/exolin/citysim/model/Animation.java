@@ -92,7 +92,7 @@ public class Animation
     public String getUnaminatedFileName()
     {
         if(fileNames.size() != 1)
-            throw new IllegalStateException("not an animation");
+            throw new IllegalStateException("not an unanimation");
         
         return fileNames.getFirst();
     }

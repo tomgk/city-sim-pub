@@ -1,6 +1,8 @@
 package org.exolin.citysim.model;
 
 import java.util.List;
+import org.exolin.citysim.Constants;
+import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -27,6 +29,8 @@ public class AnimationTest
                 "plants/gas_plant_7"
         ), a.getFileNames());
         
+        assertEquals(Constants.DEFAULT_ANIMATION_SPEED, a.getAnimationSpeed());
+        
         try{
             a.getUnaminatedFileName();
             fail();
@@ -41,5 +45,6 @@ public class AnimationTest
         Animation a = Animation.createUnanimated("plants/gas_plant");
         assertEquals(List.of("plants/gas_plant"), a.getFileNames());
         assertEquals("plants/gas_plant", a.getUnaminatedFileName());
+        assertEquals(DEFAULT_NONANIMATION_SPEED, a.getAnimationSpeed());
     }
 }

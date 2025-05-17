@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.Constants;
+import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import org.exolin.citysim.utils.ImageUtils;
 import org.exolin.citysim.utils.Utils;
 
@@ -71,7 +72,7 @@ public class Animation
     
     public static Animation createUnanimated(String name)
     {
-        return new Animation(name, List.of(name), List.of(ImageUtils.loadImage(name)), 1);
+        return new Animation(name, List.of(name), List.of(ImageUtils.loadImage(name)), DEFAULT_NONANIMATION_SPEED);
     }
     
     public static Animation createUnanimated(String name, String filename, BufferedImage image)

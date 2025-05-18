@@ -108,6 +108,12 @@ public class Animation
         return images.get(index);
     }
     
+    public Image getImageAt(long time)
+    {
+        long frame = time/getAnimationSpeed()%getImageCount();
+        return getImage((int)frame);
+    }
+    
     public int getImageCount()
     {
         return images.size();

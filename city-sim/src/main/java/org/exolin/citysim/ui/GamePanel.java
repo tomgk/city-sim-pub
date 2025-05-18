@@ -605,8 +605,7 @@ public final class GamePanel extends JComponent
     
     private Image getCurrentImage(Animation a)
     {
-        long frame = lastPaint/a.getAnimationSpeed()%a.getImageCount();
-        return a.getImage((int)frame);
+        return a.getImageAt(lastPaint);
     }
     
     public World getWorld()

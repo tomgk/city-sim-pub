@@ -137,10 +137,6 @@ public class AnimationTest
         assertEquals(2, s.getImageCount());
         
         {
-            
-        }
-        
-        {
             Image img = s.getImage(0);
             //TODO: should be green, not ALPHA
             assertImage((BufferedImage)img, Color.red, ALPHA);

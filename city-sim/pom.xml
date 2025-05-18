@@ -76,7 +76,6 @@
                 <version>3.5.3</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <java.awt.headless>true</java.awt.headless>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

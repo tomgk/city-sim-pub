@@ -121,6 +121,7 @@ public class Animation
         {
             int time = i * animationSpeed;
             filenames.add(getStackedName(a.fileNames.get(i), b.fileNames.get(i)));
+            System.out.println("@"+i+": Combine "+a.getFileNameAt(time)+" and "+b.getFileNameAt(time));
             images.add(stackImages(a.getImageAt(time), b.getImageAt(time)));
         }
         
@@ -147,12 +148,9 @@ public class Animation
         
         int h = Math.max(ha, hb);
         
-        BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR_PRE);
         Graphics2D g = image.createGraphics();
         try{
-            g.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
-            g.fillRect(0,0,256,256);
-            
             g.drawImage(a, 0, h - ha, null);
             g.drawImage(b, 0, h - hb, null);
         }finally{
@@ -165,6 +163,11 @@ public class Animation
     public List<String> getFileNames()
     {
         return fileNames;
+    }
+    
+    public String getFileNameAt(long time)
+    {
+        return fileNames.get(getFrame(time));
     }
     
     public String getUnaminatedFileName()
@@ -215,5 +218,11 @@ public class Animation
     public int getAnimationSpeed()
     {
         return animationSpeed;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getName()+"[name="+name+",animationSpeed="+animationSpeed+"]";
     }
 }

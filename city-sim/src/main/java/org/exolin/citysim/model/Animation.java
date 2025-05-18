@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -149,6 +150,9 @@ public class Animation
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         try{
+            g.setComposite(AlphaComposite.getInstance(AlphaComposite.CLEAR));
+            g.fillRect(0,0,256,256);
+            
             g.drawImage(a, 0, h - ha, null);
             g.drawImage(b, 0, h - hb, null);
         }finally{

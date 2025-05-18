@@ -190,7 +190,7 @@ public class Animation
     
     private int getFrame(long time)
     {
-        return (int)time/getAnimationSpeed()%getImageCount();
+        return (int)(time/getAnimationSpeed()%getImageCount());
     }
     
     public Image getImageAt(long time)

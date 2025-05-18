@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import org.exolin.citysim.utils.ImageUtils;
+import org.exolin.citysim.utils.MathUtils;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -90,10 +92,10 @@ public class Animation
     
     /**
      * Creates an animation where two animations are played.
-     * In case the animations don't have the same speed, the resulting animation
+     * <s>In case the animations don't have the same speed, the resulting animation
      * will have lowest common multiple number of frames.
      * In case the frame count is the same, the resulting animation will also
-     * have the same number of frames
+     * have the same number of frames</s>
      * 
      * @param a first animation
      * @param b second animation
@@ -101,7 +103,59 @@ public class Animation
      */
     public static Animation stack(Animation a, Animation b)
     {
-        throw new UnsupportedOperationException("not supported yet");
+        //LCM before both animations line up again
+        //=> that's the minimum length to create a stacked animation
+        int animationLength = MathUtils.lcm(a.getAnimationLength(), b.getAnimationLength());
+        
+        //every GCD either (or both) animation have a new frame
+        //=> need to create a new frame in the combined animation
+        int animationSpeed = MathUtils.gcd(a.animationSpeed, b.animationSpeed);
+        
+        int frameCount = animationLength/animationSpeed;
+        
+        List<BufferedImage> images = new ArrayList<>(frameCount);
+        List<String> filenames = new ArrayList<>(frameCount);
+        
+        for(int i=0;i<frameCount;++i)
+        {
+            int time = i * animationSpeed;
+            filenames.add(getStackedName(a.fileNames.get(i), b.fileNames.get(i)));
+            images.add(stackImages(a.getImageAt(time), b.getImageAt(time)));
+        }
+        
+        String name = getStackedName(a.name, b.name);
+        
+        return new Animation(name, filenames, images, animationSpeed);
+    }
+    
+    private static String getStackedName(String a, String b)
+    {
+        return "stacked:"+a+"_"+b;
+    }
+    
+    public static BufferedImage stackImages(Image a, Image b)
+    {
+        int wa = a.getWidth(null);
+        int wb = b.getWidth(null);
+        if(wa != wb)
+            throw new IllegalArgumentException();
+        int w = wa;
+        
+        int ha = a.getHeight(null);
+        int hb = b.getHeight(null);
+        
+        int h = Math.max(ha, hb);
+        
+        BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        try{
+            g.drawImage(a, 0, h - ha, null);
+            g.drawImage(b, 0, h - hb, null);
+        }finally{
+            g.dispose();
+        }
+        
+        return image;
     }
 
     public List<String> getFileNames()

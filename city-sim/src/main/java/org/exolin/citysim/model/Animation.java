@@ -80,6 +80,17 @@ public class Animation
         return new Animation(name, List.of(filename), List.of(image), 1);
     }
     
+    /**
+     * Creates an animation where two animations are played.
+     * In case the animations don't have the same speed, the resulting animation
+     * will have lowest common multiple number of frames.
+     * In case the frame count is the same, the resulting animation will also
+     * have the same number of frames
+     * 
+     * @param a first animation
+     * @param b second animation
+     * @return 
+     */
     public static Animation stack(Animation a, Animation b)
     {
         throw new UnsupportedOperationException("not supported yet");

@@ -81,6 +81,14 @@ public class Animation
     }
     
     /**
+     * @return total length of animation before it starts again
+     */
+    private int getAnimationLength()
+    {
+        return animationSpeed * images.size();
+    }
+    
+    /**
      * Creates an animation where two animations are played.
      * In case the animations don't have the same speed, the resulting animation
      * will have lowest common multiple number of frames.

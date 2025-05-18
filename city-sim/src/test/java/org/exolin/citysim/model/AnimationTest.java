@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 public class AnimationTest
 {
     @Test
-    public void createAnimated()
+    public void testCreateAnimated()
     {
         Animation a = createAnimation("plants/gas_plant", 8);
         assertEquals(List.of(
@@ -52,7 +52,7 @@ public class AnimationTest
     }
     
     @Test
-    public void createUnnimated()
+    public void createUnanimated()
     {
         testUnanimated("plants/gas_plant");
     }

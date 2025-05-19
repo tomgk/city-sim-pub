@@ -1,13 +1,9 @@
 package org.exolin.citysim.model;
 
 import java.awt.Color;
-import java.awt.Composite;
-import java.awt.CompositeContext;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -17,10 +13,8 @@ import java.util.Map;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import static org.exolin.citysim.model.Animation.createAnimation;
-import org.exolin.citysim.utils.ImageDisplay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -12,9 +12,9 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class PowerPlantSelectorDialog extends JDialog
 {
-    public PowerPlantSelectorDialog(Window parent)
+    public PowerPlantSelectorDialog(Window parent/*, List<Building> plants*/)
     {
-        super(parent);
+        super(parent, "Select Power Plant");
         setModal(true);
         setLayout(new GridLayout(1, 1));
         

@@ -6,12 +6,15 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -54,6 +57,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
     private static final String LIGHT = "Light";
     private static final String HIGH = "High";
     
+    
     /**
      * 
      * @param budgetWindow optional because of unit tests
@@ -70,7 +74,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
-        
+        /*
         registerButton(0, "electricity.png", Map.of(
                 "Power Line", new StreetBuilder(world, circuit, true),
                 "Gas", new PlaceBuilding(world, Plants.gas_plant),
@@ -78,6 +82,17 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
                 "Solar", new PlaceBuilding(world, Plants.plant_solar),
                 "Protest", new PlaceBuilding(world, Plants.protest),
                 "Pump", new PlaceBuilding(world, Plants.pump)
+        ));*/
+        
+        Window window = SwingUtilities.getWindowAncestor(this);
+        PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window);
+        registerButtonBL(0, "electricity.png", Map.of(
+                //. to keep key before Plant
+                ".Power Line", new SelectAction(new StreetBuilder(world, circuit, true)),
+                "Plant", e -> {
+                    ppsd.setLocationRelativeTo(window);
+                    ppsd.setVisible(true);
+                }
         ));
         registerButton(2, "water.png", Action.NONE);
         registerButton(4, "city_hall.png", Action.NONE);
@@ -194,6 +209,16 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
     
     private void registerButton(int x, String path, Map<String, Action> a)
     {
+        Map<String, ButtonListener> bla = a.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey,
+                                  e -> new SelectAction(e.getValue())));
+        
+        registerButtonBL(x, path, bla);
+    }
+    
+    private void registerButtonBL(int x, String path, Map<String, ButtonListener> a)
+    {
         //for unit tests
         if(GraphicsEnvironment.isHeadless())
             return;
@@ -213,8 +238,8 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
             
                     String sel = list.getSelectedValue();
                     System.out.println("SelectedValue="+sel);
-                    Action action = a.get(sel);
-                    gamePanel.setAction(action);
+                    ButtonListener action = a.get(sel);
+                    action.perform(e);
                 }
             }
         });
@@ -239,10 +264,10 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
             return;
         
         JPopupMenu m = new JPopupMenu();
-        for(Map.Entry<String, Action> e : a.entrySet())
+        for(Map.Entry<String, ButtonListener> e : a.entrySet())
         {
             JMenuItem i = new JMenuItem(e.getKey());
-            i.addActionListener(evt -> gamePanel.setAction(e.getValue()));
+            i.addActionListener(evt -> e.getValue().perform(null));
             System.out.println(e);
         }
         
@@ -279,7 +304,24 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
     
     public static interface ButtonListener
     {
+        static ButtonListener NOTHING = e -> {};
         void perform(MouseEvent e);
+    }
+    
+    public class SelectAction implements ButtonListener
+    {
+        private final Action action;
+
+        public SelectAction(Action action)
+        {
+            this.action = action;
+        }
+
+        @Override
+        public void perform(MouseEvent e)
+        {
+            gamePanel.setAction(action);
+        }
     }
     
     private void registerButton(int x, String path, ButtonListener a, boolean disabled)

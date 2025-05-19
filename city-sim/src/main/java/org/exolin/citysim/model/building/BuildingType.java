@@ -1,6 +1,8 @@
 package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
@@ -22,6 +24,28 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     private final ZoneType zoneType;
     private final int cost;
     private final BigDecimal maintenance;
+    
+    private final Map<String, Object> custom = new LinkedHashMap<>();
+    
+    public void setCustom(String name, Object value)
+    {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(value);
+        if(custom.putIfAbsent(name, value) != null)
+            throw new IllegalStateException();
+    }
+    
+    public <T> T getCustom(String name, Class<T> type)
+    {
+        Object val = custom.get(name);
+        if(val == null)
+            throw new IllegalArgumentException("no "+name+" in "+getName());
+        try{
+            return type.cast(val);
+        }catch(ClassCastException e){
+            throw new IllegalArgumentException(getName()+"."+name+" is of type "+val.getClass().getName()+" not "+type.getName());
+        }
+    }
     
     /*
     public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)

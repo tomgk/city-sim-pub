@@ -32,6 +32,7 @@ import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.RCI;
+import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
@@ -84,12 +85,12 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
                 "Pump", new PlaceBuilding(world, Plants.pump)
         ));*/
         
-        Window window = SwingUtilities.getWindowAncestor(this);
-        PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window);
         registerButtonBL(0, "electricity.png", Map.of(
                 //. to keep key before Plant
                 ".Power Line", new SelectAction(new StreetBuilder(world, circuit, true)),
                 "Plant", e -> {
+                    Window window = SwingUtilities.getWindowAncestor(this);
+                    PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window, Plants.ALL);
                     ppsd.setLocationRelativeTo(window);
                     ppsd.setVisible(true);
                 }

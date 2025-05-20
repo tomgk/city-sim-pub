@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
- *
+ * Helper class to implement {@link Object#toString()}
  * @author Thomas
  */
 public class PropertyWriter

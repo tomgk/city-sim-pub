@@ -198,5 +198,4 @@ public class OldViewCollection<T> extends AbstractCollection<T>
             arr[i] = ((Entry<T>)arr[i]).object;
         return arr;
     }
-
 }

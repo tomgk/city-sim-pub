@@ -3,6 +3,7 @@ package org.exolin.citysim.ui.sp;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
  *
@@ -16,13 +17,16 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
      * @param buildingCost
      * @param name
      */
-    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image)
+    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image, Runnable r)
     {
         initComponents();
         plantButton.setText("<html>"+megaWatt+" MW $"+buildingCost+"<br>"+name+"</html>");
         plantButton.setIcon(new ImageIcon(image));
         plantButton.setVerticalTextPosition(SwingConstants.BOTTOM);
         plantButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        plantButton.addActionListener(e -> r.run());
+        
+        plantButton.setUI(new BasicButtonUI());
         
         //TODO
         infoButton.setEnabled(false);

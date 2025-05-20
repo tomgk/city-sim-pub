@@ -60,7 +60,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
      * 
      * @param budgetWindow optional because of unit tests
      */
-    public SelectorPanel3(Optional<BudgetWindow> budgetWindow)
+    public SelectorPanel3(GamePanel gamePanel, Optional<BudgetWindow> budgetWindow)
     {
         setLayout(new GridBagLayout());
         
@@ -87,7 +87,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
                 ".Power Line", new SelectAction(new StreetBuilder(world, circuit, true)),
                 "Plant", e -> {
                     Window window = SwingUtilities.getWindowAncestor(this);
-                    PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window, Plants.ALL);
+                    PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window, gamePanel, Plants.ALL);
                     ppsd.setLocationRelativeTo(window);
                     ppsd.setVisible(true);
                 }

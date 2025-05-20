@@ -191,7 +191,7 @@ public final class GamePanel extends JComponent
         }
         
         setLayout(null);
-        SelectorPanel3 sp = new SelectorPanel3(budgetWindow);
+        SelectorPanel3 sp = new SelectorPanel3(this, budgetWindow);
         add(sp);
         sp.setLocation(10, 600);
         sp.setSize(sp.getPreferredSize());
@@ -613,6 +613,11 @@ public final class GamePanel extends JComponent
         return worldHolder.get();
     }
 
+    public WorldHolder getWorldHolder()
+    {
+        return worldHolder;
+    }
+    
     public Path getWorldFile()
     {
         return worldHolder.getFile();

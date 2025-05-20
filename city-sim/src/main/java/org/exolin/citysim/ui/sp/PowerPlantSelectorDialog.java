@@ -7,7 +7,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.utils.ImageUtils;
 
 /**
  *
@@ -19,7 +18,7 @@ public class PowerPlantSelectorDialog extends JDialog
     {
         super(parent, "Select Power Plant");
         setModal(true);
-        setLayout(new GridLayout(1, 1));
+        setLayout(new GridLayout(2, 2));
         
         for(BuildingType bt: plants)
             add(new PowerPlantSelectorPanel(
@@ -28,7 +27,7 @@ public class PowerPlantSelectorDialog extends JDialog
                     bt.getName(),
                     bt.getDefaultImage()));
         
-        add(new PowerPlantSelectorPanel(50, 2000, "Gas Power", ImageUtils.loadImage("plants/gas_plant")));
+        //add(new PowerPlantSelectorPanel(50, 2000, "Gas Power", ImageUtils.loadImage("plants/gas_plant")));
         pack();
     }
     

@@ -22,9 +22,14 @@ public class Buildings
         return createBuildingType(animation, size, zoneType, cost, BigDecimal.ZERO);
     }
     
+    public static BuildingType createBuildingType(String title, Animation animation, int size, ZoneType zoneType, int cost)
+    {
+        return new BuildingType(title, animation.getName(), animation, size, zoneType, cost, BigDecimal.ZERO);
+    }
+    
     public static <T> BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
-        return new BuildingType(animation.getName(), animation, size, zoneType, cost, maintenance);
+        return new BuildingType(animation.getName(), animation.getName(), animation, size, zoneType, cost, maintenance);
     }
 
     static void init()

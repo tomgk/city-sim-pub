@@ -17,15 +17,15 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Plants
 {
-    public static final BuildingType plant_solar = createPlant(createUnanimated("plants/plant_solar"), 4, Zones.plants, 1300, 50);
-    public static final BuildingType gas_plant = createPlant(createAnimation("plants/gas_plant", 8), 4, Zones.plants, 2000, 50);
-    public static final BuildingType oil_plant = createPlant(createAnimation("plants/oil_plant", 8), 4, Zones.plants, 6600, 220);
+    public static final BuildingType plant_solar = createPlant("Solar Power", createUnanimated("plants/plant_solar"), 4, Zones.plants, 1300, 50);
+    public static final BuildingType gas_plant = createPlant("Gas Power", createAnimation("plants/gas_plant", 8), 4, Zones.plants, 2000, 50);
+    public static final BuildingType oil_plant = createPlant("Oil Power", createAnimation("plants/oil_plant", 8), 4, Zones.plants, 6600, 220);
     
     public static final String MEGA_WATT = "megaWatt";
     
-    private static BuildingType createPlant(Animation animation, int size, ZoneType zoneType, int cost, int megaWatt)
+    private static BuildingType createPlant(String title, Animation animation, int size, ZoneType zoneType, int cost, int megaWatt)
     {
-        BuildingType bt = createBuildingType(animation, size, zoneType, cost);
+        BuildingType bt = createBuildingType(title, animation, size, zoneType, cost);
         bt.setCustom(MEGA_WATT, megaWatt);
         return bt;
     }

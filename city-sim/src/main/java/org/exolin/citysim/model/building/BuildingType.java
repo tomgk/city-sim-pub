@@ -21,6 +21,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
         DEFAULT
     }
     
+    private final String title;
     private final ZoneType zoneType;
     private final int cost;
     private final BigDecimal maintenance;
@@ -54,15 +55,21 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }*/
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    public BuildingType(String name, String title, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         super(name, animation, size);
+        this.title = Objects.requireNonNull(title);
         this.zoneType = Objects.requireNonNull(zoneType);
         zoneType.addBuilding(this);
         this.cost = cost;
         this.maintenance = maintenance;
     }
 
+    public String getTitle()
+    {
+        return title;
+    }
+    
     public int getCost()
     {
         return cost;

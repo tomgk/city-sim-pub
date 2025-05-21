@@ -9,7 +9,8 @@ import org.exolin.citysim.utils.Utils;
 public enum WorldView
 {
     OVERGROUND,
-    ZONES;
+    ZONES,
+    ELECTRICITY;
     
     private static final WorldView[] values = values();
     

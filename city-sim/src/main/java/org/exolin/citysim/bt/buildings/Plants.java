@@ -8,6 +8,7 @@ import static org.exolin.citysim.bt.buildings.Buildings.createBuildingType;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
 
@@ -30,6 +31,18 @@ public class Plants
         return bt;
     }
     
+    public static boolean isPlant(StructureType<?, ?, ?> s)
+    {
+        if(s instanceof BuildingType b)
+            return isPlant(b);
+        else
+            return false;
+    }
+    
+    public static boolean isPlant(BuildingType b)
+    {
+        return b.hasCustom(MEGA_WATT);
+    }
     
     public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), 1, Zones.plants, 0);
     public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, Zones.plants, 0);

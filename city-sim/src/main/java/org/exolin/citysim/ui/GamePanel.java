@@ -24,6 +24,7 @@ import java.util.Optional;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.SimulationSpeed;
@@ -33,6 +34,7 @@ import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.budget.BudgetWindow;
 import org.exolin.citysim.ui.sp.SelectorPanel3;
+import org.exolin.citysim.utils.ImageUtils;
 import static org.exolin.citysim.utils.ImageUtils.brighter;
 import static org.exolin.citysim.utils.ImageUtils.loadImage;
 
@@ -579,6 +581,8 @@ public final class GamePanel extends JComponent
             drawItem(g, dim, r.x, r.y, markerImage, r.width);
     }
     
+    private static final Image POWERED = ImageUtils.loadImage("electricity/powered");
+    
     private void drawBuilding(Graphics2D g, int dim, Structure<?, ?, ?, ?> b)
     {
         Point screenPoint = new Point();
@@ -586,7 +590,14 @@ public final class GamePanel extends JComponent
         
         Optional<ZoneType> zoneType = b.getTheZoneType();
         
-        if(view == WorldView.ZONES && zoneType.isPresent())
+        if(view == WorldView.ELECTRICITY)
+        {
+            if(Plants.isPlant(b.getType()))
+                drawItemN(g, dim, screenPoint.x, screenPoint.y, POWERED, b.getSize());
+        }
+        //show zone except for buildings that have no zone
+        //then just show the building
+        else if(view == WorldView.ZONES && zoneType.isPresent())
         {
             drawItemN(g, dim, screenPoint.x, screenPoint.y, zoneType.get().getDefaultImage(), b.getSize());
         }

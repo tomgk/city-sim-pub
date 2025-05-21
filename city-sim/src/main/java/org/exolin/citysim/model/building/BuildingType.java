@@ -48,6 +48,11 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
         }
     }
     
+    public boolean hasCustom(String name)
+    {
+        return custom.containsKey(name);
+    }
+    
     /*
     public BuildingType(String name, Animation animation, int size, ZoneType zoneType, int cost)
     {

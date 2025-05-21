@@ -18,9 +18,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="resetPositionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="pauseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="speed1Label" min="-2" max="-2" attributes="0"/>
@@ -32,9 +31,16 @@
                       <Component id="speed4Label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="speed5Label" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="nextView" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="resetPositionLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="prevView" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="keyLeftLabel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -50,7 +56,7 @@
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="keyMappingLabel" min="-2" pref="532" max="-2" attributes="0"/>
-              <EmptySpace pref="277" max="32767" attributes="0"/>
+              <EmptySpace pref="291" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
                   <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
@@ -78,8 +84,14 @@
                               <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="resetPositionLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="resetPositionLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="prevView" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="pauseLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="speed1Label" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -87,6 +99,7 @@
                                   <Component id="speed3Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="speed4Label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="speed5Label" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="nextView" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -272,6 +285,22 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="speedLabelClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="prevView">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt; View"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="prevViewMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nextView">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View &gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextViewMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

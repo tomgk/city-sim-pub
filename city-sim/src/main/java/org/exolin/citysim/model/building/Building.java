@@ -61,6 +61,9 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
     @Override
     protected void updateAfterTick(World world, int ticks)
     {
+        if(getType().getZoneType() == null)
+            return;
+        
         int distance = 3;
         int size = getSize();
         

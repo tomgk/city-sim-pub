@@ -11,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.AbstractMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,6 +37,7 @@ import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
+import org.exolin.citysim.ui.WorldView;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceTrees;
 import org.exolin.citysim.ui.actions.StreetBuilder;
@@ -139,7 +142,10 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         int yRCI = y;
         
         w = 2;
-        registerButton(0, "map.png", Action.NONE);
+        
+        Map<String, ButtonListener> collect = Arrays.stream(WorldView.values()).collect(Collectors.toMap(e -> e.name(), v -> (ButtonListener)e -> gamePanel.setView(v)));
+        
+        registerButtonBL(0, "map.png", collect);
         registerButton(2, "diagrams.png", Action.NONE);
         ++y;
         

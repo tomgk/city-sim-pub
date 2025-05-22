@@ -3,6 +3,7 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.Structure;
@@ -33,16 +34,16 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         super(type, x, y, variant, data);
     }
 
-    private Connection getStreet(World world, int x, int y, boolean xDirection)
+    private boolean getStreet(World world, int x, int y, boolean xDirection)
     {
         Structure<?, ?, ?, ?> b = world.getBuildingAt(x, y);
         if(b == null)
-            return null;
+            return false;
         
         //TODO: add cross logic
         
         if(!(b instanceof Connection))
-            return null;
+            return false;
         
         Connection<?, ?, ?, ?> s = (Connection) b;
         
@@ -50,10 +51,24 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         SelfConnectionType conType = xDirection ? streetType.getXType() : streetType.getYType();
         
         if(conType != getType())
+            return false;
+        
+        addConnection((Connection)b);
+        return true;
+    }
+    
+    /*
+    private Structure<?, ?, ?, ?> getStructure(World world, int x, int y)
+    {
+        if(getType() != circuit)
             return null;
         
-        return (Connection)b;
-    }
+        Structure<?, ?, ?, ?> b = world.getBuildingAt(x, y);
+        if(b == null)
+            return null;
+        
+        x;
+    }*/
 
     @Override
     public ConnectionVariant getVariant(Rotation rotation)
@@ -61,7 +76,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         return getVariant().rotate(rotation);
     }
     
-    private final List<Connection> connections = new ArrayList<>(4);
+    private final List<Structure<?, ?, ?, ?>> connections = new ArrayList<>(4);
 
     private void addConnection(Connection street)
     {
@@ -72,22 +87,11 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
     @Override
     protected void updateAfterChange(World world)
     {
-        Connection x_before_street = getStreet(world, getX()-1, getY(), true);
-        Connection x_after_street = getStreet(world, getX()+1, getY(), true);
-        Connection y_before_street = getStreet(world, getX(), getY()-1, false);
-        Connection y_after_street = getStreet(world, getX(), getY()+1, false);
-        
         connections.clear();
-        addConnection(x_before_street);
-        addConnection(x_after_street);
-        addConnection(y_before_street);
-        addConnection(y_after_street);
-        
-        boolean x_before = x_before_street != null;
-        boolean x_after = x_after_street != null;
-        
-        boolean y_before = y_before_street != null;
-        boolean y_after = y_after_street != null;
+        boolean x_before = getStreet(world, getX()-1, getY(), true);
+        boolean x_after = getStreet(world, getX()+1, getY(), true);
+        boolean y_before = getStreet(world, getX(), getY()-1, false);
+        boolean y_after = getStreet(world, getX(), getY()+1, false);
         
         if(x_before && x_after && y_before && y_after)
             setVariant(world, X_INTERSECTION);

@@ -143,10 +143,8 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         
         w = 2;
         
-        Map<String, ButtonListener> collect = Arrays.stream(WorldView.values())
-                .collect(Collectors.toMap(e -> e.name(), v -> (ButtonListener)e -> gamePanel.setView(v)));
-        
-        registerButtonBL(0, "map.png", collect);
+        registerButtonBL(0, "map.png", Arrays.stream(WorldView.values())
+                .collect(Collectors.toMap(e -> e.getTitle(), v -> (ButtonListener)e -> gamePanel.setView(v))));
         registerButton(2, "diagrams.png", Action.NONE);
         ++y;
         

@@ -23,4 +23,9 @@ public enum WorldView
     {
         return Utils.getNext(values, ordinal());
     }
+    
+    public String getTitle()
+    {
+        return name().charAt(0)+name().substring(1).toLowerCase();
+    }
 }

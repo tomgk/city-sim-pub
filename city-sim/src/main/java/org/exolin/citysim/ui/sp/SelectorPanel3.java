@@ -13,6 +13,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -143,8 +145,11 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         
         w = 2;
         
-        registerButtonBL(0, "map.png", Arrays.stream(WorldView.values())
-                .collect(Collectors.toMap(e -> e.getTitle(), v -> (ButtonListener)e -> gamePanel.setView(v))));
+        Map<String, ButtonListener> maps = new LinkedHashMap<>();
+        for(WorldView v: WorldView.values())
+            maps.put(v.getTitle(), e -> gamePanel.setView(v));
+        
+        registerButtonBL(0, "map.png", maps);
         registerButton(2, "diagrams.png", Action.NONE);
         ++y;
         

@@ -3,7 +3,6 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.exolin.citysim.bt.buildings.Plants;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import org.exolin.citysim.model.EmptyStructureParameters;

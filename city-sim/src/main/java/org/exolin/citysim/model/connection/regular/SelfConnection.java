@@ -3,6 +3,8 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import org.exolin.citysim.bt.buildings.Plants;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Rotation;
@@ -50,8 +52,18 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
             if(conType != getType())
                 return false;
 
-            addConnection(c);
+            connections.add(c);
             return true;
+        }
+        else if(getType() == circuit)
+        {
+            if(Plants.isPlant(b.getType()))
+            {
+                connections.add(b);
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
@@ -78,12 +90,6 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
     
     private final List<Structure<?, ?, ?, ?>> connections = new ArrayList<>(4);
 
-    private void addConnection(Connection street)
-    {
-        if(street != null)
-            connections.add(street);
-    }
-    
     @Override
     protected void updateAfterChange(World world)
     {

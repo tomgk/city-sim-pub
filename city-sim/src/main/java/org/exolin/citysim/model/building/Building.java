@@ -64,6 +64,9 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         if(getType().getZoneType() == null)
             return;
         
+        if(!getType().getZoneType().isUserPlaceableZone())
+            return;
+        
         int distance = 3;
         int size = getSize();
         

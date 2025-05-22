@@ -74,15 +74,6 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
-        /*
-        registerButton(0, "electricity.png", Map.of(
-                "Power Line", new StreetBuilder(world, circuit, true),
-                "Gas", new PlaceBuilding(world, Plants.gas_plant),
-                "Oil", new PlaceBuilding(world, Plants.oil_plant),
-                "Solar", new PlaceBuilding(world, Plants.plant_solar),
-                "Protest", new PlaceBuilding(world, Plants.protest),
-                "Pump", new PlaceBuilding(world, Plants.pump)
-        ));*/
         
         registerButtonBL(0, "electricity.png", Map.of(
                 //. to keep key before Plant

@@ -42,19 +42,19 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         
         //TODO: add cross logic
         
-        if(!(b instanceof Connection))
+        if(b instanceof Connection<?, ?, ?, ?> c)
+        {
+            ConnectionType<?, ?, ?, ?> type = c.getType();
+            SelfConnectionType conType = xDirection ? type.getXType() : type.getYType();
+
+            if(conType != getType())
+                return false;
+
+            addConnection(c);
+            return true;
+        }
+        else
             return false;
-        
-        Connection<?, ?, ?, ?> s = (Connection) b;
-        
-        ConnectionType<?, ?, ?, ?> streetType = s.getType();
-        SelfConnectionType conType = xDirection ? streetType.getXType() : streetType.getYType();
-        
-        if(conType != getType())
-            return false;
-        
-        addConnection((Connection)b);
-        return true;
     }
     
     /*

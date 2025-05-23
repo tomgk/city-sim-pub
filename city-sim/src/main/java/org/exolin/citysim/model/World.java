@@ -5,15 +5,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.bt.connections.SelfConnections;
+import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
@@ -455,6 +460,8 @@ public final class World
                 });
             }
         });
+        
+        updateElectricityGrid();
     }
     
     private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)
@@ -506,5 +513,109 @@ public final class World
         }
         
         return false;
+    }
+    
+    private static class ElectricityGrid
+    {
+        private final Set<ElectricityGridArea> areas = new HashSet<>();
+        private final Set<Building> plants = new HashSet<>();
+
+        public ElectricityGrid(Building plant)
+        {
+            if(!Plants.isPlant(plant))
+                throw new IllegalArgumentException();
+        }
+        
+        /**
+         * Merges two grids and returns the result.
+         * 
+         * @param other
+         * @return 
+         */
+        public ElectricityGrid merge(ElectricityGrid other)
+        {
+            //merge plants
+            plants.addAll(other.plants);
+            //merge areas
+            areas.addAll(other.areas);
+            
+            //set grid to this
+            for(ElectricityGridArea o : other.areas)
+                o.electricityGrid = this;
+            
+            return this;
+        }
+    }
+    
+    /**
+     * All ElectricityGridArea that are connected form one ElectricityGrid 
+    */
+    private static class ElectricityGridArea
+    {
+        private ElectricityGrid electricityGrid;
+
+        public ElectricityGridArea(Building plant)
+        {
+            electricityGrid = new ElectricityGrid(plant);
+        }
+        
+        private void connectTo(ElectricityGridArea other)
+        {
+            electricityGrid = electricityGrid.merge(other.electricityGrid);
+        }
+    }
+    
+    private final Map<Structure<?, ?, ?, ?>, ElectricityGridArea> structuresWithElectricity = new IdentityHashMap<>();
+
+    private void updateElectricityGrid()
+    {
+        structuresWithElectricity.clear();
+        
+        structures.stream()
+                .filter(Plants::isPlant)
+                .forEach(plant -> {
+                    //each plant starts as an own grid
+                    ElectricityGridArea grid = new ElectricityGridArea((Building)plant);
+                    onFindStructureWithElectricity(grid, plant);
+                });
+    }
+    
+    private void onFindStructureWithElectricity(ElectricityGridArea grid, Structure<?, ?, ?, ?> s)
+    {
+        Objects.requireNonNull(s);
+        
+        //remember, and if already captured, skip
+        ElectricityGridArea existingGrid = structuresWithElectricity.get(s);
+        if(existingGrid != null)
+        {
+            grid.connectTo(existingGrid);
+            
+            return;
+        }
+        
+        structuresWithElectricity.put(s, grid);
+        
+        int x = s.getX();
+        int y = s.getY();
+        int size = s.getSize();
+        for(int yi=-1;yi<size+1;++yi)
+        {
+            for(int xi=-1;xi<size+1;++xi)
+            {
+                Structure<?, ?, ?, ?> neighbor = getBuildingAt(x+xi, y+yi);
+                
+                //check if it is actually the current building
+                if(neighbor == s)
+                    continue;
+                
+                if(neighbor != null)
+                    onFindStructureWithElectricity(grid, neighbor);
+            }
+        }
+    }
+    
+    public boolean hasElectricity(Structure<?, ?, ?, ?> s)
+    {
+        return structuresWithElectricity.containsKey(s);
     }
 }

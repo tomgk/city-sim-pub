@@ -150,6 +150,15 @@ public class Worlds
         
         return w;
     }
+    /*
+    public static World ElectricityWorld()
+    {
+        World w = new World("Electricity World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
+        
+        GetWorld getWorld = GetWorld.ofStatic(w);
+        
+    }
+*/
     
     private static int limit(int num)
     {

@@ -8,6 +8,7 @@ import static org.exolin.citysim.bt.buildings.Buildings.createBuildingType;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -29,6 +30,11 @@ public class Plants
         BuildingType bt = createBuildingType(title, animation, size, zoneType, cost);
         bt.setCustom(MEGA_WATT, megaWatt);
         return bt;
+    }
+    
+    public static boolean isPlant(Structure<?, ?, ?, ?> s)
+    {
+        return isPlant(s.getType());
     }
     
     public static boolean isPlant(StructureType<?, ?, ?> s)

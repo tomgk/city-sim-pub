@@ -10,6 +10,8 @@ import static org.exolin.citysim.bt.buildings.BusinessBuildings.office;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.parkbuilding;
+import org.exolin.citysim.bt.buildings.Plants;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
@@ -150,15 +152,19 @@ public class Worlds
         
         return w;
     }
-    /*
+    
     public static World ElectricityWorld()
     {
         World w = new World("Electricity World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         
+        w.addBuilding(Plants.oil_plant, 0, 0);
+        
+        placeStreet(w, 4, 0, 6, 1, circuit);
+        
+        return w;
     }
-*/
     
     private static int limit(int num)
     {
@@ -198,6 +204,6 @@ public class Worlds
 
     public static List<World> all()
     {
-        return List.of(World1(), World2(), World3(), WaterWorld());
+        return List.of(World1(), World2(), World3(), WaterWorld(), ElectricityWorld());
     }
 }

@@ -437,6 +437,12 @@ public final class World
 
     public void updateAfterTick(int ticks, long passedTicks)
     {
+        updateAfterTick0(ticks, passedTicks);
+        updateStats();
+    }
+    
+    private void updateAfterTick0(int ticks, long passedTicks)
+    {
         if(ticks == 0)
             return;
         else if(ticks < 0)
@@ -460,8 +466,6 @@ public final class World
                 });
             }
         });
-        
-        updateElectricityGrid();
     }
     
     private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)
@@ -567,6 +571,11 @@ public final class World
     
     private final Map<Structure<?, ?, ?, ?>, ElectricityGridArea> structuresWithElectricity = new IdentityHashMap<>();
 
+    private void updateStats()
+    {
+        updateElectricityGrid();
+    }
+    
     private void updateElectricityGrid()
     {
         structuresWithElectricity.clear();
@@ -579,7 +588,7 @@ public final class World
                     onFindStructureWithElectricity(grid, plant);
                 });
         
-        System.out.println(structures);
+        //System.out.println(structures);
     }
     
     private void onFindStructureWithElectricity(ElectricityGridArea grid, Structure<?, ?, ?, ?> s)

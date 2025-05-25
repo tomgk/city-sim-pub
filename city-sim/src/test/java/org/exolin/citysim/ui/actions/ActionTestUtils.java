@@ -2,6 +2,7 @@ package org.exolin.citysim.ui.actions;
 
 import java.awt.Point;
 import java.util.Optional;
+import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
@@ -49,7 +50,7 @@ public class ActionTestUtils
     
     public static void makeZonePlacementMove(Point start, Point end, World world, ZoneType type)
     {
-        ZonePlacement z = new ZonePlacement(() -> world, type, ZoneType.Variant.DEFAULT);
+        ZonePlacement z = new ZonePlacement(GetWorld.ofStatic(world), type, ZoneType.Variant.DEFAULT);
         makeMove(start, end, world, z);
     }
     

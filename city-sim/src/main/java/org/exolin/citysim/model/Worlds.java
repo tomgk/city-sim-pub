@@ -157,11 +157,13 @@ public class Worlds
     {
         World w = new World("Electricity World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         
-        GetWorld getWorld = GetWorld.ofStatic(w);
+        //GetWorld getWorld = GetWorld.ofStatic(w);
         
         w.addBuilding(Plants.oil_plant, 0, 0);
-        
         placeStreet(w, 4, 0, 6, 1, circuit);
+        
+        w.addBuilding(Plants.oil_plant, 5, 5);
+        placeStreet(w, 4+5, 0+5, 6, 1, circuit);
         
         return w;
     }

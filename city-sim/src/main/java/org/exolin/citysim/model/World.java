@@ -578,6 +578,8 @@ public final class World
                     ElectricityGridArea grid = new ElectricityGridArea((Building)plant);
                     onFindStructureWithElectricity(grid, plant);
                 });
+        
+        System.out.println(structures);
     }
     
     private void onFindStructureWithElectricity(ElectricityGridArea grid, Structure<?, ?, ?, ?> s)

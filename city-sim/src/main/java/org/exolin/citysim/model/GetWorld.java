@@ -1,5 +1,7 @@
 package org.exolin.citysim.model;
 
+import java.util.function.Supplier;
+
 /**
  * Allows accessing the current world.
  * Necessary, so that the world can be replaced
@@ -15,6 +17,14 @@ public interface GetWorld
      */
     World get();
     
+    interface ChangeListener
+    {
+        void changed(World newWorld);
+    }
+    
+    void addChangeListener(ChangeListener listener);
+    void removeChangeListener(ChangeListener listener);
+    
     /**
      * Creates an instance where the world stays the same.
      * 
@@ -23,18 +33,49 @@ public interface GetWorld
      */
     static GetWorld ofStatic(World w)
     {
-        return () -> w;
+        return new GetWorld()
+        {
+            @Override
+            public World get()
+            {
+                return w;
+            }
+
+            @Override
+            public void addChangeListener(ChangeListener listener)
+            {
+                //not needed since it can't change
+            }
+
+            @Override
+            public void removeChangeListener(ChangeListener listener)
+            {
+                //not needed since it can't change
+            }
+        };
     }
     
-    /**
-     * Creates a placeholder that fails if used.
-     * 
-     * @return placeholder
-     */
-    static GetWorld unset()
+    static GetWorld delegate(Supplier<GetWorld> source)
     {
-        return () -> {
-            throw new IllegalStateException("not assigned");
+        return new GetWorld()
+        {
+            @Override
+            public World get()
+            {
+                return source.get().get();
+            }
+
+            @Override
+            public void addChangeListener(ChangeListener listener)
+            {
+                source.get().addChangeListener(listener);
+            }
+
+            @Override
+            public void removeChangeListener(ChangeListener listener)
+            {
+                source.get().removeChangeListener(listener);
+            }
         };
     }
 }

@@ -214,7 +214,12 @@ public final class GamePanel extends JComponent
     public static final int TICK_LENGTH = 10;
     
     private static final int REFRESH_TIME = 1000;
-
+    
+    public SimulationSpeed getTickFactor()
+    {
+        return worldHolder.get().getTickFactor();
+    }
+    
     public void setTickFactor(SimulationSpeed tickFactor)
     {
         worldHolder.get().setTickFactor(tickFactor);
@@ -728,6 +733,11 @@ public final class GamePanel extends JComponent
     {
         this.view = Objects.requireNonNull(view);
         repaint();
+    }
+    
+    public void nextView()
+    {
+        setView(view.getNext());
     }
 
     public Rotation getRotation()

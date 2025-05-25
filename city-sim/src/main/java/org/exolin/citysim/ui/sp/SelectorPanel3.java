@@ -52,7 +52,7 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
 {
     private final RCIPanel rciPanel;
     private GamePanel gamePanel;
-    private final GetWorld world = () -> gamePanel.getWorld();
+    private final GetWorld world = GetWorld.delegate(() -> gamePanel.getWorldHolder());
     
     private static final String LIGHT = "Light";
     private static final String HIGH = "High";

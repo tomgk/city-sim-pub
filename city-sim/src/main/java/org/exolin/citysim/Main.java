@@ -1,7 +1,9 @@
 package org.exolin.citysim;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,7 +61,7 @@ public class Main
                 bw.setVisible(!bw.isVisible());
             });
         mapping.add(KeyEvent.VK_F7, "Toggle debug", () -> gp.toggleDebug());
-        mapping.add(KeyEvent.VK_F8, "Go to next view", () -> gp.setView(gp.getView().getNext()));
+        mapping.add(KeyEvent.VK_F8, "Go to next view", () -> gp.nextView());
         mapping.add(KeyEvent.VK_F10, "Toggle selector visibility", () -> selector.setVisible(!selector.isVisible()));
         mapping.add(KeyEvent.VK_F11, "Toggle color grid", () -> gp.toggleColorGrid());
         mapping.add(KeyEvent.VK_F12, "Toggle control panel", () -> gd.setVisible(!gd.isVisible()));
@@ -119,7 +121,7 @@ public class Main
         }, Optional.of(bw));
         f.add(gp, BorderLayout.CENTER);
         
-        for(Map.Entry<String, List<Action>> e: Actions.getActions(gp::getWorld, debugMode).entrySet())
+        for(Map.Entry<String, List<Action>> e: Actions.getActions(gp.getWorldHolder(), debugMode).entrySet())
         {
             for(Action a: e.getValue())
                 sp.add(e.getKey(), a);

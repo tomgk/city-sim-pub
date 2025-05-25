@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
+import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.storage.WorldStorage;
@@ -23,7 +24,7 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class GameControlPanel extends javax.swing.JPanel
+public class GameControlPanel extends javax.swing.JPanel implements GetWorld.ChangeListener
 {
     private GamePanel panel;
     private final JFileChooser fileChooser = new JFileChooser(new File("./saves"));
@@ -48,7 +49,8 @@ public class GameControlPanel extends javax.swing.JPanel
          });
     }
     
-    private final Map<JLabel, SimulationSpeed> speeds = new LinkedHashMap<>();
+    private final Map<JLabel, SimulationSpeed> labelToSpeed = new LinkedHashMap<>();
+    private final Map<SimulationSpeed, JLabel> speedToLabel = new LinkedHashMap<>();
     
     /**
      * Creates new form GameData
@@ -57,19 +59,47 @@ public class GameControlPanel extends javax.swing.JPanel
     {
         initComponents();
         
-        speeds.put(pauseLabel, SimulationSpeed.PAUSED);
-        speeds.put(speed1Label, SimulationSpeed.SPEED1);
-        speeds.put(speed2Label, SimulationSpeed.SPEED2);
-        speeds.put(speed3Label, SimulationSpeed.SPEED3);
-        speeds.put(speed4Label, SimulationSpeed.SPEED4);
-        speeds.put(speed5Label, SimulationSpeed.SPEED5);
-        
-        selectSpeedLabel(speed1Label);
+        addSpeedLabel(pauseLabel, SimulationSpeed.PAUSED);
+        addSpeedLabel(speed1Label, SimulationSpeed.SPEED1);
+        addSpeedLabel(speed2Label, SimulationSpeed.SPEED2);
+        addSpeedLabel(speed3Label, SimulationSpeed.SPEED3);
+        addSpeedLabel(speed4Label, SimulationSpeed.SPEED4);
+        addSpeedLabel(speed5Label, SimulationSpeed.SPEED5);
+    }
+
+    @Override
+    public void changed(World newWorld)
+    {
+        setSpeed(newWorld.getTickFactor());
+    }
+    
+    private void addSpeedLabel(JLabel label, SimulationSpeed speed)
+    {
+        labelToSpeed.put(label, speed);
+        speedToLabel.put(speed, label);
     }
 
     public void setPanel(GamePanel panel)
     {
+        if(this.panel == panel)
+            return;
+        
+        if(this.panel != null)
+            this.panel.getWorldHolder().removeChangeListener(this);
+        
         this.panel = panel;
+        panel.getWorldHolder().addChangeListener(this);
+        
+        setSpeed(panel.getTickFactor());
+    }
+    
+    private void setSpeed(SimulationSpeed speed)
+    {
+        JLabel label = speedToLabel.get(speed);
+        if(label == null)
+            throw new IllegalArgumentException();
+        
+        selectSpeedLabel(label);
     }
 
     public void setKeyMapping(KeyMapping mapping)
@@ -402,7 +432,7 @@ public class GameControlPanel extends javax.swing.JPanel
             file = fileChooser.getSelectedFile().toPath();
         }
         
-        try(OutputStream out = Files.newOutputStream(file))
+        try//(OutputStream out = Files.newOutputStream(file))
         {
             WorldStorage.save(panel.getWorld(), file);
         }catch(IOException e){
@@ -444,11 +474,11 @@ public class GameControlPanel extends javax.swing.JPanel
 
     private SimulationSpeed selectSpeedLabel(JLabel selected)
     {
-        SimulationSpeed tickFactor = speeds.get(selected);
+        SimulationSpeed tickFactor = labelToSpeed.get(selected);
         if(tickFactor == null)
             throw new NullPointerException();
         
-        for(JLabel c : speeds.keySet())
+        for(JLabel c : labelToSpeed.keySet())
             c.setForeground(Color.black);
         selected.setForeground(Color.red);
         return tickFactor;

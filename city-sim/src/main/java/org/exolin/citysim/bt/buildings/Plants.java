@@ -54,6 +54,11 @@ public class Plants
         return b.hasCustom(MEGA_WATT);
     }
     
+    public static int getMegaWatt(Building b)
+    {
+        return getMegaWatt(b.getType());
+    }
+    
     public static int getMegaWatt(BuildingType type)
     {
         return type.getCustom(MEGA_WATT, Integer.class);

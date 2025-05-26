@@ -538,7 +538,7 @@ public final class World
         public int getSupply()
         {
             return plants.stream()
-                    .mapToInt(b -> Plants.getMegaWatt(b.getType()))
+                    .mapToInt(Plants::getMegaWatt)
                     .sum();
         }
         

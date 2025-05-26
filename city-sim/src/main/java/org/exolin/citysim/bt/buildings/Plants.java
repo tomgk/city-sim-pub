@@ -54,6 +54,11 @@ public class Plants
         return b.hasCustom(MEGA_WATT);
     }
     
+    public static int getMegaWatt(BuildingType type)
+    {
+        return type.getCustom(MEGA_WATT, Integer.class);
+    }
+    
     public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), 1, Zones.plants, 0);
     public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, Zones.plants, 0);
     

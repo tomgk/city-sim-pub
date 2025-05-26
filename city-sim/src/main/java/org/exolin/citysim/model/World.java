@@ -535,6 +535,13 @@ public final class World
                 throw new IllegalArgumentException();
         }
         
+        public int getSupply()
+        {
+            return plants.stream()
+                    .mapToInt(b -> Plants.getMegaWatt(b.getType()))
+                    .sum();
+        }
+        
         /**
          * Merges two grids and returns the result.
          * 

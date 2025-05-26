@@ -601,8 +601,10 @@ public final class GamePanel extends JComponent
             //if(Plants.isPlant(b.getType()))
             if(worldHolder.get().hasElectricity(b))
                 drawItemN(g, dim, screenPoint.x, screenPoint.y, POWERED, b.getSize());
-            else if(Plants.needsElectricity(b))
+            else if(Plants.getElectricity(b).transfers())
                 drawItemN(g, dim, screenPoint.x, screenPoint.y, UNPOWERED, b.getSize());
+            else
+                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize());
         }
         //show zone except for buildings that have no zone
         //then just show the building

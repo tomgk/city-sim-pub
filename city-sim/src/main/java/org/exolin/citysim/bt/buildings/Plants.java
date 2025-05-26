@@ -5,12 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.bt.buildings.Buildings.createBuildingType;
+import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
+import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -54,4 +58,18 @@ public class Plants
     public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, Zones.plants, 0);
     
     public static final List<BuildingType> ALL = Collections.unmodifiableList(Arrays.asList(plant_solar, gas_plant, oil_plant));
+    
+    public static Electricity getElectricity(Structure<?, ?, ?, ?> b)
+    {
+        if(b.getZoneType(true).map(ZoneType::isUserPlaceableZone).orElse(false))
+            return Electricity.NEEDS;
+        else if(b instanceof Building)
+            return Electricity.NEEDS;
+        else if(b.getType() == street)
+            return Electricity.CONDUCTS;
+        else if(b.getType() == circuit)
+            return Electricity.TRANSFER;
+        else
+            return Electricity.INSULATOR;
+    }
 }

@@ -625,7 +625,9 @@ public final class World
                 if(neighbor == s)
                     continue;
                 
-                if(neighbor != null)
+                //TODO: conduction over street should only work with one tile
+                //TODO: circuit over street doesn't work
+                if(neighbor != null && Plants.getElectricity(neighbor).transfers())
                     onFindStructureWithElectricity(grid, neighbor);
             }
         }

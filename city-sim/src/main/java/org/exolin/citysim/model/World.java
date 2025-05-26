@@ -611,6 +611,7 @@ public final class World
         
         structuresWithElectricity.put(s, grid);
         
+        //TODO: wrong, also includes diagonal
         int x = s.getX();
         int y = s.getY();
         int size = s.getSize();

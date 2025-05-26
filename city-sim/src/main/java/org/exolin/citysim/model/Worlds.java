@@ -88,6 +88,8 @@ public class Worlds
         placeZone(w, Zones.industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
         placeZone(w, Zones.business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
         
+        w.addBuilding(Plants.oil_plant, 0, 0);
+        
         int zoneSize = 6;
         
         for(int y = zoneSize/2;y<DEFAULT_GRID_SIZE-2;y+=zoneSize)

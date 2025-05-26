@@ -437,6 +437,7 @@ public final class World
 
     public void updateAfterTick(int ticks, long passedTicks)
     {
+        updateStats();
         updateAfterTick0(ticks, passedTicks);
         updateStats();
     }
@@ -471,6 +472,10 @@ public final class World
     private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)
     {
         if(z.getSize() != 1)
+            return;
+        
+        //no building without electric
+        if(!structuresWithElectricity.containsKey(s))
             return;
 
         if(hasAnyInRadius(SelfConnections.street, s.getX(), s.getY(), Zones.BUILDING_DISTANCE))

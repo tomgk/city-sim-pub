@@ -3,16 +3,15 @@ package org.exolin.citysim.model;
 import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Consumer;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
@@ -524,65 +523,13 @@ public final class World
         return false;
     }
     
-    private static class ElectricityGrid
-    {
-        private final Set<ElectricityGridArea> areas = new HashSet<>();
-        private final Set<Building> plants = new HashSet<>();
-
-        public ElectricityGrid(Building plant)
-        {
-            if(!Plants.isPlant(plant))
-                throw new IllegalArgumentException();
-        }
-        
-        public int getSupply()
-        {
-            return plants.stream()
-                    .mapToInt(Plants::getMegaWatt)
-                    .sum();
-        }
-        
-        /**
-         * Merges two grids and returns the result.
-         * 
-         * @param other
-         * @return 
-         */
-        public ElectricityGrid merge(ElectricityGrid other)
-        {
-            //merge plants
-            plants.addAll(other.plants);
-            //merge areas
-            areas.addAll(other.areas);
-            
-            //set grid to this
-            for(ElectricityGridArea o : other.areas)
-                o.electricityGrid = this;
-            
-            return this;
-        }
-    }
-    
-    /**
-     * All ElectricityGridArea that are connected form one ElectricityGrid 
-    */
-    private static class ElectricityGridArea
-    {
-        private ElectricityGrid electricityGrid;
-
-        public ElectricityGridArea(Building plant)
-        {
-            electricityGrid = new ElectricityGrid(plant);
-        }
-        
-        private void connectTo(ElectricityGridArea other)
-        {
-            electricityGrid = electricityGrid.merge(other.electricityGrid);
-        }
-    }
-    
     private final Map<Structure<?, ?, ?, ?>, ElectricityGridArea> structuresWithElectricity = new IdentityHashMap<>();
 
+    public Map<Structure<?, ?, ?, ?>, ElectricityGridArea> getStructuresWithElectricity()
+    {
+        return Collections.unmodifiableMap(structuresWithElectricity);
+    }
+    
     private void updateStats()
     {
         updateElectricityGrid();

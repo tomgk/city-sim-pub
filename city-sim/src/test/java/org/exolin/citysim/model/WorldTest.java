@@ -2,6 +2,8 @@ package org.exolin.citysim.model;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
@@ -14,6 +16,7 @@ import org.exolin.citysim.storage.WorldStorageTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -227,5 +230,21 @@ public class WorldTest
         
         System.out.println(w.getStructures().stream().map(Object::toString).collect(Collectors.joining("\n")));
         assertEquals("xxxx", w.getStructures());
+    }
+    
+    @Test
+    @Disabled
+    public void testElectricity()
+    {
+        World w = Worlds.ElectricityWorld();
+        w.updateAfterTick(0, 0);
+        
+        Map<Structure<?, ?, ?, ?>, ElectricityGridArea> s = w.getStructuresWithElectricity();
+        
+        List<ElectricityGridArea> areas = s.values().stream().distinct().toList();
+        
+        s.forEach((k, v) -> System.out.println(k + "=" +v));
+        
+        fail();
     }
 }

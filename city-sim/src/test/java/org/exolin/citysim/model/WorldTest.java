@@ -235,10 +235,55 @@ public class WorldTest
     }
     
     @Test
-    //@Disabled
     public void testElectricity()
     {
         World w = Worlds.ElectricityWorld();
+        w.updateAfterTick(0, 0);
+        
+        Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> grids = w.getElectricityGrids();
+        assertEquals(2, grids.size());
+        
+        ArrayList<ElectricityGrid> gridz = new ArrayList<>(grids.keySet());
+        gridz.sort(Comparator.comparing(g -> grids.get(g).size()));
+        
+        ElectricityGrid grid1 = gridz.get(0);
+        ElectricityGrid grid2 = gridz.get(1);
+        
+        assertEquals(1, grid1.getPlants().size());
+        assertEquals(1, grid2.getPlants().size());
+        
+        List<Structure<?, ?, ?, ?>> structures1 = grids.get(grid1);
+        List<Structure<?, ?, ?, ?>> structures2 = grids.get(grid2);
+        
+        assertEquals(7, structures1.size());
+        assertEquals(8, structures2.size());
+        
+        List<Point> expectedLocations1 = List.of(p(0, 0),
+                                                 p(4, 0),
+                                                 p(5, 0),
+                                                 p(6, 0),
+                                                 p(7, 0),
+                                                 p(8, 0),
+                                                 p(9, 0),
+                                                 p(10, 0));
+        List<Point> actualLocations1 = getLocations(structures1);
+        assertEquals(expectedLocations1, actualLocations1);
+        
+        List<Point> expectedLocations2 = List.of(p(5, 5),
+                                                 p(9, 5),
+                                                 p(10, 5),
+                                                 p(11, 5),
+                                                 p(12, 5),
+                                                 p(13, 5),
+                                                 p(14, 5));
+        List<Point> actualLocations2 = getLocations(structures2);
+        assertEquals(expectedLocations2, actualLocations2);
+    }
+    
+    @Test
+    public void testElectricity2()
+    {
+        World w = Worlds.ElectricityWorld2();
         w.updateAfterTick(0, 0);
         
         Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> grids = w.getElectricityGrids();

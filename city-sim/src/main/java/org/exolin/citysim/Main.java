@@ -1,9 +1,7 @@
 package org.exolin.citysim;
 
 import java.awt.BorderLayout;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

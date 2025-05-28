@@ -16,6 +16,11 @@ public class ElectricityGridArea
         electricityGrid = new ElectricityGrid(plant);
     }
 
+    public ElectricityGrid getElectricityGrid()
+    {
+        return electricityGrid;
+    }
+    
     void setElectricityGrid(ElectricityGrid electricityGrid)
     {
         Objects.requireNonNull(electricityGrid);

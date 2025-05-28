@@ -12,9 +12,8 @@ import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
-import org.exolin.citysim.storage.TreeData;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  *

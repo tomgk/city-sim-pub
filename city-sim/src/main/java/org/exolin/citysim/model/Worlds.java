@@ -169,7 +169,7 @@ public class Worlds
         placeStreet(w, 4, 0, 6, 1, circuit);
         
         w.addBuilding(Plants.oil_plant, 5, 5);
-        placeStreet(w, 4+5, 0+5, 6, 1, circuit);
+        placeStreet(w, 4+5, 0+5, 5, 1, circuit);
         
         return w;
     }

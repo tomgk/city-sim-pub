@@ -14,7 +14,6 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**

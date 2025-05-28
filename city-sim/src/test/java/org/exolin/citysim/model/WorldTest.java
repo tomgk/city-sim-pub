@@ -1,7 +1,9 @@
 package org.exolin.citysim.model;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,7 +18,6 @@ import org.exolin.citysim.storage.WorldStorageTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -233,18 +234,34 @@ public class WorldTest
     }
     
     @Test
-    @Disabled
+    //@Disabled
     public void testElectricity()
     {
         World w = Worlds.ElectricityWorld();
         w.updateAfterTick(0, 0);
         
-        Map<Structure<?, ?, ?, ?>, ElectricityGridArea> s = w.getStructuresWithElectricity();
+        Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> grids = w.getElectricityGrids();
+        assertEquals(2, grids.size());
         
-        List<ElectricityGridArea> areas = s.values().stream().distinct().toList();
+        ArrayList<ElectricityGrid> gridz = new ArrayList<>(grids.keySet());
         
-        s.forEach((k, v) -> System.out.println(k + "=" +v));
+        ElectricityGrid grid1 = gridz.get(0);
+        ElectricityGrid grid2 = gridz.get(1);
         
-        fail();
+        assertEquals(1, grid1.getPlants().size());
+        assertEquals(1, grid2.getPlants().size());
+        
+        List<Structure<?, ?, ?, ?>> structures1 = grids.get(grid1);
+        List<Structure<?, ?, ?, ?>> structures2 = grids.get(grid2);
+        
+        assertEquals(8, structures1.size());
+        assertEquals(7, structures2.size());
+    }
+    
+    private List<Point> getLocations(List<Structure<?, ?, ?, ?>> structures)
+    {
+        return structures.stream()
+                .map(b -> new Point(b.getX(), b.getY()))
+                .toList();
     }
 }

@@ -10,9 +10,11 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.Plants;
@@ -528,6 +530,15 @@ public final class World
     public Map<Structure<?, ?, ?, ?>, ElectricityGridArea> getStructuresWithElectricity()
     {
         return Collections.unmodifiableMap(structuresWithElectricity);
+    }
+    
+    public Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> getElectricityGrids()
+    {
+        return structuresWithElectricity.entrySet()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        (Entry<Structure<?, ?, ?, ?>, ElectricityGridArea> e) -> e.getValue().getElectricityGrid(),
+                        Collectors.mapping((Entry<Structure<?, ?, ?, ?>, ElectricityGridArea> e) -> e.getKey(), Collectors.toList())));
     }
     
     private void updateStats()

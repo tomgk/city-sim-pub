@@ -161,7 +161,12 @@ public class Worlds
     
     public static World ElectricityWorld()
     {
-        World w = new World("Electricity World", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
+        return ElectricityWorld("Electricity World");
+    }
+    
+    private static World ElectricityWorld(String name)
+    {
+        World w = new World(name, DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         
         //GetWorld getWorld = GetWorld.ofStatic(w);
         
@@ -170,7 +175,13 @@ public class Worlds
         
         w.addBuilding(Plants.oil_plant, 5, 5);
         placeStreet(w, 4+5, 0+5, 5, 1, circuit);
-        
+        return w;
+    }
+    
+    public static World ElectricityWorld2()
+    {
+        World w = ElectricityWorld("Electricity World 2");
+        placeStreet(w, 10, 0, 10, 10, circuit);
         return w;
     }
     
@@ -212,6 +223,10 @@ public class Worlds
 
     public static List<World> all()
     {
-        return List.of(World1(), World2(), World3(), WaterWorld(), ElectricityWorld());
+        return List.of(
+                World1(), World2(), World3(),
+                WaterWorld(),
+                ElectricityWorld(), ElectricityWorld2()
+        );
     }
 }

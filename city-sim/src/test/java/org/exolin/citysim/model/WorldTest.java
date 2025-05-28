@@ -235,7 +235,6 @@ public class WorldTest
     }
     
     @Test
-    //@Disabled
     public void testElectricity()
     {
         World w = Worlds.ElectricityWorld();

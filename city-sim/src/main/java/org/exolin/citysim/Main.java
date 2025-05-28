@@ -61,7 +61,7 @@ public class Main
                 bw.setVisible(!bw.isVisible());
             });
         mapping.add(KeyEvent.VK_F7, "Toggle debug", () -> gp.toggleDebug());
-        mapping.add(KeyEvent.VK_F8, "Go to next view", () -> gp.nextView());
+        mapping.add(KeyEvent.VK_F8, "Go to next view", () -> gp.setView(gp.getView().getNext()));
         mapping.add(KeyEvent.VK_F10, "Toggle selector visibility", () -> selector.setVisible(!selector.isVisible()));
         mapping.add(KeyEvent.VK_F11, "Toggle color grid", () -> gp.toggleColorGrid());
         mapping.add(KeyEvent.VK_F12, "Toggle control panel", () -> gd.setVisible(!gd.isVisible()));

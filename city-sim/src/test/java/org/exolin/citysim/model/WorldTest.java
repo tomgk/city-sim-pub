@@ -244,6 +244,7 @@ public class WorldTest
         assertEquals(2, grids.size());
         
         ArrayList<ElectricityGrid> gridz = new ArrayList<>(grids.keySet());
+        gridz.sort(Comparator.comparing(g -> grids.get(g).size()).reversed());
         
         ElectricityGrid grid1 = gridz.get(0);
         ElectricityGrid grid2 = gridz.get(1);

@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -256,12 +257,42 @@ public class WorldTest
         
         assertEquals(8, structures1.size());
         assertEquals(7, structures2.size());
+        
+        List<Point> expectedLocations1 = List.of(new Point(0, 0),
+                                                 new Point(4, 0),
+                                                 new Point(5, 0),
+                                                 new Point(6, 0),
+                                                 new Point(7, 0),
+                                                 new Point(8, 0),
+                                                 new Point(9, 0),
+                                                 new Point(10, 0));
+        List<Point> actualLocations1 = getLocations(structures1);
+        assertEquals(expectedLocations1, actualLocations1);
+        
+        List<Point> expectedLocations2 = List.of(new Point(5, 5),
+                                                 new Point(9, 5),
+                                                 new Point(10, 5),
+                                                 new Point(11, 5),
+                                                 new Point(12, 5),
+                                                 new Point(13, 5),
+                                                 new Point(14, 5));
+        List<Point> actualLocations2 = getLocations(structures2);
+        assertEquals(expectedLocations2, actualLocations2);
+    }
+    
+    private void printLocations(List<Point> points)
+    {
+        String str = points.stream()
+                .map(p -> "new Point("+p.x+", "+p.y+")")
+                .collect(Collectors.joining(",\n", "List.of(", ")"));
+        System.out.println(str);
     }
     
     private List<Point> getLocations(List<Structure<?, ?, ?, ?>> structures)
     {
         return structures.stream()
                 .map(b -> new Point(b.getX(), b.getY()))
+                .sorted(Comparator.comparing((Point p) -> p.x).thenComparing((Point p) -> p.y))
                 .toList();
     }
 }

@@ -280,6 +280,52 @@ public class WorldTest
         assertEquals(expectedLocations2, actualLocations2);
     }
     
+    @Test
+    public void testElectricity2()
+    {
+        World w = Worlds.ElectricityWorld2();
+        w.updateAfterTick(0, 0);
+        
+        Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> grids = w.getElectricityGrids();
+        assertEquals(1, grids.size());
+        
+        ElectricityGrid grid1 = grids.keySet().iterator().next();
+        
+        assertEquals(1, grid1.getPlants().size());
+        
+        List<Structure<?, ?, ?, ?>> structures1 = grids.get(grid1);
+        
+        assertEquals(24, structures1.size());
+        
+        List<Point> expectedLocations1 = List.of(p(0, 0),
+                                                 p(4, 0),
+                                                 p(5, 0),
+                                                 p(5, 5),
+                                                 p(6, 0),
+                                                 p(7, 0),
+                                                 p(8, 0),
+                                                 p(9, 0),
+                                                 p(9, 5),
+                                                 p(10, 0),
+                                                 p(10, 1),
+                                                 p(10, 2),
+                                                 p(10, 3),
+                                                 p(10, 4),
+                                                 p(10, 5),
+                                                 p(10, 6),
+                                                 p(10, 7),
+                                                 p(10, 8),
+                                                 p(10, 9),
+                                                 p(10, 10),
+                                                 p(11, 5),
+                                                 p(12, 5),
+                                                 p(13, 5),
+                                                 p(14, 5));
+        List<Point> actualLocations1 = getLocations(structures1);
+        printLocations(actualLocations1);
+        assertEquals(expectedLocations1, actualLocations1);
+    }
+    
     private Point p(int x, int y)
     {
         return new Point(x, y);

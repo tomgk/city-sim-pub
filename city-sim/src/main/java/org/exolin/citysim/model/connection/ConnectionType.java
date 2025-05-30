@@ -26,6 +26,32 @@ public abstract class ConnectionType<B extends Connection<B, T, E, D>, T extends
     {
         super(name, images, size);
     }
+    
+    public enum Direction
+    {
+        X{
+            @Override
+            public SelfConnectionType get(ConnectionType<?, ?, ?, ?> t)
+            {
+                return t.getXType();
+            }
+        },
+        Y{
+            @Override
+            public SelfConnectionType get(ConnectionType<?, ?, ?, ?> t)
+            {
+                return t.getYType();
+            }
+        };
+        
+        public abstract SelfConnectionType get(ConnectionType<?, ?, ?, ?> t);
+    }
+    
     public abstract SelfConnectionType getXType();
     public abstract SelfConnectionType getYType();
+    
+    public final SelfConnectionType getTypeInDirection(Direction d)
+    {
+        return d.get(this);
+    }
 }

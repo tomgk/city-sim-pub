@@ -126,9 +126,11 @@ public class PlantsTest
     public void testGetAnyElectricity_Self()
     {
         for(SelfConnectionType t : SelfConnections.values())
+        {
+            assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.X));
             assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
+        }
     }
-    
     @Test
     public void testGetElectricity_Cross_Street_Crircuit_X()
     {

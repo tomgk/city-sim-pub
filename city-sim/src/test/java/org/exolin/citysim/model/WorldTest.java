@@ -116,7 +116,7 @@ public class WorldTest
                           }
                           """;
         
-        WorldStorage.serialize(w, System.out);
+        //WorldStorage.serialize(w, System.out);
         
         JSONAssert.assertEquals(WorldStorageTest.serialize(w), expected, true);
     }
@@ -325,7 +325,7 @@ public class WorldTest
                                                  p(13, 5),
                                                  p(14, 5));
         List<Point> actualLocations1 = getLocations(structures1);
-        printLocations(actualLocations1);
+        //printLocations(actualLocations1);
         assertEquals(expectedLocations1, actualLocations1);
     }
     
@@ -333,17 +333,16 @@ public class WorldTest
     @Disabled
     public void testElectricity3()
     {
-        World w = Worlds.ElectricityWorld2();
+        World w = Worlds.ElectricityWorld3();
         w.updateAfterTick(0, 0);
         
         Structure<?, ?, ?, ?> building = w.getBuildingAt(14, 5);
         
         assertNotNull(building);
         
-        //succeds but doesn't work when playing the game
-        assertTrue(w.hasElectricity(building));
-        
         w.getStructuresWithElectricity().forEach((k,v) -> System.out.println(k+"="+v));
+        
+        assertTrue(w.hasElectricity(building));
         
         fail();
     }

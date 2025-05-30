@@ -185,7 +185,7 @@ public class Worlds
         return w;
     }
     
-    private static World ElectricityWorld3()
+    public static World ElectricityWorld3()
     {
         World w = new World("Electricity World 3", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
         

@@ -32,26 +32,33 @@ public class PlantsTest
     @Test
     public void testGetElectricity_Building_X()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.X));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT),
+                ConnectionType.Direction.X));
     }
-    
     
     @Test
     public void testGetElectricity_Building_Y()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.Y));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT),
+                ConnectionType.Direction.Y));
     }
     
     @Test
     public void testGetElectricity_Plant_X()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.X));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT),
+                ConnectionType.Direction.X));
     }
     
     @Test
     public void testGetElectricity_Plant_Y()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.Y));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT),
+                ConnectionType.Direction.Y));
     }
     
     @Test
@@ -69,25 +76,33 @@ public class PlantsTest
     @Test
     public void testGetElectricity_Trees_Unzoned_X()
     {
-        assertEquals(Electricity.INSULATOR, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())), ConnectionType.Direction.X));
+        assertEquals(Electricity.INSULATOR, Plants.getElectricity(
+                new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())),
+                ConnectionType.Direction.X));
     }
     
     @Test
     public void testGetElectricity_Trees_Unzoned_Y()
     {
-        assertEquals(Electricity.INSULATOR, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())), ConnectionType.Direction.Y));
+        assertEquals(Electricity.INSULATOR, Plants.getElectricity(
+                new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())),
+                ConnectionType.Direction.Y));
     }
     
     @Test
     public void testGetElectricity_Trees_Zoned_X()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))), ConnectionType.Direction.X));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))),
+                ConnectionType.Direction.X));
     }
     
     @Test
     public void testGetElectricity_Trees_Zoned_Y()
     {
-        assertEquals(Electricity.NEEDS, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))), ConnectionType.Direction.Y));
+        assertEquals(Electricity.NEEDS, Plants.getElectricity(
+                new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))),
+                ConnectionType.Direction.Y));
     }
     
     @Test

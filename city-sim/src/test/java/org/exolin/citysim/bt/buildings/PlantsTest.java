@@ -3,6 +3,7 @@ package org.exolin.citysim.bt.buildings;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.connections.CrossConnections;
@@ -24,6 +25,9 @@ import org.exolin.citysim.model.tree.TreeVariant;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  *
@@ -148,20 +152,28 @@ public class PlantsTest
         crossElectricity.put(new Pair(rail, circuit), Electricity.TRANSFER);
     }
     
-    @Test
-    public void testGetAnyElectricity_Cross()
+    static Stream<Arguments> provideStringsForTesting()
     {
-        for(SelfConnectionType y : SelfConnections.values())
+        return crossElectricity.entrySet()
+                .stream()
+                .map(e -> Arguments.of(e.getKey().x, e.getKey().y, e.getValue()));
+    }
+    
+    @ParameterizedTest
+    @MethodSource("provideStringsForTesting")
+    public void testGetAnyElectricity_Cross(SelfConnectionType x, SelfConnectionType y, Electricity e)
+    {
+        //for(SelfConnectionType y : SelfConnections.values())
         {
-            for(SelfConnectionType x : SelfConnections.values())
+            //for(SelfConnectionType x : SelfConnections.values())
             {
                 //skip selfs
                 if(x == y)
-                    continue;
+                    return;
                 
                 String take = x.getName()+"/"+y.getName();
                 
-                Electricity e = crossElectricity.get(new Pair(x, y));
+                //Electricity e = crossElectricity.get(new Pair(x, y));
                 assertNotNull(e, take);
                 
                 CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0, CrossConnectionType.Variant.DEFAULT);

@@ -341,8 +341,6 @@ public class WorldTest
         w.getStructuresWithElectricity().forEach((k,v) -> System.out.println(k+"="+v));
         
         assertTrue(w.hasElectricity(building));
-        
-        fail();
     }
     
     private Point p(int x, int y)

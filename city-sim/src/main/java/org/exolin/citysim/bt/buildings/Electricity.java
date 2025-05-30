@@ -11,13 +11,13 @@ public enum Electricity
      */
     INSULATOR,
     /**
-     * needs electricity; also transfers it
-     */
-    NEEDS,
-    /**
      * transfers electricity but doesn't need it and only does it one tile
      */
     CONDUCTS,
+    /**
+     * needs electricity; also transfers it
+     */
+    NEEDS,
     /**
      * transfers electricity but doesn't need it
      */

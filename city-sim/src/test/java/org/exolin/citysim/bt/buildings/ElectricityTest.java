@@ -64,7 +64,7 @@ public class ElectricityTest
     {
         assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.NEEDS, Electricity.INSULATOR));
         assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.NEEDS, Electricity.NEEDS));
-        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.NEEDS, Electricity.CONDUCTS));
+        assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.NEEDS, Electricity.CONDUCTS));
         assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.NEEDS, Electricity.TRANSFER));
     }
     
@@ -72,7 +72,7 @@ public class ElectricityTest
     public void testGreater_Conducts()
     {
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.INSULATOR));
-        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.NEEDS));
+        assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.CONDUCTS, Electricity.NEEDS));
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.CONDUCTS));
         assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.CONDUCTS, Electricity.TRANSFER));
     }

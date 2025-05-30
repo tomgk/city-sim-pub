@@ -20,6 +20,7 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.building.Building;
+import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
@@ -588,6 +589,8 @@ public final class World
                 if(xi != 0 && yi != 0)
                     continue;
                 
+                ConnectionType.Direction d = xi != 0 ? ConnectionType.Direction.X : ConnectionType.Direction.Y;
+                
                 Structure<?, ?, ?, ?> neighbor = getBuildingAt(x+xi, y+yi);
                 
                 //check if it is actually the current building
@@ -596,7 +599,7 @@ public final class World
                 
                 //TODO: conduction over street should only work with one tile
                 //TODO: circuit over street doesn't work
-                if(neighbor != null && Plants.getElectricity(neighbor).transfers())
+                if(neighbor != null && Plants.getElectricity(neighbor, d).transfers())
                     onFindStructureWithElectricity(grid, neighbor);
             }
         }

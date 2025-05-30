@@ -14,7 +14,6 @@ import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
 import org.exolin.citysim.model.fire.Fire;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.storage.WorldStorage;
 import org.exolin.citysim.storage.WorldStorageTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

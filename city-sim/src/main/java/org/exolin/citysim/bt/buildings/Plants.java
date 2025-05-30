@@ -3,6 +3,7 @@ package org.exolin.citysim.bt.buildings;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.bt.buildings.Buildings.createBuildingType;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
@@ -14,6 +15,9 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.connection.Connection;
+import org.exolin.citysim.model.connection.ConnectionType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -68,16 +72,44 @@ public class Plants
     
     public static final List<BuildingType> ALL = Collections.unmodifiableList(Arrays.asList(plant_solar, gas_plant, oil_plant));
     
-    public static Electricity getElectricity(Structure<?, ?, ?, ?> b)
+    private static Electricity getElectricity(SelfConnectionType type)
+    {
+        if(type == street)
+            return Electricity.CONDUCTS;
+        else if(type == circuit)
+            return Electricity.TRANSFER;
+        else
+            return Electricity.INSULATOR;
+    }
+    
+    public static Electricity getElectricity(Structure<?, ?, ?, ?> b, ConnectionType.Direction d)
+    {
+        Objects.requireNonNull(b);
+        Objects.requireNonNull(d);
+        return getElectricity0(b, d);
+    }
+    
+    public static Electricity getAnyElectricity(Structure<?, ?, ?, ?> b)
+    {
+        Electricity ex = getElectricity0(b, ConnectionType.Direction.X);
+        Electricity ey = getElectricity0(b, ConnectionType.Direction.Y);
+        if(ConnectionType.Direction.values().length != 2)
+            throw new AssertionError();
+        
+        return Electricity.greater(ex, ey);
+    }
+    
+    private static Electricity getElectricity0(Structure<?, ?, ?, ?> b, ConnectionType.Direction d)
     {
         if(b.getZoneType(true).map(ZoneType::isUserPlaceableZone).orElse(false))
             return Electricity.NEEDS;
         else if(b instanceof Building)
             return Electricity.NEEDS;
-        else if(b.getType() == street)
-            return Electricity.CONDUCTS;
-        else if(b.getType() == circuit)
-            return Electricity.TRANSFER;
+        else if(b instanceof Connection<?, ?, ?, ?> c)
+        {
+            ConnectionType<?, ?, ?, ?> t = c.getType();
+            return getElectricity(t.getTypeInDirection(d));
+        }
         else
             return Electricity.INSULATOR;
     }

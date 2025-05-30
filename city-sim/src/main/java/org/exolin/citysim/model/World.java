@@ -577,7 +577,6 @@ public final class World
         structuresWithElectricity.put(s, grid);
         grid.getElectricityGrid().addStructure(s);
         
-        //TODO: wrong, also includes diagonal
         int x = s.getX();
         int y = s.getY();
         int size = s.getSize();
@@ -585,6 +584,10 @@ public final class World
         {
             for(int xi=-1;xi<size+1;++xi)
             {
+                //exclude diagonal
+                if(xi != 0 && yi != 0)
+                    continue;
+                
                 Structure<?, ?, ?, ?> neighbor = getBuildingAt(x+xi, y+yi);
                 
                 //check if it is actually the current building

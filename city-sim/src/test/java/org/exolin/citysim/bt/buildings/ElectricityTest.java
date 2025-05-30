@@ -3,7 +3,6 @@ package org.exolin.citysim.bt.buildings;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -12,6 +11,13 @@ import org.junit.jupiter.api.Test;
  */
 public class ElectricityTest
 {
+    //check for test completeness
+    @Test
+    public void testTest()
+    {
+        assertEquals(4, Electricity.values().length);
+    }
+    
     @Test
     public void testNeeds()
     {
@@ -50,6 +56,33 @@ public class ElectricityTest
         assertEquals(Electricity.INSULATOR, Electricity.greater(Electricity.INSULATOR, Electricity.INSULATOR));
         assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.INSULATOR, Electricity.NEEDS));
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.INSULATOR, Electricity.CONDUCTS));
-        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.INSULATOR, Electricity.CONDUCTS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.INSULATOR, Electricity.TRANSFER));
+    }
+    
+    @Test
+    public void testGreater_Needs()
+    {
+        assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.NEEDS, Electricity.INSULATOR));
+        assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.NEEDS, Electricity.NEEDS));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.NEEDS, Electricity.CONDUCTS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.NEEDS, Electricity.TRANSFER));
+    }
+    
+    @Test
+    public void testGreater_Transfer()
+    {
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.INSULATOR));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.NEEDS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.TRANSFER));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.TRANSFER, Electricity.CONDUCTS));
+    }
+    
+    @Test
+    public void testGreater_Conducts()
+    {
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.INSULATOR));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.NEEDS));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.TRANSFER));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.CONDUCTS));
     }
 }

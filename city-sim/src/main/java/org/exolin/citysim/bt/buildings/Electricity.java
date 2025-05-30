@@ -6,9 +6,21 @@ package org.exolin.citysim.bt.buildings;
  */
 public enum Electricity
 {
+    /**
+     * blocks electricity
+     */
     INSULATOR,
+    /**
+     * needs electricity; also transfers it
+     */
     NEEDS,
+    /**
+     * transfers electricity but doesn't need it
+     */
     TRANSFER,
+    /**
+     * creates electricity
+     */
     CONDUCTS;
 
     public boolean needs()

@@ -575,6 +575,7 @@ public final class World
         }
         
         structuresWithElectricity.put(s, grid);
+        grid.getElectricityGrid().addStructure(s);
         
         //TODO: wrong, also includes diagonal
         int x = s.getX();

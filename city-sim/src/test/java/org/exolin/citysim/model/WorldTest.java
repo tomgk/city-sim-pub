@@ -17,8 +17,11 @@ import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.storage.WorldStorage;
 import org.exolin.citysim.storage.WorldStorageTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -324,6 +327,25 @@ public class WorldTest
         List<Point> actualLocations1 = getLocations(structures1);
         printLocations(actualLocations1);
         assertEquals(expectedLocations1, actualLocations1);
+    }
+    
+    @Test
+    @Disabled
+    public void testElectricity3()
+    {
+        World w = Worlds.ElectricityWorld2();
+        w.updateAfterTick(0, 0);
+        
+        Structure<?, ?, ?, ?> building = w.getBuildingAt(14, 5);
+        
+        assertNotNull(building);
+        
+        //succeds but doesn't work when playing the game
+        assertTrue(w.hasElectricity(building));
+        
+        w.getStructuresWithElectricity().forEach((k,v) -> System.out.println(k+"="+v));
+        
+        fail();
     }
     
     private Point p(int x, int y)

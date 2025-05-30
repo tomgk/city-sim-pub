@@ -185,6 +185,18 @@ public class Worlds
         return w;
     }
     
+    private static World ElectricityWorld3()
+    {
+        World w = new World("Electricity World 3", DEFAULT_GRID_SIZE, DEFAULT_MONEY, SimulationSpeed.PAUSED);
+        
+        //GetWorld getWorld = GetWorld.ofStatic(w);
+        
+        w.addBuilding(Plants.oil_plant, 5, 5);
+        placeStreet(w, 4+5, 0+5, 5, 1, circuit);
+        placeStreet(w, 10, 0, 10, 10, street);
+        return w;
+    }
+    
     private static int limit(int num)
     {
         if(num < 0)
@@ -226,7 +238,7 @@ public class Worlds
         return List.of(
                 World1(), World2(), World3(),
                 WaterWorld(),
-                ElectricityWorld(), ElectricityWorld2()
+                ElectricityWorld(), ElectricityWorld2(), ElectricityWorld3()
         );
     }
 }

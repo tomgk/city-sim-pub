@@ -3,6 +3,7 @@ package org.exolin.citysim.model;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import org.exolin.citysim.bt.buildings.Plants;
@@ -16,6 +17,7 @@ public class ElectricityGrid
 {
     private final Set<ElectricityGridArea> areas = new HashSet<>();
     private final Set<Building> plants = new TreeSet<>(comparePlants());
+    private final Set<Structure<?, ?, ?, ?>> structures = new LinkedHashSet<>();
 
     public ElectricityGrid(Building plant)
     {
@@ -23,6 +25,17 @@ public class ElectricityGrid
             throw new IllegalArgumentException();
         
         this.plants.add(plant);
+    }
+    
+    public void addStructure(Structure<?, ?, ?, ?> s)
+    {
+        if(!structures.add(s))
+            throw new IllegalArgumentException("duplicate");
+    }
+
+    public Set<Structure<?, ?, ?, ?>> getStructures()
+    {
+        return Collections.unmodifiableSet(structures);
     }
 
     public int getSupply()
@@ -61,6 +74,8 @@ public class ElectricityGrid
         plants.addAll(other.plants);
         //merge areas
         areas.addAll(other.areas);
+        //merge structures
+        structures.addAll(other.structures);
 
         //set grid to this
         for(ElectricityGridArea o : other.areas)

@@ -1,11 +1,14 @@
 package org.exolin.citysim.bt.buildings;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.connections.CrossConnections;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
+import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
@@ -19,6 +22,7 @@ import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -138,11 +142,30 @@ public class PlantsTest
     static{
         crossElectricity.put(new Pair(rail, street), Electricity.CONDUCTS);
     }
+    
+    @Test
+    @Disabled
+    public void testGetAnyElectricity_Cross()
+    {
+        for(SelfConnectionType y : SelfConnections.values())
         {
-            assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.X));
-            assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
+            for(SelfConnectionType x : SelfConnections.values())
+            {
+                //skip selfs
+                if(x == y)
+                    continue;
+                
+                String take = x.getName()+"/"+y.getName();
+                
+                Electricity e = crossElectricity.get(new Pair(x, y));
+                assertNotNull(e, take);
+                
+                CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0, CrossConnectionType.Variant.DEFAULT);
+                assertEquals(e, Plants.getAnyElectricity(z), take);
+            }
         }
     }
+    
     @Test
     public void testGetElectricity_Cross_Street_Crircuit_X()
     {

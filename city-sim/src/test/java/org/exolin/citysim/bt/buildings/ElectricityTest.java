@@ -1,7 +1,9 @@
 package org.exolin.citysim.bt.buildings;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -40,5 +42,14 @@ public class ElectricityTest
         assertFalse(Electricity.INSULATOR.conducts());
         assertFalse(Electricity.INSULATOR.transfers());
         assertFalse(Electricity.INSULATOR.needs());
+    }
+    
+    @Test
+    public void testGreater_Insulator()
+    {
+        assertEquals(Electricity.INSULATOR, Electricity.greater(Electricity.INSULATOR, Electricity.INSULATOR));
+        assertEquals(Electricity.NEEDS, Electricity.greater(Electricity.INSULATOR, Electricity.NEEDS));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.INSULATOR, Electricity.CONDUCTS));
+        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.INSULATOR, Electricity.CONDUCTS));
     }
 }

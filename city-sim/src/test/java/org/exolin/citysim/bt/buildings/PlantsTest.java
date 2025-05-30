@@ -22,45 +22,83 @@ import org.junit.jupiter.api.Test;
  */
 public class PlantsTest
 {
+    //test test
     @Test
-    public void testGetElectricity_Building()
+    public void test_Direction_Tests()
+    {
+        assertEquals(2, ConnectionType.Direction.values().length);
+    }
+    
+    @Test
+    public void testGetElectricity_Building_X()
     {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.X));
+    }
+    
+    
+    @Test
+    public void testGetElectricity_Building_Y()
+    {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(ResidentialBuildings.house_1, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.Y));
     }
     
     @Test
-    public void testGetElectricity_Plant()
+    public void testGetElectricity_Plant_X()
     {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Plant_Y()
+    {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Building(Plants.gas_plant, 0, 0, BuildingType.Variant.DEFAULT), ConnectionType.Direction.Y));
     }
     
     @Test
-    public void testGetElectricity_Stret()
+    public void testGetElectricity_Street_X()
     {
         assertEquals(Electricity.CONDUCTS, Plants.getElectricity(new SelfConnection(street, 0, 0, Curve.CURVE_1), ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Street_Y()
+    {
         assertEquals(Electricity.CONDUCTS, Plants.getElectricity(new SelfConnection(street, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
     }
     
     @Test
-    public void testGetElectricity_Trees_Unzoned()
+    public void testGetElectricity_Trees_Unzoned_X()
     {
         assertEquals(Electricity.INSULATOR, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())), ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Trees_Unzoned_Y()
+    {
         assertEquals(Electricity.INSULATOR, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.empty())), ConnectionType.Direction.Y));
     }
     
     @Test
-    public void testGetElectricity_Trees_Zoned()
+    public void testGetElectricity_Trees_Zoned_X()
     {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))), ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Trees_Zoned_Y()
+    {
         assertEquals(Electricity.NEEDS, Plants.getElectricity(new Tree(Trees.XTREES.get(2), 0, 0, TreeVariant.BOTTOM_LEFT, new TreeParameters(Optional.of(Zones.business))), ConnectionType.Direction.Y));
     }
     
     @Test
-    public void testGetElectricity_Circuit()
+    public void testGetElectricity_Circuit_X()
     {
         assertEquals(Electricity.TRANSFER, Plants.getElectricity(new SelfConnection(circuit, 0, 0, Curve.CURVE_1), ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Circuit_Y()
+    {
         assertEquals(Electricity.TRANSFER, Plants.getElectricity(new SelfConnection(circuit, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
     }
 }

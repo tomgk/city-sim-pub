@@ -141,10 +141,14 @@ public class PlantsTest
     private static final Map<Pair, Electricity> crossElectricity = new LinkedHashMap<>();
     static{
         crossElectricity.put(new Pair(rail, street), Electricity.CONDUCTS);
+        crossElectricity.put(new Pair(circuit, street), Electricity.TRANSFER);
+        crossElectricity.put(new Pair(street, rail), Electricity.CONDUCTS);
+        crossElectricity.put(new Pair(circuit, rail), Electricity.TRANSFER);
+        crossElectricity.put(new Pair(street, circuit), Electricity.TRANSFER);
+        crossElectricity.put(new Pair(rail, circuit), Electricity.TRANSFER);
     }
     
     @Test
-    @Disabled
     public void testGetAnyElectricity_Cross()
     {
         for(SelfConnectionType y : SelfConnections.values())

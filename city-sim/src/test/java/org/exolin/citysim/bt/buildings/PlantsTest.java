@@ -128,6 +128,16 @@ public class PlantsTest
         for(SelfConnectionType t : SelfConnections.values())
             assertEquals(Plants.getElectricity(t), Plants.getAnyElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1)));
     }
+    
+    private record Pair(SelfConnectionType x, SelfConnectionType y)
+    {
+        
+    }
+    
+    private static final Map<Pair, Electricity> crossElectricity = new LinkedHashMap<>();
+    static{
+        crossElectricity.put(new Pair(rail, street), Electricity.CONDUCTS);
+    }
         {
             assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.X));
             assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));

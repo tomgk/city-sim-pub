@@ -72,7 +72,7 @@ public class Plants
     
     public static final List<BuildingType> ALL = Collections.unmodifiableList(Arrays.asList(plant_solar, gas_plant, oil_plant));
     
-    private static Electricity getElectricity(SelfConnectionType type)
+    public static Electricity getElectricity(SelfConnectionType type)
     {
         if(type == street)
             return Electricity.CONDUCTS;

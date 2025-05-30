@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.connections.CrossConnections;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.building.Building;
@@ -13,6 +14,7 @@ import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.Curve;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
@@ -118,6 +120,13 @@ public class PlantsTest
     public void testGetElectricity_Circuit_Y()
     {
         assertEquals(Electricity.TRANSFER, Plants.getElectricity(new SelfConnection(circuit, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
+    }
+    
+    @Test
+    public void testGetAnyElectricity_Self()
+    {
+        for(SelfConnectionType t : SelfConnections.values())
+            assertEquals(Plants.getElectricity(t), Plants.getElectricity(new SelfConnection(t, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
     }
     
     @Test

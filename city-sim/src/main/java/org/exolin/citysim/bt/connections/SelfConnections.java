@@ -1,6 +1,7 @@
 package org.exolin.citysim.bt.connections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
@@ -16,6 +17,8 @@ import org.exolin.citysim.model.connection.regular.XIntersection;
  */
 public class SelfConnections
 {
+    private static final List<SelfConnectionType> VALUES = new ArrayList<>();
+    
     public static final SelfConnectionType street = createTransportType("street", List.of(
             createUnanimated("street/street_1"),
             createUnanimated("street/street_2"),
@@ -87,6 +90,11 @@ public class SelfConnections
             
             createAnimation("water/water_unconnected", 4)
     ), 1, 100);
+
+    public static List<SelfConnectionType> values()
+    {
+        return Collections.unmodifiableList(VALUES);
+    }
     
     private static SelfConnectionType createTransportType(String name, List<Animation> variants, int size, int cost)
     {
@@ -100,7 +108,9 @@ public class SelfConnections
         //Unconnected
         add.add(variants.get(ConnectVariant.CONNECT_X.index()));
         
-        return new SelfConnectionType(name, add, size, cost, ConnectVariant.CONNECT_X);
+        SelfConnectionType t = new SelfConnectionType(name, add, size, cost, ConnectVariant.CONNECT_X);
+        VALUES.add(t);
+        return t;
     }
     
     private static SelfConnectionType createAreaType(String name, List<Animation> variants, int size, int cost)

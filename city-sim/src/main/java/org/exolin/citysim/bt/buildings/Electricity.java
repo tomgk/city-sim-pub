@@ -15,13 +15,13 @@ public enum Electricity
      */
     NEEDS,
     /**
+     * transfers electricity but doesn't need it and only does it one tile
+     */
+    CONDUCTS,
+    /**
      * transfers electricity but doesn't need it
      */
-    TRANSFER,
-    /**
-     * creates electricity
-     */
-    CONDUCTS;
+    TRANSFER;
 
     public boolean needs()
     {

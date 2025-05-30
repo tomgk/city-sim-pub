@@ -69,20 +69,20 @@ public class ElectricityTest
     }
     
     @Test
-    public void testGreater_Transfer()
-    {
-        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.INSULATOR));
-        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.NEEDS));
-        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.TRANSFER));
-        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.TRANSFER, Electricity.CONDUCTS));
-    }
-    
-    @Test
     public void testGreater_Conducts()
     {
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.INSULATOR));
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.NEEDS));
-        assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.TRANSFER));
         assertEquals(Electricity.CONDUCTS, Electricity.greater(Electricity.CONDUCTS, Electricity.CONDUCTS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.CONDUCTS, Electricity.TRANSFER));
+    }
+    
+    @Test
+    public void testGreater_Transfer()
+    {
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.INSULATOR));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.NEEDS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.CONDUCTS));
+        assertEquals(Electricity.TRANSFER, Electricity.greater(Electricity.TRANSFER, Electricity.TRANSFER));
     }
 }

@@ -10,6 +10,11 @@ import org.exolin.citysim.model.connection.Connection;
  */
 public class CrossConnection extends Connection<CrossConnection, CrossConnectionType, CrossConnectionType.Variant, EmptyStructureParameters>
 {
+    public CrossConnection(CrossConnectionType type, int x, int y, CrossConnectionType.Variant variant)
+    {
+        this(type, x, y, variant, EmptyStructureParameters.getInstance());
+    }
+    
     public CrossConnection(CrossConnectionType type, int x, int y, CrossConnectionType.Variant variant, EmptyStructureParameters data)
     {
         super(type, x, y, variant, data);

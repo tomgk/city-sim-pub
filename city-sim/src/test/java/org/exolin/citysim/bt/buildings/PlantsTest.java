@@ -3,11 +3,14 @@ package org.exolin.citysim.bt.buildings;
 import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.bt.Zones;
+import org.exolin.citysim.bt.connections.CrossConnections;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.ConnectionType;
+import org.exolin.citysim.model.connection.cross.CrossConnection;
+import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.Curve;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.tree.Tree;
@@ -115,5 +118,21 @@ public class PlantsTest
     public void testGetElectricity_Circuit_Y()
     {
         assertEquals(Electricity.TRANSFER, Plants.getElectricity(new SelfConnection(circuit, 0, 0, Curve.CURVE_1), ConnectionType.Direction.Y));
+    }
+    
+    @Test
+    public void testGetElectricity_Cross_Street_Crircuit_X()
+    {
+        assertEquals(Electricity.CONDUCTS, Plants.getElectricity(
+                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                ConnectionType.Direction.X));
+    }
+    
+    @Test
+    public void testGetElectricity_Cross_Street_Crircuit_Y()
+    {
+        assertEquals(Electricity.TRANSFER, Plants.getElectricity(
+                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                ConnectionType.Direction.Y));
     }
 }

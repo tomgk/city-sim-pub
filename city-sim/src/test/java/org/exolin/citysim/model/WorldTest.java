@@ -329,7 +329,6 @@ public class WorldTest
     }
     
     @Test
-    @Disabled
     public void testElectricity3()
     {
         World w = Worlds.ElectricityWorld3();

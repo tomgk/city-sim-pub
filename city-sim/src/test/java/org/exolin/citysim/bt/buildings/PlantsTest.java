@@ -23,7 +23,6 @@ import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.tree.TreeParameters;
 import org.exolin.citysim.model.tree.TreeVariant;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -163,23 +162,17 @@ public class PlantsTest
     @MethodSource("provideStringsForTesting")
     public void testGetAnyElectricity_Cross(SelfConnectionType x, SelfConnectionType y, Electricity e)
     {
-        //for(SelfConnectionType y : SelfConnections.values())
-        {
-            //for(SelfConnectionType x : SelfConnections.values())
-            {
-                //skip selfs
-                if(x == y)
-                    return;
-                
-                String take = x.getName()+"/"+y.getName();
-                
-                //Electricity e = crossElectricity.get(new Pair(x, y));
-                assertNotNull(e, take);
-                
-                CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0, CrossConnectionType.Variant.DEFAULT);
-                assertEquals(e, Plants.getAnyElectricity(z), take);
-            }
-        }
+            //skip selfs
+            if(x == y)
+                return;
+
+            String take = x.getName()+"/"+y.getName();
+
+            //Electricity e = crossElectricity.get(new Pair(x, y));
+            assertNotNull(e, take);
+
+            CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0, CrossConnectionType.Variant.DEFAULT);
+            assertEquals(e, Plants.getAnyElectricity(z), take);
     }
     
     @Test

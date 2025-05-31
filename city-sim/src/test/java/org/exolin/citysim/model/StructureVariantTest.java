@@ -4,8 +4,11 @@ import static java.awt.BorderLayout.EAST;
 import static java.awt.BorderLayout.NORTH;
 import static java.awt.BorderLayout.SOUTH;
 import static java.awt.BorderLayout.WEST;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Set;
+import java.util.TreeSet;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
@@ -97,6 +100,17 @@ public class StructureVariantTest
         assertEquals(Set.of(BuildingType.Variant.DEFAULT), values);
     }
     
+    private static final Comparator C = Comparator.comparing(Object::toString);
+    
+    private static Set create(Set a)
+    {
+        Set s = Collections.checkedSet(new TreeSet(C), ConnectionVariant.class);
+        s.addAll(a);
+        if(a.size() != s.size())
+            throw new IllegalStateException();
+        return s;
+    }
+    
     @Test
     @Disabled
     public void testSelfConnectionType()
@@ -105,7 +119,10 @@ public class StructureVariantTest
         Set expected = Set.of(
                 CONNECT_X, CONNECT_Y, X_INTERSECTION, CURVE_1, CURVE_2, CURVE_3, CURVE_4, T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4, NORTH, WEST, SOUTH, EAST, UNCONNECTED
         );
-        assertEquals(expected, values);
+        assertEquals(
+                create(expected),
+                create(values)
+        );
     }
     
     @Test

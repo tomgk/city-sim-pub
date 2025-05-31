@@ -2,6 +2,7 @@ package org.exolin.citysim.model;
 
 import java.util.EnumSet;
 import java.util.Set;
+import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.connection.regular.ConnectVariant;
 import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
 import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;

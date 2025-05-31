@@ -1,5 +1,6 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.ConnectionType;
@@ -90,5 +91,12 @@ public class StructureTypeTest
     public void testGetStructureVariantClass_ZoneType()
     {
         assertEquals(ZoneType.Variant.class, StructureType.getStructureVariantClass(ZoneType.class));
+    }
+    
+    @Test
+    public void test()
+    {
+        Class a = StructureType.getStructureVariantClass(Zones.business.getClass());
+        assertEquals(ZoneType.Variant.class, a);
     }
 }

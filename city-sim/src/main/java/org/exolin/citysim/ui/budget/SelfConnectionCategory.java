@@ -41,4 +41,10 @@ public class SelfConnectionCategory implements BudgetCategory
     {
         return false;
     }
+
+    @Override
+    public String toString()
+    {
+        return SelfConnectionType.class.getName()+"["+type.getName()+"]";
+    }
 }

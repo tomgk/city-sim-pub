@@ -37,10 +37,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 public class PlantsTest
 {
     @Test
-    @Disabled
-    public void getGasPlantMaintanance()
+    public void getGasPlantBuildingCost()
     {
-        assertEquals(BigDecimal.TWO, Plants.gas_plant.getMaintenance());
+        assertEquals(2000, Plants.gas_plant.getBuildingCost(BuildingType.Variant.DEFAULT));
     }
     
     //test test

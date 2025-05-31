@@ -8,6 +8,7 @@ import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT
 import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,5 +33,13 @@ public class StructureVariantTest
         }catch(UnsupportedOperationException e){
             assertEquals(ConnectionVariant.class.getName(), e.getMessage());
         }
+    }
+    
+    @Test
+    @Disabled
+    public void testConnectVariant_Valuesx()
+    {
+        Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
+        assertEquals(EnumSet.of(CONNECT_X, CONNECT_Y), values);
     }
 }

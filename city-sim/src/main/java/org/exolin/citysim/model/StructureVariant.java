@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
 import java.util.Set;
+import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 
 /**
  * For a given {@link StructureType} the variant of it.
@@ -72,6 +73,8 @@ public interface StructureVariant
     {
         if(clazz.isEnum())
             return EnumSet.allOf((Class)clazz);
+        else if(clazz == ConnectionVariant.class)
+            return ConnectionVariant.values();
         else
             throw new UnsupportedOperationException(clazz.getName());
     }

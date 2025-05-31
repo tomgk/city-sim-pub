@@ -1,6 +1,9 @@
 package org.exolin.citysim.model.connection.regular;
 
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.StructureVariant;
 import static org.exolin.citysim.model.connection.regular.ConnectionVariants.VALUES;
@@ -31,6 +34,11 @@ public interface ConnectionVariant extends StructureVariant
     }
     
     public ConnectionVariant rotate(Rotation rotation);
+
+    public static Set<? extends StructureVariant> values()
+    {
+        return ConnectionVariants.SET;
+    }
     
     public static int getVariantCount()
     {
@@ -58,4 +66,6 @@ class ConnectionVariants
             End.EAST,
             Unconnected.UNCONNECTED
     );
+    
+    public static final Set<ConnectionVariant> SET = Collections.unmodifiableSet(new LinkedHashSet<>(VALUES));
 }

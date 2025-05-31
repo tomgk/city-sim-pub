@@ -29,7 +29,6 @@ import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTE
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

@@ -30,7 +30,7 @@ public class StructureVariantTest
             StructureVariant.getValues(ConnectionVariant.class);
             fail();
         }catch(UnsupportedOperationException e){
-            
+            assertEquals(ConnectionVariant.class.getName(), e.getMessage());
         }
     }
 }

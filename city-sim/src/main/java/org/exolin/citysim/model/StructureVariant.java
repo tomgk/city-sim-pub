@@ -73,6 +73,6 @@ public interface StructureVariant
         if(clazz.isEnum())
             return EnumSet.allOf((Class)clazz);
         else
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException(clazz.getName());
     }
 }

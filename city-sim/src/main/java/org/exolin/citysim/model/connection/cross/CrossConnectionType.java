@@ -29,6 +29,12 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
 
     @Override
+    public int getBuildingCost(Variant variant)
+    {
+        return NO_COST;
+    }
+
+    @Override
     public CrossConnection createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
     {
         return new CrossConnection(this, x, y, variant, data);

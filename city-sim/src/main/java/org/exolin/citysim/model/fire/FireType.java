@@ -37,6 +37,12 @@ public class FireType extends StructureType<Fire, FireVariant, FireParameters>
     }
 
     @Override
+    public int getBuildingCost(FireVariant variant)
+    {
+        return NO_COST;
+    }
+
+    @Override
     public Fire createBuilding(int x, int y, FireVariant variant, FireParameters data)
     {
         return new Fire(this, x, y, variant, data);

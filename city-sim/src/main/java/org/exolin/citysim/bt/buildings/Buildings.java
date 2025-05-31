@@ -27,7 +27,7 @@ public class Buildings
         return new BuildingType(title, animation.getName(), animation, size, zoneType, cost, BigDecimal.ZERO);
     }
     
-    public static <T> BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    public static BuildingType createBuildingType(Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         return new BuildingType(animation.getName(), animation.getName(), animation, size, zoneType, cost, maintenance);
     }

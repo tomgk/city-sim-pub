@@ -74,6 +74,12 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     {
         return title;
     }
+
+    @Override
+    public int getBuildingCost(Variant variant)
+    {
+        return getCost();
+    }
     
     public int getCost()
     {

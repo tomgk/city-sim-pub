@@ -49,7 +49,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public int getCost()
     {
-        return zoneType.getCost(variant);
+        return zoneType.getBuildingCost(variant);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
-        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getCost(variant), false);
+        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getBuildingCost(variant), false);
     }
 
     public static void performAction(Rectangle marking, World world, StructureType type, StructureVariant variant, int cost, boolean replaceEverything)

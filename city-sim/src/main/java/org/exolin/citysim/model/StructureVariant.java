@@ -2,6 +2,8 @@ package org.exolin.citysim.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * For a given {@link StructureType} the variant of it.
@@ -64,5 +66,13 @@ public interface StructureVariant
             
             throw new IllegalArgumentException("Error while getting count", e.getCause());
         }
+    }
+    
+    static Set<? extends StructureVariant> getValues(Class<? extends StructureVariant> clazz)
+    {
+        if(clazz.isEnum())
+            return EnumSet.allOf((Class)clazz);
+        else
+            throw new UnsupportedOperationException();
     }
 }

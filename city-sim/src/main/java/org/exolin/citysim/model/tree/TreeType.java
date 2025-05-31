@@ -20,6 +20,16 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
     private final int count;
     private final boolean alive;
     
+    public static final int COST = 3;
+
+    @Override
+    public int getBuildingCost(TreeVariant variant)
+    {
+        //cost of n trees
+        //Not used for count != 1
+        return COST * count;
+    }
+    
     private record Key(int number, boolean alive, boolean isGrass)
     {
         

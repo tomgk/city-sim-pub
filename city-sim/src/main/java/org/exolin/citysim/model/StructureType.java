@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.utils.ImageUtils;
@@ -24,6 +25,7 @@ import org.exolin.citysim.utils.ImageUtils;
 public abstract class StructureType<B, E extends StructureVariant, D extends StructureParameters>
 {
     public static final int DEFAULT_VARIANT = 0;
+    public static final int NO_COST = 0;
     
     public static Class<? extends StructureVariant> getStructureVariantClass(Class<? extends StructureType> clazz)
     {
@@ -43,9 +45,9 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     private final List<Animation> images;
     private final int size;
     
-    private static final Map<String, StructureType> instances = new LinkedHashMap<>();
+    private static final Map<String, StructureType<?, ?, ?>> instances = new LinkedHashMap<>();
     
-    public static Collection<StructureType> types()
+    public static Collection<StructureType<?, ?, ?>> types()
     {
         return Collections.unmodifiableCollection(instances.values());
     }
@@ -141,6 +143,11 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         if(variant.index()< 0 || variant.index() >= images.size())
             throw new IllegalArgumentException("invalid variant "+variant);
     }
+    
+    public Set<E> getVariants()
+    {
+        return (Set)StructureVariant.getValues(getStructureVariantClass(getClass()));
+    }
 
     public Animation getImage(E version)
     {
@@ -173,6 +180,8 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     {
         return ImageUtils.brighter(images.get(variant).getDefault());
     }
+    
+    public abstract int getBuildingCost(E variant);
 
     @Override
     public String toString()

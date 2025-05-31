@@ -59,8 +59,6 @@ public class PlaceTrees implements BuildingAction
         return getName();
     }
     
-    private static final int COST = 3;
-    
     private void plant()
     {
         //always count as, even if nothing gets planted
@@ -87,13 +85,13 @@ public class PlaceTrees implements BuildingAction
             return;
         
         w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, TreeVariant.random(), new TreeParameters(zoneType));
-        w.reduceMoney(COST);
+        w.reduceMoney(TreeType.COST);
     }
 
     @Override
     public int getCost()
     {
-        return COST;
+        return TreeType.COST;
     }
     
     @Override

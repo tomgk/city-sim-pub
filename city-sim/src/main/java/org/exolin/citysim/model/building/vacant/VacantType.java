@@ -25,6 +25,12 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
         
         return RandomUtils.random(forSize);
     }
+
+    @Override
+    public int getBuildingCost(Variant variant)
+    {
+        return NO_COST;
+    }
     
     public static List<VacantType> vacantTypes()
     {

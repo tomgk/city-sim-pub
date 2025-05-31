@@ -50,7 +50,8 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
         return type.isUserPlaceableZone();
     }
 
-    public int getCost(Variant variant)
+    @Override
+    public int getBuildingCost(Variant variant)
     {
         return type.getCost() * density.getFactor();
     }

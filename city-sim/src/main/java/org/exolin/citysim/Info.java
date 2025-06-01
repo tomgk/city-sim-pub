@@ -3,6 +3,7 @@ package org.exolin.citysim;
 import java.util.Objects;
 import java.util.Set;
 import org.exolin.citysim.bt.StructureTypes;
+import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 
@@ -43,9 +44,12 @@ public class Info
             }
             else
             {
-                System.out.println("Cost:");
-                
+                System.out.println("Cost: unknown");
             }
+            
+            s.customKeys().forEach(key -> {
+                System.out.println(key+": "+s.getCustom((String)key, Object.class));
+            });
         });
     }
 }

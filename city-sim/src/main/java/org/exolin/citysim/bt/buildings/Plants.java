@@ -62,6 +62,14 @@ public class Plants
         return getMegaWatt(b.getType());
     }
     
+    public static int getMegaWatt(StructureType<?, ?, ?> type)
+    {
+        if(type instanceof BuildingType bt)
+            return getMegaWatt(bt);
+        else
+            throw new IllegalArgumentException("Not a plant: "+type.getName());
+    }
+    
     public static int getMegaWatt(BuildingType type)
     {
         return type.getCustom(MEGA_WATT, Integer.class);

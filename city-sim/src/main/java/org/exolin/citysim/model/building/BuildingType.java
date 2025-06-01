@@ -1,9 +1,11 @@
 package org.exolin.citysim.model.building;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
@@ -36,11 +38,12 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
             throw new IllegalStateException();
     }
     
+    @Override
     public <T> T getCustom(String name, Class<T> type)
     {
         Object val = custom.get(name);
         if(val == null)
-            throw new IllegalArgumentException("no "+name+" in "+getName());
+            throw noCustom(name);
         try{
             return type.cast(val);
         }catch(ClassCastException e){
@@ -48,6 +51,13 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
         }
     }
     
+    @Override
+    public Set<String> customKeys()
+    {
+        return Collections.unmodifiableSet(custom.keySet());
+    }
+    
+    @Override
     public boolean hasCustom(String name)
     {
         return custom.containsKey(name);

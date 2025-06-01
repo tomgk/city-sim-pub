@@ -9,10 +9,10 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.connection.Connection;
 import org.exolin.citysim.model.connection.ConnectionType;
-import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_X;
-import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_Y;
 import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_X;
+import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_Y;
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
 
 /**

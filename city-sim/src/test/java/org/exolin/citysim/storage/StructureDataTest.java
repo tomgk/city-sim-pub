@@ -6,8 +6,8 @@ import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
+import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

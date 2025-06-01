@@ -165,6 +165,26 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     }
     
     public abstract E getVariantForDefaultImage();
+    
+    public boolean hasCustom(String name)
+    {
+        return false;
+    }
+    
+    protected IllegalArgumentException noCustom(String name)
+    {
+        return new IllegalArgumentException("no "+name+" in "+getName());
+    }
+    
+    public Set<String> customKeys()
+    {
+        return Set.of();
+    }
+    
+    public <T> T getCustom(String name, Class<T> type)
+    {
+        throw noCustom(name);
+    }
 
     public BufferedImage getBrightImage()
     {

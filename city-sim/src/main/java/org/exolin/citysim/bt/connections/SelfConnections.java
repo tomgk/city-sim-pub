@@ -7,8 +7,8 @@ import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
-import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.XIntersection;
 
 /**

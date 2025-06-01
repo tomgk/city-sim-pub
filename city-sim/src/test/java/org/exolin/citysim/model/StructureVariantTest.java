@@ -30,7 +30,10 @@ import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTE
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
 import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
@@ -114,7 +117,11 @@ public class StructureVariantTest
     @MethodSource("structureVariantClasses")
     public void testGetValues_All(Class c)
     {
-        StructureVariant.getValues(c);
+        Set values = StructureVariant.getValues(c);
+        assertNotNull(values);
+        assertFalse(values.isEmpty());
+        //check for type
+        values.stream().forEach(c::cast);
     }
     
     private static final Comparator C = Comparator.comparing(Object::toString);

@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
-import org.exolin.citysim.model.connection.regular.ConnectVariant;
-import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_X;
-import static org.exolin.citysim.model.connection.regular.ConnectVariant.CONNECT_Y;
+import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
+import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_X;
+import static org.exolin.citysim.model.connection.regular.StraightConnectionVariant.CONNECT_Y;
 import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 import static org.exolin.citysim.model.connection.regular.Curve.CURVE_1;
 import static org.exolin.citysim.model.connection.regular.Curve.CURVE_2;
@@ -42,16 +42,17 @@ public class StructureVariantTest
     static
     {
         StructureTypes.init();
+        
+        StructureVariant.getValues(StraightConnectionVariant.class);
+        StructureVariant.getValues(ConnectionVariant.class);
     }
     
     @Test
-    public void testConnectVariant_Values()
+    public void testGetValues_StraightConnectionVariant()
     {
-        Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectVariant.class);
+        Set<? extends StructureVariant> values = StructureVariant.getValues(StraightConnectionVariant.class);
         assertEquals(EnumSet.of(CONNECT_X, CONNECT_Y), values);
     }
-    
-    //private static final Comparator<StructureVariant> COMPARE = Comparator.comparing((StructureVariant e) -> e);
     
     private final static Set ALL_VALUS = Set.of(
             CONNECT_X, CONNECT_Y,
@@ -69,37 +70,28 @@ public class StructureVariantTest
         );
     
     @Test
-    public void testConnectVariant_Values_Size()
+    public void testGetVariantCount_ConnectionVariant_Size()
     {
-        Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
-        assertEquals(ALL_VALUS.size(), values.size());
+        int size = StructureVariant.getVariantCount(ConnectionVariant.class);
+        assertEquals(ALL_VALUS.size(), size);
     }
     
     @Test
-    //@Disabled
-    public void testConnectVariant_Values_Values()
+    public void testGetValues_ConnectionVariant()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
         assertEquals(ALL_VALUS, values);
     }
     
     @Test
-    @Disabled
-    public void testConnectVariant_Valuesx()
-    {
-        Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
-        assertEquals(EnumSet.of(CONNECT_X, CONNECT_Y), values);
-    }
-    
-    @Test
-    public void testZoneType()
+    public void testGetValues_ZoneType()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(ZoneType.Variant.class);
         assertEquals(Set.of(ZoneType.Variant.DEFAULT), values);
     }
     
     @Test
-    public void testBuildingType()
+    public void testGetValues_BuildingType()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(BuildingType.Variant.class);
         assertEquals(Set.of(BuildingType.Variant.DEFAULT), values);
@@ -121,9 +113,7 @@ public class StructureVariantTest
     public void testSelfConnectionType()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(StructureType.getStructureVariantClass(SelfConnectionType.class));
-        Set expected = Set.of(
-                CONNECT_X, CONNECT_Y, X_INTERSECTION, CURVE_1, CURVE_2, CURVE_3, CURVE_4, T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4, NORTH, WEST, SOUTH, EAST, UNCONNECTED
-        );
+        Set expected = ALL_VALUS;
         assertEquals(
                 create(expected),
                 create(values)

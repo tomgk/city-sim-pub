@@ -6,7 +6,7 @@ import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.connection.regular.ConnectVariant;
+import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ public class StructureDataTest
     @Test
     public void testConstruct_VariantNonDefault()
     {
-        SelfConnection b = new SelfConnection(SelfConnections.street, 4, 7, ConnectVariant.CONNECT_X);
+        SelfConnection b = new SelfConnection(SelfConnections.street, 4, 7, StraightConnectionVariant.CONNECT_X);
         SelfConnectionData bd = new SelfConnectionData(b);
         
         assertEquals(Optional.of("connect_x"), getField(bd, "variant", Optional.class));

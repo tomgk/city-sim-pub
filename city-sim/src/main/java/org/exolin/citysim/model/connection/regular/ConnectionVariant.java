@@ -49,8 +49,8 @@ public interface ConnectionVariant extends StructureVariant
 class ConnectionVariants
 {
     public static final List<ConnectionVariant> VALUES = List.of(
-            ConnectVariant.CONNECT_X,
-            ConnectVariant.CONNECT_Y,
+            StraightConnectionVariant.CONNECT_X,
+            StraightConnectionVariant.CONNECT_Y,
             XIntersection.X_INTERSECTION,
             Curve.CURVE_1,
             Curve.CURVE_2,

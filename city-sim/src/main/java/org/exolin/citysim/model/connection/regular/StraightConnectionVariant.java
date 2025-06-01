@@ -6,12 +6,12 @@ import org.exolin.citysim.model.Rotation;
  *
  * @author Thomas
  */
-public enum ConnectVariant implements ConnectionVariant
+public enum StraightConnectionVariant implements ConnectionVariant
 {
     CONNECT_X,
     CONNECT_Y;
     
-    private static final ConnectionVariantType<ConnectVariant> TYPE = 
+    private static final ConnectionVariantType<StraightConnectionVariant> TYPE = 
             new ConnectionVariantType<>(CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y);
 
     @Override

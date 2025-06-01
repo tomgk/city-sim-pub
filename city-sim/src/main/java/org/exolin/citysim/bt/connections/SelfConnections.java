@@ -7,7 +7,7 @@ import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
-import org.exolin.citysim.model.connection.regular.ConnectVariant;
+import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.connection.regular.XIntersection;
 
@@ -101,14 +101,14 @@ public class SelfConnections
         List<Animation> add = new ArrayList<>(variants);
         
         //End
-        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
-        add.add(variants.get(ConnectVariant.CONNECT_Y.index()));
-        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
-        add.add(variants.get(ConnectVariant.CONNECT_Y.index()));
+        add.add(variants.get(StraightConnectionVariant.CONNECT_X.index()));
+        add.add(variants.get(StraightConnectionVariant.CONNECT_Y.index()));
+        add.add(variants.get(StraightConnectionVariant.CONNECT_X.index()));
+        add.add(variants.get(StraightConnectionVariant.CONNECT_Y.index()));
         //Unconnected
-        add.add(variants.get(ConnectVariant.CONNECT_X.index()));
+        add.add(variants.get(StraightConnectionVariant.CONNECT_X.index()));
         
-        SelfConnectionType t = new SelfConnectionType(name, add, size, cost, ConnectVariant.CONNECT_X);
+        SelfConnectionType t = new SelfConnectionType(name, add, size, cost, StraightConnectionVariant.CONNECT_X);
         VALUES.add(t);
         return t;
     }

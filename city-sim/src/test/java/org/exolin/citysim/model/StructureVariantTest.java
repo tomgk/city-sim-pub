@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
@@ -27,10 +28,15 @@ import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERS
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTED;
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
+import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  *
@@ -94,6 +100,21 @@ public class StructureVariantTest
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(BuildingType.Variant.class);
         assertEquals(Set.of(BuildingType.Variant.DEFAULT), values);
+    }
+    
+    private static Stream<Arguments> structureVariantClasses()
+    {
+        return StructureType.classes()
+                .stream()
+                .map(c -> StructureType.getStructureVariantClass(c))
+                .map(t -> Arguments.of(Named.named(t.getSimpleName(), t)));
+    }
+    
+    @ParameterizedTest
+    @MethodSource("structureVariantClasses")
+    public void testGetValues_All(Class c)
+    {
+        StructureVariant.getValues(c);
     }
     
     private static final Comparator C = Comparator.comparing(Object::toString);

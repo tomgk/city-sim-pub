@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
 import java.util.Set;
-import org.exolin.citysim.model.connection.regular.ConnectionVariant;
 
 /**
  * For a given {@link StructureType} the variant of it.
@@ -61,11 +60,7 @@ public interface StructureVariant
         }catch(NoSuchMethodException|IllegalAccessException e){
             throw new IllegalArgumentException("Couldn't get count from "+clazz.getName(), e);
         }catch(InvocationTargetException e){
-            Throwable cause = e.getCause();
-            if(cause instanceof RuntimeException re)
-                throw re;
-            
-            throw new IllegalArgumentException("Error while getting count", e.getCause());
+            throw handleInvocationTargetException(e);
         }
     }
     
@@ -73,9 +68,23 @@ public interface StructureVariant
     {
         if(clazz.isEnum())
             return EnumSet.allOf((Class)clazz);
-        else if(clazz == ConnectionVariant.class)
-            return ConnectionVariant.values();
-        else
-            throw new UnsupportedOperationException(clazz.getName());
+        
+        try{
+            Method values = clazz.getMethod("values");
+            return (Set)values.invoke(null);
+        }catch(NoSuchMethodException|IllegalAccessException e){
+            throw new IllegalArgumentException("Couldn't get count from "+clazz.getName()+": "+e.getMessage(), e);
+        }catch(InvocationTargetException e){
+            throw handleInvocationTargetException(e);
+        }
+    }
+    
+    private static RuntimeException handleInvocationTargetException(InvocationTargetException e)
+    {
+        Throwable cause = e.getCause();
+        if(cause instanceof RuntimeException re)
+            throw re;
+
+        throw new IllegalArgumentException("Error while getting count", e.getCause());
     }
 }

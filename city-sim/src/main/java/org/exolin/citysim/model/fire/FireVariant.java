@@ -2,6 +2,7 @@ package org.exolin.citysim.model.fire;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.stream.IntStream;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.utils.RandomUtils;
@@ -45,6 +46,12 @@ public class FireVariant implements StructureVariant
     public String name()
     {
         return "V"+version;
+    }
+    
+    public static Set<FireVariant> values()
+    {
+        //TODO: no copy?
+        return Set.copyOf(VALUES);
     }
 
     public static FireVariant valueOf(String name)

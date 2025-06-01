@@ -1,14 +1,11 @@
 package org.exolin.citysim.model;
 
-import static java.awt.BorderLayout.EAST;
-import static java.awt.BorderLayout.NORTH;
-import static java.awt.BorderLayout.SOUTH;
-import static java.awt.BorderLayout.WEST;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
@@ -20,6 +17,10 @@ import static org.exolin.citysim.model.connection.regular.Curve.CURVE_1;
 import static org.exolin.citysim.model.connection.regular.Curve.CURVE_2;
 import static org.exolin.citysim.model.connection.regular.Curve.CURVE_3;
 import static org.exolin.citysim.model.connection.regular.Curve.CURVE_4;
+import static org.exolin.citysim.model.connection.regular.End.EAST;
+import static org.exolin.citysim.model.connection.regular.End.NORTH;
+import static org.exolin.citysim.model.connection.regular.End.SOUTH;
+import static org.exolin.citysim.model.connection.regular.End.WEST;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_1;
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_2;
@@ -52,29 +53,34 @@ public class StructureVariantTest
     
     //private static final Comparator<StructureVariant> COMPARE = Comparator.comparing((StructureVariant e) -> e);
     
-    private final static Set Y = Set.of(
-                CONNECT_X, CONNECT_Y, X_INTERSECTION, CURVE_1, CURVE_2, CURVE_3, CURVE_4, T_INTERSECTION_1, T_INTERSECTION_2, T_INTERSECTION_3, T_INTERSECTION_4, NORTH, WEST, SOUTH, EAST, UNCONNECTED
+    private final static Set ALL_VALUS = Set.of(
+            CONNECT_X, CONNECT_Y,
+            X_INTERSECTION,
+            
+            CURVE_1, CURVE_2, CURVE_3, CURVE_4,
+            
+            T_INTERSECTION_1,
+            T_INTERSECTION_2,
+            T_INTERSECTION_3,
+            T_INTERSECTION_4,
+            
+            NORTH, WEST, SOUTH, EAST,
+            UNCONNECTED
         );
     
     @Test
     public void testConnectVariant_Values_Size()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
-        
-        Set x = Y;
-        
-        assertEquals(x.size(), values.size());
+        assertEquals(ALL_VALUS.size(), values.size());
     }
     
     @Test
-    @Disabled
+    //@Disabled
     public void testConnectVariant_Values_Values()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(ConnectionVariant.class);
-        
-        Set x = Y;
-        
-        assertEquals(x, values);
+        assertEquals(ALL_VALUS, values);
     }
     
     @Test

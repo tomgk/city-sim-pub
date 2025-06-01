@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,12 +47,18 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     private final int size;
     
     private static final Map<String, StructureType<?, ?, ?>> instances = new LinkedHashMap<>();
+    private static final Set<Class<? extends StructureType<?, ?, ?>>> classes = new LinkedHashSet<>();
     
     public static Collection<StructureType<?, ?, ?>> types()
     {
         return Collections.unmodifiableCollection(instances.values());
     }
     
+    
+    public static Collection<Class<? extends StructureType<?, ?, ?>>> classes()
+    {
+        return Collections.unmodifiableCollection(classes);
+    }
     
     public static <T extends StructureType> List<T> types(Class<T> clazz)
     {
@@ -131,6 +138,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         this.images = images;
         this.size = size;
         instances.put(name, this);
+        classes.add((Class)getClass());
     }
     
     public String getName()

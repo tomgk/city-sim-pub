@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import static org.exolin.citysim.model.Animation.createAnimation;
@@ -79,7 +81,7 @@ public class AnimationTest
             if(right != null)
             {
                 g.setColor(right);
-                g.fillRect(2, 0, 1, 2);
+                g.fillRect(1, 0, 1, 2);
             }
         }finally{
             g.dispose();
@@ -101,7 +103,6 @@ public class AnimationTest
     
     private static final Color ALPHA = new Color(0, 0, 0, 0);
     
-    //TODO: checks are wrong - look for TODO comments
     @Test
     public void testStack_SameSpeedAndFrameCount() throws IOException, InterruptedException
     {
@@ -130,16 +131,20 @@ public class AnimationTest
         assertEquals(100, s.getAnimationSpeed());
         assertEquals(2, s.getImageCount());
         
+        ImageIO.write(a.getImage(0), "png", new File("./target/a.png"));
+        ImageIO.write(b.getImage(0), "png", new File("./target/b.png"));
+        
+        for(int i=0;i<s.getImageCount();++i)
+            ImageIO.write(s.getImage(i), "png", new File("./target/stacked"+i+".png"));
+        
         {
-            Image img = s.getImage(0);
-            //TODO: should be green, not ALPHA
-            assertImage((BufferedImage)img, Color.red, ALPHA);
+            BufferedImage img = s.getImage(0);
+            assertImage(img, Color.red, Color.green);
         }
         
         {
-            Image img = s.getImage(1);
-            //TODO: should be blue, not ALPHA
-            assertImage((BufferedImage)img, Color.yellow, ALPHA);
+            BufferedImage img = s.getImage(1);
+            assertImage(img, Color.yellow, Color.blue);
         }
     }
 

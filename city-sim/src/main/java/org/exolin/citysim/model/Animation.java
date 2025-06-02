@@ -182,7 +182,7 @@ public class Animation
         return name;
     }
 
-    public Image getImage(int index)
+    public BufferedImage getImage(int index)
     {
         return images.get(index);
     }
@@ -192,7 +192,7 @@ public class Animation
         return (int)(time/getAnimationSpeed()%getImageCount());
     }
     
-    public Image getImageAt(long time)
+    public BufferedImage getImageAt(long time)
     {
         return getImage(getFrame(time));
     }

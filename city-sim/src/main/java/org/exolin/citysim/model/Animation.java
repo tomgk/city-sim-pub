@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
@@ -95,21 +96,23 @@ public class Animation
     {
         private final Animation a;
         private final Animation b;
+        private final List<Animation> animations;
 
         public StackCall(Animation a, Animation b)
         {
             this.a = a;
             this.b = b;
+            this.animations = List.of(a, b);
         }
         
         public int getAnimationLength()
         {
-            return MathUtils.lcm(a.getAnimationLength(), b.getAnimationLength());
+            return MathUtils.lcm(animations.stream().mapToInt(Animation::getAnimationLength));
         }
         
         public int getAnimationSpeed()
         {
-            return MathUtils.gcd(a.animationSpeed, b.animationSpeed);
+            return MathUtils.gcd(animations.stream().mapToInt(a -> a.animationSpeed));
         }
         
         public String getStackedName(int time)

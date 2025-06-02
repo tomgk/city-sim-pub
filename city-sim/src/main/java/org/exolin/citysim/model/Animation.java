@@ -202,6 +202,11 @@ public class Animation
         return fileNames;
     }
     
+    public String getFileName(int index)
+    {
+        return fileNames.get(index);
+    }
+    
     public String getFileNameAt(long time)
     {
         return fileNames.get(getFrame(time));

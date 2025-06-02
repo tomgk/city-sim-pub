@@ -140,11 +140,13 @@ public class AnimationTest
         {
             BufferedImage img = s.getImage(0);
             assertImage(img, Color.red, Color.green);
+            assertEquals("stacked:a_b", s.getFileName(0));
         }
         
         {
             BufferedImage img = s.getImage(1);
             assertImage(img, Color.yellow, Color.blue);
+            assertEquals("stacked:a1_b1", s.getFileName(1));
         }
     }
 

@@ -90,6 +90,39 @@ public class Animation
         return animationSpeed * images.size();
     }
     
+    //TODO: remove after n stacks are supported
+    private static class StackCall
+    {
+        private final Animation a;
+        private final Animation b;
+
+        public StackCall(Animation a, Animation b)
+        {
+            this.a = a;
+            this.b = b;
+        }
+        
+        public int getAnimationLength()
+        {
+            return MathUtils.lcm(a.getAnimationLength(), b.getAnimationLength());
+        }
+        
+        public int getAnimationSpeed()
+        {
+            return MathUtils.gcd(a.animationSpeed, b.animationSpeed);
+        }
+        
+        public String getStackedName(int time)
+        {
+            return Animation.getStackedName(a.getFileNameAt(time), b.getFileNameAt(time));
+        }
+        
+        public BufferedImage stackImages(int time)
+        {
+            return Animation.stackImages(a.getImageAt(time), b.getImageAt(time));
+        }
+    }
+    
     /**
      * Creates an animation where two animations are played.
      * <s>In case the animations don't have the same speed, the resulting animation
@@ -103,13 +136,15 @@ public class Animation
      */
     public static Animation stack(Animation a, Animation b)
     {
+        StackCall call = new StackCall(a, b);
+        
         //LCM before both animations line up again
         //=> that's the minimum length to create a stacked animation
-        int animationLength = MathUtils.lcm(a.getAnimationLength(), b.getAnimationLength());
+        int animationLength = call.getAnimationLength();
         
         //every GCD either (or both) animation have a new frame
         //=> need to create a new frame in the combined animation
-        int animationSpeed = MathUtils.gcd(a.animationSpeed, b.animationSpeed);
+        int animationSpeed = call.getAnimationSpeed();
         
         int frameCount = animationLength/animationSpeed;
         
@@ -119,9 +154,9 @@ public class Animation
         for(int i=0;i<frameCount;++i)
         {
             int time = i * animationSpeed;
-            filenames.add(getStackedName(a.fileNames.get(i), b.fileNames.get(i)));
+            filenames.add(call.getStackedName(time));
             System.out.println("@"+i+": Combine "+a.getFileNameAt(time)+" and "+b.getFileNameAt(time));
-            images.add(stackImages(a.getImageAt(time), b.getImageAt(time)));
+            images.add(call.stackImages(time));
         }
         
         String name = getStackedName(a.name, b.name);

@@ -28,6 +28,11 @@ public class MathUtils
     private static final Supplier<IllegalArgumentException> NO_VALUES =
             () -> new IllegalArgumentException("No values");
     
+    public static int gcd(IntStream values)
+    {
+        return values.reduce(MathUtils::gcd).orElseThrow(NO_VALUES);
+    }
+    
     public static int lcm(IntStream values)
     {
         return values.reduce(MathUtils::lcm).orElseThrow(NO_VALUES);

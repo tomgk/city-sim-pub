@@ -47,4 +47,41 @@ public class MathUtilsTest
     {
         assertEquals(expected, MathUtils.lcm(nums.stream().mapToInt(Integer::intValue)));
     }
+    
+    private final static Stream<Arguments> gcdTestValues()
+    {
+        return Stream.of(
+                //one
+                Arguments.of(List.of(3), 3),
+                Arguments.of(List.of(7), 7),
+                Arguments.of(List.of(10), 10),
+                
+                //two:
+                Arguments.of(List.of(2, 5), 1),
+                Arguments.of(List.of(15, 35), 5),
+                Arguments.of(List.of(105, 420), 105),
+                
+                //Arguments.of(List.of(15, 35), 5),
+                
+                //three
+                Arguments.of(List.of(15, 35, 2), 1),
+                Arguments.of(List.of(15, 35, 25), 5)
+        );
+    }
+    
+    @Test
+    public void testGC_Empty()
+    {
+        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> {
+            MathUtils.gcd(IntStream.empty());
+        });
+        assertEquals("No values", e.getMessage());
+    }
+    
+    @ParameterizedTest
+    @MethodSource("gcdTestValues")
+    public void testGCD(List<Integer> nums, int expected)
+    {
+        assertEquals(expected, MathUtils.gcd(nums.stream().mapToInt(Integer::intValue)));
+    }
 }

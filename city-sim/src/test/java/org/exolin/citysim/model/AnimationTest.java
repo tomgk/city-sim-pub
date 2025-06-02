@@ -137,6 +137,8 @@ public class AnimationTest
         for(int i=0;i<s.getImageCount();++i)
             ImageIO.write(s.getImage(i), "png", new File("./target/stacked"+i+".png"));
         
+        assertEquals("stacked:a_b", s.getName());
+        
         {
             BufferedImage img = s.getImage(0);
             assertImage(img, Color.red, Color.green);

@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import org.exolin.citysim.utils.ImageUtils;
@@ -117,7 +119,7 @@ public class Animation
         
         public String getStackedName(int time)
         {
-            return Animation.getStackedName(a.getFileNameAt(time), b.getFileNameAt(time));
+            return Animation.getStackedName(animations.stream().map(a -> a.getFileNameAt(time)));
         }
         
         public BufferedImage stackImages(int time)
@@ -162,14 +164,14 @@ public class Animation
             images.add(call.stackImages(time));
         }
         
-        String name = getStackedName(a.name, b.name);
+        String name = call.getStackedName(0);
         
         return new Animation(name, filenames, images, animationSpeed);
     }
     
-    private static String getStackedName(String a, String b)
+    private static String getStackedName(Stream<String> names)
     {
-        return "stacked:"+a+"_"+b;
+        return "stacked:"+names.collect(Collectors.joining("_"));
     }
     
     public static BufferedImage stackImages(Image a, Image b)

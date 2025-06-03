@@ -50,6 +50,8 @@ public class AnimationStacker
         }
     }
     
+    private static final boolean DEBUG = false;
+    
     /**
      * Creates an animation where two animations are played.
      * <s>In case the animations don't have the same speed, the resulting animation
@@ -85,7 +87,7 @@ public class AnimationStacker
         {
             int time = i * animationSpeed;
             filenames.add(call.getStackedName(time));
-            System.out.println("Creating "+filenames.getLast());
+            if(DEBUG) System.out.println("Creating "+filenames.getLast());
             images.add(call.stackImages(time));
         }
         

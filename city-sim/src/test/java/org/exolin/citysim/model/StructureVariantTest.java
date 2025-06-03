@@ -28,9 +28,7 @@ import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERS
 import static org.exolin.citysim.model.connection.regular.TIntersection.T_INTERSECTION_4;
 import static org.exolin.citysim.model.connection.regular.Unconnected.UNCONNECTED;
 import static org.exolin.citysim.model.connection.regular.XIntersection.X_INTERSECTION;
-import org.exolin.citysim.model.fire.FireVariant;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

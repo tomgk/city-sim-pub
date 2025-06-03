@@ -1,13 +1,10 @@
 package org.exolin.citysim.model;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
@@ -125,7 +122,11 @@ public class Animation
         
         public BufferedImage stackImages(int time)
         {
-            return Animation.stackImages(List.of(a.getImageAt(time), b.getImageAt(time)));
+            List<BufferedImage> imagesForFrame = animations.stream()
+                    .map(img -> img.getImageAt(time))
+                    .toList();
+            
+            return Animation.stackImages(imagesForFrame);
         }
     }
     
@@ -175,10 +176,10 @@ public class Animation
         return "stacked:"+names.collect(Collectors.joining("_"));
     }
     
-    public static BufferedImage stackImages(List<Image> images)
+    public static BufferedImage stackImages(List<BufferedImage> images)
     {
         int[] widths = images.stream()
-                .mapToInt(b -> b.getWidth(null))
+                .mapToInt(b -> b.getWidth())
                 .distinct()
                 .toArray();
         if(widths.length != 1)
@@ -186,14 +187,14 @@ public class Animation
         int w = widths[0];
         
         int h = images.stream()
-                .mapToInt(img -> img.getHeight(null))
+                .mapToInt(img -> img.getHeight())
                 .max().getAsInt();
         
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR_PRE);
         Graphics2D g = image.createGraphics();
         try{
-            for(Image a: images)
-                g.drawImage(a, 0, h - a.getHeight(null), null);
+            for(BufferedImage a: images)
+                g.drawImage(a, 0, h - a.getHeight(), null);
         }finally{
             g.dispose();
         }

@@ -94,14 +94,10 @@ public class Animation
     //TODO: remove after n stacks are supported
     private static class StackCall
     {
-        private final Animation a;
-        private final Animation b;
         private final List<Animation> animations;
 
         public StackCall(Animation a, Animation b)
         {
-            this.a = a;
-            this.b = b;
             this.animations = List.of(a, b);
         }
         
@@ -117,7 +113,8 @@ public class Animation
         
         public String getStackedName(int time)
         {
-            return Animation.getStackedName(animations.stream().map(a -> a.getFileNameAt(time)));
+            return "stacked:"+
+                    animations.stream().map(a -> a.getFileNameAt(time)).collect(Collectors.joining("_"));
         }
         
         public BufferedImage stackImages(int time)
@@ -169,11 +166,6 @@ public class Animation
         String name = call.getStackedName(0);
         
         return new Animation(name, filenames, images, animationSpeed);
-    }
-    
-    private static String getStackedName(Stream<String> names)
-    {
-        return "stacked:"+names.collect(Collectors.joining("_"));
     }
     
     public static BufferedImage stackImages(List<BufferedImage> images)

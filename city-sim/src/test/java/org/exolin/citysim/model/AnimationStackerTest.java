@@ -181,6 +181,80 @@ public class AnimationStackerTest
             assertEquals("stacked:a1_b1", s.getFileName(1));
         }
     }
+    
+    @Test
+    public void testStack_DifferentFrameCount() throws IOException, InterruptedException
+    {
+        Animation a = new Animation(
+                "a",
+                List.of("a", "a1", "a2"),
+                List.of(
+                        createBufferedImage(Color.red, null),
+                        createBufferedImage(Color.yellow, null),
+                        createBufferedImage(Color.orange, null)
+                ),
+                100);
+        
+        //ImageDisplay.show((BufferedImage) a.getDefault());
+        assertImage((BufferedImage)a.getDefault(), Color.red, ALPHA);
+        
+        Animation b = new Animation(
+                "b",
+                List.of("b", "b1"),
+                List.of(
+                        createBufferedImage(null, Color.green),
+                        createBufferedImage(null, Color.blue)
+                ),
+                100);
+        
+        Animation s = AnimationStacker.stack(List.of(a, b));
+        assertEquals(100, s.getAnimationSpeed());
+        assertEquals(6, s.getImageCount());
+        
+        ImageIO.write(a.getImage(0), "png", new File("./target/a.png"));
+        ImageIO.write(b.getImage(0), "png", new File("./target/b.png"));
+        
+        for(int i=0;i<s.getImageCount();++i)
+            ImageIO.write(s.getImage(i), "png", new File("./target/stacked"+i+".png"));
+        
+        assertEquals("stacked:a_b", s.getName());
+        
+        {
+            BufferedImage img = s.getImage(0);
+            assertImage(img, Color.red, Color.green);
+            assertEquals("stacked:a_b", s.getFileName(0));
+        }
+        
+        {
+            BufferedImage img = s.getImage(1);
+            assertImage(img, Color.yellow, Color.blue);
+            assertEquals("stacked:a1_b1", s.getFileName(1));
+        }
+        
+        {
+            BufferedImage img = s.getImage(2);
+            assertImage(img, Color.orange, Color.green);
+            assertEquals("stacked:a1_b1", s.getFileName(1));
+        }
+        
+        {
+            BufferedImage img = s.getImage(3);
+            assertImage(img, Color.red, Color.blue);
+            assertEquals("stacked:a_b", s.getFileName(0));
+        }
+        
+        {
+            BufferedImage img = s.getImage(4);
+            assertImage(img, Color.yellow, Color.green);
+            assertEquals("stacked:a1_b1", s.getFileName(1));
+        }
+        
+        {
+            BufferedImage img = s.getImage(5);
+            assertImage(img, Color.orange, Color.blue);
+            assertEquals("stacked:a1_b1", s.getFileName(1));
+        }
+    }
 
     private void assertColorEquals(Color expected, Color actual)
     {

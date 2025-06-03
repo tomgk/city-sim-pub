@@ -178,7 +178,7 @@ public class AnimationStackerTest
         {
             BufferedImage img = s.getImage(2);
             assertImage(img, Color.orange, Color.pink);
-            assertEquals("stacked:a1_b1", s.getFileName(1));
+            assertEquals("stacked:a2_b2", s.getFileName(2));
         }
     }
     
@@ -234,25 +234,25 @@ public class AnimationStackerTest
         {
             BufferedImage img = s.getImage(2);
             assertImage(img, Color.orange, Color.green);
-            assertEquals("stacked:a1_b1", s.getFileName(1));
+            assertEquals("stacked:a2_b", s.getFileName(2));
         }
         
         {
             BufferedImage img = s.getImage(3);
             assertImage(img, Color.red, Color.blue);
-            assertEquals("stacked:a_b", s.getFileName(0));
+            assertEquals("stacked:a_b1", s.getFileName(3));
         }
         
         {
             BufferedImage img = s.getImage(4);
             assertImage(img, Color.yellow, Color.green);
-            assertEquals("stacked:a1_b1", s.getFileName(1));
+            assertEquals("stacked:a1_b", s.getFileName(4));
         }
         
         {
             BufferedImage img = s.getImage(5);
             assertImage(img, Color.orange, Color.blue);
-            assertEquals("stacked:a1_b1", s.getFileName(1));
+            assertEquals("stacked:a2_b1", s.getFileName(5));
         }
     }
 

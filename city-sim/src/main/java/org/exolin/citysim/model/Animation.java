@@ -4,8 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
 import org.exolin.citysim.utils.ImageUtils;
@@ -96,9 +96,9 @@ public class Animation
     {
         private final List<Animation> animations;
 
-        public StackCall(Animation a, Animation b)
+        public StackCall(List<Animation> animations)
         {
-            this.animations = List.of(a, b);
+            this.animations = Objects.requireNonNull(animations);
         }
         
         public int getAnimationLength()
@@ -138,9 +138,12 @@ public class Animation
      * @param b second animation
      * @return 
      */
-    public static Animation stack(Animation a, Animation b)
+    public static Animation stack(List<Animation> animations)
     {
-        StackCall call = new StackCall(a, b);
+        if(animations.size() < 2)
+            throw new IllegalArgumentException("not enough to stack");
+        
+        StackCall call = new StackCall(animations);
         
         //LCM before both animations line up again
         //=> that's the minimum length to create a stacked animation
@@ -159,7 +162,7 @@ public class Animation
         {
             int time = i * animationSpeed;
             filenames.add(call.getStackedName(time));
-            System.out.println("@"+i+": Combine "+a.getFileNameAt(time)+" and "+b.getFileNameAt(time));
+            System.out.println("Creating "+filenames.getLast());
             images.add(call.stackImages(time));
         }
         
@@ -168,7 +171,7 @@ public class Animation
         return new Animation(name, filenames, images, animationSpeed);
     }
     
-    public static BufferedImage stackImages(List<BufferedImage> images)
+    private static BufferedImage stackImages(List<BufferedImage> images)
     {
         int[] widths = images.stream()
                 .mapToInt(b -> b.getWidth())

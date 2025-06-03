@@ -13,7 +13,10 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
+import org.exolin.citysim.bt.Zones;
 import static org.exolin.citysim.model.Animation.createAnimation;
+import org.exolin.citysim.model.zone.ZoneType;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
@@ -103,6 +106,24 @@ public class AnimationTest
     private static final Color ALPHA = new Color(0, 0, 0, 0);
     
     @Test
+    public void testStack_None()
+    {
+        IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Animation.stack(List.of());
+        });
+        assertEquals("not enough to stack", e.getMessage());
+    }
+    
+    @Test
+    public void testStack_One()
+    {
+        IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Animation.stack(List.of(Zones.destroyed.getImage(ZoneType.Variant.DEFAULT)));
+        });
+        assertEquals("not enough to stack", e.getMessage());
+    }
+    
+    @Test
     public void testStack_SameSpeedAndFrameCount() throws IOException, InterruptedException
     {
         Animation a = new Animation(
@@ -126,7 +147,7 @@ public class AnimationTest
                 ),
                 100);
         
-        Animation s = Animation.stack(a, b);
+        Animation s = Animation.stack(List.of(a, b));
         assertEquals(100, s.getAnimationSpeed());
         assertEquals(2, s.getImageCount());
         

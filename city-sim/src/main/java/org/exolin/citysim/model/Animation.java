@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.exolin.citysim.Constants;
 import static org.exolin.citysim.Constants.DEFAULT_NONANIMATION_SPEED;
@@ -124,7 +125,7 @@ public class Animation
         
         public BufferedImage stackImages(int time)
         {
-            return Animation.stackImages(a.getImageAt(time), b.getImageAt(time));
+            return Animation.stackImages(List.of(a.getImageAt(time), b.getImageAt(time)));
         }
     }
     
@@ -174,24 +175,25 @@ public class Animation
         return "stacked:"+names.collect(Collectors.joining("_"));
     }
     
-    public static BufferedImage stackImages(Image a, Image b)
+    public static BufferedImage stackImages(List<Image> images)
     {
-        int wa = a.getWidth(null);
-        int wb = b.getWidth(null);
-        if(wa != wb)
+        int[] widths = images.stream()
+                .mapToInt(b -> b.getWidth(null))
+                .distinct()
+                .toArray();
+        if(widths.length != 1)
             throw new IllegalArgumentException();
-        int w = wa;
+        int w = widths[0];
         
-        int ha = a.getHeight(null);
-        int hb = b.getHeight(null);
-        
-        int h = Math.max(ha, hb);
+        int h = images.stream()
+                .mapToInt(img -> img.getHeight(null))
+                .max().getAsInt();
         
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR_PRE);
         Graphics2D g = image.createGraphics();
         try{
-            g.drawImage(a, 0, h - ha, null);
-            g.drawImage(b, 0, h - hb, null);
+            for(Image a: images)
+                g.drawImage(a, 0, h - a.getHeight(null), null);
         }finally{
             g.dispose();
         }

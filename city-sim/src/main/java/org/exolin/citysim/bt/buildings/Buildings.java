@@ -31,6 +31,11 @@ public class Buildings
     {
         return new BuildingType(animation.getName(), animation.getName(), animation, size, zoneType, cost, maintenance);
     }
+    
+    public static BuildingType createBuildingType(String title, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    {
+        return new BuildingType(title, animation.getName(), animation, size, zoneType, cost, maintenance);
+    }
 
     static void init()
     {

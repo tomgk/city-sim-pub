@@ -1,5 +1,6 @@
 package org.exolin.citysim.bt.buildings;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -26,15 +27,19 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Plants
 {
-    public static final BuildingType plant_solar = createPlant("Solar Power", createUnanimated("plants/plant_solar"), 4, Zones.plants, 1300, 50);
-    public static final BuildingType gas_plant = createPlant("Gas Power", createAnimation("plants/gas_plant", 8), 4, Zones.plants, 2000, 50);
-    public static final BuildingType oil_plant = createPlant("Oil Power", createAnimation("plants/oil_plant", 8), 4, Zones.plants, 6600, 220);
+    /**
+     * https://github.com/tomgk/city-sim-pub/issues/162
+     */
+    
+    public static final BuildingType plant_solar = createPlant("Solar Power", createUnanimated("plants/plant_solar"), 4, Zones.plants, 1300, 50, BigDecimal.valueOf(26));
+    public static final BuildingType gas_plant = createPlant("Gas Power", createAnimation("plants/gas_plant", 8), 4, Zones.plants, 2000, 50, BigDecimal.valueOf(40));
+    public static final BuildingType oil_plant = createPlant("Oil Power", createAnimation("plants/oil_plant", 8), 4, Zones.plants, 6600, 220, BigDecimal.valueOf(30));
     
     public static final String MEGA_WATT = "megaWatt";
     
-    private static BuildingType createPlant(String title, Animation animation, int size, ZoneType zoneType, int cost, int megaWatt)
+    private static BuildingType createPlant(String title, Animation animation, int size, ZoneType zoneType, int cost, int megaWatt, BigDecimal maintenance)
     {
-        BuildingType bt = createBuildingType(title, animation, size, zoneType, cost);
+        BuildingType bt = createBuildingType(title, animation, size, zoneType, cost, maintenance);
         bt.setCustom(MEGA_WATT, megaWatt);
         return bt;
     }

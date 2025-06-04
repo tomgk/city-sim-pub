@@ -35,7 +35,6 @@ public class Plants
             "Solar Power",
             createUnanimated("plants/plant_solar"),
             4,
-            Zones.plants,
             1300,
             50,
             BigDecimal.valueOf(26)
@@ -45,7 +44,6 @@ public class Plants
             "Gas Power",
             createAnimation("plants/gas_plant", 8),
             4,
-            Zones.plants,
             2000,
             50,
             BigDecimal.valueOf(40)
@@ -55,7 +53,6 @@ public class Plants
             "Oil Power",
             createAnimation("plants/oil_plant", 8),
             4,
-            Zones.plants,
             6600,
             220,
             BigDecimal.valueOf(30)
@@ -63,9 +60,9 @@ public class Plants
     
     public static final String MEGA_WATT = "megaWatt";
     
-    private static BuildingType createPlant(String title, Animation animation, int size, ZoneType zoneType, int cost, int megaWatt, BigDecimal maintenance)
+    private static BuildingType createPlant(String title, Animation animation, int size, int cost, int megaWatt, BigDecimal maintenance)
     {
-        BuildingType bt = createBuildingType(title, animation, size, zoneType, cost, maintenance);
+        BuildingType bt = createBuildingType(title, animation, size, Zones.plants, cost, maintenance);
         bt.setCustom(MEGA_WATT, megaWatt);
         return bt;
     }

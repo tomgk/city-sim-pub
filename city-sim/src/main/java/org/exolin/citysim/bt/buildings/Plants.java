@@ -61,6 +61,22 @@ public class Plants
             BigDecimal.valueOf(30)
     );
     
+    public static final BuildingType coal_plant = createPlant(
+            "Coal Power",
+            createAnimation("plants/coal_plant", 8),
+            4,
+            4000,
+            200,
+            BigDecimal.valueOf(20)
+    );
+    
+    public static final List<BuildingType> ALL = List.of(
+            plant_solar,
+            gas_plant,
+            oil_plant,
+            coal_plant
+    );
+    
     private static BuildingType createPlant(String title, Animation animation, int size, int cost, int megaWatt, BigDecimal maintenance)
     {
         BuildingType bt = createBuildingType(title, animation, size, Zones.plants, cost, maintenance);
@@ -106,8 +122,6 @@ public class Plants
     
     public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), 1, Zones.plants, 0);
     public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, Zones.plants, 0);
-    
-    public static final List<BuildingType> ALL = Collections.unmodifiableList(Arrays.asList(plant_solar, gas_plant, oil_plant));
     
     public static Electricity getElectricity(SelfConnectionType type)
     {

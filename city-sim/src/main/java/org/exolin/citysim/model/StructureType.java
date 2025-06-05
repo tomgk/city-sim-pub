@@ -127,7 +127,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         name = transformName(name);
         
         if(instances.containsKey(name))
-            throw new IllegalArgumentException("duplicate ID");
+            throw new IllegalArgumentException("duplicate ID: "+name);
         
         int expected = StructureVariant.getVariantCount(getStructureVariantClass(getClass()));
         if(expected != images.size())

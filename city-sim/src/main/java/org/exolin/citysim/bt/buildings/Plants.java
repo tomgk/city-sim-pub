@@ -34,7 +34,7 @@ public class Plants
      * https://github.com/tomgk/city-sim-pub/issues/162
      */
     
-    public static final BuildingType plant_solar = createPlant(
+    public static final BuildingType solar_plant = createPlant(
             "Solar Power",
             createUnanimated("plants/plant_solar"),
             4,
@@ -43,14 +43,22 @@ public class Plants
             BigDecimal.valueOf(26)
     );
     
-    
-    public static final BuildingType microwave_solar = createPlant(
+    public static final BuildingType microwave_plant = createPlant(
             "Microwave Power",
             createUnanimated("plants/microwave_plant"),
             4,
             28000,
             1600,
             BigDecimal.valueOf(17.5)
+    );
+    
+    public static final BuildingType fusion_plant = createPlant(
+            "Fusion Power",
+            createUnanimated("plants/fusion_plant"),
+            4,
+            40000,
+            2500,
+            BigDecimal.valueOf(16)
     );
     
     public static final BuildingType gas_plant = createPlant(
@@ -81,8 +89,9 @@ public class Plants
     );
     
     public static final List<BuildingType> ALL = List.of(
-            plant_solar,
-            microwave_solar,
+            solar_plant,
+            microwave_plant,
+            fusion_plant,
             gas_plant,
             oil_plant,
             coal_plant

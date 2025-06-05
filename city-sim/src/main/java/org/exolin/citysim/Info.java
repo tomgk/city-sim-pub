@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
+import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 
@@ -72,7 +73,7 @@ public class Info
             }
             
             s.customKeys().forEach(key -> {
-                System.out.println(key+": "+s.getCustom((String)key, Object.class));
+                System.out.println(key+": "+s.getCustom((CustomKey)key, Object.class));
             });
         });
     }

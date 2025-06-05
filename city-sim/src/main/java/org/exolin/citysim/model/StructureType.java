@@ -174,22 +174,22 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     
     public abstract E getVariantForDefaultImage();
     
-    public boolean hasCustom(String name)
+    public boolean hasCustom(CustomKey name)
     {
         return false;
     }
     
-    protected IllegalArgumentException noCustom(String name)
+    protected IllegalArgumentException noCustom(CustomKey name)
     {
-        return new IllegalArgumentException("no "+name+" in "+getName());
+        return new IllegalArgumentException("no "+name.getName()+" in "+getName());
     }
     
-    public Set<String> customKeys()
+    public Set<CustomKey> customKeys()
     {
         return Set.of();
     }
     
-    public <T> T getCustom(String name, Class<T> type)
+    public <T> T getCustom(CustomKey name, Class<T> type)
     {
         throw noCustom(name);
     }

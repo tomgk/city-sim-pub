@@ -12,6 +12,7 @@ import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.Building;
@@ -27,6 +28,8 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Plants
 {
+    public static final CustomKey MEGA_WATT = CustomKey.createKey("megaWatt");
+    
     /**
      * https://github.com/tomgk/city-sim-pub/issues/162
      */
@@ -57,8 +60,6 @@ public class Plants
             220,
             BigDecimal.valueOf(30)
     );
-    
-    public static final String MEGA_WATT = "megaWatt";
     
     private static BuildingType createPlant(String title, Animation animation, int size, int cost, int megaWatt, BigDecimal maintenance)
     {

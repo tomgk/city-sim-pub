@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
@@ -28,9 +29,9 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     private final int cost;
     private final BigDecimal maintenance;
     
-    private final Map<String, Object> custom = new LinkedHashMap<>();
+    private final Map<CustomKey, Object> custom = new LinkedHashMap<>();
     
-    public void setCustom(String name, Object value)
+    public void setCustom(CustomKey name, Object value)
     {
         Objects.requireNonNull(name);
         Objects.requireNonNull(value);
@@ -39,7 +40,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }
     
     @Override
-    public <T> T getCustom(String name, Class<T> type)
+    public <T> T getCustom(CustomKey name, Class<T> type)
     {
         Object val = custom.get(name);
         if(val == null)
@@ -52,13 +53,13 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }
     
     @Override
-    public Set<String> customKeys()
+    public Set<CustomKey> customKeys()
     {
         return Collections.unmodifiableSet(custom.keySet());
     }
     
     @Override
-    public boolean hasCustom(String name)
+    public boolean hasCustom(CustomKey name)
     {
         return custom.containsKey(name);
     }

@@ -95,6 +95,15 @@ public class Plants
             4,
             4000,
             200,
+            BigDecimal.valueOf(25)
+    );
+    
+    public static final BuildingType wind_plant = createPlant(
+            "Wind Power",
+            createAnimation("plants/wind_power", 8),
+            1,
+            100,
+            4,
             BigDecimal.valueOf(20)
     );
     
@@ -105,7 +114,8 @@ public class Plants
             fusion_plant,
             gas_plant,
             oil_plant,
-            coal_plant
+            coal_plant,
+            wind_plant
     );
     
     private static BuildingType createPlant(String title, Animation animation, int size, int cost, int megaWatt, BigDecimal maintenance)

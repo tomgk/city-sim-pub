@@ -134,6 +134,9 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
             throw new IllegalArgumentException("wrong number of images for variants: "
                     + "expected "+expected+" but got "+images.size());
         
+        if(size < 1 || size > 4)
+            throw new IllegalArgumentException("invalid size "+size);
+        
         this.name = name;
         this.images = images;
         this.size = size;

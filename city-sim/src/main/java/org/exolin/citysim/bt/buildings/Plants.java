@@ -61,6 +61,16 @@ public class Plants
             BigDecimal.valueOf(16)
     );
     
+    
+    public static final BuildingType nuclear_plant = createPlant(
+            "Nuclear Power",
+            createUnanimated("plants/nuclear_plant"),
+            4,
+            15000,
+            500,
+            BigDecimal.valueOf(30)
+    );
+    
     public static final BuildingType gas_plant = createPlant(
             "Gas Power",
             createAnimation("plants/gas_plant", 8),
@@ -91,6 +101,7 @@ public class Plants
     public static final List<BuildingType> ALL = List.of(
             solar_plant,
             microwave_plant,
+            nuclear_plant,
             fusion_plant,
             gas_plant,
             oil_plant,

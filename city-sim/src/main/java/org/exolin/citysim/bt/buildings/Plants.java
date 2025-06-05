@@ -43,6 +43,16 @@ public class Plants
             BigDecimal.valueOf(26)
     );
     
+    
+    public static final BuildingType microwave_solar = createPlant(
+            "Microwave Power",
+            createUnanimated("plants/microwave_plant"),
+            4,
+            28000,
+            1600,
+            BigDecimal.valueOf(17.5)
+    );
+    
     public static final BuildingType gas_plant = createPlant(
             "Gas Power",
             createAnimation("plants/gas_plant", 8),
@@ -72,6 +82,7 @@ public class Plants
     
     public static final List<BuildingType> ALL = List.of(
             plant_solar,
+            microwave_solar,
             gas_plant,
             oil_plant,
             coal_plant

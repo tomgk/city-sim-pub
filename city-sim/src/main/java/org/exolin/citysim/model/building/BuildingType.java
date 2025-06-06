@@ -9,6 +9,7 @@ import java.util.Set;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -71,7 +72,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
     }*/
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public BuildingType(String name, String title, Animation animation, int size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    public BuildingType(String name, String title, Animation animation, StructureSize size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
         super(name, animation, size);
         this.title = Objects.requireNonNull(title);

@@ -7,6 +7,7 @@ import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.Animation;
+import static org.exolin.citysim.model.StructureSize._1;
 import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
@@ -39,7 +40,7 @@ public class CrossConnections
     public static CrossConnectionType createCrossConnectionType(SelfConnectionType xtype, SelfConnectionType ytype)
     {
         String name = xtype.getName()+"_"+ytype.getName();
-        CrossConnectionType type = new CrossConnectionType(name, Animation.createUnanimated("cross_connection/"+name), 1, xtype, ytype);
+        CrossConnectionType type = new CrossConnectionType(name, Animation.createUnanimated("cross_connection/"+name), _1, xtype, ytype);
         types.put(new Key(xtype, ytype), type);
         return type;
     }

@@ -7,6 +7,8 @@ import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
+import org.exolin.citysim.model.StructureSize;
+import static org.exolin.citysim.model.StructureSize._1;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.connection.regular.StraightConnectionVariant;
 import org.exolin.citysim.model.connection.regular.XIntersection;
@@ -33,7 +35,7 @@ public class SelfConnections
             createUnanimated("street/street_t_1"),
             createUnanimated("street/street_t_2"),
             createUnanimated("street/street_t_3"),
-            createUnanimated("street/street_t_4")), 1, 10);
+            createUnanimated("street/street_t_4")), _1, 10);
     
     public static final SelfConnectionType rail = createTransportType("rail", List.of(
             createUnanimated("rail/rail_1"),
@@ -49,7 +51,7 @@ public class SelfConnections
             createUnanimated("rail/rail_t_1"),
             createUnanimated("rail/rail_t_2"),
             createUnanimated("rail/rail_t_3"),
-            createUnanimated("rail/rail_t_4")), 1, 25);
+            createUnanimated("rail/rail_t_4")), _1, 25);
     
     public static final SelfConnectionType circuit = createTransportType("circuit", List.of(
             createUnanimated("circuit/circuit_1"),
@@ -65,7 +67,7 @@ public class SelfConnections
             createUnanimated("circuit/circuit_t_1"),
             createUnanimated("circuit/circuit_t_2"),
             createUnanimated("circuit/circuit_t_3"),
-            createUnanimated("circuit/circuit_t_4")), 1, 25);
+            createUnanimated("circuit/circuit_t_4")), _1, 25);
     
     public static final SelfConnectionType water = createAreaType("water", List.of(
             createAnimation("water/water_1", 4),
@@ -89,14 +91,14 @@ public class SelfConnections
             createAnimation("water/water_end_2", 4),
             
             createAnimation("water/water_unconnected", 4)
-    ), 1, 100);
+    ), _1, 100);
 
     public static List<SelfConnectionType> values()
     {
         return Collections.unmodifiableList(VALUES);
     }
     
-    private static SelfConnectionType createTransportType(String name, List<Animation> variants, int size, int cost)
+    private static SelfConnectionType createTransportType(String name, List<Animation> variants, StructureSize size, int cost)
     {
         List<Animation> add = new ArrayList<>(variants);
         
@@ -113,7 +115,7 @@ public class SelfConnections
         return t;
     }
     
-    private static SelfConnectionType createAreaType(String name, List<Animation> variants, int size, int cost)
+    private static SelfConnectionType createAreaType(String name, List<Animation> variants, StructureSize size, int cost)
     {
         return new SelfConnectionType(name, variants, size, cost, XIntersection.X_INTERSECTION);
     }

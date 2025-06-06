@@ -1,6 +1,7 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
+import static org.exolin.citysim.model.StructureSize._1;
 import org.exolin.citysim.model.zone.Density;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.model.zone.ZoneTypeType;
@@ -36,18 +37,18 @@ public class Zones
     private static ZoneType createUserplaceableZone(String name, int cost)
     {
         ZoneTypeType ztt = new ZoneTypeType(name, true, cost);
-        return new ZoneType(name, "zone/"+name, 1, ztt, Density.DEFAULT);
+        return new ZoneType(name, "zone/"+name, _1, ztt, Density.DEFAULT);
     }
     
     private static ZoneType createLowDensity(String name, ZoneType type)
     {
-        return new ZoneType(name, "zone/"+name, 1, type.getCategory(), Density.DEFAULT);
+        return new ZoneType(name, "zone/"+name, _1, type.getCategory(), Density.DEFAULT);
     }
     
     private static ZoneType createSpecialZone(String name)
     {
         ZoneTypeType ztt = new ZoneTypeType(name, false, 0);
-        return new ZoneType(name, "zone/special", 1, ztt, Density.DEFAULT);
+        return new ZoneType(name, "zone/special", _1, ztt, Density.DEFAULT);
     }
 
     static void init()

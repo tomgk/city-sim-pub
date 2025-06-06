@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.connection.ConnectionType;
 
 /**
@@ -15,7 +16,7 @@ public class SelfConnectionType extends ConnectionType<SelfConnection, SelfConne
     private final int cost;
     private final ConnectionVariant defaultImageVariant;
     
-    public SelfConnectionType(String name, List<Animation> images, int size, int cost, ConnectionVariant defaultImageVariant)
+    public SelfConnectionType(String name, List<Animation> images, StructureSize size, int cost, ConnectionVariant defaultImageVariant)
     {
         super(name, images, size);
         this.cost = cost;

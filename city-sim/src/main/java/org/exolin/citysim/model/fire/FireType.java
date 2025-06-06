@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.Animation.createAnimation;
+import org.exolin.citysim.model.StructureSize;
+import static org.exolin.citysim.model.StructureSize._1;
 import org.exolin.citysim.model.StructureType;
 
 /**
@@ -29,9 +31,9 @@ public class FireType extends StructureType<Fire, FireVariant, FireParameters>
         return images;
     }
     
-    public static final FireType fire = new FireType("fire", create(), 1);
+    public static final FireType fire = new FireType("fire", create(), _1);
     
-    public FireType(String name, List<Animation> animation, int size)
+    public FireType(String name, List<Animation> animation, StructureSize size)
     {
         super(name, animation, size);
     }

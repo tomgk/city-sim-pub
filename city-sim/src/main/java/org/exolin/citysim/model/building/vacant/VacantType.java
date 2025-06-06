@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.utils.RandomUtils;
@@ -59,7 +60,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
     private final boolean destroyed;
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public VacantType(String name, int size, boolean destroyed)
+    public VacantType(String name, StructureSize size, boolean destroyed)
     {
         super(name, Animation.createUnanimated(name), size);
         this.destroyed = destroyed;

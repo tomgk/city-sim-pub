@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import org.exolin.citysim.model.building.BuildingType;
@@ -44,7 +45,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     
     private final String name;
     private final List<Animation> images;
-    private final int size;
+    private final StructureSize size;
     
     private static final Map<String, StructureType<?, ?, ?>> instances = new LinkedHashMap<>();
     private static final Set<Class<? extends StructureType<?, ?, ?>>> classes = new LinkedHashSet<>();
@@ -93,7 +94,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         return types(BuildingType.class);
     }
     
-    public StructureType(String name, Animation animation, int size)
+    public StructureType(String name, Animation animation, StructureSize size)
     {
         this(name, List.of(animation), size);
     }
@@ -122,7 +123,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
     }
 
     @SuppressWarnings("LeakingThisInConstructor")
-    public StructureType(String name, List<Animation> images, int size)
+    public StructureType(String name, List<Animation> images, StructureSize size)
     {
         name = transformName(name);
         
@@ -134,12 +135,9 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
             throw new IllegalArgumentException("wrong number of images for variants: "
                     + "expected "+expected+" but got "+images.size());
         
-        if(size < 1 || size > 4)
-            throw new IllegalArgumentException("invalid size "+size);
-        
         this.name = name;
         this.images = images;
-        this.size = size;
+        this.size = Objects.requireNonNull(size);
         instances.put(name, this);
         classes.add((Class)getClass());
     }
@@ -167,7 +165,7 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
 
     public int getSize()
     {
-        return size;
+        return size.toInteger();
     }
     
     public BufferedImage getDefaultImage()

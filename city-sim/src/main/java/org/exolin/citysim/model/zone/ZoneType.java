@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
@@ -27,7 +28,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
     
     private final String title;
     
-    public ZoneType(String title, String filename, int size, ZoneTypeType type, Density density)
+    public ZoneType(String title, String filename, StructureSize size, ZoneTypeType type, Density density)
     {
         super("zone_"+title, List.of(Animation.createUnanimated(density.isLowDensity() ? filename+"_low" : filename)), size);
         this.title = Objects.requireNonNull(title);

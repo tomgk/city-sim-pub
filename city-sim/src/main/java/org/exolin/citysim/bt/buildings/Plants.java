@@ -1,8 +1,6 @@
 package org.exolin.citysim.bt.buildings;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.bt.Zones;
@@ -14,6 +12,9 @@ import static org.exolin.citysim.model.Animation.createAnimation;
 import static org.exolin.citysim.model.Animation.createUnanimated;
 import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.Structure;
+import org.exolin.citysim.model.StructureSize;
+import static org.exolin.citysim.model.StructureSize._1;
+import static org.exolin.citysim.model.StructureSize._4;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
@@ -37,7 +38,7 @@ public class Plants
     public static final BuildingType solar_plant = createPlant(
             "Solar Power",
             createUnanimated("plants/plant_solar"),
-            4,
+            _4,
             1300,
             50,
             BigDecimal.valueOf(26)
@@ -46,7 +47,7 @@ public class Plants
     public static final BuildingType microwave_plant = createPlant(
             "Microwave Power",
             createUnanimated("plants/microwave_plant"),
-            4,
+            _4,
             28000,
             1600,
             BigDecimal.valueOf(17.5)
@@ -55,7 +56,7 @@ public class Plants
     public static final BuildingType fusion_plant = createPlant(
             "Fusion Power",
             createUnanimated("plants/fusion_plant"),
-            4,
+            _4,
             40000,
             2500,
             BigDecimal.valueOf(16)
@@ -65,7 +66,7 @@ public class Plants
     public static final BuildingType nuclear_plant = createPlant(
             "Nuclear Power",
             createUnanimated("plants/nuclear_plant"),
-            4,
+            _4,
             15000,
             500,
             BigDecimal.valueOf(30)
@@ -74,7 +75,7 @@ public class Plants
     public static final BuildingType gas_plant = createPlant(
             "Gas Power",
             createAnimation("plants/gas_plant", 8),
-            4,
+            _4,
             2000,
             50,
             BigDecimal.valueOf(40)
@@ -83,7 +84,7 @@ public class Plants
     public static final BuildingType oil_plant = createPlant(
             "Oil Power",
             createAnimation("plants/oil_plant", 8),
-            4,
+            _4,
             6600,
             220,
             BigDecimal.valueOf(30)
@@ -92,7 +93,7 @@ public class Plants
     public static final BuildingType coal_plant = createPlant(
             "Coal Power",
             createAnimation("plants/coal_plant", 8),
-            4,
+            _4,
             4000,
             200,
             BigDecimal.valueOf(25)
@@ -101,7 +102,7 @@ public class Plants
     public static final BuildingType wind_plant = createPlant(
             "Wind Power",
             createAnimation("plants/wind_power", 8),
-            1,
+            _1,
             100,
             4,
             BigDecimal.valueOf(20)
@@ -118,7 +119,7 @@ public class Plants
             wind_plant
     );
     
-    private static BuildingType createPlant(String title, Animation animation, int size, int cost, int megaWatt, BigDecimal maintenance)
+    private static BuildingType createPlant(String title, Animation animation, StructureSize size, int cost, int megaWatt, BigDecimal maintenance)
     {
         BuildingType bt = createBuildingType(title, animation, size, Zones.plants, cost, maintenance);
         bt.setCustom(MEGA_WATT, megaWatt);
@@ -161,8 +162,8 @@ public class Plants
         return type.getCustom(MEGA_WATT, Integer.class);
     }
     
-    public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), 1, Zones.plants, 0);
-    public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), 1, Zones.plants, 0);
+    public static final BuildingType pump = createBuildingType(createAnimation("water_pump/pump", 8), _1, Zones.plants, 0);
+    public static final BuildingType protest = createBuildingType(createAnimation("protest/protest", 2), _1, Zones.plants, 0);
     
     public static Electricity getElectricity(SelfConnectionType type)
     {

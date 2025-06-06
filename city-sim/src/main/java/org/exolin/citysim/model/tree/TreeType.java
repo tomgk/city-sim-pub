@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.exolin.citysim.model.Animation;
+import static org.exolin.citysim.model.StructureSize._1;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.utils.ImageUtils;
 
@@ -55,7 +56,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
     
     public TreeType(boolean isGrass, String name, BufferedImage image, int count, boolean alive)
     {
-        super(name, createVariants(name, image), 1);
+        super(name, createVariants(name, image), _1);
         this.isGrass = isGrass;
         this.count = count;
         this.alive = alive;

@@ -463,7 +463,6 @@ public final class World
      */
     private void iterateStructures(Consumer<Structure<?, ?, ?, ?>> consumer)
     {
-        
         //TODO: maybe no copy
         List<Structure> originalStructures = new ArrayList<>(this.structures);
         
@@ -517,7 +516,7 @@ public final class World
             return;
         
         //no building without electric
-        if(!structuresWithElectricity.containsKey(s))
+        if(!canBuildBuilding(s))
             return;
 
         if(hasAnyInRadius(SelfConnections.street, s.getX(), s.getY(), Zones.BUILDING_DISTANCE))
@@ -623,5 +622,10 @@ public final class World
     public boolean hasElectricity(Structure<?, ?, ?, ?> s)
     {
         return structuresWithElectricity.containsKey(s);
+    }
+    
+    public boolean canBuildBuilding(Structure<?, ?, ?, ?> s)
+    {
+        return hasElectricity(s);
     }
 }

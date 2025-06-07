@@ -359,7 +359,32 @@ public final class World
     }
     
     private static final double TICK_PROBABILTY_FOR_BUILDING = 0.0001;
-
+    
+    private int getMaxZone(ZoneType z, int x, int y)
+    {
+        for(int size=1;size<3;++size)
+        {
+            if(!isFullOf(z, x, y, size))
+                return size-1;
+        }
+        return 3;
+    }
+    
+    private boolean isFullOf(ZoneType z, int x, int y, int size)
+    {
+        for(int yi=0;yi<size;++yi)
+        {
+            for(int xi=0;xi<size;++xi)
+            {
+                Structure<?, ?, ?, ?> b = getBuildingAt(x+xi, y+yi);
+                if(b == null || b.getType() != z)
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+    
     private <B> void replaceBuilding(ZoneType type, int x, int y, int ticks)
     {
         Structure<?, ?, ?, ?> b = getBuildingAt(x, y);
@@ -482,31 +507,6 @@ public final class World
 
         if(hasAnyInRadius(SelfConnections.street, s.getX(), s.getY(), Zones.BUILDING_DISTANCE))
             replaceBuilding(z, s.getX(), s.getY(), ticks);
-    }
-    
-    private int getMaxZone(ZoneType z, int x, int y)
-    {
-        for(int size=1;size<3;++size)
-        {
-            if(!isFullOf(z, x, y, size))
-                return size-1;
-        }
-        return 3;
-    }
-    
-    private boolean isFullOf(ZoneType z, int x, int y, int size)
-    {
-        for(int yi=0;yi<size;++yi)
-        {
-            for(int xi=0;xi<size;++xi)
-            {
-                Structure<?, ?, ?, ?> b = getBuildingAt(x+xi, y+yi);
-                if(b == null || b.getType() != z)
-                    return false;
-            }
-        }
-        
-        return true;
     }
 
     private boolean hasAnyInRadius(SelfConnectionType street, int cx, int cy, int distance)

@@ -624,8 +624,10 @@ public final class World
         return structuresWithElectricity.containsKey(s);
     }
     
+    private static final boolean NEED_ELECTRICITY = true;
+    
     public boolean canBuildBuilding(Structure<?, ?, ?, ?> s)
     {
-        return hasElectricity(s);
+        return NEED_ELECTRICITY || hasElectricity(s);
     }
 }

@@ -19,11 +19,11 @@ public interface GetWorld
     
     interface ChangeListener
     {
-        void changed(World newWorld);
+        void changed(World oldWorld, World newWorld);
     }
     
-    void addChangeListener(ChangeListener listener);
-    void removeChangeListener(ChangeListener listener);
+    void addChangeListenerx(ChangeListener listener);
+    void removeChangeListenerx(ChangeListener listener);
     
     /**
      * Creates an instance where the world stays the same.
@@ -42,13 +42,13 @@ public interface GetWorld
             }
 
             @Override
-            public void addChangeListener(ChangeListener listener)
+            public void addChangeListenerx(ChangeListener listener)
             {
                 //not needed since it can't change
             }
 
             @Override
-            public void removeChangeListener(ChangeListener listener)
+            public void removeChangeListenerx(ChangeListener listener)
             {
                 //not needed since it can't change
             }
@@ -66,15 +66,15 @@ public interface GetWorld
             }
 
             @Override
-            public void addChangeListener(ChangeListener listener)
+            public void addChangeListenerx(ChangeListener listener)
             {
-                source.get().addChangeListener(listener);
+                source.get().addChangeListenerx(listener);
             }
 
             @Override
-            public void removeChangeListener(ChangeListener listener)
+            public void removeChangeListenerx(ChangeListener listener)
             {
-                source.get().removeChangeListener(listener);
+                source.get().removeChangeListenerx(listener);
             }
         };
     }

@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileFilter;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.storage.WorldStorage;
 import org.exolin.citysim.utils.Utils;
 
@@ -23,7 +24,7 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class GameControlPanel extends javax.swing.JPanel implements GetWorld.ChangeListener
+public class GameControlPanel extends javax.swing.JPanel implements GetWorld.ChangeListener, WorldListener
 {
     private GamePanel panel;
     private final JFileChooser fileChooser = new JFileChooser(new File("./saves"));
@@ -67,9 +68,17 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     }
 
     @Override
-    public void changed(World newWorld)
+    public void changed(World oldWorld, World newWorld)
     {
+        oldWorld.removeListener(this);
+        newWorld.removeListener(this);
         setSpeed(newWorld.getTickFactor());
+    }
+
+    @Override
+    public void onChangeNeedElectricity(boolean newValue)
+    {
+        //TODO: show
     }
     
     private void addSpeedLabel(JLabel label, SimulationSpeed speed)
@@ -84,10 +93,12 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
             return;
         
         if(this.panel != null)
-            this.panel.getWorldHolder().removeChangeListener(this);
+        {
+            this.panel.getWorldHolder().removeChangeListenerx(this);
+        }
         
         this.panel = panel;
-        panel.getWorldHolder().addChangeListener(this);
+        panel.getWorldHolder().addChangeListenerx(this);
         
         setSpeed(panel.getTickFactor());
     }

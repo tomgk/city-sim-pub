@@ -630,4 +630,16 @@ public final class World
     {
         return NEED_ELECTRICITY || hasElectricity(s);
     }
+    
+    private static final List<WorldListener> listeners = new ArrayList<>();
+    
+    public void addListener(WorldListener listener)
+    {
+        listeners.add(listener);
+    }
+    
+    public void removeListener(WorldListener listener)
+    {
+        listeners.remove(listener);
+    }
 }

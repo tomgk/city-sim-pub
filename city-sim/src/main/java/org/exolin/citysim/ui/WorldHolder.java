@@ -30,6 +30,8 @@ public final class WorldHolder implements GetWorld
     
     public void set(World world, Path file)
     {
+        World old = world;
+        
         Objects.requireNonNull(world);
         //worldFile can be null
         
@@ -37,7 +39,7 @@ public final class WorldHolder implements GetWorld
         this.file = file;
         
         for(ChangeListener l: listeners)
-            l.changed(world);
+            l.changed(old, world);
     }
 
     public Path getFile()
@@ -51,13 +53,13 @@ public final class WorldHolder implements GetWorld
     }
 
     @Override
-    public void addChangeListener(ChangeListener listener)
+    public void addChangeListenerx(ChangeListener listener)
     {
         listeners.add(Objects.requireNonNull(listener));
     }
 
     @Override
-    public void removeChangeListener(ChangeListener listener)
+    public void removeChangeListenerx(ChangeListener listener)
     {
         listeners.remove(listener);
     }

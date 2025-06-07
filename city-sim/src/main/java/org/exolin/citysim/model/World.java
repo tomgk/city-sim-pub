@@ -628,7 +628,7 @@ public final class World
     
     public boolean canBuildBuilding(Structure<?, ?, ?, ?> s)
     {
-        return NEED_ELECTRICITY || hasElectricity(s);
+        return NEED_ELECTRICITY ? hasElectricity(s) : true;
     }
     
     private static final List<WorldListener> listeners = new ArrayList<>();

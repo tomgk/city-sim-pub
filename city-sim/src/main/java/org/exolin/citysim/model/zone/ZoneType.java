@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.zone;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
@@ -64,6 +65,15 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
     
     public BuildingType getRandomBuilding(int maxSize)
     {
+        /*
+        //returns biggest building
+        if(false)
+        return buildings.stream()
+                .filter(b -> b.getSize() <= maxSize)
+                .sorted(Comparator.comparing((BuildingType b) -> b.getSize()).reversed())
+                .findFirst().get();
+        */
+        
         List<BuildingType> smallBuildings = buildings.stream()
                 .filter(b -> b.getSize() <= maxSize)
                 //.filter(b -> b.getSize() > 1)

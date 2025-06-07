@@ -94,11 +94,11 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
         
         if(this.panel != null)
         {
-            this.panel.getWorldHolder().removeChangeListenerx(this);
+            this.panel.getWorldHolder().removeChangeListener(this);
         }
         
         this.panel = panel;
-        panel.getWorldHolder().addChangeListenerx(this);
+        panel.getWorldHolder().addChangeListener(this);
         
         setSpeed(panel.getTickFactor());
     }

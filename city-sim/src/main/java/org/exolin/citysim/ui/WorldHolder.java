@@ -53,13 +53,13 @@ public final class WorldHolder implements GetWorld
     }
 
     @Override
-    public void addChangeListenerx(ChangeListener listener)
+    public void addChangeListener(ChangeListener listener)
     {
         listeners.add(Objects.requireNonNull(listener));
     }
 
     @Override
-    public void removeChangeListenerx(ChangeListener listener)
+    public void removeChangeListener(ChangeListener listener)
     {
         listeners.remove(listener);
     }

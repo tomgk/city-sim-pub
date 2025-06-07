@@ -362,7 +362,7 @@ public final class World
     
     private int getMaxZone(ZoneType z, int x, int y)
     {
-        for(int size=1;size<3;++size)
+        for(int size=1;size<StructureSize.MAX;++size)
         {
             if(!isFullOf(z, x, y, size))
                 return size-1;

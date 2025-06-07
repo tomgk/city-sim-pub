@@ -38,4 +38,10 @@ public class StructureSizeTest
     {
         assertEquals(4, StructureSize.values().length);
     }
+    
+    @Test
+    public void testMax()
+    {
+        assertEquals(4, StructureSize.MAX);
+    }
 }

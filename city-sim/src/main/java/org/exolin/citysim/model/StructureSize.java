@@ -12,4 +12,6 @@ public enum StructureSize
     {
         return ordinal()+1;
     }
+    
+    public static final int MAX = values().length;
 }

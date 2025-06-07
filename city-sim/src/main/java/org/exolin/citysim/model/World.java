@@ -360,6 +360,7 @@ public final class World
     
     private static final double TICK_PROBABILTY_FOR_BUILDING = 0.0001;
     
+    /** returns the biggest dimension possible to build on that zone */
     private int getMaxZone(ZoneType z, int x, int y)
     {
         for(int size=1;size<StructureSize.MAX;++size)
@@ -370,6 +371,7 @@ public final class World
         return 3;
     }
     
+    /** checks if size x size tiles are of zone z (empty zone) */
     private boolean isFullOf(ZoneType z, int x, int y, int size)
     {
         for(int yi=0;yi<size;++yi)
@@ -429,6 +431,11 @@ public final class World
         buildSupply.computeIfPresent(type.get(), (k, v) -> v+factor*building.getSupply());
     }
     
+    /**
+     * updates the amount of money, based on taxes and costs
+     * 
+     * @param passedTicks passed ticks
+     */
     private void updateMoney(long passedTicks)
     {
         long moneyTime = passedTicks*GamePanel.TICK_LENGTH/MONEY_PERIOD;
@@ -446,6 +453,14 @@ public final class World
         }
     }
     
+    /**
+     * Iterates over all current structures,
+     * ignoring those added by the {@link consumer}
+     * as well as those removed previously by the {@code consumer}.
+     * 
+     * @param consumer gets called for every entry that existed at the time
+     *                 of the call exluding the removed ones
+     */
     private void iterateStructures(Consumer<Structure<?, ?, ?, ?>> consumer)
     {
         

@@ -1,7 +1,6 @@
 package org.exolin.citysim.model.zone;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;

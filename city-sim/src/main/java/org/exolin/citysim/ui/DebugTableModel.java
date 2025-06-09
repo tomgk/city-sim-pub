@@ -1,19 +1,15 @@
 package org.exolin.citysim.ui;
 
-import java.awt.Component;
+import java.math.BigDecimal;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -161,6 +157,11 @@ public class DebugTableModel implements TableModel
         };
     }
     
+    private static void output(String name, Object value)
+    {
+        System.out.println(name+"="+value+" ["+value.getClass().getSimpleName()+"]");
+    }
+    
     public static void main(String[] args)
     {
         List<Entry<String, Value<?>>> values = new ArrayList<>();
@@ -185,7 +186,7 @@ public class DebugTableModel implements TableModel
             public void set(Boolean value)
             {
                 this.val = value;
-                System.out.println(name+"="+value);
+                output(name, value);
             }
         }
         
@@ -210,7 +211,7 @@ public class DebugTableModel implements TableModel
             public void set(String value)
             {
                 this.val = value;
-                System.out.println(name+"="+value);
+                output(name, value);
             }
         }
         
@@ -235,7 +236,32 @@ public class DebugTableModel implements TableModel
             public void set(Integer value)
             {
                 this.val = value;
-                System.out.println(name+"="+value);
+                output(name, value);
+            }
+        }
+        
+        class BigDecVal implements Value<BigDecimal>
+        {
+            private final String name;
+            private BigDecimal val;
+
+            public BigDecVal(String name, BigDecimal value)
+            {
+                this.name = name;
+                this.val = value;
+            }
+            
+            @Override
+            public BigDecimal get()
+            {
+                return val;
+            }
+
+            @Override
+            public void set(BigDecimal value)
+            {
+                this.val = value;
+                output(name, value);
             }
         }
         
@@ -263,7 +289,7 @@ public class DebugTableModel implements TableModel
             public void set(E value)
             {
                 this.val = value;
-                System.out.println(name+"="+value);
+                output(name, value);
             }
         }
         
@@ -271,6 +297,7 @@ public class DebugTableModel implements TableModel
         values.add(new AbstractMap.SimpleImmutableEntry<>("needElectricity", new BoolVal("needElectricity")));
         values.add(new AbstractMap.SimpleImmutableEntry<>("speed", new IntVal("speed", 3)));
         values.add(new AbstractMap.SimpleImmutableEntry<>("catastrophes", new EnumVal(YesNo.class, "catastrophes", YesNo.MAYBE)));
+        values.add(new AbstractMap.SimpleImmutableEntry<>("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
         
         JTable t = createJTable(values);
         JFrame f = new JFrame();

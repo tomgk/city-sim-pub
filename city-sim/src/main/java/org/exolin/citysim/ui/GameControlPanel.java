@@ -12,7 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -81,7 +80,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     }
 
     @Override
-    public void onChangeNeedElectricity(boolean newValue)
+    public void onChanged(String name, Object value)
     {
         //TODO: show
     }

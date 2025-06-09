@@ -29,4 +29,19 @@ public class ValueTest
         
         assertEquals(Boolean.class, v.getType());
     }
+    
+    @Test
+    public void testGetType_Readonly()
+    {
+        Value.Readonly<Boolean> v = new Value.Readonly<Boolean>()
+        {
+            @Override
+            public Boolean get()
+            {
+                throw new AssertionError("shouldn't be called");
+            }
+        };
+        
+        assertEquals(Boolean.class, v.getType());
+    }
 }

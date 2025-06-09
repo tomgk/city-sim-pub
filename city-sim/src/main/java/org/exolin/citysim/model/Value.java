@@ -12,6 +12,10 @@ public interface Value<T>
 {
     T get();
     void set(T value);
+    default boolean isReadonly()
+    {
+        return false;
+    }
     
     default Class<T> getType()
     {
@@ -25,7 +29,7 @@ public interface Value<T>
             ParameterizedType superClass = (ParameterizedType) x;
             
             Class rt = (Class)superClass.getRawType();
-            if(rt != Value.class)
+            if(rt != Value.class && rt != Readonly.class)
                 continue;
             
             for(Type t : superClass.getActualTypeArguments())
@@ -38,6 +42,21 @@ public interface Value<T>
         }
         
         throw new UnsupportedOperationException();
+    }
+    
+    interface Readonly<T> extends Value<T>
+    {
+        @Override
+        default boolean isReadonly()
+        {
+            return true;
+        }
+
+        @Override
+        public default void set(T value)
+        {
+            throw new UnsupportedOperationException("readonly");
+        }
     }
     
     abstract class EnumValue<E extends Enum<E>> implements Value<E>

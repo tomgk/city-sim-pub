@@ -71,7 +71,13 @@ public class DebugTableModel implements TableModel
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex)
     {
-        return columnIndex == VALUE;
+        if(columnIndex != VALUE)
+            return false;
+        
+        var entry = entries.get(rowIndex);
+        
+        var v = entry.getValue();
+        return !v.isReadonly();
     }
     
     private static String getTypeName(Class<?> clazz)
@@ -240,6 +246,24 @@ public class DebugTableModel implements TableModel
             }
         }
         
+        class ReadonlyIntVal implements Value.Readonly<Integer>
+        {
+            private final String name;
+            private final int val;
+
+            public ReadonlyIntVal(String name, int value)
+            {
+                this.name = name;
+                this.val = value;
+            }
+            
+            @Override
+            public Integer get()
+            {
+                return val;
+            }
+        }
+        
         class BigDecVal implements Value<BigDecimal>
         {
             private final String name;
@@ -298,6 +322,7 @@ public class DebugTableModel implements TableModel
         values.add(new AbstractMap.SimpleImmutableEntry<>("speed", new IntVal("speed", 3)));
         values.add(new AbstractMap.SimpleImmutableEntry<>("catastrophes", new EnumVal(YesNo.class, "catastrophes", YesNo.MAYBE)));
         values.add(new AbstractMap.SimpleImmutableEntry<>("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
+        values.add(new AbstractMap.SimpleImmutableEntry<>("stats.buildingCount", new ReadonlyIntVal("stats.buildingCount", 103)));
         
         JTable t = createJTable(values);
         JFrame f = new JFrame();

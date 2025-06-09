@@ -108,7 +108,7 @@ public class DebugTableModel implements TableModel
         {
             case VALUE -> ((Value)entry.getValue()).set(aValue);
             default -> throw new IllegalArgumentException();
-        };
+        }
     }
 
     @Override

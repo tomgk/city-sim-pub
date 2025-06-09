@@ -2,12 +2,14 @@ package org.exolin.citysim.model;
 
 import java.awt.Rectangle;
 import java.math.BigDecimal;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -624,11 +626,34 @@ public final class World
         return structuresWithElectricity.containsKey(s);
     }
     
-    private static final boolean NEED_ELECTRICITY = true;
+    private boolean needElectricity = true;
+    
+    private final List<Entry<String, Value<?>>> values = new ArrayList<>();
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>("needElectricity", new Value<Boolean>()
+        {
+            @Override
+            public Boolean get()
+            {
+                return World.this.needElectricity;
+            }
+
+            @Override
+            public void set(Boolean value)
+            {
+                World.this.needElectricity = value;
+            }
+        }));
+    }
+
+    public List<Entry<String, Value<?>>> getValues()
+    {
+        return Collections.unmodifiableList(values);
+    }
     
     public boolean canBuildBuilding(Structure<?, ?, ?, ?> s)
     {
-        return NEED_ELECTRICITY ? hasElectricity(s) : true;
+        return needElectricity ? hasElectricity(s) : true;
     }
     
     private static final List<WorldListener> listeners = new ArrayList<>();

@@ -24,6 +24,7 @@ import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -631,6 +632,9 @@ public final class World
     public static final String PROPERTY_CITY_NAME = "cityName";
     public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
     public static final String PROPERTY_MONEY = "money";
+    public static final String PROPERTY_STRUCTURE_COUNT = "stuctureCount";
+    public static final String PROPERTY_MONEY_UPDATE = "lastMoneyUpdate";
+    public static final String PROPERTY_LAST_CHANGE = "lastChange";
     
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     {
@@ -678,6 +682,33 @@ public final class World
             {
                 World.this.money = value;
                 changed(PROPERTY_NEED_ELECTRICITY, value);
+            }
+        }));
+        
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_STRUCTURE_COUNT, new ReadonlyValue<Integer>()
+        {
+            @Override
+            public Integer get()
+            {
+                return structures.size();
+            }
+        }));
+        
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY_UPDATE, new ReadonlyValue<Long>()
+        {
+            @Override
+            public Long get()
+            {
+                return lastMoneyUpdate;
+            }
+        }));
+        
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_LAST_CHANGE, new ReadonlyValue<Long>()
+        {
+            @Override
+            public Long get()
+            {
+                return lastChange;
             }
         }));
     }

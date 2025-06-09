@@ -100,7 +100,7 @@ public class StructureVariantTest
     public void testGetValues_BuildingType()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(BuildingType.Variant.class);
-        assertEquals(Set.of(BuildingType.Variant.DEFAULT), values);
+        assertEquals(Set.of(BuildingType.Variant.DEFAULT, BuildingType.Variant.ROTATED), values);
     }
     
     private static Stream<Arguments> structureVariantClasses()

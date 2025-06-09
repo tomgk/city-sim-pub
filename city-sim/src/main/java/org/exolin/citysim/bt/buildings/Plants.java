@@ -31,6 +31,8 @@ public class Plants
 {
     public static final CustomKey MEGA_WATT = CustomKey.createKey("megaWatt");
     
+    //TODO: maintenance
+    
     /**
      * https://github.com/tomgk/city-sim-pub/issues/162
      */
@@ -108,6 +110,16 @@ public class Plants
             BigDecimal.valueOf(20)
     );
     
+    public static final BuildingType hydro_plant = createPlant2(
+            "Hydro Power",
+            createUnanimated("plants/hydro_x"),
+            createUnanimated("plants/hydro_y"),
+            _1,
+            400,
+            20,
+            BigDecimal.valueOf(20)
+    );
+    
     public static final List<BuildingType> ALL = List.of(
             solar_plant,
             microwave_plant,
@@ -118,6 +130,13 @@ public class Plants
             coal_plant,
             wind_plant
     );
+    
+    private static BuildingType createPlant2(String title, Animation animation, Animation animation2, StructureSize size, int cost, int megaWatt, BigDecimal maintenance)
+    {
+        BuildingType bt = createBuildingType(title, animation, animation2, size, Zones.plants, cost, maintenance);
+        bt.setCustom(MEGA_WATT, megaWatt);
+        return bt;
+    }
     
     private static BuildingType createPlant(String title, Animation animation, StructureSize size, int cost, int megaWatt, BigDecimal maintenance)
     {

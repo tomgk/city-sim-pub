@@ -3,6 +3,7 @@ package org.exolin.citysim.model.building;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
 {
     public enum Variant implements StructureVariant
     {
-        DEFAULT
+        DEFAULT, ROTATED
     }
     
     private final String title;
@@ -71,10 +72,21 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
         this(name, animation, size, zoneType, cost, BigDecimal.ZERO, UpdateAfterTick.NOTHING, null);
     }*/
     
-    @SuppressWarnings("LeakingThisInConstructor")
+    
     public BuildingType(String name, String title, Animation animation, StructureSize size, ZoneType zoneType, int cost, BigDecimal maintenance)
     {
-        super(name, animation, size);
+        this(name, title, List.of(animation, animation), size, zoneType, cost, maintenance);
+    }
+    
+    public BuildingType(String name, String title, Animation animation, Animation animation2, StructureSize size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    {
+        this(name, title, List.of(animation, animation2), size, zoneType, cost, maintenance);
+    }
+    
+    @SuppressWarnings("LeakingThisInConstructor")
+    private BuildingType(String name, String title, List<Animation> animations, StructureSize size, ZoneType zoneType, int cost, BigDecimal maintenance)
+    {
+        super(name, animations, size);
         this.title = Objects.requireNonNull(title);
         this.zoneType = Objects.requireNonNull(zoneType);
         zoneType.addBuilding(this);

@@ -1,5 +1,7 @@
 package org.exolin.citysim.model;
 
+import org.exolin.citysim.model.debug.ReadonlyValue;
+import org.exolin.citysim.model.debug.Value;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +35,7 @@ public class ValueTest
     @Test
     public void testGetType_Readonly()
     {
-        Value.Readonly<Boolean> v = new Value.Readonly<Boolean>()
+        ReadonlyValue<Boolean> v = new ReadonlyValue<Boolean>()
         {
             @Override
             public Boolean get()

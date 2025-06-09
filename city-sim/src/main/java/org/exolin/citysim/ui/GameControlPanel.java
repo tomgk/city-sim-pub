@@ -21,7 +21,7 @@ import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.storage.WorldStorage;
-import static org.exolin.citysim.ui.DebugTableModel.createJTable;
+import static org.exolin.citysim.ui.debug.DebugTableModel.createJTable;
 import org.exolin.citysim.utils.Utils;
 
 /**

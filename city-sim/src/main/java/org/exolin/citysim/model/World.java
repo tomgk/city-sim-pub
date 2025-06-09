@@ -24,6 +24,7 @@ import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;

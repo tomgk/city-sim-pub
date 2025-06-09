@@ -1,4 +1,4 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.debug;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -29,7 +29,7 @@ public interface Value<T>
             ParameterizedType superClass = (ParameterizedType) x;
             
             Class rt = (Class)superClass.getRawType();
-            if(rt != Value.class && rt != Readonly.class)
+            if(rt != Value.class && rt != ReadonlyValue.class)
                 continue;
             
             for(Type t : superClass.getActualTypeArguments())
@@ -42,36 +42,5 @@ public interface Value<T>
         }
         
         throw new UnsupportedOperationException();
-    }
-    
-    interface Readonly<T> extends Value<T>
-    {
-        @Override
-        default boolean isReadonly()
-        {
-            return true;
-        }
-
-        @Override
-        public default void set(T value)
-        {
-            throw new UnsupportedOperationException("readonly");
-        }
-    }
-    
-    abstract class EnumValue<E extends Enum<E>> implements Value<E>
-    {
-        private final Class<E> type;
-
-        public EnumValue(Class<E> type)
-        {
-            this.type = type;
-        }
-        
-        @Override
-        public Class<E> getType()
-        {
-            return type;
-        }
     }
 }

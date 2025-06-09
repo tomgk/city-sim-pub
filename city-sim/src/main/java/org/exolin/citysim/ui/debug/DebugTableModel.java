@@ -1,4 +1,4 @@
-package org.exolin.citysim.ui;
+package org.exolin.citysim.ui.debug;
 
 import java.math.BigDecimal;
 import java.util.AbstractMap;
@@ -13,7 +13,9 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-import org.exolin.citysim.model.Value;
+import org.exolin.citysim.model.debug.EnumValue;
+import org.exolin.citysim.model.debug.ReadonlyValue;
+import org.exolin.citysim.model.debug.Value;
 
 /**
  *
@@ -246,14 +248,12 @@ public class DebugTableModel implements TableModel
             }
         }
         
-        class ReadonlyIntVal implements Value.Readonly<Integer>
+        class ReadonlyIntVal implements ReadonlyValue<Integer>
         {
-            private final String name;
             private final int val;
 
-            public ReadonlyIntVal(String name, int value)
+            public ReadonlyIntVal(int value)
             {
-                this.name = name;
                 this.val = value;
             }
             
@@ -291,7 +291,7 @@ public class DebugTableModel implements TableModel
         
         enum YesNo{YES, NO, MAYBE}
         
-        class EnumVal<E extends Enum<E>> extends Value.EnumValue<E>
+        class EnumVal<E extends Enum<E>> extends EnumValue<E>
         {
             private final String name;
             private E val;
@@ -322,7 +322,7 @@ public class DebugTableModel implements TableModel
         values.add(new AbstractMap.SimpleImmutableEntry<>("speed", new IntVal("speed", 3)));
         values.add(new AbstractMap.SimpleImmutableEntry<>("catastrophes", new EnumVal(YesNo.class, "catastrophes", YesNo.MAYBE)));
         values.add(new AbstractMap.SimpleImmutableEntry<>("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("stats.buildingCount", new ReadonlyIntVal("stats.buildingCount", 103)));
+        values.add(new AbstractMap.SimpleImmutableEntry<>("stats.buildingCount", new ReadonlyIntVal(103)));
         
         JTable t = createJTable(values);
         JFrame f = new JFrame();

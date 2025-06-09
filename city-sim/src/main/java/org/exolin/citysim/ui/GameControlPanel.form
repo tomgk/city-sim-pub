@@ -56,10 +56,17 @@
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Component id="keyMappingLabel" min="-2" pref="532" max="-2" attributes="0"/>
-              <EmptySpace pref="291" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
-                  <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="291" max="32767" attributes="0"/>
+                      <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="debugLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -79,7 +86,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="saveLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="debugLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="loadLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -301,6 +311,14 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nextViewMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="debugLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="[DBG] Value Inspector"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="debugLabelMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

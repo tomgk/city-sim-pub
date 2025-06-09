@@ -10,14 +10,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.storage.WorldStorage;
+import static org.exolin.citysim.ui.DebugTableModel.createJTable;
 import org.exolin.citysim.utils.Utils;
 
 /**
@@ -149,6 +154,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
         speed5Label = new javax.swing.JLabel();
         prevView = new javax.swing.JLabel();
         nextView = new javax.swing.JLabel();
+        debugLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -305,6 +311,15 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
             }
         });
 
+        debugLabel.setText("[DBG] Value Inspector");
+        debugLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                debugLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -344,10 +359,15 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
                     .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(keyMappingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(loadLabel)
-                    .addComponent(saveLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addComponent(loadLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(debugLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveLabel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -363,7 +383,9 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(saveLabel)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(saveLabel)
+                                    .addComponent(debugLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(loadLabel))
                             .addGroup(layout.createSequentialGroup()
@@ -482,6 +504,18 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
        panel.setView(panel.getView().getNext());
     }//GEN-LAST:event_nextViewMouseClicked
 
+    private void debugLabelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_debugLabelMouseClicked
+    {//GEN-HEADEREND:event_debugLabelMouseClicked
+        var parent = SwingUtilities.getWindowAncestor(this);
+        JDialog d = new JDialog(parent, "Values");
+        JTable t = createJTable(panel.getWorld().getValues());
+        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        d.add(t);
+        d.pack();
+        d.setLocationRelativeTo(parent);
+        d.setVisible(true);
+    }//GEN-LAST:event_debugLabelMouseClicked
+
     private SimulationSpeed selectSpeedLabel(JLabel selected)
     {
         SimulationSpeed tickFactor = labelToSpeed.get(selected);
@@ -495,6 +529,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel debugLabel;
     private javax.swing.JLabel keyMappingLabel;
     private javax.swing.JLabel nextView;
     private javax.swing.JLabel pauseLabel;

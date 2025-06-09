@@ -43,7 +43,7 @@ public final class World
         StructureTypes.init();
     }
     
-    private final String name;
+    private String name;
     
     //hint: lastChange should not be saved in save file,
     //so that the time gaps where the game doesnt run are just ignored
@@ -630,6 +630,20 @@ public final class World
     
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     {
+        values.add(new AbstractMap.SimpleImmutableEntry<>("cityName", new Value<String>(){
+            @Override
+            public String get()
+            {
+                return name;
+            }
+
+            @Override
+            public void set(String value)
+            {
+                World.this.name = value;
+            }
+        }));
+        
         values.add(new AbstractMap.SimpleImmutableEntry<>("needElectricity", new Value<Boolean>()
         {
             @Override

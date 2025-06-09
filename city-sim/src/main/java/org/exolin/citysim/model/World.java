@@ -630,6 +630,7 @@ public final class World
     
     public static final String PROPERTY_CITY_NAME = "cityName";
     public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
+    public static final String PROPERTY_MONEY = "money";
     
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     {
@@ -660,6 +661,22 @@ public final class World
             public void set(Boolean value)
             {
                 World.this.needElectricity = value;
+                changed(PROPERTY_NEED_ELECTRICITY, value);
+            }
+        }));
+        
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY, new Value<BigDecimal>()
+        {
+            @Override
+            public BigDecimal get()
+            {
+                return World.this.money;
+            }
+
+            @Override
+            public void set(BigDecimal value)
+            {
+                World.this.money = value;
                 changed(PROPERTY_NEED_ELECTRICITY, value);
             }
         }));

@@ -6,5 +6,5 @@ package org.exolin.citysim.model;
  */
 public interface WorldListener
 {
-    public void onChangeNeedElectricity(boolean newValue);
+    public void onChanged(String name, Object value);
 }

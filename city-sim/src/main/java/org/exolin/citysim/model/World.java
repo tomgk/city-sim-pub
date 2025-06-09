@@ -628,9 +628,12 @@ public final class World
     
     private boolean needElectricity = true;
     
+    public static final String PROPERTY_CITY_NAME = "cityName";
+    public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
+    
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     {
-        values.add(new AbstractMap.SimpleImmutableEntry<>("cityName", new Value<String>(){
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_CITY_NAME, new Value<String>(){
             @Override
             public String get()
             {
@@ -641,10 +644,11 @@ public final class World
             public void set(String value)
             {
                 World.this.name = value;
+                changed(PROPERTY_CITY_NAME, value);
             }
         }));
         
-        values.add(new AbstractMap.SimpleImmutableEntry<>("needElectricity", new Value<Boolean>()
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_NEED_ELECTRICITY, new Value<Boolean>()
         {
             @Override
             public Boolean get()
@@ -656,6 +660,7 @@ public final class World
             public void set(Boolean value)
             {
                 World.this.needElectricity = value;
+                changed(PROPERTY_NEED_ELECTRICITY, value);
             }
         }));
     }
@@ -680,5 +685,10 @@ public final class World
     public void removeListener(WorldListener listener)
     {
         listeners.remove(listener);
+    }
+    
+    private void changed(String name, Object newValue)
+    {
+        listeners.stream().forEach(l -> l.onChanged(name, newValue));
     }
 }

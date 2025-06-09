@@ -23,7 +23,7 @@ public class DebugTableModelRun
         System.out.println(name+"="+value+" ["+value.getClass().getSimpleName()+"]");
     }
     
-    public static void main(String[] args)
+    public static void main1(String[] args)
     {
         List<Map.Entry<String, Value<?>>> values = new ArrayList<>();
         

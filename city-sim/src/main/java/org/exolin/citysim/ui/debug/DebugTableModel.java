@@ -33,18 +33,21 @@ public class DebugTableModel implements TableModel
     @Override
     public int getColumnCount()
     {
-        return 3;
+        return COUNT;
     }
     
-    private static final int TYPE = 0;
-    private static final int NAME = 1;
-    private static final int VALUE = 2;
+    private static final int WRITABLE = 0;
+    private static final int TYPE = 1;
+    private static final int NAME = 2;
+    private static final int VALUE = 3;
+    private static final int COUNT = 4;
 
     @Override
     public String getColumnName(int columnIndex)
     {
         return switch(columnIndex)
         {
+            case WRITABLE -> "Writable";
             case TYPE -> "Type";
             case NAME -> "Name";
             case VALUE -> "Value";
@@ -57,6 +60,7 @@ public class DebugTableModel implements TableModel
     {
         return switch(columnIndex)
         {
+            case WRITABLE -> boolean.class;
             case TYPE -> String.class;
             case NAME -> String.class;
             case VALUE -> Object.class;
@@ -88,6 +92,7 @@ public class DebugTableModel implements TableModel
         
         return switch(columnIndex)
         {
+            case WRITABLE -> !entry.getValue().isReadonly();
             case TYPE -> getTypeName(entry.getValue().getType());
             case NAME -> entry.getKey();
             case VALUE -> entry.getValue().get();
@@ -157,5 +162,10 @@ public class DebugTableModel implements TableModel
                 return editingClass != null ? editingClass : super.getColumnClass(column);
             }
         };
+    }
+    
+    public static void main(String[] args)
+    {
+        DebugTableModelRun.main1(args);
     }
 }

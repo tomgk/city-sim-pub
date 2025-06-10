@@ -126,7 +126,7 @@ public class DebugTableModel implements TableModel
     
     public static JTable createJTable(List<Entry<String, Value<?>>> values)
     {
-        return new JTable(new DebugTableModel(values)){
+        JTable t = new JTable(new DebugTableModel(values)){
             @Override
             public TableCellRenderer getDefaultRenderer(Class<?> columnClass)
             {
@@ -182,6 +182,11 @@ public class DebugTableModel implements TableModel
                 return editingClass != null ? editingClass : super.getColumnClass(column);
             }
         };
+        
+        t.getColumnModel().getColumn(WRITABLE).setPreferredWidth(40);
+        t.getColumnModel().getColumn(NAME).setPreferredWidth(140);
+        
+        return t;
     }
     
     public static void main(String[] args)

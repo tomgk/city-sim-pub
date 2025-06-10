@@ -127,6 +127,26 @@ public class DebugTableModel implements TableModel
     public static JTable createJTable(List<Entry<String, Value<?>>> values)
     {
         return new JTable(new DebugTableModel(values)){
+            @Override
+            public TableCellRenderer getDefaultRenderer(Class<?> columnClass)
+            {
+                TableCellRenderer r = super.getDefaultRenderer(columnClass);
+                if(r == null)
+                    return null;
+                
+                return (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) ->
+                {
+                    //show non-editable entries in gray
+                    
+                    boolean editable = !values.get(row).getValue().isReadonly();
+                    
+                    Component c = r.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                    int V = 220;
+                    c.setBackground(editable ? Color.white : new Color(V, V, V));
+                    return c;
+                };
+            }
+            
             private static final long serialVersionUID = 1L;
             private Class editingClass;
 

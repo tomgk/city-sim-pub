@@ -177,7 +177,7 @@ public class DebugTableModelRun
         values.add(new AbstractMap.SimpleImmutableEntry<>("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
         values.add(new AbstractMap.SimpleImmutableEntry<>("stats.buildingCount", new ReadonlyIntVal(103)));
         
-        JTable t = createJTable(values);
+        JTable t = createJTable(values, true);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(t);

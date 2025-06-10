@@ -1,5 +1,7 @@
 package org.exolin.citysim.ui.debug;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -8,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import org.exolin.citysim.model.debug.Value;
 
@@ -124,7 +128,7 @@ public class DebugTableModel implements TableModel
         
     }
     
-    public static JTable createJTable(List<Entry<String, Value<?>>> values)
+    public static JTable createJTable(List<Entry<String, Value<?>>> values, boolean allColumns)
     {
         JTable t = new JTable(new DebugTableModel(values)){
             @Override
@@ -185,6 +189,16 @@ public class DebugTableModel implements TableModel
         
         t.getColumnModel().getColumn(WRITABLE).setPreferredWidth(40);
         t.getColumnModel().getColumn(NAME).setPreferredWidth(140);
+        
+        if(!allColumns)
+        {
+            TableColumnModel columnModel = t.getColumnModel();
+            TableColumn writableColumn = columnModel.getColumn(WRITABLE);
+            TableColumn typeColumn = columnModel.getColumn(TYPE);
+            
+            columnModel.removeColumn(writableColumn);
+            columnModel.removeColumn(typeColumn);
+        }
         
         return t;
     }

@@ -1,7 +1,6 @@
 package org.exolin.citysim.ui.debug;
 
 import java.math.BigDecimal;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -170,12 +169,12 @@ public class DebugTableModelRun
     {
         List<Map.Entry<String, Value<?>>> values = new ArrayList<>();
         
-        values.add(new AbstractMap.SimpleImmutableEntry<>("cityName", new StrVal("cityName", "TestVille")));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("needElectricity", new BoolVal("needElectricity")));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("speed", new IntVal("speed", 3)));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("catastrophes", new EnumVal(YesNo.class, "catastrophes", YesNo.MAYBE)));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
-        values.add(new AbstractMap.SimpleImmutableEntry<>("stats.buildingCount", new ReadonlyIntVal(103)));
+        values.add(Map.entry("cityName", new StrVal("cityName", "TestVille")));
+        values.add(Map.entry("needElectricity", new BoolVal("needElectricity")));
+        values.add(Map.entry("speed", new IntVal("speed", 3)));
+        values.add(Map.entry("catastrophes", new EnumVal(YesNo.class, "catastrophes", YesNo.MAYBE)));
+        values.add(Map.entry("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
+        values.add(Map.entry("stats.buildingCount", new ReadonlyIntVal(103)));
         
         JTable t = createJTable(values, true);
         JFrame f = new JFrame();

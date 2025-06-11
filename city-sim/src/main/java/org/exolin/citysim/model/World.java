@@ -2,10 +2,8 @@ package org.exolin.citysim.model;
 
 import java.awt.Rectangle;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.AbstractMap;
@@ -35,7 +33,6 @@ import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
-import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
@@ -688,6 +685,14 @@ public final class World
         values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, setter)));
     }
     
+    private <T> void addDebugValue(String name, Supplier<T> getter, Consumer<T> setter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, v -> {
+            setter.accept(v);
+            changed(name, v);
+        })));
+    }
+    
     private <T> void addReadonlyValue(String name, Supplier<T> getter)
     {
         values.add(new AbstractMap.SimpleImmutableEntry<>(name, (ReadonlyValue<T>)getter::get));
@@ -695,23 +700,7 @@ public final class World
     
     {
         addValue(PROPERTY_CITY_NAME, this::getName, this::setName);
-        
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_NEED_ELECTRICITY, new Value<Boolean>()
-        {
-            @Override
-            public Boolean get()
-            {
-                return World.this.needElectricity;
-            }
-
-            @Override
-            public void set(Boolean value)
-            {
-                World.this.needElectricity = value;
-                changed(PROPERTY_NEED_ELECTRICITY, value);
-            }
-        }));
-        
+        addDebugValue(PROPERTY_NEED_ELECTRICITY, () -> needElectricity, v -> this.needElectricity = v);
         addValue(PROPERTY_MONEY, this::getMoney, this::setMoney);
         addValue(PROPERTY_SIM_SPEED, this::getTickFactor, this::setTickFactor);
         addReadonlyValue(PROPERTY_STRUCTURE_COUNT, structures::size);

@@ -632,6 +632,7 @@ public final class World
     public static final String PROPERTY_CITY_NAME = "cityName";
     public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
     public static final String PROPERTY_MONEY = "money";
+    public static final String PROPERTY_SIM_SPEED = "simSpeed";
     public static final String PROPERTY_STRUCTURE_COUNT = "stuctureCount";
     public static final String PROPERTY_MONEY_UPDATE = "lastMoneyUpdate";
     public static final String PROPERTY_LAST_CHANGE = "lastChange";
@@ -681,36 +682,13 @@ public final class World
             public void set(BigDecimal value)
             {
                 World.this.money = value;
-                changed(PROPERTY_NEED_ELECTRICITY, value);
+                changed(PROPERTY_MONEY, value);
             }
         }));
         
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_STRUCTURE_COUNT, new ReadonlyValue<Integer>()
-        {
-            @Override
-            public Integer get()
-            {
-                return structures.size();
-            }
-        }));
-        
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY_UPDATE, new ReadonlyValue<Long>()
-        {
-            @Override
-            public Long get()
-            {
-                return lastMoneyUpdate;
-            }
-        }));
-        
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_LAST_CHANGE, new ReadonlyValue<Long>()
-        {
-            @Override
-            public Long get()
-            {
-                return lastChange;
-            }
-        }));
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_STRUCTURE_COUNT, (ReadonlyValue<Integer>) structures::size));
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY_UPDATE, (ReadonlyValue<Long>)() -> lastMoneyUpdate));
+        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_LAST_CHANGE, (ReadonlyValue<Long>)() -> lastChange));
     }
 
     public List<Entry<String, Value<?>>> getValues()

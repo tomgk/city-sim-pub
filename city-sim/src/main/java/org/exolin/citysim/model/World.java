@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
@@ -648,21 +649,44 @@ public final class World
     public static final String PROPERTY_MONEY_UPDATE = "lastMoneyUpdate";
     public static final String PROPERTY_LAST_CHANGE = "lastChange";
     
-    private final List<Entry<String, Value<?>>> values = new ArrayList<>();
+    private static class ValueImpl<T> implements Value<T>
     {
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_CITY_NAME, new Value<String>(){
-            @Override
-            public String get()
-            {
-                return getName();
-            }
+        private final Supplier<T> getter;
+        private final Consumer<T> setter;
 
-            @Override
-            public void set(String value)
-            {
-                setName(name);
-            }
-        }));
+        public ValueImpl(Supplier<T> getter, Consumer<T> setter)
+        {
+            this.getter = getter;
+            this.setter = setter;
+        }
+        
+        @Override
+        public T get()
+        {
+            return getter.get();
+        }
+
+        @Override
+        public void set(T value)
+        {
+            setter.accept(value);
+        }
+    }
+    
+    private final List<Entry<String, Value<?>>> values = new ArrayList<>();
+    
+    private <T> void addValue(String name, Supplier<T> getter, Consumer<T> setter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, setter)));
+    }
+    
+    private <T> void addReadonlyValue(String name, Supplier<T> getter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, (ReadonlyValue<T>)getter::get));
+    }
+    
+    {
+        addValue(PROPERTY_CITY_NAME, this::getName, this::setName);
         
         values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_NEED_ELECTRICITY, new Value<Boolean>()
         {
@@ -680,24 +704,11 @@ public final class World
             }
         }));
         
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY, new Value<BigDecimal>()
-        {
-            @Override
-            public BigDecimal get()
-            {
-                return getMoney();
-            }
-
-            @Override
-            public void set(BigDecimal value)
-            {
-                setMoney(value);
-            }
-        }));
-        
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_STRUCTURE_COUNT, (ReadonlyValue<Integer>) structures::size));
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_MONEY_UPDATE, (ReadonlyValue<Long>)() -> lastMoneyUpdate));
-        values.add(new AbstractMap.SimpleImmutableEntry<>(PROPERTY_LAST_CHANGE, (ReadonlyValue<Long>)() -> lastChange));
+        addValue(PROPERTY_MONEY, this::getMoney, this::setMoney);
+        addValue(PROPERTY_SIM_SPEED, this::getTickFactor, this::setTickFactor);
+        addReadonlyValue(PROPERTY_STRUCTURE_COUNT, structures::size);
+        addReadonlyValue(PROPERTY_MONEY_UPDATE, () -> lastMoneyUpdate);
+        addReadonlyValue(PROPERTY_LAST_CHANGE, () -> lastChange);
     }
 
     public List<Entry<String, Value<?>>> getValues()

@@ -744,6 +744,7 @@ public final class World
     
     private void changed(String name, Object newValue)
     {
+        System.out.println("["+listeners.size()+"] Changed "+name+"."+name+"="+newValue);
         listeners.stream().forEach(l -> l.onChanged(name, newValue));
     }
 

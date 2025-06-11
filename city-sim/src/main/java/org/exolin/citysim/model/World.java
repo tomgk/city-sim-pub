@@ -74,6 +74,7 @@ public final class World
     public void setTickFactor(SimulationSpeed tickFactor)
     {
         this.tickFactor = tickFactor;
+        changed(PROPERTY_SIM_SPEED, tickFactor);
     }
     
     public void enableOverlap()
@@ -105,11 +106,13 @@ public final class World
     public void setMoney(BigDecimal money)
     {
         this.money = money;
+        changed(PROPERTY_MONEY, money);
     }
 
     public void reduceMoney(long money)
     {
         this.money = this.money.subtract(BigDecimal.valueOf(money));
+        changed(PROPERTY_MONEY, money);
     }
     
     public World(String name, int gridSize, BigDecimal money, SimulationSpeed speed)
@@ -123,6 +126,12 @@ public final class World
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+        changed(PROPERTY_CITY_NAME, name);
     }
     
     public Structure<?, ?, ?, ?> getBuildingAt(int x, int y)
@@ -454,6 +463,8 @@ public final class World
             money = money.subtract(b.getMaintenance().multiply(bigTicks));
             money = money.add(b.getTaxRevenue().multiply(bigTicks));
         }
+        
+        changed(PROPERTY_MONEY, money);
     }
     
     /**
@@ -643,14 +654,13 @@ public final class World
             @Override
             public String get()
             {
-                return name;
+                return getName();
             }
 
             @Override
             public void set(String value)
             {
-                World.this.name = value;
-                changed(PROPERTY_CITY_NAME, value);
+                setName(name);
             }
         }));
         
@@ -675,14 +685,13 @@ public final class World
             @Override
             public BigDecimal get()
             {
-                return World.this.money;
+                return getMoney();
             }
 
             @Override
             public void set(BigDecimal value)
             {
-                World.this.money = value;
-                changed(PROPERTY_MONEY, value);
+                setMoney(value);
             }
         }));
         

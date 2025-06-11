@@ -2,6 +2,12 @@ package org.exolin.citysim.model;
 
 import java.awt.Rectangle;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -647,7 +653,8 @@ public final class World
     public static final String PROPERTY_SIM_SPEED = "simSpeed";
     public static final String PROPERTY_STRUCTURE_COUNT = "stuctureCount";
     public static final String PROPERTY_MONEY_UPDATE = "lastMoneyUpdate";
-    public static final String PROPERTY_LAST_CHANGE = "lastChange";
+    public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
+    public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
     
     private static class ValueImpl<T> implements Value<T>
     {
@@ -708,7 +715,8 @@ public final class World
         addValue(PROPERTY_SIM_SPEED, this::getTickFactor, this::setTickFactor);
         addReadonlyValue(PROPERTY_STRUCTURE_COUNT, structures::size);
         addReadonlyValue(PROPERTY_MONEY_UPDATE, () -> lastMoneyUpdate);
-        addReadonlyValue(PROPERTY_LAST_CHANGE, () -> lastChange);
+        addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> LocalDate.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
+        addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> LocalTime.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
     }
 
     public List<Entry<String, Value<?>>> getValues()

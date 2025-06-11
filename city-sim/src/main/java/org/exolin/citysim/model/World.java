@@ -35,6 +35,7 @@ import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
+import org.exolin.citysim.ui.GameControlPanel;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
 import org.exolin.citysim.utils.RandomUtils;
@@ -744,5 +745,18 @@ public final class World
     private void changed(String name, Object newValue)
     {
         listeners.stream().forEach(l -> l.onChanged(name, newValue));
+    }
+
+    /**
+     * Calls {@link WorldListener#onChanged(java.lang.String, java.lang.Object)}
+     * for every value.
+     * <p>
+     * Useful when the {@link World} instance gets replaced.
+     * 
+     * @param listener the listener
+     */
+    public void triggerAllChanges(WorldListener listener)
+    {
+        values.forEach(e -> listener.onChanged(e.getKey(), e.getValue().get()));
     }
 }

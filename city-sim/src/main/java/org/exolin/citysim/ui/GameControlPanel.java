@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -74,15 +75,24 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     @Override
     public void changed(World oldWorld, World newWorld)
     {
-        oldWorld.removeListener(this);
+        if(oldWorld != null)
+            oldWorld.removeListener(this);
+        
         newWorld.removeListener(this);
-        setSpeed(newWorld.getTickFactor());
+        
+        //show new values after replacement
+        newWorld.triggerAllChanges(this);
     }
 
     @Override
     public void onChanged(String name, Object value)
     {
-        //TODO: show
+        switch(name)
+        {
+            case World.PROPERTY_SIM_SPEED:
+                setSpeed((SimulationSpeed)value);
+                break;
+        }
     }
     
     private void addSpeedLabel(JLabel label, SimulationSpeed speed)
@@ -93,13 +103,21 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
 
     public void setPanel(GamePanel panel)
     {
+        Objects.requireNonNull(panel);
+        
+        if(this.panel != null)
+            throw new IllegalStateException();
+        
+        changed(null, panel.getWorld());
+        
+        /*
         if(this.panel == panel)
             return;
         
         if(this.panel != null)
         {
             this.panel.getWorldHolder().removeChangeListener(this);
-        }
+        }*/
         
         this.panel = panel;
         panel.getWorldHolder().addChangeListener(this);

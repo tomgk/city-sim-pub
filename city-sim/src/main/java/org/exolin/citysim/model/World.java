@@ -653,7 +653,7 @@ public final class World
     public static final String PROPERTY_MONEY = "money";
     public static final String PROPERTY_SIM_SPEED = "simSpeed";
     public static final String PROPERTY_STRUCTURE_COUNT = "stuctureCount";
-    public static final String PROPERTY_MONEY_UPDATE = "lastMoneyUpdate";
+    public static final String PROPERTY_LAST_MONEY_UPDATE = "lastMoneyUpdate";
     public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
     public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
     
@@ -715,7 +715,7 @@ public final class World
         addValue(PROPERTY_MONEY, this::getMoney, this::setMoney);
         addValue(PROPERTY_SIM_SPEED, this::getTickFactor, this::setTickFactor);
         addReadonlyValue(PROPERTY_STRUCTURE_COUNT, structures::size);
-        addReadonlyValue(PROPERTY_MONEY_UPDATE, () -> lastMoneyUpdate);
+        addReadonlyValue(PROPERTY_LAST_MONEY_UPDATE, () -> lastMoneyUpdate);
         addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> LocalDate.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
         addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> LocalTime.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
     }

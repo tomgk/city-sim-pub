@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellEditor;
@@ -136,7 +138,10 @@ public class DebugTableModel implements TableModel
             {
                 TableCellRenderer r = super.getDefaultRenderer(columnClass);
                 if(r == null)
+                {
+                    System.out.println("No default renderer for "+columnClass.getName());
                     return null;
+                }
                 
                 return (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) ->
                 {
@@ -172,6 +177,10 @@ public class DebugTableModel implements TableModel
                 int modelColumn = convertColumnIndexToModel(column);
                 if (modelColumn == VALUE) {
                     editingClass = getModel().getValueAt(row, modelColumn).getClass();
+                    
+                    if(editingClass.isEnum())
+                        return new DefaultCellEditor(new JComboBox<>(editingClass.getEnumConstants()));
+                    
                     return getDefaultEditor(editingClass);
                 } else {
                     return super.getCellEditor(row, column);

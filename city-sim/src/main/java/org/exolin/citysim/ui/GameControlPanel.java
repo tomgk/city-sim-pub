@@ -78,7 +78,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
         if(oldWorld != null)
             oldWorld.removeListener(this);
         
-        newWorld.removeListener(this);
+        newWorld.addListener(this);
         
         //show new values after replacement
         newWorld.triggerAllChanges(this);

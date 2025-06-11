@@ -214,6 +214,7 @@ public class DebugTableModel implements TableModel
     
     public static void main(String[] args)
     {
-        DebugTableModelRun.main1(args);
+        DebugTableModelRun.main1(args, false);
+        DebugTableModelRun.main1(args, true);
     }
 }

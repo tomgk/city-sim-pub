@@ -165,7 +165,7 @@ public class DebugTableModelRun
         }
     }
         
-    public static void main1(String[] args)
+    public static void main1(String[] args, boolean allColumns)
     {
         List<Map.Entry<String, Value<?>>> values = new ArrayList<>();
         
@@ -176,7 +176,7 @@ public class DebugTableModelRun
         values.add(Map.entry("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
         values.add(Map.entry("stats.buildingCount", new ReadonlyIntVal(103)));
         
-        JTable t = createJTable(values, true);
+        JTable t = createJTable(values, allColumns);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(t);

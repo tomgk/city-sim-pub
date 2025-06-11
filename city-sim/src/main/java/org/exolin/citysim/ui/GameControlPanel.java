@@ -89,9 +89,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     {
         switch(name)
         {
-            case World.PROPERTY_SIM_SPEED:
-                setSpeed((SimulationSpeed)value);
-                break;
+            case World.PROPERTY_SIM_SPEED -> setSpeed((SimulationSpeed)value);
         }
     }
     

@@ -665,7 +665,7 @@ public final class World
         Coverage previous = currentCoverage;
         
         currentCoverage = structures.stream()
-                .filter(f -> f instanceof Building || f instanceof Zone)
+                .filter(f -> f instanceof Building || f instanceof Zone || f.getZoneType(true).isPresent())
                 .map(s -> {
                     boolean covered = hasElectricity(s);
                     int size = s.getSize();

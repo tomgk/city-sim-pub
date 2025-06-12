@@ -655,6 +655,25 @@ public final class World
     public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
     public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
     
+    private final List<Entry<String, Value<?>>> values = new ArrayList<>();
+    
+    private <T> void addValue(String name, Supplier<T> getter, Consumer<T> setter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, setter)));
+    }
+    
+    private <T> void addDebugValue(String name, Supplier<T> getter, Consumer<T> setter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, v -> {
+            setter.accept(v);
+            changed(name, v);
+        })));
+    }
+    
+    private <T> void addReadonlyValue(String name, Supplier<T> getter)
+    {
+        values.add(new AbstractMap.SimpleImmutableEntry<>(name, (ReadonlyValue<T>)getter::get));
+    }
     
     {
         addValue(PROPERTY_CITY_NAME, this::getName, this::setName);

@@ -31,7 +31,7 @@ public final class DebugTableModel implements TableModel, WorldListener
 {
     //private final WorldHolder w;
     private List<Map.Entry<String, Value<?>>> entries;
-    private Map<String, Integer> indexes = new LinkedHashMap<>();
+    private final Map<String, Integer> indexes = new LinkedHashMap<>();
 
     public DebugTableModel(WorldHolder w, List<Map.Entry<String, Value<?>>> entries)
     {

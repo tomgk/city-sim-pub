@@ -2,6 +2,8 @@ package org.exolin.citysim.ui.debug;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -9,25 +11,67 @@ import java.util.Objects;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.model.debug.Value;
+import org.exolin.citysim.ui.WorldHolder;
 
 /**
  *
  * @author Thomas
  */
-public class DebugTableModel implements TableModel
+public final class DebugTableModel implements TableModel, WorldListener
 {
-    private final List<Map.Entry<String, Value<?>>> entries;
+    //private final WorldHolder w;
+    private List<Map.Entry<String, Value<?>>> entries;
+    private Map<String, Integer> indexes = new LinkedHashMap<>();
 
-    public DebugTableModel(List<Map.Entry<String, Value<?>>> entries)
+    public DebugTableModel(WorldHolder w, List<Map.Entry<String, Value<?>>> entries)
+    {
+        //this.w = w;
+        if(w != null)
+        {
+            w.addChangeListener(this::changedWorld);
+            w.get().addListener(this);
+        }
+        setEntries(entries);
+    }
+
+    public void setEntries(List<Entry<String, Value<?>>> entries)
     {
         this.entries = Objects.requireNonNull(entries);
+        this.indexes.clear();
+        for(int i=0;i<entries.size();++i)
+            indexes.put(entries.get(i).getKey(), i);
+    }
+    
+    private void fire(TableModelEvent e)
+    {
+        listeners.forEach(l -> l.tableChanged(e));
+    }
+
+    private void changedWorld(World oldWorld, World newWorld)
+    {
+        oldWorld.addListener(this);
+        newWorld.removeListener(this);
+        
+        setEntries(newWorld.getValues());
+        //reload everything - just in case
+        fire(new TableModelEvent(this));
+    }
+
+    @Override
+    public void onChanged(String name, Object value)
+    {
+        int index = indexes.get(name);
+        fire(new TableModelEvent(this, index, index, VALUE));
     }
     
     @Override
@@ -117,22 +161,24 @@ public class DebugTableModel implements TableModel
             default -> throw new IllegalArgumentException();
         }
     }
+    
+    private final List<TableModelListener> listeners = new ArrayList<>();
 
     @Override
     public void addTableModelListener(TableModelListener l)
     {
-        
+        listeners.add(l);
     }
 
     @Override
     public void removeTableModelListener(TableModelListener l)
     {
-        
+        listeners.remove(l);
     }
     
-    public static JTable createJTable(List<Entry<String, Value<?>>> values, boolean allColumns)
+    public static JTable createJTable(WorldHolder wh, List<Entry<String, Value<?>>> values, boolean allColumns)
     {
-        JTable t = new JTable(new DebugTableModel(values)){
+        JTable t = new JTable(new DebugTableModel(wh, values)){
             @Override
             public TableCellRenderer getDefaultRenderer(Class<?> columnClass)
             {

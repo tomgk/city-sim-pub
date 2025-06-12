@@ -523,7 +523,7 @@ public class GameControlPanel extends javax.swing.JPanel implements GetWorld.Cha
     {//GEN-HEADEREND:event_debugLabelMouseClicked
         var parent = SwingUtilities.getWindowAncestor(this);
         JDialog d = new JDialog(parent, "Values");
-        JTable t = createJTable(panel.getWorld().getValues(), false);
+        JTable t = createJTable(panel.getWorldHolder(), panel.getWorld().getValues(), false);
         d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         d.add(t);
         d.pack();

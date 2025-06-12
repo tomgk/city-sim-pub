@@ -31,6 +31,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
+import org.exolin.citysim.model.debug.Values;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
@@ -654,49 +655,6 @@ public final class World
     public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
     public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
     
-    private static class ValueImpl<T> implements Value<T>
-    {
-        private final Supplier<T> getter;
-        private final Consumer<T> setter;
-
-        public ValueImpl(Supplier<T> getter, Consumer<T> setter)
-        {
-            this.getter = getter;
-            this.setter = setter;
-        }
-        
-        @Override
-        public T get()
-        {
-            return getter.get();
-        }
-
-        @Override
-        public void set(T value)
-        {
-            setter.accept(value);
-        }
-    }
-    
-    private final List<Entry<String, Value<?>>> values = new ArrayList<>();
-    
-    private <T> void addValue(String name, Supplier<T> getter, Consumer<T> setter)
-    {
-        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, setter)));
-    }
-    
-    private <T> void addDebugValue(String name, Supplier<T> getter, Consumer<T> setter)
-    {
-        values.add(new AbstractMap.SimpleImmutableEntry<>(name, new ValueImpl<>(getter, v -> {
-            setter.accept(v);
-            changed(name, v);
-        })));
-    }
-    
-    private <T> void addReadonlyValue(String name, Supplier<T> getter)
-    {
-        values.add(new AbstractMap.SimpleImmutableEntry<>(name, (ReadonlyValue<T>)getter::get));
-    }
     
     {
         addValue(PROPERTY_CITY_NAME, this::getName, this::setName);

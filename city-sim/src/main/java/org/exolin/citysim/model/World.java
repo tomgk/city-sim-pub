@@ -648,12 +648,12 @@ public final class World
             return new Coverage(covered+c.covered, total+c.total);
         }
         
-        int getPercentage()
+        String getPercentage()
         {
             if(total == 0)
-                return 0;
+                return "--/--";
             
-            return covered * 100 / total;
+            return covered+"/"+total;
         }
     }
     
@@ -677,7 +677,7 @@ public final class World
             changed(PROPERTY_ELECTRICITY_COVERAGE, getElectricityCoverage());
     }
     
-    private int getElectricityCoverage()
+    private String getElectricityCoverage()
     {
         return currentCoverage.getPercentage();
     }

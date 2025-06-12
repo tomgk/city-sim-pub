@@ -33,6 +33,7 @@ import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.debug.ValueImpl;
 import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -664,6 +665,7 @@ public final class World
         Coverage previous = currentCoverage;
         
         currentCoverage = structures.stream()
+                .filter(f -> f instanceof Building || f instanceof Zone)
                 .map(s -> {
                     boolean covered = hasElectricity(s);
                     int size = s.getSize();

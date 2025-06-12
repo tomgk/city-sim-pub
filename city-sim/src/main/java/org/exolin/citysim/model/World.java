@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
-import org.exolin.citysim.model.debug.Values;
+import org.exolin.citysim.model.debug.ValueImpl;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
@@ -579,6 +580,7 @@ public final class World
     private void updateStats()
     {
         updateElectricityGrid();
+        updateElectricityCoverageStats();
     }
     
     private void updateElectricityGrid()
@@ -639,6 +641,47 @@ public final class World
         }
     }
     
+    record Coverage(int covered, int total)
+    {
+        Coverage merge(Coverage c)
+        {
+            return new Coverage(covered+c.covered, total+c.total);
+        }
+        
+        int getPercentage()
+        {
+            if(total == 0)
+                return 0;
+            
+            return covered * 100 / total;
+        }
+    }
+    
+    private static final Coverage EMPTY_COVERAGE = new Coverage(0, 0);
+    private Coverage currentCoverage = EMPTY_COVERAGE;
+    
+    private void updateElectricityCoverageStats()
+    {
+        Coverage previous = currentCoverage;
+        
+        currentCoverage = structures.stream()
+                .map(s -> {
+                    boolean covered = hasElectricity(s);
+                    int size = s.getSize();
+                    return new Coverage(covered ? size : 0, size);
+                })
+                .reduce(Coverage::merge)
+                .orElse(EMPTY_COVERAGE);
+        
+        if(!previous.equals(currentCoverage))
+            changed(PROPERTY_ELECTRICITY_COVERAGE, getElectricityCoverage());
+    }
+    
+    private int getElectricityCoverage()
+    {
+        return currentCoverage.getPercentage();
+    }
+    
     public boolean hasElectricity(Structure<?, ?, ?, ?> s)
     {
         return structuresWithElectricity.containsKey(s);
@@ -654,6 +697,7 @@ public final class World
     public static final String PROPERTY_LAST_MONEY_UPDATE = "lastMoneyUpdate";
     public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
     public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
+    public static final String PROPERTY_ELECTRICITY_COVERAGE = "electricityCoverage";
     
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     
@@ -684,6 +728,7 @@ public final class World
         addReadonlyValue(PROPERTY_LAST_MONEY_UPDATE, () -> lastMoneyUpdate);
         addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> LocalDate.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
         addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> LocalTime.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
+        addReadonlyValue(PROPERTY_ELECTRICITY_COVERAGE, () -> getElectricityCoverage());
     }
 
     public List<Entry<String, Value<?>>> getValues()

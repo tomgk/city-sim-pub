@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.utils.ImageUtils;
 
 /**
@@ -49,7 +50,7 @@ public class TearDownAction extends AreaAction implements ActionWithImage
         {
             for(int x=0;x<marking.width;++x)
             {
-                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning ? World.RemoveMode.REMOVE_ZONING : World.RemoveMode.TEAR_DOWN);
+                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning ? RemoveMode.REMOVE_ZONING : RemoveMode.TEAR_DOWN);
             }
         }
     }

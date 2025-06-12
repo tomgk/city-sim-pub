@@ -8,6 +8,7 @@ import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -100,7 +101,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     else if(buildingZoneType.equals(Optional.of(type)))
                         continue;
                     
-                    world.removeBuildingAt(marking.x + x, marking.y + y, World.RemoveMode.CLEAR);
+                    world.removeBuildingAt(marking.x + x, marking.y + y, RemoveMode.CLEAR);
                 }
 
                 world.addBuilding(type, marking.x + x, marking.y + y, variant);

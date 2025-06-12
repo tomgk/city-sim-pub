@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.exolin.citysim.bt.Trees;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.exolin.citysim.ui.actions.ZonePlacement.DEBUG_TREEZONE;
@@ -89,7 +90,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
                 {
                    if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                    {
-                       world.removeBuildingAt(x, y, World.RemoveMode.CLEAR);
+                       world.removeBuildingAt(x, y, RemoveMode.CLEAR);
                        world.addBuilding(Trees.get(getType().isGrass()).getFirst(), x, y, getVariant(), t.getDataCopy());
                    }
                 }

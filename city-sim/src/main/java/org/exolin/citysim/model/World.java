@@ -32,6 +32,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.debug.ValueImpl;
+import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.model.tree.Tree;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -168,25 +169,6 @@ public final class World
         return MONEY_PERIOD - passedTicks*GamePanel.TICK_LENGTH%MONEY_PERIOD;
     }
     
-    public enum RemoveMode
-    {
-        /**
-         * removes zones and any building with a zone, keeps everything else;
-         * no replacement for removals
-         */
-        REMOVE_ZONING,
-        
-        /**
-         * removes buildings, leaves back zones if zoned
-         */
-        TEAR_DOWN,
-        
-        /**
-         * remove, leave nothing behind, expect outside of (x,y)
-         */
-        CLEAR
-    }
-
     public boolean removeBuildingAt(int x, int y, RemoveMode mode)
     {
         if(LOG)System.out.println(" TRYREM @ "+x+"/"+y);

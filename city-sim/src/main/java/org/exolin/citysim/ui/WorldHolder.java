@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.WorldListener;
 
 /**
  *
@@ -16,6 +17,7 @@ public final class WorldHolder implements GetWorld
     private World world;
     private Path file;
     private final List<ChangeListener> listeners = new ArrayList<>();
+    private final List<WorldListener> worldListeners = new ArrayList<>();
 
     public WorldHolder(World world)
     {
@@ -30,7 +32,7 @@ public final class WorldHolder implements GetWorld
     
     public void set(World world, Path file)
     {
-        World old = world;
+        World old = this.world;
         
         Objects.requireNonNull(world);
         //worldFile can be null
@@ -40,6 +42,12 @@ public final class WorldHolder implements GetWorld
         
         for(ChangeListener l: listeners)
             l.changed(old, world);
+        
+        for(WorldListener l : worldListeners)
+        {
+            old.removeListener(l);
+            world.addListener(l);
+        }
     }
 
     public Path getFile()

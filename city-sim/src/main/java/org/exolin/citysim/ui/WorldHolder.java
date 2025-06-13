@@ -43,10 +43,12 @@ public final class WorldHolder implements GetWorld
         for(ChangeListener l: listeners)
             l.changed(old, world);
         
+        //move WorldListener to new world
         for(WorldListener l : worldListeners)
         {
             old.removeListener(l);
             world.addListener(l);
+            world.triggerAllChanges(l);
         }
     }
 
@@ -70,5 +72,19 @@ public final class WorldHolder implements GetWorld
     public void removeChangeListener(ChangeListener listener)
     {
         listeners.remove(listener);
+    }
+
+    @Override
+    public void addWorldListener(WorldListener listener)
+    {
+        worldListeners.add(listener);
+        world.addListener(listener);
+    }
+
+    @Override
+    public void removeWorldListener(WorldListener listener)
+    {
+        worldListeners.remove(listener);
+        world.removeListener(listener);
     }
 }

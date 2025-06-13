@@ -25,6 +25,9 @@ public interface GetWorld
     void addChangeListener(ChangeListener listener);
     void removeChangeListener(ChangeListener listener);
     
+    void addWorldListener(WorldListener listener);
+    void removeWorldListener(WorldListener listener);
+    
     /**
      * Creates an instance where the world stays the same.
      * 
@@ -52,6 +55,20 @@ public interface GetWorld
             {
                 //not needed since it can't change
             }
+
+            @Override
+            public void addWorldListener(WorldListener listener)
+            {
+                //just delegate since it can't change
+                w.addListener(listener);
+            }
+
+            @Override
+            public void removeWorldListener(WorldListener listener)
+            {
+                //just delegate since it can't change
+                w.removeListener(listener);
+            }
         };
     }
     
@@ -75,6 +92,18 @@ public interface GetWorld
             public void removeChangeListener(ChangeListener listener)
             {
                 source.get().removeChangeListener(listener);
+            }
+
+            @Override
+            public void addWorldListener(WorldListener listener)
+            {
+                source.get().addWorldListener(listener);
+            }
+
+            @Override
+            public void removeWorldListener(WorldListener listener)
+            {
+                source.get().removeWorldListener(listener);
             }
         };
     }

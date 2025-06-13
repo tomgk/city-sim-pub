@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
-import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
@@ -29,7 +29,7 @@ import org.exolin.citysim.utils.Utils;
  *
  * @author Thomas
  */
-public class GameControlPanel extends javax.swing.JPanel implements GetWorld.ChangeListener, WorldListener
+public class GameControlPanel extends javax.swing.JPanel implements ChangeListener, WorldListener
 {
     private GamePanel panel;
     private final JFileChooser fileChooser = new JFileChooser(new File("./saves"));

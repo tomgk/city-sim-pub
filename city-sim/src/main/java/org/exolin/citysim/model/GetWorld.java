@@ -17,11 +17,6 @@ public interface GetWorld
      */
     World get();
     
-    interface ChangeListener
-    {
-        void changed(World oldWorld, World newWorld);
-    }
-    
     void addChangeListener(ChangeListener listener);
     void removeChangeListener(ChangeListener listener);
     

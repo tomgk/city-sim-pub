@@ -45,6 +45,9 @@ public interface GetWorld
     }
 }
 
+/**
+ * Implementation that uses only one {@link World} instance that can't be changed
+ */
 class StaticGetWorld implements GetWorld
 {
     private final World w;
@@ -93,6 +96,9 @@ class StaticGetWorld implements GetWorld
     }
 }
 
+/**
+ * Implemenetation that delegates to another {@link GetWorld}
+ */
 class DelegateGetWorld implements GetWorld
 {
     private final Supplier<GetWorld> source;

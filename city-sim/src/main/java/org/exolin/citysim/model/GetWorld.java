@@ -131,4 +131,10 @@ class DelegateGetWorld implements GetWorld
     {
         source.get().removeWorldListener(listener);
     }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName()+"[source="+source+"]";
+    }
 }

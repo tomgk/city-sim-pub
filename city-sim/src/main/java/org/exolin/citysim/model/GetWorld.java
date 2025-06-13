@@ -36,75 +36,93 @@ public interface GetWorld
      */
     static GetWorld ofStatic(World w)
     {
-        return new GetWorld()
-        {
-            @Override
-            public World get()
-            {
-                return w;
-            }
-
-            @Override
-            public void addChangeListener(ChangeListener listener)
-            {
-                //not needed since it can't change
-            }
-
-            @Override
-            public void removeChangeListener(ChangeListener listener)
-            {
-                //not needed since it can't change
-            }
-
-            @Override
-            public void addWorldListener(WorldListener listener)
-            {
-                //just delegate since it can't change
-                w.addListener(listener);
-            }
-
-            @Override
-            public void removeWorldListener(WorldListener listener)
-            {
-                //just delegate since it can't change
-                w.removeListener(listener);
-            }
-        };
+        return new StaticGetWorld(w);
     }
     
     static GetWorld delegate(Supplier<GetWorld> source)
     {
-        return new GetWorld()
-        {
-            @Override
-            public World get()
-            {
-                return source.get().get();
-            }
+        return new DelegateGetWorld(source);
+    }
+}
 
-            @Override
-            public void addChangeListener(ChangeListener listener)
-            {
-                source.get().addChangeListener(listener);
-            }
+class StaticGetWorld implements GetWorld
+{
+    private final World w;
 
-            @Override
-            public void removeChangeListener(ChangeListener listener)
-            {
-                source.get().removeChangeListener(listener);
-            }
+    public StaticGetWorld(World w)
+    {
+        this.w = w;
+    }
+    
+    @Override
+    public World get()
+    {
+        return w;
+    }
 
-            @Override
-            public void addWorldListener(WorldListener listener)
-            {
-                source.get().addWorldListener(listener);
-            }
+    @Override
+    public void addChangeListener(ChangeListener listener)
+    {
+        //not needed since it can't change
+    }
 
-            @Override
-            public void removeWorldListener(WorldListener listener)
-            {
-                source.get().removeWorldListener(listener);
-            }
-        };
+    @Override
+    public void removeChangeListener(ChangeListener listener)
+    {
+        //not needed since it can't change
+    }
+
+    @Override
+    public void addWorldListener(WorldListener listener)
+    {
+        //just delegate since it can't change
+        w.addListener(listener);
+    }
+
+    @Override
+    public void removeWorldListener(WorldListener listener)
+    {
+        //just delegate since it can't change
+        w.removeListener(listener);
+    }
+}
+
+class DelegateGetWorld implements GetWorld
+{
+    private final Supplier<GetWorld> source;
+
+    public DelegateGetWorld(Supplier<GetWorld> source)
+    {
+        this.source = source;
+    }
+    
+    @Override
+    public World get()
+    {
+        return source.get().get();
+    }
+
+    @Override
+    public void addChangeListener(ChangeListener listener)
+    {
+        source.get().addChangeListener(listener);
+    }
+
+    @Override
+    public void removeChangeListener(ChangeListener listener)
+    {
+        source.get().removeChangeListener(listener);
+    }
+
+    @Override
+    public void addWorldListener(WorldListener listener)
+    {
+        source.get().addWorldListener(listener);
+    }
+
+    @Override
+    public void removeWorldListener(WorldListener listener)
+    {
+        source.get().removeWorldListener(listener);
     }
 }

@@ -50,7 +50,8 @@ public class TearDownAction extends AreaAction implements ActionWithImage
         {
             for(int x=0;x<marking.width;++x)
             {
-                world.removeBuildingAt(marking.x + x, marking.y + y, removeZoning ? RemoveMode.REMOVE_ZONING : RemoveMode.TEAR_DOWN);
+                RemoveMode mode = removeZoning ? RemoveMode.REMOVE_ZONING : RemoveMode.TEAR_DOWN;
+                world.removeBuildingAt(marking.x + x, marking.y + y, mode);
             }
         }
     }

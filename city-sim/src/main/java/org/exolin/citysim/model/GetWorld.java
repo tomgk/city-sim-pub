@@ -85,6 +85,12 @@ class StaticGetWorld implements GetWorld
         //just delegate since it can't change
         w.removeListener(listener);
     }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName()+"[world="+w.getName()+"]";
+    }
 }
 
 class DelegateGetWorld implements GetWorld

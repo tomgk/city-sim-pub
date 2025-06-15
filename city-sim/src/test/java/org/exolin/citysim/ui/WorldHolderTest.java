@@ -26,7 +26,8 @@ public class WorldHolderTest
     {
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         WorldHolder h = new WorldHolder(w);
-        h.addChangeListener(new ChangeListener()
+        
+        ChangeListener cl = new ChangeListener()
         {
             @Override
             public void changed(World oldWorld, World newWorld)
@@ -34,10 +35,15 @@ public class WorldHolderTest
                 assertSame(oldWorld, w);
                 assertEquals("test2", newWorld.getName());
             }
-        });
+        };
+        
+        h.addChangeListener(cl);
         
         World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         h.set(w2, Paths.get("w2"));
+        
+        h.removeChangeListener(cl);
+        h.set(w, Paths.get("w"));
     }
     
     private static class ExpectedWorldListener implements WorldListener
@@ -109,8 +115,5 @@ public class WorldHolderTest
         w2.setTickFactor(SimulationSpeed.SPEED5);
         
         l.checkFinished();
-        
-        //        Map.entry("simSpeed", SimulationSpeed.SPEED2)
-        //));
     }
 }

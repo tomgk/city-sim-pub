@@ -764,4 +764,10 @@ public final class World
     {
         values.forEach(e -> listener.onChanged(e.getKey(), e.getValue().get()));
     }
+
+    @Override
+    public String toString()
+    {
+        return World.class.getSimpleName()+"["+name+"@"+hashCode()+"]";
+    }
 }

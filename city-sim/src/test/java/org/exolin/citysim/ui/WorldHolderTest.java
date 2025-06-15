@@ -25,6 +25,7 @@ public class WorldHolderTest
     public void testAddChangeListener()
     {
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
+        World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         WorldHolder h = new WorldHolder(w);
         
         ChangeListener cl = new ChangeListener()
@@ -33,13 +34,12 @@ public class WorldHolderTest
             public void changed(World oldWorld, World newWorld)
             {
                 assertSame(oldWorld, w);
-                assertEquals("test2", newWorld.getName());
+                assertSame(newWorld, w2);
             }
         };
         
         h.addChangeListener(cl);
         
-        World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         h.set(w2, Paths.get("w2"));
         
         h.removeChangeListener(cl);

@@ -1,5 +1,6 @@
 package org.exolin.citysim.ui;
 
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -46,6 +47,15 @@ public class WorldHolderTest
         
         h.removeChangeListener(cl);
         h.set(w, Paths.get("w"));
+    }
+    
+    //test test to check if debug outputs in this test still make sense
+    @Test
+    public void testToString() throws NoSuchMethodException
+    {
+        Method expected = Object.class.getMethod("toString");
+        Method actual = WorldHolder.class.getMethod("toString");
+        assertEquals(expected, actual);
     }
     
     private static class ExpectedWorldListener implements WorldListener

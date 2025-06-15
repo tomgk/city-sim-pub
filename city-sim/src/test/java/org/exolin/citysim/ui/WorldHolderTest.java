@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.exolin.citysim.Github;
 import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
@@ -99,7 +100,7 @@ public class WorldHolderTest
     @Test
     public void testAddWorldListener()
     {
-        if(System.getenv("GITHUB_ACTION") != null)
+        if(Github.inActions())
             return;
         
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);

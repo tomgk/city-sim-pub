@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.exolin.citysim.model.ChangeListener;
+import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
@@ -49,14 +50,20 @@ public class WorldHolderTest
     
     private static class ExpectedWorldListener implements WorldListener
     {
+        private final GetWorld worldHolder;
         private final Deque<Entry<String, Object>> expected = new LinkedList<>();
         private final Exception source = new Exception("Source");
+
+        public ExpectedWorldListener(GetWorld worldHolder)
+        {
+            this.worldHolder = worldHolder;
+        }
         
         @Override
         public void onChanged(String name, Object value)
         {
             if(expected.isEmpty())
-                throw new AssertionError("Expected no more but got "+name+"="+value, source);
+                throw new AssertionError("Expected no more but got "+name+"="+value+" @ "+worldHolder, source);
             
             Entry<String, Object> e = expected.pop();
             assertEquals(e, Map.entry(name, value));
@@ -104,7 +111,7 @@ public class WorldHolderTest
         
         WorldHolder h = new WorldHolder(w);
         
-        ExpectedWorldListener l = new ExpectedWorldListener();
+        ExpectedWorldListener l = new ExpectedWorldListener(h);
         
         h.addWorldListener(l);
         

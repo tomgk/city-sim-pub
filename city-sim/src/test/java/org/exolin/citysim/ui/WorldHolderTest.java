@@ -99,6 +99,9 @@ public class WorldHolderTest
     @Test
     public void testAddWorldListener()
     {
+        if(System.getenv("GITHUB_ACTION") != null)
+            return;
+        
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED2);
         

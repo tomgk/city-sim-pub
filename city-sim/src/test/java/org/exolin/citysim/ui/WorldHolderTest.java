@@ -46,7 +46,7 @@ public class WorldHolderTest
         h.removeChangeListener(cl);
         h.set(w, Paths.get("w"));
     }
-    /*
+    
     private static class ExpectedWorldListener implements WorldListener
     {
         private final Deque<Entry<String, Object>> expected = new LinkedList<>();
@@ -95,6 +95,7 @@ public class WorldHolderTest
         );
     }
     
+    //for some reason makes other tests (not this) fail on github
     @Test
     public void testAddWorldListener()
     {
@@ -118,5 +119,4 @@ public class WorldHolderTest
         
         l.checkFinished();
     }
-*/
 }

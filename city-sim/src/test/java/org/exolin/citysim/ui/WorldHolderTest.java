@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
  *
  * @author Thomas
  */
-@Disabled
 public class WorldHolderTest
 {
     @Test

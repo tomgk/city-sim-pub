@@ -49,12 +49,13 @@ public class WorldHolderTest
     private static class ExpectedWorldListener implements WorldListener
     {
         private final Deque<Entry<String, Object>> expected = new LinkedList<>();
+        private final Exception source = new Exception("Source");
         
         @Override
         public void onChanged(String name, Object value)
         {
             if(expected.isEmpty())
-                fail("Expected no more but got "+name+"="+value);
+                throw new AssertionError("Expected no more but got "+name+"="+value, source);
             
             Entry<String, Object> e = expected.pop();
             assertEquals(e, Map.entry(name, value));

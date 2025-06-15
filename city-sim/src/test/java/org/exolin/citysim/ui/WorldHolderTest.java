@@ -2,6 +2,7 @@ package org.exolin.citysim.ui;
 
 import java.math.BigDecimal;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,41 +39,78 @@ public class WorldHolderTest
         World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
         h.set(w2, Paths.get("w2"));
     }
-    /*
+    
     private static class ExpectedWorldListener implements WorldListener
     {
+        private final Deque<Entry<String, Object>> expected = new LinkedList<>();
         
-    }*/
+        @Override
+        public void onChanged(String name, Object value)
+        {
+            if(expected.isEmpty())
+                fail("Expected no more but got "+name+"="+value);
+            
+            Entry<String, Object> e = expected.pop();
+            assertEquals(e, Map.entry(name, value));
+        }
+        
+        public void setExpected(Entry<String, Object>...entries)
+        {
+            setExpected(Arrays.asList(entries));
+        }
+        
+        public void setExpected(List<Entry<String, Object>> entries)
+        {
+            checkFinished();
+            expected.clear();
+            expected.addAll(entries);
+        }
+        
+        public void checkFinished()
+        {
+            if(!expected.isEmpty())
+                fail();
+        }
+    }
+    
+    private static List<Entry<String, Object>> all(World w)
+    {
+        return List.of(Map.entry("cityName", w.getName()),
+                Map.entry("needElectricity", true),
+                Map.entry("money", w.getMoney()),
+                Map.entry("simSpeed", w.getTickFactor()),
+                Map.entry("structureCount", 0),
+                Map.entry("lastMoneyUpdate", 0l),
+                Map.entry("lastChange.date", World.getLocalDateForTimeMillis(w.getLastChange())),
+                Map.entry("lastChange.time", World.getLocalTimeForTimeMillis(w.getLastChange())),
+                Map.entry("electricityCoverage", "--/--")
+        );
+    }
     
     @Test
     public void testAddWorldListener()
     {
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
+        World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED2);
+        
         WorldHolder h = new WorldHolder(w);
         
-        Deque<Entry<String, Object>> expected = new LinkedList<>(List.of(
-                Map.entry("simSpeed", SimulationSpeed.SPEED3)/*,
-                
-                Map.entry("cityName", "test2"),
-                Map.entry("needElectricity", true),
-                Map.entry("money", BigDecimal.ONE),
-                
-                Map.entry("simSpeed", SimulationSpeed.SPEED2)*/
-        ));
+        ExpectedWorldListener l = new ExpectedWorldListener();
         
-        h.addWorldListener(new WorldListener()
-        {
-            @Override
-            public void onChanged(String name, Object value)
-            {
-                Entry<String, Object> e = expected.pop();
-                assertEquals(e, Map.entry(name, value));
-            }
-        });
+        h.addWorldListener(l);
         
+        l.setExpected(Map.entry("simSpeed", SimulationSpeed.SPEED3));
         w.setTickFactor(SimulationSpeed.SPEED3);
         
-        World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
-        //h.set(w2, Paths.get("w2"));
+        l.setExpected(all(w2));
+        h.set(w2, Paths.get("w2"));
+        
+        l.setExpected(Map.entry("simSpeed", SimulationSpeed.SPEED5));
+        w2.setTickFactor(SimulationSpeed.SPEED5);
+        
+        l.checkFinished();
+        
+        //        Map.entry("simSpeed", SimulationSpeed.SPEED2)
+        //));
     }
 }

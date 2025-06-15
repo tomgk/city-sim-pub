@@ -676,7 +676,7 @@ public final class World
     public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
     public static final String PROPERTY_MONEY = "money";
     public static final String PROPERTY_SIM_SPEED = "simSpeed";
-    public static final String PROPERTY_STRUCTURE_COUNT = "stuctureCount";
+    public static final String PROPERTY_STRUCTURE_COUNT = "structureCount";
     public static final String PROPERTY_LAST_MONEY_UPDATE = "lastMoneyUpdate";
     public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
     public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
@@ -702,6 +702,16 @@ public final class World
         values.add(new AbstractMap.SimpleImmutableEntry<>(name, (ReadonlyValue<T>)getter::get));
     }
     
+    public static LocalDate getLocalDateForTimeMillis(long timeMillis)
+    {
+        return LocalDate.ofInstant(Instant.ofEpochMilli(timeMillis), ZoneId.systemDefault());
+    }
+    
+    public static LocalTime getLocalTimeForTimeMillis(long timeMillis)
+    {
+        return LocalTime.ofInstant(Instant.ofEpochMilli(timeMillis), ZoneId.systemDefault());
+    }
+    
     {
         addValue(PROPERTY_CITY_NAME, this::getName, this::setName);
         addDebugValue(PROPERTY_NEED_ELECTRICITY, () -> needElectricity, v -> this.needElectricity = v);
@@ -709,8 +719,8 @@ public final class World
         addValue(PROPERTY_SIM_SPEED, this::getTickFactor, this::setTickFactor);
         addReadonlyValue(PROPERTY_STRUCTURE_COUNT, structures::size);
         addReadonlyValue(PROPERTY_LAST_MONEY_UPDATE, () -> lastMoneyUpdate);
-        addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> LocalDate.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
-        addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> LocalTime.ofInstant(Instant.ofEpochMilli(lastChange), ZoneId.systemDefault()));
+        addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> getLocalDateForTimeMillis(lastChange));
+        addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> getLocalTimeForTimeMillis(lastChange));
         addReadonlyValue(PROPERTY_ELECTRICITY_COVERAGE, () -> getElectricityCoverage());
     }
 

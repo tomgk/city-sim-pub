@@ -738,11 +738,13 @@ public final class World
     
     public void addListener(WorldListener listener)
     {
+        System.out.println("[WORLD "+Integer.toHexString(hashCode())+"] ADD LISTENER "+listener);
         listeners.add(listener);
     }
     
     public void removeListener(WorldListener listener)
     {
+        System.out.println("\"[WORLD \"+Integer.toHexString(hashCode())+\"] REM LISTENER "+listener);
         listeners.remove(listener);
     }
     

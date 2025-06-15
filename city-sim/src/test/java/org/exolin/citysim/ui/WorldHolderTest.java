@@ -67,7 +67,9 @@ public class WorldHolderTest
         public ExpectedWorldListener(GetWorld worldHolder)
         {
             this.worldHolder = worldHolder;
-            this.source = new Exception("Source" + "[WOLRD] HOLDER = "+Integer.toHexString(worldHolder.hashCode()));
+            String logPrefix = "[WOLRD] HOLDER = "+Integer.toHexString(worldHolder.hashCode());
+            this.source = new Exception(logPrefix + " - Source");
+            System.out.println(logPrefix + " - Created "+getClass().getSimpleName());
         }
         
         @Override

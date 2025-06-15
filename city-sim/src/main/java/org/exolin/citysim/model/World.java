@@ -736,15 +736,20 @@ public final class World
     
     private static final List<WorldListener> listeners = new ArrayList<>();
     
+    private String debugPrefix()
+    {
+        return "[WORLD] "+Integer.toHexString(hashCode())+" - ";
+    }
+    
     public void addListener(WorldListener listener)
     {
-        System.out.println("[WORLD "+Integer.toHexString(hashCode())+"] ADD LISTENER "+listener);
+        System.out.println(debugPrefix()+"ADD LISTENER "+listener);
         listeners.add(listener);
     }
     
     public void removeListener(WorldListener listener)
     {
-        System.out.println("\"[WORLD \"+Integer.toHexString(hashCode())+\"] REM LISTENER "+listener);
+        System.out.println(debugPrefix()+listener);
         listeners.remove(listener);
     }
     

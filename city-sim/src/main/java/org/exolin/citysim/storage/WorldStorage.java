@@ -11,6 +11,7 @@ import java.nio.file.StandardCopyOption;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.zone.ZoneType;
 
 /**
  *

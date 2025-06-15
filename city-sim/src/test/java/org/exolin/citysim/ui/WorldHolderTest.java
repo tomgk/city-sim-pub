@@ -52,11 +52,12 @@ public class WorldHolderTest
     {
         private final GetWorld worldHolder;
         private final Deque<Entry<String, Object>> expected = new LinkedList<>();
-        private final Exception source = new Exception("Source");
+        private final Exception source;
 
         public ExpectedWorldListener(GetWorld worldHolder)
         {
             this.worldHolder = worldHolder;
+            this.source = new Exception("Source" + "[WOLRD] HOLDER = "+Integer.toHexString(worldHolder.hashCode()));
         }
         
         @Override
@@ -110,6 +111,7 @@ public class WorldHolderTest
         World w2 = new World("test2", 30, BigDecimal.ONE, SimulationSpeed.SPEED2);
         
         WorldHolder h = new WorldHolder(w);
+        System.out.println("[WOLRD] HOLDER = "+Integer.toHexString(h.hashCode()));
         
         ExpectedWorldListener l = new ExpectedWorldListener(h);
         

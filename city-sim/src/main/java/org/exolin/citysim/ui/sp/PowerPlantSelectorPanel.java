@@ -44,8 +44,10 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
 
         buttonPanel = new javax.swing.JPanel();
         infoButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         plantButton = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
         setLayout(new java.awt.BorderLayout());
 
         infoButton.setText("Info");
@@ -53,13 +55,19 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
 
         add(buttonPanel, java.awt.BorderLayout.PAGE_START);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
         plantButton.setText("jButton1");
-        add(plantButton, java.awt.BorderLayout.CENTER);
+        jPanel1.add(plantButton, java.awt.BorderLayout.CENTER);
+
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton infoButton;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton plantButton;
     // End of variables declaration//GEN-END:variables
 }

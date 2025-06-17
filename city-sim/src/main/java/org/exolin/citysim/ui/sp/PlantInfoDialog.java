@@ -46,72 +46,53 @@ public class PlantInfoDialog extends javax.swing.JDialog
     private void initComponents()
     {
 
-        jPanel1 = new javax.swing.JPanel();
-        mwLabel = new javax.swing.JLabel();
-        mwValueLabel = new javax.swing.JLabel();
-        buildingCostLabel = new javax.swing.JLabel();
-        buildingCostValueLabel = new javax.swing.JLabel();
-        maintenanceLabel = new javax.swing.JLabel();
-        maintenanceValueLabel = new javax.swing.JLabel();
         imageLabel = new javax.swing.JLabel();
+        propPanel = new javax.swing.JPanel();
+        labelPanel = new javax.swing.JPanel();
+        mwLabel = new javax.swing.JLabel();
+        buildingCostLabel = new javax.swing.JLabel();
+        maintenanceLabel = new javax.swing.JLabel();
+        propertiesPanel = new javax.swing.JPanel();
+        mwValueLabel = new javax.swing.JLabel();
+        buildingCostValueLabel = new javax.swing.JLabel();
+        maintenanceValueLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        getContentPane().add(imageLabel, java.awt.BorderLayout.CENTER);
+
+        propPanel.setLayout(new java.awt.BorderLayout());
+
+        labelPanel.setLayout(new java.awt.GridLayout(0, 1));
 
         mwLabel.setText("MW:");
-
-        mwValueLabel.setText("jLabel1");
+        labelPanel.add(mwLabel);
 
         buildingCostLabel.setText("Building Cost:");
-
-        buildingCostValueLabel.setText("jLabel1");
+        labelPanel.add(buildingCostLabel);
 
         maintenanceLabel.setText("Maintenance:");
+        labelPanel.add(maintenanceLabel);
 
+        propPanel.add(labelPanel, java.awt.BorderLayout.LINE_START);
+
+        propertiesPanel.setLayout(new java.awt.GridLayout(0, 1));
+
+        mwValueLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        mwValueLabel.setText("jLabel1");
+        propertiesPanel.add(mwValueLabel);
+
+        buildingCostValueLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        buildingCostValueLabel.setText("jLabel1");
+        propertiesPanel.add(buildingCostValueLabel);
+
+        maintenanceValueLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         maintenanceValueLabel.setText("jLabel1");
+        propertiesPanel.add(maintenanceValueLabel);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(mwLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mwValueLabel))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(buildingCostLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(buildingCostValueLabel)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(maintenanceLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(maintenanceValueLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mwLabel)
-                    .addComponent(mwValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buildingCostLabel)
-                    .addComponent(buildingCostValueLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(maintenanceLabel)
-                    .addComponent(maintenanceValueLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        propPanel.add(propertiesPanel, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
-        getContentPane().add(imageLabel, java.awt.BorderLayout.CENTER);
+        getContentPane().add(propPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -120,10 +101,12 @@ public class PlantInfoDialog extends javax.swing.JDialog
     private javax.swing.JLabel buildingCostLabel;
     private javax.swing.JLabel buildingCostValueLabel;
     private javax.swing.JLabel imageLabel;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel labelPanel;
     private javax.swing.JLabel maintenanceLabel;
     private javax.swing.JLabel maintenanceValueLabel;
     private javax.swing.JLabel mwLabel;
     private javax.swing.JLabel mwValueLabel;
+    private javax.swing.JPanel propPanel;
+    private javax.swing.JPanel propertiesPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Window;
 import java.math.BigDecimal;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -24,7 +25,11 @@ public class PlantInfoDialog extends javax.swing.JDialog
         super(parent, ModalityType.DOCUMENT_MODAL);
         setTitle(title);
         initComponents();
+        
         imageLabel.setIcon(new ImageIcon(image));
+        imageLabel.setHorizontalAlignment(JLabel.CENTER);
+        imageLabel.setVerticalAlignment(JLabel.CENTER);
+        
         buildingCostValueLabel.setText(Integer.toString(buildingCost)+" $");
         mwValueLabel.setText(Integer.toString(megaWatt));
         maintenanceValueLabel.setText(maintenance+" $");

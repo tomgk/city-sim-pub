@@ -14,7 +14,6 @@ import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**

@@ -1,8 +1,12 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.Image;
+import java.awt.Window;
+import java.util.Objects;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
@@ -11,25 +15,32 @@ import javax.swing.plaf.basic.BasicButtonUI;
  */
 public class PowerPlantSelectorPanel extends javax.swing.JPanel
 {
+    private final String name;
+    private final int buildingCost;
+    private final int megaWatt;
+    
     /**
      * Creates new form PowerPlantSelectorPanel
      * @param megaWatt
      * @param buildingCost
      * @param name
+     * @param image
+     * @param plantPlacer gets executed when a plant gets selected
      */
-    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image, Runnable r)
+    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image, Runnable plantPlacer)
     {
+        this.name = Objects.requireNonNull(name);
+        this.buildingCost = buildingCost;
+        this.megaWatt = megaWatt;
+        
         initComponents();
         plantButton.setText("<html>"+megaWatt+" MW $"+buildingCost+"<br>"+name+"</html>");
         plantButton.setIcon(new ImageIcon(image));
         plantButton.setVerticalTextPosition(SwingConstants.BOTTOM);
         plantButton.setHorizontalTextPosition(SwingConstants.CENTER);
-        plantButton.addActionListener(e -> r.run());
+        plantButton.addActionListener(e -> plantPlacer.run());
         
         plantButton.setUI(new BasicButtonUI());
-        
-        //TODO
-        infoButton.setEnabled(false);
     }
 
     /**
@@ -51,6 +62,13 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
         setLayout(new java.awt.BorderLayout());
 
         infoButton.setText("Info");
+        infoButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                infoButtonActionPerformed(evt);
+            }
+        });
         buttonPanel.add(infoButton);
 
         add(buttonPanel, java.awt.BorderLayout.PAGE_START);
@@ -63,6 +81,15 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void infoButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_infoButtonActionPerformed
+    {//GEN-HEADEREND:event_infoButtonActionPerformed
+        Window parent = SwingUtilities.getWindowAncestor(this);
+        PlantInfoDialog dlg = new PlantInfoDialog(parent, name, buildingCost, megaWatt);
+        dlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dlg.setLocationRelativeTo(parent);
+        dlg.setVisible(true);
+    }//GEN-LAST:event_infoButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;

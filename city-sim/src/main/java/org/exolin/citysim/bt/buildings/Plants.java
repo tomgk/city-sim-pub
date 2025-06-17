@@ -121,14 +121,16 @@ public class Plants
     );
     
     public static final List<BuildingType> ALL = List.of(
+            coal_plant,
+            hydro_plant,
+            oil_plant,
+            gas_plant,
+            nuclear_plant,
+            wind_plant,
+            
             solar_plant,
             microwave_plant,
-            nuclear_plant,
-            fusion_plant,
-            gas_plant,
-            oil_plant,
-            coal_plant,
-            wind_plant
+            fusion_plant
     );
     
     private static BuildingType createPlant2(String title, Animation animation, Animation animation2, StructureSize size, int cost, int megaWatt, BigDecimal maintenance)

@@ -19,7 +19,7 @@ public class PowerPlantSelectorDialog extends JDialog
     {
         super(parent, "Select Power Plant");
         setModal(true);
-        setLayout(new GridLayout(2, 2));
+        setLayout(new GridLayout(3, 3));
         
         for(BuildingType bt: plants)
         {

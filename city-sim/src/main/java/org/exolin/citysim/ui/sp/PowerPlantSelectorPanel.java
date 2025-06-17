@@ -2,6 +2,7 @@ package org.exolin.citysim.ui.sp;
 
 import java.awt.Image;
 import java.awt.Window;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -18,6 +19,7 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
     private final String name;
     private final int buildingCost;
     private final int megaWatt;
+    private final BigDecimal maintenance;
     
     /**
      * Creates new form PowerPlantSelectorPanel
@@ -25,13 +27,15 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
      * @param buildingCost
      * @param name
      * @param image
+     * @param maintenance
      * @param plantPlacer gets executed when a plant gets selected
      */
-    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image, Runnable plantPlacer)
+    public PowerPlantSelectorPanel(int megaWatt, int buildingCost, String name, Image image, BigDecimal maintenance, Runnable plantPlacer)
     {
         this.name = Objects.requireNonNull(name);
         this.buildingCost = buildingCost;
         this.megaWatt = megaWatt;
+        this.maintenance = Objects.requireNonNull(maintenance);
         
         initComponents();
         plantButton.setText("<html>"+megaWatt+" MW $"+buildingCost+"<br>"+name+"</html>");
@@ -85,7 +89,7 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_infoButtonActionPerformed
     {//GEN-HEADEREND:event_infoButtonActionPerformed
         Window parent = SwingUtilities.getWindowAncestor(this);
-        PlantInfoDialog dlg = new PlantInfoDialog(parent, name, buildingCost, megaWatt);
+        PlantInfoDialog dlg = new PlantInfoDialog(parent, name, buildingCost, megaWatt, maintenance);
         dlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dlg.setLocationRelativeTo(parent);
         dlg.setVisible(true);

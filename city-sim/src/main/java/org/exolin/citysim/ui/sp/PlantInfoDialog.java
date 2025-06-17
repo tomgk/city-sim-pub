@@ -1,6 +1,7 @@
 package org.exolin.citysim.ui.sp;
 
 import java.awt.Window;
+import java.math.BigDecimal;
 
 /**
  *
@@ -14,14 +15,16 @@ public class PlantInfoDialog extends javax.swing.JDialog
      * @param title
      * @param buildingCost
      * @param megaWatt
+     * @param maintenance
      */
-    public PlantInfoDialog(Window parent, String title, int buildingCost, int megaWatt)
+    public PlantInfoDialog(Window parent, String title, int buildingCost, int megaWatt, BigDecimal maintenance)
     {
         super(parent, ModalityType.DOCUMENT_MODAL);
         setTitle(title);
         initComponents();
         buildingCostValueLabel.setText(Integer.toString(buildingCost)+" $");
         mwValueLabel.setText(Integer.toString(megaWatt));
+        maintenanceValueLabel.setText(maintenance+" $");
     }
 
     /**
@@ -38,6 +41,8 @@ public class PlantInfoDialog extends javax.swing.JDialog
         mwValueLabel = new javax.swing.JLabel();
         buildingCostLabel = new javax.swing.JLabel();
         buildingCostValueLabel = new javax.swing.JLabel();
+        maintenanceLabel = new javax.swing.JLabel();
+        maintenanceValueLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -50,21 +55,32 @@ public class PlantInfoDialog extends javax.swing.JDialog
 
         buildingCostValueLabel.setText("jLabel1");
 
+        maintenanceLabel.setText("Maintenance:");
+
+        maintenanceValueLabel.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(mwLabel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(mwLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mwValueLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(buildingCostLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(buildingCostValueLabel)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(maintenanceLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mwValueLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buildingCostLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(buildingCostValueLabel)))
+                        .addComponent(maintenanceValueLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -78,7 +94,11 @@ public class PlantInfoDialog extends javax.swing.JDialog
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buildingCostLabel)
                     .addComponent(buildingCostValueLabel))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(maintenanceLabel)
+                    .addComponent(maintenanceValueLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,6 +107,8 @@ public class PlantInfoDialog extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel buildingCostLabel;
     private javax.swing.JLabel buildingCostValueLabel;
+    private javax.swing.JLabel maintenanceLabel;
+    private javax.swing.JLabel maintenanceValueLabel;
     private javax.swing.JLabel mwLabel;
     private javax.swing.JLabel mwValueLabel;
     // End of variables declaration//GEN-END:variables

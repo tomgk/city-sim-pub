@@ -28,7 +28,9 @@ public class PowerPlantSelectorDialog extends JDialog
                     bt.getCustom(Plants.MEGA_WATT, Integer.class),
                     bt.getCost(),
                     bt.getName(),
-                    bt.getDefaultImage(), () -> {
+                    bt.getDefaultImage(),
+                    bt.getMaintenance(),
+                    () -> {
                         gamePanel.setAction(placeBuilding);
                         setVisible(false);
                     }));

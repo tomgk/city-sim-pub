@@ -20,6 +20,7 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
     private final int buildingCost;
     private final int megaWatt;
     private final BigDecimal maintenance;
+    private final Image image;
     
     /**
      * Creates new form PowerPlantSelectorPanel
@@ -36,6 +37,7 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
         this.buildingCost = buildingCost;
         this.megaWatt = megaWatt;
         this.maintenance = Objects.requireNonNull(maintenance);
+        this.image = Objects.requireNonNull(image);
         
         initComponents();
         plantButton.setText("<html>"+megaWatt+" MW $"+buildingCost+"<br>"+name+"</html>");
@@ -89,7 +91,7 @@ public class PowerPlantSelectorPanel extends javax.swing.JPanel
     private void infoButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_infoButtonActionPerformed
     {//GEN-HEADEREND:event_infoButtonActionPerformed
         Window parent = SwingUtilities.getWindowAncestor(this);
-        PlantInfoDialog dlg = new PlantInfoDialog(parent, name, buildingCost, megaWatt, maintenance);
+        PlantInfoDialog dlg = new PlantInfoDialog(parent, name, buildingCost, megaWatt, maintenance, image);
         dlg.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dlg.setLocationRelativeTo(parent);
         dlg.setVisible(true);

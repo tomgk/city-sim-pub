@@ -1,7 +1,9 @@
 package org.exolin.citysim.ui.sp;
 
+import java.awt.Image;
 import java.awt.Window;
 import java.math.BigDecimal;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,14 +19,16 @@ public class PlantInfoDialog extends javax.swing.JDialog
      * @param megaWatt
      * @param maintenance
      */
-    public PlantInfoDialog(Window parent, String title, int buildingCost, int megaWatt, BigDecimal maintenance)
+    public PlantInfoDialog(Window parent, String title, int buildingCost, int megaWatt, BigDecimal maintenance, Image image)
     {
         super(parent, ModalityType.DOCUMENT_MODAL);
         setTitle(title);
         initComponents();
+        imageLabel.setIcon(new ImageIcon(image));
         buildingCostValueLabel.setText(Integer.toString(buildingCost)+" $");
         mwValueLabel.setText(Integer.toString(megaWatt));
         maintenanceValueLabel.setText(maintenance+" $");
+        pack();
     }
 
     /**
@@ -37,12 +41,14 @@ public class PlantInfoDialog extends javax.swing.JDialog
     private void initComponents()
     {
 
+        jPanel1 = new javax.swing.JPanel();
         mwLabel = new javax.swing.JLabel();
         mwValueLabel = new javax.swing.JLabel();
         buildingCostLabel = new javax.swing.JLabel();
         buildingCostValueLabel = new javax.swing.JLabel();
         maintenanceLabel = new javax.swing.JLabel();
         maintenanceValueLabel = new javax.swing.JLabel();
+        imageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -59,47 +65,48 @@ public class PlantInfoDialog extends javax.swing.JDialog
 
         maintenanceValueLabel.setText("jLabel1");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mwLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(mwValueLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buildingCostLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(buildingCostValueLabel)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(mwLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mwValueLabel))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(buildingCostLabel)
+                            .addGap(18, 18, 18)
+                            .addComponent(buildingCostValueLabel)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(maintenanceLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(maintenanceValueLabel)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mwLabel)
                     .addComponent(mwValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buildingCostLabel)
                     .addComponent(buildingCostValueLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maintenanceLabel)
                     .addComponent(maintenanceValueLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
+        getContentPane().add(imageLabel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -107,6 +114,8 @@ public class PlantInfoDialog extends javax.swing.JDialog
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel buildingCostLabel;
     private javax.swing.JLabel buildingCostValueLabel;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel maintenanceLabel;
     private javax.swing.JLabel maintenanceValueLabel;
     private javax.swing.JLabel mwLabel;

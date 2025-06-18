@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.function.Supplier;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -32,13 +33,14 @@ public final class DebugTableModel implements TableModel, WorldListener
     private List<Map.Entry<String, Value<?>>> entries;
     private final Map<String, Integer> indexes = new LinkedHashMap<>();
 
-    public DebugTableModel(WorldHolder w, List<Map.Entry<String, Value<?>>> entries)
+    public DebugTableModel(WorldHolder w)
     {
-        if(w != null)
-        {
-            w.addChangeListener(this::changedWorld);
-            w.get().addListener(this);
-        }
+        setEntries(w.get().getValues());
+        w.addWorldListener(this);
+    }
+
+    public DebugTableModel(List<Map.Entry<String, Value<?>>> entries)
+    {
         setEntries(entries);
     }
 
@@ -53,16 +55,6 @@ public final class DebugTableModel implements TableModel, WorldListener
     private void fire(TableModelEvent e)
     {
         listeners.forEach(l -> l.tableChanged(e));
-    }
-
-    private void changedWorld(World oldWorld, World newWorld)
-    {
-        oldWorld.addListener(this);
-        newWorld.removeListener(this);
-        
-        setEntries(newWorld.getValues());
-        //reload everything - just in case
-        fire(new TableModelEvent(this));
     }
 
     @Override
@@ -174,9 +166,9 @@ public final class DebugTableModel implements TableModel, WorldListener
         listeners.remove(l);
     }
     
-    public static JTable createJTable(WorldHolder wh, List<Entry<String, Value<?>>> values, boolean allColumns)
+    public static JTable createJTable(WorldHolder wh, Supplier<List<Entry<String, Value<?>>>> getValues, boolean allColumns)
     {
-        JTable t = new JTable(new DebugTableModel(wh, values)){
+        JTable t = new JTable(new DebugTableModel(wh)){
             @Override
             public TableCellRenderer getDefaultRenderer(Class<?> columnClass)
             {
@@ -191,7 +183,7 @@ public final class DebugTableModel implements TableModel, WorldListener
                 {
                     //show non-editable entries in gray
                     
-                    boolean editable = !values.get(row).getValue().isReadonly();
+                    boolean editable = !getValues.get().get(row).getValue().isReadonly();
                     
                     Component c = r.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                     int V = 220;

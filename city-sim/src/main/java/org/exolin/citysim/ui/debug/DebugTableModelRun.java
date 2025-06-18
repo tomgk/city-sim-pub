@@ -176,7 +176,7 @@ public class DebugTableModelRun
         values.add(Map.entry("money", new BigDecVal("money", BigDecimal.valueOf(10000))));
         values.add(Map.entry("stats.buildingCount", new ReadonlyIntVal(103)));
         
-        JTable t = createJTable(null, values, allColumns);
+        JTable t = createJTable(null, () -> values, allColumns);
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(t);

@@ -23,7 +23,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.storage.WorldStorage;
 import static org.exolin.citysim.ui.debug.DebugTableModel.createJTable;
-import org.exolin.citysim.utils.Utils;
+import org.exolin.citysim.utils.FileUtils;
 
 /**
  *
@@ -494,7 +494,7 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
             Path p = fileChooser.getSelectedFile().toPath();
             try(InputStream in = Files.newInputStream(p))
             {
-                World w = WorldStorage.deserialize(Utils.getFilenameWithoutExt(p), in);
+                World w = WorldStorage.deserialize(FileUtils.getFilenameWithoutExt(p), in);
                 panel.setWorld(w, p);
             }catch(IOException e){
                 ErrorDisplay.show(this, e);

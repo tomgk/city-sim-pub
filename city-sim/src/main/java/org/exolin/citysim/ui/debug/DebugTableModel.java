@@ -29,13 +29,11 @@ import org.exolin.citysim.ui.WorldHolder;
  */
 public final class DebugTableModel implements TableModel, WorldListener
 {
-    //private final WorldHolder w;
     private List<Map.Entry<String, Value<?>>> entries;
     private final Map<String, Integer> indexes = new LinkedHashMap<>();
 
     public DebugTableModel(WorldHolder w, List<Map.Entry<String, Value<?>>> entries)
     {
-        //this.w = w;
         if(w != null)
         {
             w.addChangeListener(this::changedWorld);

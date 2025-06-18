@@ -661,7 +661,7 @@ public final class World implements BuildingMap
      */
     public void triggerAllChanges(WorldListener listener)
     {
-        values.forEach(e -> listener.onChanged(e.getKey(), e.getValue().get()));
+        listener.onAllChanged(Collections.unmodifiableList(values));
     }
 
     @Override

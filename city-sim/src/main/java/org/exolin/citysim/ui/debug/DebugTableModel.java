@@ -19,9 +19,9 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
-import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.model.debug.Value;
+import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.WorldHolder;
 
 /**
@@ -45,7 +45,7 @@ public final class DebugTableModel implements TableModel, WorldListener
         setEntries(entries);
     }
 
-    public void setEntries(List<Entry<String, Value<?>>> entries)
+    private void setEntries(List<Entry<String, Value<?>>> entries)
     {
         this.entries = Objects.requireNonNull(entries);
         this.indexes.clear();
@@ -58,11 +58,27 @@ public final class DebugTableModel implements TableModel, WorldListener
         listeners.forEach(l -> l.tableChanged(e));
     }
 
+    /**
+     * Updates one row in the table
+     * 
+     * @param name the name of the property
+     * @param value 
+     */
     @Override
     public void onChanged(String name, Object value)
     {
         int index = indexes.get(name);
-        fire(new TableModelEvent(this, index, index, VALUE));
+        if(index < 0)
+            ErrorDisplay.show(null, new IllegalStateException("unknown "+name));
+        else
+            fire(new TableModelEvent(this, index, index, VALUE));
+    }
+    
+    @Override
+    public void onAllChanged(List<Map.Entry<String, Value<?>>> values)
+    {
+        setEntries(values);
+        fire(new TableModelEvent(this));
     }
     
     @Override

@@ -37,10 +37,4 @@ public class MathUtils
     {
         return values.reduce(MathUtils::lcm).orElseThrow(NO_VALUES);
     }
-    
-    public static void main(String[] args)
-    {
-        System.out.println(gcd(15, 25));
-        System.out.println(lcm(15, 25));
-    }
 }

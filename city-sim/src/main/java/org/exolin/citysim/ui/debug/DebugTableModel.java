@@ -33,6 +33,7 @@ public final class DebugTableModel implements TableModel, WorldListener
     private List<Map.Entry<String, Value<?>>> entries;
     private final Map<String, Integer> indexes = new LinkedHashMap<>();
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public DebugTableModel(WorldHolder w)
     {
         setEntries(w.get().getValues());

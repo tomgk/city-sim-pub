@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,21 +19,19 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.bt.buildings.Plants;
 import org.exolin.citysim.bt.connections.SelfConnections;
-import org.exolin.citysim.model.building.Building;
-import org.exolin.citysim.model.connection.ConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.debug.ReadonlyValue;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.model.debug.ValueImpl;
+import org.exolin.citysim.model.electricity.Electricity;
+import org.exolin.citysim.model.electricity.ElectricityGrid;
+import org.exolin.citysim.model.electricity.ElectricityGridArea;
 import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -45,7 +42,7 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public final class World
+public final class World implements BuildingMap
 {
     static
     {
@@ -142,6 +139,7 @@ public final class World
         changed(PROPERTY_CITY_NAME, name);
     }
     
+    @Override
     public Structure<?, ?, ?, ?> getBuildingAt(int x, int y)
     {
         for(Structure<?, ?, ?, ?> b: structures)
@@ -334,6 +332,7 @@ public final class World
         }
     }
 
+    @Override
     public List<Structure<?, ?, ?, ?>> getStructures()
     {
         return structures;
@@ -543,131 +542,31 @@ public final class World
         return false;
     }
     
-    private final Map<Structure<?, ?, ?, ?>, ElectricityGridArea> structuresWithElectricity = new IdentityHashMap<>();
-
-    public Map<Structure<?, ?, ?, ?>, ElectricityGridArea> getStructuresWithElectricity()
+    private final Electricity electricity = new Electricity();
+    
+    private void updateStats()
     {
-        return Collections.unmodifiableMap(structuresWithElectricity);
+        electricity.updateStats(this, v -> changed(PROPERTY_ELECTRICITY_COVERAGE, v));
     }
     
     public Map<ElectricityGrid, List<Structure<?, ?, ?, ?>>> getElectricityGrids()
     {
-        return structuresWithElectricity.entrySet()
-                .stream()
-                .collect(Collectors.groupingBy(
-                        (Entry<Structure<?, ?, ?, ?>, ElectricityGridArea> e) -> e.getValue().getElectricityGrid(),
-                        Collectors.mapping((Entry<Structure<?, ?, ?, ?>, ElectricityGridArea> e) -> e.getKey(), Collectors.toList())));
+        return electricity.getElectricityGrids();
     }
     
-    private void updateStats()
+    public Map<Structure<?, ?, ?, ?>, ElectricityGridArea> getStructuresWithElectricity()
     {
-        updateElectricityGrid();
-        updateElectricityCoverageStats();
-    }
-    
-    private void updateElectricityGrid()
-    {
-        structuresWithElectricity.clear();
-        
-        structures.stream()
-                .filter(Plants::isPlant)
-                .forEach(plant -> {
-                    //each plant starts as an own grid
-                    ElectricityGridArea grid = new ElectricityGridArea((Building)plant);
-                    onFindStructureWithElectricity(grid, plant);
-                });
-        
-        //System.out.println(structures);
-    }
-    
-    private void onFindStructureWithElectricity(ElectricityGridArea grid, Structure<?, ?, ?, ?> s)
-    {
-        Objects.requireNonNull(s);
-        
-        //remember, and if already captured, skip
-        ElectricityGridArea existingGrid = structuresWithElectricity.get(s);
-        if(existingGrid != null)
-        {
-            grid.connectTo(existingGrid);
-            
-            return;
-        }
-        
-        structuresWithElectricity.put(s, grid);
-        grid.getElectricityGrid().addStructure(s);
-        
-        int x = s.getX();
-        int y = s.getY();
-        int size = s.getSize();
-        for(int yi=-1;yi<size+1;++yi)
-        {
-            for(int xi=-1;xi<size+1;++xi)
-            {
-                //exclude diagonal
-                if(xi != 0 && yi != 0)
-                    continue;
-                
-                ConnectionType.Direction d = xi != 0 ? ConnectionType.Direction.X : ConnectionType.Direction.Y;
-                
-                Structure<?, ?, ?, ?> neighbor = getBuildingAt(x+xi, y+yi);
-                
-                //check if it is actually the current building
-                if(neighbor == s)
-                    continue;
-                
-                //TODO: conduction over street should only work with one tile
-                //TODO: circuit over street doesn't work
-                if(neighbor != null && Plants.getElectricity(neighbor, d).transfers())
-                    onFindStructureWithElectricity(grid, neighbor);
-            }
-        }
-    }
-    
-    record Coverage(int covered, int total)
-    {
-        Coverage merge(Coverage c)
-        {
-            return new Coverage(covered+c.covered, total+c.total);
-        }
-        
-        String getPercentage()
-        {
-            if(total == 0)
-                return "--/--";
-            
-            return covered+"/"+total;
-        }
-    }
-    
-    private static final Coverage EMPTY_COVERAGE = new Coverage(0, 0);
-    private Coverage currentCoverage = EMPTY_COVERAGE;
-    
-    private void updateElectricityCoverageStats()
-    {
-        Coverage previous = currentCoverage;
-        
-        currentCoverage = structures.stream()
-                .filter(f -> f instanceof Building || f instanceof Zone || f.getZoneType(true).isPresent())
-                .map(s -> {
-                    boolean covered = hasElectricity(s);
-                    int size = s.getSize();
-                    return new Coverage(covered ? size : 0, size);
-                })
-                .reduce(Coverage::merge)
-                .orElse(EMPTY_COVERAGE);
-        
-        if(!previous.equals(currentCoverage))
-            changed(PROPERTY_ELECTRICITY_COVERAGE, getElectricityCoverage());
+        return electricity.getStructuresWithElectricity();
     }
     
     private String getElectricityCoverage()
     {
-        return currentCoverage.getPercentage();
+        return electricity.getElectricityCoverage();
     }
     
     public boolean hasElectricity(Structure<?, ?, ?, ?> s)
     {
-        return structuresWithElectricity.containsKey(s);
+        return electricity.hasElectricity(s);
     }
     
     private boolean needElectricity = true;

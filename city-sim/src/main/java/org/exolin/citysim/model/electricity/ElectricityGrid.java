@@ -1,4 +1,4 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.electricity;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.building.Building;
 
 /**

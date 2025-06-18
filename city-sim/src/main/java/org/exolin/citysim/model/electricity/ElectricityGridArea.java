@@ -1,4 +1,4 @@
-package org.exolin.citysim.model;
+package org.exolin.citysim.model.electricity;
 
 import java.util.Objects;
 import org.exolin.citysim.model.building.Building;

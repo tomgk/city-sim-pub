@@ -158,15 +158,13 @@ public final class DebugTableModel implements TableModel, WorldListener
     }
 
     @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    public void setValueAt(Object newValue, int rowIndex, int columnIndex)
     {
-        var entry = entries.get(rowIndex);
+        if(columnIndex != VALUE)
+            throw new IllegalArgumentException();
         
-        switch(columnIndex)
-        {
-            case VALUE -> ((Value)entry.getValue()).set(aValue);
-            default -> throw new IllegalArgumentException();
-        }
+        Value value = entries.get(rowIndex).getValue();
+        value.set(newValue);
     }
     
     private final List<TableModelListener> listeners = new ArrayList<>();

@@ -1,7 +1,5 @@
 package org.exolin.citysim.ui.debug;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -58,17 +56,7 @@ public class DebugTable extends JTable
             return null;
         }
 
-        return (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) ->
-        {
-            //show non-editable entries in gray
-
-            boolean editable = !getValues.get().get(row).getValue().isReadonly();
-
-            Component c = r.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            int V = 220;
-            c.setBackground(editable ? Color.white : new Color(V, V, V));
-            return c;
-        };
+        return new DebugTableCellRenderer(r, getValues);
     }
 
     private static final long serialVersionUID = 1L;

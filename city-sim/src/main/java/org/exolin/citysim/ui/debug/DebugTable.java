@@ -32,17 +32,17 @@ public class DebugTable extends JTable
         super(model);
         this.getValues = Objects.requireNonNull(getValues);
         
-        TableColumnModel columnModel = getColumnModel();
-        columnModel.getColumn(WRITABLE).setPreferredWidth(40);
-        columnModel.getColumn(NAME).setPreferredWidth(140);
+        TableColumnModel cm = getColumnModel();
+        cm.getColumn(WRITABLE).setPreferredWidth(40);
+        cm.getColumn(NAME).setPreferredWidth(140);
         
         if(!allColumns)
         {
-            TableColumn writableColumn = columnModel.getColumn(WRITABLE);
-            TableColumn typeColumn = columnModel.getColumn(TYPE);
+            TableColumn writableColumn = cm.getColumn(WRITABLE);
+            TableColumn typeColumn = cm.getColumn(TYPE);
             
-            columnModel.removeColumn(writableColumn);
-            columnModel.removeColumn(typeColumn);
+            cm.removeColumn(writableColumn);
+            cm.removeColumn(typeColumn);
         }
         
     }

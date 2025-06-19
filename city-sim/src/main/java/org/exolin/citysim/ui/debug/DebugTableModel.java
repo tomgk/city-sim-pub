@@ -157,6 +157,17 @@ public final class DebugTableModel implements TableModel, WorldListener
         };
     }
 
+    /**
+     * Sets the value of the variable in row {@code rowIndex}.
+     * Since only the value can be changed,
+     * {@code columnIndex} can only be {@link #VALUE},
+     * otherwise an exception will be thrown
+     * 
+     * @param newValue new value
+     * @param rowIndex row index
+     * @param columnIndex column index, only {@link #VALUE} is supported
+     * @throws IllegalArgumentException if {@code columnIndex}!={@link #VALUE}
+     */
     @Override
     public void setValueAt(Object newValue, int rowIndex, int columnIndex)
     {

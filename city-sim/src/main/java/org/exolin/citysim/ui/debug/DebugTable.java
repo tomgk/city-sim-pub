@@ -20,6 +20,7 @@ import static org.exolin.citysim.ui.debug.DebugTableModel.VALUE;
 import static org.exolin.citysim.ui.debug.DebugTableModel.WRITABLE;
 
 /**
+ * Supports different types of variables
  *
  * @author Thomas
  */

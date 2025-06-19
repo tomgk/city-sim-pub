@@ -43,7 +43,6 @@ public class DebugTable extends JTable
             cm.removeColumn(writableColumn);
             cm.removeColumn(typeColumn);
         }
-        
     }
     
     @Override

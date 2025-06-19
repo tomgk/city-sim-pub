@@ -63,38 +63,43 @@ public class DebugTable extends JTable
     private Class editingClass;
 
     @Override
-    public TableCellRenderer getCellRenderer(int row, int column) {
+    public TableCellRenderer getCellRenderer(int row, int column)
+    {
         editingClass = null;
         int modelColumn = convertColumnIndexToModel(column);
-        if (modelColumn == VALUE) {
+        if (modelColumn == VALUE)
+        {
             Class rowClass = getModel().getValueAt(row, modelColumn).getClass();
             return getDefaultRenderer(rowClass);
-        } else {
-            return super.getCellRenderer(row, column);
         }
+        else
+            return super.getCellRenderer(row, column);
     }
 
     @Override
-    public TableCellEditor getCellEditor(int row, int column) {
+    public TableCellEditor getCellEditor(int row, int column)
+    {
         editingClass = null;
         int modelColumn = convertColumnIndexToModel(column);
-        if (modelColumn == VALUE) {
+        if (modelColumn == VALUE)
+        {
             editingClass = getModel().getValueAt(row, modelColumn).getClass();
 
             if(editingClass.isEnum())
                 return new DefaultCellEditor(new JComboBox<>(editingClass.getEnumConstants()));
 
             return getDefaultEditor(editingClass);
-        } else {
-            return super.getCellEditor(row, column);
         }
+        else
+            return super.getCellEditor(row, column);
     }
+
     //  This method is also invoked by the editor when the value in the editor
     //  component is saved in the TableModel. The class was saved when the
     //  editor was invoked so the proper class can be created.
-
     @Override
-    public Class getColumnClass(int column) {
+    public Class getColumnClass(int column)
+    {
         return editingClass != null ? editingClass : super.getColumnClass(column);
     }
 }

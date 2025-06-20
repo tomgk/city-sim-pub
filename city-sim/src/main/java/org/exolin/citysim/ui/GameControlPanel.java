@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
+import org.exolin.citysim.model.AbstractWorldListener;
 import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
@@ -29,7 +30,7 @@ import org.exolin.citysim.utils.FileUtils;
  *
  * @author Thomas
  */
-public class GameControlPanel extends javax.swing.JPanel implements ChangeListener, WorldListener
+public class GameControlPanel extends javax.swing.JPanel implements ChangeListener
 {
     private GamePanel panel;
     private final JFileChooser fileChooser = new JFileChooser(new File("./saves"));
@@ -71,26 +72,26 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
         addSpeedLabel(speed4Label, SimulationSpeed.SPEED4);
         addSpeedLabel(speed5Label, SimulationSpeed.SPEED5);
     }
+    
+    private final WorldListener worldListener = new AbstractWorldListener()
+    {
+        @Override
+        public void onSimSpeedChanged(String name, SimulationSpeed simulationSpeed)
+        {
+            setSpeed(simulationSpeed);
+        }
+    };
 
     @Override
     public void changed(World oldWorld, World newWorld)
     {
         if(oldWorld != null)
-            oldWorld.removeListener(this);
+            oldWorld.removeListener(worldListener);
         
-        newWorld.addListener(this);
+        newWorld.addListener(worldListener);
         
         //show new values after replacement
-        newWorld.triggerAllChanges(this);
-    }
-
-    @Override
-    public void onChanged(String name, Object value)
-    {
-        switch(name)
-        {
-            case World.PROPERTY_SIM_SPEED -> setSpeed((SimulationSpeed)value);
-        }
+        newWorld.triggerAllChanges(worldListener);
     }
     
     private void addSpeedLabel(JLabel label, SimulationSpeed speed)

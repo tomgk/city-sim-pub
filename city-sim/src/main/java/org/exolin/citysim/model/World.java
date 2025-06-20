@@ -12,11 +12,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.SequencedCollection;
+import java.util.SequencedSet;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.exolin.citysim.bt.StructureTypes;
@@ -351,6 +354,7 @@ public final class World implements BuildingMap
     void onChange()
     {
         lastChange = System.currentTimeMillis();
+        //TODO: changed() should be called here but doing so would hurt performance
     }
 
     public long getLastChange()
@@ -444,6 +448,7 @@ public final class World implements BuildingMap
         
         int ticks = (int)(moneyTime - lastMoneyUpdate);
         lastMoneyUpdate = moneyTime;
+        //TODO: changed() should be called here but doing so would hurt performance
         
         BigDecimal bigTicks = BigDecimal.valueOf(ticks);
         for(Structure<?, ?, ?, ?> b : structures)
@@ -571,15 +576,26 @@ public final class World implements BuildingMap
     
     private boolean needElectricity = true;
     
-    public static final String PROPERTY_CITY_NAME = "cityName";
-    public static final String PROPERTY_NEED_ELECTRICITY = "needElectricity";
-    public static final String PROPERTY_MONEY = "money";
-    public static final String PROPERTY_SIM_SPEED = "simSpeed";
-    public static final String PROPERTY_STRUCTURE_COUNT = "structureCount";
-    public static final String PROPERTY_LAST_MONEY_UPDATE = "lastMoneyUpdate";
-    public static final String PROPERTY_LAST_CHANGE_DATE = "lastChange.date";
-    public static final String PROPERTY_LAST_CHANGE_TIME = "lastChange.time";
-    public static final String PROPERTY_ELECTRICITY_COVERAGE = "electricityCoverage";
+    private static final List<String> PROPERTIES = new ArrayList<>();
+    private static String createProperty(String name)
+    {
+        PROPERTIES.add(name);
+        return name;
+    }
+    public static final String PROPERTY_CITY_NAME = createProperty("cityName");
+    public static final String PROPERTY_NEED_ELECTRICITY = createProperty("needElectricity");
+    public static final String PROPERTY_MONEY = createProperty("money");
+    public static final String PROPERTY_SIM_SPEED = createProperty("simSpeed");
+    public static final String PROPERTY_STRUCTURE_COUNT = createProperty("structureCount");
+    public static final String PROPERTY_LAST_MONEY_UPDATE = createProperty("lastMoneyUpdate");
+    public static final String PROPERTY_LAST_CHANGE_DATE = createProperty("lastChange.date");
+    public static final String PROPERTY_LAST_CHANGE_TIME = createProperty("lastChange.time");
+    public static final String PROPERTY_ELECTRICITY_COVERAGE = createProperty("electricityCoverage");
+    
+    public static List<String> propertyNames()
+    {
+        return Collections.unmodifiableList(PROPERTIES);
+    }
     
     private final List<Entry<String, Value<?>>> values = new ArrayList<>();
     

@@ -82,13 +82,18 @@ public class Main
         lg.setVisible(true);
     }
     
+    private static String getFrameTitle(String worldName)
+    {
+        return "City Sim - "+worldName;
+    }
+    
     public static void play(World world, boolean debugMode)
     {
         StructureTypes.init();
         
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setTitle("City Sim - "+world.getName());
+        f.setTitle(getFrameTitle(world.getName()));
         f.setLayout(new BorderLayout());
         GameControlPanel gd = new GameControlPanel();
         f.add(gd, BorderLayout.NORTH);
@@ -118,6 +123,10 @@ public class Main
             }
         }, Optional.of(bw));
         f.add(gp, BorderLayout.CENTER);
+        gp.getWorldHolder().addWorldListener((name, value) -> {
+            if(name.equals(World.PROPERTY_CITY_NAME))
+                f.setTitle(getFrameTitle((String)value));
+        });
         
         for(Map.Entry<String, List<Action>> e: Actions.getActions(gp.getWorldHolder(), debugMode).entrySet())
         {

@@ -120,7 +120,7 @@ public final class World implements BuildingMap
     public void reduceMoney(long money)
     {
         this.money = this.money.subtract(BigDecimal.valueOf(money));
-        changed(PROPERTY_MONEY, money);
+        changed(PROPERTY_MONEY, this.money);
     }
     
     public World(String name, int gridSize, BigDecimal money, SimulationSpeed speed)

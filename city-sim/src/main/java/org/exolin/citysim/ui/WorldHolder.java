@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.WorldListener;
+import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *
@@ -18,7 +18,7 @@ public final class WorldHolder implements GetWorld
     private World world;
     private Path file;
     private final List<ChangeListener> listeners = new ArrayList<>();
-    private final List<WorldListener> worldListeners = new ArrayList<>();
+    private final List<GenericWorldListener> worldListeners = new ArrayList<>();
 
     public WorldHolder(World world)
     {
@@ -45,7 +45,7 @@ public final class WorldHolder implements GetWorld
             l.changed(old, world);
         
         //move WorldListener to new world
-        for(WorldListener l : worldListeners)
+        for(GenericWorldListener l : worldListeners)
         {
             old.removeListener(l);
             world.addListener(l);
@@ -76,14 +76,14 @@ public final class WorldHolder implements GetWorld
     }
 
     @Override
-    public void addWorldListener(WorldListener listener)
+    public void addWorldListener(GenericWorldListener listener)
     {
         worldListeners.add(listener);
         world.addListener(listener);
     }
 
     @Override
-    public void removeWorldListener(WorldListener listener)
+    public void removeWorldListener(GenericWorldListener listener)
     {
         worldListeners.remove(listener);
         world.removeListener(listener);

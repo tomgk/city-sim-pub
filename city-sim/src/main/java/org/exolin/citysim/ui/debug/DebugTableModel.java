@@ -11,16 +11,16 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.WorldHolder;
+import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *
  * @author Thomas
  */
-public final class DebugTableModel implements TableModel, WorldListener
+public final class DebugTableModel implements TableModel, GenericWorldListener
 {
     private List<Map.Entry<String, Value<?>>> entries;
     private final Map<String, Integer> indexes = new LinkedHashMap<>();

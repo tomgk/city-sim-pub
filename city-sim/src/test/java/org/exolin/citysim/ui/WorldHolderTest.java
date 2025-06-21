@@ -12,9 +12,9 @@ import org.exolin.citysim.Github;
 import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.WorldListener;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *
@@ -47,7 +47,7 @@ public class WorldHolderTest
         h.set(w, Paths.get("w"));
     }
     
-    private static class ExpectedWorldListener implements WorldListener
+    private static class ExpectedWorldListener implements GenericWorldListener
     {
         private final Deque<Entry<String, Object>> expected = new LinkedList<>();
         private final Exception source = new Exception("Source");

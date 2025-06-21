@@ -8,7 +8,7 @@ import org.exolin.citysim.model.debug.Value;
  *
  * @author Thomas
  */
-public interface WorldListener
+public interface GenericWorldListener
 {
     public void onChanged(String name, Object value);
 

@@ -11,7 +11,7 @@ import org.exolin.citysim.model.debug.Value;
  *
  * @author Thomas
  */
-public abstract class AbstractWorldListener implements WorldListener
+public abstract class AbstractWorldListener implements GenericWorldListener
 {
     @Override
     public void onChanged(String name, Object value)
@@ -42,7 +42,7 @@ public abstract class AbstractWorldListener implements WorldListener
     @Override
     public final void onAllChanged(List<Map.Entry<String, Value<?>>> values)
     {
-        WorldListener.super.onAllChanged(values);
+        GenericWorldListener.super.onAllChanged(values);
     }
 
     public void onCityNameChanged(String name, String cityName){}

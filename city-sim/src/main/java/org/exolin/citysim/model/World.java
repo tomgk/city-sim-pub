@@ -649,14 +649,14 @@ public final class World implements BuildingMap
         return needElectricity ? hasElectricity(s) : true;
     }
     
-    private static final List<WorldListener> listeners = new ArrayList<>();
+    private static final List<GenericWorldListener> listeners = new ArrayList<>();
     
-    public void addListener(WorldListener listener)
+    public void addListener(GenericWorldListener listener)
     {
         listeners.add(listener);
     }
     
-    public void removeListener(WorldListener listener)
+    public void removeListener(GenericWorldListener listener)
     {
         listeners.remove(listener);
     }
@@ -668,14 +668,14 @@ public final class World implements BuildingMap
     }
 
     /**
-     * Calls {@link WorldListener#onChanged(java.lang.String, java.lang.Object)}
+     * Calls {@link GenericWorldListener#onChanged(java.lang.String, java.lang.Object)}
      * for every value.
      * <p>
      * Useful when the {@link World} instance gets replaced.
      * 
      * @param listener the listener
      */
-    public void triggerAllChanges(WorldListener listener)
+    public void triggerAllChanges(GenericWorldListener listener)
     {
         listener.onAllChanged(Collections.unmodifiableList(values));
     }

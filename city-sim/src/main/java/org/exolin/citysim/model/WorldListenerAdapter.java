@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.exolin.citysim.model.debug.Value;
 
 /**
+ * Adapter to turn a {@link WorldListener} into a {@link GenericWorldListener}.
  *
  * @author Thomas
  */

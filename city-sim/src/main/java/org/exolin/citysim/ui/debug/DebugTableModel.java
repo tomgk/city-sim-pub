@@ -11,10 +11,10 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import org.exolin.citysim.model.GenericWorldListener;
 import org.exolin.citysim.model.debug.Value;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.WorldHolder;
-import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *

@@ -17,14 +17,13 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
-import org.exolin.citysim.model.AbstractWorldListener;
 import org.exolin.citysim.model.ChangeListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.storage.WorldStorage;
 import static org.exolin.citysim.ui.debug.DebugTableModel.createJTable;
 import org.exolin.citysim.utils.FileUtils;
-import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *
@@ -73,7 +72,7 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
         addSpeedLabel(speed5Label, SimulationSpeed.SPEED5);
     }
     
-    private final GenericWorldListener worldListener = new AbstractWorldListener()
+    private final WorldListener worldListener = new WorldListener()
     {
         @Override
         public void onSimSpeedChanged(String name, SimulationSpeed simulationSpeed)

@@ -5,8 +5,10 @@ import java.util.Map;
 import org.exolin.citysim.model.debug.Value;
 
 /**
+ * A listener for world properties that has the same method for all properties.
  *
  * @author Thomas
+ * @see WorldListener
  */
 public interface GenericWorldListener
 {

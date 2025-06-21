@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.exolin.citysim.Github;
 import org.exolin.citysim.model.ChangeListener;
+import org.exolin.citysim.model.GenericWorldListener;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.World;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import org.exolin.citysim.model.GenericWorldListener;
 
 /**
  *

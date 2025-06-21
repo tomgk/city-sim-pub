@@ -12,14 +12,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.SequencedCollection;
-import java.util.SequencedSet;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import org.exolin.citysim.bt.StructureTypes;
@@ -661,6 +658,17 @@ public final class World implements BuildingMap
         listeners.remove(listener);
     }
     
+    
+    public void addListener(WorldListener listener)
+    {
+        listeners.add(new WorldListenerAdapter(listener));
+    }
+    
+    public void removeListener(WorldListener listener)
+    {
+        listeners.remove(new WorldListenerAdapter(listener));
+    }
+    
     private void changed(String name, Object newValue)
     {
         //System.out.println("["+listeners.size()+"] Changed "+name+"."+name+"="+newValue);
@@ -678,6 +686,19 @@ public final class World implements BuildingMap
     public void triggerAllChanges(GenericWorldListener listener)
     {
         listener.onAllChanged(Collections.unmodifiableList(values));
+    }
+
+    /**
+     * Calls {@link GenericWorldListener#onChanged(java.lang.String, java.lang.Object)}
+     * for every value.
+     * <p>
+     * Useful when the {@link World} instance gets replaced.
+     * 
+     * @param listener the listener
+     */
+    public void triggerAllChanges(WorldListener listener)
+    {
+        new WorldListenerAdapter(listener).onAllChanged(Collections.unmodifiableList(values));
     }
 
     @Override

@@ -13,7 +13,7 @@ import org.exolin.citysim.model.debug.Value;
  *
  * @author Thomas
  */
-class WorldListenerAdapter implements GenericWorldListener
+final class WorldListenerAdapter implements GenericWorldListener
 {
     private final WorldListener listener;
 
@@ -45,13 +45,6 @@ class WorldListenerAdapter implements GenericWorldListener
             listener.onElectricityCoverageChanged(name, (String)value);
         else
             throw new UnsupportedOperationException();
-    }
-
-    //only implemented to make it final
-    @Override
-    public final void onAllChanged(List<Map.Entry<String, Value<?>>> values)
-    {
-        GenericWorldListener.super.onAllChanged(values);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.exolin.citysim.ui.sp;
+package org.exolin.citysim.ui.sp.powerplant;
 
 import java.awt.GridLayout;
 import java.awt.Window;

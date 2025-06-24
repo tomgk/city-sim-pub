@@ -13,7 +13,7 @@ public class WorldListenerAdapterTest
     public void test()
     {
         World w = new World("test", 30, BigDecimal.ONE, SimulationSpeed.SPEED1);
-        WorldListenerAdapter l = new WorldListenerAdapter(new WorldListener(){}){};
+        WorldListenerAdapter l = new WorldListenerAdapter(new WorldListener(){});
         w.addListener(l);
         w.triggerAllChanges(l);
     }

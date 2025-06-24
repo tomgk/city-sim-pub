@@ -65,6 +65,7 @@ public final class World implements BuildingMap
     private SimulationSpeed tickFactor = SimulationSpeed.SPEED1;
     
     private final RCI rci = new RCI();
+    private final Modification modification = new DefaultModification();
 
     public RCI getRCI()
     {

@@ -17,6 +17,11 @@ public class Utils
         return copy;
     }
 
+    public static <E extends Enum<E>> E getPrev(E[] values, E current)
+    {
+        return getPrev(values, current.ordinal());
+    }
+    
     public static <E extends Enum<E>> E getPrev(E[] values, int ordinal)
     {
         int num = ordinal-1;
@@ -26,6 +31,11 @@ public class Utils
         return values[num];
     }
 
+    public static <E extends Enum<E>> E getNext(E[] values, E current)
+    {
+        return getNext(values, current.ordinal());
+    }
+    
     public static <E extends Enum<E>> E getNext(E[] values, int ordinal)
     {
         int num = ordinal+1;

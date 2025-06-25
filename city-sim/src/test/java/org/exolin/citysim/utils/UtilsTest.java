@@ -25,12 +25,30 @@ public class UtilsTest
         assertEquals(Value.b, Utils.getPrev(values, 2));
     }
     
+    
     @Test
-    public void testGetNext()
+    public void testGetPrev_Ordinal()
+    {
+        assertEquals(Value.c, Utils.getPrev(values, Value.a));
+        assertEquals(Value.a, Utils.getPrev(values, Value.b));
+        assertEquals(Value.b, Utils.getPrev(values, Value.c));
+    }
+    
+    @Test
+    public void testGetNext_Ordinal()
     {
         assertEquals(Value.b, Utils.getNext(values, 0));
         assertEquals(Value.c, Utils.getNext(values, 1));
         assertEquals(Value.a, Utils.getNext(values, 2));
+    }
+    
+    
+    @Test
+    public void testGetNext_Enum()
+    {
+        assertEquals(Value.b, Utils.getNext(values, Value.a));
+        assertEquals(Value.c, Utils.getNext(values, Value.b));
+        assertEquals(Value.a, Utils.getNext(values, Value.c));
     }
     
     @Test

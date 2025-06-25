@@ -272,29 +272,16 @@ public final class GamePanel extends JComponent
         double f = 50;
         switch(keyCode)
         {
-            case KeyEvent.VK_ESCAPE:
-                setAction(Action.NONE);
-                break;
-            
-            case KeyEvent.VK_LEFT:
-                xoffset += getZoomFactor() * f;
-                break;
-            case KeyEvent.VK_RIGHT:
-                xoffset -= getZoomFactor() * f;
-                break;
-            case KeyEvent.VK_UP:
-                yoffset += getZoomFactor() * f;
-                break;
-            case KeyEvent.VK_DOWN:
-                yoffset -= getZoomFactor() * f;
-                break;
-            default:
-                update = false;
+            case KeyEvent.VK_ESCAPE -> setAction(Action.NONE);
+            case KeyEvent.VK_LEFT -> xoffset += getZoomFactor() * f;
+            case KeyEvent.VK_RIGHT -> xoffset -= getZoomFactor() * f;
+            case KeyEvent.VK_UP -> yoffset += getZoomFactor() * f;
+            case KeyEvent.VK_DOWN -> yoffset -= getZoomFactor() * f;
+            default -> update = false;
         }
+        
         if(update)
-        {
             repaint();
-        }
     }
     
     public void resetPosition()

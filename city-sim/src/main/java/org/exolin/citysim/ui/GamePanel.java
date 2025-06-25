@@ -727,11 +727,6 @@ public final class GamePanel extends JComponent
         repaint();
     }
     
-    public void nextView()
-    {
-        setView(view.getNext());
-    }
-
     public Rotation getRotation()
     {
         return rotation;

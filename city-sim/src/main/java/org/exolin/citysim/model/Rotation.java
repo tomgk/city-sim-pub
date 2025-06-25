@@ -1,6 +1,7 @@
 package org.exolin.citysim.model;
 
 import java.awt.Point;
+import org.exolin.citysim.utils.Utils;
 
 /**
  * Rotation view on the world.
@@ -59,20 +60,12 @@ public enum Rotation
     
     public Rotation getNext()
     {
-        int num = ordinal()+1;
-        if(num == values.length)
-            num = 0;
-        
-        return values[num];
+        return Utils.getNext(values, this);
     }
     
     public Rotation getPrev()
     {
-        int num = ordinal()-1;
-        if(num == -1)
-            num = values.length-1;
-        
-        return values[num];
+        return Utils.getPrev(values, this);
     }
     
     public void counterRotate(int gridSize, int x, int y, Point point)

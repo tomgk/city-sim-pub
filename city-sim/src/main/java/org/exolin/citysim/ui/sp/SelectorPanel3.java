@@ -1,6 +1,5 @@
 package org.exolin.citysim.ui.sp;
 
-import org.exolin.citysim.ui.sp.powerplant.PowerPlantSelectorDialog;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -44,6 +43,7 @@ import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
 import org.exolin.citysim.ui.budget.BudgetWindow;
+import org.exolin.citysim.ui.sp.powerplant.PowerPlantSelectorDialog;
 
 /**
  *

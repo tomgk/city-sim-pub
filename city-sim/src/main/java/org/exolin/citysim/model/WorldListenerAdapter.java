@@ -3,10 +3,7 @@ package org.exolin.citysim.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import org.exolin.citysim.model.debug.Value;
 
 /**
  * Adapter to turn a {@link WorldListener} into a {@link GenericWorldListener}.

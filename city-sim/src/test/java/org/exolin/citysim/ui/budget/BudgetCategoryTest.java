@@ -1,6 +1,6 @@
 package org.exolin.citysim.ui.budget;
 
-import org.exolin.citysim.bt.Trees;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.bt.buildings.IndustrialBuildings;
@@ -37,25 +37,25 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Tree()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.get(PlantTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.get(PlantTypeType.TREE).getFirst()));
     }
     
     @Test
     public void testGetFor_DeadTree()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.getDead(PlantTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getDead(PlantTypeType.TREE).getFirst()));
     }
     
     @Test
     public void testGetFor_Grass()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.get(PlantTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.get(PlantTypeType.GRASS).getFirst()));
     }
     
     @Test
     public void testGetFor_DeadGrass()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.getDead(PlantTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getDead(PlantTypeType.GRASS).getFirst()));
     }
     
     @Test

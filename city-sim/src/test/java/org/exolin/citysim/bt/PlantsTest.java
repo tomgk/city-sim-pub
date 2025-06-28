@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
  *
  * @author Thomas
  */
-public class TreesTest
+public class PlantsTest
 {
     @BeforeAll
     public static void init() throws Throwable
     {
         try{
-            Trees.XTREES.get(0);
+            Plants.XTREES.get(0);
         }catch(ExceptionInInitializerError e){
             throw e.getException();
         }
@@ -41,7 +41,7 @@ public class TreesTest
                 "trees_5",
                 "trees_6",
                 "trees_7"
-        ), getFileNames(Trees.XTREES));
+        ), getFileNames(Plants.XTREES));
     }
     
     @Test
@@ -55,7 +55,7 @@ public class TreesTest
                 "trees_dead_5",
                 "trees_dead_6",
                 "trees_dead_7"
-        ), getFileNames(Trees.XDEAD_TREES));
+        ), getFileNames(Plants.XDEAD_TREES));
     }
     
     @Test
@@ -69,7 +69,7 @@ public class TreesTest
                 "grass_5",
                 "grass_6",
                 "grass_7"
-        ), getFileNames(Trees.GRASS));
+        ), getFileNames(Plants.GRASS));
     }
     
     @Test
@@ -83,6 +83,6 @@ public class TreesTest
                 "grass_dead_5",
                 "grass_dead_6",
                 "grass_dead_7"
-        ), getFileNames(Trees.DEAD_GRASS));
+        ), getFileNames(Plants.DEAD_GRASS));
     }
 }

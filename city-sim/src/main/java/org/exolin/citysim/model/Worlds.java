@@ -10,7 +10,7 @@ import static org.exolin.citysim.bt.buildings.BusinessBuildings.office;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.office2;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.office3;
 import static org.exolin.citysim.bt.buildings.BusinessBuildings.parkbuilding;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
@@ -88,7 +88,7 @@ public class Worlds
         placeZone(w, Zones.industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
         placeZone(w, Zones.business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
         
-        w.addBuilding(Plants.oil_plant, 0, 0);
+        w.addBuilding(PowerPlants.oil_plant, 0, 0);
         
         int zoneSize = 6;
         
@@ -170,10 +170,10 @@ public class Worlds
         
         //GetWorld getWorld = GetWorld.ofStatic(w);
         
-        w.addBuilding(Plants.oil_plant, 0, 0);
+        w.addBuilding(PowerPlants.oil_plant, 0, 0);
         placeStreet(w, 4, 0, 6, 1, circuit);
         
-        w.addBuilding(Plants.oil_plant, 5, 5);
+        w.addBuilding(PowerPlants.oil_plant, 5, 5);
         placeStreet(w, 4+5, 0+5, 5, 1, circuit);
         return w;
     }
@@ -191,7 +191,7 @@ public class Worlds
         
         //GetWorld getWorld = GetWorld.ofStatic(w);
         
-        w.addBuilding(Plants.oil_plant, 5, 5);
+        w.addBuilding(PowerPlants.oil_plant, 5, 5);
         placeStreet(w, 4+5, 0+5, 5, 1, circuit);
         placeStreet(w, 10, 0, 10, 10, street);
         return w;

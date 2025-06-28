@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 import org.exolin.citysim.bt.Zones;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import static org.exolin.citysim.bt.connections.SelfConnections.rail;
 import static org.exolin.citysim.bt.connections.SelfConnections.street;
@@ -38,7 +38,7 @@ import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.GamePanelListener;
 import org.exolin.citysim.ui.WorldView;
 import org.exolin.citysim.ui.actions.Action;
-import org.exolin.citysim.ui.actions.PlaceTrees;
+import org.exolin.citysim.ui.actions.PlacePlants;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
 import org.exolin.citysim.ui.actions.ZonePlacement;
@@ -68,20 +68,18 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         setLayout(new GridBagLayout());
         
         registerButton(0, "bulldoze.png", TearDownAction.createTearDown(world));
-        registerButton(2, "tree_water.png", Map.of(
-                "Trees", new PlaceTrees(world, false),
-                "Grass", new PlaceTrees(world, true),
+        registerButton(2, "tree_water.png", Map.of("Trees", new PlacePlants(world, false),
+                "Grass", new PlacePlants(world, true),
                 "Water", new StreetBuilder(world, water, false)
         ));
         registerButton(4, "emergency.png", Action.NONE);
         ++y;
         
-        registerButtonBL(0, "electricity.png", Map.of(
-                //. to keep key before Plant
+        registerButtonBL(0, "electricity.png", Map.of(//. to keep key before Plant
                 ".Power Line", new SelectAction(new StreetBuilder(world, circuit, true)),
                 "Plant", e -> {
                     Window window = SwingUtilities.getWindowAncestor(this);
-                    PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window, gamePanel, Plants.ALL);
+                    PowerPlantSelectorDialog ppsd = new PowerPlantSelectorDialog(window, gamePanel, PowerPlants.ALL);
                     ppsd.setLocationRelativeTo(window);
                     ppsd.setVisible(true);
                 }

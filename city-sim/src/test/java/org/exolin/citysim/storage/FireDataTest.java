@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Optional;
-import org.exolin.citysim.bt.Trees;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
@@ -64,7 +64,7 @@ public class FireDataTest
     @Test
     public void testSerializeActualBuilding_AfterBurn() throws IOException
     {
-        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Trees.XDEAD_TREES.get(3))));
+        Fire building = new Fire(FireType.fire, 16, 99, FireVariant.V1, new FireParameters(123, Optional.of(Zones.business), false, Optional.of(Plants.XDEAD_TREES.get(3))));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"fire","x":16,"y":99,"variant":"v1","remainingLife": 123,"zone":"zone_business", "returnToZone": false, "afterBurn": "trees_dead_4"}
@@ -146,6 +146,6 @@ public class FireDataTest
         assertEquals(123, f.getDataCopy().getRemainingLife());
         assertEquals(Optional.of(Zones.business), f.getDataCopy().getZone());
         assertEquals(true, f.getDataCopy().isReturnToZone());
-        assertEquals(Optional.of(Trees.XDEAD_TREES.get(1)), f.getDataCopy().getAfterBurn());
+        assertEquals(Optional.of(Plants.XDEAD_TREES.get(1)), f.getDataCopy().getAfterBurn());
     }
 }

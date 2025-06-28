@@ -24,7 +24,7 @@ import java.util.Optional;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.Rotation;
 import org.exolin.citysim.model.SimulationSpeed;
@@ -588,7 +588,7 @@ public final class GamePanel extends JComponent
             //if(Plants.isPlant(b.getType()))
             if(worldHolder.get().hasElectricity(b))
                 drawItemN(g, dim, screenPoint.x, screenPoint.y, POWERED, b.getSize());
-            else if(Plants.getAnyElectricity(b).transfers())
+            else if(PowerPlants.getAnyElectricity(b).transfers())
                 drawItemN(g, dim, screenPoint.x, screenPoint.y, UNPOWERED, b.getSize());
             else
                 drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize());

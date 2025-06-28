@@ -47,7 +47,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         return BigDecimal.ZERO;
     }
 
-    private static final double BURN_TREE_PROBABILITY = 0.0002;
+    private static final double BURN_PLANT_PROBABILITY = 0.0002;
     private static final double BURN_PROBABILITY = 0.0001;
     private static final double BURN_EMPTY_PROBABILITY = 0.000005;
     private static final double STOP_PROBABILITY = 0.00001;
@@ -59,7 +59,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         else if(s instanceof Plant t)
         {
             if(t.isAlive())
-                return RandomUtils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
+                return RandomUtils.getProbabilityForTicks(BURN_PLANT_PROBABILITY, t.getCount());
             else
                 return BURN_EMPTY_PROBABILITY;
         }
@@ -134,7 +134,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         if(afterBurn.isPresent())
         {
             if(afterBurn.get() instanceof PlantType)
-                //TODO: does random make sense? (movement of trees after fire)
+                //TODO: does random make sense? (movement of plants after fire)
                 w.addBuilding(afterBurn.get(), getX(), getY(), PlantVariant.random(), new PlantParameters(getDataRaw().zone));
             else
                 w.addBuilding(afterBurn.get(), getX(), getY());

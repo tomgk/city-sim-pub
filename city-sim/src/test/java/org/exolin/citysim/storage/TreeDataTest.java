@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Optional;
-import org.exolin.citysim.bt.Trees;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
@@ -28,7 +28,7 @@ public class TreeDataTest
     @Test
     public void testSerializePlant() throws IOException
     {
-        Plant plant = new Plant(Trees.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.empty()));
+        Plant plant = new Plant(Plants.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.empty()));
         String output = serialize(WorldStorage::serialize, plant);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
@@ -40,7 +40,7 @@ public class TreeDataTest
     @Test
     public void testSerializePlant_WithZone() throws IOException
     {
-        Plant plant = new Plant(Trees.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.of(Zones.residential)));
+        Plant plant = new Plant(Plants.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.of(Zones.residential)));
         String output = serialize(WorldStorage::serialize, plant);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right","zone":"zone_residential"}
@@ -58,7 +58,7 @@ public class TreeDataTest
                           """);
         WorldStorage.deserialize(in, w);
         Structure<?, ?, ?, ?> b = getBuilding(w);
-        assertEquals(Trees.XTREES.get(3), b.getType());
+        assertEquals(Plants.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(PlantVariant.TOP_RIGHT, b.getVariant());
@@ -76,7 +76,7 @@ public class TreeDataTest
                           """);
         WorldStorage.deserialize(in, w);
         Structure<?, ?, ?, ?> b = getBuilding(w);
-        assertEquals(Trees.XTREES.get(3), b.getType());
+        assertEquals(Plants.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
         assertEquals(PlantVariant.TOP_RIGHT, b.getVariant());

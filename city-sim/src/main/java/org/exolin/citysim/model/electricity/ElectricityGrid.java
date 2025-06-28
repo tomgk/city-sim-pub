@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.building.Building;
 
@@ -22,7 +22,7 @@ public class ElectricityGrid
 
     public ElectricityGrid(Building plant)
     {
-        if(!Plants.isPlant(plant))
+        if(!PowerPlants.isPlant(plant))
             throw new IllegalArgumentException();
         
         this.plants.add(plant);
@@ -42,7 +42,7 @@ public class ElectricityGrid
     public int getSupply()
     {
         return plants.stream()
-                .mapToInt(Plants::getMegaWatt)
+                .mapToInt(PowerPlants::getMegaWatt)
                 .sum();
     }
 

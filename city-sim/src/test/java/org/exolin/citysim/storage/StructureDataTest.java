@@ -2,7 +2,7 @@ package org.exolin.citysim.storage;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.building.Building;
 import org.exolin.citysim.model.building.BuildingType;
@@ -41,7 +41,7 @@ public class StructureDataTest
     @Test
     public void testConstruct_VariantDefault()
     {
-        Building b = new Building(Plants.gas_plant, 4, 7, BuildingType.Variant.DEFAULT);
+        Building b = new Building(PowerPlants.gas_plant, 4, 7, BuildingType.Variant.DEFAULT);
         BuildingData bd = new BuildingData(b);
         
         assertEquals(Optional.empty(), getField(bd, "variant", Optional.class));

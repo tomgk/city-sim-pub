@@ -17,7 +17,7 @@ import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
 import org.exolin.citysim.ui.actions.PlaceFire;
-import org.exolin.citysim.ui.actions.PlaceTrees;
+import org.exolin.citysim.ui.actions.PlacePlants;
 import org.exolin.citysim.ui.actions.PlaceVacant;
 import org.exolin.citysim.ui.actions.StreetBuilder;
 import org.exolin.citysim.ui.actions.TearDownAction;
@@ -42,7 +42,7 @@ public class Actions
             List<Action> sactions = new ArrayList<>();
             sactions.add(Action.NONE);
             sactions.add(TearDownAction.createTearDown(getWorld));
-            sactions.add(new PlaceTrees(getWorld, false));
+            sactions.add(new PlacePlants(getWorld, false));
             sactions.add(new PlaceFire(getWorld));
             actions.put("Special", sactions);
         }

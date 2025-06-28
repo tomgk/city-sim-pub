@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.Optional;
-import org.exolin.citysim.bt.Trees;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
@@ -21,7 +21,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  *
  * @author Thomas
  */
-public class PlaceTrees implements BuildingAction
+public class PlacePlants implements BuildingAction
 {
     private final GetWorld world;
     private final Rectangle marking = new Rectangle();
@@ -30,7 +30,7 @@ public class PlaceTrees implements BuildingAction
     private static final long PLANT_COOLDOWN = 250;//ms
     private final boolean isGrass;
 
-    public PlaceTrees(GetWorld world, boolean isGrass)
+    public PlacePlants(GetWorld world, boolean isGrass)
     {
         this.world = world;
         this.isGrass = isGrass;
@@ -38,7 +38,7 @@ public class PlaceTrees implements BuildingAction
     
     private List<PlantType> get()
     {
-        return (isGrass ? Trees.GRASS : Trees.XTREES);
+        return (isGrass ? Plants.GRASS : Plants.XTREES);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PlaceTrees implements BuildingAction
     @Override
     public String getName()
     {
-        return "plant trees";
+        return "plant plants";
     }
 
     @Override
@@ -68,16 +68,16 @@ public class PlaceTrees implements BuildingAction
         int alreadyPlaced = 0;
         Structure<?, ?, ?, ?> buildingAt = w.getBuildingAt(marking.x, marking.y);
         Optional<ZoneType> zoneType = Optional.empty();
-        //if trees already planted there, add one more
+        //if plants already planted there, add one more
         if(buildingAt instanceof Plant t)
         {
             alreadyPlaced = t.getType().getCount();
             zoneType = t.getTheZoneType();
         }
-        //trees keep zone if empty zone
+        //plants keep zone if empty zone
         else if(buildingAt instanceof Zone z)
             zoneType = Optional.of(z.getType());
-        //trees cant displace anything else
+        //plants cant displace anything else
         else if(buildingAt != null)
             return;
         

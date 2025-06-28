@@ -4,7 +4,7 @@ import java.awt.GridLayout;
 import java.awt.Window;
 import java.util.List;
 import javax.swing.JDialog;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
@@ -25,7 +25,7 @@ public class PowerPlantSelectorDialog extends JDialog
         {
             PlaceBuilding placeBuilding = new PlaceBuilding(gamePanel.getWorldHolder(), bt);
             add(new PowerPlantSelectorPanel(
-                    bt.getCustom(Plants.MEGA_WATT, Integer.class),
+                    bt.getCustom(PowerPlants.MEGA_WATT, Integer.class),
                     bt.getCost(),
                     bt.getName(),
                     bt.getDefaultImage(),

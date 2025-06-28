@@ -707,4 +707,9 @@ public final class World implements BuildingMap
     {
         return World.class.getSimpleName()+"["+name+"@"+hashCode()+"]";
     }
+
+    public void onUpdated(Plant t)
+    {
+        onChange();
+    }
 }

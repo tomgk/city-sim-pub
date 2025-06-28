@@ -27,7 +27,7 @@ public class PlantType extends StructureType<Plant, PlantVariant, PlantParameter
     @Override
     public int getBuildingCost(PlantVariant variant)
     {
-        //cost of n trees
+        //cost of n plants
         //Not used for count != 1
         return COST * count;
     }
@@ -72,10 +72,10 @@ public class PlantType extends StructureType<Plant, PlantVariant, PlantParameter
     
     public PlantType getDead()
     {
-        PlantType tree = instances.get(new Key(count, false, type));
-        if(tree == null)
+        PlantType plant = instances.get(new Key(count, false, type));
+        if(plant == null)
             throw new IllegalArgumentException();
-        return tree;
+        return plant;
     }
 
     public int getCount()

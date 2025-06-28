@@ -10,7 +10,7 @@ import org.exolin.citysim.utils.ImageUtils;
  *
  * @author Thomas
  */
-public class Trees
+public class Plants
 {
     private static PlantType create(PlantTypeType type, boolean isDead, int count)
     {

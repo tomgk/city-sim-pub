@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.model.BuildingMap;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.building.Building;
@@ -42,7 +42,7 @@ public class Electricity
         structuresWithElectricity.clear();
         
         w.getStructures().stream()
-                .filter(Plants::isPlant)
+                .filter(PowerPlants::isPlant)
                 .forEach(plant -> {
                     //each plant starts as an own grid
                     ElectricityGridArea grid = new ElectricityGridArea((Building)plant);
@@ -89,7 +89,7 @@ public class Electricity
                 
                 //TODO: conduction over street should only work with one tile
                 //TODO: circuit over street doesn't work
-                if(neighbor != null && Plants.getElectricity(neighbor, d).transfers())
+                if(neighbor != null && PowerPlants.getElectricity(neighbor, d).transfers())
                     onFindStructureWithElectricity(w, grid, neighbor);
             }
         }

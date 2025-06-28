@@ -23,7 +23,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     private final ZoneType zoneType;
     private final ZoneType.Variant variant;
     
-    public static boolean DEBUG_TREEZONE = false;
+    public static boolean DEBUG_PLANTZONE = false;
 
     public ZonePlacement(GetWorld world, ZoneType building, ZoneType.Variant variant)
     {
@@ -83,12 +83,13 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                     Optional<ZoneType> buildingZoneType;
                     if(buildingAt instanceof Zone z)
                         buildingZoneType = Optional.of(z.getType());
-                    //putting a zone on a tree => keed & zone tree
+                    //putting a zone on a plant => keed & zone tree
                     //maybe here for #109
                     else if(type instanceof ZoneType z && buildingAt instanceof Plant t)
                     {
                         t.setZone(Optional.of(z));
-                        if(DEBUG_TREEZONE) System.out.println(t);
+                        world.onUpdated(t);
+                        if(DEBUG_PLANTZONE) System.out.println(t);
                         continue;
                     }
                     else

@@ -2,13 +2,13 @@ package org.exolin.citysim.model.plant;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-import org.exolin.citysim.bt.Trees;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.sim.RemoveMode;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
-import static org.exolin.citysim.ui.actions.ZonePlacement.DEBUG_TREEZONE;
+import static org.exolin.citysim.ui.actions.ZonePlacement.DEBUG_PLANTZONE;
 import org.exolin.citysim.utils.RandomUtils;
 
 /**
@@ -20,7 +20,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
     public Plant(PlantType type, int x, int y, PlantVariant variant, PlantParameters data)
     {
         super(type, x, y, variant, data);
-        if(DEBUG_TREEZONE) System.out.println("New tree "+System.identityHashCode(this)+" with zone "+data.getZone());
+        if(DEBUG_PLANTZONE) System.out.println("New plant "+System.identityHashCode(this)+" with zone "+data.getZone());
     }
     
     public int getCount()
@@ -82,13 +82,13 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
             zoneType = Optional.of(z.getType());
         else if(b instanceof Plant t)
         {
-            //maybe revive dead trees
+            //maybe revive dead plants
             if(!t.isAlive())
             {
                if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                {
                    world.removeBuildingAt(x, y, RemoveMode.TEAR_DOWN);
-                   world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, getVariant(), t.getDataCopy());
+                   world.addBuilding(Plants.get(getType().getType()).getFirst(), x, y, getVariant(), t.getDataCopy());
                }
             }
             
@@ -100,7 +100,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, PlantVariant.random(), new PlantParameters(zoneType));
+            world.addBuilding(Plants.get(getType().getType()).getFirst(), x, y, PlantVariant.random(), new PlantParameters(zoneType));
     }
 
     public boolean isAlive()
@@ -116,7 +116,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
     
     public void setZone(Optional<ZoneType> zone)
     {
-        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+"="+zone+", tree="+toString());
+        if(DEBUG_PLANTZONE) System.out.println("Plant "+System.identityHashCode(this)+"="+zone+", plant="+toString());
         getDataRaw().setZone(zone);
         
         if(zone.isPresent() != getDataRaw().getZone().isPresent())
@@ -124,7 +124,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
         else
             System.out.println(toString());
         
-        if(DEBUG_TREEZONE) System.out.println("Tree "+System.identityHashCode(this)+" after setZone: "+toString());
+        if(DEBUG_PLANTZONE) System.out.println("Plant "+System.identityHashCode(this)+" after setZone: "+toString());
     }
     
     @Override

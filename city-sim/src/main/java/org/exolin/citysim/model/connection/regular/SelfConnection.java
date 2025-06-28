@@ -3,7 +3,7 @@ package org.exolin.citysim.model.connection.regular;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.exolin.citysim.bt.buildings.Plants;
+import org.exolin.citysim.bt.buildings.PowerPlants;
 import static org.exolin.citysim.bt.connections.SelfConnections.circuit;
 import org.exolin.citysim.model.EmptyStructureParameters;
 import org.exolin.citysim.model.Rotation;
@@ -56,7 +56,7 @@ public class SelfConnection extends Connection<SelfConnection, SelfConnectionTyp
         }
         else if(getType() == circuit)
         {
-            if(Plants.isPlant(b.getType()))
+            if(PowerPlants.isPlant(b.getType()))
             {
                 connections.add(b);
                 return true;

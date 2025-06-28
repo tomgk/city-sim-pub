@@ -80,27 +80,23 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         //grow into zone
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());
-        //there is already a tree
-        //=> exit, tree can grow on its own
         else if(b instanceof Tree t)
-            return;//zoneType = t.getTheZoneType();
-        else if(b != null)
         {
-            //TODO: check what this code is for when Tree has already been checked before
-            if(b instanceof Tree t)
+            //maybe revive dead trees
+            if(!t.isAlive())
             {
-                if(!t.isAlive())
-                {
-                   if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
-                   {
-                       world.removeBuildingAt(x, y, RemoveMode.CLEAR);
-                       world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, getVariant(), t.getDataCopy());
-                   }
-                }
+               if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
+               {
+                   world.removeBuildingAt(x, y, RemoveMode.TEAR_DOWN);
+                   world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, getVariant(), t.getDataCopy());
+               }
             }
             
             return;
         }
+        //don't replace existing structures
+        else if(b != null)
+            return;
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))

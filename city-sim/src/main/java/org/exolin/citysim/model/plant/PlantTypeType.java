@@ -20,11 +20,6 @@ public enum PlantTypeType
         this.cost = cost;
     }
     
-    public boolean isGrass()
-    {
-        return this == GRASS;
-    }
-    
     public String baseName()
     {
         return baseName;

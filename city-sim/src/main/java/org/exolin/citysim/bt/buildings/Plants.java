@@ -29,7 +29,7 @@ import org.exolin.citysim.model.zone.ZoneType;
  */
 public class Plants
 {
-    public static final CustomKey MEGA_WATT = CustomKey.createKey("megaWatt");
+    public static final CustomKey MEGA_WATT = CustomKey.createKey("megaWatt", v -> v+" MW");
     
     //TODO: maintenance
     

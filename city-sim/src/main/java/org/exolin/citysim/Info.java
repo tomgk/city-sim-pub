@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -7,6 +8,7 @@ import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
+import org.exolin.citysim.model.building.BuildingType;
 
 /**
  *
@@ -29,8 +31,10 @@ public class Info
                 .distinct()
                 .forEach(t -> {
                     System.out.println("==== "+t.getSimpleName()+" =====");
-                    Set<? extends StructureVariant> variants = StructureVariant.getValues((Class)t);
+                    Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
+                    Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
                     System.out.println("Variants: "+variants.stream()
+                            .sorted(Comparator.comparing(StructureVariant::index))
                             .map(v -> v.name())
                             .collect(Collectors.joining(", "))
                     );
@@ -57,13 +61,13 @@ public class Info
                 
                 if(diffCosts.size() == 1)
                 {
-                    System.out.println("Cost: "+diffCosts.iterator().next());
+                    System.out.println("Cost: "+formatCost(diffCosts.iterator().next()));
                 }
                 else
                 {
                     System.out.println("Cost:");
                     variants.forEach(v -> {
-                        System.out.println("  "+v.name()+": "+s.getBuildingCost(v)); 
+                        System.out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
                     });
                 }
             }
@@ -72,9 +76,19 @@ public class Info
                 System.out.println("Cost: unknown");
             }
             
+            if(s instanceof BuildingType bt)
+                System.out.println("Zone: "+bt.getZoneType().getName());
+            
             s.customKeys().forEach(key -> {
-                System.out.println(key+": "+s.getCustom((CustomKey)key, Object.class));
+                CustomKey k = (CustomKey)key;
+                Object v = s.getCustom(k, Object.class);
+                System.out.println(k.getName()+": "+k.formatValue(v));
             });
         });
+    }
+
+    private static String formatCost(int cost)
+    {
+        return cost != 0 ? Integer.toString(cost) : "-";
     }
 }

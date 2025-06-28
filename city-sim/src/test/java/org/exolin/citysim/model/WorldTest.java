@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
+import static org.exolin.citysim.model.StructureSize._3;
 import static org.exolin.citysim.model.Worlds.placeStreet;
 import static org.exolin.citysim.model.Worlds.placeZone;
 import org.exolin.citysim.model.fire.Fire;
@@ -28,7 +29,7 @@ public class WorldTest
     {
         World w = new World("Test", 30, BigDecimal.valueOf(100000), SimulationSpeed.PAUSED);
         
-        assertEquals(3, BusinessBuildings.cinema.getSize());
+        assertEquals(_3, BusinessBuildings.cinema.getSize());
         
         //[10, 7] .. [12, 9]
         Structure<?, ?, ?, ?> b = w.addBuilding(BusinessBuildings.cinema, 10, 7);

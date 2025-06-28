@@ -74,7 +74,7 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
         */
         
         List<BuildingType> smallBuildings = buildings.stream()
-                .filter(b -> b.getSize() <= maxSize)
+                .filter(b -> b.getSize().toIntegerx() <= maxSize)
                 //.filter(b -> b.getSize() > 1)
                 .toList();
         

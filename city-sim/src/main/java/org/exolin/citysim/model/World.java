@@ -207,11 +207,11 @@ public final class World implements BuildingMap
         return false;
     }
 
-    private void placeZone(ZoneType zoneType, int x, int y, int size, int exceptX, int exceptY)
+    private void placeZone(ZoneType zoneType, int x, int y, StructureSize size, int exceptX, int exceptY)
     {
-        for(int yi=0;yi<size;++yi)
+        for(int yi=0;yi<size.toIntegerx();++yi)
         {
-            for(int xi=0;xi<size;++xi)
+            for(int xi=0;xi<size.toIntegerx();++xi)
             {
                 if(y+yi == exceptY && x+xi == exceptX)
                     continue;
@@ -233,16 +233,16 @@ public final class World implements BuildingMap
     
     public <B extends Structure, E extends StructureVariant, D extends StructureParameters<D>> B addBuilding(StructureType<B, E, D> type, int x, int y, E variant, D data)
     {
-        if(x < 0 || y < 0 || x+type.getSize()>gridSize || y+type.getSize()>gridSize)
+        if(x < 0 || y < 0 || x+type.getSize().toIntegerx()>gridSize || y+type.getSize().toIntegerx()>gridSize)
             throw new OutOfGridException(
-                    "out of grid: "+new Rectangle(x, y, type.getSize(), type.getSize())+
+                    "out of grid: "+new Rectangle(x, y, type.getSize().toIntegerx(), type.getSize().toIntegerx())+
                             " outside of "+new Rectangle(0, 0, gridSize, gridSize));
         
-        LOG = type.getSize() > 1 && false;
+        LOG = type.getSize().toIntegerx() > 1 && false;
         if(LOG)
             System.out.println("ADD @ "+x+"/"+y+" "+type.toString());
         
-        int size = type.getSize();
+        int size = type.getSize().toIntegerx();
         for(int yi=0;yi<size;++yi)
         {
             for(int xi=0;xi<size;++xi)
@@ -286,9 +286,9 @@ public final class World implements BuildingMap
         updateStructuresAround(b.getX(), b.getY(), b.getSize());
     }
     
-    private void updateStructuresAround(int bx, int by, int bsize)
+    private void updateStructuresAround(int bx, int by, StructureSize bsize)
     {
-        for(int x=bx-1;x<bx+bsize+1;++x)
+        for(int x=bx-1;x<bx+bsize.toIntegerx()+1;++x)
         {
             {
                 //  xxxxx
@@ -304,13 +304,13 @@ public final class World implements BuildingMap
                 //   ***
                 //   ***
                 //  xxxxx
-                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by+bsize);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by+bsize.toIntegerx());
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
         }
         
-        for(int y=by;y<by+bsize;++y)
+        for(int y=by;y<by+bsize.toIntegerx();++y)
         {
             //only cover sides, corner was already covered in x loop
             
@@ -326,7 +326,7 @@ public final class World implements BuildingMap
             //   ***x
             //   ***x
             {
-                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx+bsize, y);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx+bsize.toIntegerx(), y);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
@@ -405,7 +405,7 @@ public final class World implements BuildingMap
         if(bt == null)
             return;
         
-        if(bt.getSize() > 1)
+        if(bt.getSize().toIntegerx() > 1)
         {
             bt = bt;
         }
@@ -524,7 +524,7 @@ public final class World implements BuildingMap
     
     private void handleZone(Structure<?, ?, ?, ?> s, int ticks, ZoneType z)
     {
-        if(z.getSize() != 1)
+        if(z.getSize() != StructureSize._1)
             return;
         
         //no building without electric

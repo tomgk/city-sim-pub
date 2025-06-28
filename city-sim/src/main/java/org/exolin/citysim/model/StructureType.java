@@ -163,9 +163,9 @@ public abstract class StructureType<B, E extends StructureVariant, D extends Str
         return images.get(version.index());
     }
 
-    public int getSize()
+    public StructureSize getSize()
     {
-        return size.toInteger();
+        return size;
     }
     
     public BufferedImage getDefaultImage()

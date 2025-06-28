@@ -7,6 +7,7 @@ import java.util.function.IntSupplier;
 import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureParameters;
+import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
@@ -244,7 +245,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         
         int x = s.getX();
         int y = s.getY();
-        int buildingSize = s.getSize();
+        int buildingSize = s.getSize().toIntegerx();
         
         boolean returnToZone;
         Optional<ZoneType> zt;
@@ -271,7 +272,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             int w, int h,
             E variant, D data)
     {
-        if(type.getSize() != 1)
+        if(type.getSize() != StructureSize._1)
             throw new IllegalArgumentException("only allowed for 1x1");
         
         for(int yi=0;yi<h;++yi)

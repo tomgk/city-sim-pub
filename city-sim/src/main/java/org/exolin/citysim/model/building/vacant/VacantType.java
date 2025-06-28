@@ -18,9 +18,9 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
 {
     private static final Map<Integer, List<VacantType>> vacants = new LinkedHashMap<>();
     
-    public static VacantType getRandom(int size)
+    public static VacantType getRandom(StructureSize size)
     {
-        List<VacantType> forSize = vacants.get(size);
+        List<VacantType> forSize = vacants.get(size.toIntegerx());
         if(forSize == null)
             throw new IllegalArgumentException("nothing for "+size);
         
@@ -40,7 +40,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
 
     private void addVacant(VacantType t)
     {
-        List<VacantType> forSize = vacants.computeIfAbsent(t.getSize(), s -> new ArrayList<>());
+        List<VacantType> forSize = vacants.computeIfAbsent(t.getSize().toIntegerx(), s -> new ArrayList<>());
         forSize.add(t);
     }
     

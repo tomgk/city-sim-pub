@@ -75,7 +75,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         return type.getImage(getVariant(rotation));
     }
     
-    public int getSize()
+    public StructureSize getSize()
     {
         return type.getSize();
     }
@@ -111,7 +111,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         //divide size*2 by 2 to put level to center
         //which fixes the issue of smaller buildings getting hidden
         //by bigger ones on the upper half
-        return x + y + type.getSize() * 2 / 2;
+        return x + y + type.getSize().toIntegerx() * 2 / 2;
     }
     
     /**
@@ -126,7 +126,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     {
         Point p = new Point(-1, -1);
         rotation.rotate(gridSize, x, y, p);
-        return p.x + p.y + type.getSize() * 2 / 2;
+        return p.x + p.y + type.getSize().toIntegerx() * 2 / 2;
     }
     
     /**
@@ -156,13 +156,13 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         if(x < this.x)
             return false;
         
-        if(x >= this.x+type.getSize())
+        if(x >= this.x+type.getSize().toIntegerx())
             return false;
         
         if(y < this.y)
             return false;
         
-        if(y >= this.y + type.getSize())
+        if(y >= this.y + type.getSize().toIntegerx())
             return false;
         
         return true;
@@ -221,7 +221,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     public int getSupply()
     {
         //assume high rises
-        int base = getSize() * 2;
+        int base = getSize().toIntegerx() * 2;
         return base * base;
     }
 
@@ -232,7 +232,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         
         sb.add("x", x);
         sb.add("y", y);
-        sb.add("size", type.getSize());
+        sb.add("size", type.getSize().toIntegerx());
         sb.add("type", type.getName());
         
         data.writeAdditional(sb);

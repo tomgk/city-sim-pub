@@ -34,6 +34,30 @@ public class StructureSizeTest
     }
     
     @Test
+    public void test_toString_1()
+    {
+        assertEquals("StructureSize[1]", StructureSize._1.toString());
+    }
+    
+    @Test
+    public void test_toString_2()
+    {
+        assertEquals("StructureSize[2]", StructureSize._2.toString());
+    }
+    
+    @Test
+    public void test_toString_3()
+    {
+        assertEquals("StructureSize[3]", StructureSize._3.toString());
+    }
+    
+    @Test
+    public void test_toString_4()
+    {
+        assertEquals("StructureSize[4]", StructureSize._4.toString());
+    }
+    
+    @Test
     public void testCount()
     {
         assertEquals(4, StructureSize.values().length);

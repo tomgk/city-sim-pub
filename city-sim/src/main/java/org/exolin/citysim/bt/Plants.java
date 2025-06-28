@@ -1,6 +1,8 @@
 package org.exolin.citysim.bt;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
@@ -24,21 +26,29 @@ public class Plants
         return new PlantType(type, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
-    private static final List<PlantType> TREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(PlantTypeType.TREE, false, count))
-            .toList();
+    private static class Set
+    {
+        private final List<PlantType> alive;
+        private final List<PlantType> dead;
+        
+        public Set(PlantTypeType type)
+        {
+            alive = IntStream.range(1, 8)
+                    .mapToObj(count -> create(type, false, count))
+                    .toList();
+
+            dead = IntStream.range(1, 8)
+                    .mapToObj(count -> create(type, true, count))
+                    .toList();
+        }
+    }
     
-    private static final List<PlantType> DEAD_TREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(PlantTypeType.TREE, true, count))
-            .toList();
-    
-    private static final List<PlantType> GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(PlantTypeType.GRASS, false, count))
-            .toList();
-    
-    private static final List<PlantType> DEAD_GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(PlantTypeType.GRASS, true, count))
-            .toList();
+    private static final Map<PlantTypeType, Set> TYPES = new LinkedHashMap<>();
+    static
+    {
+        for(PlantTypeType t : PlantTypeType.values())
+            TYPES.put(t, new Set(t));
+    }
     
     public static PlantType getFirst(PlantTypeType type)
     {
@@ -52,7 +62,15 @@ public class Plants
     
     public static List<PlantType> getx(PlantTypeType type)
     {
-        return type.isGrass() ? GRASS : TREES;
+        return getSet(type).alive;
+    }
+    
+    private static Set getSet(PlantTypeType type)
+    {
+        Set s = TYPES.get(type);
+        if(s == null)
+            throw new IllegalArgumentException();
+        return s;
     }
     
     public static PlantType getFirstDead(PlantTypeType type)
@@ -62,7 +80,7 @@ public class Plants
     
     public static List<PlantType> getDead(PlantTypeType type)
     {
-        return type.isGrass() ? DEAD_GRASS : DEAD_TREES;
+        return getSet(type).dead;
     }
 
     public static int getSize()

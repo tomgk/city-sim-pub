@@ -481,11 +481,18 @@ public final class World implements BuildingMap
         }
     }
 
+    /**
+     * 
+     * @param ticks
+     * @param passedTicks 
+     */
     public void updateAfterTick(int ticks, long passedTicks)
     {
+        modification.beforeUpdate(this, ticks, passedTicks);
         updateStats();
         updateAfterTick0(ticks, passedTicks);
         updateStats();
+        modification.afterUpdate(this, ticks, passedTicks);
     }
     
     private void updateAfterTick0(int ticks, long passedTicks)

@@ -111,7 +111,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         //divide size*2 by 2 to put level to center
         //which fixes the issue of smaller buildings getting hidden
         //by bigger ones on the upper half
-        return x + y + type.getSize().toIntegerx() * 2 / 2;
+        return x + y + type.getSize().toInteger() * 2 / 2;
     }
     
     /**
@@ -126,7 +126,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     {
         Point p = new Point(-1, -1);
         rotation.rotate(gridSize, x, y, p);
-        return p.x + p.y + type.getSize().toIntegerx() * 2 / 2;
+        return p.x + p.y + type.getSize().toInteger() * 2 / 2;
     }
     
     /**
@@ -156,13 +156,13 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         if(x < this.x)
             return false;
         
-        if(x >= this.x+type.getSize().toIntegerx())
+        if(x >= this.x+type.getSize().toInteger())
             return false;
         
         if(y < this.y)
             return false;
         
-        if(y >= this.y + type.getSize().toIntegerx())
+        if(y >= this.y + type.getSize().toInteger())
             return false;
         
         return true;
@@ -221,7 +221,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
     public int getSupply()
     {
         //assume high rises
-        int base = getSize().toIntegerx() * 2;
+        int base = getSize().toInteger() * 2;
         return base * base;
     }
 
@@ -232,7 +232,7 @@ public abstract class Structure<B, T extends StructureType<B, E, D>, E extends S
         
         sb.add("x", x);
         sb.add("y", y);
-        sb.add("size", type.getSize().toIntegerx());
+        sb.add("size", type.getSize().toInteger());
         sb.add("type", type.getName());
         
         data.writeAdditional(sb);

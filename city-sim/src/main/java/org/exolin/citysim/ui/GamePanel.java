@@ -579,7 +579,7 @@ public final class GamePanel extends JComponent
     private void drawBuilding(Graphics2D g, int dim, Structure<?, ?, ?, ?> b)
     {
         Point screenPoint = new Point();
-        rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize().toIntegerx(), screenPoint);
+        rotation.rotateTop(worldHolder.get().getGridSize(), b.getX(), b.getY(), b.getSize().toInteger(), screenPoint);
         
         Optional<ZoneType> zoneType = b.getTheZoneType();
         
@@ -587,17 +587,17 @@ public final class GamePanel extends JComponent
         {
             //if(Plants.isPlant(b.getType()))
             if(worldHolder.get().hasElectricity(b))
-                drawItemN(g, dim, screenPoint.x, screenPoint.y, POWERED, b.getSize().toIntegerx());
+                drawItemN(g, dim, screenPoint.x, screenPoint.y, POWERED, b.getSize().toInteger());
             else if(PowerPlants.getAnyElectricity(b).transfers())
-                drawItemN(g, dim, screenPoint.x, screenPoint.y, UNPOWERED, b.getSize().toIntegerx());
+                drawItemN(g, dim, screenPoint.x, screenPoint.y, UNPOWERED, b.getSize().toInteger());
             else
-                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize().toIntegerx());
+                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize().toInteger());
         }
         //show zone except for buildings that have no zone
         //then just show the building
         else if(view == WorldView.ZONES && zoneType.isPresent())
         {
-            drawItemN(g, dim, screenPoint.x, screenPoint.y, zoneType.get().getDefaultImage(), b.getSize().toIntegerx());
+            drawItemN(g, dim, screenPoint.x, screenPoint.y, zoneType.get().getDefaultImage(), b.getSize().toInteger());
         }
         else
         {
@@ -605,10 +605,10 @@ public final class GamePanel extends JComponent
             {
                 ZoneType zt = zoneType.get();
                 Animation zoneImage = zt.getImage(zt.getVariantForDefaultImage());
-                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(zoneImage), b.getSize().toIntegerx());
+                drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(zoneImage), b.getSize().toInteger());
             }
             
-            drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize().toIntegerx());
+            drawItem(g, dim, screenPoint.x, screenPoint.y, getCurrentImage(b.getAnimation(rotation)), b.getSize().toInteger());
         }
     }
     

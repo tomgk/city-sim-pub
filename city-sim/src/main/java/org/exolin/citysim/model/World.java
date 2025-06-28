@@ -209,9 +209,9 @@ public final class World implements BuildingMap
 
     private void placeZone(ZoneType zoneType, int x, int y, StructureSize size, int exceptX, int exceptY)
     {
-        for(int yi=0;yi<size.toIntegerx();++yi)
+        for(int yi=0;yi<size.toInteger();++yi)
         {
-            for(int xi=0;xi<size.toIntegerx();++xi)
+            for(int xi=0;xi<size.toInteger();++xi)
             {
                 if(y+yi == exceptY && x+xi == exceptX)
                     continue;
@@ -233,16 +233,16 @@ public final class World implements BuildingMap
     
     public <B extends Structure, E extends StructureVariant, D extends StructureParameters<D>> B addBuilding(StructureType<B, E, D> type, int x, int y, E variant, D data)
     {
-        if(x < 0 || y < 0 || x+type.getSize().toIntegerx()>gridSize || y+type.getSize().toIntegerx()>gridSize)
+        if(x < 0 || y < 0 || x+type.getSize().toInteger()>gridSize || y+type.getSize().toInteger()>gridSize)
             throw new OutOfGridException(
-                    "out of grid: "+new Rectangle(x, y, type.getSize().toIntegerx(), type.getSize().toIntegerx())+
+                    "out of grid: "+new Rectangle(x, y, type.getSize().toInteger(), type.getSize().toInteger())+
                             " outside of "+new Rectangle(0, 0, gridSize, gridSize));
         
-        LOG = type.getSize().toIntegerx() > 1 && false;
+        LOG = type.getSize().toInteger() > 1 && false;
         if(LOG)
             System.out.println("ADD @ "+x+"/"+y+" "+type.toString());
         
-        int size = type.getSize().toIntegerx();
+        int size = type.getSize().toInteger();
         for(int yi=0;yi<size;++yi)
         {
             for(int xi=0;xi<size;++xi)
@@ -288,7 +288,7 @@ public final class World implements BuildingMap
     
     private void updateStructuresAround(int bx, int by, StructureSize bsize)
     {
-        for(int x=bx-1;x<bx+bsize.toIntegerx()+1;++x)
+        for(int x=bx-1;x<bx+bsize.toInteger()+1;++x)
         {
             {
                 //  xxxxx
@@ -304,13 +304,13 @@ public final class World implements BuildingMap
                 //   ***
                 //   ***
                 //  xxxxx
-                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by+bsize.toIntegerx());
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(x, by+bsize.toInteger());
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
         }
         
-        for(int y=by;y<by+bsize.toIntegerx();++y)
+        for(int y=by;y<by+bsize.toInteger();++y)
         {
             //only cover sides, corner was already covered in x loop
             
@@ -326,7 +326,7 @@ public final class World implements BuildingMap
             //   ***x
             //   ***x
             {
-                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx+bsize.toIntegerx(), y);
+                Structure<?, ?, ?, ?> buildingAt = getBuildingAtForUpdate(bx+bsize.toInteger(), y);
                 if(buildingAt != null)
                     buildingAt.updateAfterChange(this);
             }
@@ -405,7 +405,7 @@ public final class World implements BuildingMap
         if(bt == null)
             return;
         
-        if(bt.getSize().toIntegerx() > 1)
+        if(bt.getSize().toInteger() > 1)
         {
             bt = bt;
         }

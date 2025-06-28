@@ -70,7 +70,7 @@ public class Electricity
         
         int x = s.getX();
         int y = s.getY();
-        int size = s.getSize().toIntegerx();
+        int size = s.getSize().toInteger();
         for(int yi=-1;yi<size+1;++yi)
         {
             for(int xi=-1;xi<size+1;++xi)
@@ -122,7 +122,7 @@ public class Electricity
                 .filter(f -> f instanceof Building || f instanceof Zone || f.getZoneType(true).isPresent())
                 .map(s -> {
                     boolean covered = hasElectricity(s);
-                    int size = s.getSize().toIntegerx();
+                    int size = s.getSize().toInteger();
                     return new Coverage(covered ? size : 0, size);
                 })
                 .reduce(Coverage::merge)

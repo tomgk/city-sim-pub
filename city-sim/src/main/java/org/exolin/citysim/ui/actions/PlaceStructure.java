@@ -57,8 +57,8 @@ public abstract class PlaceStructure implements BuildingAction
         marking.x = gridPoint.x;
         marking.y = gridPoint.y;
         StructureType type = getBuilding();
-        marking.width = type.getSize().toIntegerx();
-        marking.height = type.getSize().toIntegerx();
+        marking.width = type.getSize().toInteger();
+        marking.height = type.getSize().toInteger();
     }
 
 

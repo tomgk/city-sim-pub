@@ -55,7 +55,7 @@ public class RCI
             ZoneType z = zoneType.get();
             
             ZoneTypeType category = z.getCategory();
-            int sizeq = s.getSize().toIntegerx() * s.getSize().toIntegerx();
+            int sizeq = s.getSize().toInteger() * s.getSize().toInteger();
             if(category == Zones.residential_category)
                 rCount += sizeq;
             else if(category == Zones.business_category)

@@ -245,7 +245,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         
         int x = s.getX();
         int y = s.getY();
-        int buildingSize = s.getSize().toIntegerx();
+        int buildingSize = s.getSize().toInteger();
         
         boolean returnToZone;
         Optional<ZoneType> zt;

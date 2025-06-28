@@ -20,7 +20,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
     
     public static VacantType getRandom(StructureSize size)
     {
-        List<VacantType> forSize = vacants.get(size.toIntegerx());
+        List<VacantType> forSize = vacants.get(size.toInteger());
         if(forSize == null)
             throw new IllegalArgumentException("nothing for "+size);
         
@@ -40,7 +40,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
 
     private void addVacant(VacantType t)
     {
-        List<VacantType> forSize = vacants.computeIfAbsent(t.getSize().toIntegerx(), s -> new ArrayList<>());
+        List<VacantType> forSize = vacants.computeIfAbsent(t.getSize().toInteger(), s -> new ArrayList<>());
         forSize.add(t);
     }
     

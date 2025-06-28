@@ -49,7 +49,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         {
             int FACTOR = 1;
             
-            int size = getType().getSize().toIntegerx();
+            int size = getType().getSize().toInteger();
             int area = size * size * FACTOR;
             
             return BigDecimal.valueOf(area).divide(BigDecimal.TEN);
@@ -68,7 +68,7 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
             return;
         
         int distance = 3;
-        int size = getSize().toIntegerx();
+        int size = getSize().toInteger();
         
         int ystart = getY() - distance;
         int yend = getY() + size + distance;

@@ -8,7 +8,7 @@ public enum StructureSize
 {
     _1, _2, _3, _4;
     
-    public int toIntegerx()
+    public int toInteger()
     {
         return ordinal()+1;
     }

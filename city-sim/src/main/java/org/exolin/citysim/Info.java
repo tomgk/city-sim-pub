@@ -46,34 +46,23 @@ public class Info
             System.out.println("==== "+s.getName()+" =====");
             System.out.println("Type: "+s.getClass().getSimpleName());
             
-            Set<? extends StructureVariant> variants;
-            try{
-                variants = s.getVariants();
-                Objects.requireNonNull(variants);
-            }catch(UnsupportedOperationException e){
-                variants = null;
-            }
-            if(variants != null)
+            Set<? extends StructureVariant> variants = s.getVariants();
+            Objects.requireNonNull(variants);
+
+            Set<Integer> diffCosts = variants.stream()
+                    .map(v -> s.getBuildingCost(v))
+                    .collect(Collectors.toSet());
+
+            if(diffCosts.size() == 1)
             {
-                Set<Integer> diffCosts = variants.stream()
-                        .map(v -> s.getBuildingCost(v))
-                        .collect(Collectors.toSet());
-                
-                if(diffCosts.size() == 1)
-                {
-                    System.out.println("Cost: "+formatCost(diffCosts.iterator().next()));
-                }
-                else
-                {
-                    System.out.println("Cost:");
-                    variants.forEach(v -> {
-                        System.out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
-                    });
-                }
+                System.out.println("Cost: "+formatCost(diffCosts.iterator().next()));
             }
             else
             {
-                System.out.println("Cost: unknown");
+                System.out.println("Cost:");
+                variants.forEach(v -> {
+                    System.out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
+                });
             }
             
             if(s instanceof BuildingType bt)

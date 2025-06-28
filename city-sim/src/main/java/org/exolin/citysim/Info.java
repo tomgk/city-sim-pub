@@ -10,7 +10,6 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
-import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.plant.PlantType;
 
 /**

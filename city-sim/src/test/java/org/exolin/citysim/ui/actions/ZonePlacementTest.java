@@ -9,9 +9,9 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantVariant;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.assertTree;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.assertZone;
 import static org.exolin.citysim.ui.actions.ActionTestUtils.makeZonePlacementMove;
@@ -77,7 +77,7 @@ public class ZonePlacementTest
         try{
             World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
 
-            Tree t = world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
+            Plant t = world.addBuilding(Trees.XTREES.get(1), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
             System.out.println("Created Tree in test="+System.identityHashCode(t)+" with "+t.getTheZoneType());
 
             makeZonePlacementMove(new Point(1, 8), new Point(2, 9), world, Zones.business);
@@ -107,7 +107,7 @@ public class ZonePlacementTest
         try{
             World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
 
-            Tree t = world.addBuilding(Trees.XTREES.get(1), 1, 8, TreeVariant.DEFAULT, new TreeParameters(Optional.empty()));
+            Plant t = world.addBuilding(Trees.XTREES.get(1), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
             System.out.println("Tree="+System.identityHashCode(t));
 
             makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);

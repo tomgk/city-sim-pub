@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.tree;
+package org.exolin.citysim.model.plant;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -10,11 +10,11 @@ import org.exolin.citysim.utils.PropertyWriter;
  *
  * @author Thomas
  */
-public class TreeParameters implements StructureParameters<TreeParameters>
+public class PlantParameters implements StructureParameters<PlantParameters>
 {
     private Optional<ZoneType> zone;
 
-    public TreeParameters(Optional<ZoneType> zone)
+    public PlantParameters(Optional<ZoneType> zone)
     {
         this.zone = Objects.requireNonNull(zone);
     }
@@ -36,8 +36,8 @@ public class TreeParameters implements StructureParameters<TreeParameters>
     }
     
     @Override
-    public TreeParameters copy()
+    public PlantParameters copy()
     {
-        return new TreeParameters(zone);
+        return new PlantParameters(zone);
     }
 }

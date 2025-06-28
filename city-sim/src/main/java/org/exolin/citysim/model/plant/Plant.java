@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.tree;
+package org.exolin.citysim.model.plant;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -15,9 +15,9 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
+public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParameters>
 {
-    public Tree(TreeType type, int x, int y, TreeVariant variant, TreeParameters data)
+    public Plant(PlantType type, int x, int y, PlantVariant variant, PlantParameters data)
     {
         super(type, x, y, variant, data);
         if(DEBUG_TREEZONE) System.out.println("New tree "+System.identityHashCode(this)+" with zone "+data.getZone());
@@ -51,7 +51,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         
         if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
         {
-            Optional<TreeType> plusOne = getType().plusOne();
+            Optional<PlantType> plusOne = getType().plusOne();
             if(plusOne.isPresent())
             {
                 world.removeBuildingAt(this);
@@ -80,7 +80,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         //grow into zone
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());
-        else if(b instanceof Tree t)
+        else if(b instanceof Plant t)
         {
             //maybe revive dead trees
             if(!t.isAlive())
@@ -100,7 +100,7 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, TreeVariant.random(), new TreeParameters(zoneType));
+            world.addBuilding(Trees.get(getType().getType()).getFirst(), x, y, PlantVariant.random(), new PlantParameters(zoneType));
     }
 
     public boolean isAlive()

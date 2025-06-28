@@ -2,8 +2,8 @@ package org.exolin.citysim.bt;
 
 import java.util.List;
 import java.util.stream.IntStream;
-import org.exolin.citysim.model.tree.TreeType;
-import org.exolin.citysim.model.tree.TreeTypeType;
+import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.utils.ImageUtils;
 
 /**
@@ -12,7 +12,7 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class Trees
 {
-    private static TreeType create(TreeTypeType type, boolean isDead, int count)
+    private static PlantType create(PlantTypeType type, boolean isDead, int count)
     {
         String baseName = type.baseName();
         String add = isDead ? "dead_" : "";
@@ -20,31 +20,31 @@ public class Trees
         String name = baseName+"_"+add+count;
         String fname = baseName+"/"+add+count;
         
-        return new TreeType(type, name, ImageUtils.loadImage(fname), count, !isDead);
+        return new PlantType(type, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
-    public static final List<TreeType> XTREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(TreeTypeType.TREE, false, count))
+    public static final List<PlantType> XTREES = IntStream.range(1, 8)
+            .mapToObj(count -> create(PlantTypeType.TREE, false, count))
             .toList();
     
-    public static final List<TreeType> XDEAD_TREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(TreeTypeType.TREE, true, count))
+    public static final List<PlantType> XDEAD_TREES = IntStream.range(1, 8)
+            .mapToObj(count -> create(PlantTypeType.TREE, true, count))
             .toList();
     
-    public static final List<TreeType> GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(TreeTypeType.GRASS, false, count))
+    public static final List<PlantType> GRASS = IntStream.range(1, 8)
+            .mapToObj(count -> create(PlantTypeType.GRASS, false, count))
             .toList();
     
-    public static final List<TreeType> DEAD_GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(TreeTypeType.GRASS, true, count))
+    public static final List<PlantType> DEAD_GRASS = IntStream.range(1, 8)
+            .mapToObj(count -> create(PlantTypeType.GRASS, true, count))
             .toList();
     
-    public static List<TreeType> get(TreeTypeType type)
+    public static List<PlantType> get(PlantTypeType type)
     {
         return type.isGrass() ? GRASS : XTREES;
     }
     
-    public static List<TreeType> getDead(TreeTypeType type)
+    public static List<PlantType> getDead(PlantTypeType type)
     {
         return type.isGrass() ? DEAD_GRASS : XDEAD_TREES;
     }

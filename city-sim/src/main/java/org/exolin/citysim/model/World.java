@@ -31,7 +31,7 @@ import org.exolin.citysim.model.electricity.Electricity;
 import org.exolin.citysim.model.electricity.ElectricityGrid;
 import org.exolin.citysim.model.electricity.ElectricityGridArea;
 import org.exolin.citysim.model.sim.RemoveMode;
-import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.plant.Plant;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.GamePanel;
 import org.exolin.citysim.ui.OutOfGridException;
@@ -506,7 +506,7 @@ public final class World implements BuildingMap
             
             s.updateAfterTick(this, ticks);
             
-            if(s instanceof Tree t)
+            if(s instanceof Plant t)
             {
                 t.getDataCopy().getZone().ifPresent(z -> {
                     handleZone(s, ticks, z);

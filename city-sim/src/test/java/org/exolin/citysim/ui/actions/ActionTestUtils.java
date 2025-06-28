@@ -6,8 +6,8 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +36,7 @@ public class ActionTestUtils
         assertEquals(Zone.class, b.getClass());
     }
     
-    public static void assertTree(Structure<?, ?, ?, ?> b, int x, int y, TreeType t, Optional<ZoneType> zone)
+    public static void assertTree(Structure<?, ?, ?, ?> b, int x, int y, PlantType t, Optional<ZoneType> zone)
     {
         assertStructure(b, x, y, t);
         
@@ -45,7 +45,7 @@ public class ActionTestUtils
         assertEquals(y, b.getY());
         assertEquals(t, b.getType());
         assertEquals(zone, b.getTheZoneType());
-        assertEquals(Tree.class, b.getClass());
+        assertEquals(Plant.class, b.getClass());
     }
     
     public static void makeZonePlacementMove(Point start, Point end, World world, ZoneType type)

@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.tree;
+package org.exolin.citysim.model.plant;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -16,37 +16,37 @@ import org.exolin.citysim.utils.ImageUtils;
  *
  * @author Thomas
  */
-public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
+public class PlantType extends StructureType<Plant, PlantVariant, PlantParameters>
 {
-    private final TreeTypeType type;
+    private final PlantTypeType type;
     private final int count;
     private final boolean alive;
     
     public static final int COST = 3;
 
     @Override
-    public int getBuildingCost(TreeVariant variant)
+    public int getBuildingCost(PlantVariant variant)
     {
         //cost of n trees
         //Not used for count != 1
         return COST * count;
     }
     
-    private record Key(int number, boolean alive, TreeTypeType type)
+    private record Key(int number, boolean alive, PlantTypeType type)
     {
         
     }
     
-    private static final Map<Key, TreeType> instances = new LinkedHashMap<>();
+    private static final Map<Key, PlantType> instances = new LinkedHashMap<>();
     
     private static List<Animation> createVariants(String name, BufferedImage image)
     {
-        List<Animation> variants = new ArrayList<>(TreeVariant.VALUES.size());
+        List<Animation> variants = new ArrayList<>(PlantVariant.VALUES.size());
         
-        for(TreeVariant v : TreeVariant.VALUES)
+        for(PlantVariant v : PlantVariant.VALUES)
         {
             String variantName = name;
-            if(v != TreeVariant.DEFAULT)
+            if(v != PlantVariant.DEFAULT)
                 variantName += "@"+v;
             
             variants.add(Animation.createUnanimated(variantName, variantName, ImageUtils.createOffsetImage(image, v.getXoffset(), v.getYoffset())));
@@ -55,7 +55,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return variants;
     }
     
-    public TreeType(TreeTypeType type, String name, BufferedImage image, int count, boolean alive)
+    public PlantType(PlantTypeType type, String name, BufferedImage image, int count, boolean alive)
     {
         super(name, createVariants(name, image), _1);
         this.type = Objects.requireNonNull(type);
@@ -65,14 +65,14 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
             throw new IllegalArgumentException();
     }
     
-    public Optional<TreeType> plusOne()
+    public Optional<PlantType> plusOne()
     {
         return Optional.ofNullable(instances.get(new Key(count+1, alive, type)));
     }
     
-    public TreeType getDead()
+    public PlantType getDead()
     {
-        TreeType tree = instances.get(new Key(count, false, type));
+        PlantType tree = instances.get(new Key(count, false, type));
         if(tree == null)
             throw new IllegalArgumentException();
         return tree;
@@ -84,15 +84,15 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
     }
     
     @Override
-    public Tree createBuilding(int x, int y, TreeVariant variant, TreeParameters data)
+    public Plant createBuilding(int x, int y, PlantVariant variant, PlantParameters data)
     {
-        return new Tree(this, x, y, variant, data);
+        return new Plant(this, x, y, variant, data);
     }
 
     @Override
-    public TreeVariant getVariantForDefaultImage()
+    public PlantVariant getVariantForDefaultImage()
     {
-        return TreeVariant.DEFAULT;
+        return PlantVariant.DEFAULT;
     }
 
     public boolean isAlive()
@@ -100,7 +100,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return alive;
     }
 
-    public TreeTypeType getType()
+    public PlantTypeType getType()
     {
         return type;
     }

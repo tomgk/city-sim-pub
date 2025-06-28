@@ -10,10 +10,10 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeType;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantVariant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 
@@ -36,7 +36,7 @@ public class PlaceTrees implements BuildingAction
         this.isGrass = isGrass;
     }
     
-    private List<TreeType> get()
+    private List<PlantType> get()
     {
         return (isGrass ? Trees.GRASS : Trees.XTREES);
     }
@@ -69,7 +69,7 @@ public class PlaceTrees implements BuildingAction
         Structure<?, ?, ?, ?> buildingAt = w.getBuildingAt(marking.x, marking.y);
         Optional<ZoneType> zoneType = Optional.empty();
         //if trees already planted there, add one more
-        if(buildingAt instanceof Tree t)
+        if(buildingAt instanceof Plant t)
         {
             alreadyPlaced = t.getType().getCount();
             zoneType = t.getTheZoneType();
@@ -84,14 +84,14 @@ public class PlaceTrees implements BuildingAction
         if(alreadyPlaced+1 >= get().size())
             return;
         
-        w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, TreeVariant.random(), new TreeParameters(zoneType));
-        w.reduceMoney(TreeType.COST);
+        w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, PlantVariant.random(), new PlantParameters(zoneType));
+        w.reduceMoney(PlantType.COST);
     }
 
     @Override
     public int getCost()
     {
-        return TreeType.COST;
+        return PlantType.COST;
     }
     
     @Override

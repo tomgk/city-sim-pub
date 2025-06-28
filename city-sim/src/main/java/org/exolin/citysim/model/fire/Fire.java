@@ -15,10 +15,10 @@ import org.exolin.citysim.model.building.vacant.Vacant;
 import org.exolin.citysim.model.building.vacant.VacantParameters;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.Connection;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeType;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantVariant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
@@ -56,7 +56,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     {
         if(s == null)
             return BURN_EMPTY_PROBABILITY;
-        else if(s instanceof Tree t)
+        else if(s instanceof Plant t)
         {
             if(t.isAlive())
                 return RandomUtils.getProbabilityForTicks(BURN_TREE_PROBABILITY, t.getCount());
@@ -133,9 +133,9 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
         Optional<StructureType> afterBurn = getDataRaw().afterBurn;
         if(afterBurn.isPresent())
         {
-            if(afterBurn.get() instanceof TreeType)
+            if(afterBurn.get() instanceof PlantType)
                 //TODO: does random make sense? (movement of trees after fire)
-                w.addBuilding(afterBurn.get(), getX(), getY(), TreeVariant.random(), new TreeParameters(getDataRaw().zone));
+                w.addBuilding(afterBurn.get(), getX(), getY(), PlantVariant.random(), new PlantParameters(getDataRaw().zone));
             else
                 w.addBuilding(afterBurn.get(), getX(), getY());
             return;
@@ -209,7 +209,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             }
             else if(s instanceof Building)
                 return BUILDING_FIRE;
-            else if(s instanceof Tree)
+            else if(s instanceof Plant)
                 return 10;
             else
             {
@@ -229,7 +229,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
     
     private static Optional<StructureType> getAfterBurn(Structure<?, ?, ?, ?> s)
     {
-        if(s instanceof Tree t)
+        if(s instanceof Plant t)
             return Optional.of(t.getType().getDead());
         else
             return Optional.empty();

@@ -9,9 +9,9 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantVariant;
 import static org.exolin.citysim.storage.WorldStorageTest.createInputStream;
 import static org.exolin.citysim.storage.WorldStorageTest.getBuilding;
 import static org.exolin.citysim.storage.WorldStorageTest.serialize;
@@ -26,10 +26,10 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class TreeDataTest
 {
     @Test
-    public void testSerializeTree() throws IOException
+    public void testSerializePlant() throws IOException
     {
-        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.empty()));
-        String output = serialize(WorldStorage::serialize, street);
+        Plant plant = new Plant(Trees.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.empty()));
+        String output = serialize(WorldStorage::serialize, plant);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right"}
                           """;
@@ -38,10 +38,10 @@ public class TreeDataTest
     }
     
     @Test
-    public void testSerializeTree_WithZone() throws IOException
+    public void testSerializePlant_WithZone() throws IOException
     {
-        Tree street = new Tree(Trees.XTREES.get(3), 16, 99, TreeVariant.TOP_RIGHT, new TreeParameters(Optional.of(Zones.residential)));
-        String output = serialize(WorldStorage::serialize, street);
+        Plant plant = new Plant(Trees.XTREES.get(3), 16, 99, PlantVariant.TOP_RIGHT, new PlantParameters(Optional.of(Zones.residential)));
+        String output = serialize(WorldStorage::serialize, plant);
         String expected = """
                           {"type":"trees_4","x":16,"y":99,"variant":"top_right","zone":"zone_residential"}
                           """;
@@ -61,8 +61,8 @@ public class TreeDataTest
         assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
-        assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
-        TreeParameters data = (TreeParameters) b.getDataCopy();
+        assertEquals(PlantVariant.TOP_RIGHT, b.getVariant());
+        PlantParameters data = (PlantParameters) b.getDataCopy();
         assertEquals(Optional.empty(), data.getZone());
     }
     
@@ -79,8 +79,8 @@ public class TreeDataTest
         assertEquals(Trees.XTREES.get(3), b.getType());
         assertEquals(16, b.getX());
         assertEquals(22, b.getY());
-        assertEquals(TreeVariant.TOP_RIGHT, b.getVariant());
-        TreeParameters data = (TreeParameters) b.getDataCopy();
+        assertEquals(PlantVariant.TOP_RIGHT, b.getVariant());
+        PlantParameters data = (PlantParameters) b.getDataCopy();
         assertEquals(Optional.of(Zones.residential), data.getZone());
     }
 }

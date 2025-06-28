@@ -6,7 +6,7 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
-import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 
@@ -29,7 +29,7 @@ public interface BudgetCategory
         else if(type instanceof CrossConnectionType s)
             //TODO: ignores Y
             return new SelfConnectionCategory(s.getXType());
-        else if(type instanceof TreeType)
+        else if(type instanceof PlantType)
             return null;
         else if(type instanceof ZoneType)
             return null;

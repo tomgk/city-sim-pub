@@ -6,7 +6,7 @@ import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.bt.buildings.IndustrialBuildings;
 import org.exolin.citysim.bt.buildings.ResidentialBuildings;
 import org.exolin.citysim.bt.connections.SelfConnections;
-import org.exolin.citysim.model.tree.TreeTypeType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -37,25 +37,25 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Tree()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.get(TreeTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Trees.get(PlantTypeType.TREE).getFirst()));
     }
     
     @Test
     public void testGetFor_DeadTree()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.getDead(TreeTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Trees.getDead(PlantTypeType.TREE).getFirst()));
     }
     
     @Test
     public void testGetFor_Grass()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.get(TreeTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Trees.get(PlantTypeType.GRASS).getFirst()));
     }
     
     @Test
     public void testGetFor_DeadGrass()
     {
-        assertEquals(null, BudgetCategory.getFor(Trees.getDead(TreeTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Trees.getDead(PlantTypeType.GRASS).getFirst()));
     }
     
     @Test

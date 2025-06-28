@@ -16,7 +16,7 @@ import org.exolin.citysim.model.building.vacant.Vacant;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.fire.Fire;
-import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.plant.Plant;
 import org.exolin.citysim.model.zone.Zone;
 
 /**
@@ -76,8 +76,8 @@ public abstract class StructureData
             return new ZoneData((Zone)b);
         else if(b.getClass() == CrossConnection.class)
             return new CrossConnectionData((CrossConnection)b);
-        else if(b.getClass() == Tree.class)
-            return new TreeData((Tree)b);
+        else if(b.getClass() == Plant.class)
+            return new PlantData((Plant)b);
         else if(b.getClass() == Fire.class)
             return new FireData((Fire)b);
         else if(b.getClass() == Vacant.class)
@@ -94,8 +94,8 @@ public abstract class StructureData
             return BuildingData.class;
         else if(buildingClass == Zone.class)
             return ZoneData.class;
-        else if(buildingClass == Tree.class)
-            return TreeData.class;
+        else if(buildingClass == Plant.class)
+            return PlantData.class;
         else if(buildingClass == Fire.class)
             return FireData.class;
         else if(buildingClass == Vacant.class)

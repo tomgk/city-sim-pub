@@ -9,7 +9,7 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.sim.RemoveMode;
-import org.exolin.citysim.model.tree.Tree;
+import org.exolin.citysim.model.plant.Plant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.utils.ImageUtils;
@@ -85,7 +85,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
                         buildingZoneType = Optional.of(z.getType());
                     //putting a zone on a tree => keed & zone tree
                     //maybe here for #109
-                    else if(type instanceof ZoneType z && buildingAt instanceof Tree t)
+                    else if(type instanceof ZoneType z && buildingAt instanceof Plant t)
                     {
                         t.setZone(Optional.of(z));
                         if(DEBUG_TREEZONE) System.out.println(t);

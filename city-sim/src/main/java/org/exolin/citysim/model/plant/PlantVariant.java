@@ -1,4 +1,4 @@
-package org.exolin.citysim.model.tree;
+package org.exolin.citysim.model.plant;
 
 import java.util.List;
 import org.exolin.citysim.model.StructureVariant;
@@ -8,7 +8,7 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public enum TreeVariant implements StructureVariant
+public enum PlantVariant implements StructureVariant
 {
     DEFAULT(0, 0),
     LEFT(-1, 0),
@@ -22,12 +22,12 @@ public enum TreeVariant implements StructureVariant
     BOTTOM_MIDDLE(0, -1),
     BOTTOM_RIGHT(1, -1);
 
-    static final List<TreeVariant> VALUES = List.of(values());
+    static final List<PlantVariant> VALUES = List.of(values());
 
     private final int xoffset;
     private final int yoffset;
 
-    private TreeVariant(int xoffset, int yoffset)
+    private PlantVariant(int xoffset, int yoffset)
     {
         this.xoffset = xoffset;
         this.yoffset = yoffset;
@@ -43,7 +43,7 @@ public enum TreeVariant implements StructureVariant
         return yoffset;
     }
 
-    public static TreeVariant random()
+    public static PlantVariant random()
     {
         return RandomUtils.random(VALUES);
     }

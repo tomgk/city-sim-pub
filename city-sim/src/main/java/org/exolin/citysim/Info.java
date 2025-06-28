@@ -11,7 +11,7 @@ import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
-import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.plant.PlantType;
 
 /**
  *
@@ -81,7 +81,7 @@ public class Info
                 System.out.println("X-Type: "+cct.getXType().getName());
                 System.out.println("Y-Type: "+cct.getYType().getName());
             }
-            else if(s instanceof TreeType tt)
+            else if(s instanceof PlantType tt)
             {
                 System.out.println("Count: "+tt.getCount());
                 System.out.println("Type: "+tt.getType());

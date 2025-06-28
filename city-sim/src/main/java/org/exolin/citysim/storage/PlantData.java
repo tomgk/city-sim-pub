@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.tree.Tree;
-import org.exolin.citysim.model.tree.TreeParameters;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.Plant;
+import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantVariant;
 import org.exolin.citysim.model.zone.ZoneType;
 
 /**
@@ -16,19 +16,19 @@ import org.exolin.citysim.model.zone.ZoneType;
  * @author Thomas
  */
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class TreeData extends StructureData
+public class PlantData extends StructureData
 {
     @JsonProperty
     private final Optional<String> zone;
     
-    public TreeData(Tree b)
+    public PlantData(Plant b)
     {
         super(b);
         this.zone = b.getDataCopy().getZone().map(ZoneType::getName);
     }
 
     @JsonCreator
-    public TreeData(@JsonProperty("type") String type,
+    public PlantData(@JsonProperty("type") String type,
             @JsonProperty("x") int x, @JsonProperty("y") int y,
             @JsonProperty("variant") String variant,
             @JsonProperty("zone") Optional<String> zone)
@@ -40,12 +40,12 @@ public class TreeData extends StructureData
     @Override
     protected StructureVariant getVariant(String name)
     {
-        return TreeVariant.valueOf(name);
+        return PlantVariant.valueOf(name);
     }
 
     @Override
-    protected TreeParameters getParameters()
+    protected PlantParameters getParameters()
     {
-        return new TreeParameters(zone.map(n -> BuildingType.getByName(ZoneType.class, n)));
+        return new PlantParameters(zone.map(n -> BuildingType.getByName(ZoneType.class, n)));
     }
 }

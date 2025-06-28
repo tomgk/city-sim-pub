@@ -1,8 +1,8 @@
 package org.exolin.citysim.bt;
 
 import java.util.List;
-import org.exolin.citysim.model.tree.TreeType;
-import org.exolin.citysim.model.tree.TreeVariant;
+import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantVariant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ public class TreesTest
         }
     }
     
-    private List<String> getFileNames(List<TreeType> type)
+    private List<String> getFileNames(List<PlantType> type)
     {
         return type.stream()
-                .map(t -> t.getImage(TreeVariant.DEFAULT).getUnaminatedFileName())
+                .map(t -> t.getImage(PlantVariant.DEFAULT).getUnaminatedFileName())
                 .toList();
     }
     

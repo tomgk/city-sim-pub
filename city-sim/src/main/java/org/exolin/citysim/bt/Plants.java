@@ -24,11 +24,11 @@ public class Plants
         return new PlantType(type, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
-    private static final List<PlantType> XTREES = IntStream.range(1, 8)
+    private static final List<PlantType> TREES = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.TREE, false, count))
             .toList();
     
-    private static final List<PlantType> XDEAD_TREES = IntStream.range(1, 8)
+    private static final List<PlantType> DEAD_TREES = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.TREE, true, count))
             .toList();
     
@@ -52,7 +52,7 @@ public class Plants
     
     public static List<PlantType> getx(PlantTypeType type)
     {
-        return type.isGrass() ? GRASS : XTREES;
+        return type.isGrass() ? GRASS : TREES;
     }
     
     public static PlantType getFirstDead(PlantTypeType type)
@@ -62,7 +62,7 @@ public class Plants
     
     public static List<PlantType> getDead(PlantTypeType type)
     {
-        return type.isGrass() ? DEAD_GRASS : XDEAD_TREES;
+        return type.isGrass() ? DEAD_GRASS : DEAD_TREES;
     }
 
     public static int getSize()

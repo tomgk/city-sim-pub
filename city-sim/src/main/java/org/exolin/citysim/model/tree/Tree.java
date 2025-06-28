@@ -77,10 +77,13 @@ public class Tree extends Structure<Tree, TreeType, TreeVariant, TreeParameters>
         
         Structure<?, ?, ?, ?> b = world.getBuildingAt(x, y);
         Optional<ZoneType> zoneType = Optional.empty();
+        //grow into zone
         if(b instanceof Zone z)
             zoneType = Optional.of(z.getType());
+        //there is already a tree
+        //=> exit, tree can grow on its own
         else if(b instanceof Tree t)
-            zoneType = t.getTheZoneType();
+            return;//zoneType = t.getTheZoneType();
         else if(b != null)
         {
             //TODO: check what this code is for when Tree has already been checked before

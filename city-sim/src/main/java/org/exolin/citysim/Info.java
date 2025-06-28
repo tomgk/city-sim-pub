@@ -9,6 +9,9 @@ import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.connection.cross.CrossConnectionType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.tree.TreeType;
 
 /**
  *
@@ -33,10 +36,16 @@ public class Info
                     System.out.println("==== "+t.getSimpleName()+" =====");
                     Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
                     Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
-                    System.out.println("Variants: "+variants.stream()
+                    
+                    boolean multiType = variants.stream()
+                            .map(StructureVariant::getClass)
+                            .distinct()
+                            .count() > 1;
+                    
+                    System.out.println("Variants:"+(multiType ? "\n  " : " ")+variants.stream()
                             .sorted(Comparator.comparing(StructureVariant::index))
-                            .map(v -> v.name())
-                            .collect(Collectors.joining(", "))
+                            .map(v -> (multiType ? v.getClass().getSimpleName()+"." : "")+v.name())
+                            .collect(Collectors.joining(!multiType ? ", " : "\n  "))
                     );
                 });
         
@@ -67,6 +76,17 @@ public class Info
             
             if(s instanceof BuildingType bt)
                 System.out.println("Zone: "+bt.getZoneType().getName());
+            else if(s instanceof CrossConnectionType cct)
+            {
+                System.out.println("X-Type: "+cct.getXType().getName());
+                System.out.println("Y-Type: "+cct.getYType().getName());
+            }
+            else if(s instanceof TreeType tt)
+            {
+                System.out.println("Count: "+tt.getCount());
+                System.out.println("IsGrass: "+tt.isGrass());
+                System.out.println("IsAlive: "+tt.isAlive());
+            }
             
             s.customKeys().forEach(key -> {
                 CustomKey k = (CustomKey)key;

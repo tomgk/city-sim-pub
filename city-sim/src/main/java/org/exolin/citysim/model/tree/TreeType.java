@@ -94,7 +94,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return TreeVariant.DEFAULT;
     }
 
-    boolean isAlive()
+    public boolean isAlive()
     {
         return alive;
     }

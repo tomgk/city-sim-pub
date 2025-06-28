@@ -21,6 +21,7 @@ import org.exolin.citysim.model.connection.regular.SelfConnection;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.plant.Plant;
 import org.exolin.citysim.model.plant.PlantParameters;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.plant.PlantVariant;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -92,28 +93,28 @@ public class PlantsTest
     @Test
     public void testGetElectricity_Trees_Unzoned_X()
     {
-        assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(new Plant(Plants.XTREES.get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.empty())),
+        assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(new Plant(Plants.get(PlantTypeType.TREE).get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.empty())),
                 ConnectionType.Direction.X));
     }
     
     @Test
     public void testGetElectricity_Trees_Unzoned_Y()
     {
-        assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(new Plant(Plants.XTREES.get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.empty())),
+        assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(new Plant(Plants.get(PlantTypeType.TREE).get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.empty())),
                 ConnectionType.Direction.Y));
     }
     
     @Test
     public void testGetElectricity_Trees_Zoned_X()
     {
-        assertEquals(Electricity.NEEDS, PowerPlants.getElectricity(new Plant(Plants.XTREES.get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.of(Zones.business))),
+        assertEquals(Electricity.NEEDS, PowerPlants.getElectricity(new Plant(Plants.get(PlantTypeType.TREE).get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.of(Zones.business))),
                 ConnectionType.Direction.X));
     }
     
     @Test
     public void testGetElectricity_Trees_Zoned_Y()
     {
-        assertEquals(Electricity.NEEDS, PowerPlants.getElectricity(new Plant(Plants.XTREES.get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.of(Zones.business))),
+        assertEquals(Electricity.NEEDS, PowerPlants.getElectricity(new Plant(Plants.get(PlantTypeType.TREE).get(2), 0, 0, PlantVariant.BOTTOM_LEFT, new PlantParameters(Optional.of(Zones.business))),
                 ConnectionType.Direction.Y));
     }
     

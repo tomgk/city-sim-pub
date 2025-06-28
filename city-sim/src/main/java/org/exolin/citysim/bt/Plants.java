@@ -23,19 +23,19 @@ public class Plants
         return new PlantType(type, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
-    public static final List<PlantType> XTREES = IntStream.range(1, 8)
+    private static final List<PlantType> XTREES = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.TREE, false, count))
             .toList();
     
-    public static final List<PlantType> XDEAD_TREES = IntStream.range(1, 8)
+    private static final List<PlantType> XDEAD_TREES = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.TREE, true, count))
             .toList();
     
-    public static final List<PlantType> GRASS = IntStream.range(1, 8)
+    private static final List<PlantType> GRASS = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.GRASS, false, count))
             .toList();
     
-    public static final List<PlantType> DEAD_GRASS = IntStream.range(1, 8)
+    private static final List<PlantType> DEAD_GRASS = IntStream.range(1, 8)
             .mapToObj(count -> create(PlantTypeType.GRASS, true, count))
             .toList();
     

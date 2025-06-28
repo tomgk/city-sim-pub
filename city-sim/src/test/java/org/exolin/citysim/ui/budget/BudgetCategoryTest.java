@@ -37,25 +37,25 @@ public class BudgetCategoryTest
     @Test
     public void testGetFor_Tree()
     {
-        assertEquals(null, BudgetCategory.getFor(Plants.get(PlantTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getFirst(PlantTypeType.TREE)));
     }
     
     @Test
     public void testGetFor_DeadTree()
     {
-        assertEquals(null, BudgetCategory.getFor(Plants.getDead(PlantTypeType.TREE).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getFirstDead(PlantTypeType.TREE)));
     }
     
     @Test
     public void testGetFor_Grass()
     {
-        assertEquals(null, BudgetCategory.getFor(Plants.get(PlantTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getFirst(PlantTypeType.GRASS)));
     }
     
     @Test
     public void testGetFor_DeadGrass()
     {
-        assertEquals(null, BudgetCategory.getFor(Plants.getDead(PlantTypeType.GRASS).getFirst()));
+        assertEquals(null, BudgetCategory.getFor(Plants.getFirstDead(PlantTypeType.GRASS)));
     }
     
     @Test

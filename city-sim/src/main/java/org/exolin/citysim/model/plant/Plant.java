@@ -88,7 +88,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
                if(RandomUtils.atLeast(RandomUtils.getProbabilityForTicks(PROBABILITY_GROWTH, ticks)))
                {
                    world.removeBuildingAt(x, y, RemoveMode.TEAR_DOWN);
-                   world.addBuilding(Plants.get(getType().getType()).getFirst(), x, y, getVariant(), t.getDataCopy());
+                   world.addBuilding(Plants.getFirst(getType().getType()), x, y, getVariant(), t.getDataCopy());
                }
             }
             
@@ -100,7 +100,7 @@ public class Plant extends Structure<Plant, PlantType, PlantVariant, PlantParame
         
         double p = RandomUtils.getProbabilityForTicks(PROBABILITY_SPREAD, ticks);
         if(RandomUtils.atLeast(p))
-            world.addBuilding(Plants.get(getType().getType()).getFirst(), x, y, PlantVariant.random(), new PlantParameters(zoneType));
+            world.addBuilding(Plants.getFirst(getType().getType()), x, y, PlantVariant.random(), new PlantParameters(zoneType));
     }
 
     public boolean isAlive()

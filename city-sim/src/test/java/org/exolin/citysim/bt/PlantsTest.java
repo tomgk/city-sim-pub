@@ -18,7 +18,7 @@ public class PlantsTest
     public static void init() throws Throwable
     {
         try{
-            Plants.get(PlantTypeType.TREE);
+            Plants.getFirst(PlantTypeType.TREE);
         }catch(ExceptionInInitializerError e){
             throw e.getException();
         }
@@ -42,7 +42,7 @@ public class PlantsTest
                 "trees_5",
                 "trees_6",
                 "trees_7"
-        ), getFileNames(Plants.get(PlantTypeType.TREE)));
+        ), getFileNames(Plants.getx(PlantTypeType.TREE)));
     }
     
     @Test
@@ -70,7 +70,7 @@ public class PlantsTest
                 "grass_5",
                 "grass_6",
                 "grass_7"
-        ), getFileNames(Plants.get(PlantTypeType.GRASS)));
+        ), getFileNames(Plants.getx(PlantTypeType.GRASS)));
     }
     
     @Test

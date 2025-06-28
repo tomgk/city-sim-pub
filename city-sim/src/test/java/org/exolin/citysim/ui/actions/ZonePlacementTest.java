@@ -78,7 +78,7 @@ public class ZonePlacementTest
         try{
             World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
 
-            Plant t = world.addBuilding(Plants.get(PlantTypeType.TREE).get(1), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
+            Plant t = world.addBuilding(Plants.get(PlantTypeType.TREE, 2), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
             System.out.println("Created Tree in test="+System.identityHashCode(t)+" with "+t.getTheZoneType());
 
             makeZonePlacementMove(new Point(1, 8), new Point(2, 9), world, Zones.business);
@@ -91,7 +91,7 @@ public class ZonePlacementTest
             Structure<?, ?, ?, ?> tt = world.getBuildingAt(1, 8);
             System.out.println("Tree "+System.identityHashCode(tt)+"="+tt.getTheZoneType());
 
-            assertTree(tt, 1, 8, Plants.get(PlantTypeType.TREE).get(1), Optional.of(Zones.business));
+            assertTree(tt, 1, 8, Plants.get(PlantTypeType.TREE, 2), Optional.of(Zones.business));
 
             buildings.stream().forEach(System.out::println);
         }finally{
@@ -108,7 +108,7 @@ public class ZonePlacementTest
         try{
             World world = new World("Test", 100, BigDecimal.ZERO, SimulationSpeed.SPEED1);
 
-            Plant t = world.addBuilding(Plants.get(PlantTypeType.TREE).get(1), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
+            Plant t = world.addBuilding(Plants.get(PlantTypeType.TREE, 2), 1, 8, PlantVariant.DEFAULT, new PlantParameters(Optional.empty()));
             System.out.println("Tree="+System.identityHashCode(t));
 
             makeZonePlacementMove(new Point(1, 6), new Point(3, 9), world, Zones.business);
@@ -121,7 +121,7 @@ public class ZonePlacementTest
 
             assertZone(world.getBuildingAt(1, 6), 1, 6, Zones.business);
             assertZone(world.getBuildingAt(1, 7), 1, 7, Zones.business);
-            assertTree(tt, 1, 8, Plants.get(PlantTypeType.TREE).get(1), Optional.of(Zones.business));
+            assertTree(tt, 1, 8, Plants.get(PlantTypeType.TREE, 2), Optional.of(Zones.business));
             assertZone(world.getBuildingAt(2, 6), 2, 6, Zones.business);
             assertZone(world.getBuildingAt(2, 7), 2, 7, Zones.business);
             assertZone(world.getBuildingAt(2, 8), 2, 8, Zones.business);

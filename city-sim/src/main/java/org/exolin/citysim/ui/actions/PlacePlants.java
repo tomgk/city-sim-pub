@@ -37,15 +37,10 @@ public class PlacePlants implements BuildingAction
         this.type = type;
     }
     
-    private List<PlantType> get()
-    {
-        return Plants.get(type);
-    }
-
     @Override
     public StructureType getBuilding()
     {
-        return get().getFirst();
+        return Plants.getFirst(type);
     }
 
     @Override
@@ -82,10 +77,10 @@ public class PlacePlants implements BuildingAction
         else if(buildingAt != null)
             return;
         
-        if(alreadyPlaced+1 >= get().size())
+        if(alreadyPlaced+1 >= Plants.getSize())
             return;
         
-        w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, PlantVariant.random(), new PlantParameters(zoneType));
+        w.addBuilding(Plants.get(type, alreadyPlaced), marking.x, marking.y, PlantVariant.random(), new PlantParameters(zoneType));
         w.reduceMoney(type.getCost());
     }
 
@@ -134,7 +129,7 @@ public class PlacePlants implements BuildingAction
     @Override
     public Image getMarker()
     {
-        return get().getFirst().getBrightImage();
+        return Plants.getFirst(type).getBrightImage();
     }
 
     @Override

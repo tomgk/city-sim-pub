@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
+import org.exolin.citysim.model.plant.PlantVariant;
 import org.exolin.citysim.utils.ImageUtils;
 
 /**
@@ -39,13 +40,33 @@ public class Plants
             .mapToObj(count -> create(PlantTypeType.GRASS, true, count))
             .toList();
     
-    public static List<PlantType> get(PlantTypeType type)
+    public static PlantType getFirst(PlantTypeType type)
+    {
+        return getx(type).getFirst();
+    }
+    
+    public static PlantType get(PlantTypeType type, int count)
+    {
+        return getx(type).get(count-1);
+    }
+    
+    public static List<PlantType> getx(PlantTypeType type)
     {
         return type.isGrass() ? GRASS : XTREES;
+    }
+    
+    public static PlantType getFirstDead(PlantTypeType type)
+    {
+        return getDead(type).getFirst();
     }
     
     public static List<PlantType> getDead(PlantTypeType type)
     {
         return type.isGrass() ? DEAD_GRASS : XDEAD_TREES;
+    }
+
+    public static int getSize()
+    {
+        return PlantVariant.values().length;
     }
 }

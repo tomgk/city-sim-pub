@@ -51,7 +51,7 @@ public class PlacePlants implements BuildingAction
     @Override
     public String getName()
     {
-        return "plant plants";
+        return "plant "+type.baseName();
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.exolin.citysim.bt;
 import java.util.List;
 import java.util.stream.IntStream;
 import org.exolin.citysim.model.tree.TreeType;
+import org.exolin.citysim.model.tree.TreeTypeType;
 import org.exolin.citysim.utils.ImageUtils;
 
 /**
@@ -11,40 +12,40 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class Trees
 {
-    private static TreeType create(boolean isGrass, boolean isDead, int count)
+    private static TreeType create(TreeTypeType type, boolean isDead, int count)
     {
-        String baseName = (isGrass ? "grass" : "trees");
+        String baseName = type.baseName();
         String add = isDead ? "dead_" : "";
         
         String name = baseName+"_"+add+count;
         String fname = baseName+"/"+add+count;
         
-        return new TreeType(isGrass, name, ImageUtils.loadImage(fname), count, !isDead);
+        return new TreeType(type, name, ImageUtils.loadImage(fname), count, !isDead);
     }
     
     public static final List<TreeType> XTREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(false, false, count))
+            .mapToObj(count -> create(TreeTypeType.TREE, false, count))
             .toList();
     
     public static final List<TreeType> XDEAD_TREES = IntStream.range(1, 8)
-            .mapToObj(count -> create(false, true, count))
+            .mapToObj(count -> create(TreeTypeType.TREE, true, count))
             .toList();
     
     public static final List<TreeType> GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(true, false, count))
+            .mapToObj(count -> create(TreeTypeType.GRASS, false, count))
             .toList();
     
     public static final List<TreeType> DEAD_GRASS = IntStream.range(1, 8)
-            .mapToObj(count -> create(true, true, count))
+            .mapToObj(count -> create(TreeTypeType.GRASS, true, count))
             .toList();
     
-    public static List<TreeType> get(boolean isGrass)
+    public static List<TreeType> get(TreeTypeType type)
     {
-        return isGrass ? GRASS : XTREES;
+        return type.isGrass() ? GRASS : XTREES;
     }
     
-    public static List<TreeType> getDead(boolean isGrass)
+    public static List<TreeType> getDead(TreeTypeType type)
     {
-        return isGrass ? DEAD_GRASS : XDEAD_TREES;
+        return type.isGrass() ? DEAD_GRASS : XDEAD_TREES;
     }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.Animation;
 import static org.exolin.citysim.model.StructureSize._1;
@@ -17,7 +18,7 @@ import org.exolin.citysim.utils.ImageUtils;
  */
 public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
 {
-    private final boolean isGrass;
+    private final TreeTypeType type;
     private final int count;
     private final boolean alive;
     
@@ -31,7 +32,7 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return COST * count;
     }
     
-    private record Key(int number, boolean alive, boolean isGrass)
+    private record Key(int number, boolean alive, TreeTypeType type)
     {
         
     }
@@ -54,24 +55,24 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return variants;
     }
     
-    public TreeType(boolean isGrass, String name, BufferedImage image, int count, boolean alive)
+    public TreeType(TreeTypeType type, String name, BufferedImage image, int count, boolean alive)
     {
         super(name, createVariants(name, image), _1);
-        this.isGrass = isGrass;
+        this.type = Objects.requireNonNull(type);
         this.count = count;
         this.alive = alive;
-        if(instances.putIfAbsent(new Key(count, alive, isGrass), this) != null)
+        if(instances.putIfAbsent(new Key(count, alive, type), this) != null)
             throw new IllegalArgumentException();
     }
     
     public Optional<TreeType> plusOne()
     {
-        return Optional.ofNullable(instances.get(new Key(count+1, alive, isGrass)));
+        return Optional.ofNullable(instances.get(new Key(count+1, alive, type)));
     }
     
     public TreeType getDead()
     {
-        TreeType tree = instances.get(new Key(count, false, isGrass));
+        TreeType tree = instances.get(new Key(count, false, type));
         if(tree == null)
             throw new IllegalArgumentException();
         return tree;
@@ -99,8 +100,8 @@ public class TreeType extends StructureType<Tree, TreeVariant, TreeParameters>
         return alive;
     }
 
-    public boolean isGrass()
+    public TreeTypeType getType()
     {
-        return isGrass;
+        return type;
     }
 }

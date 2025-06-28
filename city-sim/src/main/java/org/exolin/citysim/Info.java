@@ -84,7 +84,7 @@ public class Info
             else if(s instanceof TreeType tt)
             {
                 System.out.println("Count: "+tt.getCount());
-                System.out.println("IsGrass: "+tt.isGrass());
+                System.out.println("Type: "+tt.getType());
                 System.out.println("IsAlive: "+tt.isAlive());
             }
             

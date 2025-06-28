@@ -22,14 +22,12 @@ public class PlantType extends StructureType<Plant, PlantVariant, PlantParameter
     private final int count;
     private final boolean alive;
     
-    public static final int COST = 3;
-
     @Override
     public int getBuildingCost(PlantVariant variant)
     {
         //cost of n plants
         //Not used for count != 1
-        return COST * count;
+        return type.getCost() * count;
     }
     
     private record Key(int number, boolean alive, PlantTypeType type)

@@ -13,6 +13,7 @@ import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.plant.Plant;
 import org.exolin.citysim.model.plant.PlantParameters;
 import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.plant.PlantVariant;
 import org.exolin.citysim.model.zone.Zone;
 import org.exolin.citysim.model.zone.ZoneType;
@@ -28,17 +29,17 @@ public class PlacePlants implements BuildingAction
     private boolean mouseDown;
     private long lastPlaced;
     private static final long PLANT_COOLDOWN = 250;//ms
-    private final boolean isGrass;
+    private final PlantTypeType type;
 
-    public PlacePlants(GetWorld world, boolean isGrass)
+    public PlacePlants(GetWorld world, PlantTypeType type)
     {
         this.world = world;
-        this.isGrass = isGrass;
+        this.type = type;
     }
     
     private List<PlantType> get()
     {
-        return (isGrass ? Plants.GRASS : Plants.XTREES);
+        return Plants.get(type);
     }
 
     @Override
@@ -85,13 +86,13 @@ public class PlacePlants implements BuildingAction
             return;
         
         w.addBuilding(get().get(alreadyPlaced), marking.x, marking.y, PlantVariant.random(), new PlantParameters(zoneType));
-        w.reduceMoney(PlantType.COST);
+        w.reduceMoney(type.getCost());
     }
 
     @Override
     public int getCost()
     {
-        return PlantType.COST;
+        return type.getCost();
     }
     
     @Override

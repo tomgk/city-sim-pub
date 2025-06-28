@@ -32,6 +32,7 @@ import static org.exolin.citysim.bt.connections.SelfConnections.street;
 import static org.exolin.citysim.bt.connections.SelfConnections.water;
 import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.RCI;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.ErrorDisplay;
 import org.exolin.citysim.ui.GamePanel;
@@ -68,8 +69,8 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         setLayout(new GridBagLayout());
         
         registerButton(0, "bulldoze.png", TearDownAction.createTearDown(world));
-        registerButton(2, "tree_water.png", Map.of("Trees", new PlacePlants(world, false),
-                "Grass", new PlacePlants(world, true),
+        registerButton(2, "tree_water.png", Map.of("Trees", new PlacePlants(world, PlantTypeType.TREE),
+                "Grass", new PlacePlants(world, PlantTypeType.GRASS),
                 "Water", new StreetBuilder(world, water, false)
         ));
         registerButton(4, "emergency.png", Action.NONE);

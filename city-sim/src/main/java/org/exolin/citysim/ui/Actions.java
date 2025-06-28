@@ -13,6 +13,7 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.zone.ZoneType;
 import org.exolin.citysim.ui.actions.Action;
 import org.exolin.citysim.ui.actions.PlaceBuilding;
@@ -42,7 +43,8 @@ public class Actions
             List<Action> sactions = new ArrayList<>();
             sactions.add(Action.NONE);
             sactions.add(TearDownAction.createTearDown(getWorld));
-            sactions.add(new PlacePlants(getWorld, false));
+            for(PlantTypeType type : PlantTypeType.values())
+                sactions.add(new PlacePlants(getWorld, type));
             sactions.add(new PlaceFire(getWorld));
             actions.put("Special", sactions);
         }

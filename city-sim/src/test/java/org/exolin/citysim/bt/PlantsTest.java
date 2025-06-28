@@ -2,6 +2,7 @@ package org.exolin.citysim.bt;
 
 import java.util.List;
 import org.exolin.citysim.model.plant.PlantType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.plant.PlantVariant;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,7 +18,7 @@ public class PlantsTest
     public static void init() throws Throwable
     {
         try{
-            Plants.XTREES.get(0);
+            Plants.get(PlantTypeType.TREE);
         }catch(ExceptionInInitializerError e){
             throw e.getException();
         }
@@ -41,7 +42,7 @@ public class PlantsTest
                 "trees_5",
                 "trees_6",
                 "trees_7"
-        ), getFileNames(Plants.XTREES));
+        ), getFileNames(Plants.get(PlantTypeType.TREE)));
     }
     
     @Test
@@ -55,7 +56,7 @@ public class PlantsTest
                 "trees_dead_5",
                 "trees_dead_6",
                 "trees_dead_7"
-        ), getFileNames(Plants.XDEAD_TREES));
+        ), getFileNames(Plants.getDead(PlantTypeType.TREE)));
     }
     
     @Test
@@ -69,7 +70,7 @@ public class PlantsTest
                 "grass_5",
                 "grass_6",
                 "grass_7"
-        ), getFileNames(Plants.GRASS));
+        ), getFileNames(Plants.get(PlantTypeType.GRASS)));
     }
     
     @Test
@@ -83,6 +84,6 @@ public class PlantsTest
                 "grass_dead_5",
                 "grass_dead_6",
                 "grass_dead_7"
-        ), getFileNames(Plants.DEAD_GRASS));
+        ), getFileNames(Plants.getDead(PlantTypeType.GRASS)));
     }
 }

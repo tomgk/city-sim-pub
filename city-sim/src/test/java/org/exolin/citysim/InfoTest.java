@@ -1,5 +1,7 @@
 package org.exolin.citysim;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +11,7 @@ import java.util.stream.Stream;
 import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Vacants;
+import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.bt.buildings.Parks;
 import org.exolin.citysim.bt.buildings.PowerPlants;
@@ -19,9 +22,12 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.building.vacant.VacantType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
+import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -162,25 +168,73 @@ public class InfoTest
                     Type: SelfConnectionType
                     Cost: 25
                     """
+            ),
+            Map.entry(
+                    FireType.fire,
+                    """
+                    ==== fire =====
+                    Type: FireType
+                    Cost: -
+                    """
+            ),
+            Map.entry(
+                    Zones.business,
+                    """
+                    ==== zone_business =====
+                    Type: ZoneType
+                    Cost: 5
+                    """
+            ),
+            Map.entry(
+                    Zones.parks,
+                    """
+                    ==== zone_parks =====
+                    Type: ZoneType
+                    Cost: -
+                    """
+            ),
+            Map.entry(
+                    Zones.plants,
+                    """
+                    ==== zone_plants =====
+                    Type: ZoneType
+                    Cost: -
+                    """
             )
     );
+    
+    private void assertEqualSet(Set expected, Set actual)
+    {
+        if(expected.equals(actual))
+            return;
+        
+        //expected without actual = what is missing
+        Set missing = new HashSet(expected);
+        missing.removeAll(actual);
+        
+        //actal without expected = tooMuch
+        Set tooMuch = new HashSet(actual);
+        tooMuch.removeAll(expected);
+        
+        List<String> msg = new ArrayList<>();
+        if(!missing.isEmpty())
+            msg.add("missing: "+missing);
+        if(!tooMuch.isEmpty())
+            msg.add("too much: "+tooMuch);
+        
+        fail(String.join("\n", msg));
+    }
     
     @Test
     public void testTypeClasses()
     {
-        Set<Class<?>> expected = Set.of(
-                VacantType.class,
-                PlantType.class,
-                SelfConnectionType.class,
-                BuildingType.class,
-                CrossConnectionType.class
-        );
+        Set<Class> expected = Info.getTypeClasses().collect(Collectors.toSet());
         Set<Class<?>> actual = EXPECTED.keySet()
                 .stream()
                 .map(Object::getClass)
                 .collect(Collectors.toSet());
         
-        assertEquals(expected, actual);
+        assertEqualSet(expected, actual);
     }
     
     @ParameterizedTest

@@ -90,7 +90,7 @@ public class InfoTest
                         Variants: DEFAULT
                         """;
         
-        assertEquals(expected, print(Info::classInfo));
+        assertEquals(expected, print(InfoClasses::classInfo));
     }
     
     private static final Map<StructureType<?, ?, ?>, String> EXPECTED_TYPEINFO = Map.ofEntries(
@@ -232,7 +232,7 @@ public class InfoTest
     @Test
     public void testTypeClasses()
     {
-        Set<Class> expected = Info.getTypeClasses().collect(Collectors.toSet());
+        Set<Class> expected = InfoClasses.getTypeClasses().collect(Collectors.toSet());
         Set<Class<?>> actual = EXPECTED_TYPEINFO.keySet()
                 .stream()
                 .map(Object::getClass)

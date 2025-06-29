@@ -1,7 +1,10 @@
 package org.exolin.citysim;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.StructureTypes;
@@ -12,6 +15,11 @@ import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.bt.connections.CrossConnections;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.building.BuildingType;
+import org.exolin.citysim.model.building.vacant.VacantType;
+import org.exolin.citysim.model.connection.cross.CrossConnectionType;
+import org.exolin.citysim.model.connection.regular.SelfConnectionType;
+import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Disabled;
@@ -156,6 +164,24 @@ public class InfoTest
                     """
             )
     );
+    
+    @Test
+    public void testTypeClasses()
+    {
+        Set<Class<?>> expected = Set.of(
+                VacantType.class,
+                PlantType.class,
+                SelfConnectionType.class,
+                BuildingType.class,
+                CrossConnectionType.class
+        );
+        Set<Class<?>> actual = EXPECTED.keySet()
+                .stream()
+                .map(Object::getClass)
+                .collect(Collectors.toSet());
+        
+        assertEquals(expected, actual);
+    }
     
     @ParameterizedTest
     @MethodSource("types")

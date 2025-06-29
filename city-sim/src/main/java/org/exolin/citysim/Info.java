@@ -56,47 +56,52 @@ public class Info
     public static void typeInfo(Printer out)
     {
         StructureType.types().forEach((StructureType s) -> {
-            out.println("==== "+s.getName()+" =====");
-            out.println("Type: "+s.getClass().getSimpleName());
-            
-            Set<? extends StructureVariant> variants = s.getVariants();
-            Objects.requireNonNull(variants);
+            typeInfo(out, s);
+        });
+    }
+    
+    public static void typeInfo(Printer out, StructureType s)
+    {
+        out.println("==== "+s.getName()+" =====");
+        out.println("Type: "+s.getClass().getSimpleName());
 
-            Set<Integer> diffCosts = variants.stream()
-                    .map(v -> s.getBuildingCost(v))
-                    .collect(Collectors.toSet());
+        Set<? extends StructureVariant> variants = s.getVariants();
+        Objects.requireNonNull(variants);
 
-            if(diffCosts.size() == 1)
-            {
-                out.println("Cost: "+formatCost(diffCosts.iterator().next()));
-            }
-            else
-            {
-                out.println("Cost:");
-                variants.forEach(v -> {
-                    out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
-                });
-            }
-            
-            if(s instanceof BuildingType bt)
-                out.println("Zone: "+bt.getZoneType().getName());
-            else if(s instanceof CrossConnectionType cct)
-            {
-                out.println("X-Type: "+cct.getXType().getName());
-                out.println("Y-Type: "+cct.getYType().getName());
-            }
-            else if(s instanceof PlantType tt)
-            {
-                out.println("Count: "+tt.getCount());
-                out.println("Type: "+tt.getType());
-                out.println("IsAlive: "+tt.isAlive());
-            }
-            
-            s.customKeys().forEach(key -> {
-                CustomKey k = (CustomKey)key;
-                Object v = s.getCustom(k, Object.class);
-                out.println(k.getName()+": "+k.formatValue(v));
+        Set<Integer> diffCosts = variants.stream()
+                .map(v -> s.getBuildingCost(v))
+                .collect(Collectors.toSet());
+
+        if(diffCosts.size() == 1)
+        {
+            out.println("Cost: "+formatCost(diffCosts.iterator().next()));
+        }
+        else
+        {
+            out.println("Cost:");
+            variants.forEach(v -> {
+                out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
             });
+        }
+
+        if(s instanceof BuildingType bt)
+            out.println("Zone: "+bt.getZoneType().getName());
+        else if(s instanceof CrossConnectionType cct)
+        {
+            out.println("X-Type: "+cct.getXType().getName());
+            out.println("Y-Type: "+cct.getYType().getName());
+        }
+        else if(s instanceof PlantType tt)
+        {
+            out.println("Count: "+tt.getCount());
+            out.println("Type: "+tt.getType());
+            out.println("IsAlive: "+tt.isAlive());
+        }
+
+        s.customKeys().forEach(key -> {
+            CustomKey k = (CustomKey)key;
+            Object v = s.getCustom(k, Object.class);
+            out.println(k.getName()+": "+k.formatValue(v));
         });
     }
     

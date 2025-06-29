@@ -28,7 +28,7 @@ import org.junit.jupiter.params.provider.MethodSource;
  *
  * @author Thomas
  */
-public class InfoTest
+public class InfoTypeTest
 {
     static
     {

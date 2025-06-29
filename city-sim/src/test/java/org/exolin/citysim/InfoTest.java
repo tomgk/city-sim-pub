@@ -128,6 +128,16 @@ public class InfoTest
                     """
             ),
             Map.entry(
+                    PowerPlants.hydro_plant,
+                    """
+                    ==== Hydro Power =====
+                    Type: BuildingType
+                    Cost: 400
+                    Zone: zone_plants
+                    megaWatt: 20 MW
+                    """
+            ),
+            Map.entry(
                     Vacants.abandoned_middle_2,
                     """
                     ==== destruction/abandoned_middle_2 =====

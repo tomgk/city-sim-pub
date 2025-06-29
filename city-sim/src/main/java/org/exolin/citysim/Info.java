@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.CustomKey;
 import org.exolin.citysim.model.StructureType;
@@ -29,13 +30,17 @@ public class Info
         void println(String str);
     }
     
+    public static Stream<Class> getTypeClasses()
+    {
+        return StructureType.types()
+                .stream()
+                .map(t -> (Class)t.getClass())
+                .distinct();
+    }
+    
     public static void classInfo(Printer out)
     {
-        StructureType.types()
-                .stream()
-                .map(t -> t.getClass())
-                .distinct()
-                .forEach(t -> {
+        getTypeClasses().forEach(t -> {
                     out.println("==== "+t.getSimpleName()+" =====");
                     Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
                     Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);

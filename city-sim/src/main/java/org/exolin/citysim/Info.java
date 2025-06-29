@@ -23,7 +23,7 @@ public class Info
         StructureTypes.init();
     }
     
-    public static void main(String[] args)
+    public static void classInfo()
     {
         System.out.println("--- C L A S S E S ---");
         
@@ -47,7 +47,10 @@ public class Info
                             .collect(Collectors.joining(!multiType ? ", " : "\n  "))
                     );
                 });
-        
+    }
+    
+    public static void typeInfo()
+    {
         System.out.println("--- T Y P E S ---");
         
         StructureType.types().forEach((StructureType s) -> {
@@ -93,6 +96,12 @@ public class Info
                 System.out.println(k.getName()+": "+k.formatValue(v));
             });
         });
+    }
+    
+    public static void main(String[] args)
+    {
+        classInfo();
+        typeInfo();
     }
 
     private static String formatCost(int cost)

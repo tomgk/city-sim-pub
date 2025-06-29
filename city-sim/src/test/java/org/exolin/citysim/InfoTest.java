@@ -1,8 +1,5 @@
 package org.exolin.citysim;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -22,7 +19,6 @@ import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.fire.FireType;
 import org.exolin.citysim.model.plant.PlantTypeType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -39,7 +35,7 @@ public class InfoTest
         StructureTypes.init();
     }
     
-    private static class StringPrinter implements Info.Printer
+    private static class StringPrinter implements Printer
     {
         private final StringBuilder out = new StringBuilder();
 
@@ -253,7 +249,7 @@ public class InfoTest
         if(expected == null)
             return;
         
-        String actual = print(out -> Info.typeInfo(out, type));
+        String actual = print(out -> InfoType.typeInfo(out, type));
         assertEquals(expected, actual);
     }
     

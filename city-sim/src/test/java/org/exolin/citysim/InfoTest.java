@@ -3,10 +3,18 @@ package org.exolin.citysim;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.StructureTypes;
+import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
+import org.exolin.citysim.bt.buildings.Parks;
+import org.exolin.citysim.bt.buildings.PowerPlants;
+import org.exolin.citysim.bt.connections.CrossConnections;
+import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.StructureType;
+import org.exolin.citysim.model.plant.PlantTypeType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -44,7 +52,8 @@ public class InfoTest
     @Test
     public void testClassInfo()
     {
-        String expected = """
+        String expected = 
+                        """
                         ==== ZoneType =====
                         Variants: DEFAULT
                         ==== BuildingType =====
@@ -73,6 +82,8 @@ public class InfoTest
                         Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
                         ==== VacantType =====
                         Variants: DEFAULT
+                        ==== PlantType =====
+                        Variants: DEFAULT, LEFT, RIGHT, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT
                         """;
         
         assertEquals(expected, print(Info::classInfo));
@@ -86,6 +97,62 @@ public class InfoTest
                     Type: BuildingType
                     Cost: -
                     Zone: zone_business
+                    """
+            ),
+            Map.entry(
+                    Plants.get(PlantTypeType.TREE, 3),
+                    """
+                    ==== trees_3 =====
+                    Type: PlantType
+                    Cost: 9
+                    Count: 3
+                    Type: TREE
+                    IsAlive: true
+                    """
+            ),
+            Map.entry(
+                    PowerPlants.fusion_plant,
+                    """
+                    ==== Fusion Power =====
+                    Type: BuildingType
+                    Cost: 40000
+                    Zone: zone_plants
+                    megaWatt: 2500 MW
+                    """
+            ),
+            Map.entry(
+                    Vacants.abandoned_middle_2,
+                    """
+                    ==== destruction/abandoned_middle_2 =====
+                    Type: VacantType
+                    Cost: -
+                    """
+            ),
+            Map.entry(
+                    Parks.zoo,
+                    """
+                    ==== parks_zoo =====
+                    Type: BuildingType
+                    Cost: 100
+                    Zone: zone_parks
+                    """
+            ),
+            Map.entry(
+                    CrossConnections.RAIL_STREET,
+                    """
+                    ==== rail_street =====
+                    Type: CrossConnectionType
+                    Cost: -
+                    X-Type: rail
+                    Y-Type: street
+                    """
+            ),
+            Map.entry(
+                    SelfConnections.rail,
+                    """
+                    ==== rail =====
+                    Type: SelfConnectionType
+                    Cost: 25
                     """
             )
     );

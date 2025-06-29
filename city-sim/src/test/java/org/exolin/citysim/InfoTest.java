@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import static org.exolin.citysim.TestUtils.assertEqualSet;
 import org.exolin.citysim.bt.Plants;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.bt.Vacants;
@@ -231,28 +232,6 @@ public class InfoTest
                     """
             )
     );
-    
-    private void assertEqualSet(Set expected, Set actual)
-    {
-        if(expected.equals(actual))
-            return;
-        
-        //expected without actual = what is missing
-        Set missing = new HashSet(expected);
-        missing.removeAll(actual);
-        
-        //actal without expected = tooMuch
-        Set tooMuch = new HashSet(actual);
-        tooMuch.removeAll(expected);
-        
-        List<String> msg = new ArrayList<>();
-        if(!missing.isEmpty())
-            msg.add("missing: "+missing);
-        if(!tooMuch.isEmpty())
-            msg.add("too much: "+tooMuch);
-        
-        fail(String.join("\n", msg));
-    }
     
     @Test
     public void testTypeClasses()

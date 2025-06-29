@@ -155,6 +155,24 @@ public class InfoTest
                     """
             ),
             Map.entry(
+                    CrossConnections.WATER_CIRCUIT,
+                    """
+                    ==== water_circuit =====
+                    Type: CrossConnectionType
+                    Cost: -
+                    X-Type: water
+                    Y-Type: circuit
+                    """
+            ),
+            Map.entry(
+                    SelfConnections.street,
+                    """
+                    ==== street =====
+                    Type: SelfConnectionType
+                    Cost: 10
+                    """
+            ),
+            Map.entry(
                     SelfConnections.rail,
                     """
                     ==== rail =====
@@ -174,6 +192,14 @@ public class InfoTest
                     Zones.business,
                     """
                     ==== zone_business =====
+                    Type: ZoneType
+                    Cost: 5
+                    """
+            ),
+            Map.entry(
+                    Zones.low_business,
+                    """
+                    ==== zone_business_low =====
                     Type: ZoneType
                     Cost: 5
                     """

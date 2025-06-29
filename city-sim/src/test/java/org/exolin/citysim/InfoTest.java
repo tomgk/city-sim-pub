@@ -96,7 +96,7 @@ public class InfoTest
         assertEquals(expected, print(Info::classInfo));
     }
     
-    private static final Map<StructureType<?, ?, ?>, String> EXPECTED = Map.ofEntries(
+    private static final Map<StructureType<?, ?, ?>, String> EXPECTED_TYPEINFO = Map.ofEntries(
             Map.entry(
                     BusinessBuildings.car_cinema,
                     """
@@ -258,7 +258,7 @@ public class InfoTest
     public void testTypeClasses()
     {
         Set<Class> expected = Info.getTypeClasses().collect(Collectors.toSet());
-        Set<Class<?>> actual = EXPECTED.keySet()
+        Set<Class<?>> actual = EXPECTED_TYPEINFO.keySet()
                 .stream()
                 .map(Object::getClass)
                 .collect(Collectors.toSet());
@@ -270,7 +270,7 @@ public class InfoTest
     @MethodSource("types")
     public void testTypeInfo(StructureType<?, ?, ?> type)
     {
-        String expected = EXPECTED.get(type);
+        String expected = EXPECTED_TYPEINFO.get(type);
         if(expected == null)
             return;
         

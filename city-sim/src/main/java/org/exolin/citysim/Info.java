@@ -26,13 +26,11 @@ public class Info
     
     interface Printer
     {
-        void println(String out);
+        void println(String str);
     }
     
     public static void classInfo(Printer out)
     {
-        out.println("--- C L A S S E S ---");
-        
         StructureType.types()
                 .stream()
                 .map(t -> t.getClass())
@@ -57,8 +55,6 @@ public class Info
     
     public static void typeInfo(Printer out)
     {
-        out.println("--- T Y P E S ---");
-        
         StructureType.types().forEach((StructureType s) -> {
             out.println("==== "+s.getName()+" =====");
             out.println("Type: "+s.getClass().getSimpleName());
@@ -107,7 +103,11 @@ public class Info
     public static void main(String[] args)
     {
         Printer out = System.out::println;
+        
+        out.println("--- C L A S S E S ---");
         classInfo(out);
+        
+        out.println("--- T Y P E S ---");
         typeInfo(out);
     }
 

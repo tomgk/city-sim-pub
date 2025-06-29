@@ -1,8 +1,16 @@
 package org.exolin.citysim;
 
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
+import org.exolin.citysim.bt.StructureTypes;
+import org.exolin.citysim.bt.buildings.BusinessBuildings;
+import org.exolin.citysim.model.StructureType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 /**
  *
@@ -10,6 +18,11 @@ import org.junit.jupiter.api.Test;
  */
 public class InfoTest
 {
+    static
+    {
+        StructureTypes.init();
+    }
+    
     private static class StringPrinter implements Info.Printer
     {
         private final StringBuilder out = new StringBuilder();
@@ -63,5 +76,41 @@ public class InfoTest
                         """;
         
         assertEquals(expected, print(Info::classInfo));
+    }
+    
+    private static final Map<StructureType<?, ?, ?>, String> EXPECTED = Map.ofEntries(
+            Map.entry(
+                    BusinessBuildings.car_cinema,
+                    """
+                    ==== business_car-cinema =====
+                    Type: BuildingType
+                    Cost: -
+                    Zone: zone_business
+                    """
+            )
+    );
+    
+    @ParameterizedTest
+    @MethodSource("types")
+    public void testTypeInfo(StructureType<?, ?, ?> type)
+    {
+        String expected = EXPECTED.get(type);
+        if(expected == null)
+            return;
+        
+        String actual = print(out -> Info.typeInfo(out, type));
+        assertEquals(expected, actual);
+    }
+    
+    public static void main(String[] args)
+    {
+        System.out.println(StructureType.types());
+    }
+    
+    private static Stream<Arguments> types()
+    {
+        return StructureType.types()
+                .stream()
+                .map(Arguments::of);
     }
 }

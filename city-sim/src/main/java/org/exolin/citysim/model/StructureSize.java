@@ -18,6 +18,6 @@ public enum StructureSize
     @Override
     public String toString()
     {
-        return StructureSize.class.getSimpleName()+"["+toInteger()+"]";
+        return StructureSize.class.getSimpleName()+"["+toInteger()+"x"+toInteger()+"]";
     }
 }

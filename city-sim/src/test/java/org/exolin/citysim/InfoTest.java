@@ -18,17 +18,10 @@ import org.exolin.citysim.bt.buildings.PowerPlants;
 import org.exolin.citysim.bt.connections.CrossConnections;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.building.BuildingType;
-import org.exolin.citysim.model.building.vacant.VacantType;
-import org.exolin.citysim.model.connection.cross.CrossConnectionType;
-import org.exolin.citysim.model.connection.regular.SelfConnectionType;
 import org.exolin.citysim.model.fire.FireType;
-import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
-import org.exolin.citysim.model.zone.ZoneType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -68,10 +61,14 @@ public class InfoTest
     {
         String expected = 
                         """
-                        ==== ZoneType =====
-                        Variants: DEFAULT
                         ==== BuildingType =====
                         Variants: DEFAULT, ROTATED
+                        ==== CrossConnectionType =====
+                        Variants: DEFAULT
+                        ==== FireType =====
+                        Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
+                        ==== PlantType =====
+                        Variants: DEFAULT, LEFT, RIGHT, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT
                         ==== SelfConnectionType =====
                         Variants:
                           StraightConnectionVariant.CONNECT_X
@@ -90,14 +87,10 @@ public class InfoTest
                           End.SOUTH
                           End.EAST
                           Unconnected.UNCONNECTED
-                        ==== CrossConnectionType =====
-                        Variants: DEFAULT
-                        ==== FireType =====
-                        Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
                         ==== VacantType =====
                         Variants: DEFAULT
-                        ==== PlantType =====
-                        Variants: DEFAULT, LEFT, RIGHT, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT
+                        ==== ZoneType =====
+                        Variants: DEFAULT
                         """;
         
         assertEquals(expected, print(Info::classInfo));

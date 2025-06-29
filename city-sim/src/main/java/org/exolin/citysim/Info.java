@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.PrintStream;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +34,8 @@ public class Info
         return StructureType.types()
                 .stream()
                 .map(t -> (Class)t.getClass())
-                .distinct();
+                .distinct()
+                .sorted(Comparator.comparing(Class::getSimpleName));
     }
     
     public static void classInfo(Printer out)

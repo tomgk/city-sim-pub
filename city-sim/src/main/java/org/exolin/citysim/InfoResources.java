@@ -43,17 +43,17 @@ public class InfoResources
         
         Set<E> variants = s.getVariants();
         if(variants.size() == 1)
-            System.out.println("Image: "+toString(s.getImage(s.getVariantForDefaultImage())));
+            out.println("Image: "+toString(s.getImage(s.getVariantForDefaultImage())));
         else
         {
             String d = s.getVariantForDefaultImage().name();
             if(!d.equals(DEFAULT_NAME))
-                System.out.println("DefaultImage: "+d);
+                out.println("DefaultImage: "+d);
             
-            System.out.println("Image:");
+            out.println("Image:");
             variants.forEach(v -> {
                 Animation a = s.getImage(v);
-                System.out.println(" - "+v.name()+": "+toString(a));
+                out.println(" - "+v.name()+": "+toString(a));
             });
         }
     }

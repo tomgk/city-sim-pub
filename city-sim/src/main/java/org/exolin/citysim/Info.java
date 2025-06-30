@@ -1,12 +1,6 @@
 package org.exolin.citysim;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.exolin.citysim.bt.StructureTypes;
-import org.exolin.citysim.model.StructureType;
-import org.exolin.citysim.model.StructureVariant;
 
 /**
  *

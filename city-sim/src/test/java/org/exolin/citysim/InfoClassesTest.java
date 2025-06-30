@@ -1,8 +1,5 @@
 package org.exolin.citysim;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import static org.exolin.citysim.TestUtils.assertEqualSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 

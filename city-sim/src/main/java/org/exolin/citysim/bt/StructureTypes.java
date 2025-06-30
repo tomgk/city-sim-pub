@@ -32,7 +32,6 @@ public class StructureTypes
             CrossConnections.class,
             Zones.class,
             PowerPlants.class,
-            PowerPlants.class,
             FireType.class,
             Vacants.class,
             Plants.class

@@ -37,10 +37,10 @@ public class SelfConnections
             createUnanimated("street/street_t_3"),
             createUnanimated("street/street_t_4"),
             
-            createUnanimated("street/street_1"),//end 1
-            createUnanimated("street/street_2"),//end 2
-            createUnanimated("street/street_1"),//end 3
-            createUnanimated("street/street_2"),//end 4
+            createUnanimated("street/street_end_1"),
+            createUnanimated("street/street_end_2"),
+            createUnanimated("street/street_end_3"),
+            createUnanimated("street/street_end_4"),
             createUnanimated("street/street_1")//unconnected
             ), _1, 10);
     

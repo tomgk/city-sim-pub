@@ -35,6 +35,7 @@ public class StructureTypes
             PowerPlants.class,
             FireType.class,
             Vacants.class,
+            Plants.class
         };
         
         for(Class<?> clazz: classes)

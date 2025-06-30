@@ -1,6 +1,10 @@
 package org.exolin.citysim;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.StructureParameters;
@@ -51,9 +55,13 @@ public class InfoResources
                 out.println("DefaultImage: "+d);
             
             out.println("Image:");
-            variants.forEach(v -> {
-                Animation a = s.getImage(v);
-                out.println(" - "+v.name()+": "+toString(a));
+            
+            Map<Animation, List<StructureVariant>> vars = 
+                variants.stream().collect(Collectors.groupingBy(v -> s.getImage(v), LinkedHashMap::new, Collectors.toList()));
+            
+            vars.forEach((a, v) -> {
+                String names = v.stream().map(StructureVariant::name).collect(Collectors.joining("/"));
+                out.println(" - "+names+": "+toString(a));
             });
         }
     }

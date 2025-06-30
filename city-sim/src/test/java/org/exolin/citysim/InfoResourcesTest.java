@@ -40,8 +40,7 @@ public class InfoResourcesTest
                     """
                     ==== business_car-cinema =====
                     Image:
-                     - DEFAULT: business/car-cinema, 9 f, 1000 ms/f
-                     - ROTATED: business/car-cinema, 9 f, 1000 ms/f
+                     - DEFAULT/ROTATED: business/car-cinema, 9 f, 1000 ms/f
                     """
             ),
             Map.entry(
@@ -65,8 +64,7 @@ public class InfoResourcesTest
                     """
                     ==== Fusion Power =====
                     Image:
-                     - DEFAULT: plants/fusion_plant
-                     - ROTATED: plants/fusion_plant
+                     - DEFAULT/ROTATED: plants/fusion_plant
                     """
             ),
             Map.entry(
@@ -90,8 +88,7 @@ public class InfoResourcesTest
                     """
                     ==== parks_zoo =====
                     Image:
-                     - DEFAULT: parks/zoo
-                     - ROTATED: parks/zoo
+                     - DEFAULT/ROTATED: parks/zoo
                     """
             ),
             Map.entry(
@@ -114,8 +111,8 @@ public class InfoResourcesTest
                     ==== street =====
                     DefaultImage: CONNECT_X
                     Image:
-                     - CONNECT_X: street/street_1
-                     - CONNECT_Y: street/street_2
+                     - CONNECT_X/NORTH/SOUTH/UNCONNECTED: street/street_1
+                     - CONNECT_Y/WEST/EAST: street/street_2
                      - X_INTERSECTION: street/street_x_intersection, 5 f, 1000 ms/f
                      - CURVE_1: street/street_curve_1
                      - CURVE_2: street/street_curve_2
@@ -125,11 +122,6 @@ public class InfoResourcesTest
                      - T_INTERSECTION_2: street/street_t_2
                      - T_INTERSECTION_3: street/street_t_3
                      - T_INTERSECTION_4: street/street_t_4
-                     - NORTH: street/street_1
-                     - WEST: street/street_2
-                     - SOUTH: street/street_1
-                     - EAST: street/street_2
-                     - UNCONNECTED: street/street_1
                     """
             ),
             Map.entry(
@@ -138,8 +130,8 @@ public class InfoResourcesTest
                     ==== rail =====
                     DefaultImage: CONNECT_X
                     Image:
-                     - CONNECT_X: rail/rail_1
-                     - CONNECT_Y: rail/rail_2
+                     - CONNECT_X/NORTH/SOUTH/UNCONNECTED: rail/rail_1
+                     - CONNECT_Y/WEST/EAST: rail/rail_2
                      - X_INTERSECTION: rail/rail_x_intersection
                      - CURVE_1: rail/rail_curve_1
                      - CURVE_2: rail/rail_curve_2
@@ -149,11 +141,6 @@ public class InfoResourcesTest
                      - T_INTERSECTION_2: rail/rail_t_2
                      - T_INTERSECTION_3: rail/rail_t_3
                      - T_INTERSECTION_4: rail/rail_t_4
-                     - NORTH: rail/rail_1
-                     - WEST: rail/rail_2
-                     - SOUTH: rail/rail_1
-                     - EAST: rail/rail_2
-                     - UNCONNECTED: rail/rail_1
                     """
             ),
             Map.entry(

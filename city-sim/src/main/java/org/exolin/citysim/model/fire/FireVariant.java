@@ -1,5 +1,6 @@
 package org.exolin.citysim.model.fire;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -51,7 +52,7 @@ public class FireVariant implements StructureVariant
     public static Set<FireVariant> values()
     {
         //TODO: no copy?
-        return Set.copyOf(VALUES);
+        return new LinkedHashSet<>(VALUES);
     }
 
     public static FireVariant valueOf(String name)

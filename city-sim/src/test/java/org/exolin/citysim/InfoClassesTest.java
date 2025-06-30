@@ -1,5 +1,6 @@
 package org.exolin.citysim;
 
+import org.exolin.citysim.bt.StructureTypes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,11 @@ import org.junit.jupiter.api.Test;
  */
 public class InfoClassesTest
 {
+    static
+    {
+        StructureTypes.init();
+    }
+    
     @Test
     public void testClassInfo()
     {

@@ -53,6 +53,8 @@ public class InfoType
                 out.println("  "+v.name()+": "+formatCost(s.getBuildingCost(v))); 
             });
         }
+        
+        out.println("Size: "+s.getSize().getSizeString());
 
         if(s instanceof BuildingType bt)
             out.println("Zone: "+bt.getZoneType().getName());

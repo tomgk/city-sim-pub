@@ -15,9 +15,14 @@ public enum StructureSize
     
     public static final int MAX = values().length;
 
+    public String getSizeString()
+    {
+        return toInteger()+"x"+toInteger();
+    }
+    
     @Override
     public String toString()
     {
-        return StructureSize.class.getSimpleName()+"["+toInteger()+"x"+toInteger()+"]";
+        return StructureSize.class.getSimpleName()+"["+getSizeString()+"]";
     }
 }

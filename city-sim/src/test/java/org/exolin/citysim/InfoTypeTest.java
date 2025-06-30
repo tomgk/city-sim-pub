@@ -42,6 +42,7 @@ public class InfoTypeTest
                     ==== business_car-cinema =====
                     Type: BuildingType
                     Cost: -
+                    Size: 3x3
                     Zone: zone_business
                     """
             ),
@@ -51,6 +52,7 @@ public class InfoTypeTest
                     ==== trees_3 =====
                     Type: PlantType
                     Cost: 9
+                    Size: 1x1
                     Count: 3
                     Type: TREE
                     IsAlive: true
@@ -62,6 +64,7 @@ public class InfoTypeTest
                     ==== Fusion Power =====
                     Type: BuildingType
                     Cost: 40000
+                    Size: 4x4
                     Zone: zone_plants
                     megaWatt: 2500 MW
                     """
@@ -72,6 +75,7 @@ public class InfoTypeTest
                     ==== Hydro Power =====
                     Type: BuildingType
                     Cost: 400
+                    Size: 1x1
                     Zone: zone_plants
                     megaWatt: 20 MW
                     """
@@ -82,6 +86,7 @@ public class InfoTypeTest
                     ==== destruction/abandoned_middle_2 =====
                     Type: VacantType
                     Cost: -
+                    Size: 2x2
                     """
             ),
             Map.entry(
@@ -90,6 +95,7 @@ public class InfoTypeTest
                     ==== parks_zoo =====
                     Type: BuildingType
                     Cost: 100
+                    Size: 4x4
                     Zone: zone_parks
                     """
             ),
@@ -99,6 +105,7 @@ public class InfoTypeTest
                     ==== rail_street =====
                     Type: CrossConnectionType
                     Cost: -
+                    Size: 1x1
                     X-Type: rail
                     Y-Type: street
                     """
@@ -109,6 +116,7 @@ public class InfoTypeTest
                     ==== water_circuit =====
                     Type: CrossConnectionType
                     Cost: -
+                    Size: 1x1
                     X-Type: water
                     Y-Type: circuit
                     """
@@ -119,6 +127,7 @@ public class InfoTypeTest
                     ==== street =====
                     Type: SelfConnectionType
                     Cost: 10
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -127,6 +136,7 @@ public class InfoTypeTest
                     ==== rail =====
                     Type: SelfConnectionType
                     Cost: 25
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -135,6 +145,7 @@ public class InfoTypeTest
                     ==== fire =====
                     Type: FireType
                     Cost: -
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -143,6 +154,7 @@ public class InfoTypeTest
                     ==== zone_business =====
                     Type: ZoneType
                     Cost: 5
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -151,6 +163,7 @@ public class InfoTypeTest
                     ==== zone_business_low =====
                     Type: ZoneType
                     Cost: 5
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -159,6 +172,7 @@ public class InfoTypeTest
                     ==== zone_parks =====
                     Type: ZoneType
                     Cost: -
+                    Size: 1x1
                     """
             ),
             Map.entry(
@@ -167,6 +181,7 @@ public class InfoTypeTest
                     ==== zone_plants =====
                     Type: ZoneType
                     Cost: -
+                    Size: 1x1
                     """
             )
     );

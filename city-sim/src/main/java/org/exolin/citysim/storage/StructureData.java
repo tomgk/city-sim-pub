@@ -40,7 +40,7 @@ public abstract class StructureData
     @JsonProperty
     private final Optional<String> variant;
     
-    private static final String DEFAULT_NAME = "DEFAULT";
+    public static final String DEFAULT_NAME = "DEFAULT";
 
     @JsonCreator
     public StructureData(@JsonProperty("type") String type,

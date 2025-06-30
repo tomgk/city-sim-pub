@@ -14,6 +14,7 @@ import org.exolin.citysim.model.building.BuildingType;
 import org.exolin.citysim.model.connection.cross.CrossConnectionType;
 import static org.exolin.citysim.model.fire.FireVariant.V1;
 import org.exolin.citysim.model.plant.PlantType;
+import static org.exolin.citysim.storage.StructureData.DEFAULT_NAME;
 
 /**
  *
@@ -48,7 +49,10 @@ public class InfoResources
             System.out.println("Image: "+toString(s.getImage(s.getVariantForDefaultImage())));
         else
         {
-            System.out.println("DefaultImage: "+s.getVariantForDefaultImage().name());
+            String d = s.getVariantForDefaultImage().name();
+            if(!d.equals(DEFAULT_NAME))
+                System.out.println("DefaultImage: "+d);
+            
             System.out.println("Image:");
             variants.forEach(v -> {
                 Animation a = s.getImage(v);

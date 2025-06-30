@@ -21,7 +21,7 @@ public class SelfConnections
 {
     private static final List<SelfConnectionType> VALUES = new ArrayList<>();
     
-    public static final SelfConnectionType street = createTransportType("street", List.of(
+    public static final SelfConnectionType street = createAreaType("street", List.of(
             createUnanimated("street/street_1"),
             createUnanimated("street/street_2"),
             
@@ -35,7 +35,14 @@ public class SelfConnections
             createUnanimated("street/street_t_1"),
             createUnanimated("street/street_t_2"),
             createUnanimated("street/street_t_3"),
-            createUnanimated("street/street_t_4")), _1, 10);
+            createUnanimated("street/street_t_4"),
+            
+            createUnanimated("street/street_1"),//end 1
+            createUnanimated("street/street_2"),//end 2
+            createUnanimated("street/street_1"),//end 3
+            createUnanimated("street/street_2"),//end 4
+            createUnanimated("street/street_1")//unconnected
+            ), _1, 10);
     
     public static final SelfConnectionType rail = createTransportType("rail", List.of(
             createUnanimated("rail/rail_1"),
@@ -117,7 +124,9 @@ public class SelfConnections
     
     private static SelfConnectionType createAreaType(String name, List<Animation> variants, StructureSize size, int cost)
     {
-        return new SelfConnectionType(name, variants, size, cost, XIntersection.X_INTERSECTION);
+        SelfConnectionType t = new SelfConnectionType(name, variants, size, cost, XIntersection.X_INTERSECTION);
+        VALUES.add(t);
+        return t;
     }
 
     static void init()

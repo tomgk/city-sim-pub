@@ -12,6 +12,6 @@ public class SelfConnectionsTest
     @Test
     public void testCount()
     {
-        assertEquals(3, SelfConnections.values().size());
+        assertEquals(4, SelfConnections.values().size());
     }
 }

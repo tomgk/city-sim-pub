@@ -109,10 +109,10 @@ public class InfoResourcesTest
                     SelfConnections.street,
                     """
                     ==== street =====
-                    DefaultImage: CONNECT_X
+                    DefaultImage: X_INTERSECTION
                     Image:
-                     - CONNECT_X/NORTH/SOUTH/UNCONNECTED: street/street_1
-                     - CONNECT_Y/WEST/EAST: street/street_2
+                     - CONNECT_X: street/street_1
+                     - CONNECT_Y: street/street_2
                      - X_INTERSECTION: street/street_x_intersection, 5 f, 1000 ms/f
                      - CURVE_1: street/street_curve_1
                      - CURVE_2: street/street_curve_2
@@ -122,6 +122,11 @@ public class InfoResourcesTest
                      - T_INTERSECTION_2: street/street_t_2
                      - T_INTERSECTION_3: street/street_t_3
                      - T_INTERSECTION_4: street/street_t_4
+                     - NORTH: street/street_1
+                     - WEST: street/street_2
+                     - SOUTH: street/street_1
+                     - EAST: street/street_2
+                     - UNCONNECTED: street/street_1
                     """
             ),
             Map.entry(

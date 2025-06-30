@@ -122,10 +122,10 @@ public class InfoResourcesTest
                      - T_INTERSECTION_2: street/street_t_2
                      - T_INTERSECTION_3: street/street_t_3
                      - T_INTERSECTION_4: street/street_t_4
-                     - NORTH: street/street_1
-                     - WEST: street/street_2
-                     - SOUTH: street/street_1
-                     - EAST: street/street_2
+                     - NORTH: street/street_end_1
+                     - WEST: street/street_end_2
+                     - SOUTH: street/street_end_3
+                     - EAST: street/street_end_4
                      - UNCONNECTED: street/street_1
                     """
             ),

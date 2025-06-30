@@ -102,9 +102,14 @@ public class Animation
         return fileNames.get(getFrame(time));
     }
     
+    public boolean isUnanimated()
+    {
+        return fileNames.size() == 1;
+    }
+    
     public String getUnaminatedFileName()
     {
-        if(fileNames.size() != 1)
+        if(!isUnanimated())
             throw new IllegalStateException("not an unanimation");
         
         return fileNames.getFirst();

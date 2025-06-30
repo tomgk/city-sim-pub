@@ -59,6 +59,7 @@ public class Animation
         return new Animation(name, fileNames, images, animationSpeed);
     }
     
+    //TODO: better name, currently sounds like rotating the images instead of just shifting frames
     public Animation createRotated(String name, int distance)
     {
         return new Animation(

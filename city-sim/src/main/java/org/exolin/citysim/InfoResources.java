@@ -56,6 +56,7 @@ public class InfoResources
             
             out.println("Image:");
             
+            //find variants that use the same animation
             Map<Animation, List<StructureVariant>> vars;
             vars = variants.stream()
                     .collect(

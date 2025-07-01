@@ -56,8 +56,15 @@ public class InfoResources
             
             out.println("Image:");
             
-            Map<Animation, List<StructureVariant>> vars = 
-                variants.stream().collect(Collectors.groupingBy(v -> s.getImage(v), LinkedHashMap::new, Collectors.toList()));
+            Map<Animation, List<StructureVariant>> vars;
+            vars = variants.stream()
+                    .collect(
+                            Collectors.groupingBy(
+                                    v -> s.getImage(v),
+                                    LinkedHashMap::new,
+                                    Collectors.toList()
+                            )
+                    );
             
             vars.forEach((a, v) -> {
                 String names = v.stream().map(StructureVariant::name).collect(Collectors.joining("/"));

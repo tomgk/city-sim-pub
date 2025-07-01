@@ -52,6 +52,6 @@ public class InfoClassesTest
                         Variants: DEFAULT
                         """;
         
-        assertEquals(expected, StringPrinter.print(InfoClasses::classInfo));
+        assertEquals(expected, StringPrinter.toString(InfoClasses::classInfo));
     }
 }

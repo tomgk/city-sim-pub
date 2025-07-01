@@ -222,7 +222,7 @@ public class InfoResourcesTest
         if(expected == null)
             return;
         
-        String actual = StringPrinter.print(out -> InfoResources.resourceInfo(out, type));
+        String actual = StringPrinter.toString(out -> InfoResources.resourceInfo(out, type));
         assertEquals(expected, actual);
     }
     

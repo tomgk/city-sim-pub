@@ -205,7 +205,7 @@ public class InfoTypeTest
         if(expected == null)
             return;
         
-        String actual = StringPrinter.print(out -> InfoType.typeInfo(out, type));
+        String actual = StringPrinter.toString(out -> InfoType.typeInfo(out, type));
         assertEquals(expected, actual);
     }
     

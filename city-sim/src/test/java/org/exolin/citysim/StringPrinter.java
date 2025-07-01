@@ -16,7 +16,7 @@ public class StringPrinter implements Printer
         out.append(str).append("\n");
     }
         
-    public static String print(Consumer<StringPrinter> out)
+    public static String toString(Consumer<StringPrinter> out)
     {
         StringPrinter p = new StringPrinter();
         out.accept(p);

@@ -751,32 +751,33 @@ public final class World implements BuildingMap
                 newHints.add("No electricity @ "+s.getX()+"/"+s.getY());
         }
         
-        updateHints(newHints);
+        List<String> oldHints = hints;
+        hints = newHints;
+        listChanged(PROPERTY_HINTS, oldHints, newHints);
     }
     
-    private void updateHints(List<String> newHints)
+    private void listChanged(String name, List<String> oldValues, List<String> newValues)
     {
-        for(String n : newHints)
+        for(String n : newValues)
         {
             //not in previous ones => new
-            if(!hints.contains(n))
+            if(!oldValues.contains(n))
             {
                 System.out.println("[NEW HINT] "+n);
-                added(PROPERTY_HINTS, n);
+                added(name, n);
             }
         }
         
-        for(String n : hints)
+        for(String n : oldValues)
         {
             //not in current ones => removed
-            if(!newHints.contains(n))
+            if(!newValues.contains(n))
             {
                 System.out.println("[REM HINT] "+n);
-                removed(PROPERTY_HINTS, n);
+                removed(name, n);
             }
         }
         
-        hints = newHints;
-        changed(PROPERTY_HINTS, hints);
+        changed(name, oldValues);
     }
 }

@@ -492,6 +492,7 @@ public final class World implements BuildingMap
         updateStats();
         updateAfterTick0(ticks, passedTicks);
         updateStats();
+        updateHints();
         modification.afterUpdate(this, ticks, passedTicks);
     }
     
@@ -655,6 +656,13 @@ public final class World implements BuildingMap
         return needElectricity ? hasElectricity(s) : true;
     }
     
+    //returns true if zone or a zoned building
+    public boolean isBuildingRelated(Structure<?, ?, ?, ?> s)
+    {
+        //it is if the zone is building related
+        return s.getZoneType(true).map(ZoneType::isUserPlaceableZone).orElse(false);
+    }
+    
     private static final List<GenericWorldListener> listeners = new ArrayList<>();
     
     public void addListener(GenericWorldListener listener)
@@ -682,6 +690,16 @@ public final class World implements BuildingMap
     {
         //System.out.println("["+listeners.size()+"] Changed "+name+"."+name+"="+newValue);
         listeners.stream().forEach(l -> l.onChanged(name, newValue));
+    }
+    
+    private void added(String name, Object newItem)
+    {
+        listeners.stream().forEach(l -> l.onAdded(name, newItem));
+    }
+    
+    private void removed(String name, Object removedItem)
+    {
+        listeners.stream().forEach(l -> l.onRemoved(name, removedItem));
     }
 
     /**
@@ -719,5 +737,41 @@ public final class World implements BuildingMap
     public void onUpdated(Plant t)
     {
         onChange();
+    }
+    
+    private List<String> hints = new ArrayList<>();
+
+    private void updateHints()
+    {
+        List<String> newHints = new ArrayList<>();
+        
+        for(Structure s : structures)
+        {
+            if(isBuildingRelated(s) && !hasElectricity(s))
+                newHints.add("No electricity @ "+s.getX()+"/"+s.getY());
+        }
+        
+        for(String n : newHints)
+        {
+            //not in previous ones => new
+            if(!hints.contains(n))
+            {
+                System.out.println("[NEW HINT] "+n);
+                added(PROPERTY_HINTS, n);
+            }
+        }
+        
+        for(String n : hints)
+        {
+            //not in current ones => removed
+            if(!newHints.contains(n))
+            {
+                System.out.println("[REM HINT] "+n);
+                removed(PROPERTY_HINTS, n);
+            }
+        }
+        
+        hints = newHints;
+        changed(PROPERTY_HINTS, hints);
     }
 }

@@ -23,7 +23,24 @@ public interface WorldListener
     default public void onLastChangeTime(LocalTime localTime){}
     default public void onElectricityCoverageChanged(String string){}
 
+    /**
+     * gets called when the hints change, even if just one item got added/removed
+     * 
+     * @param list new list
+     */
     default public void onHintsChanged(List<String> list){}
+    
+    /**
+     * Gets called when a hint gets added, even if the whole list changes.
+     * 
+     * @param hint the new hint
+     */
     default public void onHintAdded(String hint){}
+    
+    /**
+     * Gets called when a hint gets deleted, even if the whole list changes.
+     * 
+     * @param hint 
+     */
     default public void onHintRemoved(String hint){}
 }

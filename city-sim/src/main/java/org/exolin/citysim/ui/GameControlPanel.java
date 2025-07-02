@@ -170,6 +170,7 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
         prevView = new javax.swing.JLabel();
         nextView = new javax.swing.JLabel();
         debugLabel = new javax.swing.JLabel();
+        hintsLabel = new javax.swing.JLabel();
 
         resetPositionLabel.setText("Reset position");
         resetPositionLabel.addMouseListener(new java.awt.event.MouseAdapter()
@@ -335,6 +336,15 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
             }
         });
 
+        hintsLabel.setText("Hints");
+        hintsLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                hintsLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -374,14 +384,15 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
                     .addComponent(zoomOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(keyMappingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                        .addComponent(hintsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(loadLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addComponent(debugLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                         .addComponent(saveLabel)))
                 .addContainerGap())
         );
@@ -402,7 +413,9 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
                                     .addComponent(saveLabel)
                                     .addComponent(debugLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(loadLabel))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(loadLabel)
+                                    .addComponent(hintsLabel)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(resetPositionLabel)
@@ -531,6 +544,12 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
         d.setVisible(true);
     }//GEN-LAST:event_debugLabelMouseClicked
 
+    private void hintsLabelMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_hintsLabelMouseClicked
+    {//GEN-HEADEREND:event_hintsLabelMouseClicked
+        HintDialog d = new HintDialog(SwingUtilities.getWindowAncestor(this));
+        d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_hintsLabelMouseClicked
+
     private SimulationSpeed selectSpeedLabel(JLabel selected)
     {
         SimulationSpeed tickFactor = labelToSpeed.get(selected);
@@ -545,6 +564,7 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel debugLabel;
+    private javax.swing.JLabel hintsLabel;
     private javax.swing.JLabel keyMappingLabel;
     private javax.swing.JLabel nextView;
     private javax.swing.JLabel pauseLabel;

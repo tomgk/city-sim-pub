@@ -751,6 +751,11 @@ public final class World implements BuildingMap
                 newHints.add("No electricity @ "+s.getX()+"/"+s.getY());
         }
         
+        updateHints(newHints);
+    }
+    
+    private void updateHints(List<String> newHints)
+    {
         for(String n : newHints)
         {
             //not in previous ones => new

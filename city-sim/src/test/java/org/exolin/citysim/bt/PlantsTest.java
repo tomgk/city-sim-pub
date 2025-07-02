@@ -4,7 +4,11 @@ import java.util.List;
 import org.exolin.citysim.model.plant.PlantType;
 import org.exolin.citysim.model.plant.PlantTypeType;
 import org.exolin.citysim.model.plant.PlantVariant;
+import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -85,5 +89,43 @@ public class PlantsTest
                 "grass_dead_6",
                 "grass_dead_7"
         ), getFileNames(Plants.getDead(PlantTypeType.GRASS)));
+    }
+    
+    @Test
+    public void get_Tree()
+    {
+        for(int i=1;i<=7;++i)
+        {
+            PlantType pt = Plants.get(PlantTypeType.TREE, i);
+            assertEquals(PlantTypeType.TREE, pt.getType());
+            assertEquals(i, pt.getCount());
+            assertTrue(pt.isAlive());
+        }
+    }
+    
+    @Test
+    public void get_Grass()
+    {
+        for(int i=1;i<=7;++i)
+        {
+            PlantType pt = Plants.get(PlantTypeType.GRASS, i);
+            assertEquals(PlantTypeType.GRASS, pt.getType());
+            assertEquals(i, pt.getCount());
+            assertTrue(pt.isAlive());
+        }
+    }
+    
+    @Test
+    public void get_below()
+    {
+        var e = assertThrows(IllegalArgumentException.class, () -> Plants.get(PlantTypeType.TREE, 0));
+        assertEquals("0 out of range [1..7]", e.getMessage());
+    }
+    
+    @Test
+    public void get_above()
+    {
+        var e = assertThrows(IllegalArgumentException.class, () -> Plants.get(PlantTypeType.TREE, 8));
+        assertEquals("8 out of range [1..7]", e.getMessage());
     }
 }

@@ -57,7 +57,12 @@ public class Plants
     
     public static PlantType get(PlantTypeType type, int count)
     {
-        return getx(type).get(count-1);
+        var x = getx(type);
+        try{
+            return x.get(count-1);
+        }catch(ArrayIndexOutOfBoundsException e){
+            throw new IllegalArgumentException(count+" out of range [1.."+x.size()+"]");
+        }
     }
     
     public static List<PlantType> getx(PlantTypeType type)

@@ -61,6 +61,18 @@ public class WorldHolderTest
             Entry<String, Object> e = expected.pop();
             assertEquals(e, Map.entry(name, value));
         }
+
+        @Override
+        public void onAdded(String name, Object item)
+        {
+            fail();
+        }
+
+        @Override
+        public void onRemoved(String name, Object item)
+        {
+            fail();
+        }
         
         public void setExpected(Entry<String, Object>...entries)
         {

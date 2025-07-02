@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.RCI;
 import org.exolin.citysim.model.World;
+import org.exolin.citysim.model.WorldListener;
 import org.exolin.citysim.model.Worlds;
 import org.exolin.citysim.ui.Actions;
 import org.exolin.citysim.ui.GameControlPanel;
@@ -123,9 +124,13 @@ public class Main
             }
         }, Optional.of(bw));
         f.add(gp, BorderLayout.CENTER);
-        gp.getWorldHolder().addWorldListener((name, value) -> {
-            if(name.equals(World.PROPERTY_CITY_NAME))
-                f.setTitle(getFrameTitle((String)value));
+        gp.getWorldHolder().addWorldListener(new WorldListener()
+        {
+            @Override
+            public void onCityNameChanged(String cityName)
+            {
+                f.setTitle(getFrameTitle(cityName));
+            }
         });
         
         for(Map.Entry<String, List<Action>> e: Actions.getActions(gp.getWorldHolder(), debugMode).entrySet())

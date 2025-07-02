@@ -12,7 +12,29 @@ import org.exolin.citysim.model.debug.Value;
  */
 public interface GenericWorldListener
 {
+    /**
+     * A property changes.
+     * 
+     * @param name name of the property
+     * @param value new value of the property
+     */
     public void onChanged(String name, Object value);
+    
+    /**
+     * An item has been added to a list property.
+     * 
+     * @param name the name of the property
+     * @param item the new item
+     */
+    public void onAdded(String name, Object item);
+    
+    /**
+     * An item has been removed from a list property.
+     * 
+     * @param name the name of the property
+     * @param item the removed item
+     */
+    public void onRemoved(String name, Object item);
 
     default public void onAllChanged(List<Map.Entry<String, Value<?>>> values)
     {

@@ -596,6 +596,7 @@ public final class World implements BuildingMap
     public static final String PROPERTY_LAST_CHANGE_DATE = createProperty("lastChange.date");
     public static final String PROPERTY_LAST_CHANGE_TIME = createProperty("lastChange.time");
     public static final String PROPERTY_ELECTRICITY_COVERAGE = createProperty("electricityCoverage");
+    public static final String PROPERTY_HINTS = createProperty("hints");
     
     public static List<String> propertyNames()
     {

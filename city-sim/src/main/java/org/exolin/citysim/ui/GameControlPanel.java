@@ -75,7 +75,7 @@ public class GameControlPanel extends javax.swing.JPanel implements ChangeListen
     private final WorldListener worldListener = new WorldListener()
     {
         @Override
-        public void onSimSpeedChanged(String name, SimulationSpeed simulationSpeed)
+        public void onSimSpeedChanged(SimulationSpeed simulationSpeed)
         {
             setSpeed(simulationSpeed);
         }

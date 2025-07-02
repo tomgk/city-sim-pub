@@ -60,6 +60,11 @@ public final class DebugTableModel implements TableModel, GenericWorldListener
     @Override
     public void onChanged(String name, Object value)
     {
+        onChanged(name);
+    }
+    
+    private void onChanged(String name)
+    {
         int index = indexes.get(name);
         if(index < 0)
             ErrorDisplay.show(null, new IllegalStateException("unknown "+name));
@@ -72,6 +77,18 @@ public final class DebugTableModel implements TableModel, GenericWorldListener
     {
         setEntries(values);
         fire(new TableModelEvent(this));
+    }
+
+    @Override
+    public void onAdded(String name, Object item)
+    {
+        onChanged(name);
+    }
+
+    @Override
+    public void onRemoved(String name, Object item)
+    {
+        onChanged(name);
     }
     
     @Override

@@ -3,6 +3,7 @@ package org.exolin.citysim.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,33 +24,55 @@ final class WorldListenerAdapter implements GenericWorldListener
     public void onChanged(String name, Object value)
     {
         if(name.equals(World.PROPERTY_CITY_NAME))
-            listener.onCityNameChanged(name, (String)value);
+            listener.onCityNameChanged((String)value);
         else if(name.equals(World.PROPERTY_NEED_ELECTRICITY))
-            listener.onNeedElectricity(name, (Boolean)value);
+            listener.onNeedElectricity((Boolean)value);
         else if(name.equals(World.PROPERTY_MONEY))
-            listener.onMoneyChanged(name, (BigDecimal)value);
+            listener.onMoneyChanged((BigDecimal)value);
         else if(name.equals(World.PROPERTY_SIM_SPEED))
-            listener.onSimSpeedChanged(name, (SimulationSpeed)value);
+            listener.onSimSpeedChanged((SimulationSpeed)value);
         else if(name.equals(World.PROPERTY_STRUCTURE_COUNT))
-            listener.onStructureCount(name, (Integer)value);
+            listener.onStructureCount((Integer)value);
         else if(name.equals(World.PROPERTY_LAST_MONEY_UPDATE))
-            listener.onLastMoneyUpdateChange(name, (Long)value);
+            listener.onLastMoneyUpdateChange((Long)value);
         else if(name.equals(World.PROPERTY_LAST_CHANGE_DATE))
-            listener.onLastChangeDate(name, (LocalDate)value);
+            listener.onLastChangeDate((LocalDate)value);
         else if(name.equals(World.PROPERTY_LAST_CHANGE_TIME))
-            listener.onLastChangeTime(name, (LocalTime)value);
+            listener.onLastChangeTime((LocalTime)value);
         else if(name.equals(World.PROPERTY_ELECTRICITY_COVERAGE))
-            listener.onElectricityCoverageChanged(name, (String)value);
+            listener.onElectricityCoverageChanged((String)value);
+        else if(name.equals(World.PROPERTY_HINTS))
+            listener.onHintsChanged((List<String>)value);
         else
             throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void onAdded(String name, Object item)
+    {
+        if(name.equals(World.PROPERTY_HINTS))
+            listener.onHintAdded((String)item);
+        else
+            throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void onRemoved(String name, Object item)
+    {
+        if(name.equals(World.PROPERTY_HINTS))
+            listener.onHintRemoved((String)item);
+        else
+            throw new UnsupportedOperationException();
+    }
+
+    //required to make remove(new WorldListenerAdapter(x)) work
     @Override
     public int hashCode()
     {
         return this.listener.hashCode();
     }
 
+    //required to make remove(new WorldListenerAdapter(x)) work
     @Override
     public boolean equals(Object obj)
     {

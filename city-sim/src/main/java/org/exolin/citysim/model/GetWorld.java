@@ -23,6 +23,15 @@ public interface GetWorld
     void addWorldListener(GenericWorldListener listener);
     void removeWorldListener(GenericWorldListener listener);
     
+    default void addWorldListener(WorldListener listener)
+    {
+        addWorldListener(new WorldListenerAdapter(listener));
+    }
+    default void removeWorldListener(WorldListener listener)
+    {
+        removeWorldListener(new WorldListenerAdapter(listener));
+    }
+    
     /**
      * Creates an instance where the world stays the same.
      * 

@@ -20,13 +20,39 @@ public interface GetWorld
     void addChangeListener(ChangeListener listener);
     void removeChangeListener(ChangeListener listener);
     
+    /**
+     * Adds a {@link GenericWorldListener}, that will get added
+     * to the current world, and moved over to the next world if
+     * worlds can get replaced.
+     * 
+     * @param listener 
+     */
     void addWorldListener(GenericWorldListener listener);
+    
+    /**
+     * Removes the {@link GenericWorldListener}
+     * 
+     * @param listener 
+     */
     void removeWorldListener(GenericWorldListener listener);
     
+    /**
+     * Adds a {@link WorldListener}, that will get added
+     * to the current world, and moved over to the next world if
+     * worlds can get replaced.
+     * 
+     * @param listener 
+     */
     default void addWorldListener(WorldListener listener)
     {
         addWorldListener(new WorldListenerAdapter(listener));
     }
+    
+    /**
+     * Removes the {@link WorldListener}
+     * 
+     * @param listener 
+     */
     default void removeWorldListener(WorldListener listener)
     {
         removeWorldListener(new WorldListenerAdapter(listener));
@@ -43,6 +69,18 @@ public interface GetWorld
         return new StaticGetWorld(w);
     }
     
+    /**
+     * Creates a {@link GetWorld} that delegates all operations
+     * to the {@link GetWorld} returned by the {@link Supplier}.
+     * 
+     * The {@link Supplier} will only be called when a method of
+     * the returned {@link GetWorld} is called, which allows using a
+     * Supplier that can't return a valid instance yet when
+     * {@link #delegate(java.util.function.Supplier)} gets called
+     * 
+     * @param source supplies the {@link Supplier} that all calls get delegated to
+     * @return the delegating {@link GetWorld}
+     */
     static GetWorld delegate(Supplier<GetWorld> source)
     {
         return new DelegateGetWorld(source);

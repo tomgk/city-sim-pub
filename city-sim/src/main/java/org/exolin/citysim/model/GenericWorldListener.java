@@ -5,7 +5,7 @@ import java.util.Map;
 import org.exolin.citysim.model.debug.Value;
 
 /**
- * A listener for world properties that has the same method for all properties.
+ * A listener for world properties that has the same methods for all properties.
  *
  * @author Thomas
  * @see WorldListener
@@ -14,6 +14,14 @@ public interface GenericWorldListener
 {
     /**
      * A property changes.
+     * 
+     * For list properties this method will always be called,
+     * when an item gets added/removed.
+     * Only implementing {@link #onAdded(java.lang.String, java.lang.Object)}
+     * and {@link #onRemoved(java.lang.String, java.lang.Object)} is enough
+     * if it keeps track of the changes, no need to implement
+     * {@link #onChanged(java.lang.String, java.lang.Object)}, especially if
+     * replacing everything is expensive.
      * 
      * @param name name of the property
      * @param value new value of the property

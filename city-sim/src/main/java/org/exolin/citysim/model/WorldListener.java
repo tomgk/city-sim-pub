@@ -6,7 +6,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 /**
- * A listener for world properties that has a different method for each property.
+ * A listener for world properties that
+ * has a different method for each property.
  *
  * @author Thomas
  * @see GenericWorldListener

@@ -10,6 +10,8 @@ import org.exolin.citysim.model.GetWorld;
 import org.exolin.citysim.model.World;
 
 /**
+ * An implementation of {@link GetWorld} that directly contains
+ * the world while allowing to switch it out with a different one.
  *
  * @author Thomas
  */
@@ -31,6 +33,12 @@ public final class WorldHolder implements GetWorld
         return world;
     }
     
+    /**
+     * Sets a different world, triggering all listeners
+     * 
+     * @param world
+     * @param file 
+     */
     public void set(World world, Path file)
     {
         World old = this.world;

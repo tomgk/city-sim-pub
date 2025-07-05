@@ -644,6 +644,7 @@ public final class World implements BuildingMap
         addReadonlyValue(PROPERTY_LAST_CHANGE_DATE, () -> getLocalDateForTimeMillis(lastChange));
         addReadonlyValue(PROPERTY_LAST_CHANGE_TIME, () -> getLocalTimeForTimeMillis(lastChange));
         addReadonlyValue(PROPERTY_ELECTRICITY_COVERAGE, () -> getElectricityCoverage());
+        addReadonlyValue(PROPERTY_HINTS, () -> getHints());
     }
 
     public List<Entry<String, Value<?>>> getValues()
@@ -779,5 +780,10 @@ public final class World implements BuildingMap
         }
         
         changed(name, oldValues);
+    }
+
+    public List<String> getHints()
+    {
+        return Collections.unmodifiableList(hints);
     }
 }

@@ -103,7 +103,8 @@ public class WorldHolderTest
                 Map.entry("lastMoneyUpdate", 0l),
                 Map.entry("lastChange.date", World.getLocalDateForTimeMillis(w.getLastChange())),
                 Map.entry("lastChange.time", World.getLocalTimeForTimeMillis(w.getLastChange())),
-                Map.entry("electricityCoverage", "--/--")
+                Map.entry("electricityCoverage", "--/--"),
+                Map.entry("hints", List.of())
         );
     }
     

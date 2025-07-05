@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Thomas
  * @param <T>
  */
-public class Property<T> implements Map.Entry<String, T>
+public class Property<T> implements Map.Entry<String, Value<T>>
 {
     private final String name;
     private final Value<T> value;
@@ -24,9 +24,9 @@ public class Property<T> implements Map.Entry<String, T>
     }
 
     @Override
-    public T getValue()
+    public Value<T> getValue()
     {
-        return value.get();
+        return value;
     }
 
     public void set(T value)
@@ -51,10 +51,8 @@ public class Property<T> implements Map.Entry<String, T>
     }
 
     @Override
-    public T setValue(T value)
+    public Value<T> setValue(Value<T> value)
     {
-        T old = this.value.get();
-        set(value);
-        return old;
+        throw new UnsupportedOperationException();
     }
 }

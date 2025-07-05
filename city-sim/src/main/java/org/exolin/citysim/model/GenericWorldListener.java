@@ -43,7 +43,15 @@ public interface GenericWorldListener
      * @param item the removed item
      */
     public void onRemoved(String name, Object item);
-
+    
+    /**
+     * Gets called if all properties have been changed at once.
+     * 
+     * @implSpec the default implementation just delegates to
+     * {@link #onChanged(java.lang.String, java.lang.Object)}, calling it once per entry
+     * 
+     * @param values new list of properties, with name and value
+     */
     default public void onAllChanged(List<Map.Entry<String, Value<?>>> values)
     {
         values.forEach(e -> onChanged(e.getKey(), e.getValue().get()));

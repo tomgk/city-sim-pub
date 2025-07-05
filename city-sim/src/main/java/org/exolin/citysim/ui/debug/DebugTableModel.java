@@ -68,7 +68,12 @@ public final class DebugTableModel implements TableModel, GenericWorldListener
         Integer index = indexes.get(name);
         //TODO: not
         if(index == null)
+        {
+            index = indexes.size();
+            indexes.put(name, index);
+            fire(new TableModelEvent(this));
             return;
+        }
         if(index < 0)
             ErrorDisplay.show(null, new IllegalStateException("unknown "+name));
         else

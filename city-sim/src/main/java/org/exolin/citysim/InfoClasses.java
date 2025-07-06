@@ -1,6 +1,5 @@
 package org.exolin.citysim;
 
-import java.io.StringBufferInputStream;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.Set;

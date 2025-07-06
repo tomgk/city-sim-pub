@@ -42,9 +42,20 @@ public class InfoClasses
                     
                     out.println("Variants:"+(multiType ? "\n  " : " ")+variants.stream()
                             .sorted(Comparator.comparing(StructureVariant::index))
-                            .map(v -> (multiType ? v.getClass().getSimpleName()+"." : "")+v.name())
+                            .map(v -> toString(v, multiType))
                             .collect(Collectors.joining(!multiType ? ", " : "\n  "))
                     );
                 });
+    }
+    
+    private static String toString(StructureVariant v, boolean multiType)
+    {
+        StringBuilder sb = new StringBuilder();
+        if(multiType)
+            sb.append(v.getClass().getSimpleName()).append(".");
+        
+        sb.append(v.name());
+        
+        return (multiType ?  : "")+;
     }
 }

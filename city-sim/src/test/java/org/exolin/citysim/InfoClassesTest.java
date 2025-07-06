@@ -24,9 +24,6 @@ public class InfoClassesTest
                         Variants:
                           DEFAULT (0°)
                           ROTATED (90°)
-                        ==== CrossConnectionType =====
-                        Super: ConnectionType
-                        No variants
                         ==== FireType =====
                         Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
                         ==== PlantType =====
@@ -40,6 +37,13 @@ public class InfoClassesTest
                           BOTTOM_LEFT (X: -1, Y: -1)
                           BOTTOM_MIDDLE (X: 0, Y: -1)
                           BOTTOM_RIGHT (X: 1, Y: -1)
+                        ==== VacantType =====
+                        No variants
+                        ==== ZoneType =====
+                        No variants
+                        ==== CrossConnectionType =====
+                        Super: ConnectionType
+                        No variants
                         ==== SelfConnectionType =====
                         Super: ConnectionType
                         Variants:
@@ -59,10 +63,6 @@ public class InfoClassesTest
                           End.SOUTH (v)
                           End.EAST (>)
                           Unconnected.UNCONNECTED
-                        ==== VacantType =====
-                        No variants
-                        ==== ZoneType =====
-                        No variants
                         """;
         
         assertEquals(expected, StringPrinter.toString(InfoClasses::classInfo));

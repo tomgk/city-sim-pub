@@ -35,7 +35,7 @@ public class InfoClasses
     {
         Comparator<Class> w = Comparator.comparing(InfoClasses::getSuperClassName);
         Comparator<Class> x = Comparator.comparing(Class::getSimpleName);
-        return x;
+        return w.thenComparing(x);
     }
     
     private static String getSuperClassName(Class<?> c)

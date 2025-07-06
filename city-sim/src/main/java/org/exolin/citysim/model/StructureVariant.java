@@ -3,6 +3,7 @@ package org.exolin.citysim.model;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -36,6 +37,16 @@ public interface StructureVariant
      * @return the name
      */
     String name();
+    
+    /**
+     * Returns additional information about a variant (only info, no behaviour)
+     * 
+     * @return info or {@link Optional#empty()} if none
+     */
+    default Optional<String> getInfo()
+    {
+        return Optional.empty();
+    }
       
     /**
      * Returns how many variants there are of the same type.

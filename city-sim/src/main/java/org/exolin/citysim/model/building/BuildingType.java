@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.CustomKey;
@@ -23,7 +24,20 @@ public class BuildingType extends StructureType<Building, BuildingType.Variant, 
 {
     public enum Variant implements StructureVariant
     {
-        DEFAULT, ROTATED
+        DEFAULT("0°"), ROTATED("90°");
+        
+        private final String info;
+
+        private Variant(String info)
+        {
+            this.info = info;
+        }
+
+        @Override
+        public Optional<String> getInfo()
+        {
+            return Optional.of(info);
+        }
     }
     
     private final String title;

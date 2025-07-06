@@ -1,6 +1,7 @@
 package org.exolin.citysim.model.plant;
 
 import java.util.List;
+import java.util.Optional;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.utils.RandomUtils;
 
@@ -46,5 +47,14 @@ public enum PlantVariant implements StructureVariant
     public static PlantVariant random()
     {
         return RandomUtils.random(VALUES);
+    }
+    
+    /**
+     * @return offset information
+     */
+    @Override
+    public Optional<String> getInfo()
+    {
+        return Optional.of("X: "+xoffset+", Y: "+yoffset);
     }
 }

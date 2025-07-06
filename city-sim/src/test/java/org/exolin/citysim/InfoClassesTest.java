@@ -21,13 +21,24 @@ public class InfoClassesTest
         String expected = 
                         """
                         ==== BuildingType =====
-                        Variants: DEFAULT, ROTATED
+                        Variants:
+                          DEFAULT (0°)
+                          ROTATED (90°)
                         ==== CrossConnectionType =====
                         Variants: DEFAULT
                         ==== FireType =====
                         Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
                         ==== PlantType =====
-                        Variants: DEFAULT, LEFT, RIGHT, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT
+                        Variants:
+                          DEFAULT (X: 0, Y: 0)
+                          LEFT (X: -1, Y: 0)
+                          RIGHT (X: 1, Y: 0)
+                          TOP_LEFT (X: -1, Y: -1)
+                          TOP_MIDDLE (X: 0, Y: -1)
+                          TOP_RIGHT (X: 1, Y: -1)
+                          BOTTOM_LEFT (X: -1, Y: -1)
+                          BOTTOM_MIDDLE (X: 0, Y: -1)
+                          BOTTOM_RIGHT (X: 1, Y: -1)
                         ==== SelfConnectionType =====
                         Variants:
                           StraightConnectionVariant.CONNECT_X
@@ -41,10 +52,10 @@ public class InfoClassesTest
                           TIntersection.T_INTERSECTION_2
                           TIntersection.T_INTERSECTION_3
                           TIntersection.T_INTERSECTION_4
-                          End.NORTH
-                          End.WEST
-                          End.SOUTH
-                          End.EAST
+                          End.NORTH (^)
+                          End.WEST (<)
+                          End.SOUTH (v)
+                          End.EAST (>)
                           Unconnected.UNCONNECTED
                         ==== VacantType =====
                         Variants: DEFAULT

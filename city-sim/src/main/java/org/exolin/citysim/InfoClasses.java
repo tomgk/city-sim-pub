@@ -1,6 +1,8 @@
 package org.exolin.citysim;
 
+import java.io.StringBufferInputStream;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -40,10 +42,17 @@ public class InfoClasses
                             .distinct()
                             .count() > 1;
                     
-                    out.println("Variants:"+(multiType ? "\n  " : " ")+variants.stream()
+                    boolean hasInfo = variants.stream()
+                            .map(StructureVariant::getInfo)
+                            .map(Optional::isPresent)
+                            .reduce(false, (a, b) -> a||b);
+                    
+                    boolean multiLine = multiType || hasInfo;
+                    
+                    out.println("Variants:"+(multiLine ? "\n  " : " ")+variants.stream()
                             .sorted(Comparator.comparing(StructureVariant::index))
                             .map(v -> toString(v, multiType))
-                            .collect(Collectors.joining(!multiType ? ", " : "\n  "))
+                            .collect(Collectors.joining(!multiLine ? ", " : "\n  "))
                     );
                 });
     }
@@ -56,6 +65,10 @@ public class InfoClasses
         
         sb.append(v.name());
         
-        return (multiType ?  : "")+;
+        var info = v.getInfo();
+        if(info.isPresent())
+            sb.append(" (").append(info.get()).append(")");
+        
+        return sb.toString();
     }
 }

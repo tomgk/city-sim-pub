@@ -43,6 +43,10 @@ public class InfoClasses
         Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
         Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
         
+        Class superclass = t.getSuperclass();
+        if(!superclass.equals(StructureType.class))
+            out.println("Super: "+superclass.getSimpleName());
+        
         if(variants.size() == 1 && variants.iterator().next().name().equals(DEFAULT_NAME))
         {
             //TODO: better text

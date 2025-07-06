@@ -25,6 +25,7 @@ public class InfoClassesTest
                           DEFAULT (0°)
                           ROTATED (90°)
                         ==== CrossConnectionType =====
+                        Super: ConnectionType
                         No variants
                         ==== FireType =====
                         Variants: V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16
@@ -40,6 +41,7 @@ public class InfoClassesTest
                           BOTTOM_MIDDLE (X: 0, Y: -1)
                           BOTTOM_RIGHT (X: 1, Y: -1)
                         ==== SelfConnectionType =====
+                        Super: ConnectionType
                         Variants:
                           StraightConnectionVariant.CONNECT_X
                           StraightConnectionVariant.CONNECT_Y

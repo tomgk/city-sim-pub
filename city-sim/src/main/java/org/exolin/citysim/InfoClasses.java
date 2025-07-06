@@ -32,28 +32,33 @@ public class InfoClasses
     public static void classInfo(Printer out)
     {
         getTypeClasses().forEach(t -> {
-                    out.println("==== "+t.getSimpleName()+" =====");
-                    Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
-                    Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
-                    
-                    boolean multiType = variants.stream()
-                            .map(StructureVariant::getClass)
-                            .distinct()
-                            .count() > 1;
-                    
-                    boolean hasInfo = variants.stream()
-                            .map(StructureVariant::getInfo)
-                            .map(Optional::isPresent)
-                            .reduce(false, (a, b) -> a||b);
-                    
-                    boolean multiLine = multiType || hasInfo;
-                    
-                    out.println("Variants:"+(multiLine ? "\n  " : " ")+variants.stream()
-                            .sorted(Comparator.comparing(StructureVariant::index))
-                            .map(v -> toString(v, multiType))
-                            .collect(Collectors.joining(!multiLine ? ", " : "\n  "))
-                    );
+                    classInfo(out, t);
                 });
+    }
+    
+    private static void classInfo(Printer out, Class t)
+    {
+        out.println("==== "+t.getSimpleName()+" =====");
+        Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
+        Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
+
+        boolean multiType = variants.stream()
+                .map(StructureVariant::getClass)
+                .distinct()
+                .count() > 1;
+
+        boolean hasInfo = variants.stream()
+                .map(StructureVariant::getInfo)
+                .map(Optional::isPresent)
+                .reduce(false, (a, b) -> a||b);
+
+        boolean multiLine = multiType || hasInfo;
+
+        out.println("Variants:"+(multiLine ? "\n  " : " ")+variants.stream()
+                .sorted(Comparator.comparing(StructureVariant::index))
+                .map(v -> toString(v, multiType))
+                .collect(Collectors.joining(!multiLine ? ", " : "\n  "))
+        );
     }
     
     private static String toString(StructureVariant v, boolean multiType)

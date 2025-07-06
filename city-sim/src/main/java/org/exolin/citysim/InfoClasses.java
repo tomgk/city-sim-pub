@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
+import static org.exolin.citysim.storage.StructureData.DEFAULT_NAME;
 
 /**
  *
@@ -41,6 +42,13 @@ public class InfoClasses
         out.println("==== "+t.getSimpleName()+" =====");
         Class<? extends StructureVariant> vc = StructureType.getStructureVariantClass(t);
         Set<? extends StructureVariant> variants = StructureVariant.getValues(vc);
+        
+        if(variants.size() == 1 && variants.iterator().next().name().equals(DEFAULT_NAME))
+        {
+            //TODO: better text
+            out.println("No variants");
+            return;
+        }
 
         boolean multiType = variants.stream()
                 .map(StructureVariant::getClass)

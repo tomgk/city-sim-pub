@@ -33,7 +33,8 @@ public class InfoClasses
     
     private static Comparator<Class> order()
     {
-        return Comparator.comparing(Class::getSimpleName);
+        Comparator<Class> x = Comparator.comparing(Class::getSimpleName);
+        return x;
     }
     
     private static Optional<String> getSuperClassName(Class c)

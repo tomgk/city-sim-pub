@@ -33,16 +33,17 @@ public class InfoClasses
     
     private static Comparator<Class> order()
     {
+        Comparator<Class> w = Comparator.comparing(InfoClasses::getSuperClassName);
         Comparator<Class> x = Comparator.comparing(Class::getSimpleName);
         return x;
     }
     
-    private static Optional<String> getSuperClassName(Class c)
+    private static String getSuperClassName(Class<?> c)
     {
         Class<?> superClass = c.getSuperclass();
         if(superClass.equals(StructureType.class))
-            return Optional.empty();
-        return Optional.of(superClass.getSimpleName());
+            return "";
+        return superClass.getSimpleName();
     }
     
     public static void classInfo(Printer out)

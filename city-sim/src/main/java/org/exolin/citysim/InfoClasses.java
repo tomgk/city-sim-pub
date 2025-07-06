@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import org.exolin.citysim.bt.StructureTypes;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
+import org.exolin.citysim.model.building.BuildingType;
 import static org.exolin.citysim.storage.StructureData.DEFAULT_NAME;
 
 /**
@@ -27,7 +28,20 @@ public class InfoClasses
                 .stream()
                 .map(t -> (Class)t.getClass())
                 .distinct()
-                .sorted(Comparator.comparing(Class::getSimpleName));
+                .sorted(order());
+    }
+    
+    private static Comparator<Class> order()
+    {
+        return Comparator.comparing(Class::getSimpleName);
+    }
+    
+    private static Optional<String> getSuperClassName(Class c)
+    {
+        Class<?> superClass = c.getSuperclass();
+        if(superClass.equals(StructureType.class))
+            return Optional.empty();
+        return Optional.of(superClass.getSimpleName());
     }
     
     public static void classInfo(Printer out)

@@ -172,7 +172,7 @@ public class PlantsTest
             //Electricity e = crossElectricity.get(new Pair(x, y));
             assertNotNull(e, take);
 
-            CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0, CrossConnectionType.Variant.DEFAULT);
+            CrossConnection z = new CrossConnection((CrossConnectionType)CrossConnections.get(x, y), 0, 0);
             assertEquals(e, PowerPlants.getAnyElectricity(z), take);
     }
     
@@ -180,7 +180,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Street_Crircuit_X()
     {
         assertEquals(Electricity.CONDUCTS, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0),
                 ConnectionType.Direction.X));
     }
     
@@ -188,7 +188,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Street_Crircuit_Y()
     {
         assertEquals(Electricity.TRANSFER, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.STREET_CIRCUIT, 0, 0),
                 ConnectionType.Direction.Y));
     }
     
@@ -196,7 +196,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Crircuit_Street_X()
     {
         assertEquals(Electricity.TRANSFER, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.CIRCUIT_STREET, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.CIRCUIT_STREET, 0, 0),
                 ConnectionType.Direction.X));
     }
     
@@ -204,7 +204,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Crircuit_Street_Y()
     {
         assertEquals(Electricity.CONDUCTS, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.CIRCUIT_STREET, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.CIRCUIT_STREET, 0, 0),
                 ConnectionType.Direction.Y));
     }
     
@@ -212,7 +212,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Rail_Crircuit_X()
     {
         assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.RAIL_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.RAIL_CIRCUIT, 0, 0),
                 ConnectionType.Direction.X));
     }
     
@@ -220,7 +220,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Rail_Crircuit_Y()
     {
         assertEquals(Electricity.TRANSFER, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.RAIL_CIRCUIT, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.RAIL_CIRCUIT, 0, 0),
                 ConnectionType.Direction.Y));
     }
     
@@ -228,7 +228,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Crircuit_Rail_X()
     {
         assertEquals(Electricity.TRANSFER, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.CIRCUIT_RAIL, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.CIRCUIT_RAIL, 0, 0),
                 ConnectionType.Direction.X));
     }
     
@@ -236,7 +236,7 @@ public class PlantsTest
     public void testGetElectricity_Cross_Crircuit_Rail_Y()
     {
         assertEquals(Electricity.INSULATOR, PowerPlants.getElectricity(
-                new CrossConnection(CrossConnections.CIRCUIT_RAIL, 0, 0, CrossConnectionType.Variant.DEFAULT),
+                new CrossConnection(CrossConnections.CIRCUIT_RAIL, 0, 0),
                 ConnectionType.Direction.Y));
     }
 }

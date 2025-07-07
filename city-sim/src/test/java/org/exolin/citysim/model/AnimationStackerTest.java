@@ -71,7 +71,7 @@ public class AnimationStackerTest
     public void testStack_One()
     {
         IllegalArgumentException e = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            AnimationStacker.stack(List.of(Zones.destroyed.getImage(ZoneType.Variant.DEFAULT)));
+            AnimationStacker.stack(List.of(Zones.destroyed.getImage(SingleVariant.DEFAULT)));
         });
         assertEquals("not enough to stack", e.getMessage());
     }

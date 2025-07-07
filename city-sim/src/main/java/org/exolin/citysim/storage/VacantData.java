@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
@@ -42,7 +43,7 @@ public class VacantData extends StructureData
     @Override
     protected StructureVariant getVariant(String name)
     {
-        return VacantType.Variant.valueOf(name);
+        return SingleVariant.valueOf(name);
     }
 
     @Override

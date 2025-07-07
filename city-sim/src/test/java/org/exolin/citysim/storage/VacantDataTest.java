@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.exolin.citysim.bt.Vacants;
 import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.model.SimulationSpeed;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.vacant.Vacant;
@@ -28,7 +29,7 @@ public class VacantDataTest
     @Test
     public void testSerializeActualBuilding_WithZone() throws IOException
     {
-        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, VacantType.Variant.DEFAULT, new VacantParameters(Optional.of(Zones.business)));
+        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, SingleVariant.DEFAULT, new VacantParameters(Optional.of(Zones.business)));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"destruction/abandoned_big_1","x":16,"y":99,"zone":"zone_business"}
@@ -39,7 +40,7 @@ public class VacantDataTest
     @Test
     public void testSerializeActualBuilding_NoZone() throws IOException
     {
-        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, VacantType.Variant.DEFAULT, new VacantParameters(Optional.empty()));
+        Vacant building = new Vacant(Vacants.abandoned_big_1, 16, 99, SingleVariant.DEFAULT, new VacantParameters(Optional.empty()));
         String output = serialize(WorldStorage::serialize, building);
         String expected = """
                           {"type":"destruction/abandoned_big_1","x":16,"y":99}
@@ -59,7 +60,7 @@ public class VacantDataTest
         assertEquals(Vacants.abandoned_big_1, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
-        assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
+        assertEquals(SingleVariant.DEFAULT, b.getVariant());
         Vacant f = (Vacant)b;
         assertEquals(Optional.of(Zones.business), f.getDataCopy().getZoneType());
     }
@@ -76,7 +77,7 @@ public class VacantDataTest
         assertEquals(Vacants.abandoned_big_1, b.getType());
         assertEquals(16, b.getX());
         assertEquals(99, b.getY());
-        assertEquals(VacantType.Variant.DEFAULT, b.getVariant());
+        assertEquals(SingleVariant.DEFAULT, b.getVariant());
         Vacant f = (Vacant)b;
         assertEquals(Optional.empty(), f.getDataCopy().getZoneType());
     }

@@ -95,16 +95,16 @@ public class SelectorPanel3 extends JPanel implements GamePanelListener
         ++y;
         
         registerButton(0, "residential.png", Map.of(
-                LIGHT, new ZonePlacement(world, Zones.low_residential, ZoneType.Variant.DEFAULT),
-                HIGH, new ZonePlacement(world, Zones.residential, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.low_residential),
+                HIGH, new ZonePlacement(world, Zones.residential)
         ));
         registerButton(2, "business.png", Map.of(
-                LIGHT, new ZonePlacement(world, Zones.low_business, ZoneType.Variant.DEFAULT),
-                HIGH, new ZonePlacement(world, Zones.business, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.low_business),
+                HIGH, new ZonePlacement(world, Zones.business)
         ));
         registerButton(4, "industry.png", Map.of(
-                LIGHT, new ZonePlacement(world, Zones.low_industrial, ZoneType.Variant.DEFAULT),
-                HIGH, new ZonePlacement(world, Zones.industrial, ZoneType.Variant.DEFAULT)
+                LIGHT, new ZonePlacement(world, Zones.low_industrial),
+                HIGH, new ZonePlacement(world, Zones.industrial)
         ));
         ++y;
         

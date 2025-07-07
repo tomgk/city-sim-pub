@@ -6,11 +6,10 @@ import java.util.Objects;
  *
  * @author Thomas
  */
-public record ZoneState(ZoneType type, ZoneType.Variant variant)
+public record ZoneState(ZoneType type)
 {
     public ZoneState
     {
         Objects.requireNonNull(type);
-        Objects.requireNonNull(variant);
     }
 }

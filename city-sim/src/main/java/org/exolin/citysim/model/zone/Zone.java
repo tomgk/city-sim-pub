@@ -3,20 +3,21 @@ package org.exolin.citysim.model.zone;
 import java.math.BigDecimal;
 import java.util.Optional;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 
 /**
  *
  * @author Thomas
  */
-public class Zone extends Structure<Zone, ZoneType, ZoneType.Variant, EmptyStructureParameters>
+public class Zone extends Structure<Zone, ZoneType, SingleVariant, EmptyStructureParameters>
 {
-    public Zone(ZoneType type, int x, int y, ZoneType.Variant variant)
+    public Zone(ZoneType type, int x, int y)
     {
-        this(type, x, y, variant, EmptyStructureParameters.getInstance());
+        this(type, x, y, SingleVariant.DEFAULT, EmptyStructureParameters.getInstance());
     }
     
-    public Zone(ZoneType type, int x, int y, ZoneType.Variant variant, EmptyStructureParameters data)
+    public Zone(ZoneType type, int x, int y, SingleVariant variant, EmptyStructureParameters data)
     {
         super(type, x, y, variant, data);
     }

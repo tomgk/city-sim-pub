@@ -50,7 +50,7 @@ public class ActionTestUtils
     
     public static void makeZonePlacementMove(Point start, Point end, World world, ZoneType type)
     {
-        ZonePlacement z = new ZonePlacement(GetWorld.ofStatic(world), type, ZoneType.Variant.DEFAULT);
+        ZonePlacement z = new ZonePlacement(GetWorld.ofStatic(world), type);
         makeMove(start, end, world, z);
     }
     

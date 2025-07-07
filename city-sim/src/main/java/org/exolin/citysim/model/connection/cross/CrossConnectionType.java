@@ -3,6 +3,7 @@ package org.exolin.citysim.model.connection.cross;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.connection.ConnectionType;
@@ -12,13 +13,8 @@ import org.exolin.citysim.model.connection.regular.SelfConnectionType;
  *
  * @author Thomas
  */
-public class CrossConnectionType extends ConnectionType<CrossConnection, CrossConnectionType, CrossConnectionType.Variant, EmptyStructureParameters>
+public class CrossConnectionType extends ConnectionType<CrossConnection, CrossConnectionType, SingleVariant, EmptyStructureParameters>
 {
-    public enum Variant implements StructureVariant
-    {
-        DEFAULT
-    }
-    
     private final SelfConnectionType xtype;
     private final SelfConnectionType ytype;
 
@@ -30,13 +26,13 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
 
     @Override
-    public int getBuildingCost(Variant variant)
+    public int getBuildingCost(SingleVariant variant)
     {
         return NO_COST;
     }
 
     @Override
-    public CrossConnection createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
+    public CrossConnection createBuilding(int x, int y, SingleVariant variant, EmptyStructureParameters data)
     {
         return new CrossConnection(this, x, y, variant, data);
     }
@@ -54,8 +50,8 @@ public class CrossConnectionType extends ConnectionType<CrossConnection, CrossCo
     }
     
     @Override
-    public Variant getVariantForDefaultImage()
+    public SingleVariant getVariantForDefaultImage()
     {
-        return Variant.DEFAULT;
+        return SingleVariant.DEFAULT;
     }
 }

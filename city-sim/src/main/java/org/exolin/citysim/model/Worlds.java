@@ -84,9 +84,9 @@ public class Worlds
         
         //GetWorld getWorld = GetWorld.ofStatic(w);
         
-        placeZone(w, Zones.residential, ZoneType.Variant.DEFAULT, 0, 0, 20, 15);
-        placeZone(w, Zones.industrial, ZoneType.Variant.DEFAULT, 0, 15, 20, 15);
-        placeZone(w, Zones.business, ZoneType.Variant.DEFAULT, 20, 0, 10, 30);
+        placeZone(w, Zones.residential, 0, 0, 20, 15);
+        placeZone(w, Zones.industrial, 0, 15, 20, 15);
+        placeZone(w, Zones.business, 20, 0, 10, 30);
         
         w.addBuilding(PowerPlants.oil_plant, 0, 0);
         
@@ -207,9 +207,9 @@ public class Worlds
             return num;
     }
     
-    public static void placeZone(World w, ZoneType type, ZoneType.Variant variant, int x, int y, int width, int height)
+    public static void placeZone(World w, ZoneType type, int x, int y, int width, int height)
     {
-        ZonePlacement zonePlacement = new ZonePlacement(GetWorld.ofStatic(w), type, variant);
+        ZonePlacement zonePlacement = new ZonePlacement(GetWorld.ofStatic(w), type);
         place(zonePlacement, x, y, width, height);
     }
     

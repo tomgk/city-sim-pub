@@ -32,7 +32,7 @@ public class Actions
 {
     private static void addZone(GetWorld getWorld, List<Action> zoneActions, ZoneType zoneType)
     {
-        zoneActions.add(new ZonePlacement(getWorld, zoneType, ZoneType.Variant.DEFAULT));
+        zoneActions.add(new ZonePlacement(getWorld, zoneType));
     }
     
     public static Map<String, List<Action>> getActions(GetWorld getWorld, boolean debugMode)

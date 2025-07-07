@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import org.exolin.citysim.model.Animation;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
@@ -15,13 +16,8 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructureParameters>
+public class ZoneType extends StructureType<Zone, SingleVariant, EmptyStructureParameters>
 {
-    public enum Variant implements StructureVariant
-    {
-        DEFAULT
-    }
-    
     private final ZoneTypeType type;
     private final Density density;
     private final List<BuildingType> buildings = new ArrayList<>();
@@ -50,9 +46,14 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
     {
         return type.isUserPlaceableZone();
     }
-
+    
     @Override
-    public int getBuildingCost(Variant variant)
+    public int getBuildingCost(SingleVariant variant)
+    {
+        return getBuildingCost();
+    }
+
+    public int getBuildingCost()
     {
         return type.getCost() * density.getFactor();
     }
@@ -85,13 +86,13 @@ public class ZoneType extends StructureType<Zone, ZoneType.Variant, EmptyStructu
     }
 
     @Override
-    public Variant getVariantForDefaultImage()
+    public SingleVariant getVariantForDefaultImage()
     {
-        return Variant.DEFAULT;
+        return SingleVariant.DEFAULT;
     }
 
     @Override
-    public Zone createBuilding(int x, int y, Variant variant, EmptyStructureParameters data)
+    public Zone createBuilding(int x, int y, SingleVariant variant, EmptyStructureParameters data)
     {
         return new Zone(this, x, y, variant, data);
     }

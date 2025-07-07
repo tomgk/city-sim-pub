@@ -13,6 +13,7 @@ import org.exolin.citysim.bt.Zones;
 import org.exolin.citysim.bt.buildings.BusinessBuildings;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.SimulationSpeed;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.BuildingType;
@@ -67,7 +68,7 @@ public class WorldStorageTest
         World w = new World("Test", 30, BigDecimal.ZERO, SimulationSpeed.PAUSED);
         w.addBuilding(BusinessBuildings.cinema, 16, 5, BuildingType.Variant.DEFAULT);
         w.addBuilding(SelfConnections.street, 15, 5, T_INTERSECTION_4);
-        w.addBuilding(Zones.business, 15, 4, ZoneType.Variant.DEFAULT);
+        w.addBuilding(Zones.business, 15, 4);
         w.addBuilding(FireType.fire, 29, 28, FireVariant.V1, new FireParameters(134, Optional.empty(), false, Optional.empty()));
         String output = serialize(WorldStorage::serialize, w);
         String expected = """
@@ -119,7 +120,7 @@ public class WorldStorageTest
             assertEquals(Zones.business, b.getType());
             assertEquals(15, b.getX());
             assertEquals(4, b.getY());
-            assertEquals(ZoneType.Variant.DEFAULT, b.getVariant());
+            assertEquals(SingleVariant.DEFAULT, b.getVariant());
         }
         
         {

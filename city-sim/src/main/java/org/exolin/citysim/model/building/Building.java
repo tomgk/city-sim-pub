@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import org.exolin.citysim.bt.connections.SelfConnections;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.vacant.VacantParameters;
@@ -87,6 +88,6 @@ public class Building extends Structure<Building, BuildingType, BuildingType.Var
         
         world.removeBuildingAt(this);
         VacantType vacant = VacantType.getRandom(getSize());
-        world.addBuilding(vacant, getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(getTheZoneType()));
+        world.addBuilding(vacant, getX(), getY(), SingleVariant.DEFAULT, new VacantParameters(getTheZoneType()));
     }
 }

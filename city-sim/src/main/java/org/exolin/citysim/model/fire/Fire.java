@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.IntSupplier;
 import org.exolin.citysim.bt.Vacants;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureSize;
@@ -148,7 +149,7 @@ public class Fire extends Structure<Fire, FireType, FireVariant, FireParameters>
             if(getDataRaw().returnToZone)
                 w.addBuilding(z.get(), getX(), getY());
             else
-                w.addBuilding(Vacants.tore_down(), getX(), getY(), VacantType.Variant.DEFAULT, new VacantParameters(z));
+                w.addBuilding(Vacants.tore_down(), getX(), getY(), SingleVariant.DEFAULT, new VacantParameters(z));
         }
     }
 

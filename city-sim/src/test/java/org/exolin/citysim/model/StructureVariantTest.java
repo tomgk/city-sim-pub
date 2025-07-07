@@ -109,13 +109,6 @@ public class StructureVariantTest
     }
     
     @Test
-    public void testGetValues_ZoneType()
-    {
-        Set<? extends StructureVariant> values = StructureVariant.getValues(ZoneType.Variant.class);
-        assertEquals(Set.of(ZoneType.Variant.DEFAULT), values);
-    }
-    
-    @Test
     public void testGetValues_BuildingType()
     {
         Set<? extends StructureVariant> values = StructureVariant.getValues(BuildingType.Variant.class);
@@ -165,9 +158,9 @@ public class StructureVariantTest
     }
     
     @Test
-    public void testCrossConnectionType()
+    public void testSingleVariant()
     {
-        Set<? extends StructureVariant> values = StructureVariant.getValues(CrossConnectionType.Variant.class);
-        assertEquals(Set.of(CrossConnectionType.Variant.DEFAULT), values);
+        Set<? extends StructureVariant> values = StructureVariant.getValues(SingleVariant.class);
+        assertEquals(Set.of(SingleVariant.DEFAULT), values);
     }
 }

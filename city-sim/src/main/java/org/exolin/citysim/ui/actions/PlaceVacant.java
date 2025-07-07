@@ -3,6 +3,7 @@ package org.exolin.citysim.ui.actions;
 import java.util.Objects;
 import java.util.Optional;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.World;
 import org.exolin.citysim.model.building.vacant.VacantParameters;
@@ -33,7 +34,7 @@ public class PlaceVacant extends PlaceStructure
     @Override
     protected void addBuilding(World w, int x, int y)
     {
-        w.addBuilding(vacantType, x, y, VacantType.Variant.DEFAULT, new VacantParameters(zoneType));
+        w.addBuilding(vacantType, x, y, SingleVariant.DEFAULT, new VacantParameters(zoneType));
         w.reduceMoney(0);
     }
 

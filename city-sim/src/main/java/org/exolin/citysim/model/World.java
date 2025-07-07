@@ -216,7 +216,7 @@ public final class World implements BuildingMap
                 if(y+yi == exceptY && x+xi == exceptX)
                     continue;
                 
-                addBuilding(zoneType, x+xi, y+yi, ZoneType.Variant.DEFAULT);
+                addBuilding(zoneType, x+xi, y+yi);
             }
         }
     }

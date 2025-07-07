@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.exolin.citysim.model.EmptyStructureParameters;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureParameters;
 import org.exolin.citysim.model.StructureVariant;
 import org.exolin.citysim.model.connection.cross.CrossConnection;
@@ -32,7 +33,7 @@ public class CrossConnectionData extends StructureData
     @Override
     protected StructureVariant getVariant(String name)
     {
-        return CrossConnectionType.Variant.valueOf(name);
+        return SingleVariant.valueOf(name);
     }
 
     @Override

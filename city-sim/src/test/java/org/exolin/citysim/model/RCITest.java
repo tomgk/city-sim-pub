@@ -27,7 +27,7 @@ public class RCITest
     public void testSingleZone()
     {
         RCI r = new RCI();
-        r.update(List.of(new Zone(Zones.business, 1, 1, ZoneType.Variant.DEFAULT)));
+        r.update(List.of(new Zone(Zones.business, 1, 1)));
         assertEquals(100, r.getR());
         assertEquals(-100, r.getC());
         assertEquals(100, r.getI());
@@ -38,8 +38,8 @@ public class RCITest
     {
         RCI r = new RCI();
         r.update(List.of(
-                new Zone(Zones.residential, 1, 1, ZoneType.Variant.DEFAULT),
-                new Zone(Zones.business, 1, 1, ZoneType.Variant.DEFAULT)
+                new Zone(Zones.residential, 1, 1),
+                new Zone(Zones.business, 1, 1)
         ));
         assertEquals(0, r.getR());
         assertEquals(0, r.getC());
@@ -51,9 +51,9 @@ public class RCITest
     {
         RCI r = new RCI();
         r.update(List.of(
-                new Zone(Zones.residential, 1, 1, ZoneType.Variant.DEFAULT),
-                new Zone(Zones.business, 1, 1, ZoneType.Variant.DEFAULT),
-                new Zone(Zones.industrial, 1, 1, ZoneType.Variant.DEFAULT)
+                new Zone(Zones.residential, 1, 1),
+                new Zone(Zones.business, 1, 1),
+                new Zone(Zones.industrial, 1, 1)
         ));
         assertEquals(34, r.getR());
         assertEquals(34, r.getC());

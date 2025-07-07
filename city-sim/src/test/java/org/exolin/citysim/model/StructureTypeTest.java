@@ -60,7 +60,7 @@ public class StructureTypeTest
     @Test
     public void testGetStructureVariantClass_CrossConnectionType()
     {
-        assertEquals(CrossConnectionType.Variant.class, StructureType.getStructureVariantClass(CrossConnectionType.class));
+        assertEquals(SingleVariant.class, StructureType.getStructureVariantClass(CrossConnectionType.class));
     }
     
     @Test
@@ -72,7 +72,7 @@ public class StructureTypeTest
     @Test
     public void testGetStructureVariantClass_VacantType()
     {
-        assertEquals(VacantType.Variant.class, StructureType.getStructureVariantClass(VacantType.class));
+        assertEquals(SingleVariant.class, StructureType.getStructureVariantClass(VacantType.class));
     }
     
     @Test
@@ -90,13 +90,13 @@ public class StructureTypeTest
     @Test
     public void testGetStructureVariantClass_ZoneType()
     {
-        assertEquals(ZoneType.Variant.class, StructureType.getStructureVariantClass(ZoneType.class));
+        assertEquals(SingleVariant.class, StructureType.getStructureVariantClass(ZoneType.class));
     }
     
     @Test
     public void test()
     {
         Class a = StructureType.getStructureVariantClass(Zones.business.getClass());
-        assertEquals(ZoneType.Variant.class, a);
+        assertEquals(SingleVariant.class, a);
     }
 }

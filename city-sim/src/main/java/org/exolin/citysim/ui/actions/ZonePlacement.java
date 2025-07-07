@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.util.Optional;
 import org.exolin.citysim.model.GetWorld;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.Structure;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
@@ -21,15 +22,13 @@ import org.exolin.citysim.utils.ImageUtils;
 public class ZonePlacement extends AreaAction implements BuildingAction
 {
     private final ZoneType zoneType;
-    private final ZoneType.Variant variant;
     
     public static boolean DEBUG_PLANTZONE = false;
 
-    public ZonePlacement(GetWorld world, ZoneType building, ZoneType.Variant variant)
+    public ZonePlacement(GetWorld world, ZoneType building)
     {
         super(world);
         this.zoneType = building;
-        this.variant = variant;
     }
 
     @Override
@@ -50,13 +49,13 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public int getCost()
     {
-        return zoneType.getBuildingCost(variant);
+        return zoneType.getBuildingCost();
     }
 
     @Override
-    public StructureVariant getVariant()
+    public SingleVariant getVariant()
     {
-        return variant;
+        return SingleVariant.DEFAULT;
     }
 
     @Override
@@ -68,7 +67,7 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     protected void performAction(Rectangle marking)
     {
-        performAction(marking, getWorld.get(), zoneType, variant, zoneType.getBuildingCost(variant), false);
+        performAction(marking, getWorld.get(), zoneType, getVariant(), zoneType.getBuildingCost(), false);
     }
 
     public static void performAction(Rectangle marking, World world, StructureType type, StructureVariant variant, int cost, boolean replaceEverything)
@@ -120,13 +119,13 @@ public class ZonePlacement extends AreaAction implements BuildingAction
     @Override
     public Image getIcon()
     {
-        return ImageUtils.removeGround(zoneType.getImage(variant).getDefault());
+        return ImageUtils.removeGround(zoneType.getImage(getVariant()).getDefault());
     }
 
     @Override
     public Image getMarker()
     {
-        return zoneType.getImage(variant).getDefault();
+        return zoneType.getImage(getVariant()).getDefault();
     }
 
     @Override

@@ -125,7 +125,7 @@ public class WorldTest
          xxxx
          xxxx
         */
-        Fire.placeMultiple(w, Zones.business, 1, 1, 4, 4, ZoneType.Variant.DEFAULT, EmptyStructureParameters.getInstance());
+        Fire.placeMultiple(w, Zones.business, 1, 1, 4, 4, SingleVariant.DEFAULT, EmptyStructureParameters.getInstance());
         
         //WorldStorage.serialize(w, System.out);
         
@@ -220,7 +220,7 @@ public class WorldTest
         
         GetWorld getWorld = GetWorld.ofStatic(w);
         
-        placeZone(w, Zones.residential, ZoneType.Variant.DEFAULT, 0, 0, 2, 2);
+        placeZone(w, Zones.residential, 0, 0, 2, 2);
         placeStreet(w, 0, 2, 2, 2);
         
         w.updateAfterTick(1, 1);

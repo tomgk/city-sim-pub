@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.exolin.citysim.model.Animation;
+import org.exolin.citysim.model.SingleVariant;
 import org.exolin.citysim.model.StructureSize;
 import org.exolin.citysim.model.StructureType;
 import org.exolin.citysim.model.StructureVariant;
@@ -14,7 +15,7 @@ import org.exolin.citysim.utils.RandomUtils;
  *
  * @author Thomas
  */
-public class VacantType extends StructureType<Vacant, VacantType.Variant, VacantParameters>
+public class VacantType extends StructureType<Vacant, SingleVariant, VacantParameters>
 {
     private static final Map<Integer, List<VacantType>> vacants = new LinkedHashMap<>();
     
@@ -28,7 +29,7 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
     }
 
     @Override
-    public int getBuildingCost(Variant variant)
+    public int getBuildingCost(SingleVariant variant)
     {
         return NO_COST;
     }
@@ -52,11 +53,6 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
             return false;
     }
     
-    public enum Variant implements StructureVariant
-    {
-        DEFAULT
-    }
-    
     private final boolean destroyed;
 
     @SuppressWarnings("LeakingThisInConstructor")
@@ -73,13 +69,13 @@ public class VacantType extends StructureType<Vacant, VacantType.Variant, Vacant
     }
 
     @Override
-    public VacantType.Variant getVariantForDefaultImage()
+    public SingleVariant getVariantForDefaultImage()
     {
-        return VacantType.Variant.DEFAULT;
+        return SingleVariant.DEFAULT;
     }
 
     @Override
-    public Vacant createBuilding(int x, int y, Variant variant, VacantParameters data)
+    public Vacant createBuilding(int x, int y, SingleVariant variant, VacantParameters data)
     {
         return new Vacant(this, x, y, variant, data);
     }

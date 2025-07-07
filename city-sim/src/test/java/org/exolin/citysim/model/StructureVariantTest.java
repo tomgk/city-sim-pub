@@ -82,6 +82,25 @@ public class StructureVariantTest
         assertEquals(ALL_VALUS.size(), size);
     }
     
+    private enum SubTyped implements StructureVariant
+    {
+        ENTRY{};
+    }
+    
+    @Test
+    public void testGetVariantCount_SubTyped()
+    {
+        int size = StructureVariant.getVariantCount(SubTyped.ENTRY.getClass());
+        assertEquals(1, size);
+    }
+    
+    @Test
+    public void testGetValues_SubTyped()
+    {
+        Set<? extends StructureVariant> size = StructureVariant.getValues(SubTyped.ENTRY.getClass());
+        assertEquals(Set.of(SubTyped.ENTRY), size);
+    }
+    
     @Test
     public void testGetValues_ConnectionVariant()
     {

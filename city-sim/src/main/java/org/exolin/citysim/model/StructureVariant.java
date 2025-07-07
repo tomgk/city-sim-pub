@@ -65,6 +65,12 @@ public interface StructureVariant
         if(clazz.isEnum())
             return clazz.getEnumConstants().length;
         
+        {
+            Class<?> cd = clazz.getSuperclass();
+            if(cd != null && cd.isEnum())
+                return cd.getEnumConstants().length;
+        }
+        
         try{
             Method m = clazz.getMethod("getVariantCount");
             return (Integer)m.invoke(null);
@@ -75,10 +81,21 @@ public interface StructureVariant
         }
     }
     
+    private static Set<? extends StructureVariant> wrap(Class clazz)
+    {
+        return EnumSet.allOf(clazz);
+    }
+    
     static Set<? extends StructureVariant> getValues(Class<? extends StructureVariant> clazz)
     {
         if(clazz.isEnum())
-            return EnumSet.allOf((Class)clazz);
+            return wrap((Class)clazz);
+        
+        {
+            Class<?> cd = clazz.getSuperclass();
+            if(cd != null && cd.isEnum())
+                return wrap(cd);
+        }
         
         try{
             Method values = clazz.getMethod("values");
